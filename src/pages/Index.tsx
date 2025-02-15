@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import PreviewSearch from '../components/PreviewSearch';
 import FeaturedCreators from '../components/FeaturedCreators';
@@ -10,15 +11,18 @@ import Footer from '../components/Footer';
 
 const Index = () => {
   return (
-    <main className="min-h-screen">
-      <HeroSection />
-      <PreviewSearch />
-      <FeaturedCreators />
-      <HowItWorks />
-      <Testimonials />
-      <CallToActionSection />
-      <Footer />
-    </main>
+    <>
+      <Header />
+      <main className="min-h-screen">
+        <HeroSection />
+        <PreviewSearch />
+        <FeaturedCreators />
+        <HowItWorks />
+        <Testimonials />
+        <CallToActionSection />
+        <Footer />
+      </main>
+    </>
   );
 };
 
