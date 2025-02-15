@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown } from 'lucide-react';
 import { Card } from './ui/card';
@@ -158,6 +159,7 @@ const PreviewSearch = () => {
             Load More
           </Button>
         </div>
+      </div>
 
       <FeaturesSectionWithHoverEffects />
     </section>
