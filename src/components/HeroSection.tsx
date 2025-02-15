@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -76,7 +75,7 @@ const HeroSection = () => {
         className="relative z-50 container flex justify-center flex-1 flex-col px-5 md:px-10 gap-4 -translate-y-20"
       >
         <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="font-anek text-4xl font-medium tracking-tight sm:text-6xl lg:text-7xl">
             <span className="block">Premium Content for</span>
             <span className="block mt-2">Real Estate Excellence</span>
           </h1>
