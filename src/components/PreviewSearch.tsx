@@ -7,7 +7,7 @@ const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [radius, setRadius] = useState([25]);
-  return <section className="relative bg-secondary/50 section-padding py-0">
+  return <section className="relative bg-secondary/50 section-padding py-[22px]">
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
