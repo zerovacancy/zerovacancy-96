@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -9,14 +8,16 @@ const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [radius, setRadius] = useState([25]);
-  return <section className="relative bg-secondary/50 section-padding py-[22px]">
+
+  return (
+    <section className="relative bg-secondary/50 section-padding py-[22px]">
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Discover Local Creators</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="section-subtitle max-w-2xl mx-auto">
             Connect with professional photographers, videographers, and content creators in your area
           </p>
         </div>
@@ -73,10 +74,12 @@ const PreviewSearch = () => {
             <div className="space-y-4">
               <label className="text-sm font-medium">Experience Level</label>
               <div className="space-y-2">
-                {['New', 'Verified', 'Top-rated'].map(level => <label key={level} className="flex items-center gap-2 text-sm cursor-pointer">
+                {['New', 'Verified', 'Top-rated'].map(level => (
+                  <label key={level} className="flex items-center gap-2 text-sm cursor-pointer">
                     <input type="checkbox" className="rounded border-muted" />
                     {level}
-                  </label>)}
+                  </label>
+                ))}
               </div>
             </div>
 
@@ -116,7 +119,8 @@ const PreviewSearch = () => {
 
         {/* Results Grid - Changed from 6 to 3 results */}
         <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-          {[1, 2, 3].map(index => <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+          {[1, 2, 3].map(index => (
+            <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
               <div className="relative aspect-[4/3] bg-muted">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
@@ -135,7 +139,8 @@ const PreviewSearch = () => {
                 </div>
                 <Button className="w-full">View Profile</Button>
               </div>
-            </Card>)}
+            </Card>
+          ))}
         </div>
 
         {/* Load More Button */}
@@ -145,7 +150,8 @@ const PreviewSearch = () => {
           </Button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default PreviewSearch;
