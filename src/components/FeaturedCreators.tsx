@@ -27,7 +27,7 @@ const FeaturedCreators = () => {
   return (
     <section className="section-padding bg-background">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold text-center mb-4">
+        <h2 className="section-title">
           Top-Rated Creators in Your Area
         </h2>
         <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">

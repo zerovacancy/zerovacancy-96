@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Search, Users, CreditCard, FileCheck } from 'lucide-react';
 import { Button } from './ui/button';
@@ -30,7 +29,7 @@ const HowItWorks = () => {
   return (
     <section className="section-padding bg-secondary/30">
       <div className="mx-auto max-w-7xl">
-        <h2 className="text-3xl font-bold text-center mb-4">
+        <h2 className="section-title">
           How Luxe Content Connect Works
         </h2>
         <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">

@@ -23,6 +23,10 @@
     @apply bg-background text-foreground antialiased;
   }
 
+  .section-title {
+    @apply font-anek text-3xl font-medium mb-4 text-center;
+  }
+
   .section-subtitle {
     @apply font-anek text-lg text-muted-foreground;
   }

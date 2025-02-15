@@ -16,7 +16,7 @@ const PreviewSearch = () => {
       
       <div className="relative mx-auto max-w-7xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Discover Local Creators</h2>
+          <h2 className="section-title">Discover Local Creators</h2>
           <p className="section-subtitle max-w-2xl mx-auto">
             Connect with professional photographers, videographers, and content creators in your area
           </p>
