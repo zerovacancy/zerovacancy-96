@@ -2,7 +2,7 @@ import React from 'react';
 import CallToAction from './CallToAction';
 const HeroSection = () => {
   return <div className="relative isolate overflow-hidden">
-      <div className="mx-auto max-w-7xl section-padding px-0 rounded-none bg-gray-300 hover:bg-gray-200">
+      <div className="mx-auto max-w-7xl section-padding px-0 rounded-none bg-gray-300 hover:bg-gray-200 my-[20px] py-[57px]">
         <div className="text-center">
           <h1 className="fade-up text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
             <span className="block">Premium Content for</span>
