@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Slider } from './ui/slider';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { FeaturesSectionWithHoverEffects } from './Features';
 
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
@@ -158,7 +158,8 @@ const PreviewSearch = () => {
             Load More
           </Button>
         </div>
-      </div>
+
+      <FeaturesSectionWithHoverEffects />
     </section>
   );
 };
