@@ -1,10 +1,7 @@
-
 import React from 'react';
 import CallToAction from './CallToAction';
-
 const HeroSection = () => {
-  return (
-      <div className="mx-auto max-w-7xl section-padding px-0 rounded-none bg-gray-300 hover:bg-gray-200 my-[20px] py-[57px]">
+  return <div className="mx-auto max-w-7xl section-padding px-0 rounded-none bg-gray-300 hover:bg-gray-200 py-[41px] my-0">
         <div className="text-center">
           <h1 className="fade-up text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
             <span className="block">Premium Content for</span>
@@ -20,8 +17,6 @@ const HeroSection = () => {
             <CallToAction type="secondary" text="Search Creators" href="/search" />
           </div>
         </div>
-      </div>
-  );
+      </div>;
 };
-
 export default HeroSection;
