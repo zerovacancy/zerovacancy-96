@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Slider } from './ui/slider';
+
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -112,9 +114,9 @@ const PreviewSearch = () => {
           </select>
         </div>
 
-        {/* Results Grid - Placeholder for now */}
+        {/* Results Grid - Changed from 6 to 3 results */}
         <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-          {[1, 2, 3, 4, 5, 6].map(index => <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+          {[1, 2, 3].map(index => <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
               <div className="relative aspect-[4/3] bg-muted">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
@@ -145,4 +147,5 @@ const PreviewSearch = () => {
       </div>
     </section>;
 };
+
 export default PreviewSearch;
