@@ -6,7 +6,7 @@ import {
   IconVideo,
   IconBrandInstagram,
   IconCertificate,
-  IconClockHour24,
+  IconClock24,
   IconWallet,
   IconStars,
 } from "@tabler/icons-react";
@@ -45,7 +45,7 @@ export function FeaturesSectionWithHoverEffects() {
       title: "24/7 Availability",
       description:
         "Book creators any time, with flexible scheduling to meet your deadlines.",
-      icon: <IconClockHour24 />,
+      icon: <IconClock24 />,
     },
     {
       title: "Transparent Pricing",
@@ -59,6 +59,7 @@ export function FeaturesSectionWithHoverEffects() {
       icon: <IconStars />,
     },
   ];
+  
   return (
     <section className="bg-secondary/50 py-16 sm:py-24">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 max-w-7xl mx-auto">
