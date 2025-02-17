@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Users, FileCheck } from 'lucide-react';
+import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Users, FileCheck, Crown } from 'lucide-react';
 import { Card } from './ui/card';
 import { ShimmerButton } from './ui/shimmer-button';
 import { Slider } from './ui/slider';
@@ -80,11 +80,20 @@ const PreviewSearch = () => {
             </ShimmerButton>
           </div>
 
-          <button onClick={() => setIsAdvancedOpen(!isAdvancedOpen)} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mx-auto p-2">
-            <Sliders className="w-4 h-4" />
-            Advanced Filters
-            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAdvancedOpen ? 'rotate-180' : ''}`} />
-          </button>
+          <div className="flex items-center justify-center">
+            <button 
+              onClick={() => setIsAdvancedOpen(!isAdvancedOpen)} 
+              className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors p-2 relative"
+            >
+              <Sliders className="w-4 h-4" />
+              Advanced Filters
+              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAdvancedOpen ? 'rotate-180' : ''}`} />
+              <span className="ml-2 inline-flex items-center gap-1 bg-primary/10 text-primary rounded-full px-2 py-0.5 text-xs font-medium">
+                <Crown className="w-3 h-3" />
+                PRO
+              </span>
+            </button>
+          </div>
 
           <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 overflow-hidden transition-all duration-200 ${isAdvancedOpen ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0'}`}>
             <div className="space-y-4">
