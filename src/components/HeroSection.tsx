@@ -87,17 +87,17 @@ const HeroSection = () => {
     }} whileInView={{
       y: 0,
       opacity: 1
-    }} className="relative z-50 container flex justify-center flex-1 flex-col px-5 md:px-10 gap-4 py-8">
+    }} className="relative z-50 container flex justify-center flex-1 flex-col px-6 sm:px-8 lg:px-10 gap-6 py-12 sm:py-16">
         <div className="text-center">
-          <h1 className="font-anek text-4xl font-medium tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="font-anek text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
             <span className="block">Premium Content for</span>
-            <span className="block mt-2">Real Estate Excellence</span>
+            <span className="block mt-3">Real Estate Excellence</span>
           </h1>
-          <p className="mt-4 text-xl text-muted-foreground">
+          <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
             Connect with top-tier creators for photography, videography, and marketing content
             that elevates your property portfolio.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <CallToAction type="primary" text="I Need Content" href="/property-manager" />
             <CallToAction type="primary" text="I Create Content" href="/creator" />
             <CallToAction type="secondary" text="Search Creators" href="/search" />
