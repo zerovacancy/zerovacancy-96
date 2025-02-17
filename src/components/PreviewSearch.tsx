@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Users, FileCheck } from 'lucide-react';
 import { Card } from './ui/card';
-import { Button } from './ui/button';
+import { ShimmerButton } from './ui/shimmer-button';
 import { Slider } from './ui/slider';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
@@ -73,9 +72,9 @@ const PreviewSearch = () => {
               <input type="date" className="search-input" />
             </div>
 
-            <Button className="w-full h-14 text-base hover:scale-[1.02] transition-transform">
+            <ShimmerButton className="w-full h-14 text-base">
               Find Creators
-            </Button>
+            </ShimmerButton>
           </div>
 
           <button onClick={() => setIsAdvancedOpen(!isAdvancedOpen)} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mx-auto p-2">
@@ -139,14 +138,13 @@ const PreviewSearch = () => {
                     <span className="text-sm font-medium">4.8</span>
                     <span className="text-sm text-muted-foreground">(47 reviews)</span>
                   </div>
-                  <Button className="w-full h-10">View Profile</Button>
+                  <ShimmerButton className="w-full h-10">View Profile</ShimmerButton>
                 </div>
               </Card>
             </BackgroundGradient>
           ))}
         </div>
 
-        {/* Integrated How It Works Section - Now positioned after creator profiles */}
         <div className="my-12 px-4 sm:px-0">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold mb-2">How It Works</h3>
@@ -172,9 +170,9 @@ const PreviewSearch = () => {
         </div>
 
         <div className="text-center mt-8 sm:mt-12">
-          <Button size="lg" className="min-w-[200px]">
+          <ShimmerButton size="lg" className="min-w-[200px]">
             Find Your Creator
-          </Button>
+          </ShimmerButton>
         </div>
       </div>
 

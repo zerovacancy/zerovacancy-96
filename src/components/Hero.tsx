@@ -4,7 +4,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Building, UserPlus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
+
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(() => ["engages", "converts", "impresses", "stands out", "educates"], []);
@@ -18,6 +19,7 @@ export function Hero() {
     }, 2000);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length]);
+  
   return <div className="w-full">
       <div className="container mx-auto py-0">
         <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0">
@@ -50,15 +52,21 @@ export function Hero() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto px-4 sm:px-0">
-            <Button size="lg" className="w-full sm:w-auto gap-2 min-w-[200px]" variant="outline">
+            <ShimmerButton 
+              className="w-full sm:w-auto gap-2 min-w-[200px] h-12"
+              background="rgba(255, 255, 255, 0.1)"
+            >
               I Need Content <Building className="w-4 h-4" />
-            </Button>
-            <Button size="lg" className="w-full sm:w-auto gap-2 min-w-[200px]">
+            </ShimmerButton>
+            <ShimmerButton 
+              className="w-full sm:w-auto gap-2 min-w-[200px] h-12"
+            >
               I Create Content <UserPlus className="w-4 h-4" />
-            </Button>
+            </ShimmerButton>
           </div>
         </div>
       </div>
     </div>;
 }
+
 export default Hero;
