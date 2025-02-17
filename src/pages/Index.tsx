@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Header from '../components/Header';
-import HeroSection from '../components/HeroSection';
+import { Hero } from '../components/Hero';
 import PreviewSearch from '../components/PreviewSearch';
 import HowItWorks from '../components/HowItWorks';
 import Testimonials from '../components/Testimonials';
@@ -13,7 +13,7 @@ const Index = () => {
     <>
       <Header />
       <main className="min-h-screen">
-        <HeroSection />
+        <Hero />
         <div className="space-y-10">
           <PreviewSearch />
           <HowItWorks />
