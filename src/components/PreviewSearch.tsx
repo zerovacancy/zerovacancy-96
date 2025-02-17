@@ -14,7 +14,7 @@ const PreviewSearch = () => {
   return <section className="relative section-padding py-[22px] bg-slate-300 hover:bg-slate-200">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="section-title">Discover Local Creators</h2>
           <p className="section-subtitle max-w-2xl mx-auto px-4">
