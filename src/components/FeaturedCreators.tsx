@@ -19,14 +19,37 @@ const FeaturedCreators = () => {
       location: "New York, NY",
       rating: 4.9,
       reviews: 124,
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500"
     },
-    // ... more creators
+    {
+      name: "Michael Chen",
+      services: ["Videography", "Editing"],
+      location: "Los Angeles, CA",
+      rating: 4.8,
+      reviews: 98,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500"
+    },
+    {
+      name: "Emily Rodriguez",
+      services: ["3D Tours", "Photography"],
+      location: "Miami, FL",
+      rating: 5.0,
+      reviews: 156,
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500"
+    },
+    {
+      name: "David Kim",
+      services: ["Photography", "Virtual Staging"],
+      location: "Chicago, IL",
+      rating: 4.7,
+      reviews: 87,
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&h=500"
+    }
   ];
 
   return (
-    <div className="mx-auto max-w-7xl">
-      <h2 className="section-title">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <h2 className="text-3xl font-semibold text-center mb-4">
         Top-Rated Creators in Your Area
       </h2>
       <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">

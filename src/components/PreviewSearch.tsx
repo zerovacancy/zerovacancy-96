@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Crown } from 'lucide-react';
 import { Card } from './ui/card';
@@ -7,6 +8,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
+import FeaturedCreators from './FeaturedCreators';
 
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
@@ -136,6 +138,7 @@ const PreviewSearch = () => {
         </BackgroundGradient>
       </div>
 
+      <FeaturedCreators />
       <FeaturesSectionWithHoverEffects />
       <PricingSection />
     </section>
