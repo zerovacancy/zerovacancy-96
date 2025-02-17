@@ -1,19 +1,26 @@
 
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar, ChevronDown, Star } from 'lucide-react';
+import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Crown } from 'lucide-react';
 import { Card } from './ui/card';
-import { Button } from './ui/button';
+import { ShimmerButton } from './ui/shimmer-button';
+import { Slider } from './ui/slider';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
+import { Button } from './ui/button';
 
 const PreviewSearch = () => {
+  const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [radius, setRadius] = useState([25]);
+  const isMobile = useIsMobile();
+
   const creators = [
     {
       name: "Sarah Johnson",
       services: ["Photography", "Drone"],
-      price: 200,
+      location: "New York, NY",
       rating: 4.9,
       reviews: 124,
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500"
@@ -21,7 +28,7 @@ const PreviewSearch = () => {
     {
       name: "Michael Chen",
       services: ["Videography", "Editing"],
-      price: 250,
+      location: "Los Angeles, CA",
       rating: 4.8,
       reviews: 98,
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500"
@@ -29,7 +36,7 @@ const PreviewSearch = () => {
     {
       name: "Emily Rodriguez",
       services: ["3D Tours", "Photography"],
-      price: 300,
+      location: "Miami, FL",
       rating: 5.0,
       reviews: 156,
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500"
@@ -37,7 +44,7 @@ const PreviewSearch = () => {
     {
       name: "David Kim",
       services: ["Photography", "Virtual Staging"],
-      price: 180,
+      location: "Chicago, IL",
       rating: 4.7,
       reviews: 87,
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&h=500"
@@ -45,89 +52,153 @@ const PreviewSearch = () => {
   ];
 
   return (
-    <section className="relative section-padding py-[22px] bg-white">
+    <section className="relative section-padding py-[22px] bg-white hover:bg-background">
+      <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
+      
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
-        <div className="mx-4 sm:mx-0 mb-12">
-          <h2 className="text-3xl font-semibold text-center mb-3">Discover Local Creators</h2>
-          <p className="text-muted-foreground text-center mb-8">
-            Connect with professional photographers, videographers, and content creators in your area
-          </p>
+        <BackgroundGradient containerClassName="mx-4 sm:mx-0">
+          <Card className="p-4 sm:p-6 mb-6 sm:mb-8 backdrop-blur-sm bg-[#F1F0FB]/95 border-[#E5DEFF] shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center justify-between mb-4 sm:mb-6">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-2 sm:mb-0">Find Your Perfect Creator</h2>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-md hover:bg-gray-100 transition-colors ${viewMode === 'grid' ? 'bg-gray-200' : ''}`}
+                >
+                  <Grid className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-md hover:bg-gray-100 transition-colors ${viewMode === 'list' ? 'bg-gray-200' : ''}`}
+                >
+                  <List className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
 
-          <Card className="p-6 bg-white shadow-md">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 sm:mb-6">
+              <div className="flex items-center space-x-3 bg-white rounded-md shadow-sm px-4 py-2">
+                <Search className="w-5 h-5 text-gray-500" />
+                <input
+                  type="text"
+                  placeholder="Search creators..."
+                  className="flex-1 border-none outline-none focus:ring-0 text-sm text-gray-700"
+                />
+              </div>
+
+              <div className="flex items-center space-x-3 bg-white rounded-md shadow-sm px-4 py-2">
                 <MapPin className="w-5 h-5 text-gray-500" />
                 <input
                   type="text"
-                  placeholder="Location"
-                  className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm"
+                  placeholder="Enter location..."
+                  className="flex-1 border-none outline-none focus:ring-0 text-sm text-gray-700"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 sm:mb-6">
+              <div className="flex items-center space-x-3 bg-white rounded-md shadow-sm px-4 py-2">
+                <Calendar className="w-5 h-5 text-gray-500" />
+                <input
+                  type="date"
+                  placeholder="Select date"
+                  className="flex-1 border-none outline-none focus:ring-0 text-sm text-gray-700"
                 />
               </div>
 
-              <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-2">
-                <Search className="w-5 h-5 text-gray-500" />
-                <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm">
-                  <option>Content Type</option>
-                  <option>Photography</option>
-                  <option>Videography</option>
-                  <option>3D Tours</option>
+              <div className="flex items-center space-x-3 bg-white rounded-md shadow-sm px-4 py-2">
+                <DollarSign className="w-5 h-5 text-gray-500" />
+                <select className="flex-1 border-none outline-none focus:ring-0 text-sm text-gray-700">
+                  <option>Budget</option>
+                  <option>Under $500</option>
+                  <option>$500 - $1000</option>
+                  <option>$1000+</option>
                 </select>
               </div>
 
-              <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-2">
-                <Calendar className="w-5 h-5 text-gray-500" />
-                <input
-                  type="text"
-                  placeholder="mm/dd/yyyy"
-                  className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm"
-                />
-              </div>
-
-              <Button className="w-full h-10 bg-primary text-white hover:bg-primary/90">
-                Find Creators
-              </Button>
-            </div>
-
-            <div className="flex items-center justify-between mt-4 pt-4 border-t">
-              <button className="text-sm text-muted-foreground hover:text-primary flex items-center gap-2">
-                Advanced Filters
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              <span className="px-2 py-1 text-xs font-medium bg-accent text-accent-foreground rounded">PRO</span>
-            </div>
-          </Card>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-4 sm:mx-0">
-          {creators.map((creator, index) => (
-            <Card key={index} className="group overflow-hidden">
               <div className="relative">
-                <div className="absolute top-3 right-3 z-10">
-                  <span className="px-3 py-1 text-sm font-medium bg-black/60 text-white rounded-full">
-                    From ${creator.price}
-                  </span>
-                </div>
-                <div className="relative aspect-[4/3]">
+                <button
+                  onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
+                  className="flex items-center w-full space-x-2 bg-white rounded-md shadow-sm px-4 py-2"
+                >
+                  <Sliders className="w-5 h-5 text-gray-500" />
+                  <span className="text-sm text-gray-700">Advanced Filters</span>
+                  <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isAdvancedOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {isAdvancedOpen && (
+                  <div className="absolute left-0 right-0 mt-2 p-4 bg-white rounded-md shadow-lg z-10">
+                    <h4 className="text-lg font-semibold mb-3">Advanced Filters</h4>
+
+                    <div className="mb-3">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Radius:</label>
+                      <div className="flex items-center space-x-2">
+                        <Slider
+                          defaultValue={radius}
+                          max={100}
+                          step={1}
+                          onValueChange={(value) => setRadius(value)}
+                        />
+                        <span className="text-sm text-gray-500">{radius[0]} km</span>
+                      </div>
+                    </div>
+
+                    <div className="mb-3">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Rating:</label>
+                      <div className="flex items-center space-x-2">
+                        {[1, 2, 3, 4, 5].map((rating) => (
+                          <button key={rating} className="text-yellow-500 hover:text-yellow-600 focus:outline-none">
+                            <Star className="w-5 h-5" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Top Creators:</label>
+                      <div className="flex items-center space-x-2">
+                        <button className="flex items-center space-x-1 bg-yellow-500 text-white rounded-full px-3 py-1 text-sm">
+                          <Crown className="w-4 h-4" />
+                          <span>Verified</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <ShimmerButton className="w-full h-12">Search Creators</ShimmerButton>
+          </Card>
+        </BackgroundGradient>
+
+        <div className={`grid ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'grid-cols-1 gap-4'} mx-4 sm:mx-0`}>
+          {creators.map((creator, index) => (
+            <Card key={index} className="group hover:shadow-lg transition-all duration-300">
+              <div className={`${viewMode === 'grid' ? 'block' : 'flex'}`}>
+                <div className={`relative ${viewMode === 'grid' ? 'aspect-square' : 'w-48 h-48'}`}>
                   <img
                     src={creator.image}
                     alt={creator.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-t-lg"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-t-lg" />
                   <div className="absolute bottom-4 left-4 text-white">
                     <h3 className="font-semibold text-lg">{creator.name}</h3>
-                    <p className="text-sm opacity-90">{creator.services.join(" • ")}</p>
+                    <p className="text-sm opacity-90">{creator.services.join(" | ")}</p>
                   </div>
                 </div>
-                <div className="p-4 space-y-4">
+                <div className="p-4 space-y-4 flex-1">
                   <div className="flex items-center gap-2">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">{creator.location}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 fill-primary text-primary" />
                     <span className="font-medium">{creator.rating}</span>
                     <span className="text-sm text-muted-foreground">({creator.reviews} reviews)</span>
                   </div>
-                  <Button variant="default" className="w-full bg-primary text-white hover:bg-primary/90">
-                    View Profile
-                  </Button>
+                  <Button className="w-full">View Profile</Button>
                 </div>
               </div>
             </Card>
