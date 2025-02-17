@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Users, FileCheck } from 'lucide-react';
 import { Card } from './ui/card';
@@ -118,32 +119,7 @@ const PreviewSearch = () => {
           </div>
         </Card>
 
-        {/* Integrated How It Works Section */}
-        <div className="my-12 px-4 sm:px-0">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-semibold mb-2">How It Works</h3>
-            <p className="text-muted-foreground">Your journey to amazing content in four simple steps</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((step, index) => (
-              <div key={index} className="relative group">
-                <div className="flex flex-col items-center p-6 rounded-lg bg-background/80 backdrop-blur-sm hover:bg-background/95 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-primary">
-                    {step.icon}
-                  </div>
-                  <h4 className="font-medium mb-2">{step.title}</h4>
-                  <p className="text-sm text-muted-foreground text-center">{step.description}</p>
-                </div>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 right-0 w-full h-[2px] bg-primary/10 -mr-3 transform translate-x-1/2 -translate-y-1/2 z-0" />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className={`grid gap-4 sm:gap-6 px-4 sm:px-0 mt-8 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+        <div className="grid gap-4 sm:gap-6 px-4 sm:px-0 mt-8 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}">
           {[1, 2, 3].map(index => (
             <BackgroundGradient key={index} containerClassName="w-full">
               <Card className="group overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
@@ -168,6 +144,31 @@ const PreviewSearch = () => {
               </Card>
             </BackgroundGradient>
           ))}
+        </div>
+
+        {/* Integrated How It Works Section - Now positioned after creator profiles */}
+        <div className="my-12 px-4 sm:px-0">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-semibold mb-2">How It Works</h3>
+            <p className="text-muted-foreground">Your journey to amazing content in four simple steps</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, index) => (
+              <div key={index} className="relative group">
+                <div className="flex flex-col items-center p-6 rounded-lg bg-background/80 backdrop-blur-sm hover:bg-background/95 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-primary">
+                    {step.icon}
+                  </div>
+                  <h4 className="font-medium mb-2">{step.title}</h4>
+                  <p className="text-sm text-muted-foreground text-center">{step.description}</p>
+                </div>
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:block absolute top-1/2 right-0 w-full h-[2px] bg-primary/10 -mr-3 transform translate-x-1/2 -translate-y-1/2 z-0" />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="text-center mt-8 sm:mt-12">
