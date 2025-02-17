@@ -62,6 +62,14 @@ export function FeaturesSectionWithHoverEffects() {
   
   return (
     <section className="bg-secondary/50 py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-12">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="section-title">Professional Content Creation Services</h2>
+          <p className="section-subtitle">
+            Everything you need to showcase your properties with stunning visuals and engaging content
+          </p>
+        </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 max-w-7xl mx-auto">
         {features.map((feature, index) => (
           <Feature key={feature.title} {...feature} index={index} />
