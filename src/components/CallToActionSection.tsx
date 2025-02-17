@@ -14,8 +14,8 @@ const CallToActionSection = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <ShimmerButton
-            className="text-black h-12 sm:h-auto w-full sm:w-auto text-base font-medium"
-            background="#ffffff"
+            className="h-12 sm:h-auto w-full sm:w-auto text-base font-medium text-primary"
+            background="white"
             shimmerColor="rgba(0,0,0,0.1)"
             shimmerSize="0.1em"
             shimmerDuration="2s"
@@ -23,7 +23,7 @@ const CallToActionSection = () => {
             Find a Creator
           </ShimmerButton>
           <ShimmerButton
-            className="text-white h-12 sm:h-auto w-full sm:w-auto text-base font-medium"
+            className="h-12 sm:h-auto w-full sm:w-auto text-base font-medium text-white"
             background="transparent"
             shimmerColor="rgba(255,255,255,0.1)"
             shimmerSize="0.1em"
