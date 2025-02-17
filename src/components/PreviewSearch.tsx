@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Users, FileCheck, Crown } from 'lucide-react';
 import { Card } from './ui/card';
@@ -8,6 +7,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
+import HowItWorksSection from './HowItWorksSection';
 
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
@@ -32,7 +32,8 @@ const PreviewSearch = () => {
     description: "Receive and approve deliverables"
   }];
 
-  return <section className="relative section-padding py-[22px] bg-white hover:bg-background">
+  return (
+    <section className="relative section-padding py-[22px] bg-white hover:bg-background">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
@@ -149,37 +150,13 @@ const PreviewSearch = () => {
             </div>
           </Card>
         </BackgroundGradient>
-
-        <section className="my-12 px-4 sm:px-0">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-semibold mb-2">How It Works</h3>
-            <p className="text-muted-foreground">Your journey to amazing content in four simple steps</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((step, index) => <div key={index} className="relative group">
-                <div className="flex flex-col items-center p-6 rounded-lg bg-background/80 backdrop-blur-sm hover:bg-background/95 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-primary">
-                    {step.icon}
-                  </div>
-                  <h4 className="font-medium mb-2">{step.title}</h4>
-                  <p className="text-sm text-muted-foreground text-center">{step.description}</p>
-                </div>
-                {index < steps.length - 1 && <div className="hidden lg:block absolute top-1/2 right-0 w-full h-[2px] bg-primary/10 -mr-3 transform translate-x-1/2 -translate-y-1/2 z-0" />}
-              </div>)}
-          </div>
-        </section>
-
-        <div className="flex justify-center mt-8 sm:mt-12">
-          <ShimmerButton className="min-w-[200px] h-12 text-base px-8" background="#1A1F2C">
-            Find Your Creator
-          </ShimmerButton>
-        </div>
       </div>
 
+      <HowItWorksSection />
       <FeaturesSectionWithHoverEffects />
       <PricingSection />
-    </section>;
+    </section>
+  );
 };
 
 export default PreviewSearch;
