@@ -30,6 +30,12 @@
   .section-subtitle {
     @apply font-anek text-lg text-muted-foreground;
   }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(200%);
+    }
+  }
 }
 
 @layer components {

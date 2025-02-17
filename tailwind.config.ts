@@ -68,7 +68,7 @@ export default {
           "100%": {
             opacity: "1",
           },
-        },
+        }
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out",
