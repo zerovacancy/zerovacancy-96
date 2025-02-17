@@ -6,15 +6,12 @@ import { Slider } from './ui/slider';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
-
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [radius, setRadius] = useState([25]);
   const isMobile = useIsMobile();
-
-  return (
-    <section className="relative bg-secondary/50 section-padding py-[22px]">
+  return <section className="relative section-padding py-[22px] bg-slate-300 hover:bg-slate-200">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl">
@@ -54,10 +51,7 @@ const PreviewSearch = () => {
             </Button>
           </div>
 
-          <button 
-            onClick={() => setIsAdvancedOpen(!isAdvancedOpen)} 
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mx-auto p-2"
-          >
+          <button onClick={() => setIsAdvancedOpen(!isAdvancedOpen)} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mx-auto p-2">
             <Sliders className="w-4 h-4" />
             Advanced Filters
             <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAdvancedOpen ? 'rotate-180' : ''}`} />
@@ -67,13 +61,7 @@ const PreviewSearch = () => {
             <div className="space-y-4">
               <label className="text-sm font-medium">Distance Range</label>
               <div className="px-3">
-                <Slider 
-                  value={radius} 
-                  onValueChange={setRadius} 
-                  max={100} 
-                  step={1}
-                  className="touch-none" 
-                />
+                <Slider value={radius} onValueChange={setRadius} max={100} step={1} className="touch-none" />
                 <div className="mt-2 text-sm text-muted-foreground">
                   Within {radius}mi
                 </div>
@@ -83,12 +71,10 @@ const PreviewSearch = () => {
             <div className="space-y-4">
               <label className="text-sm font-medium">Experience Level</label>
               <div className="space-y-3">
-                {['New', 'Verified', 'Top-rated'].map(level => (
-                  <label key={level} className="flex items-center gap-2 text-sm cursor-pointer p-2">
+                {['New', 'Verified', 'Top-rated'].map(level => <label key={level} className="flex items-center gap-2 text-sm cursor-pointer p-2">
                     <input type="checkbox" className="rounded border-muted w-4 h-4" />
                     {level}
-                  </label>
-                ))}
+                  </label>)}
               </div>
             </div>
 
@@ -125,13 +111,8 @@ const PreviewSearch = () => {
           </select>
         </div>
 
-        <div className={`grid gap-4 sm:gap-6 px-4 sm:px-0 ${
-          viewMode === 'grid' 
-            ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
-            : 'grid-cols-1'
-        }`}>
-          {[1, 2, 3].map(index => (
-            <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+        <div className={`grid gap-4 sm:gap-6 px-4 sm:px-0 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+          {[1, 2, 3].map(index => <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
               <div className="relative aspect-[4/3] bg-muted">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
@@ -150,8 +131,7 @@ const PreviewSearch = () => {
                 </div>
                 <Button className="w-full h-10">View Profile</Button>
               </div>
-            </Card>
-          ))}
+            </Card>)}
         </div>
 
         <div className="text-center mt-8 sm:mt-12 px-4 sm:px-0">
@@ -163,8 +143,6 @@ const PreviewSearch = () => {
 
       <FeaturesSectionWithHoverEffects />
       <PricingSection />
-    </section>
-  );
+    </section>;
 };
-
 export default PreviewSearch;
