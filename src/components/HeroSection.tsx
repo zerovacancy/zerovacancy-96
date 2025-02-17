@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import CallToAction from './CallToAction';
+
 const HeroSection = () => {
-  return <section className="relative z-0 flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden rounded-md bg-background">
+  return <section className="relative z-0 flex min-h-[70vh] w-full flex-col items-center justify-center overflow-hidden rounded-md bg-background">
       <div className="absolute top-0 isolate z-0 flex w-screen flex-1 items-start justify-center">
         <div className="absolute top-0 z-50 h-48 w-screen bg-transparent opacity-10 backdrop-blur-md" />
 
@@ -85,17 +87,17 @@ const HeroSection = () => {
     }} whileInView={{
       y: 0,
       opacity: 1
-    }} className="relative z-50 container flex justify-center flex-1 flex-col px-5 md:px-10 gap-4 -translate-y-10 py--5">
+    }} className="relative z-50 container flex justify-center flex-1 flex-col px-5 md:px-10 gap-4 py-8">
         <div className="text-center">
           <h1 className="font-anek text-4xl font-medium tracking-tight sm:text-6xl lg:text-7xl">
             <span className="block">Premium Content for</span>
             <span className="block mt-2">Real Estate Excellence</span>
           </h1>
-          <p className="mt-6 text-xl text-muted-foreground">
+          <p className="mt-4 text-xl text-muted-foreground">
             Connect with top-tier creators for photography, videography, and marketing content
             that elevates your property portfolio.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <CallToAction type="primary" text="I Need Content" href="/property-manager" />
             <CallToAction type="primary" text="I Create Content" href="/creator" />
             <CallToAction type="secondary" text="Search Creators" href="/search" />
@@ -104,4 +106,5 @@ const HeroSection = () => {
       </motion.div>
     </section>;
 };
+
 export default HeroSection;
