@@ -121,37 +121,39 @@ const PreviewSearch = () => {
           </div>
         </Card>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 sm:px-6 lg:px-8 mt-8 max-w-[1024px] mx-auto">
-          {[1, 2, 3].map(index => (
-            <BackgroundGradient key={index} containerClassName="w-full">
-              <Card className="group h-full overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
-                <div className="relative aspect-video bg-muted">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <h3 className="font-semibold">John Doe</h3>
-                    <p className="text-sm opacity-90">Drone & Photography</p>
+        <Card className="p-4 sm:p-6 mt-8 backdrop-blur-sm bg-background/95 border-0 shadow-lg mx-4 sm:mx-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[1, 2, 3].map(index => (
+              <BackgroundGradient key={index} containerClassName="w-full">
+                <Card className="group h-full overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
+                  <div className="relative aspect-video bg-muted">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <h3 className="font-semibold">John Doe</h3>
+                      <p className="text-sm opacity-90">Drone & Photography</p>
+                    </div>
+                    <div className="absolute top-4 right-4 bg-black/50 px-2 py-1 rounded-full text-white text-sm">
+                      From $200
+                    </div>
                   </div>
-                  <div className="absolute top-4 right-4 bg-black/50 px-2 py-1 rounded-full text-white text-sm">
-                    From $200
+                  <div className="p-4">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Star className="w-4 h-4 fill-primary text-primary" />
+                      <span className="text-sm font-medium">4.8</span>
+                      <span className="text-sm text-muted-foreground">(47 reviews)</span>
+                    </div>
+                    <ShimmerButton 
+                      className="w-full h-10 text-sm"
+                      background="#1A1F2C"
+                    >
+                      View Profile
+                    </ShimmerButton>
                   </div>
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Star className="w-4 h-4 fill-primary text-primary" />
-                    <span className="text-sm font-medium">4.8</span>
-                    <span className="text-sm text-muted-foreground">(47 reviews)</span>
-                  </div>
-                  <ShimmerButton 
-                    className="w-full h-10 text-sm"
-                    background="#1A1F2C"
-                  >
-                    View Profile
-                  </ShimmerButton>
-                </div>
-              </Card>
-            </BackgroundGradient>
-          ))}
-        </div>
+                </Card>
+              </BackgroundGradient>
+            ))}
+          </div>
+        </Card>
 
         <div className="my-12 px-4 sm:px-0">
           <div className="text-center mb-8">
