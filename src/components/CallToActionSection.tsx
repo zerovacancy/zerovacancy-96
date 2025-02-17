@@ -14,15 +14,20 @@ const CallToActionSection = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <ShimmerButton
-            className="h-12 sm:h-auto w-full sm:w-auto text-base font-medium"
-            background="white"
+            className="text-black h-12 sm:h-auto w-full sm:w-auto text-base font-medium"
+            background="#ffffff"
             shimmerColor="rgba(0,0,0,0.1)"
+            shimmerSize="0.1em"
+            shimmerDuration="2s"
           >
             Find a Creator
           </ShimmerButton>
           <ShimmerButton
-            className="h-12 sm:h-auto w-full sm:w-auto text-base font-medium"
+            className="text-white h-12 sm:h-auto w-full sm:w-auto text-base font-medium"
             background="transparent"
+            shimmerColor="rgba(255,255,255,0.1)"
+            shimmerSize="0.1em"
+            shimmerDuration="2s"
           >
             Join as a Creator
           </ShimmerButton>
