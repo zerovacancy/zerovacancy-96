@@ -37,7 +37,7 @@ const PreviewSearch = () => {
     }
   ];
 
-  return <section className="relative section-padding py-[22px] bg-slate-300 hover:bg-slate-200">
+  return <section className="relative section-padding py-[22px] bg-white hover:bg-background">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
