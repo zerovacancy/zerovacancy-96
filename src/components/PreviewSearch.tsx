@@ -6,6 +6,8 @@ import { Slider } from './ui/slider';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
+import { BackgroundGradient } from './ui/background-gradient';
+
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -112,7 +114,9 @@ const PreviewSearch = () => {
         </div>
 
         <div className={`grid gap-4 sm:gap-6 px-4 sm:px-0 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-          {[1, 2, 3].map(index => <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+          {[1, 2, 3].map(index => (
+          <BackgroundGradient key={index} containerClassName="w-full">
+            <Card className="group overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
               <div className="relative aspect-[4/3] bg-muted">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
@@ -131,8 +135,10 @@ const PreviewSearch = () => {
                 </div>
                 <Button className="w-full h-10">View Profile</Button>
               </div>
-            </Card>)}
-        </div>
+            </Card>
+          </BackgroundGradient>
+        ))}
+      </div>
 
         <div className="text-center mt-8 sm:mt-12 px-4 sm:px-0">
           <Button variant="secondary" className="min-w-[200px] h-12">
@@ -145,4 +151,5 @@ const PreviewSearch = () => {
       <PricingSection />
     </section>;
 };
+
 export default PreviewSearch;
