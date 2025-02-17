@@ -170,7 +170,7 @@ const PreviewSearch = () => {
         </div>
 
         <div className="text-center mt-8 sm:mt-12">
-          <ShimmerButton size="lg" className="min-w-[200px]">
+          <ShimmerButton className="min-w-[200px] h-12 text-base px-8">
             Find Your Creator
           </ShimmerButton>
         </div>
