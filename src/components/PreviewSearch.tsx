@@ -33,14 +33,6 @@ const PreviewSearch = () => {
       rating: 5.0,
       reviews: 156,
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500"
-    },
-    {
-      name: "David Kim",
-      services: ["Photography", "Virtual Staging"],
-      price: 180,
-      rating: 4.7,
-      reviews: 87,
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&h=500"
     }
   ];
 
@@ -98,7 +90,7 @@ const PreviewSearch = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-4 sm:mx-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-4 sm:mx-0">
           {creators.map((creator, index) => (
             <Card key={index} className="group overflow-hidden">
               <div className="relative">
