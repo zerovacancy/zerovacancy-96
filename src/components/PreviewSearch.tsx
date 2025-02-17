@@ -7,6 +7,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
+
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -29,10 +30,11 @@ const PreviewSearch = () => {
     title: "Get Content",
     description: "Receive and approve deliverables"
   }];
-  return <section className="relative section-padding py-[22px] bg-zinc-50">
+
+  return <section className="relative section-padding py-[22px] bg-white hover:bg-background">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
-      <div className="relative mx-auto max-w-7xl my-0 py-[28px] bg-white">
+      <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <BackgroundGradient containerClassName="mx-4 sm:mx-0">
           <Card className="p-4 sm:p-6 mb-6 sm:mb-8 backdrop-blur-sm bg-[#F1F0FB]/95 border-[#E5DEFF] shadow-lg">
             <div className="text-center mb-8 sm:mb-12">
@@ -147,7 +149,7 @@ const PreviewSearch = () => {
           </Card>
         </BackgroundGradient>
 
-        <div className="my-12 px-4 sm:px-0">
+        <section className="my-12 px-4 sm:px-0">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold mb-2">How It Works</h3>
             <p className="text-muted-foreground">Your journey to amazing content in four simple steps</p>
@@ -165,7 +167,7 @@ const PreviewSearch = () => {
                 {index < steps.length - 1 && <div className="hidden lg:block absolute top-1/2 right-0 w-full h-[2px] bg-primary/10 -mr-3 transform translate-x-1/2 -translate-y-1/2 z-0" />}
               </div>)}
           </div>
-        </div>
+        </section>
 
         <div className="text-center mt-8 sm:mt-12">
           <ShimmerButton className="min-w-[200px] h-12 text-base px-8" background="#1A1F2C">
@@ -178,4 +180,5 @@ const PreviewSearch = () => {
       <PricingSection />
     </section>;
 };
+
 export default PreviewSearch;
