@@ -80,12 +80,14 @@ const PreviewSearch = () => {
               </Button>
             </div>
 
-            <div className="flex items-center justify-between mt-4 pt-4 border-t">
-              <button className="text-sm text-muted-foreground hover:text-primary flex items-center gap-2">
-                Advanced Filters
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              <span className="px-2 py-1 text-xs font-medium bg-accent text-accent-foreground rounded">PRO</span>
+            <div className="flex items-center justify-center mt-4 pt-4 border-t">
+              <div className="flex items-center gap-2">
+                <button className="text-sm text-muted-foreground hover:text-primary flex items-center gap-2">
+                  Advanced Filters
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+                <span className="px-2 py-0.5 text-xs font-medium bg-accent text-accent-foreground rounded">PRO</span>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
