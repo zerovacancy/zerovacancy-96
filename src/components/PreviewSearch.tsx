@@ -6,24 +6,27 @@ import { Slider } from './ui/slider';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
+
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [radius, setRadius] = useState([25]);
   const isMobile = useIsMobile();
-  return <section className="relative section-padding py-[22px] bg-slate-300 hover:bg-slate-200">
+
+  return (
+    <section className="relative bg-slate-50/80 py-20 lg:py-24">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
-      <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="section-title">Discover Local Creators</h2>
-          <p className="section-subtitle max-w-2xl mx-auto px-4">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10 lg:mb-14">
+          <h2 className="section-title text-4xl lg:text-5xl mb-6">Discover Local Creators</h2>
+          <p className="section-subtitle max-w-2xl mx-auto">
             Connect with professional photographers, videographers, and content creators in your area
           </p>
         </div>
 
-        <Card className="p-4 sm:p-6 mb-6 sm:mb-8 backdrop-blur-sm bg-background/95 border-0 shadow-lg mx-4 sm:mx-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4">
+        <Card className="p-6 lg:p-8 mb-8 lg:mb-12 backdrop-blur-sm bg-background/95 border-0 shadow-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6">
             <div className="search-group">
               <MapPin className="w-5 h-5 text-muted-foreground group-focus-within:text-primary flex-shrink-0" />
               <input type="text" placeholder="Enter Location" className="search-input" />
@@ -71,10 +74,12 @@ const PreviewSearch = () => {
             <div className="space-y-4">
               <label className="text-sm font-medium">Experience Level</label>
               <div className="space-y-3">
-                {['New', 'Verified', 'Top-rated'].map(level => <label key={level} className="flex items-center gap-2 text-sm cursor-pointer p-2">
+                {['New', 'Verified', 'Top-rated'].map(level => (
+                  <label key={level} className="flex items-center gap-2 text-sm cursor-pointer p-2">
                     <input type="checkbox" className="rounded border-muted w-4 h-4" />
                     {level}
-                  </label>)}
+                  </label>
+                ))}
               </div>
             </div>
 
@@ -92,7 +97,7 @@ const PreviewSearch = () => {
           </div>
         </Card>
 
-        <div className="flex justify-between items-center mb-6 sm:mb-8 px-4 sm:px-0">
+        <div className="flex justify-between items-center mb-8 lg:mb-10">
           <div className="flex items-center gap-2 sm:gap-4">
             <button onClick={() => setViewMode('grid')} className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-secondary' : 'hover:bg-secondary/50'}`}>
               <Grid className="w-5 h-5" />
@@ -111,8 +116,9 @@ const PreviewSearch = () => {
           </select>
         </div>
 
-        <div className={`grid gap-4 sm:gap-6 px-4 sm:px-0 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-          {[1, 2, 3].map(index => <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+        <div className={`grid gap-6 lg:gap-8 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+          {[1, 2, 3].map(index => (
+            <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
               <div className="relative aspect-[4/3] bg-muted">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
@@ -131,18 +137,25 @@ const PreviewSearch = () => {
                 </div>
                 <Button className="w-full h-10">View Profile</Button>
               </div>
-            </Card>)}
+            </Card>
+          ))}
         </div>
 
-        <div className="text-center mt-8 sm:mt-12 px-4 sm:px-0">
+        <div className="text-center mt-12 lg:mt-16">
           <Button variant="secondary" className="min-w-[200px] h-12">
             Load More
           </Button>
         </div>
       </div>
 
-      <FeaturesSectionWithHoverEffects />
-      <PricingSection />
-    </section>;
+      <div className="mt-24 lg:mt-32">
+        <FeaturesSectionWithHoverEffects />
+      </div>
+      <div className="mt-24 lg:mt-32">
+        <PricingSection />
+      </div>
+    </section>
+  );
 };
+
 export default PreviewSearch;
