@@ -87,43 +87,43 @@ const PreviewSearch = () => {
               </button>
               <span className="px-2 py-1 text-xs font-medium bg-accent text-accent-foreground rounded">PRO</span>
             </div>
-          </Card>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-4 sm:mx-0">
-          {creators.map((creator, index) => (
-            <Card key={index} className="group overflow-hidden">
-              <div className="relative">
-                <div className="absolute top-3 right-3 z-10">
-                  <span className="px-3 py-1 text-sm font-medium bg-black/60 text-white rounded-full">
-                    From ${creator.price}
-                  </span>
-                </div>
-                <div className="relative aspect-[4/3]">
-                  <img
-                    src={creator.image}
-                    alt={creator.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <h3 className="font-semibold text-lg">{creator.name}</h3>
-                    <p className="text-sm opacity-90">{creator.services.join(" • ")}</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+              {creators.map((creator, index) => (
+                <Card key={index} className="group overflow-hidden">
+                  <div className="relative">
+                    <div className="absolute top-3 right-3 z-10">
+                      <span className="px-3 py-1 text-sm font-medium bg-black/60 text-white rounded-full">
+                        From ${creator.price}
+                      </span>
+                    </div>
+                    <div className="relative aspect-[4/3]">
+                      <img
+                        src={creator.image}
+                        alt={creator.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <h3 className="font-semibold text-lg">{creator.name}</h3>
+                        <p className="text-sm opacity-90">{creator.services.join(" • ")}</p>
+                      </div>
+                    </div>
+                    <div className="p-4 space-y-4">
+                      <div className="flex items-center gap-2">
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <span className="font-medium">{creator.rating}</span>
+                        <span className="text-sm text-muted-foreground">({creator.reviews} reviews)</span>
+                      </div>
+                      <Button variant="default" className="w-full bg-primary text-white hover:bg-primary/90">
+                        View Profile
+                      </Button>
+                    </div>
                   </div>
-                </div>
-                <div className="p-4 space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-medium">{creator.rating}</span>
-                    <span className="text-sm text-muted-foreground">({creator.reviews} reviews)</span>
-                  </div>
-                  <Button variant="default" className="w-full bg-primary text-white hover:bg-primary/90">
-                    View Profile
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          ))}
+                </Card>
+              ))}
+            </div>
+          </Card>
         </div>
       </div>
 
