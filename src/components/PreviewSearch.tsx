@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Users, FileCheck, Crown } from 'lucide-react';
 import { Card } from './ui/card';
@@ -169,7 +170,7 @@ const PreviewSearch = () => {
           </div>
         </section>
 
-        <div className="text-center mt-8 sm:mt-12">
+        <div className="flex justify-center mt-8 sm:mt-12">
           <ShimmerButton className="min-w-[200px] h-12 text-base px-8" background="#1A1F2C">
             Find Your Creator
           </ShimmerButton>

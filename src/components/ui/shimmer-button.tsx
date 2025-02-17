@@ -4,10 +4,13 @@ import { HTMLAttributes, forwardRef } from "react";
 
 interface ShimmerButtonProps extends HTMLAttributes<HTMLDivElement> {
   background?: string;
+  shimmerColor?: string;
+  shimmerSize?: string;
+  shimmerDuration?: string;
 }
 
 export const ShimmerButton = forwardRef<HTMLDivElement, ShimmerButtonProps>(
-  ({ className, background, children, ...props }, ref) => {
+  ({ className, background, shimmerColor, shimmerSize, shimmerDuration, children, ...props }, ref) => {
     return (
       <div
         ref={ref}
