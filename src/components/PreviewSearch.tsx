@@ -119,9 +119,9 @@ const PreviewSearch = () => {
               </div>
             </div>
           </div>
-        </Card>
 
-        <Card className="p-4 sm:p-6 mt-8 backdrop-blur-sm bg-background/95 border-0 shadow-lg mx-4 sm:mx-0">
+          <div className="border-t border-border/50 my-6" />
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[1, 2, 3].map(index => (
               <BackgroundGradient key={index} containerClassName="w-full">
