@@ -1,11 +1,9 @@
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Building, UserPlus } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
-
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(() => ["engages", "converts", "impresses", "stands out", "educates"], []);
@@ -19,10 +17,9 @@ export function Hero() {
     }, 2000);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length]);
-  
   return <div className="w-full">
-      <div className="container mx-auto py-0">
-        <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0">
+      <div className="container mx-auto py-0 bg-zinc-100">
+        <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0 bg-zinc-100">
           <div className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-primary">Property Content that</span>
@@ -52,15 +49,10 @@ export function Hero() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto px-4 sm:px-0">
-            <ShimmerButton 
-              className="w-full sm:w-auto gap-2 min-w-[200px] h-12"
-              background="rgba(255, 255, 255, 0.1)"
-            >
+            <ShimmerButton className="w-full sm:w-auto gap-2 min-w-[200px] h-12" background="rgba(255, 255, 255, 0.1)">
               I Need Content <Building className="w-4 h-4" />
             </ShimmerButton>
-            <ShimmerButton 
-              className="w-full sm:w-auto gap-2 min-w-[200px] h-12"
-            >
+            <ShimmerButton className="w-full sm:w-auto gap-2 min-w-[200px] h-12">
               I Create Content <UserPlus className="w-4 h-4" />
             </ShimmerButton>
           </div>
@@ -68,5 +60,4 @@ export function Hero() {
       </div>
     </div>;
 }
-
 export default Hero;
