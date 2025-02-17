@@ -121,11 +121,11 @@ const PreviewSearch = () => {
           </div>
         </Card>
 
-        <div className="grid gap-4 sm:gap-6 px-4 sm:px-0 mt-8 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 sm:px-6 lg:px-8 mt-8 max-w-[1024px] mx-auto">
           {[1, 2, 3].map(index => (
             <BackgroundGradient key={index} containerClassName="w-full">
-              <Card className="group overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
-                <div className="relative aspect-[4/3] bg-muted">
+              <Card className="group h-full overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
+                <div className="relative aspect-video bg-muted">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute bottom-4 left-4 text-white">
                     <h3 className="font-semibold">John Doe</h3>
@@ -142,7 +142,7 @@ const PreviewSearch = () => {
                     <span className="text-sm text-muted-foreground">(47 reviews)</span>
                   </div>
                   <ShimmerButton 
-                    className="w-full h-10"
+                    className="w-full h-10 text-sm"
                     background="#1A1F2C"
                   >
                     View Profile
