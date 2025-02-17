@@ -39,10 +39,9 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
           } as CSSProperties
         }
         className={cn(
-          "group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap px-6 py-3",
-          "text-white font-medium", // Explicit white text color
+          "group relative flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap px-6 py-3",
+          "text-white font-medium",
           "transform-gpu transition-transform duration-300 ease-in-out active:translate-y-px",
-          "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-[var(--shimmer-color)] before:to-transparent before:opacity-70",
           "[background:var(--bg)] [border-radius:var(--radius)]",
           "hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2",
           className
@@ -50,16 +49,11 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
         ref={ref}
         {...props}
       >
-        <span className="relative z-10">{children}</span>
-        <div
-          className={cn(
-            "absolute inset-0 rounded-[inherit]",
-            "shadow-[inset_0_-8px_10px_rgba(0,0,0,0.1)]",
-            "transform-gpu transition-all duration-300 ease-in-out",
-            "group-hover:shadow-[inset_0_-6px_10px_rgba(0,0,0,0.15)]",
-            "group-active:shadow-[inset_0_-10px_10px_rgba(0,0,0,0.2)]",
-          )}
-        />
+        <div className="absolute inset-0 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-[var(--shimmer-color)] before:to-transparent before:opacity-70" />
+        <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0_-8px_10px_rgba(0,0,0,0.1)] transform-gpu transition-all duration-300 ease-in-out group-hover:shadow-[inset_0_-6px_10px_rgba(0,0,0,0.15)] group-active:shadow-[inset_0_-10px_10px_rgba(0,0,0,0.2)]" />
+        <div className="relative z-[1] flex items-center justify-center gap-2">
+          {children}
+        </div>
       </button>
     );
   },
