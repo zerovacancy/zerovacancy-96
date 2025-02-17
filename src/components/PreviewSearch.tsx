@@ -7,40 +7,32 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
-
 const PreviewSearch = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [radius, setRadius] = useState([25]);
   const isMobile = useIsMobile();
-
-  const steps = [
-    {
-      icon: <Search className="w-6 h-6" />,
-      title: "Search & Filter",
-      description: "Find your perfect creator match"
-    },
-    {
-      icon: <Users className="w-6 h-6" />,
-      title: "Review & Compare",
-      description: "Browse portfolios and reviews"
-    },
-    {
-      icon: <Calendar className="w-6 h-6" />,
-      title: "Book & Pay",
-      description: "Schedule securely through platform"
-    },
-    {
-      icon: <FileCheck className="w-6 h-6" />,
-      title: "Get Content",
-      description: "Receive and approve deliverables"
-    }
-  ];
-
+  const steps = [{
+    icon: <Search className="w-6 h-6" />,
+    title: "Search & Filter",
+    description: "Find your perfect creator match"
+  }, {
+    icon: <Users className="w-6 h-6" />,
+    title: "Review & Compare",
+    description: "Browse portfolios and reviews"
+  }, {
+    icon: <Calendar className="w-6 h-6" />,
+    title: "Book & Pay",
+    description: "Schedule securely through platform"
+  }, {
+    icon: <FileCheck className="w-6 h-6" />,
+    title: "Get Content",
+    description: "Receive and approve deliverables"
+  }];
   return <section className="relative section-padding py-[22px] bg-white hover:bg-background">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
-      <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
+      <div className="relative mx-auto max-w-7xl my-0 py-[28px] bg-zinc-50">
         <BackgroundGradient containerClassName="mx-4 sm:mx-0">
           <Card className="p-4 sm:p-6 mb-6 sm:mb-8 backdrop-blur-sm bg-[#F1F0FB]/95 border-[#E5DEFF] shadow-lg">
             <div className="text-center mb-8 sm:mb-12">
@@ -73,19 +65,13 @@ const PreviewSearch = () => {
                 <input type="date" className="search-input" />
               </div>
 
-              <ShimmerButton 
-                className="w-full h-14 text-base"
-                background="#1A1F2C"
-              >
+              <ShimmerButton className="w-full h-14 text-base" background="#1A1F2C">
                 Find Creators
               </ShimmerButton>
             </div>
 
             <div className="flex items-center justify-center">
-              <button 
-                onClick={() => setIsAdvancedOpen(!isAdvancedOpen)} 
-                className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors p-2 relative"
-              >
+              <button onClick={() => setIsAdvancedOpen(!isAdvancedOpen)} className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors p-2 relative">
                 <Sliders className="w-4 h-4" />
                 Advanced Filters
                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAdvancedOpen ? 'rotate-180' : ''}`} />
@@ -133,8 +119,7 @@ const PreviewSearch = () => {
             <div className="border-t border-border/50 my-6" />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[1, 2, 3].map(index => (
-                <BackgroundGradient key={index} containerClassName="w-full">
+              {[1, 2, 3].map(index => <BackgroundGradient key={index} containerClassName="w-full">
                   <Card className="group h-full overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
                     <div className="relative aspect-video bg-muted">
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -152,16 +137,12 @@ const PreviewSearch = () => {
                         <span className="text-sm font-medium">4.8</span>
                         <span className="text-sm text-muted-foreground">(47 reviews)</span>
                       </div>
-                      <ShimmerButton 
-                        className="w-full h-10 text-sm"
-                        background="#1A1F2C"
-                      >
+                      <ShimmerButton className="w-full h-10 text-sm" background="#1A1F2C">
                         View Profile
                       </ShimmerButton>
                     </div>
                   </Card>
-                </BackgroundGradient>
-              ))}
+                </BackgroundGradient>)}
             </div>
           </Card>
         </BackgroundGradient>
@@ -173,8 +154,7 @@ const PreviewSearch = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((step, index) => (
-              <div key={index} className="relative group">
+            {steps.map((step, index) => <div key={index} className="relative group">
                 <div className="flex flex-col items-center p-6 rounded-lg bg-background/80 backdrop-blur-sm hover:bg-background/95 transition-all duration-300">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-primary">
                     {step.icon}
@@ -182,19 +162,13 @@ const PreviewSearch = () => {
                   <h4 className="font-medium mb-2">{step.title}</h4>
                   <p className="text-sm text-muted-foreground text-center">{step.description}</p>
                 </div>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 right-0 w-full h-[2px] bg-primary/10 -mr-3 transform translate-x-1/2 -translate-y-1/2 z-0" />
-                )}
-              </div>
-            ))}
+                {index < steps.length - 1 && <div className="hidden lg:block absolute top-1/2 right-0 w-full h-[2px] bg-primary/10 -mr-3 transform translate-x-1/2 -translate-y-1/2 z-0" />}
+              </div>)}
           </div>
         </div>
 
         <div className="text-center mt-8 sm:mt-12">
-          <ShimmerButton 
-            className="min-w-[200px] h-12 text-base px-8"
-            background="#1A1F2C"
-          >
+          <ShimmerButton className="min-w-[200px] h-12 text-base px-8" background="#1A1F2C">
             Find Your Creator
           </ShimmerButton>
         </div>
@@ -204,5 +178,4 @@ const PreviewSearch = () => {
       <PricingSection />
     </section>;
 };
-
 export default PreviewSearch;
