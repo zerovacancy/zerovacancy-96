@@ -29,10 +29,10 @@ const PreviewSearch = () => {
     title: "Get Content",
     description: "Receive and approve deliverables"
   }];
-  return <section className="relative section-padding py-[22px] bg-white hover:bg-background">
+  return <section className="relative section-padding py-[22px] bg-zinc-50">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
-      <div className="relative mx-auto max-w-7xl my-0 py-[28px] bg-zinc-50">
+      <div className="relative mx-auto max-w-7xl my-0 py-[28px] bg-white">
         <BackgroundGradient containerClassName="mx-4 sm:mx-0">
           <Card className="p-4 sm:p-6 mb-6 sm:mb-8 backdrop-blur-sm bg-[#F1F0FB]/95 border-[#E5DEFF] shadow-lg">
             <div className="text-center mb-8 sm:mb-12">
