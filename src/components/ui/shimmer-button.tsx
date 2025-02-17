@@ -20,7 +20,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
       shimmerSize = "0.05em",
       shimmerDuration = "3s",
       borderRadius = "0.5rem",
-      background = "#1A1F2C", // Dark primary color for better contrast
+      background = "#1A1F2C",
       className,
       children,
       ...props
@@ -40,7 +40,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
         }
         className={cn(
           "group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap px-6 py-3",
-          "text-white font-medium", // Ensuring white text for contrast
+          "text-white font-medium", // Explicit white text color
           "transform-gpu transition-transform duration-300 ease-in-out active:translate-y-px",
           "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-[var(--shimmer-color)] before:to-transparent before:opacity-70",
           "[background:var(--bg)] [border-radius:var(--radius)]",
@@ -50,7 +50,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
         ref={ref}
         {...props}
       >
-        {children}
+        <span className="relative z-10">{children}</span>
         <div
           className={cn(
             "absolute inset-0 rounded-[inherit]",
