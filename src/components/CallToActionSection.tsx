@@ -16,6 +16,7 @@ const CallToActionSection = () => {
           <Button
             size="lg"
             className="bg-white text-primary hover:bg-white/90 h-12 sm:h-auto w-full sm:w-auto"
+            style={{ '--speed': '1.5s' } as React.CSSProperties}
           >
             Find a Creator
           </Button>
@@ -23,6 +24,7 @@ const CallToActionSection = () => {
             size="lg"
             variant="outline"
             className="border-white text-white hover:bg-white/10 h-12 sm:h-auto w-full sm:w-auto"
+            style={{ '--speed': '1.5s' } as React.CSSProperties}
           >
             Join as a Creator
           </Button>

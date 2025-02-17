@@ -33,7 +33,12 @@ const buttonVariants = cva(
           "before:animate-shimmer-slide before:bg-gradient-to-r",
           "before:from-transparent before:via-black/5 before:to-transparent",
         ],
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: [
+          "hover:bg-accent hover:text-accent-foreground",
+          "before:absolute before:inset-0 before:z-0 before:h-[100%] before:w-[20%]",
+          "before:animate-shimmer-slide before:bg-gradient-to-r",
+          "before:from-transparent before:via-black/5 before:to-transparent",
+        ],
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
