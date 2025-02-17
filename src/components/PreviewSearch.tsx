@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown } from 'lucide-react';
+import { Search, MapPin, Calendar, DollarSign, Sliders, Grid, List, Star, ChevronDown, Users, FileCheck } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Slider } from './ui/slider';
@@ -13,6 +13,30 @@ const PreviewSearch = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [radius, setRadius] = useState([25]);
   const isMobile = useIsMobile();
+
+  const steps = [
+    {
+      icon: <Search className="w-6 h-6" />,
+      title: "Search & Filter",
+      description: "Find your perfect creator match"
+    },
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: "Review & Compare",
+      description: "Browse portfolios and reviews"
+    },
+    {
+      icon: <Calendar className="w-6 h-6" />,
+      title: "Book & Pay",
+      description: "Schedule securely through platform"
+    },
+    {
+      icon: <FileCheck className="w-6 h-6" />,
+      title: "Get Content",
+      description: "Receive and approve deliverables"
+    }
+  ];
+
   return <section className="relative section-padding py-[22px] bg-slate-300 hover:bg-slate-200">
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-transparent pointer-events-none" />
       
@@ -94,55 +118,61 @@ const PreviewSearch = () => {
           </div>
         </Card>
 
-        <div className="flex justify-between items-center mb-6 sm:mb-8 px-4 sm:px-0">
-          <div className="flex items-center gap-2 sm:gap-4">
-            <button onClick={() => setViewMode('grid')} className={`p-2 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-secondary' : 'hover:bg-secondary/50'}`}>
-              <Grid className="w-5 h-5" />
-            </button>
-            <button onClick={() => setViewMode('list')} className={`p-2 rounded-md transition-colors ${viewMode === 'list' ? 'bg-secondary' : 'hover:bg-secondary/50'}`}>
-              <List className="w-5 h-5" />
-            </button>
+        {/* Integrated How It Works Section */}
+        <div className="my-12 px-4 sm:px-0">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-semibold mb-2">How It Works</h3>
+            <p className="text-muted-foreground">Your journey to amazing content in four simple steps</p>
           </div>
-
-          <select className="bg-transparent border-none focus:outline-none text-sm text-muted-foreground p-2">
-            <option value="relevance">Sort by: Relevance</option>
-            <option value="rating">Highest Rated</option>
-            <option value="experience">Most Experienced</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, index) => (
+              <div key={index} className="relative group">
+                <div className="flex flex-col items-center p-6 rounded-lg bg-background/80 backdrop-blur-sm hover:bg-background/95 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-primary">
+                    {step.icon}
+                  </div>
+                  <h4 className="font-medium mb-2">{step.title}</h4>
+                  <p className="text-sm text-muted-foreground text-center">{step.description}</p>
+                </div>
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:block absolute top-1/2 right-0 w-full h-[2px] bg-primary/10 -mr-3 transform translate-x-1/2 -translate-y-1/2 z-0" />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className={`grid gap-4 sm:gap-6 px-4 sm:px-0 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+        <div className={`grid gap-4 sm:gap-6 px-4 sm:px-0 mt-8 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
           {[1, 2, 3].map(index => (
-          <BackgroundGradient key={index} containerClassName="w-full">
-            <Card className="group overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
-              <div className="relative aspect-[4/3] bg-muted">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-4 left-4 text-white">
-                  <h3 className="font-semibold">John Doe</h3>
-                  <p className="text-sm opacity-90">Drone & Photography</p>
+            <BackgroundGradient key={index} containerClassName="w-full">
+              <Card className="group overflow-hidden transition-all duration-200 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
+                <div className="relative aspect-[4/3] bg-muted">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <h3 className="font-semibold">John Doe</h3>
+                    <p className="text-sm opacity-90">Drone & Photography</p>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-black/50 px-2 py-1 rounded-full text-white text-sm">
+                    From $200
+                  </div>
                 </div>
-                <div className="absolute top-4 right-4 bg-black/50 px-2 py-1 rounded-full text-white text-sm">
-                  From $200
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Star className="w-4 h-4 fill-primary text-primary" />
+                    <span className="text-sm font-medium">4.8</span>
+                    <span className="text-sm text-muted-foreground">(47 reviews)</span>
+                  </div>
+                  <Button className="w-full h-10">View Profile</Button>
                 </div>
-              </div>
-              <div className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                  <Star className="w-4 h-4 fill-primary text-primary" />
-                  <span className="text-sm font-medium">4.8</span>
-                  <span className="text-sm text-muted-foreground">(47 reviews)</span>
-                </div>
-                <Button className="w-full h-10">View Profile</Button>
-              </div>
-            </Card>
-          </BackgroundGradient>
-        ))}
-      </div>
+              </Card>
+            </BackgroundGradient>
+          ))}
+        </div>
 
-        <div className="text-center mt-8 sm:mt-12 px-4 sm:px-0">
-          <Button variant="secondary" className="min-w-[200px] h-12">
-            Load More
+        <div className="text-center mt-8 sm:mt-12">
+          <Button size="lg" className="min-w-[200px]">
+            Find Your Creator
           </Button>
         </div>
       </div>
