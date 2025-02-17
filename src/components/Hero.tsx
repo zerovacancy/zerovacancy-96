@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -48,11 +49,11 @@ export function Hero() {
               property portfolio.
             </p>
           </div>
-          <div className="flex flex-row gap-3">
-            <Button size="lg" className="gap-4" variant="outline">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto px-4 sm:px-0">
+            <Button size="lg" className="w-full sm:w-auto gap-2 min-w-[200px]" variant="outline">
               I Need Content <Building className="w-4 h-4" />
             </Button>
-            <Button size="lg" className="gap-4">
+            <Button size="lg" className="w-full sm:w-auto gap-2 min-w-[200px]">
               I Create Content <UserPlus className="w-4 h-4" />
             </Button>
           </div>
