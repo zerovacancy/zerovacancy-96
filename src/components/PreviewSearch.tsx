@@ -42,7 +42,7 @@ const PreviewSearch = () => {
       
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <BackgroundGradient containerClassName="mx-4 sm:mx-0">
-          <Card className="p-4 sm:p-6 mb-6 sm:mb-8 backdrop-blur-sm bg-background/95 border-0 shadow-lg">
+          <Card className="p-4 sm:p-6 mb-6 sm:mb-8 backdrop-blur-sm bg-[#F1F0FB]/95 border-[#E5DEFF] shadow-lg">
             <div className="text-center mb-8 sm:mb-12">
               <h2 className="section-title">Discover Local Creators</h2>
               <p className="section-subtitle max-w-2xl mx-auto">
@@ -50,7 +50,7 @@ const PreviewSearch = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 p-4 border border-[#F1F0FB] rounded-lg bg-white/50">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 p-4 border border-[#E5DEFF] rounded-lg bg-white/90">
               <div className="search-group">
                 <MapPin className="w-5 h-5 text-muted-foreground group-focus-within:text-primary flex-shrink-0" />
                 <input type="text" placeholder="Enter Location" className="search-input" />
