@@ -72,7 +72,10 @@ const PreviewSearch = () => {
               <input type="date" className="search-input" />
             </div>
 
-            <ShimmerButton className="w-full h-14 text-base">
+            <ShimmerButton 
+              className="w-full h-14 text-base"
+              background="#1A1F2C"
+            >
               Find Creators
             </ShimmerButton>
           </div>
@@ -138,7 +141,12 @@ const PreviewSearch = () => {
                     <span className="text-sm font-medium">4.8</span>
                     <span className="text-sm text-muted-foreground">(47 reviews)</span>
                   </div>
-                  <ShimmerButton className="w-full h-10">View Profile</ShimmerButton>
+                  <ShimmerButton 
+                    className="w-full h-10"
+                    background="#1A1F2C"
+                  >
+                    View Profile
+                  </ShimmerButton>
                 </div>
               </Card>
             </BackgroundGradient>
@@ -170,7 +178,10 @@ const PreviewSearch = () => {
         </div>
 
         <div className="text-center mt-8 sm:mt-12">
-          <ShimmerButton className="min-w-[200px] h-12 text-base px-8">
+          <ShimmerButton 
+            className="min-w-[200px] h-12 text-base px-8"
+            background="#1A1F2C"
+          >
             Find Your Creator
           </ShimmerButton>
         </div>
