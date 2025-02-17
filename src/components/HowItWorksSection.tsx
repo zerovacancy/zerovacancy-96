@@ -20,9 +20,9 @@ const HowItWorksSection = () => {
     description: "Receive and approve deliverables"
   }];
   return <section className="bg-white py-[8px]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 bg-transparent lg:px-[107px] py-[14px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 bg-transparent lg:px-[107px] py-0 my-0">
         <div className="text-center mb-8">
-          <h3 className="font-semibold mb-2 text-5xl">How It Works</h3>
+          <h3 className="font-semibold mb-2 text-5xl my-[19px]">How It Works</h3>
           <p className="text-muted-foreground">Your journey to amazing content in four simple steps</p>
         </div>
         
@@ -39,7 +39,7 @@ const HowItWorksSection = () => {
             </div>)}
         </div>
 
-        <div className="flex justify-center mt-8 sm:mt-12 my-[13px]">
+        <div className="flex justify-center mt-8 sm:mt-12 my-[23px]">
           <ShimmerButton className="min-w-[200px] h-12 text-base px-8" background="#1A1F2C">
             Find Your Creator
           </ShimmerButton>
