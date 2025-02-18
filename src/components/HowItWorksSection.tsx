@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
-import { RainbowButton } from './ui/rainbow-button';
+import { ShimmerButton } from './ui/shimmer-button';
 
 const HowItWorksSection = () => {
   const steps = [{
@@ -48,9 +48,9 @@ const HowItWorksSection = () => {
         </div>
 
         <div className="flex justify-center mt-16">
-          <RainbowButton className="min-w-[200px] h-12 text-base font-medium">
+          <ShimmerButton className="min-w-[200px] h-12 text-base font-medium">
             Find Your Creator
-          </RainbowButton>
+          </ShimmerButton>
         </div>
       </div>
     </section>;
