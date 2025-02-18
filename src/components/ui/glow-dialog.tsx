@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -89,18 +90,20 @@ export function GlowDialog({ open, onOpenChange }: GlowDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl md:max-w-3xl overflow-hidden border-none bg-transparent">
         <motion.div 
-          className="relative rounded-lg overflow-hidden p-6 sm:p-8 md:p-10"
+          className="relative rounded-lg overflow-hidden bg-[#060606]/80 p-6 sm:p-8 md:p-10"
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
         >
-          <Squares
-            direction="diagonal"
-            speed={0.5}
-            borderColor="#333"
-            squareSize={32}
-            hoverFillColor="#222"
-          />
+          <div className="absolute inset-0">
+            <Squares
+              direction="diagonal"
+              speed={0.5}
+              borderColor="#333"
+              squareSize={32}
+              hoverFillColor="#222"
+            />
+          </div>
           <MovingBorder rx="12px" ry="12px" duration={3000}>
             <div className="h-24 w-24 sm:h-32 sm:w-32 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]" />
           </MovingBorder>
