@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -11,241 +10,168 @@ import { GlowingEffect } from './ui/glowing-effect';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
-// Optimize creator images by converting to WebP
-const creators = [{
-  name: "Sarah Johnson",
-  services: ["Photography", "Drone"],
-  price: 200,
-  rating: 4.9,
-  reviews: 124,
-  location: "New York, NY",
-  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
-  workExamples: [
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
-  ]
-}, {
-  name: "Michael Chen",
-  services: ["Videography", "Editing"],
-  price: 250,
-  rating: 4.8,
-  reviews: 98,
-  location: "Los Angeles, CA",
-  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
-  workExamples: [
-    "https://images.unsplash.com/photo-1600607687644-05f5f91428f9?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600585154363-67eb9e684b16?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
-  ]
-}, {
-  name: "Emily Rodriguez",
-  services: ["3D Tours", "Photography"],
-  price: 300,
-  rating: 5.0,
-  reviews: 156,
-  location: "Miami, FL",
-  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
-  workExamples: [
-    "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
-  ]
-}];
+const creators = [
+  {
+    id: 1,
+    name: 'John Doe',
+    location: 'New York, USA',
+    availability: 'Available Now',
+    rating: 4.5,
+    imageUrl: '/placeholder-image.webp',
+    profileUrl: '/johndoe',
+    services: ['Photography', 'Videography'],
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    location: 'Los Angeles, USA',
+    availability: 'Available Next Week',
+    rating: 4.8,
+    imageUrl: '/placeholder-image.webp',
+    profileUrl: '/janesmith',
+    services: ['Drone Photography', '3D Tours'],
+  },
+  {
+    id: 3,
+    name: 'Alice Johnson',
+    location: 'London, UK',
+    availability: 'Available in 2 Weeks',
+    rating: 4.2,
+    imageUrl: '/placeholder-image.webp',
+    profileUrl: '/alicejohnson',
+    services: ['Photography', 'Social Media Content'],
+  },
+  {
+    id: 4,
+    name: 'Bob Williams',
+    location: 'Sydney, Australia',
+    availability: 'Available Next Month',
+    rating: 4.9,
+    imageUrl: '/placeholder-image.webp',
+    profileUrl: '/bobwilliams',
+    services: ['Videography', 'Drone Photography'],
+  },
+];
 
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
-  // Intersection Observer for lazy loading with proper type checking
-  const imageObserver = React.useRef(
+  const handleImageIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      const target = entry.target as HTMLImageElement;
+      if (entry.isIntersecting && target.dataset.src) {
+        setLoadedImages((prev) => new Set([...prev, target.dataset.src as string]));
+      }
+    });
+  }, []);
+
+  const imageObserver = useRef(
     typeof window !== 'undefined'
-      ? new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && entry.target instanceof HTMLImageElement && entry.target.dataset.src) {
-                setLoadedImages((prev) => new Set([...prev, entry.target.dataset.src]));
-              }
-            });
-          },
-          { rootMargin: '50px' }
-        )
+      ? new IntersectionObserver(handleImageIntersection, { rootMargin: '50px' })
       : null
   );
 
-  // Handle image observation
-  const observeImage = React.useCallback((node: HTMLImageElement | null) => {
-    if (node && imageObserver.current) {
-      imageObserver.current.observe(node);
+  const observeImage = useCallback((node: HTMLImageElement | null) => {
+    const currentObserver = imageObserver.current;
+    if (node && currentObserver) {
+      currentObserver.observe(node);
       return () => {
-        imageObserver.current?.unobserve(node);
+        currentObserver.unobserve(node);
       };
     }
   }, []);
 
+  React.useEffect(() => {
+    return () => {
+      imageObserver.current?.disconnect();
+    };
+  }, []);
+
   return (
-    <section className="relative section-padding overflow-hidden py-[21px] my-0">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
-        [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#4F46E5,transparent)] opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-20" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
-        <div className="mx-4 sm:mx-0 mb-8">
-          <div className="relative">
-            <Card className="p-6 sm:p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-4 sm:mb-6">
-                Discover Local Creators
+    <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
+      <BackgroundGradient
+        containerClassName="absolute inset-0 -z-10"
+        className="bg-[radial-gradient(circle_farthest-side_at_0_100%,#E6E9F0,transparent),radial-gradient(circle_farthest-side_at_100%_0,#ffffff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#eef1f5,transparent),radial-gradient(circle_farthest-side_at_0_0,#d7d2cc,#304352)]"
+      />
+      <GlowingEffect
+        className="opacity-40"
+        glow
+        blur={30}
+        spread={40}
+      />
+      <div className="container relative z-10">
+        <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">
+                Find Your Perfect Creator
               </h2>
-              <p className="text-muted-foreground text-center text-base sm:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto">
-                Connect with professional photographers, videographers, and content creators in your area
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                  <MapPin className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                  <input 
-                    type="text" 
-                    placeholder="Location" 
-                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70" 
-                  />
-                </div>
-
-                <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                  <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                  <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base appearance-none cursor-pointer">
-                    <option value="">Content Type</option>
-                    <option value="photography">Photography</option>
-                    <option value="videography">Videography</option>
-                    <option value="3d-tours">3D Tours</option>
-                  </select>
-                </div>
-
-                <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                  <Calendar className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                  <input 
-                    type="text" 
-                    placeholder="mm/dd/yyyy" 
-                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70" 
-                  />
-                </div>
-
-                <Button className="w-full h-[52px] bg-primary text-white hover:bg-primary/90 text-base font-medium shadow-sm">
-                  Find Creators
-                </Button>
-              </div>
-
-              <div className="flex items-center justify-center pt-4 border-t">
-                <button className="text-base text-muted-foreground hover:text-primary flex items-center gap-2 py-3 px-4 transition-colors duration-200">
-                  Advanced Filters
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-                <span className="ml-2 px-2.5 py-1 text-sm font-medium bg-accent rounded-md">PRO</span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-                {creators.map((creator, index) => (
-                  <div key={index} className="group">
-                    <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
-                      <div className="relative">
-                        <div className="absolute top-4 right-4 z-10">
-                          <span className="px-3 py-1.5 text-sm font-medium bg-black/70 text-white rounded-full backdrop-blur-sm">
-                            From ${creator.price}
-                          </span>
-                        </div>
-                        <div className="relative aspect-[4/3]">
-                          <img 
-                            ref={observeImage}
-                            src={loadedImages.has(creator.image) ? creator.image : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                            data-src={creator.image}
-                            alt={creator.name} 
-                            className={cn(
-                              "w-full h-full object-cover object-center transition-opacity duration-300",
-                              !loadedImages.has(creator.image) && "opacity-0"
-                            )}
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                          <div className="absolute bottom-4 left-4 text-white">
-                            <h3 className="font-semibold text-xl mb-1">{creator.name}</h3>
-                            <div className="flex items-center gap-1.5 text-sm text-white/90">
-                              <MapPin className="w-4 h-4" />
-                              <span>{creator.location}</span>
-                            </div>
-                            <p className="text-sm text-white/90 mt-1">
-                              {creator.services.join(" • ")}
-                            </p>
-                          </div>
-                        </div>
-                        
-                        <div className="p-5 space-y-5">
-                          <div className="flex items-center gap-2 justify-between">
-                            <div className="flex items-center gap-2">
-                              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                              <span className="text-base font-medium">{creator.rating}</span>
-                              <span className="text-sm text-muted-foreground">
-                                ({creator.reviews} reviews)
-                              </span>
-                            </div>
-                            <Button 
-                              variant="outline" 
-                              size="default" 
-                              className="text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
-                            >
-                              Contact
-                            </Button>
-                          </div>
-                          
-                          <div className="grid grid-cols-3 gap-3">
-                            {creator.workExamples.map((example, i) => (
-                              <Dialog key={i}>
-                                <DialogTrigger asChild>
-                                  <button className="relative aspect-square w-full overflow-hidden rounded-lg will-change-transform">
-                                    <img 
-                                      ref={observeImage}
-                                      src={loadedImages.has(example) ? example : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                                      data-src={example}
-                                      alt={`${creator.name}'s work ${i + 1}`} 
-                                      className={cn(
-                                        "object-cover w-full h-full transform transition-all duration-300 group-hover:scale-105",
-                                        !loadedImages.has(example) && "opacity-0"
-                                      )}
-                                      loading="lazy"
-                                    />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                      <Image className="w-5 h-5 text-white" />
-                                    </div>
-                                  </button>
-                                </DialogTrigger>
-                                <DialogContent className={cn("max-w-3xl w-[95vw] p-4", isMobile ? "h-[90vh]" : "")}>
-                                  <div className={cn("w-full h-full", isMobile ? "flex items-center justify-center" : "aspect-[4/3]")}>
-                                    <img 
-                                      src={example} 
-                                      alt={`${creator.name}'s work ${i + 1}`} 
-                                      className="object-contain w-full h-full rounded-lg"
-                                    />
-                                  </div>
-                                </DialogContent>
-                              </Dialog>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="secondary" size="sm">
+                    <Search className="w-4 h-4 mr-2" />
+                    Advanced Search
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <div className="grid gap-4">
+                    <div className="text-lg font-semibold">Advanced Search</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <Button variant="outline">Location <MapPin className="w-4 h-4 ml-2" /></Button>
+                      <Button variant="outline">Date <Calendar className="w-4 h-4 ml-2" /></Button>
+                      <Button variant="outline">Service <ChevronDown className="w-4 h-4 ml-2" /></Button>
+                      <Button variant="outline">Rating <Star className="w-4 h-4 ml-2" /></Button>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </Card>
-            <GlowingEffect disabled={false} spread={30} borderWidth={2} />
+                </DialogContent>
+              </Dialog>
+            </div>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-md text-center sm:text-right px-4 sm:px-0">
+              Browse top-rated creators specializing in photography, videography, and more.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 px-4 sm:px-6 lg:px-8">
+            {creators.map((creator) => (
+              <Card key={creator.id} className="overflow-hidden">
+                <div className="relative">
+                  <Image
+                    src={creator.imageUrl}
+                    alt={`Preview of ${creator.name}`}
+                    className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    style={{
+                      opacity: loadedImages.has(creator.imageUrl) ? 1 : 0,
+                      transition: 'opacity 0.5s ease-in-out',
+                    }}
+                    data-src={creator.imageUrl}
+                    ref={observeImage}
+                  />
+                  {!loadedImages.has(creator.imageUrl) && (
+                    <div className="absolute inset-0 bg-muted-foreground/10 animate-pulse" />
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="text-md sm:text-lg font-semibold mb-1 line-clamp-1">{creator.name}</h3>
+                  <p className="text-sm text-muted-foreground line-clamp-1">{creator.location}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{creator.availability}</p>
+                  <Button asChild variant="link" className="mt-3">
+                    <a href={creator.profileUrl}>View Profile</a>
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="px-4 sm:px-6 lg:px-8">
+            <FeaturesSectionWithHoverEffects />
+          </div>
+
+          <div className="px-4 sm:px-6 lg:px-8">
+            <Pricing />
           </div>
         </div>
       </div>
-
-      <FeaturesSectionWithHoverEffects />
-      <Pricing />
     </section>
   );
 };
