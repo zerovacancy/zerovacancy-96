@@ -94,14 +94,16 @@ const PricingCard = ({
     <div
       className={cn(
         "relative rounded-2xl p-6 shadow-xl ring-1 ring-slate-900/10 transition-all duration-300",
-        highlighted ? "bg-primary/5 scale-105" : "bg-white hover:scale-102",
-        "cursor-pointer"
+        "bg-white hover:scale-102",
+        highlighted && "before:absolute before:inset-0 before:z-0 before:h-[100%] before:w-[20%] before:animate-shimmer-slide before:bg-gradient-to-r before:from-transparent before:via-primary/10 before:to-transparent",
+        highlighted && "scale-105",
+        "cursor-pointer overflow-hidden"
       )}
       onClick={isMobile ? toggleExpand : undefined}
       onMouseEnter={() => !isMobile && setIsExpanded(true)}
       onMouseLeave={() => !isMobile && setIsExpanded(false)}
     >
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 relative z-10">
         <h3 className="text-lg font-semibold leading-tight text-slate-900">
           {title}
         </h3>
@@ -114,18 +116,18 @@ const PricingCard = ({
         />
       </div>
       
-      <div className="mt-3 flex items-baseline text-slate-900">
+      <div className="mt-3 flex items-baseline text-slate-900 relative z-10">
         <span className="text-4xl font-bold tracking-tight">${price}</span>
         <span className="ml-1 text-sm font-medium text-slate-600">/project</span>
       </div>
 
-      <p className="mt-3 text-sm text-slate-600">
+      <p className="mt-3 text-sm text-slate-600 relative z-10">
         {description}
       </p>
 
       <div 
         className={cn(
-          "mt-4 overflow-hidden transition-all duration-300",
+          "mt-4 overflow-hidden transition-all duration-300 relative z-10",
           isExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
