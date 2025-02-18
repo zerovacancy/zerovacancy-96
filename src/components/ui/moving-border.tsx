@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
 export const MovingBorder = ({
   children,
   duration = 2000,
-  rx,
-  ry,
+  rx = "30%",
+  ry = "30%",
   className,
   ...otherProps
 }: {
@@ -26,7 +26,7 @@ export const MovingBorder = ({
   className?: string;
   [key: string]: any;
 }) => {
-  const pathRef = useRef<any>();
+  const pathRef = useRef<SVGPathElement>(null);
   const progress = useMotionValue<number>(0);
 
   useAnimationFrame((time) => {
@@ -39,17 +39,21 @@ export const MovingBorder = ({
 
   const x = useTransform(
     progress,
-    (val) => pathRef.current?.getPointAtLength(val).x
+    (val) => pathRef.current?.getPointAtLength(val || 0)?.x ?? 0
   );
   const y = useTransform(
     progress,
-    (val) => pathRef.current?.getPointAtLength(val).y
+    (val) => pathRef.current?.getPointAtLength(val || 0)?.y ?? 0
   );
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 
+  // Ensure rx and ry have default values and are properly formatted
+  const normalizedRx = typeof rx === 'string' ? rx : `${rx}px`;
+  const normalizedRy = typeof ry === 'string' ? ry : `${ry}px`;
+
   return (
-    <div className={cn("absolute inset-0", className)}>
+    <div className={cn("absolute inset-0", className)} style={{ overflow: "hidden" }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
@@ -61,15 +65,15 @@ export const MovingBorder = ({
         <path
           ref={pathRef}
           d={`
-            M ${rx || 0},0
-            H calc(100% - ${rx || 0})
-            C 100%,0 100%,0 100%,${ry || 0}
-            V calc(100% - ${ry || 0})
-            C 100%,100% 100%,100% calc(100% - ${rx || 0}),100%
-            H ${rx || 0}
-            C 0,100% 0,100% 0,calc(100% - ${ry || 0})
-            V ${ry || 0}
-            C 0,0 0,0 ${rx || 0},0
+            M ${normalizedRx},0
+            H calc(100% - ${normalizedRx})
+            C 100%,0 100%,0 100%,${normalizedRy}
+            V calc(100% - ${normalizedRy})
+            C 100%,100% 100%,100% calc(100% - ${normalizedRx}),100%
+            H ${normalizedRx}
+            C 0,100% 0,100% 0,calc(100% - ${normalizedRy})
+            V ${normalizedRy}
+            C 0,0 0,0 ${normalizedRx},0
           `}
           fill="none"
           stroke="transparent"

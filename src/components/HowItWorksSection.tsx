@@ -51,7 +51,7 @@ const HowItWorksSection = () => {
             <div key={index} className="relative group">
               <div className="relative p-[1px] rounded-3xl overflow-hidden">
                 <GlowingEffect blur={20} spread={30} borderWidth={2} className="opacity-50" glow />
-                <MovingBorder rx="30%" ry="30%" duration={3000}>
+                <MovingBorder rx="20px" ry="20px" duration={3000}>
                   <div className="h-24 w-24 opacity-100 bg-[radial-gradient(#8B5CF6_40%,transparent_60%)]" />
                 </MovingBorder>
                 <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white/95 backdrop-blur-sm relative z-20">
