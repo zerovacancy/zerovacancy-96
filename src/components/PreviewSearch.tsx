@@ -13,8 +13,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
-const PreviewSearch = () => {
-  const creators = [{
+const creators = [{
     name: "Sarah Johnson",
     services: ["Photography", "Drone"],
     price: 200,
@@ -124,7 +123,7 @@ const PreviewSearch = () => {
                         <img src={creator.image} alt={creator.name} className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                         <div className="absolute bottom-2 left-2 text-white">
-                          <h3 className="font-semibold">{creator.name}</h3>
+                          <h3 className="font-semibold text-base sm:text-lg">{creator.name}</h3>
                           <div className="flex items-center gap-1 text-xs opacity-90">
                             <MapPin className="w-3 h-3" />
                             <span>{creator.location}</span>
@@ -133,10 +132,15 @@ const PreviewSearch = () => {
                         </div>
                       </div>
                       <div className="p-3 space-y-3">
-                        <div className="flex items-center gap-1.5">
-                          <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                          <span className="text-sm font-medium">{creator.rating}</span>
-                          <span className="text-xs text-muted-foreground">({creator.reviews} reviews)</span>
+                        <div className="flex items-center gap-1.5 justify-between">
+                          <div className="flex items-center gap-1.5">
+                            <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                            <span className="text-sm font-medium">{creator.rating}</span>
+                            <span className="text-xs text-muted-foreground">({creator.reviews} reviews)</span>
+                          </div>
+                          <Button variant="outline" size="sm" className="text-xs px-2 py-1">
+                            Contact
+                          </Button>
                         </div>
                         <div className="grid grid-cols-3 gap-1.5">
                           {creator.workExamples.map((example, i) => (
@@ -165,9 +169,6 @@ const PreviewSearch = () => {
                             </Dialog>
                           ))}
                         </div>
-                        <Button variant="default" className="w-full h-8 text-sm bg-primary text-white hover:bg-primary/90">
-                          View Profile
-                        </Button>
                       </div>
                     </div>
                   </Card>
