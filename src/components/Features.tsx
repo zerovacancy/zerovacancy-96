@@ -111,7 +111,7 @@ const Feature = ({
   return (
     <div 
       className={cn(
-        "flex flex-col relative group/feature cursor-pointer transition-all duration-300",
+        "flex flex-col items-center relative group/feature cursor-pointer transition-all duration-300",
         "bg-white/40 backdrop-blur-sm rounded-lg shadow-sm border border-primary/5",
         "hover:bg-white/60",
         isExpanded ? "p-4 sm:p-5" : "p-3"
@@ -127,19 +127,19 @@ const Feature = ({
         {icon}
       </div>
       <div className={cn(
-        "text-sm sm:text-base font-semibold mb-1.5 relative z-10 transition-all duration-300",
+        "text-sm sm:text-base font-semibold mb-1.5 relative z-10 transition-all duration-300 w-full",
         isExpanded ? "translate-x-2" : ""
       )}>
         <div className={cn(
           "absolute left-0 inset-y-0 h-5 sm:h-6 w-0.5 rounded-tr-full rounded-br-full",
           "bg-primary/20 group-hover/feature:bg-primary transition-all duration-200 origin-center"
         )} />
-        <span className="group-hover/feature:translate-x-2 transition duration-200 block text-primary/90 line-clamp-2 text-left">
+        <h3 className="group-hover/feature:translate-x-2 transition duration-200 text-primary/90 line-clamp-2 text-center">
           {title}
-        </span>
+        </h3>
       </div>
       <p className={cn(
-        "text-xs sm:text-sm leading-relaxed text-muted-foreground/80 relative z-10 transition-all duration-300 text-left",
+        "text-xs sm:text-sm leading-relaxed text-muted-foreground/80 relative z-10 transition-all duration-300 text-center w-full",
         isExpanded ? "opacity-100 max-h-32 line-clamp-none" : "opacity-0 max-h-0 overflow-hidden line-clamp-2"
       )}>
         {description}
