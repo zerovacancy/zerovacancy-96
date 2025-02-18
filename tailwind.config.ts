@@ -22,8 +22,8 @@ const config = {
       fontFamily: {
         'anek': ['Anek Devanagari', 'sans-serif'],
         'space': ['Space Grotesk', 'sans-serif'],
-        'playfair': ['Playfair Display', 'serif'],
-        'sans': ['Playfair Display', 'system-ui', 'sans-serif'],
+        'roboto': ['Roboto', 'system-ui', 'sans-serif'],
+        'sans': ['Roboto', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
