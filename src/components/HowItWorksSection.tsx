@@ -44,12 +44,8 @@ const HowItWorksSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative bg-white p-5 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-all group pt-8 text-center border-2 border-gray-100"
+              className="relative bg-white p-5 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-all group text-center border-2 border-gray-100"
             >
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-gray-900 text-sm font-medium">
-                {index + 1}
-              </div>
-              
               <div className="flex flex-col items-center">
                 <div className="mb-3 text-gray-900 transition-transform group-hover:scale-110">
                   {step.icon}
