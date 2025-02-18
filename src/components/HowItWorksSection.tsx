@@ -20,7 +20,7 @@ const HowItWorksSection = () => {
     description: "Receive and approve deliverables"
   }];
   return <section className="bg-white py-[8px]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 bg-transparent lg:px-[107px] py-0 my-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-[107px] py-0 my-0 bg-white">
         <div className="text-center mb-8">
           <h3 className="font-semibold mb-2 text-5xl my-[19px]">How It Works</h3>
           <p className="text-muted-foreground">Your journey to amazing content in four simple steps</p>
