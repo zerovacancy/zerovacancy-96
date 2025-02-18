@@ -1,17 +1,13 @@
-
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar } from 'lucide-react';
 import { Card } from './ui/card';
-import { Button } from './ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { Pricing } from './Pricing';
-import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
-import { cn } from '@/lib/utils';
-import { CreatorCard } from './creator/CreatorCard';
-import { SortMenu } from './sorting/SortMenu';
 import ServicesSection from './ServicesSection';
+import { SearchHeader } from './search/SearchHeader';
+import { SearchBar } from './search/SearchBar';
+import { CreatorsList } from './search/CreatorsList';
 
 const creators = [
   {
@@ -116,13 +112,6 @@ const PreviewSearch = () => {
     setLoadedImages((prev) => new Set(prev.add(imageSrc)));
   };
 
-  const sortOptions = [
-    { label: 'Rating', value: 'rating' },
-    { label: 'Price: Low to High', value: 'price_asc' },
-    { label: 'Price: High to Low', value: 'price_desc' },
-    { label: 'Distance', value: 'distance' }
-  ];
-
   const handleSort = (value: string) => {
     setSortBy(value);
   };
@@ -131,63 +120,19 @@ const PreviewSearch = () => {
     <>
       <section className="relative section-padding overflow-hidden py-4 sm:py-8 my-0">
         <div className="relative mx-auto max-w-7xl my-0 py-4 sm:py-8">
-          <div className="text-center mb-8 sm:mb-12 px-4 sm:px-0">
-            <h2 className="section-title">Find Your Perfect Content Creator</h2>
-            <p className="section-subtitle max-w-2xl mx-auto">
-              Connect with talented photographers, videographers, and content creators in your area. Filter by expertise, style, and budget to find the perfect match for your project.
-            </p>
-          </div>
+          <SearchHeader />
           <div className="mx-4 sm:mx-0 mb-8">
             <div className="relative">
               <Card className="p-4 sm:p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-lg">
-                {/* Search Container */}
-                <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 sm:gap-6 mb-8 sm:mb-12">
-                  <div className="search-group min-h-[52px]">
-                    <Search className="w-5 h-5 text-muted-foreground" />
-                    <input
-                      type="text"
-                      placeholder="Search creators..."
-                      className="search-input min-h-[44px] text-base sm:text-sm"
-                    />
-                  </div>
-                  <div className="search-group min-h-[52px]">
-                    <MapPin className="w-5 h-5 text-muted-foreground" />
-                    <input
-                      type="text"
-                      placeholder="Location"
-                      className="search-input min-h-[44px] text-base sm:text-sm"
-                    />
-                  </div>
-                  <Button className="w-full md:w-auto h-[52px] text-base">
-                    Search
-                  </Button>
-                </div>
-
-                {/* Creators Section */}
-                <div className="mb-8">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900">Featured Creators</h2>
-                    <div className="w-full sm:w-auto">
-                      <SortMenu 
-                        options={sortOptions}
-                        onSort={handleSort}
-                        defaultValue={sortBy}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                    {creators.map((creator, index) => (
-                      <CreatorCard
-                        key={index}
-                        creator={creator}
-                        onImageLoad={onImageLoad}
-                        loadedImages={loadedImages}
-                        imageRef={imageRef}
-                      />
-                    ))}
-                  </div>
-                </div>
+                <SearchBar />
+                <CreatorsList 
+                  creators={creators}
+                  sortBy={sortBy}
+                  onSort={handleSort}
+                  onImageLoad={onImageLoad}
+                  loadedImages={loadedImages}
+                  imageRef={imageRef}
+                />
               </Card>
               <GlowingEffect disabled={false} spread={30} borderWidth={2} />
             </div>
@@ -195,7 +140,6 @@ const PreviewSearch = () => {
         </div>
       </section>
 
-      {/* Services Section as a separate section */}
       <div className="bg-gray-50">
         <ServicesSection />
       </div>
