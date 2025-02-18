@@ -26,7 +26,7 @@ const Header = () => {
     </nav>;
   return <div className="sticky top-0 z-50 w-full">
       <WarpBackground beamsPerSide={5} beamSize={3} beamDuration={4} className="w-full backdrop-blur bg-muted-DEFAULT">
-        <div className="container flex h-14 items-center justify-between">
+        <div className="container flex h-14 items-center justify-between bg-white">
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <div className="text-xl font-semibold">
