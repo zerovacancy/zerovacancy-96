@@ -15,6 +15,7 @@ const PreviewSearch = () => {
     price: 200,
     rating: 4.9,
     reviews: 124,
+    location: "New York, NY",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500"
   }, {
     name: "Michael Chen",
@@ -22,6 +23,7 @@ const PreviewSearch = () => {
     price: 250,
     rating: 4.8,
     reviews: 98,
+    location: "Los Angeles, CA",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500"
   }, {
     name: "Emily Rodriguez",
@@ -29,6 +31,7 @@ const PreviewSearch = () => {
     price: 300,
     rating: 5.0,
     reviews: 156,
+    location: "Miami, FL",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500"
   }];
   return (
@@ -102,7 +105,11 @@ const PreviewSearch = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                         <div className="absolute bottom-4 left-4 text-white">
                           <h3 className="font-semibold text-lg">{creator.name}</h3>
-                          <p className="text-sm opacity-90">{creator.services.join(" • ")}</p>
+                          <div className="flex items-center gap-1.5 text-sm opacity-90">
+                            <MapPin className="w-3.5 h-3.5" />
+                            <span>{creator.location}</span>
+                          </div>
+                          <p className="text-sm opacity-90 mt-1">{creator.services.join(" • ")}</p>
                         </div>
                       </div>
                       <div className="p-4 space-y-4">
