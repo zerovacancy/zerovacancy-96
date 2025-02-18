@@ -17,20 +17,19 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
       onClick={onToggle}
       className={cn(
         "w-full text-left p-6 rounded-xl transition-all duration-200",
-        isExpanded ? 'bg-white/50 shadow-sm' : 'bg-white/30 hover:bg-white/40',
-        "relative backdrop-blur-sm border border-white/10",
+        isExpanded ? 'bg-gray-50 shadow-sm' : 'bg-white hover:bg-gray-50',
         "md:hover:shadow-md md:h-full"
       )}
     >
       <div className="flex items-start gap-4">
         <div className="flex-shrink-0">
-          <Icon className="w-6 h-6 text-primary/80" />
+          <Icon className="w-6 h-6 text-gray-700" />
         </div>
         <div className="flex-1">
-          <h3 className="font-medium text-lg text-primary">{title}</h3>
+          <h3 className="font-medium text-lg text-gray-900">{title}</h3>
           <div 
             className={cn(
-              "mt-2 text-muted-foreground text-sm transition-all duration-200 overflow-hidden",
+              "mt-2 text-gray-600 text-sm transition-all duration-200 overflow-hidden",
               isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0 md:max-h-48 md:opacity-100'
             )}
           >
@@ -104,26 +103,13 @@ const ServicesSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-16 px-4 md:py-24 overflow-hidden">
-      <div>
-        <div 
-          className={cn(
-            "absolute inset-0 -z-10 h-full w-full",
-            "[background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]",
-            "[background-size:6rem_4rem]",
-            "[mask-image:radial-gradient(ellipse_at_center,white,transparent)]"
-          )}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 via-transparent to-transparent opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 animate-aurora" />
-      </div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section className="relative py-16 px-4 md:py-24 bg-white/50 backdrop-blur-sm">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-serif text-primary mb-4">
+          <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">
             Professional Content Creation Services
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Everything you need to showcase your properties with stunning visuals and engaging content
           </p>
         </div>
