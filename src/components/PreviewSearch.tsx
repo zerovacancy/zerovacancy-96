@@ -17,7 +17,7 @@ const creators = [
     rating: 4.8,
     reviews: 120,
     location: 'New York, NY',
-    image: 'lovable-uploads/13ccf096-d016-4850-86b1-a9eb6fd05874.png',
+    image: 'https://aerialsoutheast.com/wp-content/uploads/2023/07/1201Demon120816_038-950x533-1-950x500.jpg',
     workExamples: [
       'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
       'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&h=500',
