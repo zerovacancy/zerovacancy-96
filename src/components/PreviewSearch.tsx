@@ -7,7 +7,6 @@ import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
-
 const PreviewSearch = () => {
   const creators = [{
     name: "Sarah Johnson",
@@ -31,9 +30,7 @@ const PreviewSearch = () => {
     reviews: 156,
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500"
   }];
-
-  return (
-    <section className="relative section-padding py-[22px] bg-white">
+  return <section className="relative section-padding py-[22px] bg-zinc-100">
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <div className="mx-4 sm:mx-0 mb-12">
           <div className="relative">
@@ -80,8 +77,7 @@ const PreviewSearch = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                {creators.map((creator, index) => (
-                  <Card key={index} className="group overflow-hidden">
+                {creators.map((creator, index) => <Card key={index} className="group overflow-hidden">
                     <div className="relative">
                       <div className="absolute top-3 right-3 z-10">
                         <span className="px-3 py-1 text-sm font-medium bg-black/60 text-white rounded-full">
@@ -107,8 +103,7 @@ const PreviewSearch = () => {
                         </Button>
                       </div>
                     </div>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
             </Card>
             <GlowingEffect disabled={false} spread={30} borderWidth={2} />
@@ -118,8 +113,6 @@ const PreviewSearch = () => {
 
       <FeaturesSectionWithHoverEffects />
       <PricingSection />
-    </section>
-  );
+    </section>;
 };
-
 export default PreviewSearch;

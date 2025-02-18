@@ -1,8 +1,6 @@
-
 import { cn } from "@/lib/utils";
 import { IconCamera, IconDrone, IconVideo, IconBrandInstagram, IconCertificate, IconClock24, IconWallet, IconStars } from "@tabler/icons-react";
 import { BorderTrail } from "./ui/border-trail";
-
 export function FeaturesSectionWithHoverEffects() {
   const features = [{
     title: "Professional Photography",
@@ -37,18 +35,12 @@ export function FeaturesSectionWithHoverEffects() {
     description: "100% satisfaction guarantee on all content. Your property deserves the best.",
     icon: <IconStars />
   }];
-
-  return (
-    <section className="bg-secondary/50 py-16 sm:py-24 rounded-sm relative">
-      <BorderTrail 
-        className="bg-primary/20" 
-        size={80}
-        transition={{
-          repeat: Infinity,
-          duration: 8,
-          ease: "linear"
-        }}
-      />
+  return <section className="py-16 sm:py-24 rounded-sm relative bg-white">
+      <BorderTrail className="bg-primary/20" size={80} transition={{
+      repeat: Infinity,
+      duration: 8,
+      ease: "linear"
+    }} />
       <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-12">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="section-title">Professional Content Creation Services</h2>
@@ -60,10 +52,8 @@ export function FeaturesSectionWithHoverEffects() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 max-w-7xl mx-auto">
         {features.map((feature, index) => <Feature key={feature.title} {...feature} index={index} />)}
       </div>
-    </section>
-  );
+    </section>;
 }
-
 const Feature = ({
   title,
   description,
@@ -92,5 +82,4 @@ const Feature = ({
       </p>
     </div>;
 };
-
 export default FeaturesSectionWithHoverEffects;
