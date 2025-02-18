@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
+import { Search, MapPin, Calendar, ChevronDown, Star, Image, Grid } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -56,6 +55,7 @@ const creators = [{
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Intersection Observer for lazy loading with proper type checking
   const imageObserver = React.useRef(
@@ -105,46 +105,91 @@ const PreviewSearch = () => {
                 Connect with professional photographers, videographers, and content creators in your area
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                  <MapPin className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                  <input 
-                    type="text" 
-                    placeholder="Location" 
-                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70" 
-                  />
+              <div className="max-w-4xl mx-auto">
+                <div className="relative">
+                  <div className={cn(
+                    "grid transition-all duration-300 ease-in-out",
+                    isExpanded 
+                      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" 
+                      : "grid-cols-1"
+                  )}>
+                    <div 
+                      className={cn(
+                        "flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200",
+                        isExpanded ? "lg:col-span-3" : ""
+                      )}
+                      onClick={() => !isExpanded && setIsExpanded(true)}
+                    >
+                      <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                      <input 
+                        type="text" 
+                        placeholder="Search creators..." 
+                        className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70 cursor-pointer" 
+                        onClick={() => !isExpanded && setIsExpanded(true)}
+                      />
+                    </div>
+
+                    {isExpanded && (
+                      <>
+                        <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
+                          <MapPin className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                          <input 
+                            type="text" 
+                            placeholder="Location" 
+                            className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70" 
+                          />
+                        </div>
+
+                        <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
+                          <Grid className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                          <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base appearance-none cursor-pointer placeholder:text-muted-foreground/70">
+                            <option value="">Content Type</option>
+                            <option value="photography">Photography</option>
+                            <option value="videography">Videography</option>
+                            <option value="3d-tours">3D Tours</option>
+                          </select>
+                        </div>
+
+                        <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
+                          <Calendar className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                          <input 
+                            type="text" 
+                            placeholder="mm/dd/yyyy" 
+                            className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70" 
+                          />
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  <div className={cn(
+                    "flex items-center justify-center transition-all duration-300",
+                    isExpanded ? "mt-6" : "mt-4"
+                  )}>
+                    {isExpanded ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                        <Button 
+                          variant="outline" 
+                          className="w-full"
+                          onClick={() => setIsExpanded(false)}
+                        >
+                          Cancel
+                        </Button>
+                        <Button className="w-full">
+                          Find Creators
+                        </Button>
+                      </div>
+                    ) : (
+                      <button 
+                        className="text-base text-muted-foreground hover:text-primary flex items-center gap-2 py-3 px-4 transition-colors duration-200"
+                        onClick={() => setIsExpanded(true)}
+                      >
+                        Advanced Filters
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
-
-                <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                  <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                  <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base appearance-none cursor-pointer">
-                    <option value="">Content Type</option>
-                    <option value="photography">Photography</option>
-                    <option value="videography">Videography</option>
-                    <option value="3d-tours">3D Tours</option>
-                  </select>
-                </div>
-
-                <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                  <Calendar className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                  <input 
-                    type="text" 
-                    placeholder="mm/dd/yyyy" 
-                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70" 
-                  />
-                </div>
-
-                <Button className="w-full h-[52px] bg-primary text-white hover:bg-primary/90 text-base font-medium shadow-sm">
-                  Find Creators
-                </Button>
-              </div>
-
-              <div className="flex items-center justify-center pt-4 border-t">
-                <button className="text-base text-muted-foreground hover:text-primary flex items-center gap-2 py-3 px-4 transition-colors duration-200">
-                  Advanced Filters
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-                <span className="ml-2 px-2.5 py-1 text-sm font-medium bg-accent rounded-md">PRO</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
