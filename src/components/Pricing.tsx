@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -182,8 +181,7 @@ export function PricingSection() {
                   {plan.name}
                 </p>
                 <div className="mt-6 flex items-center justify-center gap-x-2">
-                  <div className="text-5xl font-bold tracking-tight text-foreground flex items-center">
-                    <span>$</span>
+                  <span className="text-5xl font-bold tracking-tight text-foreground">
                     <NumberFlow
                       value={isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)}
                       transformTiming={{
@@ -192,8 +190,10 @@ export function PricingSection() {
                       }}
                       willChange
                       className="font-variant-numeric: tabular-nums"
-                    />
-                  </div>
+                    >
+                      ${isMonthly ? plan.price : plan.yearlyPrice}
+                    </NumberFlow>
+                  </span>
                   <span className="text-sm font-semibold leading-6 tracking-wide text-muted-foreground">
                     / {plan.period}
                   </span>
