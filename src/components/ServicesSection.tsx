@@ -17,8 +17,8 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
       className={cn(
         "w-full text-left p-6 rounded-xl transition-all duration-200",
         "group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
-        isExpanded ? "bg-gray-50 shadow-sm" : "bg-white hover:bg-gray-50",
-        "md:bg-white md:hover:bg-gray-50 md:hover:shadow-md md:h-full"
+        "md:hover:shadow-md md:h-full",
+        isExpanded ? "bg-gray-50 shadow-sm" : "bg-white hover:bg-gray-50"
       )}
     >
       <div className="flex items-start gap-4">
@@ -29,11 +29,11 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
           <h3 className="font-medium text-lg text-gray-900">{title}</h3>
           <div 
             className={cn(
-              "mt-2 text-gray-600 text-sm transition-all duration-200 overflow-hidden",
-              "md:block md:max-h-none md:opacity-100", // Always show on desktop
-              isExpanded 
-                ? "max-h-48 opacity-100" 
-                : "max-h-0 opacity-0"
+              "mt-2 text-gray-600 text-sm transition-all duration-200",
+              "md:block", // Always visible on desktop
+              isExpanded
+                ? "block max-h-48 opacity-100" 
+                : "hidden md:block" // Hidden on mobile when collapsed, always shown on desktop
             )}
           >
             {description}
@@ -56,7 +56,7 @@ const ServicesSection: React.FC = () => {
     },
     {
       id: 2,
-      icon: Satellite, // Using Satellite instead of Drone as per Lucide availability
+      icon: Satellite,
       title: "Aerial Coverage",
       description: "FAA-certified operators capturing stunning aerial views and property surroundings."
     },
