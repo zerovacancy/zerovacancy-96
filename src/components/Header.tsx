@@ -1,53 +1,31 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Menu } from 'lucide-react';
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "./ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { cn } from '@/lib/utils';
 import WarpBackground from './ui/warp-background';
-
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const NavLinks = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
-    <nav className={cn("flex items-center gap-6", className)}>
-      <Link 
-        to="/search" 
-        className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-        onClick={onClick}
-      >
+  const NavLinks = ({
+    className,
+    onClick
+  }: {
+    className?: string;
+    onClick?: () => void;
+  }) => <nav className={cn("flex items-center gap-6", className)}>
+      <Link to="/search" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" onClick={onClick}>
         Find Creators
       </Link>
-      <Link 
-        to="/how-it-works" 
-        className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-        onClick={onClick}
-      >
+      <Link to="/how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" onClick={onClick}>
         How It Works
       </Link>
-      <Link 
-        to="/pricing" 
-        className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-        onClick={onClick}
-      >
+      <Link to="/pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors" onClick={onClick}>
         Pricing
       </Link>
-    </nav>
-  );
-
-  return (
-    <div className="sticky top-0 z-50 w-full">
-      <WarpBackground 
-        className="w-full backdrop-blur supports-[backdrop-filter]:bg-background/60"
-        beamsPerSide={5}
-        beamSize={3}
-        beamDuration={4}
-      >
+    </nav>;
+  return <div className="sticky top-0 z-50 w-full">
+      <WarpBackground beamsPerSide={5} beamSize={3} beamDuration={4} className="w-full backdrop-blur bg-muted-DEFAULT">
         <div className="container flex h-14 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
@@ -93,8 +71,6 @@ const Header = () => {
           </div>
         </div>
       </WarpBackground>
-    </div>
-  );
+    </div>;
 };
-
 export default Header;
