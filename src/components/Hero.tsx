@@ -27,7 +27,7 @@ export function Hero() {
       <AuroraBackground className="w-full">
         <div className="flex gap-6 sm:gap-8 items-center justify-center flex-col py-16 sm:py-20 lg:py-24 px-4 sm:px-6 mx-0">
           <div className="flex gap-3 sm:gap-4 flex-col">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-['Krona_One']">
               <span className="text-primary">Property Content that</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
