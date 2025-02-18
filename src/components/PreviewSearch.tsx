@@ -108,7 +108,7 @@ const PreviewSearch = () => {
         <div className="relative mx-auto max-w-7xl my-0 py-4 sm:py-8">
           <div className="mx-6 sm:mx-0 mb-8">
             <div className="relative">
-              <Card className="p-4 sm:p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-lg">
+              <Card className="p-4 sm:p-8 md:p-10 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75 shadow-lg border border-white/20 rounded-xl">
                 <SearchHeader />
                 <div className="my-8">
                   <SearchBar />
