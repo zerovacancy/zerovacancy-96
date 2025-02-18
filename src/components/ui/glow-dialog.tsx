@@ -76,11 +76,20 @@ interface GlowDialogProps {
 }
 
 export function GlowDialog({ open, onOpenChange }: GlowDialogProps) {
+  const [email, setEmail] = React.useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle email submission here
+    console.log("Email submitted:", email);
+    onOpenChange(false);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md overflow-hidden border-none bg-transparent">
+      <DialogContent className="sm:max-w-2xl md:max-w-3xl overflow-hidden border-none bg-transparent">
         <motion.div 
-          className="relative rounded-lg overflow-hidden bg-gradient-to-br from-[#1A1F2C] via-[#221F26] to-[#1A1F2C] p-6"
+          className="relative rounded-lg overflow-hidden bg-gradient-to-br from-[#1A1F2C] via-[#221F26] to-[#1A1F2C] p-6 sm:p-8 md:p-10"
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
@@ -94,25 +103,35 @@ export function GlowDialog({ open, onOpenChange }: GlowDialogProps) {
             ]}
             mode="colorShift"
             blur="stronger"
-            scale={1.8}
+            scale={2}
           />
           <MovingBorder rx="12px" ry="12px" duration={3000}>
-            <div className="h-20 w-20 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]" />
+            <div className="h-24 w-24 sm:h-32 sm:w-32 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]" />
           </MovingBorder>
           <div className="relative z-10">
-            <h2 className="text-2xl font-bold text-center mb-4 text-white">Welcome to CreativeEstate!</h2>
-            <p className="text-center text-gray-300 mb-6">
-              Join our community of creators and property owners. Start exploring now!
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 md:mb-6 text-white leading-tight">
+              The Future of Real Estate Marketing is Here
+            </h2>
+            <p className="text-center text-gray-300 mb-8 max-w-2xl mx-auto text-sm sm:text-base md:text-lg">
+              Our cutting-edge content marketplace connects property managers with expert creators for high-quality real estate marketing. From photography to 3D tours—get the content you need, when you need it.
             </p>
-            <div className="flex justify-center">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 justify-center items-stretch max-w-md mx-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30"
+                required
+              />
               <Button 
-                onClick={() => onOpenChange(false)}
-                className="relative z-10"
+                type="submit"
                 size="lg"
+                className="relative z-10 whitespace-nowrap"
               >
-                Get Started
+                Join Waitlist
               </Button>
-            </div>
+            </form>
           </div>
         </motion.div>
       </DialogContent>
