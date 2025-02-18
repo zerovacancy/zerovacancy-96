@@ -2,7 +2,7 @@
 import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { ShimmerButton } from './ui/shimmer-button';
-import { BackgroundGradient } from './ui/background-gradient';
+import { GlowingEffect } from './ui/glowing-effect';
 
 const HowItWorksSection = () => {
   const steps = [{
@@ -37,8 +37,9 @@ const HowItWorksSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {steps.map((step, index) => (
             <div key={index} className="relative group">
-              <BackgroundGradient>
-                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white">
+              <div className="relative">
+                <GlowingEffect blur={20} spread={30} borderWidth={2} className="opacity-50" glow />
+                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white relative z-10">
                   <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 mb-6 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-primary">
                       {step.icon}
@@ -47,7 +48,7 @@ const HowItWorksSection = () => {
                   <h4 className="text-xl font-semibold mb-3 text-primary">{step.title}</h4>
                   <p className="text-muted-foreground text-center">{step.description}</p>
                 </div>
-              </BackgroundGradient>
+              </div>
             </div>
           ))}
         </div>
