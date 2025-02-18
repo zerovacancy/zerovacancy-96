@@ -18,8 +18,8 @@ export function Hero() {
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length]);
   return <div className="w-full">
-      <div className="container mx-auto py-0 bg-zinc-100">
-        <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0 bg-zinc-100">
+      <div className="container mx-auto py-0 bg-transparent">
+        <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0 bg-transparent">
           <div className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-primary">Property Content that</span>
