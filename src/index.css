@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,7 +36,7 @@
   }
 
   .section-title {
-    @apply font-anek text-2xl sm:text-3xl lg:text-4xl font-medium mb-4 text-center;
+    @apply font-space text-2xl sm:text-3xl lg:text-4xl font-medium mb-4 text-center;
   }
 
   .section-subtitle {

@@ -3,13 +3,16 @@ import { useEffect } from 'react';
 
 const FontLoader = () => {
   useEffect(() => {
-    // Create link preload elements for both fonts
+    // Create link preload elements for fonts
     const links = [
       {
         href: 'https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@500&display=swap'
       },
       {
         href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap'
+      },
+      {
+        href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap'
       }
     ];
 
