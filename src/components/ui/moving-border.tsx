@@ -58,13 +58,22 @@ export const MovingBorder = ({
         height="100%"
         {...otherProps}
       >
-        <rect
-          fill="none"
-          width="100%"
-          height="100%"
-          rx={rx}
-          ry={ry}
+        <path
           ref={pathRef}
+          d={`
+            M ${rx || 0},0
+            H calc(100% - ${rx || 0})
+            C 100%,0 100%,0 100%,${ry || 0}
+            V calc(100% - ${ry || 0})
+            C 100%,100% 100%,100% calc(100% - ${rx || 0}),100%
+            H ${rx || 0}
+            C 0,100% 0,100% 0,calc(100% - ${ry || 0})
+            V ${ry || 0}
+            C 0,0 0,0 ${rx || 0},0
+          `}
+          fill="none"
+          stroke="transparent"
+          strokeWidth="1"
         />
       </svg>
       <motion.div
