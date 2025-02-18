@@ -1,5 +1,9 @@
 
+"use client";
+
 import { useRef, useEffect, useState } from "react"
+import { cn } from "@/lib/utils";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 interface SquaresProps {
   direction?: "right" | "left" | "up" | "down" | "diagonal"
@@ -165,9 +169,20 @@ export function Squares({
   }, [direction, speed, borderColor, hoverFillColor, hoveredSquare, squareSize])
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={`w-full h-full border-none block ${className}`}
-    />
-  )
+    <div className="relative w-full h-full">
+      <canvas
+        ref={canvasRef}
+        className={cn("w-full h-full border-none block", className)}
+      />
+      <GlowingEffect
+        blur={20}
+        spread={30}
+        glow={true}
+        variant="default"
+        disabled={false}
+        movementDuration={2}
+        borderWidth={2}
+      />
+    </div>
+  );
 }
