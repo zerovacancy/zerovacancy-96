@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { IconCamera, IconDrone, IconVideo, IconBrandInstagram, IconCertificate, IconClock24, IconWallet, IconStars } from "@tabler/icons-react";
 import { BorderTrail } from "./ui/border-trail";
 import { GlowingEffect } from "./ui/glowing-effect";
+
 export function FeaturesSectionWithHoverEffects() {
   const features = [{
     title: "Professional Photography",
@@ -36,13 +37,25 @@ export function FeaturesSectionWithHoverEffects() {
     description: "100% satisfaction guarantee on all content. Your property deserves the best.",
     icon: <IconStars />
   }];
-  return <section className="py-16 rounded-sm relative bg-white overflow-hidden sm:py-[30px]">
-      <BorderTrail className="bg-primary/20" size={80} transition={{
-      repeat: Infinity,
-      duration: 8,
-      ease: "linear"
-    }} />
-      <GlowingEffect blur={20} spread={30} borderWidth={2} className="opacity-50" glow />
+
+  return (
+    <section className="py-16 sm:py-24 rounded-sm relative bg-white overflow-hidden">
+      <BorderTrail 
+        className="bg-primary/20" 
+        size={80}
+        transition={{
+          repeat: Infinity,
+          duration: 8,
+          ease: "linear"
+        }}
+      />
+      <GlowingEffect 
+        blur={20}
+        spread={30}
+        borderWidth={2}
+        className="opacity-50"
+        glow
+      />
       <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-12 relative z-10">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="section-title">Professional Content Creation Services</h2>
@@ -54,8 +67,10 @@ export function FeaturesSectionWithHoverEffects() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 max-w-7xl mx-auto">
         {features.map((feature, index) => <Feature key={feature.title} {...feature} index={index} />)}
       </div>
-    </section>;
+    </section>
+  );
 }
+
 const Feature = ({
   title,
   description,
@@ -84,4 +99,5 @@ const Feature = ({
       </p>
     </div>;
 };
+
 export default FeaturesSectionWithHoverEffects;
