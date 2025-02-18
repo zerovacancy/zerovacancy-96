@@ -182,10 +182,10 @@ export function PricingSection() {
                   {plan.name}
                 </p>
                 <div className="mt-6 flex items-center justify-center gap-x-2">
-                  <span className="text-5xl font-bold tracking-tight text-foreground">
+                  <div className="text-5xl font-bold tracking-tight text-foreground flex items-center">
+                    <span>$</span>
                     <NumberFlow
                       value={isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)}
-                      format="$"
                       transformTiming={{
                         duration: 500,
                         easing: "ease-out",
@@ -193,7 +193,7 @@ export function PricingSection() {
                       willChange
                       className="font-variant-numeric: tabular-nums"
                     />
-                  </span>
+                  </div>
                   <span className="text-sm font-semibold leading-6 tracking-wide text-muted-foreground">
                     / {plan.period}
                   </span>
