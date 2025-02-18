@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar } from 'lucide-react';
 import { Card } from './ui/card';
@@ -19,11 +20,11 @@ const creators = [
     rating: 4.8,
     reviews: 120,
     location: 'New York, NY',
-    image: '/images/avatars/1.png',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500',
     workExamples: [
-      '/images/works/1.jpg',
-      '/images/works/2.jpg',
-      '/images/works/3.jpg',
+      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&h=500',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&h=500',
     ],
   },
   {
@@ -33,11 +34,11 @@ const creators = [
     rating: 4.9,
     reviews: 150,
     location: 'Los Angeles, CA',
-    image: '/images/avatars/2.png',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500',
     workExamples: [
-      '/images/works/4.jpg',
-      '/images/works/5.jpg',
-      '/images/works/6.jpg',
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=500&h=500',
+      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&h=500',
     ],
   },
   {
@@ -47,11 +48,11 @@ const creators = [
     rating: 4.7,
     reviews: 100,
     location: 'Chicago, IL',
-    image: '/images/avatars/3.png',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500',
     workExamples: [
-      '/images/works/7.jpg',
-      '/images/works/8.jpg',
-      '/images/works/9.jpg',
+      'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=500&h=500',
+      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&h=500',
     ],
   },
   {
@@ -61,11 +62,11 @@ const creators = [
     rating: 4.6,
     reviews: 80,
     location: 'Houston, TX',
-    image: '/images/avatars/4.png',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&h=500',
     workExamples: [
-      '/images/works/10.jpg',
-      '/images/works/11.jpg',
-      '/images/works/12.jpg',
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=500&h=500',
+      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&h=500',
     ],
   },
 ];
