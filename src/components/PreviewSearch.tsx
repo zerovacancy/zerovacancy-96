@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
 import { Card } from './ui/card';
@@ -170,6 +169,13 @@ const PreviewSearch = () => {
                               </DialogContent>
                             </Dialog>
                           ))}
+                        </div>
+
+                        <div className="flex items-center justify-center pt-2 border-t mt-3">
+                          <button className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1 group/btn transition-all duration-300">
+                            See Features
+                            <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-y-1" />
+                          </button>
                         </div>
                       </div>
                     </div>
