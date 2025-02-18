@@ -4,6 +4,7 @@ import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { ShimmerButton } from './ui/shimmer-button';
 import { GlowingEffect } from './ui/glowing-effect';
 import { MovingBorder } from './ui/moving-border';
+import { Tiles } from './ui/tiles';
 
 const HowItWorksSection = () => {
   const steps = [{
@@ -24,8 +25,18 @@ const HowItWorksSection = () => {
     description: "Receive and approve deliverables"
   }];
 
-  return <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-[76px]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  return (
+    <section className="relative overflow-hidden py-[76px]">
+      <div className="absolute inset-0 opacity-50">
+        <Tiles 
+          rows={8} 
+          cols={8} 
+          tileSize="lg" 
+          className="absolute inset-0" 
+          tileClassName="opacity-[0.15] dark:opacity-[0.15]" 
+        />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
             How It Works
@@ -63,7 +74,8 @@ const HowItWorksSection = () => {
           </ShimmerButton>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default HowItWorksSection;
