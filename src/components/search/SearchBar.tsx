@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 export const SearchBar = () => {
   return (
-    <div className="max-w-6xl px-4 mx-auto w-full">
+    <div className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-[45%_45%_10%] gap-4 w-full">
         <div className="relative">
           <Search className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
