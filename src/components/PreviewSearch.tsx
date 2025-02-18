@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar, ChevronDown, Grid } from 'lucide-react';
+import { Search, MapPin, Calendar } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -9,196 +9,146 @@ import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
 import { cn } from '@/lib/utils';
 import { CreatorCard } from './creator/CreatorCard';
+import { SortMenu } from './sorting/SortMenu';
 
-// Optimize creator images by converting to WebP
-const creators = [{
-  name: "Sarah Johnson",
-  services: ["Photography", "Drone"],
-  price: 200,
-  rating: 4.9,
-  reviews: 124,
-  location: "New York, NY",
-  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
-  workExamples: [
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
-  ]
-}, {
-  name: "Michael Chen",
-  services: ["Videography", "Editing"],
-  price: 250,
-  rating: 4.8,
-  reviews: 98,
-  location: "Los Angeles, CA",
-  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
-  workExamples: [
-    "https://images.unsplash.com/photo-1600607687644-05f5f91428f9?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600585154363-67eb9e684b16?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
-  ]
-}, {
-  name: "Emily Rodriguez",
-  services: ["3D Tours", "Photography"],
-  price: 300,
-  rating: 5.0,
-  reviews: 156,
-  location: "Miami, FL",
-  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
-  workExamples: [
-    "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
-  ]
-}];
+const creators = [
+  {
+    name: 'Jane Cooper',
+    services: ['Photography', 'Videography'],
+    price: 499,
+    rating: 4.8,
+    reviews: 120,
+    location: 'New York, NY',
+    image: '/images/avatars/1.png',
+    workExamples: [
+      '/images/works/1.jpg',
+      '/images/works/2.jpg',
+      '/images/works/3.jpg',
+    ],
+  },
+  {
+    name: 'John Smith',
+    services: ['Photography', 'Drone'],
+    price: 599,
+    rating: 4.9,
+    reviews: 150,
+    location: 'Los Angeles, CA',
+    image: '/images/avatars/2.png',
+    workExamples: [
+      '/images/works/4.jpg',
+      '/images/works/5.jpg',
+      '/images/works/6.jpg',
+    ],
+  },
+  {
+    name: 'Emily Johnson',
+    services: ['Videography', 'Editing'],
+    price: 699,
+    rating: 4.7,
+    reviews: 100,
+    location: 'Chicago, IL',
+    image: '/images/avatars/3.png',
+    workExamples: [
+      '/images/works/7.jpg',
+      '/images/works/8.jpg',
+      '/images/works/9.jpg',
+    ],
+  },
+  {
+    name: 'Michael Brown',
+    services: ['Photography', 'Retouching'],
+    price: 799,
+    rating: 4.6,
+    reviews: 80,
+    location: 'Houston, TX',
+    image: '/images/avatars/4.png',
+    workExamples: [
+      '/images/works/10.jpg',
+      '/images/works/11.jpg',
+      '/images/works/12.jpg',
+    ],
+  },
+];
 
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [sortBy, setSortBy] = useState('rating');
 
-  // Intersection Observer for lazy loading with proper type checking
-  const imageObserver = React.useRef(
-    typeof window !== 'undefined'
-      ? new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              const target = entry.target as HTMLImageElement;
-              if (entry.isIntersecting && target.dataset.src) {
-                setLoadedImages((prev) => new Set([...prev, target.dataset.src as string]));
-              }
-            });
-          },
-          { rootMargin: '50px' }
-        )
-      : null
-  );
+  const imageObserver = React.useRef<IntersectionObserver | null>(null);
 
-  // Handle image observation
-  const observeImage = React.useCallback((node: HTMLImageElement | null) => {
-    if (node && imageObserver.current) {
-      imageObserver.current.observe(node);
-      return () => {
-        imageObserver.current?.unobserve(node);
-      };
+  React.useEffect(() => {
+    imageObserver.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            const src = img.dataset.src;
+            if (src && !loadedImages.has(src)) {
+              img.src = src;
+              onImageLoad(src);
+            }
+            imageObserver.current?.unobserve(img);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1,
+      }
+    );
+
+    return () => {
+      imageObserver.current?.disconnect();
+    };
+  }, [loadedImages]);
+
+  const imageRef = (node: HTMLImageElement | null) => {
+    if (node) {
+      imageObserver.current?.observe(node);
     }
-  }, []);
+  };
+
+  const onImageLoad = (imageSrc: string) => {
+    setLoadedImages((prev) => new Set(prev.add(imageSrc)));
+  };
+
+  const sortOptions = [
+    { label: 'Rating', value: 'rating' },
+    { label: 'Price: Low to High', value: 'price_asc' },
+    { label: 'Price: High to Low', value: 'price_desc' },
+    { label: 'Distance', value: 'distance' }
+  ];
+
+  const handleSort = (value: string) => {
+    setSortBy(value);
+    // Add sorting logic here
+  };
 
   return (
     <section className="relative section-padding overflow-hidden py-[21px] my-0">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
-        [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#4F46E5,transparent)] opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-20" />
-      </div>
-
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <div className="mx-4 sm:mx-0 mb-8">
           <div className="relative">
             <Card className="p-6 sm:p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-4 sm:mb-6">
-                Discover Local Creators
-              </h2>
-              <p className="text-muted-foreground text-center text-base sm:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto">
-                Connect with professional photographers, videographers, and content creators in your area
-              </p>
-
-              <div className="max-w-4xl mx-auto">
-                <div className="relative">
-                  <div className={cn(
-                    "grid transition-all duration-300 ease-in-out",
-                    isExpanded 
-                      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" 
-                      : "grid-cols-1"
-                  )}>
-                    <div 
-                      className={cn(
-                        "flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200",
-                        isExpanded ? "lg:col-span-3" : ""
-                      )}
-                      onClick={() => !isExpanded && setIsExpanded(true)}
-                    >
-                      <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                      <input 
-                        type="text" 
-                        placeholder="Search creators..." 
-                        className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70 cursor-pointer" 
-                        onClick={() => !isExpanded && setIsExpanded(true)}
-                      />
-                    </div>
-
-                    {isExpanded && (
-                      <>
-                        <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                          <MapPin className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                          <input 
-                            type="text" 
-                            placeholder="Location" 
-                            className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70" 
-                          />
-                        </div>
-
-                        <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                          <Grid className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                          <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base appearance-none cursor-pointer placeholder:text-muted-foreground/70">
-                            <option value="">Content Type</option>
-                            <option value="photography">Photography</option>
-                            <option value="videography">Videography</option>
-                            <option value="3d-tours">3D Tours</option>
-                          </select>
-                        </div>
-
-                        <div className="flex items-center space-x-3 bg-secondary/80 hover:bg-secondary rounded-lg px-5 py-4 transition-colors duration-200">
-                          <Calendar className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                          <input 
-                            type="text" 
-                            placeholder="mm/dd/yyyy" 
-                            className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base placeholder:text-muted-foreground/70" 
-                          />
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  <div className={cn(
-                    "flex items-center justify-center transition-all duration-300",
-                    isExpanded ? "mt-6" : "mt-4"
-                  )}>
-                    {isExpanded ? (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-                        <Button 
-                          variant="outline" 
-                          className="w-full"
-                          onClick={() => setIsExpanded(false)}
-                        >
-                          Cancel
-                        </Button>
-                        <Button className="w-full">
-                          Find Creators
-                        </Button>
-                      </div>
-                    ) : (
-                      <button 
-                        className="text-base text-muted-foreground hover:text-primary flex items-center gap-2 py-3 px-4 transition-colors duration-200"
-                        onClick={() => setIsExpanded(true)}
-                      >
-                        Advanced Filters
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                </div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-semibold">Featured Creators</h2>
+                <SortMenu 
+                  options={sortOptions}
+                  onSort={handleSort}
+                  defaultValue={sortBy}
+                />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {creators.map((creator, index) => (
                   <CreatorCard
                     key={index}
                     creator={creator}
+                    onImageLoad={onImageLoad}
                     loadedImages={loadedImages}
-                    imageRef={observeImage}
+                    imageRef={imageRef}
                   />
                 ))}
               </div>
