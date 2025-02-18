@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
 import { Card } from './ui/card';
@@ -55,6 +56,8 @@ const creators = [{
 }];
 
 const PreviewSearch = () => {
+  const isMobile = useIsMobile();
+
   return (
     <section className="relative section-padding py-[22px] overflow-hidden">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white 
@@ -71,21 +74,25 @@ const PreviewSearch = () => {
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <div className="mx-4 sm:mx-0 mb-8">
           <div className="relative">
-            <Card className="p-4 sm:p-6 bg-white shadow-md">
-              <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-2">Discover Local Creators</h2>
-              <p className="text-muted-foreground text-center text-sm sm:text-base mb-6">
+            <Card className="p-3 sm:p-4 md:p-6 bg-white shadow-md">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-2">Discover Local Creators</h2>
+              <p className="text-muted-foreground text-center text-sm sm:text-base mb-4 sm:mb-6 px-2">
                 Connect with professional photographers, videographers, and content creators in your area
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
-                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2">
-                  <MapPin className="w-4 h-4 text-gray-500" />
-                  <input type="text" placeholder="Location" className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-4">
+                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2.5 touch-manipulation">
+                  <MapPin className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                  <input 
+                    type="text" 
+                    placeholder="Location" 
+                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm min-w-0"
+                  />
                 </div>
 
-                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2">
-                  <Search className="w-4 h-4 text-gray-500" />
-                  <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm">
+                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2.5 touch-manipulation">
+                  <Search className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                  <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm appearance-none">
                     <option>Content Type</option>
                     <option>Photography</option>
                     <option>Videography</option>
@@ -93,25 +100,29 @@ const PreviewSearch = () => {
                   </select>
                 </div>
 
-                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2">
-                  <Calendar className="w-4 h-4 text-gray-500" />
-                  <input type="text" placeholder="mm/dd/yyyy" className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm" />
+                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2.5 touch-manipulation">
+                  <Calendar className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                  <input 
+                    type="text" 
+                    placeholder="mm/dd/yyyy" 
+                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm min-w-0"
+                  />
                 </div>
 
-                <Button className="w-full h-9 bg-primary text-white hover:bg-primary/90">
+                <Button className="w-full h-10 sm:h-9 bg-primary text-white hover:bg-primary/90">
                   Find Creators
                 </Button>
               </div>
 
               <div className="flex items-center justify-center pt-2 border-t">
-                <button className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1">
+                <button className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1 py-2 touch-manipulation">
                   Advanced Filters
                   <ChevronDown className="w-3.5 h-3.5" />
                 </button>
                 <span className="ml-2 px-1.5 py-0.5 text-xs font-medium bg-accent text-accent-foreground rounded">PRO</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
                 {creators.map((creator, index) => (
                   <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <Card className="group overflow-hidden h-full">
@@ -122,7 +133,12 @@ const PreviewSearch = () => {
                           </span>
                         </div>
                         <div className="relative aspect-[3/2]">
-                          <img src={creator.image} alt={creator.name} className="w-full h-full object-cover" />
+                          <img 
+                            src={creator.image} 
+                            alt={creator.name} 
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                           <div className="absolute bottom-2 left-2 text-white">
                             <h3 className="font-semibold text-base sm:text-lg">{creator.name}</h3>
@@ -140,7 +156,11 @@ const PreviewSearch = () => {
                               <span className="text-sm font-medium">{creator.rating}</span>
                               <span className="text-xs text-muted-foreground">({creator.reviews} reviews)</span>
                             </div>
-                            <Button variant="outline" size="sm" className="text-xs px-2 py-1">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="text-xs px-3 py-1.5 touch-manipulation"
+                            >
                               Contact
                             </Button>
                           </div>
@@ -148,23 +168,30 @@ const PreviewSearch = () => {
                             {creator.workExamples.map((example, i) => (
                               <Dialog key={i}>
                                 <DialogTrigger asChild>
-                                  <button className="relative aspect-square w-full overflow-hidden rounded hover:ring-2 hover:ring-primary/50 transition-all duration-300">
+                                  <button className="relative aspect-square w-full overflow-hidden rounded hover:ring-2 hover:ring-primary/50 transition-all duration-300 touch-manipulation">
                                     <img 
                                       src={example} 
                                       alt={`${creator.name}'s work ${i + 1}`} 
                                       className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
+                                      loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                       <Image className="w-4 h-4 text-white" />
                                     </div>
                                   </button>
                                 </DialogTrigger>
-                                <DialogContent className="max-w-3xl">
-                                  <div className="aspect-[4/3] w-full">
+                                <DialogContent className={cn(
+                                  "max-w-3xl w-[95vw] p-2 sm:p-4",
+                                  isMobile ? "h-[90vh]" : ""
+                                )}>
+                                  <div className={cn(
+                                    "w-full h-full",
+                                    isMobile ? "flex items-center justify-center" : "aspect-[4/3]"
+                                  )}>
                                     <img 
                                       src={example} 
                                       alt={`${creator.name}'s work ${i + 1}`} 
-                                      className="object-cover w-full h-full rounded-lg"
+                                      className="object-contain w-full h-full rounded-lg"
                                     />
                                   </div>
                                 </DialogContent>

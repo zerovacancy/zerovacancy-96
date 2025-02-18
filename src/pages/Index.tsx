@@ -12,9 +12,9 @@ const Index = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen">
+      <main className="min-h-screen overflow-x-hidden">
         <Hero />
-        <div className="space-y-8 sm:space-y-10">
+        <div className="space-y-6 sm:space-y-8 lg:space-y-10">
           <HowItWorksSection />
           <PreviewSearch />
           <Testimonials />
