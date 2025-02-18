@@ -70,24 +70,25 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
           
           <div className="p-5 space-y-5">
-            <div className="flex items-center gap-2 justify-between">
-              <CreatorRating rating={creator.rating} reviews={creator.reviews} />
+            <CreatorRating rating={creator.rating} reviews={creator.reviews} />
+            
+            <div className="space-y-4">
+              <PortfolioGallery 
+                images={creator.workExamples} 
+                creatorName={creator.name} 
+                loadedImages={loadedImages}
+                imageRef={imageRef}
+                isMobile={isMobile}
+              />
+              
               <Button 
                 variant="outline" 
                 size="default" 
-                className="text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
+                className="w-full text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
               >
                 Contact
               </Button>
             </div>
-            
-            <PortfolioGallery 
-              images={creator.workExamples} 
-              creatorName={creator.name} 
-              loadedImages={loadedImages}
-              imageRef={imageRef}
-              isMobile={isMobile}
-            />
           </div>
         </div>
       </Card>
