@@ -1,59 +1,63 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { IconCamera, IconDrone, IconVideo, IconBrandInstagram, IconCertificate, IconClock24, IconWallet, IconStars } from "@tabler/icons-react";
+import { Camera, Drone, Video, Instagram, UserCheck, Clock, CreditCard, Award } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export function FeaturesSectionWithHoverEffects() {
-  const features = [{
-    title: "Professional Photography",
-    description: "High-end property photos with precision and artistry",
-    icon: <IconCamera className="w-6 h-6 sm:w-7 sm:h-7" />
-  }, {
-    title: "Drone Photography",
-    description: "Stunning aerial views that showcase unique perspectives",
-    icon: <IconDrone className="w-6 h-6 sm:w-7 sm:h-7" />
-  }, {
-    title: "Video Production",
-    description: "Cinematic property tours that tell your story",
-    icon: <IconVideo className="w-6 h-6 sm:w-7 sm:h-7" />
-  }, {
-    title: "Social Media Content",
-    description: "Engaging content optimized for all platforms",
-    icon: <IconBrandInstagram className="w-6 h-6 sm:w-7 sm:h-7" />
-  }, {
-    title: "Certified Professionals",
-    description: "Verified experts in real estate content creation",
-    icon: <IconCertificate className="w-6 h-6 sm:w-7 sm:h-7" />
-  }, {
-    title: "Fast Turnaround",
-    description: "Quick delivery to meet your marketing deadlines",
-    icon: <IconClock24 className="w-6 h-6 sm:w-7 sm:h-7" />
-  }, {
-    title: "Competitive Pricing",
-    description: "Transparent rates with no hidden fees",
-    icon: <IconWallet className="w-6 h-6 sm:w-7 sm:h-7" />
-  }, {
-    title: "Quality Guaranteed",
-    description: "100% satisfaction with free revisions",
-    icon: <IconStars className="w-6 h-6 sm:w-7 sm:h-7" />
-  }];
+const features = [{
+  title: "Professional Photography",
+  description: "High-quality, professionally edited real estate photography that showcases properties at their best.",
+  icon: Camera
+}, {
+  title: "Drone Aerial Coverage",
+  description: "FAA-certified drone operators capturing stunning aerial views and property surroundings.",
+  icon: Drone
+}, {
+  title: "Video Production",
+  description: "Cinematic property tours and promotional videos that tell your property's unique story.",
+  icon: Video
+}, {
+  title: "Social Media Content",
+  description: "Engaging content optimized for all major social platforms and marketing channels.",
+  icon: Instagram
+}, {
+  title: "Verified Creators",
+  description: "Every creator is thoroughly vetted and verified for quality and professionalism.",
+  icon: UserCheck
+}, {
+  title: "24/7 Availability",
+  description: "Book creators any time, with flexible scheduling to meet your deadlines.",
+  icon: Clock
+}, {
+  title: "Transparent Pricing",
+  description: "Clear, upfront pricing with no hidden fees. Pay only for what you need.",
+  icon: CreditCard
+}, {
+  title: "Quality Guaranteed",
+  description: "100% satisfaction guarantee on all content. Your property deserves the best.",
+  icon: Award
+}];
 
+export function FeaturesSectionWithHoverEffects() {
   return (
-    <section className="section-padding">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-semibold mb-4">Our Features</h2>
-          <p className="text-muted-foreground text-lg">Comprehensive solutions for your real estate content needs</p>
+          <h2 className="font-space text-3xl sm:text-4xl font-semibold mb-4">
+            Professional Content Creation Services
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Everything you need to showcase your properties with stunning visuals and engaging content
+          </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           {features.map((feature, index) => (
             <Feature
               key={index}
-              index={index}
               title={feature.title}
               description={feature.description}
-              icon={feature.icon}
+              Icon={feature.icon}
             />
           ))}
         </div>
@@ -62,64 +66,60 @@ export function FeaturesSectionWithHoverEffects() {
   );
 }
 
-const Feature = ({
-  title,
-  description,
-  icon,
-  index
-}: {
+interface FeatureProps {
   title: string;
   description: string;
-  icon: React.ReactNode;
-  index: number;
-}) => {
+  Icon: React.ComponentType<{ className?: string }>;
+}
+
+const Feature = ({ title, description, Icon }: FeatureProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
   
+  const handleClick = () => {
+    if (isMobile) {
+      setIsExpanded(!isExpanded);
+    }
+  };
+  
   return (
-    <div 
+    <button
       className={cn(
-        "flex flex-col relative group/feature transition-all duration-300",
-        "bg-white/40 backdrop-blur-sm rounded-lg shadow-sm border border-primary/5",
-        "hover:bg-white/60 active:bg-white/70",
-        isExpanded ? "p-4 sm:p-5" : "p-3 sm:p-4",
-        isMobile && "cursor-default"
+        "w-full text-left",
+        "rounded-xl transition-all duration-200",
+        "bg-white/50 hover:bg-white/80",
+        "border border-gray-200/50",
+        "p-6",
+        "group focus:outline-none focus:ring-2 focus:ring-primary/20",
+        !isMobile && "hover:shadow-lg"
       )}
-      onClick={() => isMobile && setIsExpanded(!isExpanded)}
-      onMouseEnter={() => !isMobile && setIsExpanded(true)}
-      onMouseLeave={() => !isMobile && setIsExpanded(false)}
+      onClick={handleClick}
+      aria-expanded={isMobile ? isExpanded : undefined}
     >
-      <div className={cn(
-        "flex items-start gap-3 relative z-10",
-        isExpanded ? "mb-3" : "mb-0"
-      )}>
-        <div className={cn(
-          "text-primary transition-transform duration-300 shrink-0 mt-0.5",
-          isExpanded ? "scale-110" : "scale-100"
-        )}>
-          {icon}
+      <div className="flex items-start gap-4">
+        <Icon className={cn(
+          "w-6 h-6 text-gray-700 shrink-0",
+          "transition-transform duration-200",
+          isMobile && isExpanded && "transform rotate-90"
+        )} />
+        <div>
+          <h3 className={cn(
+            "text-lg font-medium leading-6",
+            "text-gray-900"
+          )}>
+            {title}
+          </h3>
+          <div className={cn(
+            "overflow-hidden transition-[max-height,opacity] duration-200",
+            isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-32 opacity-100 mt-2"
+          )}>
+            <p className="text-sm text-gray-600">
+              {description}
+            </p>
+          </div>
         </div>
-        <h3 className={cn(
-          "text-sm font-semibold text-primary/90 transition-all duration-300 flex-1 leading-tight",
-          "sm:text-base",
-          isExpanded ? "opacity-100" : "opacity-90"
-        )}>
-          {title}
-        </h3>
       </div>
-      <div className={cn(
-        "overflow-hidden transition-all duration-300 pl-9",
-        isExpanded ? "max-h-20 sm:max-h-24" : "max-h-0"
-      )}>
-        <p className={cn(
-          "text-sm leading-relaxed text-muted-foreground/80 relative z-10",
-          "transition-opacity duration-200",
-          isExpanded ? "opacity-100" : "opacity-0"
-        )}>
-          {description}
-        </p>
-      </div>
-    </div>
+    </button>
   );
 };
 
