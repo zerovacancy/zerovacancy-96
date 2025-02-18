@@ -24,17 +24,17 @@ const HowItWorksSection = () => {
     description: "Receive and approve deliverables"
   }];
 
-  return <section className="relative overflow-hidden bg-gradient-to-b from-[#E6E9F0] to-[#EEF1F5] py-[76px]">
-      <div className="absolute inset-0 -z-10 h-full w-full 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]
-        [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
-        before:absolute before:inset-0
-        before:bg-[radial-gradient(circle_at_center,#E6E9F0,transparent)]
-        before:opacity-40
-        after:absolute after:h-full after:w-full
-        after:[background:linear-gradient(to_right,#EEF1F5,#E6E9F0)]
-        after:opacity-20 after:animate-aurora">
+  return <section className="relative overflow-hidden py-[76px]">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6,#D946EF)] opacity-20" />
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,#4F46E5,#9333EA)]
+          [mask-image:radial-gradient(100%_100%_at_top_center,white,transparent)]
+          opacity-20"
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="pointer-events-none absolute h-full w-full bg-[linear-gradient(to_right,#4F46E5,#9333EA)] opacity-10 blur-[100px]" />
+        </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
