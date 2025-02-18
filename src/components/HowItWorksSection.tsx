@@ -46,9 +46,6 @@ const HowItWorksSection = () => {
                 <h4 className="text-xl font-semibold mb-3 text-primary">{step.title}</h4>
                 <p className="text-muted-foreground text-center">{step.description}</p>
               </div>
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 right-0 w-full h-[2px] bg-gradient-to-r from-primary/10 via-primary/5 to-transparent -mr-3 transform translate-x-1/2 -translate-y-1/2 z-0" />
-              )}
             </div>
           ))}
         </div>
