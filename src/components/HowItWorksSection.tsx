@@ -1,73 +1,69 @@
 
 import React from 'react';
-import { Card } from "@/components/ui/card";
-import { IconCamera, IconDrone, IconCheck } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
-import { Particles } from "@/components/ui/particles";
+import { Search, Users, FileCheck, Calendar } from 'lucide-react';
+import { ShimmerButton } from './ui/shimmer-button';
+import { GlowingEffect } from './ui/glowing-effect';
+import { MovingBorder } from './ui/moving-border';
 
 const HowItWorksSection = () => {
-  return (
-    <section className="relative overflow-hidden py-[76px]">
-      <div className="absolute inset-0 -z-10 bg-[#060606]">
-        <Particles
-          className="h-full"
-          quantity={50}
-          staticity={30}
-          ease={30}
-          color="#ffffff"
-        />
-      </div>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="section-title">How It Works</h2>
-          <p className="section-subtitle">
-            Get professional real estate visuals in three simple steps
+  const steps = [{
+    icon: <Search className="w-6 h-6" />,
+    title: "Search & Filter",
+    description: "Find your perfect creator match"
+  }, {
+    icon: <Users className="w-6 h-6" />,
+    title: "Review & Compare",
+    description: "Browse portfolios and reviews"
+  }, {
+    icon: <Calendar className="w-6 h-6" />,
+    title: "Book & Pay",
+    description: "Schedule securely through platform"
+  }, {
+    icon: <FileCheck className="w-6 h-6" />,
+    title: "Get Content",
+    description: "Receive and approve deliverables"
+  }];
+
+  return <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-[76px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
+            How It Works
+          </h3>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Your journey to amazing content in four simple steps
           </p>
         </div>
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
-          <Card className="bg-secondary">
-            <div className="flex items-center justify-center h-16 w-16 rounded-full bg-accent text-primary mb-4 mx-auto">
-              <IconCamera size={32} />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+          {steps.map((step, index) => (
+            <div key={index} className="relative group">
+              <div className="relative p-[1px] rounded-3xl overflow-hidden">
+                <GlowingEffect blur={20} spread={30} borderWidth={2} className="opacity-50" glow />
+                <MovingBorder rx="30%" ry="30%" duration={3000}>
+                  <div className="h-24 w-24 opacity-100 bg-[radial-gradient(#8B5CF6_40%,transparent_60%)]" />
+                </MovingBorder>
+                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white/95 backdrop-blur-sm relative z-20">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div className="text-primary">
+                      {step.icon}
+                    </div>
+                  </div>
+                  <h4 className="text-xl font-semibold mb-3 text-primary">{step.title}</h4>
+                  <p className="text-muted-foreground text-center">{step.description}</p>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-center mb-2">
-              1. Book a Photoshoot
-            </h3>
-            <p className="text-muted-foreground text-center">
-              Schedule a convenient time for our photographers to capture your
-              property.
-            </p>
-          </Card>
-          <Card className="bg-secondary">
-            <div className="flex items-center justify-center h-16 w-16 rounded-full bg-accent text-primary mb-4 mx-auto">
-              <IconDrone size={32} />
-            </div>
-            <h3 className="text-xl font-semibold text-center mb-2">
-              2. Capture Stunning Visuals
-            </h3>
-            <p className="text-muted-foreground text-center">
-              Our skilled team uses the latest equipment to create high-quality
-              photos and videos.
-            </p>
-          </Card>
-          <Card className="bg-secondary">
-            <div className="flex items-center justify-center h-16 w-16 rounded-full bg-accent text-primary mb-4 mx-auto">
-              <IconCheck size={32} />
-            </div>
-            <h3 className="text-xl font-semibold text-center mb-2">
-              3. Receive Your Media
-            </h3>
-            <p className="text-muted-foreground text-center">
-              Receive your professionally edited photos and videos ready to
-              showcase your property.
-            </p>
-          </Card>
+          ))}
         </div>
-        <div className="mt-12 text-center">
-          <Button size="lg">Get Started Today</Button>
+
+        <div className="flex justify-center mt-16">
+          <ShimmerButton className="min-w-[200px] h-12 text-base font-medium">
+            Find Your Creator
+          </ShimmerButton>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
 
 export default HowItWorksSection;
