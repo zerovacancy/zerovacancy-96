@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconCamera, IconDrone, IconVideo, IconBrandInstagram, IconCertificate, IconClock24, IconWallet, IconStars } from "@tabler/icons-react";
 import { BorderTrail } from "./ui/border-trail";
@@ -105,22 +106,42 @@ const Feature = ({
   icon: React.ReactNode;
   index: number;
 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
-    <div className={cn(
-      "flex flex-col p-4 relative group/feature",
-      "bg-white/40 backdrop-blur-sm rounded-lg shadow-sm border border-primary/5",
-      "hover:bg-white/60 transition-colors duration-200"
-    )}>
-      <div className="mb-3 relative z-10 text-primary">
+    <div 
+      className={cn(
+        "flex flex-col relative group/feature cursor-pointer transition-all duration-300",
+        "bg-white/40 backdrop-blur-sm rounded-lg shadow-sm border border-primary/5",
+        "hover:bg-white/60",
+        isExpanded ? "p-4 sm:p-5" : "p-3"
+      )}
+      onClick={() => setIsExpanded(!isExpanded)}
+      onMouseEnter={() => setIsExpanded(true)}
+      onMouseLeave={() => setIsExpanded(false)}
+    >
+      <div className={cn(
+        "mb-3 relative z-10 text-primary transition-transform duration-300",
+        isExpanded ? "scale-110" : "scale-100"
+      )}>
         {icon}
       </div>
-      <div className="text-base sm:text-lg font-semibold mb-2 relative z-10">
-        <div className="absolute left-0 inset-y-0 h-5 sm:h-6 w-0.5 rounded-tr-full rounded-br-full bg-primary/20 group-hover/feature:bg-primary transition-all duration-200 origin-center" />
+      <div className={cn(
+        "text-base sm:text-lg font-semibold mb-2 relative z-10 transition-all duration-300",
+        isExpanded ? "translate-x-2" : ""
+      )}>
+        <div className={cn(
+          "absolute left-0 inset-y-0 h-5 sm:h-6 w-0.5 rounded-tr-full rounded-br-full",
+          "bg-primary/20 group-hover/feature:bg-primary transition-all duration-200 origin-center"
+        )} />
         <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-primary/90">
           {title}
         </span>
       </div>
-      <p className="text-sm leading-relaxed text-muted-foreground/80 relative z-10">
+      <p className={cn(
+        "text-sm leading-relaxed text-muted-foreground/80 relative z-10 transition-all duration-300",
+        isExpanded ? "opacity-100 max-h-24" : "opacity-0 max-h-0 overflow-hidden"
+      )}>
         {description}
       </p>
     </div>
