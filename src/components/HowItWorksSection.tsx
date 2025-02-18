@@ -23,21 +23,20 @@ const HowItWorksSection = () => {
   }];
 
   return (
-    <section className="relative overflow-hidden py-12 sm:py-16 lg:py-20 px-3 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white/50 backdrop-blur-sm
-        [background:linear-gradient(to_bottom,white,#f9fafb)]">
+    <section className="relative overflow-hidden py-8 sm:py-12 lg:py-16 px-3 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white/50 backdrop-blur-sm">
       </div>
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10 sm:mb-12">
-          <h3 className="section-title">
+        <div className="text-center mb-8 sm:mb-10">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">
             How It Works
           </h3>
-          <p className="section-subtitle max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Your journey to amazing content in four simple steps
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 px-2 sm:px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 px-2 sm:px-4">
           {steps.map((step, index) => (
             <motion.div
               key={index}
@@ -45,18 +44,18 @@ const HowItWorksSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all group"
+              className="relative bg-white p-5 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-all group"
             >
               <div className="absolute -top-3 -left-3 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-medium">
                 {index + 1}
               </div>
               
-              <div className="mb-4 text-gray-900 transition-transform group-hover:scale-110">
+              <div className="mb-3 text-gray-900 transition-transform group-hover:scale-110">
                 {step.icon}
               </div>
               
-              <h4 className="text-xl font-medium text-gray-900 mb-2 font-space">{step.title}</h4>
-              <p className="text-gray-600 font-anek">{step.description}</p>
+              <h4 className="text-lg font-medium text-gray-900 mb-2 font-space">{step.title}</h4>
+              <p className="text-gray-600 text-sm sm:text-base">{step.description}</p>
               
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-gray-300" />
@@ -65,8 +64,8 @@ const HowItWorksSection = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-10 sm:mt-12">
-          <button className="px-8 py-4 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all font-space">
+        <div className="flex justify-center mt-8 sm:mt-10">
+          <button className="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all font-space text-sm sm:text-base">
             Find Your Creator
           </button>
         </div>

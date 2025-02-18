@@ -11,31 +11,39 @@ import { BottomNav } from '../components/navigation/BottomNav';
 
 const Index = () => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden">
+        {/* Hero Section - Full height minus header */}
         <Hero />
-        <div className="space-y-0">
-          {/* HowItWorks with soft white/gray gradient */}
-          <div className="bg-gradient-to-b from-white via-gray-50 to-white">
+        
+        {/* Content Sections with optimized spacing */}
+        <div className="space-y-12 sm:space-y-16 lg:space-y-20">
+          {/* HowItWorks with soft gradient */}
+          <div className="bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-12 lg:py-16">
             <HowItWorksSection />
           </div>
           
-          {/* Preview Search */}
-          <PreviewSearch />
+          {/* Preview Search with reduced padding */}
+          <div className="py-8 sm:py-12 lg:py-16">
+            <PreviewSearch />
+          </div>
           
-          {/* Testimonials with warm gradient */}
-          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white">
+          {/* Testimonials with warm gradient and optimized spacing */}
+          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white py-8 sm:py-12 lg:py-16">
             <Testimonials />
           </div>
           
-          {/* Call to Action with existing background */}
-          <CallToActionSection />
+          {/* Call to Action with aurora background */}
+          <div className="py-8 sm:py-12 lg:py-16">
+            <CallToActionSection />
+          </div>
         </div>
+
         <Footer />
       </main>
       <BottomNav />
-    </>
+    </div>
   );
 };
 
