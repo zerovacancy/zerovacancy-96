@@ -34,7 +34,7 @@ const Index = () => {
           </div>
           
           {/* Call to Action */}
-          <div className="py-8 sm:py-10 lg:py-12">
+          <div className="pt-8 sm:pt-10 lg:pt-12">
             <CallToActionSection />
           </div>
         </div>
