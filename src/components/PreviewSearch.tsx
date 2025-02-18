@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star } from 'lucide-react';
 import { Card } from './ui/card';
@@ -47,21 +48,21 @@ const PreviewSearch = () => {
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <div className="mx-4 sm:mx-0 mb-12">
           <div className="relative">
-            <Card className="p-6 bg-white shadow-md">
-              <h2 className="text-3xl font-semibold text-center mb-3">Discover Local Creators</h2>
-              <p className="text-muted-foreground text-center mb-8">
+            <Card className="p-4 sm:p-6 bg-white shadow-md">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-3">Discover Local Creators</h2>
+              <p className="text-muted-foreground text-center mb-6 sm:mb-8 text-sm sm:text-base">
                 Connect with professional photographers, videographers, and content creators in your area
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-2">
-                  <MapPin className="w-5 h-5 text-gray-500" />
-                  <input type="text" placeholder="Location" className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm" />
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3">
+                  <MapPin className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                  <input type="text" placeholder="Location" className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm w-full" />
                 </div>
 
-                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-2">
-                  <Search className="w-5 h-5 text-gray-500" />
-                  <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm">
+                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3">
+                  <Search className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                  <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm w-full">
                     <option>Content Type</option>
                     <option>Photography</option>
                     <option>Videography</option>
@@ -69,9 +70,9 @@ const PreviewSearch = () => {
                   </select>
                 </div>
 
-                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-2">
-                  <Calendar className="w-5 h-5 text-gray-500" />
-                  <input type="text" placeholder="mm/dd/yyyy" className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm" />
+                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3">
+                  <Calendar className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                  <input type="text" placeholder="mm/dd/yyyy" className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm w-full" />
                 </div>
 
                 <Button className="w-full h-10 bg-primary text-white hover:bg-primary/90">
@@ -89,8 +90,9 @@ const PreviewSearch = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                {creators.map((creator, index) => <Card key={index} className="group overflow-hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-8">
+                {creators.map((creator, index) => (
+                  <Card key={index} className="group overflow-hidden">
                     <div className="relative">
                       <div className="absolute top-3 right-3 z-10">
                         <span className="px-3 py-1 text-sm font-medium bg-black/60 text-white rounded-full">
@@ -116,7 +118,8 @@ const PreviewSearch = () => {
                         </Button>
                       </div>
                     </div>
-                  </Card>)}
+                  </Card>
+                ))}
               </div>
             </Card>
             <GlowingEffect disabled={false} spread={30} borderWidth={2} />
