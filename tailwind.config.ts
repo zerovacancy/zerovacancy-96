@@ -89,12 +89,18 @@ const config = {
             transform: "translate(calc(100cqw - 100%), 0)",
           },
         },
+        "border-beam": {
+          "100%": {
+            offsetDistance: "100%"
+          }
+        }
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out",
         "fade-in": "fade-in 0.3s ease-out",
         "shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
+        "border-beam": "border-beam var(--duration) infinite linear"
       },
       backgroundImage: {
         'gradient-conic': 'conic-gradient(var(--conic-position), var(--tw-gradient-stops))',
