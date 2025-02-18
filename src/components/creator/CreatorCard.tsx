@@ -35,6 +35,12 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
+  const handleImageLoad = () => {
+    if (onImageLoad) {
+      onImageLoad(creator.image);
+    }
+  };
+  
   return (
     <div className="group select-text">
       <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
@@ -54,6 +60,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 "w-full h-full object-cover object-center transition-opacity duration-300",
                 !loadedImages.has(creator.image) && "opacity-0"
               )}
+              onLoad={handleImageLoad}
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
