@@ -1,25 +1,45 @@
-
 import { cn } from "@/lib/utils";
 import { IconCamera, IconDrone, IconVideo, IconBrandInstagram, IconCertificate, IconClock24, IconWallet, IconStars } from "@tabler/icons-react";
 import { BorderTrail } from "./ui/border-trail";
 import { GlowingEffect } from "./ui/glowing-effect";
 
 export function FeaturesSectionWithHoverEffects() {
-  const features = [/* ... keep existing code (features array) */];
+  const features = [{
+    title: "Professional Photography",
+    description: "High-quality, professionally edited real estate photography that showcases properties at their best.",
+    icon: <IconCamera />
+  }, {
+    title: "Drone Aerial Coverage",
+    description: "FAA-certified drone operators capturing stunning aerial views and property surroundings.",
+    icon: <IconDrone />
+  }, {
+    title: "Video Production",
+    description: "Cinematic property tours and promotional videos that tell your property's unique story.",
+    icon: <IconVideo />
+  }, {
+    title: "Social Media Content",
+    description: "Engaging content optimized for all major social platforms and marketing channels.",
+    icon: <IconBrandInstagram />
+  }, {
+    title: "Verified Creators",
+    description: "Every creator is thoroughly vetted and verified for quality and professionalism.",
+    icon: <IconCertificate />
+  }, {
+    title: "24/7 Availability",
+    description: "Book creators any time, with flexible scheduling to meet your deadlines.",
+    icon: <IconClock24 />
+  }, {
+    title: "Transparent Pricing",
+    description: "Clear, upfront pricing with no hidden fees. Pay only for what you need.",
+    icon: <IconWallet />
+  }, {
+    title: "Quality Guaranteed",
+    description: "100% satisfaction guarantee on all content. Your property deserves the best.",
+    icon: <IconStars />
+  }];
 
   return (
-    <section className="py-16 sm:py-24 rounded-sm relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
-        [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
-        before:absolute before:inset-0
-        before:bg-[radial-gradient(circle_at_center,#4F46E5,transparent)]
-        before:opacity-40
-        after:absolute after:h-full after:w-full
-        after:[background:linear-gradient(to_right,#4F46E5,#EC4899)]
-        after:opacity-20 after:animate-aurora">
-      </div>
+    <section className="py-16 sm:py-24 rounded-sm relative bg-white overflow-hidden">
       <BorderTrail 
         className="bg-primary/20" 
         size={80}
