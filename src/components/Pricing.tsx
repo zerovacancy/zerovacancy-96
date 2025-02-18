@@ -77,7 +77,20 @@ export function PricingSection() {
       });
     }
   };
-  return <section className="py-16 sm:py-24 bg-zinc-100">
+
+  return (
+    <section className="relative py-16 sm:py-24 overflow-hidden">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white 
+        [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
+        [background-size:6rem_4rem]
+        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
+        before:absolute before:inset-0
+        before:bg-[radial-gradient(circle_at_center,#4F46E5,transparent)]
+        before:opacity-40
+        after:absolute after:h-full after:w-full
+        after:[background:linear-gradient(to_right,#4F46E5,#EC4899)]
+        after:opacity-20 after:animate-aurora">
+      </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-12">
           <h2 className="section-title">Simple, Transparent Pricing</h2>
@@ -166,6 +179,8 @@ export function PricingSection() {
             </motion.div>)}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 }
+
 export default PricingSection;
