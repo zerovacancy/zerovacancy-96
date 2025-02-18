@@ -6,17 +6,17 @@ import { cn } from '@/lib/utils';
 
 export const SearchBar = () => {
   return (
-    <div className="w-full space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3 sm:gap-4 w-full">
+    <div className="w-full space-y-3 sm:space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-2 sm:gap-4 w-full">
         <div className="relative">
-          <Search className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder="Search creators..."
             className={cn(
-              "w-full h-11 sm:h-12 pl-12 pr-4 rounded-lg",
+              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg",
               "border border-[#E5E7EB] bg-white/80 backdrop-blur",
-              "text-base placeholder:text-gray-500",
+              "text-sm sm:text-base placeholder:text-gray-500",
               "transition-all duration-200",
               "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30",
               "hover:bg-white/90"
@@ -24,14 +24,14 @@ export const SearchBar = () => {
           />
         </div>
         <div className="relative">
-          <MapPin className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <MapPin className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder="Location"
             className={cn(
-              "w-full h-11 sm:h-12 pl-12 pr-4 rounded-lg",
+              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg",
               "border border-[#E5E7EB] bg-white/80 backdrop-blur",
-              "text-base placeholder:text-gray-500",
+              "text-sm sm:text-base placeholder:text-gray-500",
               "transition-all duration-200",
               "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30",
               "hover:bg-white/90"
@@ -40,25 +40,26 @@ export const SearchBar = () => {
         </div>
         <Button 
           className={cn(
-            "h-11 sm:h-12 w-full sm:w-[120px] px-4 sm:px-6",
+            "h-10 sm:h-12 w-full sm:w-[120px] px-3 sm:px-6",
             "bg-primary text-white font-medium rounded-lg",
             "transition-all duration-200",
             "hover:opacity-90 hover:shadow-md",
-            "focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+            "focus:ring-2 focus:ring-primary/20 focus:ring-offset-2",
+            "text-sm sm:text-base"
           )}
         >
           Search
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
         <div className="relative">
-          <Camera className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Camera className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <select
             className={cn(
-              "w-full h-11 sm:h-12 pl-12 pr-4 rounded-lg appearance-none",
+              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg appearance-none",
               "border border-[#E5E7EB] bg-white/80 backdrop-blur",
-              "text-base text-gray-500",
+              "text-sm sm:text-base text-gray-500",
               "transition-all duration-200",
               "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30",
               "hover:bg-white/90"
@@ -73,12 +74,12 @@ export const SearchBar = () => {
         </div>
 
         <div className="relative">
-          <DollarSign className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <DollarSign className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <select
             className={cn(
-              "w-full h-11 sm:h-12 pl-12 pr-4 rounded-lg appearance-none",
+              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg appearance-none",
               "border border-[#E5E7EB] bg-white/80 backdrop-blur",
-              "text-base text-gray-500",
+              "text-sm sm:text-base text-gray-500",
               "transition-all duration-200",
               "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30",
               "hover:bg-white/90"
@@ -93,12 +94,12 @@ export const SearchBar = () => {
         </div>
 
         <div className="relative">
-          <Star className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Star className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <select
             className={cn(
-              "w-full h-11 sm:h-12 pl-12 pr-4 rounded-lg appearance-none",
+              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg appearance-none",
               "border border-[#E5E7EB] bg-white/80 backdrop-blur",
-              "text-base text-gray-500",
+              "text-sm sm:text-base text-gray-500",
               "transition-all duration-200",
               "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30",
               "hover:bg-white/90"
