@@ -17,6 +17,7 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
       onClick={onToggle}
       className={cn(
         "w-full text-left p-6 rounded-xl transition-all duration-200",
+        "group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
         isExpanded ? "bg-gray-50 shadow-sm" : "bg-white hover:bg-gray-50",
         "md:hover:shadow-md md:h-full"
       )}
@@ -41,17 +42,10 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
   );
 };
 
-interface Service {
-  id: number;
-  icon: React.ElementType;
-  title: string;
-  description: string;
-}
-
 const ServicesSection: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const services: Service[] = [
+  const services = [
     {
       id: 1,
       icon: Camera,
@@ -60,7 +54,7 @@ const ServicesSection: React.FC = () => {
     },
     {
       id: 2,
-      icon: Satellite,
+      icon: Satellite, // Using Satellite instead of Drone as per Lucide availability
       title: "Aerial Coverage",
       description: "FAA-certified operators capturing stunning aerial views and property surroundings."
     },
@@ -103,7 +97,7 @@ const ServicesSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-16 px-4 md:py-24">
+    <section className="py-16 px-4 md:py-24">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">
