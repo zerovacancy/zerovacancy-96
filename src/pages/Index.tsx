@@ -13,23 +13,23 @@ const Index = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 pb-20">
+      <main className="flex-1 pb-16 sm:pb-20">
         <Hero />
         
-        <div className="space-y-6 sm:space-y-8 lg:space-y-12">
-          <div className="bg-gradient-to-b from-white via-gray-50 to-white py-10 sm:py-12 lg:py-14">
+        <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+          <div className="bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-10 lg:py-12">
             <HowItWorksSection />
           </div>
           
-          <div className="py-6 sm:py-8 lg:py-10">
+          <div className="py-4 sm:py-6 lg:py-8">
             <PreviewSearch />
           </div>
           
-          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white py-8 sm:py-10 lg:py-12">
+          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white py-6 sm:py-8 lg:py-10">
             <Testimonials />
           </div>
           
-          <div className="pt-8 sm:pt-10 lg:pt-12">
+          <div className="pt-6 sm:pt-8 lg:pt-10">
             <CallToActionSection />
           </div>
         </div>
