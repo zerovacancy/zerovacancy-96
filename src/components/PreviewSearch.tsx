@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar, ChevronDown, Star, Image, Grid } from 'lucide-react';
+import { Search, MapPin, Calendar, ChevronDown, Grid } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -8,7 +8,7 @@ import { Pricing } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
 import { cn } from '@/lib/utils';
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { CreatorCard } from './creator/CreatorCard';
 
 // Optimize creator images by converting to WebP
 const creators = [{
@@ -194,94 +194,12 @@ const PreviewSearch = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
                 {creators.map((creator, index) => (
-                  <div key={index} className="group">
-                    <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
-                      <div className="relative">
-                        <div className="absolute top-4 right-4 z-10">
-                          <span className="px-3 py-1.5 text-sm font-medium bg-black/70 text-white rounded-full backdrop-blur-sm">
-                            From ${creator.price}
-                          </span>
-                        </div>
-                        <div className="relative aspect-[4/3]">
-                          <img 
-                            ref={observeImage}
-                            src={loadedImages.has(creator.image) ? creator.image : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                            data-src={creator.image}
-                            alt={creator.name} 
-                            className={cn(
-                              "w-full h-full object-cover object-center transition-opacity duration-300",
-                              !loadedImages.has(creator.image) && "opacity-0"
-                            )}
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                          <div className="absolute bottom-4 left-4 text-white">
-                            <h3 className="font-semibold text-xl mb-1">{creator.name}</h3>
-                            <div className="flex items-center gap-1.5 text-sm text-white/90">
-                              <MapPin className="w-4 h-4" />
-                              <span>{creator.location}</span>
-                            </div>
-                            <p className="text-sm text-white/90 mt-1">
-                              {creator.services.join(" • ")}
-                            </p>
-                          </div>
-                        </div>
-                        
-                        <div className="p-5 space-y-5">
-                          <div className="flex items-center gap-2 justify-between">
-                            <div className="flex items-center gap-2">
-                              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                              <span className="text-base font-medium">{creator.rating}</span>
-                              <span className="text-sm text-muted-foreground">
-                                ({creator.reviews} reviews)
-                              </span>
-                            </div>
-                            <Button 
-                              variant="outline" 
-                              size="default" 
-                              className="text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
-                            >
-                              Contact
-                            </Button>
-                          </div>
-                          
-                          <div className="grid grid-cols-3 gap-3">
-                            {creator.workExamples.map((example, i) => (
-                              <Dialog key={i}>
-                                <DialogTrigger asChild>
-                                  <button className="relative aspect-square w-full overflow-hidden rounded-lg will-change-transform">
-                                    <img 
-                                      ref={observeImage}
-                                      src={loadedImages.has(example) ? example : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-                                      data-src={example}
-                                      alt={`${creator.name}'s work ${i + 1}`} 
-                                      className={cn(
-                                        "object-cover w-full h-full transform transition-all duration-300 group-hover:scale-105",
-                                        !loadedImages.has(example) && "opacity-0"
-                                      )}
-                                      loading="lazy"
-                                    />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                      <Image className="w-5 h-5 text-white" />
-                                    </div>
-                                  </button>
-                                </DialogTrigger>
-                                <DialogContent className={cn("max-w-3xl w-[95vw] p-4", isMobile ? "h-[90vh]" : "")}>
-                                  <div className={cn("w-full h-full", isMobile ? "flex items-center justify-center" : "aspect-[4/3]")}>
-                                    <img 
-                                      src={example} 
-                                      alt={`${creator.name}'s work ${i + 1}`} 
-                                      className="object-contain w-full h-full rounded-lg"
-                                    />
-                                  </div>
-                                </DialogContent>
-                              </Dialog>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
+                  <CreatorCard
+                    key={index}
+                    creator={creator}
+                    loadedImages={loadedImages}
+                    imageRef={observeImage}
+                  />
                 ))}
               </div>
             </Card>
