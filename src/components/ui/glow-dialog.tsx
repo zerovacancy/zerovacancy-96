@@ -20,12 +20,16 @@ export function GlowDialog({ open, onOpenChange }: GlowDialogProps) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
         >
-          <div className="absolute inset-0 bg-black/40" /> {/* Dark overlay */}
           <GlowEffect
-            colors={['#FF5733', '#33FF57', '#3357FF', '#F1C40F']}
+            colors={[
+              'rgba(255, 87, 51, 0.3)', // Transparent red
+              'rgba(51, 255, 87, 0.2)', // Transparent green
+              'rgba(51, 87, 255, 0.25)', // Transparent blue
+              'rgba(241, 196, 15, 0.15)'  // Transparent yellow
+            ]}
             mode="colorShift"
-            blur="strong"
-            scale={1.5}
+            blur="stronger"
+            scale={1.8}
           />
           <div className="relative z-10">
             <h2 className="text-2xl font-bold text-center mb-4 text-white">Welcome to CreativeEstate!</h2>
