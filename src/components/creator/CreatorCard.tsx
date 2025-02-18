@@ -6,6 +6,8 @@ import { MapPin, Star, Image } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { CreatorRating } from './CreatorRating';
+import { PortfolioGallery } from './PortfolioGallery';
 
 interface Creator {
   name: string;
