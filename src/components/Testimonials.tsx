@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Carousel,
@@ -8,6 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import { AuroraBackground } from './ui/aurora-background';
 
 const Testimonials = () => {
   const testimonials = [
@@ -22,9 +24,9 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="section-padding bg-background">
+    <AuroraBackground className="section-padding">
       <div className="mx-auto max-w-7xl">
-        <h2 className="section-title">
+        <h2 className="section-title text-foreground">
           What Property Managers & Creators Are Saying
         </h2>
         <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -69,7 +71,7 @@ const Testimonials = () => {
           <CarouselNext />
         </Carousel>
       </div>
-    </section>
+    </AuroraBackground>
   );
 };
 
