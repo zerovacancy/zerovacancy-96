@@ -49,14 +49,14 @@ const HowItWorksSection = () => {
         
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 px-2 sm:px-4">
           {steps.map((step, index) => (
-            <div key={index} className="relative group">
-              <div className="relative p-[1px] rounded-2xl overflow-hidden">
+            <div key={index} className="relative group h-full">
+              <div className="relative p-[1px] rounded-2xl overflow-hidden h-full">
                 <GlowingEffect blur={20} spread={30} borderWidth={1} className="opacity-40" glow />
                 <MovingBorder rx="16px" ry="16px" duration={3000}>
                   <div className="h-16 w-16 opacity-100 bg-[radial-gradient(#8B5CF6_40%,transparent_60%)]" />
                 </MovingBorder>
                 <div className="h-full flex flex-col items-center p-4 rounded-2xl bg-white/95 backdrop-blur-sm relative z-20">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/5 mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/5 mb-3 group-hover:scale-110 transition-transform duration-300 shrink-0">
                     <div className="text-primary">
                       {step.icon}
                     </div>
