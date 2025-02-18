@@ -25,8 +25,8 @@ export function Hero() {
   return (
     <div className="w-full">
       <AuroraBackground className="w-full">
-        <div className="flex gap-4 sm:gap-6 lg:gap-8 items-center justify-center flex-col py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
-          <div className="flex gap-3 sm:gap-4 flex-col max-w-4xl mx-auto">
+        <div className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
+          <div className="flex gap-4 sm:gap-6 flex-col max-w-4xl mx-auto">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter text-center font-medium">
               <span className="text-primary inline whitespace-nowrap">Property Content that</span>
               <span className="relative flex w-full justify-center h-[1.2em] overflow-hidden">
@@ -58,15 +58,15 @@ export function Hero() {
             </p>
           </div>
           
-          <div className="flex flex-col gap-3 sm:gap-4 w-full px-4 sm:px-6 max-w-md mx-auto mt-4">
+          <div className="flex flex-col gap-4 w-full px-4 sm:px-6 max-w-md mx-auto mt-2">
             <ShimmerButton 
-              className="w-full text-base font-medium gap-3 h-12 sm:h-14" 
+              className="w-full text-base font-medium gap-3 min-h-[3.5rem] touch-manipulation" 
               background="rgba(255, 255, 255, 0.1)"
             >
               I Need Content <Building className="w-5 h-5" />
             </ShimmerButton>
             <ShimmerButton 
-              className="w-full text-base font-medium gap-3 h-12 sm:h-14"
+              className="w-full text-base font-medium gap-3 min-h-[3.5rem] touch-manipulation"
             >
               I Create Content <UserPlus className="w-5 h-5" />
             </ShimmerButton>
