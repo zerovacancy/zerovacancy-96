@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, MapPin, Calendar, ChevronDown, Star } from 'lucide-react';
+import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -7,6 +7,11 @@ import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "./ui/dialog";
 
 const PreviewSearch = () => {
   const creators = [{
@@ -16,7 +21,12 @@ const PreviewSearch = () => {
     rating: 4.9,
     reviews: 124,
     location: "New York, NY",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500"
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500",
+    workExamples: [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&h=600"
+    ]
   }, {
     name: "Michael Chen",
     services: ["Videography", "Editing"],
@@ -24,7 +34,12 @@ const PreviewSearch = () => {
     rating: 4.8,
     reviews: 98,
     location: "Los Angeles, CA",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500"
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500",
+    workExamples: [
+      "https://images.unsplash.com/photo-1600607687644-05f5f91428f9?auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1600585154363-67eb9e684b16?auto=format&fit=crop&w=800&h=600"
+    ]
   }, {
     name: "Emily Rodriguez",
     services: ["3D Tours", "Photography"],
@@ -32,8 +47,14 @@ const PreviewSearch = () => {
     rating: 5.0,
     reviews: 156,
     location: "Miami, FL",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500"
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500",
+    workExamples: [
+      "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&h=600",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=600"
+    ]
   }];
+
   return (
     <section className="relative section-padding py-[22px] overflow-hidden">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white 
@@ -93,7 +114,8 @@ const PreviewSearch = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                {creators.map((creator, index) => <Card key={index} className="group overflow-hidden">
+                {creators.map((creator, index) => (
+                  <Card key={index} className="group overflow-hidden">
                     <div className="relative">
                       <div className="absolute top-3 right-3 z-10">
                         <span className="px-3 py-1 text-sm font-medium bg-black/60 text-white rounded-full">
@@ -118,12 +140,40 @@ const PreviewSearch = () => {
                           <span className="font-medium">{creator.rating}</span>
                           <span className="text-sm text-muted-foreground">({creator.reviews} reviews)</span>
                         </div>
+                        <div className="grid grid-cols-3 gap-2">
+                          {creator.workExamples.map((example, i) => (
+                            <Dialog key={i}>
+                              <DialogTrigger asChild>
+                                <button className="relative aspect-square w-full overflow-hidden rounded-lg group/image">
+                                  <img 
+                                    src={example} 
+                                    alt={`${creator.name}'s work ${i + 1}`} 
+                                    className="object-cover w-full h-full transition-transform duration-300 group-hover/image:scale-110"
+                                  />
+                                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                    <Image className="w-5 h-5 text-white" />
+                                  </div>
+                                </button>
+                              </DialogTrigger>
+                              <DialogContent className="max-w-3xl">
+                                <div className="aspect-[4/3] w-full">
+                                  <img 
+                                    src={example} 
+                                    alt={`${creator.name}'s work ${i + 1}`} 
+                                    className="object-cover w-full h-full rounded-lg"
+                                  />
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                          ))}
+                        </div>
                         <Button variant="default" className="w-full bg-primary text-white hover:bg-primary/90">
                           View Profile
                         </Button>
                       </div>
                     </div>
-                  </Card>)}
+                  </Card>
+                ))}
               </div>
             </Card>
             <GlowingEffect disabled={false} spread={30} borderWidth={2} />
