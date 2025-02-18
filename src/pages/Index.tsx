@@ -42,7 +42,7 @@ const Index = () => {
             <Button 
               variant="secondary" 
               size="sm" 
-              className="hidden sm:flex"
+              className="flex text-sm items-center"
               onClick={handleTryNowClick}
             >
               Try CreativeEstate Now
