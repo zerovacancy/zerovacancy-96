@@ -11,6 +11,7 @@ import { GlowingEffect } from './ui/glowing-effect';
 import { cn } from '@/lib/utils';
 import { CreatorCard } from './creator/CreatorCard';
 import { SortMenu } from './sorting/SortMenu';
+import ServicesSection from './ServicesSection';
 
 const creators = [
   {
@@ -133,26 +134,55 @@ const PreviewSearch = () => {
         <div className="mx-4 sm:mx-0 mb-8">
           <div className="relative">
             <Card className="p-6 sm:p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-semibold">Featured Creators</h2>
-                <SortMenu 
-                  options={sortOptions}
-                  onSort={handleSort}
-                  defaultValue={sortBy}
-                />
+              {/* Search Container */}
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 mb-8">
+                <div className="search-group">
+                  <Search className="w-5 h-5 text-muted-foreground" />
+                  <input
+                    type="text"
+                    placeholder="Search creators..."
+                    className="search-input"
+                  />
+                </div>
+                <div className="search-group">
+                  <MapPin className="w-5 h-5 text-muted-foreground" />
+                  <input
+                    type="text"
+                    placeholder="Location"
+                    className="search-input"
+                  />
+                </div>
+                <Button className="w-full md:w-auto">
+                  Search
+                </Button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {creators.map((creator, index) => (
-                  <CreatorCard
-                    key={index}
-                    creator={creator}
-                    onImageLoad={onImageLoad}
-                    loadedImages={loadedImages}
-                    imageRef={imageRef}
+              {/* Creators Section */}
+              <div className="mb-12">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-semibold">Featured Creators</h2>
+                  <SortMenu 
+                    options={sortOptions}
+                    onSort={handleSort}
+                    defaultValue={sortBy}
                   />
-                ))}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {creators.map((creator, index) => (
+                    <CreatorCard
+                      key={index}
+                      creator={creator}
+                      onImageLoad={onImageLoad}
+                      loadedImages={loadedImages}
+                      imageRef={imageRef}
+                    />
+                  ))}
+                </div>
               </div>
+
+              {/* Services Section */}
+              <ServicesSection />
             </Card>
             <GlowingEffect disabled={false} spread={30} borderWidth={2} />
           </div>
@@ -166,3 +196,4 @@ const PreviewSearch = () => {
 };
 
 export default PreviewSearch;
+
