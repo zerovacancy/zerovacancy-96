@@ -75,25 +75,25 @@ const PreviewSearch = () => {
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <div className="mx-4 sm:mx-0 mb-8">
           <div className="relative">
-            <Card className="p-3 sm:p-4 md:p-6 bg-white shadow-md">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-center mb-2">Discover Local Creators</h2>
-              <p className="text-muted-foreground text-center text-sm sm:text-base mb-4 sm:mb-6 px-2">
+            <Card className="p-4 sm:p-6 md:p-8 bg-white shadow-md">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-3 sm:mb-4">Discover Local Creators</h2>
+              <p className="text-muted-foreground text-center text-base sm:text-lg mb-6 sm:mb-8 px-4">
                 Connect with professional photographers, videographers, and content creators in your area
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-4">
-                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2.5 touch-manipulation">
-                  <MapPin className="w-4 h-4 text-gray-500 flex-shrink-0" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3.5 touch-manipulation shadow-sm">
+                  <MapPin className="w-5 h-5 text-gray-500 flex-shrink-0" />
                   <input 
                     type="text" 
                     placeholder="Location" 
-                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm min-w-0"
+                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base min-w-0 h-8"
                   />
                 </div>
 
-                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2.5 touch-manipulation">
-                  <Search className="w-4 h-4 text-gray-500 flex-shrink-0" />
-                  <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm appearance-none">
+                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3.5 touch-manipulation shadow-sm">
+                  <Search className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                  <select className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base appearance-none h-8">
                     <option>Content Type</option>
                     <option>Photography</option>
                     <option>Videography</option>
@@ -101,39 +101,39 @@ const PreviewSearch = () => {
                   </select>
                 </div>
 
-                <div className="flex items-center space-x-2 bg-secondary rounded-lg px-3 py-2.5 touch-manipulation">
-                  <Calendar className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3.5 touch-manipulation shadow-sm">
+                  <Calendar className="w-5 h-5 text-gray-500 flex-shrink-0" />
                   <input 
                     type="text" 
                     placeholder="mm/dd/yyyy" 
-                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-sm min-w-0"
+                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base min-w-0 h-8"
                   />
                 </div>
 
-                <Button className="w-full h-10 sm:h-9 bg-primary text-white hover:bg-primary/90">
+                <Button className="w-full h-14 sm:h-[3.375rem] bg-primary text-white hover:bg-primary/90 text-base shadow-sm">
                   Find Creators
                 </Button>
               </div>
 
-              <div className="flex items-center justify-center pt-2 border-t">
-                <button className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1 py-2 touch-manipulation">
+              <div className="flex items-center justify-center pt-3 border-t">
+                <button className="text-base text-muted-foreground hover:text-primary flex items-center gap-2 py-3 px-4 touch-manipulation">
                   Advanced Filters
-                  <ChevronDown className="w-3.5 h-3.5" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
-                <span className="ml-2 px-1.5 py-0.5 text-xs font-medium bg-accent text-accent-foreground rounded">PRO</span>
+                <span className="ml-2 px-2 py-1 text-sm font-medium bg-accent text-accent-foreground rounded">PRO</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8">
                 {creators.map((creator, index) => (
                   <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <Card className="group overflow-hidden h-full">
                       <div className="relative">
-                        <div className="absolute top-2 right-2 z-10">
-                          <span className="px-2 py-0.5 text-xs font-medium bg-black/60 text-white rounded-full">
+                        <div className="absolute top-3 right-3 z-10">
+                          <span className="px-3 py-1 text-sm font-medium bg-black/70 text-white rounded-full shadow-sm">
                             From ${creator.price}
                           </span>
                         </div>
-                        <div className="relative aspect-[3/2]">
+                        <div className="relative aspect-[4/3]">
                           <img 
                             src={creator.image} 
                             alt={creator.name} 
@@ -141,35 +141,35 @@ const PreviewSearch = () => {
                             loading="lazy"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                          <div className="absolute bottom-2 left-2 text-white">
-                            <h3 className="font-semibold text-base sm:text-lg">{creator.name}</h3>
-                            <div className="flex items-center gap-1 text-xs opacity-90">
-                              <MapPin className="w-3 h-3" />
+                          <div className="absolute bottom-3 left-3 text-white">
+                            <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
+                            <div className="flex items-center gap-1.5 text-sm opacity-90 mt-1">
+                              <MapPin className="w-4 h-4" />
                               <span>{creator.location}</span>
                             </div>
-                            <p className="text-xs opacity-90 mt-0.5">{creator.services.join(" • ")}</p>
+                            <p className="text-sm opacity-90 mt-1">{creator.services.join(" • ")}</p>
                           </div>
                         </div>
-                        <div className="p-3 space-y-3">
-                          <div className="flex items-center gap-1.5 justify-between">
-                            <div className="flex items-center gap-1.5">
-                              <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm font-medium">{creator.rating}</span>
-                              <span className="text-xs text-muted-foreground">({creator.reviews} reviews)</span>
+                        <div className="p-4 space-y-4">
+                          <div className="flex items-center gap-2 justify-between">
+                            <div className="flex items-center gap-2">
+                              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                              <span className="text-base font-medium">{creator.rating}</span>
+                              <span className="text-sm text-muted-foreground">({creator.reviews} reviews)</span>
                             </div>
                             <Button 
                               variant="outline" 
-                              size="sm" 
-                              className="text-xs px-3 py-1.5 touch-manipulation"
+                              size="default"
+                              className="text-sm px-4 py-2 h-10 touch-manipulation"
                             >
                               Contact
                             </Button>
                           </div>
-                          <div className="grid grid-cols-3 gap-1.5">
+                          <div className="grid grid-cols-3 gap-2">
                             {creator.workExamples.map((example, i) => (
                               <Dialog key={i}>
                                 <DialogTrigger asChild>
-                                  <button className="relative aspect-square w-full overflow-hidden rounded hover:ring-2 hover:ring-primary/50 transition-all duration-300 touch-manipulation">
+                                  <button className="relative aspect-square w-full overflow-hidden rounded-lg hover:ring-2 hover:ring-primary/50 transition-all duration-300 touch-manipulation shadow-sm">
                                     <img 
                                       src={example} 
                                       alt={`${creator.name}'s work ${i + 1}`} 
@@ -177,12 +177,12 @@ const PreviewSearch = () => {
                                       loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                      <Image className="w-4 h-4 text-white" />
+                                      <Image className="w-5 h-5 text-white" />
                                     </div>
                                   </button>
                                 </DialogTrigger>
                                 <DialogContent className={cn(
-                                  "max-w-3xl w-[95vw] p-2 sm:p-4",
+                                  "max-w-3xl w-[95vw] p-3 sm:p-4",
                                   isMobile ? "h-[90vh]" : ""
                                 )}>
                                   <div className={cn(
