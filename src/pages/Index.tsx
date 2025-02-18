@@ -13,29 +13,29 @@ const Index = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 overflow-x-hidden">
-        {/* Hero Section - Full height minus header */}
+      <main className="flex-1">
+        {/* Hero Section */}
         <Hero />
         
         {/* Content Sections with optimized spacing */}
-        <div className="space-y-12 sm:space-y-16 lg:space-y-20">
-          {/* HowItWorks with soft gradient */}
-          <div className="bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-12 lg:py-16">
+        <div className="space-y-8 sm:space-y-12 lg:space-y-16">
+          {/* HowItWorks with minimal gradient */}
+          <div className="bg-gradient-to-b from-white via-gray-50 to-white py-10 sm:py-12 lg:py-14">
             <HowItWorksSection />
           </div>
           
-          {/* Preview Search with reduced padding */}
-          <div className="py-8 sm:py-12 lg:py-16">
+          {/* Preview Search */}
+          <div className="py-10 sm:py-12 lg:py-14">
             <PreviewSearch />
           </div>
           
-          {/* Testimonials with warm gradient and optimized spacing */}
-          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white py-8 sm:py-12 lg:py-16">
+          {/* Testimonials with subtle gradient */}
+          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white py-10 sm:py-12 lg:py-14">
             <Testimonials />
           </div>
           
-          {/* Call to Action with aurora background */}
-          <div className="py-8 sm:py-12 lg:py-16">
+          {/* Call to Action */}
+          <div className="py-10 sm:py-12 lg:py-14">
             <CallToActionSection />
           </div>
         </div>
