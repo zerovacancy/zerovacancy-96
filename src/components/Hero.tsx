@@ -27,7 +27,7 @@ export function Hero() {
   return (
     <div className="w-full">
       <AuroraBackground className="w-full">
-        <div className="flex gap-4 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-4 sm:px-6 py-4 sm:py-6 lg:py-8 min-h-[calc(100vh-4.5rem)] sm:min-h-0">
+        <div className="flex gap-4 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-4 sm:px-6 py-16 sm:py-20 lg:py-24 min-h-[calc(100vh-4.5rem)] sm:min-h-0">
           <div className="flex gap-3 sm:gap-4 flex-col max-w-4xl mx-auto w-full">
             <h1 className="text-[2rem] sm:text-5xl md:text-6xl tracking-wide leading-[1.15] sm:leading-normal text-center py-3 sm:py-4 my-4 sm:my-6 font-bold lg:text-7xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-wide font-light">
@@ -69,13 +69,13 @@ export function Hero() {
           
           <div className="flex flex-col gap-3 w-full px-3 sm:px-4 max-w-md mx-auto mt-4 sm:mt-6">
             <ShimmerButton 
-              className="w-full text-sm sm:text-base font-medium gap-2 sm:gap-3 min-h-[2.75rem] sm:min-h-[3rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform" 
+              className="w-full text-sm sm:text-base font-medium gap-2 sm:gap-3 min-h-[3rem] sm:min-h-[3.25rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform" 
               background="rgba(255, 255, 255, 0.1)"
             >
               I Need Content <Building className="w-4 h-4 sm:w-5 sm:h-5" />
             </ShimmerButton>
             <ShimmerButton 
-              className="w-full text-sm sm:text-base font-medium gap-2 sm:gap-3 min-h-[2.75rem] sm:min-h-[3rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform"
+              className="w-full text-sm sm:text-base font-medium gap-2 sm:gap-3 min-h-[3rem] sm:min-h-[3.25rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform"
             >
               I Create Content <UserPlus className="w-4 h-4 sm:w-5 sm:h-5" />
             </ShimmerButton>

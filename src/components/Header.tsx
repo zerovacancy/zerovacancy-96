@@ -22,10 +22,10 @@ const Header = () => {
           key={link.to}
           to={link.to} 
           className={cn(
-            "text-base font-medium transition-colors relative py-1",
+            "text-base font-medium transition-colors relative py-1.5",
             "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
             "before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left",
-            "before:bg-primary",
+            "before:bg-primary active:opacity-80",
             location.pathname === link.to 
               ? "text-foreground before:scale-x-100" 
               : "text-muted-foreground hover:text-foreground"
@@ -40,7 +40,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40">
-      <div className="container flex h-[4.5rem] items-center justify-between px-4">
+      <div className="container flex h-14 sm:h-16 items-center justify-between px-4">
         <Link 
           to="/" 
           className="flex items-center gap-2 transition-opacity active:opacity-80"
