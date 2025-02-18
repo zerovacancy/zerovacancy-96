@@ -108,13 +108,6 @@ const PricingCard = ({
         <h3 className="text-lg font-semibold leading-tight text-slate-900">
           {title}
         </h3>
-        <IconChevronDown 
-          className={cn(
-            "w-5 h-5 transition-transform duration-300",
-            isExpanded ? "rotate-180" : "rotate-0",
-            "text-slate-500"
-          )}
-        />
       </div>
       
       <div className="mt-3 flex items-baseline text-slate-900 relative z-10">
@@ -161,6 +154,24 @@ const PricingCard = ({
           )}
         >
           {cta}
+        </button>
+      </div>
+
+      <div className="flex items-center justify-center pt-4 mt-4 border-t">
+        <button 
+          className="text-sm text-slate-600 hover:text-primary flex items-center gap-1 group/btn transition-all duration-300"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleExpand();
+          }}
+        >
+          See Features
+          <IconChevronDown 
+            className={cn(
+              "w-4 h-4 transition-transform duration-300",
+              isExpanded ? "rotate-180" : "group-hover/btn:translate-y-0.5"
+            )}
+          />
         </button>
       </div>
     </div>
