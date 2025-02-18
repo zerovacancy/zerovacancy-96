@@ -3,6 +3,7 @@ import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { ShimmerButton } from './ui/shimmer-button';
 import { GlowingEffect } from './ui/glowing-effect';
+import { MovingBorder } from './ui/moving-border';
 
 const HowItWorksSection = () => {
   const steps = [{
@@ -37,9 +38,12 @@ const HowItWorksSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {steps.map((step, index) => (
             <div key={index} className="relative group">
-              <div className="relative">
+              <div className="relative p-[1px] rounded-3xl overflow-hidden">
                 <GlowingEffect blur={20} spread={30} borderWidth={2} className="opacity-50" glow />
-                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white relative z-10">
+                <MovingBorder rx="30%" ry="30%" duration={3000}>
+                  <div className="h-20 w-20 opacity-[0.8] bg-[radial-gradient(var(--primary)_40%,transparent_60%)]" />
+                </MovingBorder>
+                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white/95 backdrop-blur-sm relative z-10">
                   <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 mb-6 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-primary">
                       {step.icon}
