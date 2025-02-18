@@ -29,10 +29,10 @@ const HowItWorksSection = () => {
       </div>
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10 sm:mb-12">
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-3 sm:mb-4 text-gray-900">
+          <h3 className="section-title">
             How It Works
           </h3>
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+          <p className="section-subtitle max-w-2xl mx-auto px-4">
             Your journey to amazing content in four simple steps
           </p>
         </div>
@@ -55,8 +55,8 @@ const HowItWorksSection = () => {
                 {step.icon}
               </div>
               
-              <h4 className="text-xl font-medium text-gray-900 mb-2">{step.title}</h4>
-              <p className="text-gray-600">{step.description}</p>
+              <h4 className="text-xl font-medium text-gray-900 mb-2 font-space">{step.title}</h4>
+              <p className="text-gray-600 font-anek">{step.description}</p>
               
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-gray-300" />
@@ -66,7 +66,7 @@ const HowItWorksSection = () => {
         </div>
 
         <div className="flex justify-center mt-10 sm:mt-12">
-          <button className="px-8 py-4 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all font-medium">
+          <button className="px-8 py-4 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all font-space">
             Find Your Creator
           </button>
         </div>
