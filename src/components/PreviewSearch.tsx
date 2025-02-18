@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
 import { Card } from './ui/card';
@@ -9,58 +8,38 @@ import { Pricing } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
 import { cn } from '@/lib/utils';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "./ui/dialog";
-
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 const creators = [{
-    name: "Sarah Johnson",
-    services: ["Photography", "Drone"],
-    price: 200,
-    rating: 4.9,
-    reviews: 124,
-    location: "New York, NY",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500",
-    workExamples: [
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&h=600"
-    ]
-  }, {
-    name: "Michael Chen",
-    services: ["Videography", "Editing"],
-    price: 250,
-    rating: 4.8,
-    reviews: 98,
-    location: "Los Angeles, CA",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500",
-    workExamples: [
-      "https://images.unsplash.com/photo-1600607687644-05f5f91428f9?auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1600585154363-67eb9e684b16?auto=format&fit=crop&w=800&h=600"
-    ]
-  }, {
-    name: "Emily Rodriguez",
-    services: ["3D Tours", "Photography"],
-    price: 300,
-    rating: 5.0,
-    reviews: 156,
-    location: "Miami, FL",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500",
-    workExamples: [
-      "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&h=600",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=600"
-    ]
+  name: "Sarah Johnson",
+  services: ["Photography", "Drone"],
+  price: 200,
+  rating: 4.9,
+  reviews: 124,
+  location: "New York, NY",
+  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500",
+  workExamples: ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&h=600"]
+}, {
+  name: "Michael Chen",
+  services: ["Videography", "Editing"],
+  price: 250,
+  rating: 4.8,
+  reviews: 98,
+  location: "Los Angeles, CA",
+  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500",
+  workExamples: ["https://images.unsplash.com/photo-1600607687644-05f5f91428f9?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600585154363-67eb9e684b16?auto=format&fit=crop&w=800&h=600"]
+}, {
+  name: "Emily Rodriguez",
+  services: ["3D Tours", "Photography"],
+  price: 300,
+  rating: 5.0,
+  reviews: 156,
+  location: "Miami, FL",
+  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500",
+  workExamples: ["https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=600"]
 }];
-
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
-
-  return (
-    <section className="relative section-padding py-[22px] overflow-hidden">
+  return <section className="relative section-padding overflow-hidden py-[21px] my-0">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white 
         [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
         [background-size:6rem_4rem]
@@ -84,11 +63,7 @@ const PreviewSearch = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
                 <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3.5 touch-manipulation shadow-sm">
                   <MapPin className="w-5 h-5 text-gray-500 flex-shrink-0" />
-                  <input 
-                    type="text" 
-                    placeholder="Location" 
-                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base min-w-0 h-8"
-                  />
+                  <input type="text" placeholder="Location" className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base min-w-0 h-8" />
                 </div>
 
                 <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3.5 touch-manipulation shadow-sm">
@@ -103,11 +78,7 @@ const PreviewSearch = () => {
 
                 <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-3.5 touch-manipulation shadow-sm">
                   <Calendar className="w-5 h-5 text-gray-500 flex-shrink-0" />
-                  <input 
-                    type="text" 
-                    placeholder="mm/dd/yyyy" 
-                    className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base min-w-0 h-8"
-                  />
+                  <input type="text" placeholder="mm/dd/yyyy" className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-base min-w-0 h-8" />
                 </div>
 
                 <Button className="w-full h-14 sm:h-[3.375rem] bg-primary text-white hover:bg-primary/90 text-base shadow-sm">
@@ -124,8 +95,7 @@ const PreviewSearch = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8">
-                {creators.map((creator, index) => (
-                  <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                {creators.map((creator, index) => <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <Card className="group overflow-hidden h-full">
                       <div className="relative">
                         <div className="absolute top-3 right-3 z-10">
@@ -134,12 +104,7 @@ const PreviewSearch = () => {
                           </span>
                         </div>
                         <div className="relative aspect-[4/3]">
-                          <img 
-                            src={creator.image} 
-                            alt={creator.name} 
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
+                          <img src={creator.image} alt={creator.name} className="w-full h-full object-cover" loading="lazy" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                           <div className="absolute bottom-3 left-3 text-white">
                             <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
@@ -157,53 +122,31 @@ const PreviewSearch = () => {
                               <span className="text-base font-medium">{creator.rating}</span>
                               <span className="text-sm text-muted-foreground">({creator.reviews} reviews)</span>
                             </div>
-                            <Button 
-                              variant="outline" 
-                              size="default"
-                              className="text-sm px-4 py-2 h-10 touch-manipulation"
-                            >
+                            <Button variant="outline" size="default" className="text-sm px-4 py-2 h-10 touch-manipulation">
                               Contact
                             </Button>
                           </div>
                           <div className="grid grid-cols-3 gap-2">
-                            {creator.workExamples.map((example, i) => (
-                              <Dialog key={i}>
+                            {creator.workExamples.map((example, i) => <Dialog key={i}>
                                 <DialogTrigger asChild>
                                   <button className="relative aspect-square w-full overflow-hidden rounded-lg hover:ring-2 hover:ring-primary/50 transition-all duration-300 touch-manipulation shadow-sm">
-                                    <img 
-                                      src={example} 
-                                      alt={`${creator.name}'s work ${i + 1}`} 
-                                      className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
-                                      loading="lazy"
-                                    />
+                                    <img src={example} alt={`${creator.name}'s work ${i + 1}`} className="object-cover w-full h-full transition-transform duration-300 hover:scale-110" loading="lazy" />
                                     <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                       <Image className="w-5 h-5 text-white" />
                                     </div>
                                   </button>
                                 </DialogTrigger>
-                                <DialogContent className={cn(
-                                  "max-w-3xl w-[95vw] p-3 sm:p-4",
-                                  isMobile ? "h-[90vh]" : ""
-                                )}>
-                                  <div className={cn(
-                                    "w-full h-full",
-                                    isMobile ? "flex items-center justify-center" : "aspect-[4/3]"
-                                  )}>
-                                    <img 
-                                      src={example} 
-                                      alt={`${creator.name}'s work ${i + 1}`} 
-                                      className="object-contain w-full h-full rounded-lg"
-                                    />
+                                <DialogContent className={cn("max-w-3xl w-[95vw] p-3 sm:p-4", isMobile ? "h-[90vh]" : "")}>
+                                  <div className={cn("w-full h-full", isMobile ? "flex items-center justify-center" : "aspect-[4/3]")}>
+                                    <img src={example} alt={`${creator.name}'s work ${i + 1}`} className="object-contain w-full h-full rounded-lg" />
                                   </div>
                                 </DialogContent>
-                              </Dialog>
-                            ))}
+                              </Dialog>)}
                           </div>
                         </div>
                       </div>
                     </Card>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </Card>
             <GlowingEffect disabled={false} spread={30} borderWidth={2} />
@@ -213,8 +156,6 @@ const PreviewSearch = () => {
 
       <FeaturesSectionWithHoverEffects />
       <Pricing />
-    </section>
-  );
+    </section>;
 };
-
 export default PreviewSearch;
