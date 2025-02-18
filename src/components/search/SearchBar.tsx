@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 export const SearchBar = () => {
   return (
     <div className="w-full space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-[45%_45%_10%] gap-4 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 w-full">
         <div className="relative">
           <Search className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
@@ -40,7 +40,7 @@ export const SearchBar = () => {
         </div>
         <Button 
           className={cn(
-            "h-12 w-full md:w-fit px-6",
+            "h-12 w-full md:w-[120px] px-6",
             "bg-primary text-white font-medium rounded-lg",
             "transition-all duration-200",
             "hover:opacity-90 hover:shadow-md",
@@ -51,7 +51,6 @@ export const SearchBar = () => {
         </Button>
       </div>
 
-      {/* Additional Filters */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="relative">
           <Camera className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
