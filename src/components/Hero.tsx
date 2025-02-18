@@ -25,12 +25,11 @@ export function Hero() {
   return (
     <div className="w-full">
       <AuroraBackground className="w-full">
-        <div className="flex gap-6 sm:gap-8 items-center justify-center flex-col py-16 sm:py-24 lg:py-32 px-4">
-          <div className="flex gap-3 sm:gap-4 flex-col">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
-              <span className="text-primary">Property Content that</span>
-              <span className="relative flex w-full justify-center overflow-hidden text-center pt-1 sm:pt-2">
-                &nbsp;
+        <div className="flex gap-8 sm:gap-10 lg:gap-12 items-center justify-center flex-col py-20 sm:py-28 lg:py-36 px-6">
+          <div className="flex gap-4 sm:gap-6 flex-col max-w-4xl mx-auto">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter text-center font-medium">
+              <span className="text-primary block mb-2 sm:mb-3">Property Content that</span>
+              <span className="relative flex w-full justify-center overflow-hidden text-center">
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
@@ -49,17 +48,23 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center px-4">
+            <p className="text-lg sm:text-xl lg:text-2xl leading-relaxed text-muted-foreground max-w-2xl text-center mx-auto">
               Connect with top-tier creators for photography, videography, and marketing content that elevates your
               property portfolio.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto px-4">
-            <ShimmerButton className="w-full sm:w-auto gap-2 h-11 sm:h-12 text-sm sm:text-base min-w-[160px] sm:min-w-[200px]" background="rgba(255, 255, 255, 0.1)">
-              I Need Content <Building className="w-4 h-4" />
+          
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto justify-center px-6">
+            <ShimmerButton 
+              className="w-full sm:w-auto text-base sm:text-lg font-medium gap-3 h-14 sm:h-16 min-w-[200px] sm:min-w-[240px]" 
+              background="rgba(255, 255, 255, 0.1)"
+            >
+              I Need Content <Building className="w-5 h-5" />
             </ShimmerButton>
-            <ShimmerButton className="w-full sm:w-auto gap-2 h-11 sm:h-12 text-sm sm:text-base min-w-[160px] sm:min-w-[200px]">
-              I Create Content <UserPlus className="w-4 h-4" />
+            <ShimmerButton 
+              className="w-full sm:w-auto text-base sm:text-lg font-medium gap-3 h-14 sm:h-16 min-w-[200px] sm:min-w-[240px]"
+            >
+              I Create Content <UserPlus className="w-5 h-5" />
             </ShimmerButton>
           </div>
         </div>
