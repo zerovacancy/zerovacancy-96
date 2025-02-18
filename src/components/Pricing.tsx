@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -185,13 +184,7 @@ export function PricingSection() {
                   <span className="text-5xl font-bold tracking-tight text-foreground">
                     <NumberFlow
                       value={isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)}
-                      format={{
-                        style: "currency",
-                        currency: "USD",
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0,
-                      }}
-                      formatter={(value) => `$${value}`}
+                      format={(value) => `$${value}`}
                       transformTiming={{
                         duration: 500,
                         easing: "ease-out",
