@@ -25,9 +25,9 @@ export function Hero() {
   return (
     <div className="w-full">
       <AuroraBackground className="w-full">
-        <div className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col py-12 sm:py-16 lg:py-20 px-6">
-          <div className="flex gap-4 sm:gap-6 flex-col max-w-4xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter text-center font-medium">
+        <div className="flex gap-4 sm:gap-6 lg:gap-8 items-center justify-center flex-col py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
+          <div className="flex gap-3 sm:gap-4 flex-col max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter text-center font-medium">
               <span className="text-primary inline whitespace-nowrap">Property Content that</span>
               <span className="relative flex w-full justify-center h-[1.2em] overflow-hidden">
                 {titles.map((title, index) => (
@@ -52,21 +52,21 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl leading-relaxed text-muted-foreground max-w-2xl text-center mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-muted-foreground max-w-2xl text-center mx-auto px-4">
               Connect with top-tier creators for photography, videography, and marketing content that elevates your
               property portfolio.
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto justify-center px-6">
+          <div className="flex flex-col gap-3 sm:gap-4 w-full px-4 sm:px-6 max-w-md mx-auto mt-4">
             <ShimmerButton 
-              className="w-full sm:w-auto text-base sm:text-lg font-medium gap-3 h-14 sm:h-16 min-w-[200px] sm:min-w-[240px]" 
+              className="w-full text-base font-medium gap-3 h-12 sm:h-14" 
               background="rgba(255, 255, 255, 0.1)"
             >
               I Need Content <Building className="w-5 h-5" />
             </ShimmerButton>
             <ShimmerButton 
-              className="w-full sm:w-auto text-base sm:text-lg font-medium gap-3 h-14 sm:h-16 min-w-[200px] sm:min-w-[240px]"
+              className="w-full text-base font-medium gap-3 h-12 sm:h-14"
             >
               I Create Content <UserPlus className="w-5 h-5" />
             </ShimmerButton>
