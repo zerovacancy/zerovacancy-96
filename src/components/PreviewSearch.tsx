@@ -144,13 +144,13 @@ const PreviewSearch = () => {
                           {creator.workExamples.map((example, i) => (
                             <Dialog key={i}>
                               <DialogTrigger asChild>
-                                <button className="relative aspect-square w-full overflow-hidden rounded-lg group/image">
+                                <button className="relative aspect-square w-full overflow-hidden rounded-lg hover:ring-2 hover:ring-primary/50 transition-all duration-300">
                                   <img 
                                     src={example} 
                                     alt={`${creator.name}'s work ${i + 1}`} 
-                                    className="object-cover w-full h-full transition-transform duration-300 group-hover/image:scale-110"
+                                    className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
                                   />
-                                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                  <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                     <Image className="w-5 h-5 text-white" />
                                   </div>
                                 </button>
