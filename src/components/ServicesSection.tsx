@@ -17,7 +17,7 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
       onClick={onToggle}
       className={cn(
         "w-full text-left p-6 rounded-xl transition-all duration-200",
-        isExpanded ? 'bg-gray-50 shadow-sm' : 'bg-white hover:bg-gray-50',
+        isExpanded ? "bg-gray-50 shadow-sm" : "bg-white hover:bg-gray-50",
         "md:hover:shadow-md md:h-full"
       )}
     >
@@ -27,10 +27,12 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
         </div>
         <div className="flex-1">
           <h3 className="font-medium text-lg text-gray-900">{title}</h3>
-          <div className={cn(
-            "mt-2 text-gray-600 text-sm transition-all duration-200 overflow-hidden",
-            isExpanded ? "max-h-48 opacity-100" : "max-h-0 opacity-0 md:max-h-48 md:opacity-100"
-          )}>
+          <div 
+            className={cn(
+              "mt-2 text-gray-600 text-sm transition-all duration-200 overflow-hidden",
+              isExpanded ? "max-h-48 opacity-100" : "max-h-0 opacity-0 md:max-h-48 md:opacity-100"
+            )}
+          >
             {description}
           </div>
         </div>
@@ -102,20 +104,7 @@ const ServicesSection: React.FC = () => {
 
   return (
     <section className="relative py-16 px-4 md:py-24">
-      <div className="absolute inset-0 -z-10 h-full w-full">
-        <div 
-          className={cn(
-            "absolute inset-0 h-full w-full",
-            "[background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]",
-            "[background-size:6rem_4rem]",
-            "[mask-image:radial-gradient(ellipse_at_center,white,transparent)]"
-          )}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 via-transparent to-transparent opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 animate-aurora" />
-      </div>
-
-      <div className="max-w-6xl mx-auto relative">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">
             Professional Content Creation Services
