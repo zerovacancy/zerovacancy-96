@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -25,7 +24,7 @@ export function Hero() {
   return (
     <div className="w-full">
       <AuroraBackground className="w-full">
-        <div className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
+        <div className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col py-4 sm:py-8 lg:py-12 px-4 sm:px-6">
           <div className="flex gap-4 sm:gap-6 flex-col max-w-4xl mx-auto">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter text-center font-medium">
               <span className="text-primary inline whitespace-nowrap">Property Content that</span>
