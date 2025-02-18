@@ -1,16 +1,11 @@
 
 "use client";
 
-import { memo, useCallback, useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { animate } from "framer-motion";
 
 export interface AnimatedGridProps {
-  direction?: "right" | "left" | "up" | "down" | "diagonal";
-  speed?: number;
-  borderColor?: string;
-  squareSize?: number;
-  hoverFillColor?: string;
   className?: string;
 }
 
@@ -20,10 +15,21 @@ export const AnimatedGrid = memo(({
   const containerRef = useRef<HTMLDivElement>(null);
   const lastPosition = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number>(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Set timeout for 30 seconds
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 30000);
+
+    // Cleanup timeout if component unmounts
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleMove = useCallback(
     (e?: MouseEvent | { x: number; y: number }) => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !isVisible) return;
 
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -80,10 +86,12 @@ export const AnimatedGrid = memo(({
         });
       });
     },
-    []
+    [isVisible]
   );
 
   useEffect(() => {
+    if (!isVisible) return;
+
     const handleScroll = () => handleMove();
     const handlePointerMove = (e: PointerEvent) => handleMove(e);
 
@@ -99,7 +107,9 @@ export const AnimatedGrid = memo(({
       window.removeEventListener("scroll", handleScroll);
       document.body.removeEventListener("pointermove", handlePointerMove);
     };
-  }, [handleMove]);
+  }, [handleMove, isVisible]);
+
+  if (!isVisible) return null;
 
   return (
     <div className={cn("relative w-full h-full overflow-hidden", className)}>
