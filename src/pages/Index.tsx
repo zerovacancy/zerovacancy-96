@@ -25,7 +25,7 @@ const Index = () => {
           icon={<Star className="h-4 w-4 text-primary-foreground" />}
           action={
             <Button variant="secondary" size="sm" className="hidden sm:flex">
-              Join Waitlist
+              Try CreativeEstate Now
             </Button>
           }
           isClosable
