@@ -3,26 +3,22 @@ import React, { useState } from 'react';
 import { Camera, Drone, Video, Instagram, UserCheck, Clock, CreditCard, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const ServiceCard = ({ 
-  icon: Icon, 
-  title, 
-  description, 
-  isExpanded, 
-  onToggle 
-}: { 
+interface ServiceProps {
   icon: React.ElementType;
   title: string;
   description: string;
   isExpanded: boolean;
   onToggle: () => void;
-}) => {
+}
+
+const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, isExpanded, onToggle }) => {
   return (
     <button 
       onClick={onToggle}
       className={cn(
         "w-full text-left p-6 rounded-xl transition-all duration-200",
-        "relative backdrop-blur-sm border border-white/10",
         isExpanded ? 'bg-white/50 shadow-sm' : 'bg-white/30 hover:bg-white/40',
+        "relative backdrop-blur-sm border border-white/10",
         "md:hover:shadow-md md:h-full"
       )}
     >
@@ -32,11 +28,12 @@ const ServiceCard = ({
         </div>
         <div className="flex-1">
           <h3 className="font-medium text-lg text-primary">{title}</h3>
-          <div className={cn(
-            "mt-2 text-muted-foreground text-sm transition-all duration-200",
-            "overflow-hidden",
-            isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0 md:max-h-48 md:opacity-100'
-          )}>
+          <div 
+            className={cn(
+              "mt-2 text-muted-foreground text-sm transition-all duration-200 overflow-hidden",
+              isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0 md:max-h-48 md:opacity-100'
+            )}
+          >
             {description}
           </div>
         </div>
@@ -45,10 +42,17 @@ const ServiceCard = ({
   );
 };
 
-const ServicesSection = () => {
+interface Service {
+  id: number;
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}
+
+const ServicesSection: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const services = [
+  const services: Service[] = [
     {
       id: 1,
       icon: Camera,
@@ -101,15 +105,16 @@ const ServicesSection = () => {
 
   return (
     <section className="relative py-16 px-4 md:py-24 overflow-hidden">
-      <div 
-        className={cn(
-          "absolute inset-0 -z-10 h-full w-full",
-          "[background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]",
-          "[background-size:6rem_4rem]",
-          "[mask-image:radial-gradient(ellipse_at_center,white,transparent)]"
-        )}
-      >
-        <div className="absolute inset-0 bg-gradient-radial from-purple-500/30 to-transparent opacity-30" />
+      <div>
+        <div 
+          className={cn(
+            "absolute inset-0 -z-10 h-full w-full",
+            "[background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]",
+            "[background-size:6rem_4rem]",
+            "[mask-image:radial-gradient(ellipse_at_center,white,transparent)]"
+          )}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 via-transparent to-transparent opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 animate-aurora" />
       </div>
 
@@ -128,7 +133,9 @@ const ServicesSection = () => {
           {services.map((service) => (
             <ServiceCard
               key={service.id}
-              {...service}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
               isExpanded={true}
               onToggle={() => {}}
             />
@@ -140,7 +147,9 @@ const ServicesSection = () => {
           {services.map((service) => (
             <ServiceCard
               key={service.id}
-              {...service}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
               isExpanded={expandedId === service.id}
               onToggle={() => setExpandedId(expandedId === service.id ? null : service.id)}
             />
