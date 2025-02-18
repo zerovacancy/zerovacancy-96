@@ -7,7 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 export function Pricing() {
   return (
     <section id="pricing" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border border-slate-200 rounded-2xl py-12 bg-white/50 backdrop-blur-sm">
         <div className="mx-auto max-w-3xl md:text-center">
           <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
             Simple, transparent pricing
