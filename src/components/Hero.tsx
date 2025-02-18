@@ -29,18 +29,22 @@ export function Hero() {
           <div className="flex gap-4 sm:gap-6 flex-col max-w-4xl mx-auto">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter text-center font-medium">
               <span className="text-primary block mb-2 sm:mb-3">Property Content that</span>
-              <span className="relative flex w-full justify-center overflow-hidden text-center">
+              <span className="relative flex w-full justify-center h-[1.2em] overflow-hidden">
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
                     className="absolute font-playfair"
-                    initial={{ opacity: 0, y: "-100" }}
-                    transition={{ type: "spring", stiffness: 50 }}
+                    initial={{ opacity: 0, y: 50 }}
                     animate={
                       titleNumber === index
                         ? { y: 0, opacity: 1 }
-                        : { y: titleNumber > index ? -150 : 150, opacity: 0 }
+                        : { y: titleNumber > index ? -50 : 50, opacity: 0 }
                     }
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 100,
+                      damping: 15
+                    }}
                   >
                     {title}
                   </motion.span>
