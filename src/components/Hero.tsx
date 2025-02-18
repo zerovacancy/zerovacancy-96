@@ -23,9 +23,9 @@ export function Hero() {
   }, [titleNumber, titles.length]);
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full">
       <AuroraBackground className="w-full">
-        <div className="flex gap-8 sm:gap-10 lg:gap-12 items-center justify-center flex-col py-20 sm:py-28 lg:py-36 px-6">
+        <div className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col py-12 sm:py-16 lg:py-20 px-6">
           <div className="flex gap-4 sm:gap-6 flex-col max-w-4xl mx-auto">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter text-center font-medium">
               <span className="text-primary inline whitespace-nowrap">Property Content that</span>
