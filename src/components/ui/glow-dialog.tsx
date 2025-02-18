@@ -1,11 +1,11 @@
 
 import * as React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { GlowEffect } from "@/components/ui/glow-effect";
 import { Button } from "@/components/ui/button";
 import { motion, useAnimationFrame, useMotionTemplate, useMotionValue, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { Squares } from "@/components/ui/squares";
 
 const MovingBorder = ({
   children,
@@ -89,22 +89,20 @@ export function GlowDialog({ open, onOpenChange }: GlowDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl md:max-w-3xl overflow-hidden border-none bg-transparent">
         <motion.div 
-          className="relative rounded-lg overflow-hidden bg-gradient-to-br from-[#1A1F2C] via-[#221F26] to-[#1A1F2C] p-6 sm:p-8 md:p-10"
+          className="relative rounded-lg overflow-hidden bg-[#060606]/80 p-6 sm:p-8 md:p-10"
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
         >
-          <GlowEffect
-            colors={[
-              'rgba(255, 87, 51, 0.3)', // Transparent red
-              'rgba(51, 255, 87, 0.2)', // Transparent green
-              'rgba(51, 87, 255, 0.25)', // Transparent blue
-              'rgba(241, 196, 15, 0.15)'  // Transparent yellow
-            ]}
-            mode="colorShift"
-            blur="stronger"
-            scale={2}
-          />
+          <div className="absolute inset-0">
+            <Squares
+              direction="diagonal"
+              speed={0.5}
+              borderColor="#333"
+              squareSize={32}
+              hoverFillColor="#222"
+            />
+          </div>
           <MovingBorder rx="12px" ry="12px" duration={3000}>
             <div className="h-24 w-24 sm:h-32 sm:w-32 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]" />
           </MovingBorder>
