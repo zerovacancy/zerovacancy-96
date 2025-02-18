@@ -41,8 +41,13 @@ const Header = () => {
   );
 
   return (
-    <WarpBackground className="sticky top-0 z-50 w-full backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <header className="w-full">
+    <div className="sticky top-0 z-50 w-full">
+      <WarpBackground 
+        className="w-full backdrop-blur supports-[backdrop-filter]:bg-background/60"
+        beamsPerSide={5}
+        beamSize={3}
+        beamDuration={4}
+      >
         <div className="container flex h-14 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
@@ -87,8 +92,8 @@ const Header = () => {
             </Button>
           </div>
         </div>
-      </header>
-    </WarpBackground>
+      </WarpBackground>
+    </div>
   );
 };
 
