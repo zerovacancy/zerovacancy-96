@@ -20,10 +20,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        'anek': ['Anek Devanagari', 'sans-serif'],
+        'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
         'space': ['Space Grotesk', 'sans-serif'],
-        'roboto': ['Anek Devanagari', 'system-ui', 'sans-serif'],
-        'sans': ['Anek Devanagari', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
