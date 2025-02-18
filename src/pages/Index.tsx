@@ -8,6 +8,7 @@ import CallToActionSection from '../components/CallToActionSection';
 import Footer from '../components/Footer';
 import HowItWorksSection from '../components/HowItWorksSection';
 import { BottomNav } from '../components/navigation/BottomNav';
+import { FeaturesSectionWithHoverEffects } from '../components/Features';
 
 const Index = () => {
   return (
@@ -21,10 +22,13 @@ const Index = () => {
             <HowItWorksSection />
           </div>
           
-          {/* PreviewSearch with soft blue tint */}
+          {/* Features with soft blue tint */}
           <div className="bg-gradient-to-b from-white via-[#F7FAFF] to-white">
-            <PreviewSearch />
+            <FeaturesSectionWithHoverEffects />
           </div>
+          
+          {/* Preview Search */}
+          <PreviewSearch />
           
           {/* Testimonials with warm gradient */}
           <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white">
