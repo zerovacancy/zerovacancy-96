@@ -68,17 +68,11 @@ export default {
           "100%": {
             opacity: "1",
           },
-        },
-        "border-beam": {
-          "100%": {
-            "offset-distance": "100%",
-          },
-        },
+        }
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out",
         "fade-in": "fade-in 0.3s ease-out",
-        "border-beam": "border-beam var(--duration) linear infinite",
       },
       backgroundImage: {
         'gradient-conic': 'conic-gradient(var(--conic-position), var(--tw-gradient-stops))',
