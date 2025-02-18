@@ -30,22 +30,25 @@ export function Pricing() {
             description="Perfect for single-family homes and small properties"
             cta="Get Started"
           />
-          <PricingCard
-            title="Professional"
-            price={499}
-            features={[
-              "Everything in Basic, plus:",
-              "Up to 40 professional photos",
-              "Drone aerial photography",
-              "Virtual tour",
-              "Advanced photo editing",
-              "Social media optimized images",
-              "Unlimited revisions"
-            ]}
-            description="Ideal for luxury homes and medium-sized properties"
-            cta="Go Professional"
-            highlighted
-          />
+          <div className="relative group">
+            <div className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-purple-500 via-cyan-300 to-emerald-400 opacity-75 blur-lg transition-all group-hover:opacity-100 group-hover:blur-xl" />
+            <PricingCard
+              title="Professional"
+              price={499}
+              features={[
+                "Everything in Basic, plus:",
+                "Up to 40 professional photos",
+                "Drone aerial photography",
+                "Virtual tour",
+                "Advanced photo editing",
+                "Social media optimized images",
+                "Unlimited revisions"
+              ]}
+              description="Ideal for luxury homes and medium-sized properties"
+              cta="Go Professional"
+              highlighted
+            />
+          </div>
           <PricingCard
             title="Premium"
             price={799}
@@ -95,8 +98,6 @@ const PricingCard = ({
       className={cn(
         "relative rounded-2xl p-6 shadow-xl ring-1 ring-slate-900/10 transition-all duration-300",
         "bg-white hover:scale-102",
-        highlighted && "before:absolute before:inset-0 before:z-0 before:h-[100%] before:w-[20%] before:animate-shimmer-slide before:bg-gradient-to-r before:from-transparent before:via-primary/10 before:to-transparent",
-        highlighted && "scale-105",
         "cursor-pointer overflow-hidden"
       )}
       onClick={isMobile ? toggleExpand : undefined}
