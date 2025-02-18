@@ -134,12 +134,12 @@ const Feature = ({
           "absolute left-0 inset-y-0 h-5 sm:h-6 w-0.5 rounded-tr-full rounded-br-full",
           "bg-primary/20 group-hover/feature:bg-primary transition-all duration-200 origin-center"
         )} />
-        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-primary/90 line-clamp-2">
+        <span className="group-hover/feature:translate-x-2 transition duration-200 block text-primary/90 line-clamp-2 text-left">
           {title}
         </span>
       </div>
       <p className={cn(
-        "text-xs sm:text-sm leading-relaxed text-muted-foreground/80 relative z-10 transition-all duration-300",
+        "text-xs sm:text-sm leading-relaxed text-muted-foreground/80 relative z-10 transition-all duration-300 text-left",
         isExpanded ? "opacity-100 max-h-32 line-clamp-none" : "opacity-0 max-h-0 overflow-hidden line-clamp-2"
       )}>
         {description}
