@@ -29,7 +29,7 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
           <h3 className="font-medium text-lg text-gray-900">{title}</h3>
           <div 
             className={cn(
-              "mt-2 text-gray-600 text-sm transition-all duration-200",
+              "mt-3 text-gray-600 text-sm leading-relaxed transition-all duration-200",
               "md:block", // Always visible on desktop
               isExpanded
                 ? "block max-h-48 opacity-100" 
@@ -44,10 +44,7 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
   );
 };
 
-const ServicesSection: React.FC = () => {
-  const [expandedId, setExpandedId] = useState<number | null>(null);
-
-  const services = [
+const services = [
     {
       id: 1,
       icon: Camera,
@@ -98,14 +95,17 @@ const ServicesSection: React.FC = () => {
     }
   ];
 
+const ServicesSection: React.FC = () => {
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+
   return (
-    <section className="py-16 px-4 md:py-24">
+    <section className="py-8 md:py-12">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-4">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-serif text-gray-900 mb-4">
             Professional Content Creation Services
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg">
             Everything you need to showcase your properties with stunning visuals and engaging content
           </p>
         </div>
@@ -125,7 +125,7 @@ const ServicesSection: React.FC = () => {
         </div>
 
         {/* Mobile Layout - Expandable */}
-        <div className="md:hidden space-y-3">
+        <div className="md:hidden space-y-4">
           {services.map((service) => (
             <ServiceCard
               key={service.id}

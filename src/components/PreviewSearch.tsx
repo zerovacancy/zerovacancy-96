@@ -129,13 +129,13 @@ const PreviewSearch = () => {
   };
 
   return (
-    <section className="relative section-padding overflow-hidden py-[21px] my-0">
-      <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
+    <section className="relative section-padding overflow-hidden py-8 my-0">
+      <div className="relative mx-auto max-w-7xl my-0 py-8">
         <div className="mx-4 sm:mx-0 mb-8">
           <div className="relative">
-            <Card className="p-6 sm:p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+            <Card className="p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-lg">
               {/* Search Container */}
-              <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-6 mb-12">
                 <div className="search-group">
                   <Search className="w-5 h-5 text-muted-foreground" />
                   <input
@@ -152,15 +152,15 @@ const PreviewSearch = () => {
                     className="search-input"
                   />
                 </div>
-                <Button className="w-full md:w-auto">
+                <Button className="w-full md:w-auto h-[52px] text-base">
                   Search
                 </Button>
               </div>
 
               {/* Creators Section */}
-              <div className="mb-12">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-semibold">Featured Creators</h2>
+              <div className="mb-16">
+                <div className="flex items-center justify-between mb-8">
+                  <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">Featured Creators</h2>
                   <SortMenu 
                     options={sortOptions}
                     onSort={handleSort}
@@ -168,7 +168,7 @@ const PreviewSearch = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                   {creators.map((creator, index) => (
                     <CreatorCard
                       key={index}
@@ -181,8 +181,10 @@ const PreviewSearch = () => {
                 </div>
               </div>
 
-              {/* Services Section */}
-              <ServicesSection />
+              {/* Services Section with updated padding */}
+              <div className="pt-4">
+                <ServicesSection />
+              </div>
             </Card>
             <GlowingEffect disabled={false} spread={30} borderWidth={2} />
           </div>
@@ -196,4 +198,3 @@ const PreviewSearch = () => {
 };
 
 export default PreviewSearch;
-
