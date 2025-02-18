@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Building, UserPlus } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
-import WarpBackground from "@/components/ui/warp-background";
+import AuroraBackground from "@/components/ui/aurora-background";
 
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -24,12 +24,7 @@ export function Hero() {
 
   return (
     <div className="w-full">
-      <WarpBackground 
-        className="w-full"
-        beamsPerSide={5}
-        beamSize={3}
-        beamDuration={4}
-      >
+      <AuroraBackground className="w-full">
         <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0">
           <div className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
@@ -68,7 +63,7 @@ export function Hero() {
             </ShimmerButton>
           </div>
         </div>
-      </WarpBackground>
+      </AuroraBackground>
     </div>
   );
 }
