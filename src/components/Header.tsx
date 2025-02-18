@@ -10,7 +10,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const NavLinks = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
-    <nav className={cn("flex items-center gap-6", className)}>
+    <nav className={cn("flex items-center gap-4 sm:gap-6", className)}>
       <Link 
         to="/search" 
         className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -36,30 +36,27 @@ const Header = () => {
   );
 
   return (
-    <div className="sticky top-0 z-50 w-full bg-background">
-      <div className="container flex h-14 items-center justify-between">
-        {/* Logo */}
+    <div className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center">
-          <div className="text-xl font-semibold">
+          <div className="text-lg sm:text-xl font-semibold">
             LuxeConnect
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
         <NavLinks className="hidden md:flex" />
 
-        {/* Mobile Navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" className="md:hidden">
+            <Button variant="ghost" size="icon" className="h-9 w-9">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+          <SheetContent side="right" className="w-[300px] sm:w-[400px] pr-0">
             <div className="flex flex-col gap-4 mt-6">
               <NavLinks onClick={() => setIsOpen(false)} className="flex-col items-start" />
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 mt-2">
                 <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
                   <Link to="/login" className="w-full justify-start">Log In</Link>
                 </Button>
@@ -71,12 +68,11 @@ const Header = () => {
           </SheetContent>
         </Sheet>
 
-        {/* Desktop Auth Buttons */}
-        <div className="hidden md:flex items-center gap-4">
-          <Button variant="ghost" asChild>
+        <div className="hidden md:flex items-center gap-2">
+          <Button variant="ghost" asChild className="h-9">
             <Link to="/login">Log In</Link>
           </Button>
-          <Button asChild>
+          <Button asChild className="h-9">
             <Link to="/signup">Sign Up</Link>
           </Button>
         </div>

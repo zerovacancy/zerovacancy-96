@@ -14,8 +14,8 @@ const Index = () => {
       <Header />
       <main className="min-h-screen">
         <Hero />
-        <HowItWorksSection />
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
+          <HowItWorksSection />
           <PreviewSearch />
           <Testimonials />
           <CallToActionSection />
