@@ -5,6 +5,17 @@ import { useRef, useEffect, useState } from "react"
 import { cn } from "@/lib/utils";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 
+// Add CSS property definition for offsetDistance
+const style = document.createElement('style');
+style.textContent = `
+  @property --offset-distance {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+  }
+`;
+document.head.appendChild(style);
+
 interface BorderBeamProps {
   className?: string
   size?: number
@@ -31,7 +42,7 @@ const BorderBeam = ({
       style={
         {
           "--size": size,
-          "--duration": duration,
+          "--duration": `${duration}s`,
           "--anchor": anchor,
           "--border-width": borderWidth,
           "--color-from": colorFrom,
@@ -216,7 +227,7 @@ export function Squares({
     <div className="relative w-full h-full rounded-lg overflow-hidden">
       <BorderBeam 
         size={300}
-        duration={20}
+        duration={8}
         anchor={90}
         borderWidth={2}
         colorFrom="#ff40aa"

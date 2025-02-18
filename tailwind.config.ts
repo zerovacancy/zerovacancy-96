@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -90,9 +89,8 @@ const config = {
           },
         },
         "border-beam": {
-          "100%": {
-            offsetDistance: "100%"
-          }
+          "0%": { "--offset-distance": "0%" },
+          "100%": { "--offset-distance": "100%" }
         }
       },
       animation: {
