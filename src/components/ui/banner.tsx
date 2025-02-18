@@ -17,7 +17,7 @@ const bannerVariants = cva(
       size: {
         sm: "px-4 py-2",
         default: "px-4 py-3",
-        lg: "px-6 py-4 md:py-5",
+        lg: "p-3 md:p-4",
       },
       rounded: {
         none: "",
@@ -57,32 +57,32 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
             layout === "complex" && "md:items-center"
           )}>
             <div className="flex shrink-0 items-center">
-              {icon || <Wand2 className="h-10 w-10 p-2 rounded-full bg-white/10" />}
+              {icon || <Wand2 className="h-8 w-8 p-1.5 rounded-full bg-white/10" />}
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-2xl font-semibold mb-1">
+              <h2 className="text-base font-medium leading-none mb-1">
                 Introducing Magic - The AI Agent That Builds Beautiful UI Components
               </h2>
-              <p className="text-[#888] text-lg">
+              <p className="text-[#888] text-sm font-normal">
                 Empower your IDE with an AI extension that creates stunning, production-ready components with AI precision.
               </p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <Button 
-                size="lg"
-                className="bg-white text-black hover:bg-white/90 rounded-full px-8"
+                size="sm"
+                className="bg-white text-black hover:bg-white/90 rounded-full px-5 h-8 text-sm font-medium"
               >
                 Try Magic Now
               </Button>
               {isClosable && (
                 <Button
                   variant="ghost"
-                  size="icon"
-                  className="text-white hover:bg-white/10"
+                  size="sm"
+                  className="text-white hover:bg-white/10 h-8 w-8 p-0"
                   onClick={onClose}
                   aria-label="Close banner"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4" />
                 </Button>
               )}
             </div>
