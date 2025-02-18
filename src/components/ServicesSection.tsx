@@ -27,12 +27,10 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
         </div>
         <div className="flex-1">
           <h3 className="font-medium text-lg text-gray-900">{title}</h3>
-          <div 
-            className={cn(
-              "mt-2 text-gray-600 text-sm transition-all duration-200 overflow-hidden",
-              isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0 md:max-h-48 md:opacity-100'
-            )}
-          >
+          <div className={cn(
+            "mt-2 text-gray-600 text-sm transition-all duration-200 overflow-hidden",
+            isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0 md:max-h-48 md:opacity-100'
+          )}>
             {description}
           </div>
         </div>
