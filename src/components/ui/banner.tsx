@@ -17,7 +17,7 @@ const bannerVariants = cva(
       size: {
         sm: "px-4 py-2",
         default: "px-4 py-3",
-        lg: "px-6 py-4 md:py-5",
+        lg: "px-4 py-4 md:px-6 md:py-5",
       },
       rounded: {
         none: "",
@@ -50,27 +50,27 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
         className={cn(bannerVariants({ variant, size, rounded }), className)}
         {...props}
       >
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4 md:px-6">
           <div className={cn(
-            "flex items-center gap-4",
+            "flex flex-col md:flex-row md:items-center gap-4 md:gap-6",
             layout === "center" && "justify-center",
             layout === "complex" && "md:items-center"
           )}>
             <div className="flex shrink-0 items-center">
-              {icon || <Wand2 className="h-10 w-10 p-2 rounded-full bg-white/10" />}
+              {icon || <Wand2 className="h-8 w-8 md:h-10 md:w-10 p-1.5 md:p-2 rounded-full bg-white/10" />}
             </div>
-            <div className="flex-1 min-w-0">
-              <h2 className="text-2xl font-semibold mb-1">
+            <div className="flex-1 min-w-0 space-y-1 md:space-y-1.5">
+              <h2 className="text-xl md:text-2xl font-semibold leading-tight">
                 Introducing Magic - The AI Agent That Builds Beautiful UI Components
               </h2>
-              <p className="text-[#888] text-lg">
+              <p className="text-[#888] text-base md:text-lg">
                 Empower your IDE with an AI extension that creates stunning, production-ready components with AI precision.
               </p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 md:gap-4">
               <Button 
-                size="lg"
-                className="bg-white text-black hover:bg-white/90 rounded-full px-8"
+                size="default"
+                className="w-full md:w-auto bg-white text-black hover:bg-white/90 rounded-full px-6 md:px-8 py-2 md:py-2.5 text-sm md:text-base"
               >
                 Try Magic Now
               </Button>
@@ -82,7 +82,7 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
                   onClick={onClose}
                   aria-label="Close banner"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
               )}
             </div>
