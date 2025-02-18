@@ -1,154 +1,108 @@
+import React from 'react';
+import { RocketIcon, ShieldCheckIcon, SparklesIcon } from 'lucide-react';
+import { cn } from "@/lib/utils";
+import { BorderBeam } from "./ui/border-beam";
 
-import { motion } from "framer-motion"
-import { Check, X } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+const tiers = [
+  {
+    name: 'Hobby',
+    id: 'hobby',
+    href: '#',
+    price: '$19',
+    description: 'Perfect for personal projects and small websites.',
+    features: ['5 Products', 'Basic analytics', 'Email support'],
+    mostPopular: false,
+  },
+  {
+    name: 'Startup',
+    id: 'startup',
+    href: '#',
+    price: '$49',
+    description: 'Essential tools for growing your business online.',
+    features: ['25 Products', 'Advanced analytics', 'Priority email support'],
+    mostPopular: true,
+  },
+  {
+    name: 'Enterprise',
+    id: 'enterprise',
+    href: '#',
+    price: '$99',
+    description: 'Dedicated support and infrastructure for your company.',
+    features: ['Unlimited Products', 'Custom analytics', '24/7 phone & email support'],
+    mostPopular: false,
+  },
+];
 
-interface BenefitProps {
-  text: string
-  checked: boolean
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
 }
 
-const Benefit = ({ text, checked }: BenefitProps) => {
+export const PricingSection = () => {
   return (
-    <div className="flex items-center gap-3">
-      {checked ? (
-        <span className="grid size-4 place-content-center rounded-full bg-primary text-sm text-primary-foreground">
-          <Check className="size-3" />
-        </span>
-      ) : (
-        <span className="grid size-4 place-content-center rounded-full dark:bg-zinc-800 bg-zinc-200 text-sm dark:text-zinc-400 text-zinc-600">
-          <X className="size-3" />
-        </span>
-      )}
-      <span className="text-sm dark:text-zinc-300 text-zinc-600">{text}</span>
-    </div>
-  )
-}
-
-interface PricingCardProps {
-  tier: string
-  price: string
-  bestFor: string
-  CTA: string
-  benefits: Array<{ text: string; checked: boolean }>
-  className?: string
-}
-
-const PricingCard = ({
-  tier,
-  price,
-  bestFor,
-  CTA,
-  benefits,
-  className,
-}: PricingCardProps) => {
-  return (
-    <motion.div
-      initial={{ filter: "blur(2px)" }}
-      whileInView={{ filter: "blur(0px)" }}
-      transition={{ duration: 0.5, ease: "easeInOut", delay: 0.25 }}
-    >
-      <Card
-        className={cn(
-          "relative h-full w-full overflow-hidden border",
-          "dark:border-zinc-700 dark:bg-gradient-to-br dark:from-zinc-950/50 dark:to-zinc-900/80",
-          "border-zinc-200 bg-gradient-to-br from-zinc-50/50 to-zinc-100/80",
-          "p-6",
-          className,
-        )}
-      >
-        <div className="flex flex-col items-center border-b pb-6 dark:border-zinc-700 border-zinc-200">
-          <span className="mb-6 inline-block dark:text-zinc-50 text-zinc-900">
-            {tier}
-          </span>
-          <span className="mb-3 inline-block text-4xl font-medium">
-            {price}
-          </span>
-          <span className="dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-500 bg-gradient-to-br from-zinc-700 to-zinc-900 bg-clip-text text-center text-transparent">
-            {bestFor}
-          </span>
-        </div>
-        <div className="space-y-4 py-9">
-          {benefits.map((benefit, index) => (
-            <Benefit key={index} {...benefit} />
-          ))}
-        </div>
-        <Button
-          className="w-full"
-          variant={tier === "Pro" ? "default" : "ghost"}
-        >
-          {CTA}
-        </Button>
-      </Card>
-    </motion.div>
-  )
-}
-
-export function PricingSection() {
-  const pricingPlans = [
-    {
-      tier: "Basic",
-      price: "$99",
-      bestFor: "Perfect for single property listings",
-      CTA: "Get Started",
-      benefits: [
-        { text: "Professional Photography (20 photos)", checked: true },
-        { text: "Basic Photo Editing", checked: true },
-        { text: "24-Hour Turnaround", checked: true },
-        { text: "Digital Downloads", checked: true },
-        { text: "Drone Photography", checked: false },
-        { text: "Virtual Tour", checked: false },
-      ],
-    },
-    {
-      tier: "Pro",
-      price: "$199",
-      bestFor: "Ideal for premium properties",
-      CTA: "Choose Pro",
-      benefits: [
-        { text: "Professional Photography (40 photos)", checked: true },
-        { text: "Advanced Photo Editing", checked: true },
-        { text: "Same-Day Turnaround", checked: true },
-        { text: "Digital Downloads", checked: true },
-        { text: "Drone Photography", checked: true },
-        { text: "Virtual Tour", checked: true },
-      ],
-    },
-    {
-      tier: "Enterprise",
-      price: "Custom",
-      bestFor: "For real estate agencies & teams",
-      CTA: "Contact Sales",
-      benefits: [
-        { text: "Unlimited Photography", checked: true },
-        { text: "Premium Editing Suite", checked: true },
-        { text: "Priority Turnaround", checked: true },
-        { text: "Dedicated Account Manager", checked: true },
-        { text: "Custom Branding", checked: true },
-        { text: "API Access", checked: true },
-      ],
-    },
-  ];
-
-  return (
-    <section className="bg-background py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="section-title">Simple, Transparent Pricing</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            Choose the perfect plan for your real estate content needs. No hidden fees, no surprises.
+    <div className="relative py-24 sm:py-32">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <BorderBeam 
+          size={250}
+          duration={20}
+          borderWidth={2}
+          colorFrom="#ffaa40"
+          colorTo="#9c40ff"
+        />
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Simple no-tricks pricing
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">
+            We believe in providing transparent pricing plans tailored to your needs. No hidden fees, no surprises.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {pricingPlans.map((plan) => (
-            <PricingCard key={plan.tier} {...plan} />
+        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6 lg:gap-8">
+          {tiers.map((tier) => (
+            <div
+              key={tier.id}
+              className={classNames(
+                tier.mostPopular ? 'bg-primary/5 ring-2 ring-primary' : 'bg-white',
+                'rounded-lg shadow-sm divide-y divide-gray-200'
+              )}
+            >
+              <div className="p-6">
+                <h2 className="text-lg font-medium text-gray-900">{tier.name}</h2>
+                <p className="mt-4 text-sm text-gray-500">{tier.description}</p>
+                <p className="mt-8">
+                  <span className="text-4xl font-bold tracking-tight text-gray-900">{tier.price}</span>{' '}
+                  <span className="text-base font-medium text-gray-500">/month</span>
+                </p>
+                <a
+                  href={tier.href}
+                  className={classNames(
+                    tier.mostPopular
+                      ? 'bg-primary text-white hover:bg-primary/90'
+                      : 'bg-white text-primary hover:bg-gray-50',
+                    'mt-8 block w-full rounded-md border border-gray-300 py-2 text-center text-sm font-semibold shadow-sm'
+                  )}
+                >
+                  Get started today
+                </a>
+              </div>
+              <div className="pt-6 pb-8 px-6">
+                <h3 className="text-xs font-medium text-gray-900 tracking-wide uppercase">What’s included</h3>
+                <ul role="list" className="mt-6 space-y-4">
+                  {tier.features.map((feature) => (
+                    <li key={feature} className="flex space-x-3">
+                      {tier.mostPopular ? (
+                        <SparklesIcon className="h-5 w-5 flex-shrink-0 text-primary" aria-hidden="true" />
+                      ) : (
+                        <RocketIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                      )}
+                      <span className="text-sm text-gray-500">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
-}
-
-export default PricingSection;
+};
