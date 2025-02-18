@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
 export const MovingBorder = ({
   children,
   duration = 2000,
-  rx = "30%",
-  ry = "30%",
+  rx,
+  ry,
   className,
   ...otherProps
 }: {
@@ -26,55 +26,50 @@ export const MovingBorder = ({
   className?: string;
   [key: string]: any;
 }) => {
-  const pathRef = useRef<SVGPathElement>(null);
+  const pathRef = useRef<any>();
   const progress = useMotionValue<number>(0);
 
   useAnimationFrame((time) => {
-    if (!pathRef.current) return;
-    const length = pathRef.current.getTotalLength();
+    const length = pathRef.current?.getTotalLength();
     if (length) {
       const pxPerMillisecond = length / duration;
       progress.set((time * pxPerMillisecond) % length);
     }
   });
 
-  const x = useTransform(progress, (val) => {
-    if (!pathRef.current) return 0;
-    return pathRef.current.getPointAtLength(val)?.x || 0;
-  });
-  
-  const y = useTransform(progress, (val) => {
-    if (!pathRef.current) return 0;
-    return pathRef.current.getPointAtLength(val)?.y || 0;
-  });
+  const x = useTransform(
+    progress,
+    (val) => pathRef.current?.getPointAtLength(val).x
+  );
+  const y = useTransform(
+    progress,
+    (val) => pathRef.current?.getPointAtLength(val).y
+  );
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 
-  // Ensure rx and ry are valid percentages or pixel values
-  const normalizedRx = rx.includes("%") ? rx : `${rx}px`;
-  const normalizedRy = ry.includes("%") ? ry : `${ry}px`;
-
   return (
-    <div className={cn("absolute inset-0", className)} {...otherProps}>
+    <div className={cn("absolute inset-0", className)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
         className="absolute h-full w-full"
         width="100%"
         height="100%"
+        {...otherProps}
       >
         <path
           ref={pathRef}
           d={`
-            M ${normalizedRx},0
-            H calc(100% - ${normalizedRx})
-            C 100%,0 100%,0 100%,${normalizedRy}
-            V calc(100% - ${normalizedRy})
-            C 100%,100% 100%,100% calc(100% - ${normalizedRx}),100%
-            H ${normalizedRx}
-            C 0,100% 0,100% 0,calc(100% - ${normalizedRy})
-            V ${normalizedRy}
-            C 0,0 0,0 ${normalizedRx},0
+            M ${rx || 0},0
+            H calc(100% - ${rx || 0})
+            C 100%,0 100%,0 100%,${ry || 0}
+            V calc(100% - ${ry || 0})
+            C 100%,100% 100%,100% calc(100% - ${rx || 0}),100%
+            H ${rx || 0}
+            C 0,100% 0,100% 0,calc(100% - ${ry || 0})
+            V ${ry || 0}
+            C 0,0 0,0 ${rx || 0},0
           `}
           fill="none"
           stroke="transparent"

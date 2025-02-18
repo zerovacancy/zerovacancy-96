@@ -26,19 +26,19 @@ const HowItWorksSection = () => {
   }];
 
   return (
-    <section className="relative overflow-hidden py-24 lg:py-32 bg-gradient-to-b from-white via-gray-50/50 to-gray-50">
-      <div className="absolute inset-0">
+    <section className="relative overflow-hidden py-[76px]">
+      <div className="absolute inset-0 opacity-50">
         <Tiles 
-          rows={12} 
-          cols={12} 
+          rows={8} 
+          cols={8} 
           tileSize="lg" 
           className="absolute inset-0" 
-          tileClassName="opacity-[0.08] dark:opacity-[0.12] border-blue-200/20 dark:border-blue-900/20" 
+          tileClassName="opacity-[0.15] dark:opacity-[0.15]" 
         />
       </div>
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="text-center mb-20">
-          <h3 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16">
+          <h3 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
             How It Works
           </h3>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -46,7 +46,7 @@ const HowItWorksSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {steps.map((step, index) => (
             <div key={index} className="relative group">
               <div className="relative p-[1px] rounded-3xl overflow-hidden">
@@ -54,7 +54,7 @@ const HowItWorksSection = () => {
                 <MovingBorder rx="30%" ry="30%" duration={3000}>
                   <div className="h-24 w-24 opacity-100 bg-[radial-gradient(#8B5CF6_40%,transparent_60%)]" />
                 </MovingBorder>
-                <div className="h-full flex flex-col items-center p-8 lg:p-10 rounded-3xl bg-white/95 backdrop-blur-sm relative z-20">
+                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white/95 backdrop-blur-sm relative z-20">
                   <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 mb-6 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-primary">
                       {step.icon}
@@ -68,7 +68,7 @@ const HowItWorksSection = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-20">
+        <div className="flex justify-center mt-16">
           <ShimmerButton className="min-w-[200px] h-12 text-base font-medium">
             Find Your Creator
           </ShimmerButton>
