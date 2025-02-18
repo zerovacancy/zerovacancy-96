@@ -2,6 +2,7 @@
 import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { ShimmerButton } from './ui/shimmer-button';
+import { BackgroundGradient } from './ui/background-gradient';
 
 const HowItWorksSection = () => {
   const steps = [{
@@ -34,17 +35,21 @@ const HowItWorksSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-          {steps.map((step, index) => <div key={index} className="relative group">
-              <div className="h-full flex flex-col items-center p-8 rounded-2xl bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.05)] hover:shadow-[0_0_0_1px_rgba(0,0,0,0.03),0_2px_4px_rgba(0,0,0,0.05),0_12px_24px_rgba(0,0,0,0.09)] transform hover:-translate-y-1 transition-all duration-300">
-                <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <div className="text-primary">
-                    {step.icon}
+          {steps.map((step, index) => (
+            <div key={index} className="relative group">
+              <BackgroundGradient>
+                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div className="text-primary">
+                      {step.icon}
+                    </div>
                   </div>
+                  <h4 className="text-xl font-semibold mb-3 text-primary">{step.title}</h4>
+                  <p className="text-muted-foreground text-center">{step.description}</p>
                 </div>
-                <h4 className="text-xl font-semibold mb-3 text-primary">{step.title}</h4>
-                <p className="text-muted-foreground text-center">{step.description}</p>
-              </div>
-            </div>)}
+              </BackgroundGradient>
+            </div>
+          ))}
         </div>
 
         <div className="flex justify-center mt-16">
