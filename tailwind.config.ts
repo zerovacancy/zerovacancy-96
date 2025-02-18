@@ -21,6 +21,7 @@ export default {
     extend: {
       fontFamily: {
         'anek': ['Anek Devanagari', 'sans-serif'],
+        'space': ['Space Grotesk', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
