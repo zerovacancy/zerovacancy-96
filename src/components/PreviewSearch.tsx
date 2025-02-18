@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { FeaturesSectionWithHoverEffects } from './Features';
 import { Pricing } from './Pricing';
 import { GlowingEffect } from './ui/glowing-effect';
 import { SearchHeader } from './search/SearchHeader';
@@ -143,7 +142,6 @@ const PreviewSearch = () => {
         </div>
       </section>
 
-      <FeaturesSectionWithHoverEffects />
       <Pricing />
     </>
   );
