@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -8,10 +7,8 @@ import CallToActionSection from '../components/CallToActionSection';
 import Footer from '../components/Footer';
 import HowItWorksSection from '../components/HowItWorksSection';
 import { BottomNav } from '../components/navigation/BottomNav';
-
 const Index = () => {
-  return (
-    <div className="flex flex-col min-h-screen">
+  return <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
@@ -30,12 +27,12 @@ const Index = () => {
           </div>
           
           {/* Testimonials with subtle gradient */}
-          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white py-10 sm:py-12 lg:py-14">
+          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white py-10 lg:py-14 sm:py-0">
             <Testimonials />
           </div>
           
           {/* Call to Action */}
-          <div className="py-10 sm:py-12 lg:py-14">
+          <div className="py-10 lg:py-14 sm:py-0">
             <CallToActionSection />
           </div>
         </div>
@@ -43,8 +40,6 @@ const Index = () => {
         <Footer />
       </main>
       <BottomNav />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
