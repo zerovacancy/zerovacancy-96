@@ -55,50 +55,50 @@ const ServicesSection: React.FC = () => {
     {
       id: 1,
       icon: Camera,
-      title: 'Professional Photography',
-      description: 'High-quality, professionally edited real estate photography that showcases properties at their best.'
+      title: "Professional Photography",
+      description: "High-quality, professionally edited real estate photography that showcases properties at their best."
     },
     {
       id: 2,
       icon: Drone,
-      title: 'Drone Aerial Coverage',
-      description: 'FAA-certified drone operators capturing stunning aerial views and property surroundings.'
+      title: "Drone Aerial Coverage",
+      description: "FAA-certified drone operators capturing stunning aerial views and property surroundings."
     },
     {
       id: 3,
       icon: Video,
-      title: 'Video Production',
-      description: 'Cinematic property tours and promotional videos that tell your property's unique story.'
+      title: "Video Production",
+      description: "Cinematic property tours and promotional videos that tell your property's unique story."
     },
     {
       id: 4,
       icon: Instagram,
-      title: 'Social Media Content',
-      description: 'Engaging content optimized for all major social platforms and marketing channels.'
+      title: "Social Media Content",
+      description: "Engaging content optimized for all major social platforms and marketing channels."
     },
     {
       id: 5,
       icon: UserCheck,
-      title: 'Verified Creators',
-      description: 'Every creator is thoroughly vetted and verified for quality and professionalism.'
+      title: "Verified Creators",
+      description: "Every creator is thoroughly vetted and verified for quality and professionalism."
     },
     {
       id: 6,
       icon: Clock,
-      title: '24/7 Availability',
-      description: 'Book creators any time, with flexible scheduling to meet your deadlines.'
+      title: "24/7 Availability",
+      description: "Book creators any time, with flexible scheduling to meet your deadlines."
     },
     {
       id: 7,
       icon: CreditCard,
-      title: 'Transparent Pricing',
-      description: 'Clear, upfront pricing with no hidden fees. Pay only for what you need.'
+      title: "Transparent Pricing",
+      description: "Clear, upfront pricing with no hidden fees. Pay only for what you need."
     },
     {
       id: 8,
       icon: Award,
-      title: 'Quality Guaranteed',
-      description: '100% satisfaction guarantee on all content. Your property deserves the best.'
+      title: "Quality Guaranteed",
+      description: "100% satisfaction guarantee on all content. Your property deserves the best."
     }
   ];
 
