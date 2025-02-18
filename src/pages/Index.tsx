@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
 import PreviewSearch from '../components/PreviewSearch';
@@ -11,9 +11,24 @@ import { BottomNav } from '../components/navigation/BottomNav';
 import { Banner } from '@/components/ui/banner';
 import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
+import { GlowDialog } from '@/components/ui/glow-dialog';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
+  const [showGlowDialog, setShowGlowDialog] = useState(false);
+
+  useEffect(() => {
+    // Show dialog on first visit
+    const hasVisited = localStorage.getItem('hasVisited');
+    if (!hasVisited) {
+      setShowGlowDialog(true);
+      localStorage.setItem('hasVisited', 'true');
+    }
+  }, []);
+
+  const handleTryNowClick = () => {
+    setShowGlowDialog(true);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -24,7 +39,12 @@ const Index = () => {
           className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground"
           icon={<Star className="h-4 w-4 text-primary-foreground" />}
           action={
-            <Button variant="secondary" size="sm" className="hidden sm:flex">
+            <Button 
+              variant="secondary" 
+              size="sm" 
+              className="hidden sm:flex"
+              onClick={handleTryNowClick}
+            >
               Try CreativeEstate Now
             </Button>
           }
@@ -60,6 +80,10 @@ const Index = () => {
         <Footer />
       </main>
       <BottomNav />
+      <GlowDialog 
+        open={showGlowDialog} 
+        onOpenChange={setShowGlowDialog}
+      />
     </div>
   );
 };
