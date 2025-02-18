@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -5,9 +6,11 @@ import { motion } from "framer-motion";
 import { Building, UserPlus } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import AuroraBackground from "@/components/ui/aurora-background";
+
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(() => ["engages", "converts", "impresses", "stands out", "educates"], []);
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (titleNumber === titles.length - 1) {
@@ -18,27 +21,33 @@ export function Hero() {
     }, 2000);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length]);
+
   return <div className="w-full">
       <AuroraBackground className="w-full">
         <div className="flex gap-4 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-4 sm:px-6 py-4 sm:py-6 lg:py-8 min-h-[50vh] sm:min-h-0">
           <div className="flex gap-3 sm:gap-4 flex-col max-w-4xl mx-auto w-full">
-            <h1 className="sm:text-3xl lg:text-5xl tracking-wide leading-normal text-center py-[7px] my-[28px] sm:font-extrabold md:text-4xl text-2xl font-extrabold">
-              <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-wide font-bold">Property Content that</span>
+            <h1 className="text-[1.75rem] sm:text-3xl md:text-4xl lg:text-5xl tracking-wide leading-[1.2] sm:leading-normal text-center py-2 sm:py-[7px] my-4 sm:my-[28px] font-bold">
+              <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-wide">Property Content that</span>
               <span className="relative flex w-full justify-center h-[1.2em] overflow-hidden mt-2 sm:mt-0">
-                {titles.map((title, index) => <motion.span key={index} className="absolute font-playfair tracking-wide" initial={{
-                opacity: 0,
-                y: 50
-              }} animate={titleNumber === index ? {
-                y: 0,
-                opacity: 1
-              } : {
-                y: titleNumber > index ? -50 : 50,
-                opacity: 0
-              }} transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}>
+                {titles.map((title, index) => <motion.span
+                    key={index}
+                    className="absolute font-playfair tracking-wide"
+                    initial={{
+                      opacity: 0,
+                      y: 50
+                    }}
+                    animate={titleNumber === index ? {
+                      y: 0,
+                      opacity: 1
+                    } : {
+                      y: titleNumber > index ? -50 : 50,
+                      opacity: 0
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 15
+                    }}>
                     {title}
                   </motion.span>)}
               </span>
@@ -62,4 +71,5 @@ export function Hero() {
       </AuroraBackground>
     </div>;
 }
+
 export default Hero;
