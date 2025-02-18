@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { Pricing } from './Pricing';
 import { GlowingEffect } from './ui/glowing-effect';
-import ServicesSection from './ServicesSection';
 import { SearchHeader } from './search/SearchHeader';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
@@ -144,10 +142,6 @@ const PreviewSearch = () => {
           </div>
         </div>
       </section>
-
-      <div className="bg-gray-50">
-        <ServicesSection />
-      </div>
 
       <FeaturesSectionWithHoverEffects />
       <Pricing />
