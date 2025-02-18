@@ -4,7 +4,7 @@ import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
-import { PricingSection } from './Pricing';
+import { Pricing } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
 import {
@@ -180,7 +180,7 @@ const PreviewSearch = () => {
       </div>
 
       <FeaturesSectionWithHoverEffects />
-      <PricingSection />
+      <Pricing />
     </section>
   );
 };
