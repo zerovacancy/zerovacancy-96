@@ -49,17 +49,17 @@ export function FeaturesSectionWithHoverEffects() {
   ];
 
   return (
-    <section className="py-8 sm:py-16 rounded-sm relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
+    <section className="py-8 sm:py-16 rounded-sm relative overflow-hidden bg-white/50 backdrop-blur-sm">
+      <div className="absolute inset-0 -z-10 h-full w-full 
+        [background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]
         [background-size:6rem_4rem]
         [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
         before:absolute before:inset-0
         before:bg-[radial-gradient(circle_at_center,#4F46E5,transparent)]
-        before:opacity-40
+        before:opacity-30
         after:absolute after:h-full after:w-full
         after:[background:linear-gradient(to_right,#4F46E5,#EC4899)]
-        after:opacity-20 after:animate-aurora">
+        after:opacity-10 after:animate-aurora">
       </div>
       <BorderTrail 
         className="bg-primary/20" 
@@ -77,15 +77,17 @@ export function FeaturesSectionWithHoverEffects() {
         className="opacity-50"
         glow
       />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-6 sm:mb-12 relative z-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 relative z-10">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="section-title text-xl sm:text-2xl lg:text-3xl mb-2 sm:mb-4">Professional Content Creation Services</h2>
-          <p className="section-subtitle text-sm sm:text-base">
+          <h2 className="section-title text-xl sm:text-2xl lg:text-3xl mb-3 sm:mb-4 text-primary font-semibold">
+            Professional Content Creation Services
+          </h2>
+          <p className="section-subtitle text-sm sm:text-base text-muted-foreground/90 max-w-xl mx-auto">
             Everything you need to showcase your properties with stunning visuals and engaging content
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {features.map((feature, index) => <Feature key={feature.title} {...feature} index={index} />)}
       </div>
     </section>
@@ -105,20 +107,20 @@ const Feature = ({
 }) => {
   return (
     <div className={cn(
-      "flex flex-col p-3 sm:p-4 relative group/feature",
-      "border-primary/10",
-      "sm:hover:bg-secondary/50 transition-colors duration-200"
+      "flex flex-col p-4 relative group/feature",
+      "bg-white/40 backdrop-blur-sm rounded-lg shadow-sm border border-primary/5",
+      "hover:bg-white/60 transition-colors duration-200"
     )}>
-      <div className="mb-2 sm:mb-3 relative z-10 text-muted-foreground">
+      <div className="mb-3 relative z-10 text-primary">
         {icon}
       </div>
-      <div className="text-base sm:text-lg font-semibold mb-1 sm:mb-2 relative z-10">
-        <div className="absolute left-0 inset-y-0 h-4 sm:h-6 w-0.5 rounded-tr-full rounded-br-full bg-primary/20 group-hover/feature:bg-primary transition-all duration-200 origin-center" />
-        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-foreground">
+      <div className="text-base sm:text-lg font-semibold mb-2 relative z-10">
+        <div className="absolute left-0 inset-y-0 h-5 sm:h-6 w-0.5 rounded-tr-full rounded-br-full bg-primary/20 group-hover/feature:bg-primary transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-primary/90">
           {title}
         </span>
       </div>
-      <p className="text-xs sm:text-sm text-muted-foreground relative z-10">
+      <p className="text-sm leading-relaxed text-muted-foreground/80 relative z-10">
         {description}
       </p>
     </div>
