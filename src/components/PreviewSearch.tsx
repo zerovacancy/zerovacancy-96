@@ -17,7 +17,7 @@ const creators = [
     rating: 4.8,
     reviews: 120,
     location: 'New York, NY',
-    image: '/lovable-uploads/f2ad2cee-f2cd-49dd-8df9-5696aa0ab00d.png',
+    image: 'lovable-uploads/13ccf096-d016-4850-86b1-a9eb6fd05874.png',
     workExamples: [
       'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
       'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&h=500',
