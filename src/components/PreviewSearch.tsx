@@ -1,5 +1,6 @@
+
 import React, { useState, useCallback, useRef } from 'react';
-import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
+import { Search, MapPin, Calendar, ChevronDown, Star } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -136,7 +137,7 @@ const PreviewSearch = () => {
             {creators.map((creator) => (
               <Card key={creator.id} className="overflow-hidden">
                 <div className="relative">
-                  <Image
+                  <img
                     src={creator.imageUrl}
                     alt={`Preview of ${creator.name}`}
                     className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
