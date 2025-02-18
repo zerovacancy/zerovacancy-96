@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Camera, Drone, Video, Instagram, UserCheck, Clock, CreditCard, Award } from 'lucide-react';
+import { Camera, Satellite, Video, Instagram, UserCheck, Clock, CreditCard, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ServiceProps {
@@ -60,9 +60,9 @@ const ServicesSection: React.FC = () => {
     },
     {
       id: 2,
-      icon: Drone,
-      title: "Drone Aerial Coverage",
-      description: "FAA-certified drone operators capturing stunning aerial views and property surroundings."
+      icon: Satellite,
+      title: "Aerial Coverage",
+      description: "FAA-certified operators capturing stunning aerial views and property surroundings."
     },
     {
       id: 3,
