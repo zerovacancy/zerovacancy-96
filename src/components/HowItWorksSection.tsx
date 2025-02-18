@@ -41,9 +41,9 @@ const HowItWorksSection = () => {
               <div className="relative p-[1px] rounded-3xl overflow-hidden">
                 <GlowingEffect blur={20} spread={30} borderWidth={2} className="opacity-50" glow />
                 <MovingBorder rx="30%" ry="30%" duration={3000}>
-                  <div className="h-20 w-20 opacity-[0.8] bg-[radial-gradient(var(--primary)_40%,transparent_60%)]" />
+                  <div className="h-24 w-24 opacity-100 bg-[radial-gradient(#8B5CF6_40%,transparent_60%)]" />
                 </MovingBorder>
-                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white/95 backdrop-blur-sm relative z-10">
+                <div className="h-full flex flex-col items-center p-8 rounded-3xl bg-white/95 backdrop-blur-sm relative z-20">
                   <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/5 mb-6 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-primary">
                       {step.icon}

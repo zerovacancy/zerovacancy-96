@@ -49,7 +49,7 @@ export const MovingBorder = ({
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn("absolute inset-0", className)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
