@@ -39,7 +39,7 @@ const FontLoader = () => {
 
     // Load the fonts
     document.fonts.ready.then(() => {
-      console.log('Fonts have loaded.');
+      // Removed unnecessary console.log statement
     });
     
     return () => {
