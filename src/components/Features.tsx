@@ -5,7 +5,48 @@ import { BorderTrail } from "./ui/border-trail";
 import { GlowingEffect } from "./ui/glowing-effect";
 
 export function FeaturesSectionWithHoverEffects() {
-  const features = [/* ... keep existing code (features array) */];
+  const features = [
+    {
+      title: "Professional Photography",
+      description: "High-quality property photos that capture every detail with precision and artistry",
+      icon: <IconCamera className="w-8 h-8" />
+    },
+    {
+      title: "Drone Photography",
+      description: "Stunning aerial views that showcase properties and their surroundings from unique perspectives",
+      icon: <IconDrone className="w-8 h-8" />
+    },
+    {
+      title: "Video Production",
+      description: "Cinematic property tours and promotional videos that tell your property's story",
+      icon: <IconVideo className="w-8 h-8" />
+    },
+    {
+      title: "Social Media Content",
+      description: "Engaging content optimized for Instagram, Facebook, and other social platforms",
+      icon: <IconBrandInstagram className="w-8 h-8" />
+    },
+    {
+      title: "Certified Professionals",
+      description: "Work with verified and experienced real estate content creators",
+      icon: <IconCertificate className="w-8 h-8" />
+    },
+    {
+      title: "Fast Turnaround",
+      description: "Quick delivery times to meet your listing deadlines and marketing schedules",
+      icon: <IconClock24 className="w-8 h-8" />
+    },
+    {
+      title: "Competitive Pricing",
+      description: "Transparent, market-competitive rates with no hidden fees",
+      icon: <IconWallet className="w-8 h-8" />
+    },
+    {
+      title: "Quality Guaranteed",
+      description: "100% satisfaction guarantee on all deliverables with free revisions",
+      icon: <IconStars className="w-8 h-8" />
+    }
+  ];
 
   return (
     <section className="py-16 sm:py-24 rounded-sm relative overflow-hidden">
