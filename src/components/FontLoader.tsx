@@ -6,7 +6,7 @@ const FontLoader = () => {
     // Create link preload elements for fonts
     const links = [
       {
-        href: 'https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@500&display=swap'
+        href: 'https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;500;600;700&display=swap'
       },
       {
         href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap'
@@ -39,7 +39,7 @@ const FontLoader = () => {
 
     // Load the fonts
     document.fonts.ready.then(() => {
-      // Removed unnecessary console.log statement
+      // Fonts are loaded and ready
     });
     
     return () => {
