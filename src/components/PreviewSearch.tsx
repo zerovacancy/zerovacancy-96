@@ -6,6 +6,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
+
 const PreviewSearch = () => {
   const creators = [{
     name: "Sarah Johnson",
@@ -29,15 +30,17 @@ const PreviewSearch = () => {
     reviews: 156,
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500"
   }];
-  return <section className="relative section-padding py-[22px] bg-white">
-      <div className="relative mx-auto max-w-7xl my-0 py-0">
-        <div className="mx-4 sm:mx-0 mb-12">
-          <h2 className="text-3xl font-semibold text-center mb-3">Discover Local Creators</h2>
-          <p className="text-muted-foreground text-center mb-8">
-            Connect with professional photographers, videographers, and content creators in your area
-          </p>
 
+  return (
+    <section className="relative section-padding py-[22px] bg-white">
+      <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
+        <div className="mx-4 sm:mx-0 mb-12">
           <Card className="p-6 bg-white shadow-md">
+            <h2 className="text-3xl font-semibold text-center mb-3">Discover Local Creators</h2>
+            <p className="text-muted-foreground text-center mb-8">
+              Connect with professional photographers, videographers, and content creators in your area
+            </p>
+
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="flex items-center space-x-3 bg-secondary rounded-lg px-4 py-2">
                 <MapPin className="w-5 h-5 text-gray-500" />
@@ -75,7 +78,8 @@ const PreviewSearch = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-              {creators.map((creator, index) => <Card key={index} className="group overflow-hidden">
+              {creators.map((creator, index) => (
+                <Card key={index} className="group overflow-hidden">
                   <div className="relative">
                     <div className="absolute top-3 right-3 z-10">
                       <span className="px-3 py-1 text-sm font-medium bg-black/60 text-white rounded-full">
@@ -101,7 +105,8 @@ const PreviewSearch = () => {
                       </Button>
                     </div>
                   </div>
-                </Card>)}
+                </Card>
+              ))}
             </div>
           </Card>
         </div>
@@ -109,6 +114,8 @@ const PreviewSearch = () => {
 
       <FeaturesSectionWithHoverEffects />
       <PricingSection />
-    </section>;
+    </section>
+  );
 };
+
 export default PreviewSearch;
