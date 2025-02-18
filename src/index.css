@@ -29,21 +29,21 @@
   }
 
   * {
-    @apply border-border scroll-smooth;
+    @apply border-border scroll-smooth font-playfair;
   }
 
   body {
-    @apply bg-background text-foreground antialiased min-h-screen;
+    @apply bg-background text-foreground antialiased min-h-screen font-playfair;
   }
 }
 
 @layer components {
   .section-title {
-    @apply font-space text-2xl sm:text-3xl lg:text-4xl font-medium mb-4 text-center;
+    @apply font-playfair text-2xl sm:text-3xl lg:text-4xl font-medium mb-4 text-center;
   }
 
   .section-subtitle {
-    @apply font-anek text-base sm:text-lg text-muted-foreground;
+    @apply font-playfair text-base sm:text-lg text-muted-foreground;
   }
 
   .hero-button {
