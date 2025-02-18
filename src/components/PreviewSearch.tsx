@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
 import { Card } from './ui/card';
@@ -56,14 +57,14 @@ const PreviewSearch = () => {
   const isMobile = useIsMobile();
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
-  // Intersection Observer for lazy loading
+  // Intersection Observer for lazy loading with proper type checking
   const imageObserver = React.useRef(
     typeof window !== 'undefined'
       ? new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              if (entry.isIntersecting && entry.target instanceof HTMLImageElement) {
-                setLoadedImages((prev) => new Set([...prev, entry.target.dataset.src || '']));
+              if (entry.isIntersecting && entry.target instanceof HTMLImageElement && entry.target.dataset.src) {
+                setLoadedImages((prev) => new Set([...prev, entry.target.dataset.src]));
               }
             });
           },
