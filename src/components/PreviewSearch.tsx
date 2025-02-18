@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
 import { Card } from './ui/card';
@@ -8,6 +7,7 @@ import { FeaturesSectionWithHoverEffects } from './Features';
 import { Pricing } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
+import { cn } from '@/lib/utils';
 import {
   Dialog,
   DialogContent,
