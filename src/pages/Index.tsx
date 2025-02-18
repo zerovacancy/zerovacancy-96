@@ -15,10 +15,23 @@ const Index = () => {
       <Header />
       <main className="min-h-screen overflow-x-hidden pb-16 md:pb-0">
         <Hero />
-        <div className="space-y-6 sm:space-y-8 lg:space-y-10 py-0 my-0">
-          <HowItWorksSection />
-          <PreviewSearch />
-          <Testimonials />
+        <div className="space-y-0">
+          {/* HowItWorks with soft white/gray gradient */}
+          <div className="bg-gradient-to-b from-white via-gray-50 to-white">
+            <HowItWorksSection />
+          </div>
+          
+          {/* PreviewSearch with soft blue tint */}
+          <div className="bg-gradient-to-b from-white via-[#F7FAFF] to-white">
+            <PreviewSearch />
+          </div>
+          
+          {/* Testimonials with warm gradient */}
+          <div className="bg-gradient-to-b from-white via-[#FEF9F6] to-white">
+            <Testimonials />
+          </div>
+          
+          {/* Call to Action with existing background */}
           <CallToActionSection />
         </div>
         <Footer />
