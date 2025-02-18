@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star } from 'lucide-react';
 import { Card } from './ui/card';
@@ -7,43 +8,13 @@ import { FeaturesSectionWithHoverEffects } from './Features';
 import { PricingSection } from './Pricing';
 import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
+import { AuroraBackground } from './ui/aurora-background';
 
 const PreviewSearch = () => {
-  const creators = [{
-    name: "Sarah Johnson",
-    services: ["Photography", "Drone"],
-    price: 200,
-    rating: 4.9,
-    reviews: 124,
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500"
-  }, {
-    name: "Michael Chen",
-    services: ["Videography", "Editing"],
-    price: 250,
-    rating: 4.8,
-    reviews: 98,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500"
-  }, {
-    name: "Emily Rodriguez",
-    services: ["3D Tours", "Photography"],
-    price: 300,
-    rating: 5.0,
-    reviews: 156,
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500"
-  }];
+  const creators = [/* ... keep existing code (creators array) */];
+
   return (
-    <section className="relative section-padding py-[22px] overflow-hidden">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
-        [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
-        before:absolute before:inset-0
-        before:bg-[radial-gradient(circle_at_center,#4F46E5,transparent)]
-        before:opacity-40
-        after:absolute after:h-full after:w-full
-        after:[background:linear-gradient(to_right,#4F46E5,#EC4899)]
-        after:opacity-20 after:animate-aurora">
-      </div>
+    <AuroraBackground className="min-h-screen py-[22px]">
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <div className="mx-4 sm:mx-0 mb-12">
           <div className="relative">
@@ -126,7 +97,7 @@ const PreviewSearch = () => {
 
       <FeaturesSectionWithHoverEffects />
       <PricingSection />
-    </section>
+    </AuroraBackground>
   );
 };
 
