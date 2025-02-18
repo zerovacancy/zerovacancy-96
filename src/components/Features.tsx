@@ -2,8 +2,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconCamera, IconDrone, IconVideo, IconBrandInstagram, IconCertificate, IconClock24, IconWallet, IconStars } from "@tabler/icons-react";
-import { BorderTrail } from "./ui/border-trail";
-import { GlowingEffect } from "./ui/glowing-effect";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export function FeaturesSectionWithHoverEffects() {
@@ -52,22 +50,6 @@ export function FeaturesSectionWithHoverEffects() {
 
   return (
     <section className="py-8 sm:py-14 lg:py-20 rounded-sm relative overflow-hidden bg-white/50 backdrop-blur-sm">
-      <BorderTrail 
-        className="bg-primary/20" 
-        size={80}
-        transition={{
-          repeat: Infinity,
-          duration: 8,
-          ease: "linear"
-        }}
-      />
-      <GlowingEffect 
-        blur={20}
-        spread={30}
-        borderWidth={2}
-        className="opacity-50"
-        glow
-      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8 sm:mb-10 lg:mb-12 relative z-10">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-xl sm:text-2xl lg:text-3xl mb-3 sm:mb-4 text-primary font-semibold">
