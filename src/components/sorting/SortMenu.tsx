@@ -38,7 +38,7 @@ export const SortMenu: React.FC<SortMenuProps> = ({
         <Button 
           variant="outline" 
           size="sm"
-          className="gap-2"
+          className="gap-2 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 border-[#E5E7EB] rounded-lg"
         >
           <SortAsc className="w-4 h-4" />
           Sort By
