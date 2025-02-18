@@ -20,12 +20,12 @@ const Index = () => {
       <Header />
       {showBanner && (
         <Banner
-          variant="border"
-          className="animate-in fade-in slide-in-from-top duration-500"
-          icon={<Star className="h-4 w-4 text-primary" />}
+          variant="default"
+          className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground"
+          icon={<Star className="h-4 w-4 text-primary-foreground" />}
           action={
-            <Button variant="ghost" size="sm" className="hidden sm:flex">
-              Learn more
+            <Button variant="secondary" size="sm" className="hidden sm:flex">
+              Join Waitlist
             </Button>
           }
           isClosable
