@@ -85,7 +85,7 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
   return (
     <button
       className={cn(
-        "w-full text-left",
+        "w-full text-center",
         "rounded-xl transition-all duration-200",
         "bg-white/50 hover:bg-white/80",
         "border border-gray-200/50",
@@ -96,13 +96,13 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
       onClick={handleClick}
       aria-expanded={isMobile ? isExpanded : undefined}
     >
-      <div className="flex items-start gap-4">
+      <div className="flex flex-col items-center gap-4">
         <Icon className={cn(
           "w-6 h-6 text-gray-700 shrink-0",
           "transition-transform duration-200",
           isMobile && isExpanded && "transform rotate-90"
         )} />
-        <div>
+        <div className="text-center">
           <h3 className={cn(
             "text-lg font-medium leading-6 font-space",
             "text-gray-900"
