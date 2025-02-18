@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, MapPin, Calendar, ChevronDown, Star, Image } from 'lucide-react';
 import { Card } from './ui/card';
@@ -54,6 +55,7 @@ const creators = [{
     ]
   }];
 
+const PreviewSearch = () => {
   return (
     <section className="relative section-padding py-[22px] overflow-hidden">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white 
