@@ -129,9 +129,9 @@ const PreviewSearch = () => {
 
   return (
     <>
-      <section className="relative section-padding overflow-hidden py-8 my-0">
-        <div className="relative mx-auto max-w-7xl my-0 py-8">
-          <div className="text-center mb-12">
+      <section className="relative section-padding overflow-hidden py-4 sm:py-8 my-0">
+        <div className="relative mx-auto max-w-7xl my-0 py-4 sm:py-8">
+          <div className="text-center mb-8 sm:mb-12 px-4 sm:px-0">
             <h2 className="section-title">Find Your Perfect Content Creator</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
               Connect with talented photographers, videographers, and content creators in your area. Filter by expertise, style, and budget to find the perfect match for your project.
@@ -139,23 +139,23 @@ const PreviewSearch = () => {
           </div>
           <div className="mx-4 sm:mx-0 mb-8">
             <div className="relative">
-              <Card className="p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-lg">
+              <Card className="p-4 sm:p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-lg">
                 {/* Search Container */}
-                <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-6 mb-12">
-                  <div className="search-group">
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 sm:gap-6 mb-8 sm:mb-12">
+                  <div className="search-group min-h-[52px]">
                     <Search className="w-5 h-5 text-muted-foreground" />
                     <input
                       type="text"
                       placeholder="Search creators..."
-                      className="search-input"
+                      className="search-input min-h-[44px] text-base sm:text-sm"
                     />
                   </div>
-                  <div className="search-group">
+                  <div className="search-group min-h-[52px]">
                     <MapPin className="w-5 h-5 text-muted-foreground" />
                     <input
                       type="text"
                       placeholder="Location"
-                      className="search-input"
+                      className="search-input min-h-[44px] text-base sm:text-sm"
                     />
                   </div>
                   <Button className="w-full md:w-auto h-[52px] text-base">
@@ -165,16 +165,18 @@ const PreviewSearch = () => {
 
                 {/* Creators Section */}
                 <div className="mb-8">
-                  <div className="flex items-center justify-between mb-8">
-                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">Featured Creators</h2>
-                    <SortMenu 
-                      options={sortOptions}
-                      onSort={handleSort}
-                      defaultValue={sortBy}
-                    />
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900">Featured Creators</h2>
+                    <div className="w-full sm:w-auto">
+                      <SortMenu 
+                        options={sortOptions}
+                        onSort={handleSort}
+                        defaultValue={sortBy}
+                      />
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                     {creators.map((creator, index) => (
                       <CreatorCard
                         key={index}
