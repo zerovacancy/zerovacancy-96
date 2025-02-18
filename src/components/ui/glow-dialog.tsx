@@ -41,14 +41,13 @@ const MovingBorder = ({
       <svg
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
-        className="absolute h-full w-full pointer-events-none"
+        className="absolute h-full w-full"
         width="100%"
         height="100%"
         {...otherProps}
       >
         <rect
           fill="none"
-          stroke="none"
           width="100%"
           height="100%"
           rx={rx}
