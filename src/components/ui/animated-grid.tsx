@@ -1,176 +1,154 @@
 
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { animate } from "framer-motion";
 
 export interface AnimatedGridProps {
-  direction?: "right" | "left" | "up" | "down" | "diagonal"
-  speed?: number
-  borderColor?: string
-  squareSize?: number
-  hoverFillColor?: string
-  className?: string
+  direction?: "right" | "left" | "up" | "down" | "diagonal";
+  speed?: number;
+  borderColor?: string;
+  squareSize?: number;
+  hoverFillColor?: string;
+  className?: string;
 }
 
-export function AnimatedGrid({
+export const AnimatedGrid = memo(({
   direction = "right",
   speed = 1,
   borderColor = "#333",
   squareSize = 40,
   hoverFillColor = "#222",
   className,
-}: AnimatedGridProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const requestRef = useRef<number>()
-  const lastTimeRef = useRef<number>(0)
-  const totalOffsetRef = useRef({ x: 0, y: 0 })
-  const [hoveredSquare, setHoveredSquare] = useState<{
-    x: number
-    y: number
-  } | null>(null)
+}: AnimatedGridProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const lastPosition = useRef({ x: 0, y: 0 });
+  const animationFrameRef = useRef<number>(0);
+
+  const handleMove = useCallback(
+    (e?: MouseEvent | { x: number; y: number }) => {
+      if (!containerRef.current) return;
+
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+
+      animationFrameRef.current = requestAnimationFrame(() => {
+        const element = containerRef.current;
+        if (!element) return;
+
+        const { left, top, width, height } = element.getBoundingClientRect();
+        const mouseX = e?.x ?? lastPosition.current.x;
+        const mouseY = e?.y ?? lastPosition.current.y;
+
+        if (e) {
+          lastPosition.current = { x: mouseX, y: mouseY };
+        }
+
+        const center = [left + width * 0.5, top + height * 0.5];
+        const distanceFromCenter = Math.hypot(
+          mouseX - center[0],
+          mouseY - center[1]
+        );
+        const inactiveRadius = 0.5 * Math.min(width, height) * 0.7;
+
+        if (distanceFromCenter < inactiveRadius) {
+          element.style.setProperty("--active", "0");
+          return;
+        }
+
+        const isActive =
+          mouseX > left &&
+          mouseX < left + width &&
+          mouseY > top &&
+          mouseY < top + height;
+
+        element.style.setProperty("--active", isActive ? "1" : "0");
+
+        if (!isActive) return;
+
+        const currentAngle =
+          parseFloat(element.style.getPropertyValue("--start")) || 0;
+        let targetAngle =
+          (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) / Math.PI + 90;
+
+        const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
+        const newAngle = currentAngle + angleDiff;
+
+        animate(currentAngle, newAngle, {
+          duration: 2,
+          ease: [0.16, 1, 0.3, 1],
+          onUpdate: (value) => {
+            element.style.setProperty("--start", String(value));
+          },
+        });
+      });
+    },
+    []
+  );
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const handleScroll = () => handleMove();
+    const handlePointerMove = (e: PointerEvent) => handleMove(e);
 
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    document.body.addEventListener("pointermove", handlePointerMove, {
+      passive: true,
+    });
 
-    canvas.style.background = "#060606"
-
-    const resizeCanvas = () => {
-      const dpr = window.devicePixelRatio || 1
-      const rect = canvas.getBoundingClientRect()
-      
-      canvas.width = rect.width * dpr
-      canvas.height = rect.height * dpr
-      
-      ctx.scale(dpr, dpr)
-      
-      canvas.style.width = `${rect.width}px`
-      canvas.style.height = `${rect.height}px`
-    }
-
-    const drawGrid = (timestamp: number) => {
-      if (!canvas || !ctx) return
-      
-      // Calculate delta time for smooth animation
-      const deltaTime = timestamp - lastTimeRef.current
-      lastTimeRef.current = timestamp
-      
-      // Update total offset based on direction and speed
-      const effectiveSpeed = (speed * deltaTime) / 16 // Normalize to 60fps
-
-      switch (direction) {
-        case "right":
-          totalOffsetRef.current.x -= effectiveSpeed
-          break
-        case "left":
-          totalOffsetRef.current.x += effectiveSpeed
-          break
-        case "up":
-          totalOffsetRef.current.y += effectiveSpeed
-          break
-        case "down":
-          totalOffsetRef.current.y -= effectiveSpeed
-          break
-        case "diagonal":
-          totalOffsetRef.current.x -= effectiveSpeed
-          totalOffsetRef.current.y -= effectiveSpeed
-          break
-      }
-
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      // Calculate grid position
-      const offsetX = totalOffsetRef.current.x % squareSize
-      const offsetY = totalOffsetRef.current.y % squareSize
-
-      // Set up drawing styles
-      ctx.lineWidth = 1
-      ctx.strokeStyle = borderColor
-
-      // Draw grid
-      const width = canvas.width / window.devicePixelRatio
-      const height = canvas.height / window.devicePixelRatio
-
-      for (let x = -squareSize + offsetX; x < width + squareSize; x += squareSize) {
-        for (let y = -squareSize + offsetY; y < height + squareSize; y += squareSize) {
-          if (
-            hoveredSquare &&
-            Math.floor(x / squareSize) === hoveredSquare.x &&
-            Math.floor(y / squareSize) === hoveredSquare.y
-          ) {
-            ctx.fillStyle = hoverFillColor
-            ctx.fillRect(x, y, squareSize, squareSize)
-          }
-
-          ctx.beginPath()
-          ctx.rect(x, y, squareSize, squareSize)
-          ctx.stroke()
-        }
-      }
-
-      // Add vignette effect
-      const gradient = ctx.createRadialGradient(
-        width / 2,
-        height / 2,
-        0,
-        width / 2,
-        height / 2,
-        Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / 2,
-      )
-      gradient.addColorStop(0, "rgba(6, 6, 6, 0)")
-      gradient.addColorStop(1, "#060606")
-
-      ctx.fillStyle = gradient
-      ctx.fillRect(0, 0, width, height)
-
-      // Request next frame
-      requestRef.current = requestAnimationFrame(drawGrid)
-    }
-
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect()
-      const mouseX = event.clientX - rect.left
-      const mouseY = event.clientY - rect.top
-      
-      const hoveredSquareX = Math.floor((mouseX - (totalOffsetRef.current.x % squareSize)) / squareSize)
-      const hoveredSquareY = Math.floor((mouseY - (totalOffsetRef.current.y % squareSize)) / squareSize)
-
-      setHoveredSquare({ x: hoveredSquareX, y: hoveredSquareY })
-    }
-
-    const handleMouseLeave = () => {
-      setHoveredSquare(null)
-    }
-
-    // Event listeners
-    window.addEventListener("resize", resizeCanvas)
-    canvas.addEventListener("mousemove", handleMouseMove)
-    canvas.addEventListener("mouseleave", handleMouseLeave)
-
-    // Initial setup
-    resizeCanvas()
-    requestRef.current = requestAnimationFrame(drawGrid)
-
-    // Cleanup
     return () => {
-      window.removeEventListener("resize", resizeCanvas)
-      canvas.removeEventListener("mousemove", handleMouseMove)
-      canvas.removeEventListener("mouseleave", handleMouseLeave)
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current)
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
-    }
-  }, [direction, speed, borderColor, hoverFillColor, squareSize])
+      window.removeEventListener("scroll", handleScroll);
+      document.body.removeEventListener("pointermove", handlePointerMove);
+    };
+  }, [handleMove]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={cn("w-full h-full border-none block", className)}
-    />
-  )
-}
+    <div className={cn("relative w-full h-full", className)}>
+      <div
+        ref={containerRef}
+        style={{
+          "--spread": "20",
+          "--start": "0",
+          "--active": "0",
+          "--glowingeffect-border-width": "2px",
+          "--repeating-conic-gradient-times": "5",
+          "--gradient": `radial-gradient(circle, #dd7bbb 10%, #dd7bbb00 20%),
+            radial-gradient(circle at 40% 40%, #d79f1e 5%, #d79f1e00 15%),
+            radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%), 
+            radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%),
+            repeating-conic-gradient(
+              from 236.84deg at 50% 50%,
+              #dd7bbb 0%,
+              #d79f1e calc(25% / var(--repeating-conic-gradient-times)),
+              #5a922c calc(50% / var(--repeating-conic-gradient-times)), 
+              #4c7894 calc(75% / var(--repeating-conic-gradient-times)),
+              #dd7bbb calc(100% / var(--repeating-conic-gradient-times))
+            )`,
+        } as React.CSSProperties}
+        className={cn(
+          "pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity"
+        )}
+      >
+        <div
+          className={cn(
+            "glow",
+            "rounded-[inherit]",
+            'after:content-[""] after:rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))]',
+            "after:[border:var(--glowingeffect-border-width)_solid_transparent]",
+            "after:[background:var(--gradient)] after:[background-attachment:fixed]",
+            "after:opacity-[var(--active)] after:transition-opacity after:duration-300",
+            "after:[mask-clip:padding-box,border-box]",
+            "after:[mask-composite:intersect]",
+            "after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]"
+          )}
+        />
+      </div>
+    </div>
+  );
+});
+
+AnimatedGrid.displayName = "AnimatedGrid";
