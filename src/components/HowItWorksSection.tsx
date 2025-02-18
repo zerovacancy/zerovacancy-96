@@ -1,20 +1,20 @@
+
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { IconCamera, IconDrone, IconCheck } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
-import { Squares } from "@/components/ui/squares";
+import { Particles } from "@/components/ui/particles";
 
 const HowItWorksSection = () => {
   return (
     <section className="relative overflow-hidden py-[76px]">
-      <div className="absolute inset-0 -z-10">
-        <Squares
-          direction="diagonal"
-          speed={0.5}
-          borderColor="rgba(255,255,255,0.1)"
-          squareSize={50}
-          hoverFillColor="rgba(255,255,255,0.05)"
-          className="opacity-70"
+      <div className="absolute inset-0 -z-10 bg-[#060606]">
+        <Particles
+          className="h-full"
+          quantity={50}
+          staticity={30}
+          ease={30}
+          color="#ffffff"
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
