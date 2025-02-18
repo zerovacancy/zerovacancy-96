@@ -25,9 +25,9 @@ export function Hero() {
   return (
     <div className="w-full">
       <AuroraBackground className="w-full">
-        <div className="flex gap-6 sm:gap-8 items-center justify-center flex-col py-16 sm:py-20 lg:py-24 px-4 sm:px-6 mx-0">
-          <div className="flex gap-3 sm:gap-4 flex-col">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-['Krona_One']">
+        <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0">
+          <div className="flex gap-4 flex-col">
+            <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-primary">Property Content that</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
@@ -49,7 +49,7 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center px-4 sm:px-0">
+            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
               Connect with top-tier creators for photography, videography, and marketing content that elevates your
               property portfolio.
             </p>

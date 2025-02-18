@@ -1,6 +1,6 @@
 
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   motion,
   useAnimationFrame,
@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
 export const MovingBorder = ({
   children,
   duration = 2000,
-  rx = "30%",
-  ry = "30%",
+  rx,
+  ry,
   className,
   ...otherProps
 }: {
@@ -26,74 +26,54 @@ export const MovingBorder = ({
   className?: string;
   [key: string]: any;
 }) => {
-  const pathRef = useRef<SVGPathElement>(null);
+  const pathRef = useRef<any>();
   const progress = useMotionValue<number>(0);
-  const [isPathReady, setIsPathReady] = React.useState(false);
-
-  useEffect(() => {
-    if (pathRef.current) {
-      // Ensure the path is valid before starting animations
-      const length = pathRef.current.getTotalLength();
-      if (length > 0) {
-        setIsPathReady(true);
-      }
-    }
-  }, []);
 
   useAnimationFrame((time) => {
-    if (!pathRef.current || !isPathReady) return;
-    const length = pathRef.current.getTotalLength();
+    const length = pathRef.current?.getTotalLength();
     if (length) {
       const pxPerMillisecond = length / duration;
       progress.set((time * pxPerMillisecond) % length);
     }
   });
 
-  const x = useTransform(progress, (val) => {
-    if (!pathRef.current || !isPathReady) return 0;
-    const point = pathRef.current.getPointAtLength(val);
-    return point ? point.x : 0;
-  });
-
-  const y = useTransform(progress, (val) => {
-    if (!pathRef.current || !isPathReady) return 0;
-    const point = pathRef.current.getPointAtLength(val);
-    return point ? point.y : 0;
-  });
+  const x = useTransform(
+    progress,
+    (val) => pathRef.current?.getPointAtLength(val).x
+  );
+  const y = useTransform(
+    progress,
+    (val) => pathRef.current?.getPointAtLength(val).y
+  );
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 
-  // Ensure rx and ry have valid values
-  const safeRx = rx || "30%";
-  const safeRy = ry || "30%";
-
   return (
-    <div className={cn("absolute inset-0", className)} {...otherProps}>
+    <div className={cn("absolute inset-0", className)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
         className="absolute h-full w-full"
         width="100%"
         height="100%"
-        viewBox="0 0 100 100"
+        {...otherProps}
       >
         <path
           ref={pathRef}
           d={`
-            M ${safeRx},0
-            H calc(100% - ${safeRx})
-            C 100%,0 100%,0 100%,${safeRy}
-            V calc(100% - ${safeRy})
-            C 100%,100% 100%,100% calc(100% - ${safeRx}),100%
-            H ${safeRx}
-            C 0,100% 0,100% 0,calc(100% - ${safeRy})
-            V ${safeRy}
-            C 0,0 0,0 ${safeRx},0
+            M ${rx || 0},0
+            H calc(100% - ${rx || 0})
+            C 100%,0 100%,0 100%,${ry || 0}
+            V calc(100% - ${ry || 0})
+            C 100%,100% 100%,100% calc(100% - ${rx || 0}),100%
+            H ${rx || 0}
+            C 0,100% 0,100% 0,calc(100% - ${ry || 0})
+            V ${ry || 0}
+            C 0,0 0,0 ${rx || 0},0
           `}
           fill="none"
           stroke="transparent"
           strokeWidth="1"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
       <motion.div

@@ -21,7 +21,6 @@ export default {
     extend: {
       fontFamily: {
         'anek': ['Anek Devanagari', 'sans-serif'],
-        'krona': ['Krona One', 'system-ui'],
       },
       colors: {
         border: "hsl(var(--border))",
