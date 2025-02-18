@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Camera, Drone, Video, Instagram, UserCheck, Clock, CreditCard, Award } from "lucide-react";
+import { Camera, Plane, Video, Instagram, UserCheck, Clock, CreditCard, Award } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const features = [{
@@ -11,7 +11,7 @@ const features = [{
 }, {
   title: "Drone Aerial Coverage",
   description: "FAA-certified drone operators capturing stunning aerial views and property surroundings.",
-  icon: Drone
+  icon: Plane
 }, {
   title: "Video Production",
   description: "Cinematic property tours and promotional videos that tell your property's unique story.",
