@@ -102,6 +102,9 @@
 }
 
 @layer utilities {
+  .animate-aurora {
+    animation: aurora 60s linear infinite;
+  }
   .animate-rainbow {
     animation: rainbow 8s linear infinite;
   }
