@@ -43,10 +43,10 @@ export function FeaturesSectionWithHoverEffects() {
     <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="section-title font-space">
+          <h2 className="section-title mb-4 font-space tracking-tight">
             Professional Content Creation Services
           </h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle max-w-2xl mx-auto">
             Everything you need to showcase your properties with stunning visuals and engaging content
           </p>
         </div>
@@ -102,18 +102,18 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
           "transition-transform duration-200",
           isMobile && isExpanded && "transform rotate-90"
         )} />
-        <div className="text-center">
+        <div className="text-center w-full">
           <h3 className={cn(
-            "text-lg font-medium leading-6 font-space",
+            "text-lg font-semibold leading-6 font-space mb-2",
             "text-gray-900"
           )}>
             {title}
           </h3>
           <div className={cn(
             "overflow-hidden transition-[max-height,opacity] duration-200",
-            isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-32 opacity-100 mt-2"
+            isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-32 opacity-100"
           )}>
-            <p className="text-sm text-gray-600 font-anek">
+            <p className="text-sm text-gray-600 font-anek mx-auto max-w-xs">
               {description}
             </p>
           </div>
