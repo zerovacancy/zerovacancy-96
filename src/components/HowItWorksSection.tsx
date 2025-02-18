@@ -46,7 +46,7 @@ const HowItWorksSection = () => {
               viewport={{ once: true }}
               className="relative bg-white p-5 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-all group pt-8 text-center border-2 border-gray-100"
             >
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-white text-gray-900 rounded-full flex items-center justify-center text-sm font-medium border-2 border-gray-900 shadow-sm">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-gray-900 text-sm font-medium">
                 {index + 1}
               </div>
               
