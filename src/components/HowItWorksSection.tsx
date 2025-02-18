@@ -28,7 +28,7 @@ const HowItWorksSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, index) => <div key={index} className="relative group">
-              <div className="flex flex-col items-center p-6 rounded-lg bg-background/80 backdrop-blur-sm hover:bg-background/95 transition-all duration-300">
+              <div className="flex flex-col items-center p-6 bg-background/80 backdrop-blur-sm hover:bg-background/95 transition-all duration-300 rounded-sm">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 text-primary">
                   {step.icon}
                 </div>
