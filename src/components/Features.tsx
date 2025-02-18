@@ -52,17 +52,6 @@ export function FeaturesSectionWithHoverEffects() {
 
   return (
     <section className="py-8 sm:py-14 lg:py-20 rounded-sm relative overflow-hidden bg-white/50 backdrop-blur-sm">
-      <div className="absolute inset-0 -z-10 h-full w-full 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]
-        [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
-        before:absolute before:inset-0
-        before:bg-[radial-gradient(circle_at_center,#4F46E5,transparent)]
-        before:opacity-30
-        after:absolute after:h-full after:w-full
-        after:[background:linear-gradient(to_right,#4F46E5,#EC4899)]
-        after:opacity-10 after:animate-aurora">
-      </div>
       <BorderTrail 
         className="bg-primary/20" 
         size={80}
