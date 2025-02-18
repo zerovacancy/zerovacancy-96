@@ -25,7 +25,7 @@ export const ShimmerButton = forwardRef<HTMLDivElement, ShimmerButtonProps>(
         style={{ '--speed': '1.5s' } as React.CSSProperties}
         {...props}
       >
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center gap-3">
           {children}
         </div>
       </div>
