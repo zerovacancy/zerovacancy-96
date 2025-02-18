@@ -1,12 +1,16 @@
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Building, UserPlus } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
+import WarpBackground from "@/components/ui/warp-background";
+
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(() => ["engages", "converts", "impresses", "stands out", "educates"], []);
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (titleNumber === titles.length - 1) {
@@ -17,29 +21,36 @@ export function Hero() {
     }, 2000);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length]);
-  return <div className="w-full">
-      <div className="container mx-auto py-0 bg-transparent">
-        <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0 bg-transparent">
+
+  return (
+    <div className="w-full">
+      <WarpBackground 
+        className="w-full"
+        beamsPerSide={5}
+        beamSize={3}
+        beamDuration={4}
+      >
+        <div className="flex gap-8 items-center justify-center flex-col lg:py-[52px] py-[124px] px-0 mx-0">
           <div className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-primary">Property Content that</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
-                {titles.map((title, index) => <motion.span key={index} className="absolute font-semibold" initial={{
-                opacity: 0,
-                y: "-100"
-              }} transition={{
-                type: "spring",
-                stiffness: 50
-              }} animate={titleNumber === index ? {
-                y: 0,
-                opacity: 1
-              } : {
-                y: titleNumber > index ? -150 : 150,
-                opacity: 0
-              }}>
+                {titles.map((title, index) => (
+                  <motion.span
+                    key={index}
+                    className="absolute font-semibold"
+                    initial={{ opacity: 0, y: "-100" }}
+                    transition={{ type: "spring", stiffness: 50 }}
+                    animate={
+                      titleNumber === index
+                        ? { y: 0, opacity: 1 }
+                        : { y: titleNumber > index ? -150 : 150, opacity: 0 }
+                    }
+                  >
                     {title}
-                  </motion.span>)}
+                  </motion.span>
+                ))}
               </span>
             </h1>
 
@@ -57,7 +68,9 @@ export function Hero() {
             </ShimmerButton>
           </div>
         </div>
-      </div>
-    </div>;
+      </WarpBackground>
+    </div>
+  );
 }
+
 export default Hero;
