@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconCamera, IconDrone, IconVideo, IconBrandInstagram, IconCertificate, IconClock24, IconWallet, IconStars } from "@tabler/icons-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+
 export function FeaturesSectionWithHoverEffects() {
   const features = [{
     title: "Professional Photography",
@@ -36,8 +38,30 @@ export function FeaturesSectionWithHoverEffects() {
     description: "100% satisfaction with free revisions",
     icon: <IconStars className="w-6 h-6 sm:w-7 sm:h-7" />
   }];
-  return;
+
+  return (
+    <section className="section-padding">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-semibold mb-4">Our Features</h2>
+          <p className="text-muted-foreground text-lg">Comprehensive solutions for your real estate content needs</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {features.map((feature, index) => (
+            <Feature
+              key={index}
+              index={index}
+              title={feature.title}
+              description={feature.description}
+              icon={feature.icon}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
+
 const Feature = ({
   title,
   description,
@@ -51,20 +75,52 @@ const Feature = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
-  return <div className={cn("flex flex-col relative group/feature transition-all duration-300", "bg-white/40 backdrop-blur-sm rounded-lg shadow-sm border border-primary/5", "hover:bg-white/60 active:bg-white/70", isExpanded ? "p-4 sm:p-5" : "p-3 sm:p-4", isMobile && "cursor-default")} onClick={() => isMobile && setIsExpanded(!isExpanded)} onMouseEnter={() => !isMobile && setIsExpanded(true)} onMouseLeave={() => !isMobile && setIsExpanded(false)}>
-      <div className={cn("flex items-start gap-3 relative z-10", isExpanded ? "mb-3" : "mb-0")}>
-        <div className={cn("text-primary transition-transform duration-300 shrink-0 mt-0.5", isExpanded ? "scale-110" : "scale-100")}>
+  
+  return (
+    <div 
+      className={cn(
+        "flex flex-col relative group/feature transition-all duration-300",
+        "bg-white/40 backdrop-blur-sm rounded-lg shadow-sm border border-primary/5",
+        "hover:bg-white/60 active:bg-white/70",
+        isExpanded ? "p-4 sm:p-5" : "p-3 sm:p-4",
+        isMobile && "cursor-default"
+      )}
+      onClick={() => isMobile && setIsExpanded(!isExpanded)}
+      onMouseEnter={() => !isMobile && setIsExpanded(true)}
+      onMouseLeave={() => !isMobile && setIsExpanded(false)}
+    >
+      <div className={cn(
+        "flex items-start gap-3 relative z-10",
+        isExpanded ? "mb-3" : "mb-0"
+      )}>
+        <div className={cn(
+          "text-primary transition-transform duration-300 shrink-0 mt-0.5",
+          isExpanded ? "scale-110" : "scale-100"
+        )}>
           {icon}
         </div>
-        <h3 className={cn("text-sm font-semibold text-primary/90 transition-all duration-300 flex-1 leading-tight", "sm:text-base", isExpanded ? "opacity-100" : "opacity-90")}>
+        <h3 className={cn(
+          "text-sm font-semibold text-primary/90 transition-all duration-300 flex-1 leading-tight",
+          "sm:text-base",
+          isExpanded ? "opacity-100" : "opacity-90"
+        )}>
           {title}
         </h3>
       </div>
-      <div className={cn("overflow-hidden transition-all duration-300 pl-9", isExpanded ? "max-h-20 sm:max-h-24" : "max-h-0")}>
-        <p className={cn("text-sm leading-relaxed text-muted-foreground/80 relative z-10", "transition-opacity duration-200", isExpanded ? "opacity-100" : "opacity-0")}>
+      <div className={cn(
+        "overflow-hidden transition-all duration-300 pl-9",
+        isExpanded ? "max-h-20 sm:max-h-24" : "max-h-0"
+      )}>
+        <p className={cn(
+          "text-sm leading-relaxed text-muted-foreground/80 relative z-10",
+          "transition-opacity duration-200",
+          isExpanded ? "opacity-100" : "opacity-0"
+        )}>
           {description}
         </p>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default FeaturesSectionWithHoverEffects;
