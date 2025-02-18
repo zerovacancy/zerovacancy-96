@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -51,21 +50,7 @@ const creators = [
       'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&h=500',
     ],
-  },
-  {
-    name: 'Michael Brown',
-    services: ['Photography', 'Retouching'],
-    price: 799,
-    rating: 4.6,
-    reviews: 80,
-    location: 'Houston, TX',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&h=500',
-    workExamples: [
-      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=500&h=500',
-      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&h=500',
-    ],
-  },
+  }
 ];
 
 const PreviewSearch = () => {
@@ -151,4 +136,3 @@ const PreviewSearch = () => {
 };
 
 export default PreviewSearch;
-
