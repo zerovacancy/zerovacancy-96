@@ -5,6 +5,7 @@ import { motion, useAnimationFrame, useMotionTemplate, useMotionValue, useTransf
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Squares } from "@/components/ui/squares";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 const MovingBorder = ({
   children,
@@ -100,13 +101,13 @@ export function GlowDialog({
                 required
                 className="flex-1 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30"
               />
-              <Button 
+              <HoverBorderGradient 
                 type="submit"
-                size="lg"
-                className="relative z-10 whitespace-nowrap bg-white text-black hover:bg-white/90"
+                className="!bg-white !text-black hover:!bg-white/90"
+                duration={1.5}
               >
                 Join Waitlist
-              </Button>
+              </HoverBorderGradient>
             </form>
           </div>
         </motion.div>
