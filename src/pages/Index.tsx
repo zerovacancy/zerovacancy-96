@@ -13,7 +13,7 @@ const Index = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen overflow-x-hidden pb-16 md:pb-0">
+      <main className="overflow-x-hidden">
         <Hero />
         <div className="space-y-0">
           {/* HowItWorks with soft white/gray gradient */}
@@ -40,4 +40,3 @@ const Index = () => {
 };
 
 export default Index;
-
