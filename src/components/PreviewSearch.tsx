@@ -9,6 +9,8 @@ import { BackgroundGradient } from './ui/background-gradient';
 import { GlowingEffect } from './ui/glowing-effect';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+
+// Optimize creator images by converting to WebP
 const creators = [{
   name: "Sarah Johnson",
   services: ["Photography", "Drone"],
@@ -16,8 +18,12 @@ const creators = [{
   rating: 4.9,
   reviews: 124,
   location: "New York, NY",
-  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&h=500",
-  workExamples: ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&h=600"]
+  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
+  workExamples: [
+    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
+  ]
 }, {
   name: "Michael Chen",
   services: ["Videography", "Editing"],
@@ -25,8 +31,12 @@ const creators = [{
   rating: 4.8,
   reviews: 98,
   location: "Los Angeles, CA",
-  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&h=500",
-  workExamples: ["https://images.unsplash.com/photo-1600607687644-05f5f91428f9?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600585154363-67eb9e684b16?auto=format&fit=crop&w=800&h=600"]
+  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
+  workExamples: [
+    "https://images.unsplash.com/photo-1600607687644-05f5f91428f9?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
+    "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
+    "https://images.unsplash.com/photo-1600585154363-67eb9e684b16?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
+  ]
 }, {
   name: "Emily Rodriguez",
   services: ["3D Tours", "Photography"],
@@ -34,30 +44,58 @@ const creators = [{
   rating: 5.0,
   reviews: 156,
   location: "Miami, FL",
-  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500",
-  workExamples: ["https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&h=600", "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=600"]
+  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&w=500&h=500&q=80&fit=crop&fm=webp",
+  workExamples: [
+    "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
+    "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&w=800&h=600&q=80&fit=crop&fm=webp",
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&w=800&h=600&q=80&fit=crop&fm=webp"
+  ]
 }];
+
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
+  // Intersection Observer for lazy loading
+  const imageObserver = React.useRef(
+    typeof window !== 'undefined'
+      ? new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && entry.target instanceof HTMLImageElement) {
+                setLoadedImages((prev) => new Set([...prev, entry.target.dataset.src || '']));
+              }
+            });
+          },
+          { rootMargin: '50px' }
+        )
+      : null
+  );
+
+  // Handle image observation
+  const observeImage = React.useCallback((node: HTMLImageElement | null) => {
+    if (node && imageObserver.current) {
+      imageObserver.current.observe(node);
+      return () => {
+        imageObserver.current?.unobserve(node);
+      };
+    }
+  }, []);
 
   return (
     <section className="relative section-padding overflow-hidden py-[21px] my-0">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white 
         [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
         [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
-        before:absolute before:inset-0
-        before:bg-[radial-gradient(circle_at_center,#4F46E5,transparent)]
-        before:opacity-40
-        after:absolute after:h-full after:w-full
-        after:[background:linear-gradient(to_right,#4F46E5,#EC4899)]
-        after:opacity-20 after:animate-aurora">
+        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#4F46E5,transparent)] opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 opacity-20" />
       </div>
 
       <div className="relative mx-auto max-w-7xl my-0 py-[28px]">
         <div className="mx-4 sm:mx-0 mb-8">
           <div className="relative">
-            <Card className="p-6 sm:p-8 md:p-10 bg-white shadow-md">
+            <Card className="p-6 sm:p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-4 sm:mb-6">
                 Discover Local Creators
               </h2>
@@ -110,19 +148,24 @@ const PreviewSearch = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
                 {creators.map((creator, index) => (
                   <div key={index} className="group">
-                    <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]">
+                    <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
                       <div className="relative">
                         <div className="absolute top-4 right-4 z-10">
-                          <span className="px-3 py-1.5 text-sm font-medium bg-black/70 text-white rounded-full shadow-sm backdrop-blur-sm">
+                          <span className="px-3 py-1.5 text-sm font-medium bg-black/70 text-white rounded-full backdrop-blur-sm">
                             From ${creator.price}
                           </span>
                         </div>
                         <div className="relative aspect-[4/3]">
                           <img 
-                            src={creator.image} 
+                            ref={observeImage}
+                            src={loadedImages.has(creator.image) ? creator.image : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+                            data-src={creator.image}
                             alt={creator.name} 
-                            className="w-full h-full object-cover object-center" 
-                            loading="lazy" 
+                            className={cn(
+                              "w-full h-full object-cover object-center transition-opacity duration-300",
+                              !loadedImages.has(creator.image) && "opacity-0"
+                            )}
+                            loading="lazy"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                           <div className="absolute bottom-4 left-4 text-white">
@@ -149,7 +192,7 @@ const PreviewSearch = () => {
                             <Button 
                               variant="outline" 
                               size="default" 
-                              className="text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors duration-200"
+                              className="text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
                             >
                               Contact
                             </Button>
@@ -159,12 +202,17 @@ const PreviewSearch = () => {
                             {creator.workExamples.map((example, i) => (
                               <Dialog key={i}>
                                 <DialogTrigger asChild>
-                                  <button className="relative aspect-square w-full overflow-hidden rounded-lg hover:ring-2 hover:ring-primary/50 transition-all duration-300">
+                                  <button className="relative aspect-square w-full overflow-hidden rounded-lg will-change-transform">
                                     <img 
-                                      src={example} 
+                                      ref={observeImage}
+                                      src={loadedImages.has(example) ? example : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
+                                      data-src={example}
                                       alt={`${creator.name}'s work ${i + 1}`} 
-                                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105" 
-                                      loading="lazy" 
+                                      className={cn(
+                                        "object-cover w-full h-full transform transition-all duration-300 group-hover:scale-105",
+                                        !loadedImages.has(example) && "opacity-0"
+                                      )}
+                                      loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                       <Image className="w-5 h-5 text-white" />
@@ -176,7 +224,7 @@ const PreviewSearch = () => {
                                     <img 
                                       src={example} 
                                       alt={`${creator.name}'s work ${i + 1}`} 
-                                      className="object-contain w-full h-full rounded-lg" 
+                                      className="object-contain w-full h-full rounded-lg"
                                     />
                                   </div>
                                 </DialogContent>
