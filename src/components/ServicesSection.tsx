@@ -101,17 +101,17 @@ const ServicesSection = () => {
 
   return (
     <section className="relative py-16 px-4 md:py-24 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 -z-10 h-full w-full 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]
-        [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
-        before:absolute before:inset-0
-        before:bg-[radial-gradient(circle_at_center,#4F46E5,transparent)]
-        before:opacity-30
-        after:absolute after:h-full after:w-full
-        after:[background:linear-gradient(to_right,#4F46E5,#EC4899)]
-        after:opacity-10 after:animate-aurora" />
+      <div 
+        className={cn(
+          "absolute inset-0 -z-10 h-full w-full",
+          "[background-image:linear-gradient(to_right,rgba(176,108,234,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.1)_1px,transparent_1px)]",
+          "[background-size:6rem_4rem]",
+          "[mask-image:radial-gradient(ellipse_at_center,white,transparent)]"
+        )}
+      >
+        <div className="absolute inset-0 bg-gradient-radial from-purple-500/30 to-transparent opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 animate-aurora" />
+      </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-12">
