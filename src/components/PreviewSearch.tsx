@@ -125,13 +125,18 @@ const PreviewSearch = () => {
 
   const handleSort = (value: string) => {
     setSortBy(value);
-    // Add sorting logic here
   };
 
   return (
     <>
       <section className="relative section-padding overflow-hidden py-8 my-0">
         <div className="relative mx-auto max-w-7xl my-0 py-8">
+          <div className="text-center mb-12">
+            <h2 className="section-title">Find Your Perfect Content Creator</h2>
+            <p className="section-subtitle max-w-2xl mx-auto">
+              Connect with talented photographers, videographers, and content creators in your area. Filter by expertise, style, and budget to find the perfect match for your project.
+            </p>
+          </div>
           <div className="mx-4 sm:mx-0 mb-8">
             <div className="relative">
               <Card className="p-8 md:p-10 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-lg">
