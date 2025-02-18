@@ -36,7 +36,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   const isMobile = useIsMobile();
   
   return (
-    <div className="group">
+    <div className="group select-text">
       <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
         <div className="relative">
           <div className="absolute top-4 right-4 z-10">
@@ -56,8 +56,8 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               )}
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-            <div className="absolute bottom-4 left-4 text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-4 text-white select-text">
               <h3 className="font-semibold text-xl mb-1">{creator.name}</h3>
               <div className="flex items-center gap-1.5 text-sm text-white/90">
                 <MapPin className="w-4 h-4" />
