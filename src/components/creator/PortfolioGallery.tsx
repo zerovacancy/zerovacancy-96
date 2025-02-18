@@ -24,7 +24,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
       {images.map((image, i) => (
         <Dialog key={i}>
           <DialogTrigger asChild>
-            <button className="relative aspect-square w-full overflow-hidden rounded-lg will-change-transform">
+            <button className="relative aspect-square w-full overflow-hidden rounded-lg group will-change-transform">
               <img 
                 ref={imageRef}
                 src={loadedImages.has(image) ? image : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
@@ -36,7 +36,7 @@ export const PortfolioGallery: React.FC<PortfolioGalleryProps> = ({
                 )}
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 flex items-center justify-center">
                 <Image className="w-5 h-5 text-white" />
               </div>
             </button>
