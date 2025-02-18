@@ -111,75 +111,70 @@ const PreviewSearch = () => {
                 <span className="ml-2 px-1.5 py-0.5 text-xs font-medium bg-accent text-accent-foreground rounded">PRO</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                 {creators.map((creator, index) => (
-                  <Card key={index} className="group overflow-hidden">
-                    <div className="relative">
-                      <div className="absolute top-2 right-2 z-10">
-                        <span className="px-2 py-0.5 text-xs font-medium bg-black/60 text-white rounded-full">
-                          From ${creator.price}
-                        </span>
-                      </div>
-                      <div className="relative aspect-[3/2]">
-                        <img src={creator.image} alt={creator.name} className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                        <div className="absolute bottom-2 left-2 text-white">
-                          <h3 className="font-semibold text-base sm:text-lg">{creator.name}</h3>
-                          <div className="flex items-center gap-1 text-xs opacity-90">
-                            <MapPin className="w-3 h-3" />
-                            <span>{creator.location}</span>
-                          </div>
-                          <p className="text-xs opacity-90 mt-0.5">{creator.services.join(" • ")}</p>
+                  <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <Card className="group overflow-hidden h-full">
+                      <div className="relative">
+                        <div className="absolute top-2 right-2 z-10">
+                          <span className="px-2 py-0.5 text-xs font-medium bg-black/60 text-white rounded-full">
+                            From ${creator.price}
+                          </span>
                         </div>
-                      </div>
-                      <div className="p-3 space-y-3">
-                        <div className="flex items-center gap-1.5 justify-between">
-                          <div className="flex items-center gap-1.5">
-                            <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm font-medium">{creator.rating}</span>
-                            <span className="text-xs text-muted-foreground">({creator.reviews} reviews)</span>
+                        <div className="relative aspect-[3/2]">
+                          <img src={creator.image} alt={creator.name} className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                          <div className="absolute bottom-2 left-2 text-white">
+                            <h3 className="font-semibold text-base sm:text-lg">{creator.name}</h3>
+                            <div className="flex items-center gap-1 text-xs opacity-90">
+                              <MapPin className="w-3 h-3" />
+                              <span>{creator.location}</span>
+                            </div>
+                            <p className="text-xs opacity-90 mt-0.5">{creator.services.join(" • ")}</p>
                           </div>
-                          <Button variant="outline" size="sm" className="text-xs px-2 py-1">
-                            Contact
-                          </Button>
                         </div>
-                        <div className="grid grid-cols-3 gap-1.5">
-                          {creator.workExamples.map((example, i) => (
-                            <Dialog key={i}>
-                              <DialogTrigger asChild>
-                                <button className="relative aspect-square w-full overflow-hidden rounded hover:ring-2 hover:ring-primary/50 transition-all duration-300">
-                                  <img 
-                                    src={example} 
-                                    alt={`${creator.name}'s work ${i + 1}`} 
-                                    className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
-                                  />
-                                  <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <Image className="w-4 h-4 text-white" />
+                        <div className="p-3 space-y-3">
+                          <div className="flex items-center gap-1.5 justify-between">
+                            <div className="flex items-center gap-1.5">
+                              <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                              <span className="text-sm font-medium">{creator.rating}</span>
+                              <span className="text-xs text-muted-foreground">({creator.reviews} reviews)</span>
+                            </div>
+                            <Button variant="outline" size="sm" className="text-xs px-2 py-1">
+                              Contact
+                            </Button>
+                          </div>
+                          <div className="grid grid-cols-3 gap-1.5">
+                            {creator.workExamples.map((example, i) => (
+                              <Dialog key={i}>
+                                <DialogTrigger asChild>
+                                  <button className="relative aspect-square w-full overflow-hidden rounded hover:ring-2 hover:ring-primary/50 transition-all duration-300">
+                                    <img 
+                                      src={example} 
+                                      alt={`${creator.name}'s work ${i + 1}`} 
+                                      className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                      <Image className="w-4 h-4 text-white" />
+                                    </div>
+                                  </button>
+                                </DialogTrigger>
+                                <DialogContent className="max-w-3xl">
+                                  <div className="aspect-[4/3] w-full">
+                                    <img 
+                                      src={example} 
+                                      alt={`${creator.name}'s work ${i + 1}`} 
+                                      className="object-cover w-full h-full rounded-lg"
+                                    />
                                   </div>
-                                </button>
-                              </DialogTrigger>
-                              <DialogContent className="max-w-3xl">
-                                <div className="aspect-[4/3] w-full">
-                                  <img 
-                                    src={example} 
-                                    alt={`${creator.name}'s work ${i + 1}`} 
-                                    className="object-cover w-full h-full rounded-lg"
-                                  />
-                                </div>
-                              </DialogContent>
-                            </Dialog>
-                          ))}
-                        </div>
-
-                        <div className="flex items-center justify-center pt-2 border-t mt-3">
-                          <button className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1 group/btn transition-all duration-300">
-                            See Features
-                            <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-y-1" />
-                          </button>
+                                </DialogContent>
+                              </Dialog>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </div>
                 ))}
               </div>
             </Card>
