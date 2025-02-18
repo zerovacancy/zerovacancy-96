@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Camera, Satellite, Video, Instagram, UserCheck, Clock, CreditCard, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -19,7 +18,7 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
         "w-full text-left p-6 rounded-xl transition-all duration-200",
         "group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
         isExpanded ? "bg-gray-50 shadow-sm" : "bg-white hover:bg-gray-50",
-        "md:hover:shadow-md md:h-full"
+        "md:bg-white md:hover:bg-gray-50 md:hover:shadow-md md:h-full"
       )}
     >
       <div className="flex items-start gap-4">
@@ -31,7 +30,10 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon: Icon, title, description, i
           <div 
             className={cn(
               "mt-2 text-gray-600 text-sm transition-all duration-200 overflow-hidden",
-              isExpanded ? "max-h-48 opacity-100" : "max-h-0 opacity-0 md:max-h-48 md:opacity-100"
+              "md:block md:max-h-none md:opacity-100", // Always show on desktop
+              isExpanded 
+                ? "max-h-48 opacity-100" 
+                : "max-h-0 opacity-0"
             )}
           >
             {description}
@@ -108,7 +110,7 @@ const ServicesSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Desktop Layout */}
+        {/* Desktop Layout - Always expanded */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
             <ServiceCard
@@ -122,7 +124,7 @@ const ServicesSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Mobile Layout */}
+        {/* Mobile Layout - Expandable */}
         <div className="md:hidden space-y-3">
           {services.map((service) => (
             <ServiceCard
