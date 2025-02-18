@@ -60,11 +60,8 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
               {icon || <Wand2 className="h-8 w-8 p-1.5 rounded-full bg-white/10" />}
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-base font-medium leading-none mb-1">
-                Introducing Magic - The AI Agent That Builds Beautiful UI Components
-              </h2>
-              <p className="text-[#888] text-sm font-normal">
-                Empower your IDE with an AI extension that creates stunning, production-ready components with AI precision.
+              <p className="text-xs sm:text-sm pr-2">
+                <span className="font-medium">New:</span> We've launched our creator marketplace! 🎉
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -72,7 +69,7 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
                 size="sm"
                 className="bg-white text-black hover:bg-white/90 rounded-full px-5 h-8 text-sm font-medium"
               >
-                Try Magic Now
+                Try CreativeEstate Now
               </Button>
               {isClosable && (
                 <Button
