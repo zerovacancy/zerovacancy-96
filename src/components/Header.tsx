@@ -50,7 +50,7 @@ const Header = () => {
             animate={{ scale: isOpen ? 0.95 : 1 }}
             className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
           >
-            LuxeConnect
+            CreativeEstate
           </motion.div>
         </Link>
 
