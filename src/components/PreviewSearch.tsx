@@ -63,8 +63,9 @@ const PreviewSearch = () => {
       ? new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              if (entry.isIntersecting && entry.target instanceof HTMLImageElement && entry.target.dataset.src) {
-                setLoadedImages((prev) => new Set([...prev, entry.target.dataset.src]));
+              const target = entry.target as HTMLImageElement;
+              if (entry.isIntersecting && target.dataset.src) {
+                setLoadedImages((prev) => new Set([...prev, target.dataset.src as string]));
               }
             });
           },
