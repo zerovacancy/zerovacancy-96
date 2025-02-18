@@ -42,25 +42,37 @@ export function AnimatedGrid({
     canvas.style.background = "#060606"
 
     const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-      numSquaresX.current = Math.ceil(canvas.width / squareSize) + 1
-      numSquaresY.current = Math.ceil(canvas.height / squareSize) + 1
+      const dpr = window.devicePixelRatio || 1
+      const rect = canvas.getBoundingClientRect()
+      
+      canvas.width = rect.width * dpr
+      canvas.height = rect.height * dpr
+      
+      ctx.scale(dpr, dpr)
+      
+      canvas.style.width = `${rect.width}px`
+      canvas.style.height = `${rect.height}px`
+      
+      numSquaresX.current = Math.ceil(rect.width / squareSize) + 1
+      numSquaresY.current = Math.ceil(rect.height / squareSize) + 1
     }
 
     window.addEventListener("resize", resizeCanvas)
     resizeCanvas()
 
     const drawGrid = () => {
+      if (!canvas || !ctx) return
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize
-      const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize
+      const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize - squareSize
+      const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize - squareSize
 
-      ctx.lineWidth = 0.5
+      ctx.lineWidth = 1
+      ctx.strokeStyle = borderColor
 
-      for (let x = startX; x < canvas.width + squareSize; x += squareSize) {
-        for (let y = startY; y < canvas.height + squareSize; y += squareSize) {
+      for (let x = startX; x < canvas.width + squareSize * 2; x += squareSize) {
+        for (let y = startY; y < canvas.height + squareSize * 2; y += squareSize) {
           const squareX = x - (gridOffset.current.x % squareSize)
           const squareY = y - (gridOffset.current.y % squareSize)
 
@@ -73,11 +85,13 @@ export function AnimatedGrid({
             ctx.fillRect(squareX, squareY, squareSize, squareSize)
           }
 
-          ctx.strokeStyle = borderColor
-          ctx.strokeRect(squareX, squareY, squareSize, squareSize)
+          ctx.beginPath()
+          ctx.rect(squareX, squareY, squareSize, squareSize)
+          ctx.stroke()
         }
       }
 
+      // Add vignette effect
       const gradient = ctx.createRadialGradient(
         canvas.width / 2,
         canvas.height / 2,
@@ -98,26 +112,20 @@ export function AnimatedGrid({
 
       switch (direction) {
         case "right":
-          gridOffset.current.x =
-            (gridOffset.current.x - effectiveSpeed + squareSize) % squareSize
+          gridOffset.current.x = (gridOffset.current.x + effectiveSpeed) % squareSize
           break
         case "left":
-          gridOffset.current.x =
-            (gridOffset.current.x + effectiveSpeed + squareSize) % squareSize
+          gridOffset.current.x = (gridOffset.current.x - effectiveSpeed + squareSize) % squareSize
           break
         case "up":
-          gridOffset.current.y =
-            (gridOffset.current.y + effectiveSpeed + squareSize) % squareSize
+          gridOffset.current.y = (gridOffset.current.y - effectiveSpeed + squareSize) % squareSize
           break
         case "down":
-          gridOffset.current.y =
-            (gridOffset.current.y - effectiveSpeed + squareSize) % squareSize
+          gridOffset.current.y = (gridOffset.current.y + effectiveSpeed) % squareSize
           break
         case "diagonal":
-          gridOffset.current.x =
-            (gridOffset.current.x - effectiveSpeed + squareSize) % squareSize
-          gridOffset.current.y =
-            (gridOffset.current.y - effectiveSpeed + squareSize) % squareSize
+          gridOffset.current.x = (gridOffset.current.x + effectiveSpeed) % squareSize
+          gridOffset.current.y = (gridOffset.current.y + effectiveSpeed) % squareSize
           break
       }
 
@@ -148,7 +156,6 @@ export function AnimatedGrid({
     }
 
     // Event listeners
-    window.addEventListener("resize", resizeCanvas)
     canvas.addEventListener("mousemove", handleMouseMove)
     canvas.addEventListener("mouseleave", handleMouseLeave)
 
@@ -165,7 +172,7 @@ export function AnimatedGrid({
         cancelAnimationFrame(requestRef.current)
       }
     }
-  }, [direction, speed, borderColor, hoverFillColor, hoveredSquare, squareSize])
+  }, [direction, speed, borderColor, hoverFillColor, squareSize])
 
   return (
     <canvas
