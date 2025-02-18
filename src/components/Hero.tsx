@@ -34,7 +34,7 @@ export function Hero() {
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-semibold"
+                    className="absolute font-playfair"
                     initial={{ opacity: 0, y: "-100" }}
                     transition={{ type: "spring", stiffness: 50 }}
                     animate={

@@ -3,30 +3,47 @@ import { useEffect } from 'react';
 
 const FontLoader = () => {
   useEffect(() => {
-    // Create a link preload element for the font
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'style';
-    link.href = 'https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@500&display=swap';
-    
-    // Create the stylesheet link
-    const stylesheet = document.createElement('link');
-    stylesheet.rel = 'stylesheet';
-    stylesheet.href = 'https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@500&display=swap';
-    
-    // Append to document head
-    document.head.appendChild(link);
-    document.head.appendChild(stylesheet);
-    
-    // Load the font
+    // Create link preload elements for both fonts
+    const links = [
+      {
+        href: 'https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@500&display=swap'
+      },
+      {
+        href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap'
+      }
+    ];
+
+    const elements: HTMLLinkElement[] = [];
+
+    links.forEach(link => {
+      // Create preload link
+      const preloadLink = document.createElement('link');
+      preloadLink.rel = 'preload';
+      preloadLink.as = 'style';
+      preloadLink.href = link.href;
+      
+      // Create stylesheet link
+      const stylesheet = document.createElement('link');
+      stylesheet.rel = 'stylesheet';
+      stylesheet.href = link.href;
+      
+      // Append to document head
+      document.head.appendChild(preloadLink);
+      document.head.appendChild(stylesheet);
+      
+      elements.push(preloadLink, stylesheet);
+    });
+
+    // Load the fonts
     document.fonts.ready.then(() => {
       console.log('Fonts have loaded.');
     });
     
     return () => {
       // Cleanup
-      document.head.removeChild(link);
-      document.head.removeChild(stylesheet);
+      elements.forEach(element => {
+        document.head.removeChild(element);
+      });
     };
   }, []);
 
