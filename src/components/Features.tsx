@@ -1,8 +1,10 @@
+
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconCamera, IconDrone, IconVideo, IconBrandInstagram, IconCertificate, IconClock24, IconWallet, IconStars } from "@tabler/icons-react";
 import { BorderTrail } from "./ui/border-trail";
 import { GlowingEffect } from "./ui/glowing-effect";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function FeaturesSectionWithHoverEffects() {
   const features = [
@@ -87,7 +89,7 @@ export function FeaturesSectionWithHoverEffects() {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {features.map((feature, index) => <Feature key={feature.title} {...feature} index={index} />)}
       </div>
     </section>
@@ -106,39 +108,51 @@ const Feature = ({
   index: number;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <div 
       className={cn(
-        "flex flex-col relative group/feature cursor-pointer transition-all duration-300",
+        "flex flex-col relative group/feature transition-all duration-300",
         "bg-white/40 backdrop-blur-sm rounded-lg shadow-sm border border-primary/5",
-        "hover:bg-white/60",
-        isExpanded ? "p-4 sm:p-5" : "p-3"
+        "hover:bg-white/60 active:bg-white/70",
+        isExpanded ? "p-4" : "p-3",
+        isMobile && "cursor-default"
       )}
-      onClick={() => setIsExpanded(!isExpanded)}
-      onMouseEnter={() => setIsExpanded(true)}
-      onMouseLeave={() => setIsExpanded(false)}
+      onClick={() => isMobile && setIsExpanded(!isExpanded)}
+      onMouseEnter={() => !isMobile && setIsExpanded(true)}
+      onMouseLeave={() => !isMobile && setIsExpanded(false)}
     >
       <div className={cn(
-        "mb-2 relative z-10 text-primary transition-transform duration-300",
-        isExpanded ? "scale-110" : "scale-100"
+        "flex items-center gap-3 relative z-10",
+        isExpanded ? "mb-3" : "mb-2"
       )}>
-        {icon}
-      </div>
-      <div className={cn(
-        "text-sm sm:text-base font-semibold mb-1.5 relative z-10 transition-all duration-300 w-full",
-        isExpanded ? "translate-x-0" : ""
-      )}>
-        <h3 className="transition duration-200 text-primary/90 line-clamp-2 text-left">
+        <div className={cn(
+          "text-primary transition-transform duration-300",
+          isExpanded ? "scale-110" : "scale-100"
+        )}>
+          {icon}
+        </div>
+        <h3 className={cn(
+          "text-sm font-semibold text-primary/90 transition-all duration-300 flex-1",
+          "sm:text-base",
+          isExpanded ? "opacity-100" : "opacity-90"
+        )}>
           {title}
         </h3>
       </div>
-      <p className={cn(
-        "text-xs sm:text-sm leading-relaxed text-muted-foreground/80 relative z-10 transition-all duration-300 text-left w-full",
-        isExpanded ? "opacity-100 max-h-32 line-clamp-none" : "opacity-0 max-h-0 overflow-hidden line-clamp-2"
+      <div className={cn(
+        "overflow-hidden transition-all duration-300",
+        isExpanded ? "max-h-48" : "max-h-0"
       )}>
-        {description}
-      </p>
+        <p className={cn(
+          "text-xs sm:text-sm leading-relaxed text-muted-foreground/80 relative z-10",
+          "transition-opacity duration-200",
+          isExpanded ? "opacity-100" : "opacity-0"
+        )}>
+          {description}
+        </p>
+      </div>
     </div>
   );
 };
