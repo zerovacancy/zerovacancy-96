@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
-import { ShimmerButton } from './ui/shimmer-button';
+import { RainbowButton } from './ui/rainbow-button';
+
 const HowItWorksSection = () => {
   const steps = [{
     icon: <Search className="w-6 h-6" />,
@@ -19,6 +21,7 @@ const HowItWorksSection = () => {
     title: "Get Content",
     description: "Receive and approve deliverables"
   }];
+
   return <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-[76px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -45,11 +48,12 @@ const HowItWorksSection = () => {
         </div>
 
         <div className="flex justify-center mt-16">
-          <ShimmerButton className="min-w-[200px] h-12 text-base px-8 rounded-full font-medium" background="rgba(26, 31, 44, 0.95)">
+          <RainbowButton className="min-w-[200px] h-12 text-base font-medium">
             Find Your Creator
-          </ShimmerButton>
+          </RainbowButton>
         </div>
       </div>
     </section>;
 };
+
 export default HowItWorksSection;
