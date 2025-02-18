@@ -23,9 +23,8 @@ export function AnimatedGrid({
 }: AnimatedGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const requestRef = useRef<number>()
-  const numSquaresX = useRef<number>()
-  const numSquaresY = useRef<number>()
-  const gridOffset = useRef({ x: 0, y: 0 })
+  const lastTimeRef = useRef<number>(0)
+  const totalOffsetRef = useRef({ x: 0, y: 0 })
   const [hoveredSquare, setHoveredSquare] = useState<{
     x: number
     y: number
@@ -38,7 +37,6 @@ export function AnimatedGrid({
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    // Set canvas background
     canvas.style.background = "#060606"
 
     const resizeCanvas = () => {
@@ -52,101 +50,95 @@ export function AnimatedGrid({
       
       canvas.style.width = `${rect.width}px`
       canvas.style.height = `${rect.height}px`
-      
-      numSquaresX.current = Math.ceil(rect.width / squareSize) + 1
-      numSquaresY.current = Math.ceil(rect.height / squareSize) + 1
     }
 
-    window.addEventListener("resize", resizeCanvas)
-    resizeCanvas()
-
-    const drawGrid = () => {
+    const drawGrid = (timestamp: number) => {
       if (!canvas || !ctx) return
       
+      // Calculate delta time for smooth animation
+      const deltaTime = timestamp - lastTimeRef.current
+      lastTimeRef.current = timestamp
+      
+      // Update total offset based on direction and speed
+      const effectiveSpeed = (speed * deltaTime) / 16 // Normalize to 60fps
+
+      switch (direction) {
+        case "right":
+          totalOffsetRef.current.x -= effectiveSpeed
+          break
+        case "left":
+          totalOffsetRef.current.x += effectiveSpeed
+          break
+        case "up":
+          totalOffsetRef.current.y += effectiveSpeed
+          break
+        case "down":
+          totalOffsetRef.current.y -= effectiveSpeed
+          break
+        case "diagonal":
+          totalOffsetRef.current.x -= effectiveSpeed
+          totalOffsetRef.current.y -= effectiveSpeed
+          break
+      }
+
+      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize - squareSize
-      const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize - squareSize
+      // Calculate grid position
+      const offsetX = totalOffsetRef.current.x % squareSize
+      const offsetY = totalOffsetRef.current.y % squareSize
 
+      // Set up drawing styles
       ctx.lineWidth = 1
       ctx.strokeStyle = borderColor
 
-      for (let x = startX; x < canvas.width + squareSize * 2; x += squareSize) {
-        for (let y = startY; y < canvas.height + squareSize * 2; y += squareSize) {
-          const squareX = x - (gridOffset.current.x % squareSize)
-          const squareY = y - (gridOffset.current.y % squareSize)
+      // Draw grid
+      const width = canvas.width / window.devicePixelRatio
+      const height = canvas.height / window.devicePixelRatio
 
+      for (let x = -squareSize + offsetX; x < width + squareSize; x += squareSize) {
+        for (let y = -squareSize + offsetY; y < height + squareSize; y += squareSize) {
           if (
             hoveredSquare &&
-            Math.floor((x - startX) / squareSize) === hoveredSquare.x &&
-            Math.floor((y - startY) / squareSize) === hoveredSquare.y
+            Math.floor(x / squareSize) === hoveredSquare.x &&
+            Math.floor(y / squareSize) === hoveredSquare.y
           ) {
             ctx.fillStyle = hoverFillColor
-            ctx.fillRect(squareX, squareY, squareSize, squareSize)
+            ctx.fillRect(x, y, squareSize, squareSize)
           }
 
           ctx.beginPath()
-          ctx.rect(squareX, squareY, squareSize, squareSize)
+          ctx.rect(x, y, squareSize, squareSize)
           ctx.stroke()
         }
       }
 
       // Add vignette effect
       const gradient = ctx.createRadialGradient(
-        canvas.width / 2,
-        canvas.height / 2,
+        width / 2,
+        height / 2,
         0,
-        canvas.width / 2,
-        canvas.height / 2,
-        Math.sqrt(Math.pow(canvas.width, 2) + Math.pow(canvas.height, 2)) / 2,
+        width / 2,
+        height / 2,
+        Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / 2,
       )
       gradient.addColorStop(0, "rgba(6, 6, 6, 0)")
       gradient.addColorStop(1, "#060606")
 
       ctx.fillStyle = gradient
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-    }
+      ctx.fillRect(0, 0, width, height)
 
-    const updateAnimation = () => {
-      const effectiveSpeed = Math.max(speed, 0.1)
-
-      switch (direction) {
-        case "right":
-          gridOffset.current.x = (gridOffset.current.x + effectiveSpeed) % squareSize
-          break
-        case "left":
-          gridOffset.current.x = (gridOffset.current.x - effectiveSpeed + squareSize) % squareSize
-          break
-        case "up":
-          gridOffset.current.y = (gridOffset.current.y - effectiveSpeed + squareSize) % squareSize
-          break
-        case "down":
-          gridOffset.current.y = (gridOffset.current.y + effectiveSpeed) % squareSize
-          break
-        case "diagonal":
-          gridOffset.current.x = (gridOffset.current.x + effectiveSpeed) % squareSize
-          gridOffset.current.y = (gridOffset.current.y + effectiveSpeed) % squareSize
-          break
-      }
-
-      drawGrid()
-      requestRef.current = requestAnimationFrame(updateAnimation)
+      // Request next frame
+      requestRef.current = requestAnimationFrame(drawGrid)
     }
 
     const handleMouseMove = (event: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
       const mouseX = event.clientX - rect.left
       const mouseY = event.clientY - rect.top
-
-      const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize
-      const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize
-
-      const hoveredSquareX = Math.floor(
-        (mouseX + gridOffset.current.x - startX) / squareSize,
-      )
-      const hoveredSquareY = Math.floor(
-        (mouseY + gridOffset.current.y - startY) / squareSize,
-      )
+      
+      const hoveredSquareX = Math.floor((mouseX - (totalOffsetRef.current.x % squareSize)) / squareSize)
+      const hoveredSquareY = Math.floor((mouseY - (totalOffsetRef.current.y % squareSize)) / squareSize)
 
       setHoveredSquare({ x: hoveredSquareX, y: hoveredSquareY })
     }
@@ -156,12 +148,13 @@ export function AnimatedGrid({
     }
 
     // Event listeners
+    window.addEventListener("resize", resizeCanvas)
     canvas.addEventListener("mousemove", handleMouseMove)
     canvas.addEventListener("mouseleave", handleMouseLeave)
 
     // Initial setup
     resizeCanvas()
-    requestRef.current = requestAnimationFrame(updateAnimation)
+    requestRef.current = requestAnimationFrame(drawGrid)
 
     // Cleanup
     return () => {
