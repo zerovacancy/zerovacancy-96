@@ -15,11 +15,6 @@ export interface AnimatedGridProps {
 }
 
 export const AnimatedGrid = memo(({
-  direction = "right",
-  speed = 1,
-  borderColor = "#333",
-  squareSize = 40,
-  hoverFillColor = "#222",
   className,
 }: AnimatedGridProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,10 +54,10 @@ export const AnimatedGrid = memo(({
         }
 
         const isActive =
-          mouseX > left &&
-          mouseX < left + width &&
-          mouseY > top &&
-          mouseY < top + height;
+          mouseX > left - 100 &&
+          mouseX < left + width + 100 &&
+          mouseY > top - 100 &&
+          mouseY < top + height + 100;
 
         element.style.setProperty("--active", isActive ? "1" : "0");
 
@@ -77,7 +72,7 @@ export const AnimatedGrid = memo(({
         const newAngle = currentAngle + angleDiff;
 
         animate(currentAngle, newAngle, {
-          duration: 2,
+          duration: 1,
           ease: [0.16, 1, 0.3, 1],
           onUpdate: (value) => {
             element.style.setProperty("--start", String(value));
@@ -107,11 +102,11 @@ export const AnimatedGrid = memo(({
   }, [handleMove]);
 
   return (
-    <div className={cn("relative w-full h-full", className)}>
+    <div className={cn("relative w-full h-full overflow-hidden", className)}>
       <div
         ref={containerRef}
         style={{
-          "--spread": "20",
+          "--spread": "40",
           "--start": "0",
           "--active": "0",
           "--glowingeffect-border-width": "2px",
@@ -121,7 +116,7 @@ export const AnimatedGrid = memo(({
             radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%), 
             radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%),
             repeating-conic-gradient(
-              from 236.84deg at 50% 50%,
+              from var(--start) at 50% 50%,
               #dd7bbb 0%,
               #d79f1e calc(25% / var(--repeating-conic-gradient-times)),
               #5a922c calc(50% / var(--repeating-conic-gradient-times)), 
@@ -130,7 +125,7 @@ export const AnimatedGrid = memo(({
             )`,
         } as React.CSSProperties}
         className={cn(
-          "pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity"
+          "pointer-events-auto absolute inset-0 rounded-[inherit]"
         )}
       >
         <div
@@ -143,7 +138,7 @@ export const AnimatedGrid = memo(({
             "after:opacity-[var(--active)] after:transition-opacity after:duration-300",
             "after:[mask-clip:padding-box,border-box]",
             "after:[mask-composite:intersect]",
-            "after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]"
+            "after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*1deg))]"
           )}
         />
       </div>
