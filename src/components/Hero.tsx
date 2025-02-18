@@ -27,13 +27,13 @@ export function Hero() {
       <AuroraBackground className="w-full">
         <div className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col pt-0 pb-4 sm:py-8 lg:py-12 px-4 sm:px-6">
           <div className="flex gap-4 sm:gap-6 flex-col max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter text-center font-medium">
-              <span className="text-primary inline whitespace-nowrap">Property Content that</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wider leading-normal text-center font-medium">
+              <span className="text-primary inline whitespace-nowrap tracking-wide">Property Content that</span>
               <span className="relative flex w-full justify-center h-[1.2em] overflow-hidden">
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-playfair"
+                    className="absolute font-playfair tracking-wide"
                     initial={{ opacity: 0, y: 50 }}
                     animate={
                       titleNumber === index
@@ -52,21 +52,21 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg lg:text-xl leading-relaxed text-muted-foreground max-w-2xl text-center mx-auto px-4">
+            <p className="text-base sm:text-lg lg:text-xl leading-relaxed tracking-wide text-muted-foreground max-w-2xl text-center mx-auto px-4 [word-spacing:0.16em]">
               Connect with top-tier creators for photography, videography, and marketing content that elevates your
               property portfolio.
             </p>
           </div>
           
-          <div className="flex flex-col gap-4 w-full px-4 sm:px-6 max-w-md mx-auto mt-2">
+          <div className="flex flex-col gap-4 w-full px-4 sm:px-6 max-w-md mx-auto mt-8">
             <ShimmerButton 
-              className="w-full text-base font-medium gap-3 min-h-[3.5rem] touch-manipulation" 
+              className="w-full text-base font-medium gap-3 min-h-[3.5rem] touch-manipulation tracking-wide [word-spacing:0.16em]" 
               background="rgba(255, 255, 255, 0.1)"
             >
               I Need Content <Building className="w-5 h-5" />
             </ShimmerButton>
             <ShimmerButton 
-              className="w-full text-base font-medium gap-3 min-h-[3.5rem] touch-manipulation"
+              className="w-full text-base font-medium gap-3 min-h-[3.5rem] touch-manipulation tracking-wide [word-spacing:0.16em]"
             >
               I Create Content <UserPlus className="w-5 h-5" />
             </ShimmerButton>
