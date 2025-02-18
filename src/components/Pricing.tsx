@@ -1,186 +1,167 @@
-"use client";
 
-import { motion } from "framer-motion";
-import { Check, Star } from "lucide-react";
-import { useState, useRef } from "react";
-import confetti from "canvas-confetti";
-import NumberFlow from "@number-flow/react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-interface PricingPlan {
-  name: string;
-  price: string;
-  yearlyPrice: string;
-  period: string;
-  features: string[];
-  description: string;
-  buttonText: string;
-  href: string;
-  isPopular: boolean;
-}
-const plans = [{
-  name: "Basic",
-  price: "99",
-  yearlyPrice: "948",
-  period: "month",
-  features: ["Professional Photography (20 photos)", "Basic Photo Editing", "24-Hour Turnaround", "Digital Downloads"],
-  description: "Perfect for single property listings",
-  buttonText: "Get Started",
-  href: "#",
-  isPopular: false
-}, {
-  name: "Pro",
-  price: "199",
-  yearlyPrice: "1908",
-  period: "month",
-  features: ["Professional Photography (40 photos)", "Advanced Photo Editing", "Same-Day Turnaround", "Digital Downloads", "Drone Photography", "Virtual Tour"],
-  description: "Ideal for premium properties",
-  buttonText: "Choose Pro",
-  href: "#",
-  isPopular: true
-}, {
-  name: "Enterprise",
-  price: "499",
-  yearlyPrice: "4788",
-  period: "month",
-  features: ["Unlimited Photography", "Premium Editing Suite", "Priority Turnaround", "Dedicated Account Manager", "Custom Branding", "API Access"],
-  description: "For real estate agencies & teams",
-  buttonText: "Contact Sales",
-  href: "#",
-  isPopular: false
-}];
-export function PricingSection() {
-  const [isMonthly, setIsMonthly] = useState(true);
-  const isDesktop = window.innerWidth >= 768;
-  const switchRef = useRef<HTMLButtonElement>(null);
-  const handleToggle = (checked: boolean) => {
-    setIsMonthly(!checked);
-    if (checked && switchRef.current) {
-      const rect = switchRef.current.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-      confetti({
-        particleCount: 50,
-        spread: 60,
-        origin: {
-          x: x / window.innerWidth,
-          y: y / window.innerHeight
-        },
-        colors: ["#1A1F2C", "#E5DEFF", "#F6F6F7", "#F1F0FB"],
-        ticks: 200,
-        gravity: 1.2,
-        decay: 0.94,
-        startVelocity: 30,
-        shapes: ["circle"]
-      });
-    }
-  };
+import { IconChevronDown } from "@tabler/icons-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
+export function Pricing() {
   return (
-    <section className="relative py-16 sm:py-24 overflow-hidden">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white 
-        [background-image:linear-gradient(to_right,rgba(176,108,234,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(176,108,234,0.2)_1px,transparent_1px)]
-        [background-size:6rem_4rem]
-        [mask-image:radial-gradient(ellipse_at_center,white,transparent)]
-        before:absolute before:inset-0
-        before:bg-[radial-gradient(circle_at_center,#4F46E5,transparent)]
-        before:opacity-40
-        after:absolute after:h-full after:w-full
-        after:[background:linear-gradient(to_right,#4F46E5,#EC4899)]
-        after:opacity-20 after:animate-aurora">
-      </div>
+    <section id="pricing" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="section-title">Simple, Transparent Pricing</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            Choose the perfect plan for your real estate content needs. No hidden fees, no surprises.
+        <div className="mx-auto max-w-3xl md:text-center">
+          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
+            Simple, transparent pricing
+          </h2>
+          <p className="mt-4 text-lg tracking-tight text-slate-600">
+            Choose the perfect plan for your property marketing needs
           </p>
         </div>
-
-        <div className="flex justify-center mb-10">
-          <label className="relative inline-flex items-center cursor-pointer">
-            <Label>
-              <Switch ref={switchRef} checked={!isMonthly} onCheckedChange={handleToggle} className="relative" />
-            </Label>
-          </label>
-          <span className="ml-2 font-semibold">
-            Annual billing <span className="text-primary">(Save 20%)</span>
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {plans.map((plan, index) => <motion.div key={index} initial={{
-          y: 50,
-          opacity: 1
-        }} whileInView={isDesktop ? {
-          y: plan.isPopular ? -20 : 0,
-          opacity: 1,
-          x: index === 2 ? -30 : index === 0 ? 30 : 0,
-          scale: index === 0 || index === 2 ? 0.94 : 1.0
-        } : {}} viewport={{
-          once: true
-        }} transition={{
-          duration: 1.6,
-          type: "spring",
-          stiffness: 100,
-          damping: 30,
-          delay: 0.4,
-          opacity: {
-            duration: 0.5
-          }
-        }} className={cn(`rounded-2xl border-[1px] p-6 bg-background text-center lg:flex lg:flex-col lg:justify-center relative`, plan.isPopular ? "border-primary border-2" : "border-border", "flex flex-col", !plan.isPopular && "mt-5", index === 0 || index === 2 ? "z-0 transform translate-x-0 translate-y-0 -translate-z-[50px] rotate-y-[10deg]" : "z-10", index === 0 && "origin-right", index === 2 && "origin-left")}>
-              {plan.isPopular && <div className="absolute top-0 right-0 bg-primary py-0.5 px-2 rounded-bl-xl rounded-tr-xl flex items-center">
-                  <Star className="text-primary-foreground h-4 w-4 fill-current" />
-                  <span className="text-primary-foreground ml-1 font-sans font-semibold">
-                    Popular
-                  </span>
-                </div>}
-              <div className="flex-1 flex flex-col">
-                <p className="text-base font-semibold text-muted-foreground">
-                  {plan.name}
-                </p>
-                <div className="mt-6 flex items-center justify-center gap-x-2">
-                  <div className="text-5xl font-bold tracking-tight text-foreground flex items-center">
-                    <span>$</span>
-                    <NumberFlow value={isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)} transformTiming={{
-                  duration: 500,
-                  easing: "ease-out"
-                }} willChange className="font-variant-numeric: tabular-nums" />
-                  </div>
-                  <span className="text-sm font-semibold leading-6 tracking-wide text-muted-foreground">
-                    / {plan.period}
-                  </span>
-                </div>
-
-                <p className="text-xs leading-5 text-muted-foreground">
-                  {isMonthly ? "billed monthly" : "billed annually"}
-                </p>
-
-                <ul className="mt-5 gap-2 flex flex-col">
-                  {plan.features.map((feature, idx) => <li key={idx} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                      <span className="text-left">{feature}</span>
-                    </li>)}
-                </ul>
-
-                <hr className="w-full my-4" />
-
-                <button className={cn(buttonVariants({
-              variant: "outline"
-            }), "group relative w-full gap-2 overflow-hidden text-lg font-semibold tracking-tighter", "transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-1 hover:bg-primary hover:text-primary-foreground", plan.isPopular ? "bg-primary text-primary-foreground" : "bg-background text-foreground")}>
-                  {plan.buttonText}
-                </button>
-                <p className="mt-6 text-xs leading-5 text-muted-foreground">
-                  {plan.description}
-                </p>
-              </div>
-            </motion.div>)}
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <PricingCard
+            title="Basic"
+            price={299}
+            features={[
+              "Professional photography (up to 25 photos)",
+              "Basic photo editing",
+              "24-hour turnaround",
+              "Digital delivery",
+              "Limited revisions"
+            ]}
+            description="Perfect for single-family homes and small properties"
+            cta="Get Started"
+          />
+          <PricingCard
+            title="Professional"
+            price={499}
+            features={[
+              "Everything in Basic, plus:",
+              "Up to 40 professional photos",
+              "Drone aerial photography",
+              "Virtual tour",
+              "Advanced photo editing",
+              "Social media optimized images",
+              "Unlimited revisions"
+            ]}
+            description="Ideal for luxury homes and medium-sized properties"
+            cta="Go Professional"
+            highlighted
+          />
+          <PricingCard
+            title="Premium"
+            price={799}
+            features={[
+              "Everything in Professional, plus:",
+              "Unlimited professional photos",
+              "4K video tour",
+              "3D virtual walkthrough",
+              "Premium photo editing",
+              "Marketing materials",
+              "Dedicated support",
+              "Rush delivery available"
+            ]}
+            description="Best for luxury estates and commercial properties"
+            cta="Go Premium"
+          />
         </div>
       </div>
     </section>
   );
 }
 
-export default PricingSection;
+const PricingCard = ({
+  title,
+  price,
+  description,
+  features,
+  cta,
+  highlighted = false,
+}: {
+  title: string;
+  price: number;
+  description: string;
+  features: string[];
+  cta: string;
+  highlighted?: boolean;
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isMobile = useIsMobile();
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  return (
+    <div
+      className={cn(
+        "relative rounded-2xl p-6 shadow-xl ring-1 ring-slate-900/10 transition-all duration-300",
+        highlighted ? "bg-primary/5 scale-105" : "bg-white hover:scale-102",
+        "cursor-pointer"
+      )}
+      onClick={isMobile ? toggleExpand : undefined}
+      onMouseEnter={() => !isMobile && setIsExpanded(true)}
+      onMouseLeave={() => !isMobile && setIsExpanded(false)}
+    >
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold leading-tight text-slate-900">
+          {title}
+        </h3>
+        <IconChevronDown 
+          className={cn(
+            "w-5 h-5 transition-transform duration-300",
+            isExpanded ? "rotate-180" : "rotate-0",
+            "text-slate-500"
+          )}
+        />
+      </div>
+      
+      <div className="mt-3 flex items-baseline text-slate-900">
+        <span className="text-4xl font-bold tracking-tight">${price}</span>
+        <span className="ml-1 text-sm font-medium text-slate-600">/project</span>
+      </div>
+
+      <p className="mt-3 text-sm text-slate-600">
+        {description}
+      </p>
+
+      <div 
+        className={cn(
+          "mt-4 overflow-hidden transition-all duration-300",
+          isExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        )}
+      >
+        <ul className="mt-6 space-y-3 text-sm text-slate-600">
+          {features.map((feature) => (
+            <li key={feature} className="flex">
+              <svg
+                aria-hidden="true"
+                className="h-5 w-5 flex-shrink-0 text-primary"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span className="ml-3">{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          className={cn(
+            "mt-6 block w-full rounded-lg py-3 px-6 text-center text-sm font-semibold leading-5",
+            highlighted
+              ? "bg-primary text-white hover:bg-primary/90"
+              : "bg-slate-800 text-white hover:bg-slate-900"
+          )}
+        >
+          {cta}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Pricing;
