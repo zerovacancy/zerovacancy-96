@@ -26,7 +26,7 @@ export function Hero() {
       <AuroraBackground className="w-full">
         <div className="flex gap-4 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-4 sm:px-6 py-4 sm:py-6 lg:py-8 min-h-[50vh] sm:min-h-0">
           <div className="flex gap-3 sm:gap-4 flex-col max-w-4xl mx-auto w-full">
-            <h1 className="text-[1.75rem] sm:text-3xl md:text-4xl lg:text-5xl tracking-wide leading-[1.2] sm:leading-normal text-center py-2 sm:py-[7px] my-4 sm:my-[28px] font-bold">
+            <h1 className="text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl tracking-wide leading-[1.15] sm:leading-normal text-center py-3 sm:py-4 my-4 sm:my-6 font-bold">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-wide">Property Content that</span>
               <span className="relative flex w-full justify-center h-[1.2em] overflow-hidden mt-2 sm:mt-0">
                 {titles.map((title, index) => <motion.span
