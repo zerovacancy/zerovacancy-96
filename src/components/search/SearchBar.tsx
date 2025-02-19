@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Search, MapPin, Camera, DollarSign, Star } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -12,7 +11,7 @@ export const SearchBar = () => {
           <Search className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
-            placeholder="Search creators..."
+            placeholder="What type of content do you need?"
             className={cn(
               "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg",
               "border border-[#E5E7EB] bg-white/80 backdrop-blur",
