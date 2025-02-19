@@ -16,7 +16,7 @@ export const SearchBar = () => {
   ] : [];
 
   return (
-    <div className="w-full space-y-4 sm:space-y-6">
+    <div className="w-full space-y-6">
       {/* Main Search Bar */}
       <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-lg border border-gray-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
         {/* Content Type Dropdown */}
@@ -62,10 +62,6 @@ export const SearchBar = () => {
               "border-0"
             )}
           />
-          <div className="absolute -bottom-5 left-4 text-xs text-gray-500 flex items-center gap-1">
-            <Info className="w-3 h-3" />
-            Enter city or ZIP for local results
-          </div>
         </div>
 
         {/* Search Button */}
@@ -84,9 +80,15 @@ export const SearchBar = () => {
         </div>
       </div>
 
+      {/* Helper Text */}
+      <div className="px-2 -mt-4 mb-2 text-xs text-gray-500 flex items-center gap-1">
+        <Info className="w-3 h-3" />
+        Enter city or ZIP for local results
+      </div>
+
       {/* Popular Services */}
       {popularServices.length > 0 && (
-        <div className="flex flex-wrap gap-2 px-2">
+        <div className="flex flex-wrap gap-2 px-2 mt-4">
           {popularServices.map((service) => (
             <span 
               key={service}
@@ -99,10 +101,10 @@ export const SearchBar = () => {
       )}
 
       {/* Filters Section */}
-      <div className="relative">
+      <div className="relative mt-6">
         <div className={cn(
           "grid grid-cols-1 sm:grid-cols-2 gap-3 transition-all duration-300",
-          showMoreFilters ? "opacity-100" : "sm:opacity-100 opacity-0 h-0 sm:h-auto overflow-hidden"
+          showMoreFilters ? "opacity-100 h-auto" : "sm:opacity-100 sm:h-auto opacity-0 h-0 overflow-hidden"
         )}>
           {/* Budget Filter */}
           <div className="relative group">
@@ -152,7 +154,7 @@ export const SearchBar = () => {
         {/* Mobile Filter Toggle */}
         <button
           onClick={() => setShowMoreFilters(!showMoreFilters)}
-          className="w-full sm:hidden mt-3 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 flex items-center justify-center gap-2 transition-colors duration-200"
+          className="w-full sm:hidden mt-4 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 flex items-center justify-center gap-2 transition-colors duration-200"
         >
           <ChevronDown className={cn(
             "w-4 h-4 transition-transform duration-200",
