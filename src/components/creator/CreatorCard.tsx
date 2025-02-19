@@ -53,7 +53,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           <div className="relative aspect-[4/3]">
             <img 
               ref={imageRef}
-              src="/janeprofile.png"
+              src={creator.name === 'Jane Cooper' ? '/janeprofile.png' : creator.image}
               alt={creator.name} 
               className={cn(
                 "w-full h-full object-cover object-center transition-opacity duration-300",
