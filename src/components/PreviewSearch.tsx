@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
@@ -55,7 +55,7 @@ const PreviewSearch: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('rating');
   const [loadedImages, setLoadedImages] = useState(new Set<string>());
-  const [imageElements, setImageElements] = useState<HTMLImageElement[]>([])
+  const imageRefs = useRef<Map<string, HTMLImageElement>>(new Map());
 
   const handleImageLoad = (imageSrc: string) => {
     setLoadedImages(prev => new Set(prev).add(imageSrc));
@@ -86,9 +86,13 @@ const PreviewSearch: React.FC = () => {
   });
 
   const setImageRef = (el: HTMLImageElement | null) => {
-    if (!el) return;
-    setImageElements(prev => [...prev, el])
-  }
+    if (el) {
+      const key = el.src;
+      if (!imageRefs.current.has(key)) {
+        imageRefs.current.set(key, el);
+      }
+    }
+  };
 
   return (
     <section id="search" className="container section-sm">
