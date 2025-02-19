@@ -106,14 +106,14 @@ const PreviewSearch = () => {
     <>
       <section className="relative section-padding overflow-hidden py-4 sm:py-8 my-0">
         <div className="relative mx-auto max-w-7xl my-0 py-4 sm:py-8">
-          <div className="mx-6 sm:mx-0 mb-8">
+          <div className="mx-2 sm:mx-6 md:mx-0 mb-8">
             <div className="relative">
-              <Card className="p-4 sm:p-8 md:p-10 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75 shadow-lg border border-white/20 rounded-xl">
+              <Card className="p-3 sm:p-6 md:p-8 lg:p-10 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75 shadow-lg border border-white/20 rounded-xl">
                 <SearchHeader />
-                <div className="my-8">
+                <div className="my-4 sm:my-6 md:my-8">
                   <SearchBar />
                 </div>
-                <div className="mt-8">
+                <div className="mt-4 sm:mt-6 md:mt-8">
                   <CreatorsList 
                     creators={creators}
                     sortBy={sortBy}
