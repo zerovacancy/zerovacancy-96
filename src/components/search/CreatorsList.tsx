@@ -39,7 +39,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   ];
 
   return (
-    <div className="hidden">
+    <div>
       <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 w-full gap-4">
         <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-[-0.02em]">
           Featured Creators
