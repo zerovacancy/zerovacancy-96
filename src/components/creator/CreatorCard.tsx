@@ -7,7 +7,6 @@ import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { CreatorRating } from './CreatorRating';
-import { PortfolioGallery } from './PortfolioGallery';
 
 interface Creator {
   name: string;
@@ -78,23 +77,13 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           <div className="p-5 space-y-5">
             <CreatorRating rating={creator.rating} reviews={creator.reviews} />
             
-            <div className="space-y-4">
-              <PortfolioGallery 
-                images={creator.workExamples} 
-                creatorName={creator.name} 
-                loadedImages={loadedImages}
-                imageRef={imageRef}
-                isMobile={isMobile}
-              />
-              
-              <Button 
-                variant="outline" 
-                size="default" 
-                className="w-full text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
-              >
-                Contact
-              </Button>
-            </div>
+            <Button 
+              variant="outline" 
+              size="default" 
+              className="w-full text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
+            >
+              Contact
+            </Button>
           </div>
         </div>
       </Card>
