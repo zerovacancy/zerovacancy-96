@@ -96,20 +96,26 @@ export const SearchBar = () => {
           </Button>
         </div>
 
-        {/* Advanced Filters Toggle - Desktop & Mobile */}
-        <div className={cn(
-          "relative w-full",
-          "after:content-[''] after:absolute after:left-0 after:right-0 after:top-0 after:h-px after:bg-gray-200 sm:after:hidden"
-        )}>
+        {/* Advanced Filters Toggle - Desktop */}
+        <div className="hidden sm:block text-right mt-3">
           <button
             onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className={cn(
-              "text-sm text-gray-600/60 hover:text-gray-800 transition-colors duration-200",
-              "flex items-center gap-1.5",
-              "py-3 sm:py-2 px-4 sm:px-0",
-              "w-full sm:w-auto sm:ml-auto",
-              "sm:absolute sm:bottom-2 sm:right-4"
-            )}
+            className="inline-flex items-center gap-1.5 text-sm text-gray-600/60 hover:text-gray-800 transition-colors duration-200"
+          >
+            Advanced Filters
+            <ChevronDown className={cn(
+              "w-3.5 h-3.5 transition-transform duration-200",
+              showMoreFilters ? "rotate-180" : ""
+            )} />
+          </button>
+        </div>
+
+        {/* Advanced Filters Toggle - Mobile */}
+        <div className="sm:hidden">
+          <div className="h-px bg-gray-200" />
+          <button
+            onClick={() => setShowMoreFilters(!showMoreFilters)}
+            className="w-full text-left px-4 py-3 text-sm text-gray-600/60 hover:text-gray-800 flex items-center gap-1.5 transition-colors duration-200"
           >
             Advanced Filters
             <ChevronDown className={cn(
