@@ -2,22 +2,73 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
-import { Menu } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from "framer-motion";
 import { Magnetic } from './ui/magnetic';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+} from "./ui/dropdown-menu";
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
+
+  const ResourcesDropdown = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="group">
+        <span className={cn(
+          "text-base font-medium transition-colors relative py-1 inline-flex items-center gap-1",
+          "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
+          "before:transition-transform before:duration-300 group-hover:before:scale-x-100 before:origin-left",
+          "before:bg-primary",
+          location.pathname.startsWith('/resources')
+            ? "text-foreground before:scale-x-100"
+            : "text-muted-foreground hover:text-foreground"
+        )}>
+          Resources
+          <ChevronDown className="h-4 w-4" />
+        </span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="w-[180px]">
+        <DropdownMenuItem asChild onClick={onClick}>
+          <Link to="/resources/blog" className="w-full cursor-pointer">Blog</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild onClick={onClick}>
+          <Link to="/resources/learn" className="w-full cursor-pointer">Learn</Link>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  const MobileResourcesLinks = ({ onClick }: { onClick?: () => void }) => (
+    <div className="pl-4 flex flex-col gap-4">
+      <Link 
+        to="/resources/blog" 
+        className="text-base text-muted-foreground hover:text-foreground transition-colors"
+        onClick={onClick}
+      >
+        Blog
+      </Link>
+      <Link 
+        to="/resources/learn" 
+        className="text-base text-muted-foreground hover:text-foreground transition-colors"
+        onClick={onClick}
+      >
+        Learn
+      </Link>
+    </div>
+  );
 
   const NavLinks = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
     <nav className={cn("flex items-center gap-8", className)}>
       {[
         { to: "/search", label: "Find Creators" },
         { to: "/how-it-works", label: "How It Works" },
-        { to: "/pricing", label: "Pricing" },
       ].map((link) => (
         <Magnetic key={link.to} intensity={0.5}>
           <Link 
@@ -37,6 +88,26 @@ const Header = () => {
           </Link>
         </Magnetic>
       ))}
+      <Magnetic intensity={0.5}>
+        <ResourcesDropdown onClick={onClick} />
+      </Magnetic>
+      <Magnetic intensity={0.5}>
+        <Link 
+          to="/pricing" 
+          className={cn(
+            "text-base font-medium transition-colors relative py-1",
+            "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
+            "before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left",
+            "before:bg-primary",
+            location.pathname === '/pricing'
+              ? "text-foreground before:scale-x-100" 
+              : "text-muted-foreground hover:text-foreground"
+          )}
+          onClick={onClick}
+        >
+          Pricing
+        </Link>
+      </Magnetic>
     </nav>
   );
 
@@ -82,10 +153,52 @@ const Header = () => {
             className="w-full sm:w-[380px] pr-0 border-l border-border/40"
           >
             <div className="flex flex-col gap-8 mt-8">
-              <NavLinks 
-                onClick={() => setIsOpen(false)} 
-                className="flex-col items-start gap-8"
-              />
+              <div className="flex flex-col gap-8">
+                {[
+                  { to: "/search", label: "Find Creators" },
+                  { to: "/how-it-works", label: "How It Works" },
+                ].map((link) => (
+                  <Link 
+                    key={link.to}
+                    to={link.to} 
+                    className={cn(
+                      "text-base font-medium transition-colors",
+                      location.pathname === link.to 
+                        ? "text-foreground" 
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="flex flex-col gap-2">
+                  <Link 
+                    to="/resources"
+                    className={cn(
+                      "text-base font-medium transition-colors",
+                      location.pathname.startsWith('/resources')
+                        ? "text-foreground" 
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    Resources
+                  </Link>
+                  <MobileResourcesLinks onClick={() => setIsOpen(false)} />
+                </div>
+                <Link 
+                  to="/pricing" 
+                  className={cn(
+                    "text-base font-medium transition-colors",
+                    location.pathname === '/pricing'
+                      ? "text-foreground" 
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Pricing
+                </Link>
+              </div>
               <div className="flex flex-col gap-4 mt-4">
                 <AnimatePresence>
                   <motion.div
