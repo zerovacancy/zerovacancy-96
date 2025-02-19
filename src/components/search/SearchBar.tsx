@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Search, MapPin, Camera, DollarSign, Star, ChevronDown, Info } from 'lucide-react';
+import { Search, MapPin, Camera, DollarSign, Star, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 
@@ -68,7 +68,7 @@ export const SearchBar = () => {
         <div className="w-full sm:w-[20%] p-2 sm:p-0 order-3">
           <Button 
             className={cn(
-              "w-full h-10 sm:h-14 px-6",
+              "w-full h-12 sm:h-14 px-6",
               "bg-primary hover:bg-primary/90 text-white font-medium",
               "shadow-sm hover:shadow-md transition-all duration-200",
               "text-sm sm:text-base rounded-md sm:rounded-none"
@@ -78,12 +78,6 @@ export const SearchBar = () => {
             Search
           </Button>
         </div>
-      </div>
-
-      {/* Helper Text */}
-      <div className="px-2 -mt-4 mb-2 text-xs text-gray-500 flex items-center gap-1">
-        <Info className="w-3 h-3" />
-        Enter city or ZIP for local results
       </div>
 
       {/* Popular Services */}
