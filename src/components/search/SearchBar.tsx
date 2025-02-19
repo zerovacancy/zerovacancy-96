@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+
+import React, { useState, ChangeEvent } from 'react';
 import { Search, MapPin, Camera, DollarSign, Star, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+}
+
+export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
   const [location, setLocation] = useState('');
 
