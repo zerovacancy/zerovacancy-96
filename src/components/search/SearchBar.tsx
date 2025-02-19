@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Search, MapPin, Camera, DollarSign, Star, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -65,7 +66,7 @@ export const SearchBar = () => {
               "hover:bg-white/90"
             )}
           >
-            <option value="">Service Type</option>
+            <option value="">Select content type (Professional Photography, Virtual Tour, etc.)</option>
             <option value="professional-photography">Professional Photography</option>
             <option value="virtual-tours">Virtual Tours (360° POV)</option>
             <option value="drone-video">Drone Video Tours</option>
