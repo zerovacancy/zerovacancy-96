@@ -35,29 +35,31 @@ const Index = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       {showBanner && (
-        <Banner
-          variant="default"
-          size="lg"
-          className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground"
-          icon={<Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground flex-shrink-0" />}
-          action={
-            <Button
-              variant="secondary"
-              size="sm"
-              className="flex text-xs sm:text-sm items-center whitespace-nowrap px-2.5 py-1.5 sm:px-3 sm:py-2 ml-2 sm:ml-3 flex-shrink-0"
-              onClick={handleTryNowClick}
-            >
-              Join Waitlist
-            </Button>
-          }
-          layout="complex"
-          isClosable
-          onClose={() => setShowBanner(false)}
-        >
-          <p className="text-xs sm:text-sm pr-2 text-left">
-            <span className="font-medium">New:</span> We've launched our creator marketplace! 🎉
-          </p>
-        </Banner>
+        <div className="sticky top-[4.5rem] z-40">
+          <Banner
+            variant="default"
+            size="lg"
+            className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground"
+            icon={<Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground flex-shrink-0" />}
+            action={
+              <Button
+                variant="secondary"
+                size="sm"
+                className="flex text-xs sm:text-sm items-center whitespace-nowrap px-2.5 py-1.5 sm:px-3 sm:py-2 ml-2 sm:ml-3 flex-shrink-0"
+                onClick={handleTryNowClick}
+              >
+                Join Waitlist
+              </Button>
+            }
+            layout="complex"
+            isClosable
+            onClose={() => setShowBanner(false)}
+          >
+            <p className="text-xs sm:text-sm pr-2 text-left">
+              <span className="font-medium">New:</span> We've launched our creator marketplace! 🎉
+            </p>
+          </Banner>
+        </div>
       )}
       <main className="flex-1 pb-16 sm:pb-20">
         <div className="relative overflow-hidden">
