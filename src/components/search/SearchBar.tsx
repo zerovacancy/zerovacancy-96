@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, MapPin, Camera, DollarSign, Star } from 'lucide-react';
+import { Search, MapPin, Camera, DollarSign, Star, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 
@@ -54,9 +54,10 @@ export const SearchBar = () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
         <div className="relative">
           <Camera className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <select
             className={cn(
-              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg appearance-none",
+              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-10 sm:pr-12 rounded-lg appearance-none",
               "border border-[#E5E7EB] bg-white/80 backdrop-blur",
               "text-sm sm:text-base text-gray-500",
               "transition-all duration-200",
@@ -65,10 +66,16 @@ export const SearchBar = () => {
             )}
           >
             <option value="">Service Type</option>
-            <option value="photography">Photography</option>
-            <option value="videography">Videography</option>
-            <option value="drone">Drone Services</option>
-            <option value="editing">Photo Editing</option>
+            <option value="professional-photography">Professional Photography</option>
+            <option value="virtual-tours">Virtual Tours (360° POV)</option>
+            <option value="drone-video">Drone Video Tours</option>
+            <option value="property-highlight">Property Highlight Videos</option>
+            <option value="social-media">Social Media Content Package</option>
+            <option value="3d-virtual">3D Virtual Tours</option>
+            <option value="architectural">Architectural Photography</option>
+            <option value="twilight">Twilight Photography</option>
+            <option value="amenity">Amenity Lifestyle Photos</option>
+            <option value="property-video">Property Video Tour</option>
           </select>
         </div>
 
