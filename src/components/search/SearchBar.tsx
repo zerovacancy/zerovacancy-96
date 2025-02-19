@@ -20,7 +20,7 @@ export const SearchBar = () => {
       {/* Main Search Bar */}
       <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-lg border border-gray-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
         {/* Content Type Dropdown */}
-        <div className="w-full sm:w-[40%] relative group">
+        <div className="w-full sm:w-[40%] relative group order-1">
           <Camera className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <select
@@ -47,7 +47,7 @@ export const SearchBar = () => {
         </div>
 
         {/* Location Input */}
-        <div className="w-full sm:w-[40%] relative group">
+        <div className="w-full sm:w-[40%] relative group order-2">
           <MapPin className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
@@ -65,7 +65,7 @@ export const SearchBar = () => {
         </div>
 
         {/* Search Button */}
-        <div className="w-full sm:w-[20%] p-2 sm:p-0">
+        <div className="w-full sm:w-[20%] p-2 sm:p-0 order-3">
           <Button 
             className={cn(
               "w-full h-10 sm:h-14 px-6",
