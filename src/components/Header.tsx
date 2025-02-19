@@ -6,6 +6,7 @@ import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from "framer-motion";
+import { Magnetic } from './ui/magnetic';
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -18,22 +19,23 @@ const Header = () => {
         { to: "/how-it-works", label: "How It Works" },
         { to: "/pricing", label: "Pricing" },
       ].map((link) => (
-        <Link 
-          key={link.to}
-          to={link.to} 
-          className={cn(
-            "text-base font-medium transition-colors relative py-1",
-            "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
-            "before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left",
-            "before:bg-primary",
-            location.pathname === link.to 
-              ? "text-foreground before:scale-x-100" 
-              : "text-muted-foreground hover:text-foreground"
-          )}
-          onClick={onClick}
-        >
-          {link.label}
-        </Link>
+        <Magnetic key={link.to} intensity={0.5}>
+          <Link 
+            to={link.to} 
+            className={cn(
+              "text-base font-medium transition-colors relative py-1",
+              "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
+              "before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left",
+              "before:bg-primary",
+              location.pathname === link.to 
+                ? "text-foreground before:scale-x-100" 
+                : "text-muted-foreground hover:text-foreground"
+            )}
+            onClick={onClick}
+          >
+            {link.label}
+          </Link>
+        </Magnetic>
       ))}
     </nav>
   );
@@ -41,18 +43,20 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40">
       <div className="container flex h-[4.5rem] items-center justify-between px-4">
-        <Link 
-          to="/" 
-          className="flex items-center gap-2 transition-opacity active:opacity-80"
-        >
-          <motion.div 
-            initial={false}
-            animate={{ scale: isOpen ? 0.95 : 1 }}
-            className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+        <Magnetic intensity={0.3}>
+          <Link 
+            to="/" 
+            className="flex items-center gap-2 transition-opacity active:opacity-80"
           >
-            CreativeEstate
-          </motion.div>
-        </Link>
+            <motion.div 
+              initial={false}
+              animate={{ scale: isOpen ? 0.95 : 1 }}
+              className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+            >
+              CreativeEstate
+            </motion.div>
+          </Link>
+        </Magnetic>
 
         <NavLinks className="hidden md:flex" />
 
@@ -91,21 +95,25 @@ const Header = () => {
                     transition={{ duration: 0.2 }}
                     className="space-y-4"
                   >
-                    <Button 
-                      variant="ghost" 
-                      asChild 
-                      onClick={() => setIsOpen(false)}
-                      className="w-full justify-start text-base font-medium h-14"
-                    >
-                      <Link to="/login">Log In</Link>
-                    </Button>
-                    <Button 
-                      asChild 
-                      onClick={() => setIsOpen(false)}
-                      className="w-full justify-start text-base font-medium h-14 bg-primary hover:bg-primary/90"
-                    >
-                      <Link to="/signup">Sign Up</Link>
-                    </Button>
+                    <Magnetic intensity={0.4}>
+                      <Button 
+                        variant="ghost" 
+                        asChild 
+                        onClick={() => setIsOpen(false)}
+                        className="w-full justify-start text-base font-medium h-14"
+                      >
+                        <Link to="/login">Log In</Link>
+                      </Button>
+                    </Magnetic>
+                    <Magnetic intensity={0.4}>
+                      <Button 
+                        asChild 
+                        onClick={() => setIsOpen(false)}
+                        className="w-full justify-start text-base font-medium h-14 bg-primary hover:bg-primary/90"
+                      >
+                        <Link to="/signup">Sign Up</Link>
+                      </Button>
+                    </Magnetic>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -114,19 +122,23 @@ const Header = () => {
         </Sheet>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button 
-            variant="ghost" 
-            asChild 
-            className="h-11 px-6 text-base font-medium hover:bg-accent/50"
-          >
-            <Link to="/login">Log In</Link>
-          </Button>
-          <Button 
-            asChild 
-            className="h-11 px-6 text-base font-medium bg-primary hover:bg-primary/90 hover:shadow-lg transition-all duration-200"
-          >
-            <Link to="/signup">Sign Up</Link>
-          </Button>
+          <Magnetic intensity={0.4}>
+            <Button 
+              variant="ghost" 
+              asChild 
+              className="h-11 px-6 text-base font-medium hover:bg-accent/50"
+            >
+              <Link to="/login">Log In</Link>
+            </Button>
+          </Magnetic>
+          <Magnetic intensity={0.4}>
+            <Button 
+              asChild 
+              className="h-11 px-6 text-base font-medium bg-primary hover:bg-primary/90 hover:shadow-lg transition-all duration-200"
+            >
+              <Link to="/signup">Sign Up</Link>
+            </Button>
+          </Magnetic>
         </div>
       </div>
     </header>
