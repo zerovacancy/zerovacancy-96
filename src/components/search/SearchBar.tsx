@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Search, MapPin, Camera, DollarSign, Star, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -81,9 +82,10 @@ export const SearchBar = () => {
 
         <div className="relative">
           <DollarSign className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <select
             className={cn(
-              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg appearance-none",
+              "w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-10 sm:pr-12 rounded-lg appearance-none",
               "border border-[#E5E7EB] bg-white/80 backdrop-blur",
               "text-sm sm:text-base text-gray-500",
               "transition-all duration-200",
@@ -91,7 +93,7 @@ export const SearchBar = () => {
               "hover:bg-white/90"
             )}
           >
-            <option value="">Price Range</option>
+            <option value="">Select your budget range</option>
             <option value="0-100">$0 - $100</option>
             <option value="100-300">$100 - $300</option>
             <option value="300-500">$300 - $500</option>
