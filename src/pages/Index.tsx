@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
 import PreviewSearch from '../components/PreviewSearch';
-import Testimonials from '../components/Testimonials';
 import CallToActionSection from '../components/CallToActionSection';
 import Footer from '../components/Footer';
 import HowItWorksSection from '../components/HowItWorksSection';
@@ -76,11 +75,6 @@ const Index = () => {
           <div className="relative py-4 sm:py-6 lg:py-8 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <PreviewSearch />
-          </div>
-          
-          <div className="relative bg-gradient-to-b from-white via-[#FEF9F6] to-white py-6 sm:py-8 lg:py-10 overflow-hidden">
-            <Spotlight className="from-orange-500/20 via-amber-500/20 to-yellow-500/20" size={350} />
-            <Testimonials />
           </div>
           
           <div className="relative pt-6 sm:pt-8 lg:pt-10 overflow-hidden">
