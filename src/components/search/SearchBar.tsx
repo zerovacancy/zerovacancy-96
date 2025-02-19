@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, MapPin, Camera, DollarSign, Star, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -96,13 +95,23 @@ export const SearchBar = () => {
             Search
           </Button>
         </div>
-      </div>
 
-      {/* Advanced Filters Toggle - Desktop */}
-      <div className="hidden sm:flex justify-center mt-4">
+        {/* Advanced Filters Toggle - Desktop & Mobile */}
         <button
           onClick={() => setShowMoreFilters(!showMoreFilters)}
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
+          className={cn(
+            "w-full sm:w-auto sm:mx-auto mt-2",
+            "inline-flex items-center justify-center gap-2 px-6 py-2.5",
+            "text-sm text-gray-600 hover:text-gray-800",
+            "transition-all duration-200",
+            "rounded-full",
+            "bg-gradient-to-r from-transparent via-gray-200 to-transparent",
+            "bg-[length:200%_100%]",
+            "hover:bg-right-top",
+            "border border-gray-200",
+            "relative",
+            "after:absolute after:inset-[1px] after:bg-white after:rounded-full after:-z-10"
+          )}
         >
           Advanced Filters
           <ChevronDown className={cn(
