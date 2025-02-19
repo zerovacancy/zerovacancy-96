@@ -24,20 +24,20 @@ const Header = () => {
           "text-base font-medium transition-colors relative py-1 inline-flex items-center gap-1",
           "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
           "before:transition-transform before:duration-300 group-hover:before:scale-x-100 before:origin-left",
-          "before:bg-primary",
+          "before:bg-[#9b87f5]",
           location.pathname.startsWith('/resources')
-            ? "text-foreground before:scale-x-100"
-            : "text-muted-foreground hover:text-foreground"
+            ? "text-[#9b87f5] before:scale-x-100"
+            : "text-muted-foreground hover:text-[#9b87f5]"
         )}>
           Resources
           <ChevronDown className="h-4 w-4" />
         </span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-[180px]">
-        <DropdownMenuItem asChild onClick={onClick}>
+      <DropdownMenuContent align="start" className="w-[180px] bg-white border border-border/40 shadow-lg">
+        <DropdownMenuItem asChild onClick={onClick} className="hover:bg-accent focus:bg-accent">
           <Link to="/resources/blog" className="w-full cursor-pointer">Blog</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild onClick={onClick}>
+        <DropdownMenuItem asChild onClick={onClick} className="hover:bg-accent focus:bg-accent">
           <Link to="/resources/learn" className="w-full cursor-pointer">Learn</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
