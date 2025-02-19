@@ -41,7 +41,7 @@ const creators = [
     rating: 4.7,
     reviews: 100,
     location: 'Chicago, IL',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=500&h=500',
+    image: '/pov apt.jpg',
     workExamples: [
       'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=500&h=500',
       'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&h=500',
