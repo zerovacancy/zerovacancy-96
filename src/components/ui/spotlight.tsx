@@ -45,12 +45,10 @@ export function Spotlight({
         "absolute inset-0 pointer-events-none",
         "opacity-0 transition-opacity duration-500 hover:opacity-100",
         "[--x:0px] [--y:0px]",
+        `[--spotlight-size:${size}px]`,
         "[background:radial-gradient(circle_at_var(--x)_var(--y),var(--spotlight-color,rgba(255,255,255,0.125))_0%,transparent_var(--spotlight-size,80%))]",
         className
       )}
-      style={{
-        '--spotlight-size': `${size}px`
-      }}
     />
   );
 }
