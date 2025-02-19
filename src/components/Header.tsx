@@ -77,10 +77,10 @@ const Header = () => {
               "text-base font-medium transition-colors relative py-1",
               "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
               "before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left",
-              "before:bg-primary",
+              "before:bg-[#9b87f5]",
               location.pathname === link.to 
-                ? "text-foreground before:scale-x-100" 
-                : "text-muted-foreground hover:text-foreground"
+                ? "text-[#9b87f5] before:scale-x-100" 
+                : "text-muted-foreground hover:text-[#9b87f5]"
             )}
             onClick={onClick}
           >
