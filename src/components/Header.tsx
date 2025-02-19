@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
@@ -69,6 +68,7 @@ const Header = () => {
       {[
         { to: "/search", label: "Find Creators" },
         { to: "/how-it-works", label: "How It Works" },
+        { to: "/pricing", label: "Pricing" },
       ].map((link) => (
         <Magnetic key={link.to} intensity={0.5}>
           <Link 
@@ -90,23 +90,6 @@ const Header = () => {
       ))}
       <Magnetic intensity={0.5}>
         <ResourcesDropdown onClick={onClick} />
-      </Magnetic>
-      <Magnetic intensity={0.5}>
-        <Link 
-          to="/pricing" 
-          className={cn(
-            "text-base font-medium transition-colors relative py-1",
-            "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
-            "before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left",
-            "before:bg-primary",
-            location.pathname === '/pricing'
-              ? "text-foreground before:scale-x-100" 
-              : "text-muted-foreground hover:text-foreground"
-          )}
-          onClick={onClick}
-        >
-          Pricing
-        </Link>
       </Magnetic>
     </nav>
   );
@@ -157,6 +140,7 @@ const Header = () => {
                 {[
                   { to: "/search", label: "Find Creators" },
                   { to: "/how-it-works", label: "How It Works" },
+                  { to: "/pricing", label: "Pricing" },
                 ].map((link) => (
                   <Link 
                     key={link.to}
@@ -186,18 +170,6 @@ const Header = () => {
                   </Link>
                   <MobileResourcesLinks onClick={() => setIsOpen(false)} />
                 </div>
-                <Link 
-                  to="/pricing" 
-                  className={cn(
-                    "text-base font-medium transition-colors",
-                    location.pathname === '/pricing'
-                      ? "text-foreground" 
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Pricing
-                </Link>
               </div>
               <div className="flex flex-col gap-4 mt-4">
                 <AnimatePresence>
