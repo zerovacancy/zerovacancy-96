@@ -17,61 +17,79 @@ export const SearchBar = () => {
 
   return (
     <div className="w-full space-y-4">
-      {/* Main Search Bar */}
-      <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-md border border-gray-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
-        {/* Content Type Dropdown */}
-        <div className="w-full sm:w-[35%] relative group order-1">
-          <Camera className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-          <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-          <select
-            className={cn(
-              "w-full h-12 sm:h-14 pl-11 pr-10 appearance-none",
-              "bg-white text-sm text-gray-700",
-              "transition-colors duration-200",
-              "focus:outline-none focus:bg-blue-50/50 group-hover:bg-gray-50",
-              "border-0 rounded-lg sm:rounded-none"
-            )}
-          >
-            <option value="">Select content type</option>
-            <option value="professional-photography">Professional Photography</option>
-            <option value="virtual-tours">Virtual Tours (360° POV)</option>
-            <option value="drone-video">Drone Video Tours</option>
-            <option value="property-highlight">Property Highlight Videos</option>
-            <option value="social-media">Social Media Content Package</option>
-            <option value="3d-virtual">3D Virtual Tours</option>
-            <option value="architectural">Architectural Photography</option>
-            <option value="twilight">Twilight Photography</option>
-            <option value="amenity">Amenity Lifestyle Photos</option>
-            <option value="property-video">Property Video Tour</option>
-          </select>
+      {/* Main Search Container */}
+      <div className="flex flex-col gap-4">
+        {/* Input Fields Container */}
+        <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-md border border-gray-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+          {/* Content Type Dropdown */}
+          <div className="w-full sm:w-[35%] relative group order-1">
+            <Camera className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <select
+              className={cn(
+                "w-full h-12 sm:h-14 pl-11 pr-10 appearance-none",
+                "bg-white text-sm text-gray-700",
+                "transition-colors duration-200",
+                "focus:outline-none focus:bg-blue-50/50 group-hover:bg-gray-50",
+                "border-0 rounded-lg sm:rounded-none"
+              )}
+            >
+              <option value="">Select content type</option>
+              <option value="professional-photography">Professional Photography</option>
+              <option value="virtual-tours">Virtual Tours (360° POV)</option>
+              <option value="drone-video">Drone Video Tours</option>
+              <option value="property-highlight">Property Highlight Videos</option>
+              <option value="social-media">Social Media Content Package</option>
+              <option value="3d-virtual">3D Virtual Tours</option>
+              <option value="architectural">Architectural Photography</option>
+              <option value="twilight">Twilight Photography</option>
+              <option value="amenity">Amenity Lifestyle Photos</option>
+              <option value="property-video">Property Video Tour</option>
+            </select>
+          </div>
+
+          {/* Location Input */}
+          <div className="w-full sm:w-[45%] relative group order-2">
+            <MapPin className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="text"
+              placeholder="Enter city or zip code"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className={cn(
+                "w-full h-12 sm:h-14 pl-11 pr-4",
+                "bg-white text-sm text-gray-700",
+                "transition-colors duration-200",
+                "focus:outline-none focus:bg-blue-50/50 group-hover:bg-gray-50",
+                "border-0 rounded-lg sm:rounded-none"
+              )}
+            />
+          </div>
+
+          {/* Desktop Search Button */}
+          <div className="hidden sm:block w-[20%] order-3">
+            <Button 
+              className={cn(
+                "w-full h-14 px-6",
+                "bg-primary hover:bg-primary/90 text-white font-medium",
+                "shadow-sm hover:shadow-md transition-all duration-200",
+                "text-sm rounded-none"
+              )}
+            >
+              <Search className="w-4 h-4 mr-2" />
+              Search
+            </Button>
+          </div>
         </div>
 
-        {/* Location Input */}
-        <div className="w-full sm:w-[45%] relative group order-2">
-          <MapPin className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-          <input
-            type="text"
-            placeholder="Enter city or zip code"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className={cn(
-              "w-full h-12 sm:h-14 pl-11 pr-4",
-              "bg-white text-sm text-gray-700",
-              "transition-colors duration-200",
-              "focus:outline-none focus:bg-blue-50/50 group-hover:bg-gray-50",
-              "border-0 rounded-lg sm:rounded-none"
-            )}
-          />
-        </div>
-
-        {/* Search Button */}
-        <div className="w-full sm:w-[20%] p-2 sm:p-0 order-3">
+        {/* Mobile Search Button */}
+        <div className="sm:hidden mt-4">
           <Button 
             className={cn(
-              "w-full h-12 sm:h-14 px-6",
+              "w-full h-12 px-6",
               "bg-primary hover:bg-primary/90 text-white font-medium",
               "shadow-sm hover:shadow-md transition-all duration-200",
-              "text-sm rounded-lg sm:rounded-none"
+              "text-sm rounded-lg"
             )}
           >
             <Search className="w-4 h-4 mr-2" />
@@ -80,25 +98,41 @@ export const SearchBar = () => {
         </div>
       </div>
 
-      {/* Popular Services */}
-      {popularServices.length > 0 && (
-        <div className="flex flex-wrap gap-2 px-2">
-          {popularServices.map((service) => (
-            <span 
-              key={service}
-              className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
-            >
-              Popular in {location}: {service}
-            </span>
-          ))}
-        </div>
-      )}
+      {/* Advanced Filters Toggle - Desktop */}
+      <div className="hidden sm:flex justify-center mt-4">
+        <button
+          onClick={() => setShowMoreFilters(!showMoreFilters)}
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
+        >
+          Advanced Filters
+          <ChevronDown className={cn(
+            "w-4 h-4 transition-transform duration-200",
+            showMoreFilters ? "rotate-180" : ""
+          )} />
+        </button>
+      </div>
 
       {/* Filters Section */}
-      <div className="relative mt-6">
+      <div className="relative">
+        {/* Mobile Filters Toggle */}
+        <div className="sm:hidden">
+          <div className="h-px bg-gray-200 my-4" />
+          <button
+            onClick={() => setShowMoreFilters(!showMoreFilters)}
+            className="w-full px-4 py-2 text-sm text-gray-600 hover:text-gray-800 flex items-center justify-center gap-2 transition-colors duration-200"
+          >
+            <ChevronDown className={cn(
+              "w-4 h-4 transition-transform duration-200",
+              showMoreFilters ? "rotate-180" : ""
+            )} />
+            {showMoreFilters ? "Show Less" : "Show More Filters"}
+          </button>
+        </div>
+
+        {/* Expandable Filters */}
         <div className={cn(
           "grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-300",
-          showMoreFilters ? "opacity-100 h-auto" : "sm:opacity-100 sm:h-auto opacity-0 h-0 overflow-hidden"
+          showMoreFilters ? "opacity-100 h-auto mt-4" : "opacity-0 h-0 overflow-hidden"
         )}>
           {/* Budget Filter */}
           <div className="relative group">
@@ -144,19 +178,21 @@ export const SearchBar = () => {
             </select>
           </div>
         </div>
-
-        {/* Mobile Filter Toggle */}
-        <button
-          onClick={() => setShowMoreFilters(!showMoreFilters)}
-          className="w-full sm:hidden mt-4 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 flex items-center justify-center gap-2 transition-colors duration-200"
-        >
-          <ChevronDown className={cn(
-            "w-4 h-4 transition-transform duration-200",
-            showMoreFilters ? "rotate-180" : ""
-          )} />
-          {showMoreFilters ? "Show Less" : "Show More Filters"}
-        </button>
       </div>
+
+      {/* Popular Services */}
+      {popularServices.length > 0 && (
+        <div className="flex flex-wrap gap-2 px-2 mt-4">
+          {popularServices.map((service) => (
+            <span 
+              key={service}
+              className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
+            >
+              Popular in {location}: {service}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
