@@ -16,20 +16,20 @@ export const SearchBar = () => {
   ] : [];
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-4">
       {/* Main Search Bar */}
-      <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-lg border border-gray-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+      <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-md border border-gray-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
         {/* Content Type Dropdown */}
-        <div className="w-full sm:w-[40%] relative group order-1">
-          <Camera className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-          <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="w-full sm:w-[35%] relative group order-1">
+          <Camera className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <select
             className={cn(
-              "w-full h-12 sm:h-14 pl-10 sm:pl-12 pr-10 sm:pr-12 appearance-none",
-              "bg-white text-sm sm:text-base text-gray-700",
+              "w-full h-12 sm:h-14 pl-11 pr-10 appearance-none",
+              "bg-white text-sm text-gray-700",
               "transition-colors duration-200",
               "focus:outline-none focus:bg-blue-50/50 group-hover:bg-gray-50",
-              "border-0"
+              "border-0 rounded-lg sm:rounded-none"
             )}
           >
             <option value="">Select content type</option>
@@ -47,19 +47,19 @@ export const SearchBar = () => {
         </div>
 
         {/* Location Input */}
-        <div className="w-full sm:w-[40%] relative group order-2">
-          <MapPin className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="w-full sm:w-[45%] relative group order-2">
+          <MapPin className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder="Enter city or zip code"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className={cn(
-              "w-full h-12 sm:h-14 pl-10 sm:pl-12 pr-4",
-              "bg-white text-sm sm:text-base text-gray-700",
+              "w-full h-12 sm:h-14 pl-11 pr-4",
+              "bg-white text-sm text-gray-700",
               "transition-colors duration-200",
               "focus:outline-none focus:bg-blue-50/50 group-hover:bg-gray-50",
-              "border-0"
+              "border-0 rounded-lg sm:rounded-none"
             )}
           />
         </div>
@@ -71,10 +71,10 @@ export const SearchBar = () => {
               "w-full h-12 sm:h-14 px-6",
               "bg-primary hover:bg-primary/90 text-white font-medium",
               "shadow-sm hover:shadow-md transition-all duration-200",
-              "text-sm sm:text-base rounded-md sm:rounded-none"
+              "text-sm rounded-lg sm:rounded-none"
             )}
           >
-            <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+            <Search className="w-4 h-4 mr-2" />
             Search
           </Button>
         </div>
@@ -82,7 +82,7 @@ export const SearchBar = () => {
 
       {/* Popular Services */}
       {popularServices.length > 0 && (
-        <div className="flex flex-wrap gap-2 px-2 mt-4">
+        <div className="flex flex-wrap gap-2 px-2">
           {popularServices.map((service) => (
             <span 
               key={service}
@@ -97,18 +97,18 @@ export const SearchBar = () => {
       {/* Filters Section */}
       <div className="relative mt-6">
         <div className={cn(
-          "grid grid-cols-1 sm:grid-cols-2 gap-3 transition-all duration-300",
+          "grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-300",
           showMoreFilters ? "opacity-100 h-auto" : "sm:opacity-100 sm:h-auto opacity-0 h-0 overflow-hidden"
         )}>
           {/* Budget Filter */}
           <div className="relative group">
-            <DollarSign className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <DollarSign className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
             <select
               className={cn(
-                "w-full h-12 pl-10 pr-10 rounded-lg appearance-none",
+                "w-full h-12 px-11 rounded-lg appearance-none",
                 "border border-gray-200 bg-white",
-                "text-sm sm:text-base text-gray-700",
+                "text-sm text-gray-700",
                 "transition-colors duration-200",
                 "focus:outline-none focus:border-blue-300 focus:ring-2 focus:ring-blue-100",
                 "group-hover:bg-gray-50"
@@ -124,13 +124,13 @@ export const SearchBar = () => {
 
           {/* Rating Filter */}
           <div className="relative group">
-            <Star className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 text-gray-400 absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Star className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
             <select
               className={cn(
-                "w-full h-12 pl-10 pr-10 rounded-lg appearance-none",
+                "w-full h-12 px-11 rounded-lg appearance-none",
                 "border border-gray-200 bg-white",
-                "text-sm sm:text-base text-gray-700",
+                "text-sm text-gray-700",
                 "transition-colors duration-200",
                 "focus:outline-none focus:border-blue-300 focus:ring-2 focus:ring-blue-100",
                 "group-hover:bg-gray-50"
