@@ -82,7 +82,7 @@ export const SearchBar = () => {
         </div>
 
         {/* Mobile Search Button */}
-        <div className="sm:hidden mt-4">
+        <div className="sm:hidden">
           <Button 
             className={cn(
               "w-full h-12 px-6",
@@ -97,52 +97,34 @@ export const SearchBar = () => {
         </div>
 
         {/* Advanced Filters Toggle - Desktop & Mobile */}
-        <button
-          onClick={() => setShowMoreFilters(!showMoreFilters)}
-          className={cn(
-            "w-full sm:w-auto sm:mx-auto mt-2",
-            "inline-flex items-center justify-center gap-2 px-6 py-2.5",
-            "text-sm text-gray-600 hover:text-gray-800",
-            "transition-all duration-200",
-            "rounded-full",
-            "bg-gradient-to-r from-transparent via-gray-200 to-transparent",
-            "bg-[length:200%_100%]",
-            "hover:bg-right-top",
-            "border border-gray-200",
-            "relative",
-            "after:absolute after:inset-[1px] after:bg-white after:rounded-full after:-z-10"
-          )}
-        >
-          Advanced Filters
-          <ChevronDown className={cn(
-            "w-4 h-4 transition-transform duration-200",
-            showMoreFilters ? "rotate-180" : ""
-          )} />
-        </button>
+        <div className={cn(
+          "relative w-full",
+          "after:content-[''] after:absolute after:left-0 after:right-0 after:top-0 after:h-px after:bg-gray-200 sm:after:hidden"
+        )}>
+          <button
+            onClick={() => setShowMoreFilters(!showMoreFilters)}
+            className={cn(
+              "text-sm text-gray-600/60 hover:text-gray-800 transition-colors duration-200",
+              "flex items-center gap-1.5",
+              "py-3 sm:py-2 px-4 sm:px-0",
+              "w-full sm:w-auto sm:ml-auto",
+              "sm:absolute sm:bottom-2 sm:right-4"
+            )}
+          >
+            Advanced Filters
+            <ChevronDown className={cn(
+              "w-3.5 h-3.5 transition-transform duration-200",
+              showMoreFilters ? "rotate-180" : ""
+            )} />
+          </button>
+        </div>
       </div>
 
       {/* Filters Section */}
-      <div className="relative">
-        {/* Mobile Filters Toggle */}
-        <div className="sm:hidden">
-          <div className="h-px bg-gray-200 my-4" />
-          <button
-            onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className="w-full px-4 py-2 text-sm text-gray-600 hover:text-gray-800 flex items-center justify-center gap-2 transition-colors duration-200"
-          >
-            <ChevronDown className={cn(
-              "w-4 h-4 transition-transform duration-200",
-              showMoreFilters ? "rotate-180" : ""
-            )} />
-            {showMoreFilters ? "Show Less" : "Show More Filters"}
-          </button>
-        </div>
-
-        {/* Expandable Filters */}
-        <div className={cn(
-          "grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-300",
-          showMoreFilters ? "opacity-100 h-auto mt-4" : "opacity-0 h-0 overflow-hidden"
-        )}>
+      <div className={cn(
+        "grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-300",
+        showMoreFilters ? "opacity-100 h-auto mt-4" : "opacity-0 h-0 overflow-hidden"
+      )}>
           {/* Budget Filter */}
           <div className="relative group">
             <DollarSign className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -187,7 +169,6 @@ export const SearchBar = () => {
             </select>
           </div>
         </div>
-      </div>
 
       {/* Popular Services */}
       {popularServices.length > 0 && (
