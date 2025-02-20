@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -19,7 +18,6 @@ const Index = () => {
   const [showGlowDialog, setShowGlowDialog] = useState(false);
 
   useEffect(() => {
-    // Show dialog on first visit
     const hasVisited = localStorage.getItem('hasVisited');
     if (!hasVisited) {
       setShowGlowDialog(true);
@@ -39,7 +37,7 @@ const Index = () => {
           <Banner
             variant="default"
             size="lg"
-            className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground relative overflow-hidden"
+            className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground relative overflow-hidden min-h-[4rem]"
             icon={<Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground flex-shrink-0" />}
             action={
               <Button
@@ -58,12 +56,12 @@ const Index = () => {
             <div className="absolute inset-0 z-0">
               <WavyBackground 
                 className="w-full h-full"
-                colors={["#1a1f2c", "#2a2f3c", "#3a3f4c"]}
-                waveWidth={50}
+                colors={["#2a2f3c", "#3a3f4c", "#4a4f5c"]}
+                waveWidth={100}
                 backgroundFill="#1A1F2C"
-                blur={2}
+                blur={1}
                 speed="slow"
-                waveOpacity={0.3}
+                waveOpacity={0.15}
               />
             </div>
             <p className="text-xs sm:text-sm pr-2 text-left relative z-10">
