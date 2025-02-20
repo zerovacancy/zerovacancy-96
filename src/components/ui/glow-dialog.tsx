@@ -1,11 +1,13 @@
+
 import * as React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { motion, useAnimationFrame, useMotionTemplate, useMotionValue, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { cn } from "@/lib/utils";
 import { Squares } from "@/components/ui/squares";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const MovingBorder = ({
   children,
@@ -58,12 +60,57 @@ export function GlowDialog({
   onOpenChange
 }: GlowDialogProps) {
   const [email, setEmail] = React.useState("");
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle email submission here
-    console.log("Email submitted:", email);
-    onOpenChange(false);
+    
+    if (!email) {
+      toast({
+        title: "Error",
+        description: "Please enter your email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    const webhookUrl = "https://hooks.zapier.com/hooks/catch/21787151/2wjtn4b/";
+    
+    try {
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: JSON.stringify({
+          email,
+          timestamp: new Date().toISOString(),
+          triggered_from: window.location.origin,
+        }),
+      });
+
+      toast({
+        title: "Success!",
+        description: "You've been added to the waitlist. We'll be in touch soon!",
+      });
+      
+      setEmail("");
+      onOpenChange(false);
+    } catch (error) {
+      console.error("Error submitting email:", error);
+      toast({
+        title: "Error",
+        description: "Failed to join the waitlist. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl md:max-w-3xl overflow-hidden border-none bg-transparent">
@@ -99,14 +146,23 @@ export function GlowDialog({
                 onChange={e => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30"
+                disabled={isLoading}
+                className="flex-1 px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30 disabled:opacity-50"
               />
               <HoverBorderGradient 
                 type="submit"
-                className="!bg-white !text-black hover:!bg-white/90"
+                className="!bg-white !text-black hover:!bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 duration={1.5}
+                disabled={isLoading}
               >
-                Join Waitlist
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Joining...
+                  </>
+                ) : (
+                  'Join Waitlist'
+                )}
               </HoverBorderGradient>
             </form>
           </div>
