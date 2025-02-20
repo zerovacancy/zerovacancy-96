@@ -52,14 +52,14 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     if (name === 'Jane Cooper') {
       return ['#Interior', '#Design', '#Staging'];
     }
-    if (name === 'Emily') {
-      return ['#Portrait', '#Fashion', '#Lifestyle'];
+    if (name === 'Emily Johnson') {
+      return ['#POV', '#TikTok', '#ComeTourWithMe'];
     }
     return ['#Professional', '#Creative', '#Expert'];
   };
 
   const getTagStyle = (tag: string) => {
-    if (['#RealEstate', '#Aerial', '#Commercial', '#Portrait', '#Wedding', '#Editorial', '#Interior', '#Design', '#Staging'].includes(tag)) {
+    if (['#RealEstate', '#Aerial', '#Commercial', '#Portrait', '#Wedding', '#Editorial', '#Interior', '#Design', '#Staging', '#POV', '#TikTok', '#ComeTourWithMe'].includes(tag)) {
       return "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA] hover:text-[#3730A3]";
     }
     if (['#Professional', '#Creative', '#Expert'].includes(tag)) {
