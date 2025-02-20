@@ -13,6 +13,7 @@ import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
 import { SparklesCore } from '@/components/ui/sparkles-core';
+import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -65,9 +66,12 @@ const Index = () => {
                 maxSize={1}
               />
             </div>
-            <p className="text-xs sm:text-sm inline-block text-left relative z-10 rounded px-2 py-1 ml-2">
+            <AnimatedShinyText 
+              className="text-xs sm:text-sm inline-block text-left text-white relative z-10 rounded px-2 py-1 ml-2"
+              shimmerWidth={150}
+            >
               Get priority access to our creator marketplace - Join the waitlist! ✨
-            </p>
+            </AnimatedShinyText>
           </Banner>
         </div>
       )}
