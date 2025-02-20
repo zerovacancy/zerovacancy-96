@@ -13,7 +13,7 @@ import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
 import { SparklesCore } from '@/components/ui/sparkles-core';
-import { LampContainer } from '@/components/ui/lamp-container';
+import { LampContainer } from '../components/ui/lamp-container';
 import { motion } from 'framer-motion';
 
 const Index = () => {
