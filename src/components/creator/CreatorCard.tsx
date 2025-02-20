@@ -43,7 +43,8 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     }
   };
 
-  // Get default tags based on services
+  console.log('Creator name:', creator.name); // Debug log
+
   const getDefaultTags = (name: string, services: string[]) => {
     if (name === 'John Smith' && services.includes('Photography')) {
       return ['#RealEstate', '#Aerial', '#Commercial'];
@@ -51,43 +52,45 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     if (name === 'Jane Cooper') {
       return ['#Portrait', '#Wedding', '#Editorial'];
     }
+    if (name === 'Emily') {
+      return ['#Portrait', '#Fashion', '#Lifestyle'];
+    }
     return ['#Professional', '#Creative', '#Expert'];
   };
 
-  // Get tag style based on category
   const getTagStyle = (tag: string) => {
-    // Photography-related tags
     if (['#RealEstate', '#Aerial', '#Commercial', '#Portrait', '#Wedding', '#Editorial'].includes(tag)) {
       return "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA] hover:text-[#3730A3]";
     }
-    // Creative/Professional tags
     if (['#Professional', '#Creative', '#Expert'].includes(tag)) {
       return "bg-[#F2FCE2] text-[#3B823E] hover:bg-[#DCF5DC] hover:text-[#2E6A31]";
     }
-    // Default style
     return "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7] hover:text-[#9D5B3F]";
   };
   
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
+
+  // Get the correct image source
+  const getImageSource = () => {
+    if (creator.name === 'Jane Cooper') return '/janeprofile.png';
+    if (creator.name === 'Emily') return '/emily profile.png';
+    return creator.image;
+  };
   
   return (
     <div className="group select-text">
       <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
         <div className="relative">
-          {/* Price Badge */}
           <div className="absolute top-4 right-4 z-10">
             <span className="px-3 py-1.5 text-sm font-medium bg-black/70 text-white rounded-full backdrop-blur-sm">
               From ${creator.price}
             </span>
           </div>
 
-          {/* Profile Image Section */}
           <div className="relative aspect-[4/3]">
             <img 
               ref={imageRef}
-              src={creator.name === 'Jane Cooper' ? '/janeprofile.png' : 
-                   creator.name === 'Emily' ? '/emily profile.jpeg' : 
-                   creator.image}
+              src={getImageSource()}
               alt={creator.name} 
               className={cn(
                 "w-full h-full object-cover object-center transition-opacity duration-300",
@@ -99,7 +102,6 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
             
-            {/* Minimal Text Overlay */}
             <div className="absolute bottom-4 left-4 text-white select-text">
               <div className="flex items-center gap-2">
                 <h3 className="font-semibold text-xl">{creator.name}</h3>
@@ -115,10 +117,8 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             </div>
           </div>
           
-          {/* Metadata Section */}
           <div className="p-5">
             <div className="space-y-5">
-              {/* Tags Section */}
               <div className="flex flex-wrap gap-2">
                 {tags.map((tag, index) => (
                   <button
@@ -134,10 +134,8 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 ))}
               </div>
               
-              {/* Rating Section */}
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
-              {/* CTA Button */}
               <Button 
                 variant="outline" 
                 size="default" 
