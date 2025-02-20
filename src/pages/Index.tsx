@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
-import { SparklesCore } from '@/components/ui/sparkles-core';
+import { WavyBackground } from '@/components/ui/wavy-background';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -56,13 +56,14 @@ const Index = () => {
             onClose={() => setShowBanner(false)}
           >
             <div className="absolute inset-0 z-0">
-              <SparklesCore 
-                id="banner-tsparticles"
-                background="transparent"
-                particleColor="#FFFFFF"
-                particleDensity={100}
-                speed={2}
+              <WavyBackground 
                 className="w-full h-full"
+                colors={["#1a1f2c", "#2a2f3c", "#3a3f4c"]}
+                waveWidth={50}
+                backgroundFill="#1A1F2C"
+                blur={2}
+                speed="slow"
+                waveOpacity={0.3}
               />
             </div>
             <p className="text-xs sm:text-sm pr-2 text-left relative z-10">
