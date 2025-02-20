@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -13,8 +14,6 @@ import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
 import { SparklesCore } from '@/components/ui/sparkles-core';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
-import { LampContainer } from '@/components/ui/lamp-container';
-import { motion } from 'framer-motion';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -40,13 +39,13 @@ const Index = () => {
           <Banner
             variant="default"
             size="lg"
-            className="animate-in fade-in slide-in-from-top duration-500 bg-transparent relative overflow-hidden"
-            icon={<Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground flex-shrink-0 relative z-50" />}
+            className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground relative overflow-hidden min-h-[4rem]"
+            icon={<Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground flex-shrink-0" />}
             action={
               <Button
                 variant="secondary"
                 size="sm"
-                className="flex text-xs sm:text-sm items-center whitespace-nowrap px-2.5 py-1.5 sm:px-3 sm:py-2 ml-2 sm:ml-3 flex-shrink-0 relative z-50"
+                className="flex text-xs sm:text-sm items-center whitespace-nowrap px-2.5 py-1.5 sm:px-3 sm:py-2 ml-2 sm:ml-3 flex-shrink-0"
                 onClick={handleTryNowClick}
               >
                 Join Waitlist
@@ -56,20 +55,23 @@ const Index = () => {
             isClosable
             onClose={() => setShowBanner(false)}
           >
-            <LampContainer className="min-h-[4rem] !-translate-y-0">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.3,
-                  duration: 0.8,
-                  ease: "easeInOut",
-                }}
-                className="text-xs sm:text-sm text-white relative z-50 rounded px-2 py-1 ml-2"
-              >
-                Get priority access to our creator marketplace - Join the waitlist! ✨
-              </motion.div>
-            </LampContainer>
+            <div className="absolute inset-0 z-0">
+              <SparklesCore 
+                background="transparent"
+                particleColor="#ffffff"
+                particleDensity={100}
+                speed={2}
+                className="w-full h-full"
+                minSize={0.5}
+                maxSize={1}
+              />
+            </div>
+            <AnimatedShinyText 
+              className="text-xs sm:text-sm inline-block text-left text-white relative z-10 rounded px-2 py-1 ml-2"
+              shimmerWidth={150}
+            >
+              Get priority access to our creator marketplace - Join the waitlist! ✨
+            </AnimatedShinyText>
           </Banner>
         </div>
       )}
