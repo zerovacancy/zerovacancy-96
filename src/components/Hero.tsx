@@ -67,15 +67,15 @@ export function Hero() {
             </p>
           </div>
           
-          <div className="flex flex-col gap-3 w-full px-3 sm:px-4 max-w-md mx-auto mt-4 sm:mt-6">
+          <div className="flex flex-col sm:flex-row gap-3 w-full px-3 sm:px-4 max-w-md mx-auto mt-4 sm:mt-6">
             <ShimmerButton 
-              className="w-full text-sm sm:text-base font-medium gap-2 sm:gap-3 min-h-[2.75rem] sm:min-h-[3rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform" 
+              className="flex-1 text-sm sm:text-base font-medium gap-2 sm:gap-3 min-h-[2.75rem] sm:min-h-[3rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform" 
               background="rgba(255, 255, 255, 0.1)"
             >
               I Need Content <Building className="w-4 h-4 sm:w-5 sm:h-5" />
             </ShimmerButton>
             <ShimmerButton 
-              className="w-full text-sm sm:text-base font-medium gap-2 sm:gap-3 min-h-[2.75rem] sm:min-h-[3rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform"
+              className="flex-1 text-sm sm:text-base font-medium gap-2 sm:gap-3 min-h-[2.75rem] sm:min-h-[3rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform"
             >
               I Create Content <UserPlus className="w-4 h-4 sm:w-5 sm:h-5" />
             </ShimmerButton>
