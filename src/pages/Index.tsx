@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -12,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
-import { WarpBackground } from '@/components/ui/warp-background';
+import { SparklesCore } from '@/components/ui/sparkles-core';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -55,17 +54,15 @@ const Index = () => {
             onClose={() => setShowBanner(false)}
           >
             <div className="absolute inset-0 z-0">
-              <WarpBackground 
-                className="w-full h-full bg-black/50"
-                beamsPerSide={4}
-                beamSize={8}
-                beamDelayMax={2}
-                beamDuration={2}
-                gridColor="rgba(255,255,255,0.1)"
-                perspective={80}
-              >
-                <div className="w-full h-full" />
-              </WarpBackground>
+              <SparklesCore 
+                background="rgba(0,0,0,0.5)"
+                particleColor="#ffffff"
+                particleDensity={100}
+                speed={2}
+                className="w-full h-full"
+                minSize={0.5}
+                maxSize={1}
+              />
             </div>
             <p className="text-xs sm:text-sm inline-block text-left relative z-10 bg-black/50 rounded px-2 py-1 ml-2">
               Get priority access to our creator marketplace - Join the waitlist! ✨
