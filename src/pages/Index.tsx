@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
+import { SparklesCore } from '@/components/ui/sparkles-core';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -38,7 +39,7 @@ const Index = () => {
           <Banner
             variant="default"
             size="lg"
-            className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground"
+            className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground relative overflow-hidden"
             icon={<Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground flex-shrink-0" />}
             action={
               <Button
@@ -54,7 +55,17 @@ const Index = () => {
             isClosable
             onClose={() => setShowBanner(false)}
           >
-            <p className="text-xs sm:text-sm pr-2 text-left">
+            <div className="absolute inset-0 z-0">
+              <SparklesCore 
+                id="banner-tsparticles"
+                background="transparent"
+                particleColor="#FFFFFF"
+                particleDensity={100}
+                speed={2}
+                className="w-full h-full"
+              />
+            </div>
+            <p className="text-xs sm:text-sm pr-2 text-left relative z-10">
               <span className="font-medium">New:</span> We've launched our creator marketplace! 🎉
             </p>
           </Banner>
