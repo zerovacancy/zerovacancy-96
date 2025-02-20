@@ -26,7 +26,7 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
   const hourlyRate = getHourlyRate(name);
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between gap-8">
       <div className="flex items-center gap-2">
         <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
         <span className="text-sm font-medium">{rating}</span>
