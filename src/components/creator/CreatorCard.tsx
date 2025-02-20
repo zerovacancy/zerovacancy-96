@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardHeader, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
@@ -69,7 +70,6 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
 
-  // Get the correct image source with updated name check
   const getImageSource = () => {
     if (creator.name === 'Jane Cooper') return '/janeprofile.png';
     if (creator.name === 'Emily Johnson') return '/emily profile.jpeg';
@@ -136,9 +136,9 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
               <Button 
-                variant="outline" 
+                variant="default"
                 size="default" 
-                className="w-full text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
+                className="w-full text-sm px-4 py-2 h-10 bg-[#F97316] hover:bg-[#EA580C] text-white transition-colors"
                 onClick={() => setShowEmailDialog(true)}
               >
                 Get Early Access
