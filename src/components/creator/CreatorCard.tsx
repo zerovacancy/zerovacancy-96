@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { CreatorRating } from './CreatorRating';
 import { GlowDialog } from '../ui/glow-dialog';
+import { ButtonColorful } from '../ui/button-colorful';
 
 interface Creator {
   name: string;
@@ -135,14 +136,11 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
-              <Button 
-                variant="default"
-                size="default" 
-                className="w-full text-sm px-4 py-2 h-10 bg-[#4F46E5] hover:bg-[#3730A3] text-white transition-colors"
+              <ButtonColorful 
+                className="w-full"
+                label="Get Early Access"
                 onClick={() => setShowEmailDialog(true)}
-              >
-                Get Early Access
-              </Button>
+              />
             </div>
           </div>
         </div>
@@ -151,3 +149,4 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     </div>
   );
 };
+
