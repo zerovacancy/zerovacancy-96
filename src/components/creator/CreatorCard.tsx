@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardHeader, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
-import { MapPin, Star, Image } from 'lucide-react';
+import { MapPin, Star, Image, CheckCircle } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -63,7 +63,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
             <div className="absolute bottom-4 left-4 text-white select-text">
-              <h3 className="font-semibold text-xl mb-1">{creator.name}</h3>
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="font-semibold text-xl">{creator.name}</h3>
+                <CheckCircle className="w-5 h-5 text-blue-400" />
+              </div>
               <div className="flex items-center gap-1.5 text-sm text-white/90">
                 <MapPin className="w-4 h-4" />
                 <span>{creator.location}</span>
