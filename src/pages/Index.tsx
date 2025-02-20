@@ -56,7 +56,7 @@ const Index = () => {
           >
             <div className="absolute inset-0 z-0">
               <WarpBackground 
-                className="w-full h-full"
+                className="w-full h-full bg-black/50"
                 beamsPerSide={4}
                 beamSize={8}
                 beamDelayMax={2}
