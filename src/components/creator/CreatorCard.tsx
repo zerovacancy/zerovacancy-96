@@ -18,13 +18,7 @@ interface Creator {
   location: string;
   image: string;
   workExamples: string[];
-}
-
-interface CreatorCardProps {
-  creator: Creator;
-  onImageLoad?: (imageSrc: string) => void;
-  loadedImages: Set<string>;
-  imageRef: (node: HTMLImageElement | null) => void;
+  tags?: string[];
 }
 
 export const CreatorCard: React.FC<CreatorCardProps> = ({ 
@@ -41,6 +35,19 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       onImageLoad(creator.image);
     }
   };
+
+  // Get default tags based on services
+  const getDefaultTags = (name: string, services: string[]) => {
+    if (name === 'John Smith' && services.includes('Photography')) {
+      return ['#RealEstate', '#Aerial', '#Commercial'];
+    }
+    if (name === 'Jane Cooper') {
+      return ['#Portrait', '#Wedding', '#Editorial'];
+    }
+    return ['#Professional', '#Creative', '#Expert'];
+  };
+  
+  const tags = creator.tags || getDefaultTags(creator.name, creator.services);
   
   return (
     <div className="group select-text">
@@ -77,6 +84,22 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <p className="text-sm text-white/90 mt-1">
                 {creator.services.join(" • ")}
               </p>
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                {tags.map((tag, index) => (
+                  <button
+                    key={index}
+                    className={cn(
+                      "text-xs px-2 py-0.5 rounded-full transition-colors",
+                      index % 3 === 0 ? "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA]" :
+                      index % 3 === 1 ? "bg-[#F2FCE2] text-[#3B823E] hover:bg-[#DCF5DC]" :
+                      "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7]"
+                    )}
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
           
