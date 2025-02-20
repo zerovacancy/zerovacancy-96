@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -55,7 +56,7 @@ const Index = () => {
           >
             <div className="absolute inset-0 z-0">
               <SparklesCore 
-                background="rgba(0,0,0,0.5)"
+                background="transparent"
                 particleColor="#ffffff"
                 particleDensity={100}
                 speed={2}
@@ -64,7 +65,7 @@ const Index = () => {
                 maxSize={1}
               />
             </div>
-            <p className="text-xs sm:text-sm inline-block text-left relative z-10 bg-black/50 rounded px-2 py-1 ml-2">
+            <p className="text-xs sm:text-sm inline-block text-left relative z-10 rounded px-2 py-1 ml-2">
               Get priority access to our creator marketplace - Join the waitlist! ✨
             </p>
           </Banner>
