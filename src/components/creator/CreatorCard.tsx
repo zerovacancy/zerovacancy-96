@@ -50,7 +50,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       return ['#RealEstate', '#Aerial', '#Commercial'];
     }
     if (name === 'Jane Cooper') {
-      return ['#Portrait', '#Wedding', '#Editorial'];
+      return ['#Interior', '#Design', '#Staging'];
     }
     if (name === 'Emily') {
       return ['#Portrait', '#Fashion', '#Lifestyle'];
@@ -59,7 +59,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   };
 
   const getTagStyle = (tag: string) => {
-    if (['#RealEstate', '#Aerial', '#Commercial', '#Portrait', '#Wedding', '#Editorial'].includes(tag)) {
+    if (['#RealEstate', '#Aerial', '#Commercial', '#Portrait', '#Wedding', '#Editorial', '#Interior', '#Design', '#Staging'].includes(tag)) {
       return "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA] hover:text-[#3730A3]";
     }
     if (['#Professional', '#Creative', '#Expert'].includes(tag)) {
