@@ -21,6 +21,13 @@ interface Creator {
   tags?: string[];
 }
 
+interface CreatorCardProps {
+  creator: Creator;
+  onImageLoad?: (imageSrc: string) => void;
+  loadedImages: Set<string>;
+  imageRef: (node: HTMLImageElement | null) => void;
+}
+
 export const CreatorCard: React.FC<CreatorCardProps> = ({ 
   creator, 
   onImageLoad, 
@@ -45,6 +52,20 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       return ['#Portrait', '#Wedding', '#Editorial'];
     }
     return ['#Professional', '#Creative', '#Expert'];
+  };
+
+  // Get tag style based on category
+  const getTagStyle = (tag: string) => {
+    // Photography-related tags
+    if (['#RealEstate', '#Aerial', '#Commercial', '#Portrait', '#Wedding', '#Editorial'].includes(tag)) {
+      return "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA] hover:text-[#3730A3]";
+    }
+    // Creative/Professional tags
+    if (['#Professional', '#Creative', '#Expert'].includes(tag)) {
+      return "bg-[#F2FCE2] text-[#3B823E] hover:bg-[#DCF5DC] hover:text-[#2E6A31]";
+    }
+    // Default style
+    return "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7] hover:text-[#9D5B3F]";
   };
   
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
@@ -84,15 +105,13 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <p className="text-sm text-white/90 mt-1">
                 {creator.services.join(" • ")}
               </p>
-              <div className="flex flex-wrap gap-1.5 mt-2">
+              <div className="flex flex-wrap gap-1 mt-1.5">
                 {tags.map((tag, index) => (
                   <button
                     key={index}
                     className={cn(
-                      "text-xs px-2 py-0.5 rounded-full transition-colors",
-                      index % 3 === 0 ? "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA]" :
-                      index % 3 === 1 ? "bg-[#F2FCE2] text-[#3B823E] hover:bg-[#DCF5DC]" :
-                      "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7]"
+                      "text-xs px-1.5 py-0.5 rounded-full transition-colors duration-200 cursor-pointer",
+                      getTagStyle(tag)
                     )}
                     onClick={(e) => e.preventDefault()}
                   >
