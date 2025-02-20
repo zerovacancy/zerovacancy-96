@@ -80,7 +80,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
           
           <div className="p-5 space-y-5">
-            <CreatorRating rating={creator.rating} reviews={creator.reviews} />
+            <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
             
             <Button 
               variant="outline" 
