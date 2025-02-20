@@ -37,11 +37,16 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const [showEmailDialog, setShowEmailDialog] = React.useState(false);
+  const [imageError, setImageError] = React.useState(false);
   
   const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
     if (onImageLoad) {
       onImageLoad(creator.image);
     }
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
   };
 
   console.log('Creator name:', creator.name); // Debug log
@@ -72,8 +77,15 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
 
   const getImageSource = () => {
+    if (creator.name === 'Emily Johnson') {
+      // If the main image fails, use the first fallback
+      if (imageError) {
+        return 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=500&h=500';
+      }
+      // Use the local image as primary source
+      return '/emily profile.jpeg';
+    }
     if (creator.name === 'Jane Cooper') return '/janeprofile.png';
-    if (creator.name === 'Emily Johnson') return '/emily profile.jpeg';
     return creator.image;
   };
   
@@ -97,6 +109,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 !loadedImages.has(creator.image) && "opacity-0"
               )}
               onLoad={handleImageLoad}
+              onError={handleImageError}
               loading="lazy"
               crossOrigin="anonymous"
             />
@@ -149,4 +162,3 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     </div>
   );
 };
-
