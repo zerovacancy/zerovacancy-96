@@ -1,8 +1,10 @@
+
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FeaturesSectionWithHoverEffects } from './Features';
 import { Pricing } from './Pricing';
+import { GlowingEffect } from './ui/glowing-effect';
 import { SearchHeader } from './search/SearchHeader';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
@@ -94,6 +96,7 @@ const PreviewSearch: React.FC = () => {
 
   return (
     <section id="search" className="container section-sm">
+      <GlowingEffect className="bg-blue-600/20 absolute -left-24 top-1/2 -translate-y-1/2 blur-3xl opacity-50 w-[32rem] h-[32rem] md:block" />
       <div className="relative grid items-center gap-8">
         <div className="flex flex-col gap-3">
           <SearchHeader />

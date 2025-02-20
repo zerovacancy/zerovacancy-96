@@ -1,4 +1,3 @@
-
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
@@ -27,10 +26,13 @@ export default {
       },
       animation: {
         "shimmer-slide": "shimmer-slide var(--speed, 1.5s) infinite linear",
-        "shiny-text": "shiny-text 1s cubic-bezier(.6,.6,0,1) infinite",
+        "shiny-text": "shiny-text 2s infinite linear",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        anek: ["Anek Devanagari", ...fontFamily.sans],
+        space: ["Space Grotesk", ...fontFamily.sans],
+        playfair: ["Playfair Display", ...fontFamily.serif],
       },
       colors: {
         border: "hsl(var(--border))",
