@@ -2,9 +2,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { BorderBeam } from "@/components/ui/border-beam";
-import { AnimatedGrid } from "@/components/ui/animated-grid";
 
 export interface SquaresProps {
   direction?: "right" | "left" | "up" | "down" | "diagonal";
@@ -33,16 +31,6 @@ export function Squares({
         colorFrom="#ff40aa"
         colorTo="#40ffb3"
         delay={0}
-      />
-      <AnimatedGrid className={className} />
-      <GlowingEffect
-        blur={20}
-        spread={30}
-        glow={true}
-        variant="default"
-        disabled={false}
-        movementDuration={2}
-        borderWidth={2}
       />
     </div>
   );
