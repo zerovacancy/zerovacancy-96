@@ -67,7 +67,7 @@ const Index = () => {
                 <div className="w-full h-full" />
               </WarpBackground>
             </div>
-            <p className="text-xs sm:text-sm pr-2 text-left relative z-10 bg-black/50 rounded px-2 py-1">
+            <p className="text-xs sm:text-sm inline-block text-left relative z-10 bg-black/50 rounded px-2 py-1">
               Get priority access to our creator marketplace - Join the waitlist! ✨
             </p>
           </Banner>
