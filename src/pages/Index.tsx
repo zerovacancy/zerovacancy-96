@@ -66,7 +66,7 @@ const Index = () => {
               />
             </div>
             <p className="text-xs sm:text-sm pr-2 text-left relative z-10">
-              <span className="font-medium">New:</span> We've launched our creator marketplace! 🎉
+              Get priority access to our creator marketplace - Join the waitlist! ✨
             </p>
           </Banner>
         </div>
