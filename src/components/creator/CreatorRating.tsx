@@ -29,8 +29,8 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
         <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-        <span className="font-medium">{rating}</span>
-        <span className="text-muted-foreground">({reviews} reviews)</span>
+        <span className="text-sm font-medium">{rating}</span>
+        <span className="text-sm text-muted-foreground">({reviews} reviews)</span>
       </div>
       {hourlyRate && (
         <div className="text-sm text-muted-foreground">
