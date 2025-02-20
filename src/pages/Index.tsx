@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -11,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
-import { WavyBackground } from '@/components/ui/wavy-background';
+import { WarpBackground } from '@/components/ui/warp-background';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -54,14 +55,14 @@ const Index = () => {
             onClose={() => setShowBanner(false)}
           >
             <div className="absolute inset-0 z-0">
-              <WavyBackground 
+              <WarpBackground 
                 className="w-full h-full"
-                colors={["#2a2f3c", "#3a3f4c", "#4a4f5c"]}
-                waveWidth={100}
-                backgroundFill="#1A1F2C"
-                blur={1}
-                speed="slow"
-                waveOpacity={0.15}
+                beamsPerSide={4}
+                beamSize={8}
+                beamDelayMax={2}
+                beamDuration={2}
+                gridColor="rgba(255,255,255,0.1)"
+                perspective={80}
               />
             </div>
             <p className="text-xs sm:text-sm pr-2 text-left relative z-10">

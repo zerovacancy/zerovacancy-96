@@ -1,4 +1,5 @@
 
+"use client";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import React, { HTMLAttributes, useCallback, useMemo } from "react";
@@ -83,7 +84,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
   const leftBeams = useMemo(() => generateBeams(), [generateBeams]);
 
   return (
-    <div className={cn("relative rounded p-2", className)} {...props}>
+    <div className={cn("relative h-full w-full", className)} {...props}>
       <div
         style={
           {
@@ -149,5 +150,3 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
     </div>
   );
 };
-
-export default WarpBackground;
