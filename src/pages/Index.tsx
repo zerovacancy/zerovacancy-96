@@ -38,7 +38,7 @@ const Index = () => {
           <Banner
             variant="default"
             size="lg"
-            className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground relative overflow-hidden min-h-[4rem]"
+            className="animate-in fade-in slide-in-from-top duration-500 bg-primary text-primary-foreground relative overflow-hidden min-h-[4rem] flex items-center justify-center"
             icon={<Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground flex-shrink-0" />}
             action={
               <Button
@@ -67,7 +67,7 @@ const Index = () => {
                 <div className="w-full h-full" />
               </WarpBackground>
             </div>
-            <p className="text-xs sm:text-sm inline-block text-left relative z-10 bg-black/50 rounded px-2 py-1">
+            <p className="text-xs sm:text-sm inline-block text-center relative z-10 bg-black/50 rounded px-2 py-1">
               Get priority access to our creator marketplace - Join the waitlist! ✨
             </p>
           </Banner>
