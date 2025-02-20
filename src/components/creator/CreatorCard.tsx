@@ -138,7 +138,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <Button 
                 variant="default"
                 size="default" 
-                className="w-full text-sm px-4 py-2 h-10 bg-[#F97316] hover:bg-[#EA580C] text-white transition-colors"
+                className="w-full text-sm px-4 py-2 h-10 bg-[#4F46E5] hover:bg-[#3730A3] text-white transition-colors"
                 onClick={() => setShowEmailDialog(true)}
               >
                 Get Early Access
