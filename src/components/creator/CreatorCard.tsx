@@ -36,7 +36,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   const isMobile = useIsMobile();
   const [showEmailDialog, setShowEmailDialog] = React.useState(false);
   
-  const handleImageLoad = () => {
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
     if (onImageLoad) {
       onImageLoad(creator.image);
     }
@@ -62,6 +62,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               )}
               onLoad={handleImageLoad}
               loading="lazy"
+              crossOrigin="anonymous"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
             <div className="absolute bottom-4 left-4 text-white select-text">
