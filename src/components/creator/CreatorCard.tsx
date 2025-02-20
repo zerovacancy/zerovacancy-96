@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { CreatorRating } from './CreatorRating';
+import { GlowDialog } from '../ui/glow-dialog';
 
 interface Creator {
   name: string;
@@ -33,6 +34,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   imageRef 
 }) => {
   const isMobile = useIsMobile();
+  const [showEmailDialog, setShowEmailDialog] = React.useState(false);
   
   const handleImageLoad = () => {
     if (onImageLoad) {
@@ -84,12 +86,14 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               variant="outline" 
               size="default" 
               className="w-full text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
+              onClick={() => setShowEmailDialog(true)}
             >
-              Contact
+              Get Early Access
             </Button>
           </div>
         </div>
       </Card>
+      <GlowDialog open={showEmailDialog} onOpenChange={setShowEmailDialog} />
     </div>
   );
 };
