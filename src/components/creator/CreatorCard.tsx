@@ -70,10 +70,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
 
-  // Get the correct image source
+  // Get the correct image source with updated file extension
   const getImageSource = () => {
     if (creator.name === 'Jane Cooper') return '/janeprofile.png';
-    if (creator.name === 'Emily') return '/emily profile.png';
+    if (creator.name === 'Emily') return '/emily profile.jpeg';
     return creator.image;
   };
   
