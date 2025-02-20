@@ -105,24 +105,25 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <p className="text-sm text-white/90 mt-1">
                 {creator.services.join(" • ")}
               </p>
-              <div className="flex flex-wrap gap-1 mt-1.5">
-                {tags.map((tag, index) => (
-                  <button
-                    key={index}
-                    className={cn(
-                      "text-xs px-1.5 py-0.5 rounded-full transition-colors duration-200 cursor-pointer",
-                      getTagStyle(tag)
-                    )}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
           
           <div className="p-5 space-y-5">
+            <div className="flex flex-wrap gap-1">
+              {tags.map((tag, index) => (
+                <button
+                  key={index}
+                  className={cn(
+                    "text-xs px-1.5 py-0.5 rounded-full transition-colors duration-200 cursor-pointer",
+                    getTagStyle(tag)
+                  )}
+                  onClick={(e) => e.preventDefault()}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+            
             <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
             
             <Button 
