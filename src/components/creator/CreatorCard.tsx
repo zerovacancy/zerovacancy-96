@@ -74,11 +74,14 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     <div className="group select-text">
       <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
         <div className="relative">
+          {/* Price Badge */}
           <div className="absolute top-4 right-4 z-10">
             <span className="px-3 py-1.5 text-sm font-medium bg-black/70 text-white rounded-full backdrop-blur-sm">
               From ${creator.price}
             </span>
           </div>
+
+          {/* Profile Image Section */}
           <div className="relative aspect-[4/3]">
             <img 
               ref={imageRef}
@@ -93,47 +96,55 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               crossOrigin="anonymous"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
+            
+            {/* Minimal Text Overlay */}
             <div className="absolute bottom-4 left-4 text-white select-text">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2">
                 <h3 className="font-semibold text-xl">{creator.name}</h3>
                 <CheckCircle className="w-5 h-5 text-blue-400" />
               </div>
-              <div className="flex items-center gap-1.5 text-sm text-white/90">
-                <MapPin className="w-4 h-4" />
-                <span>{creator.location}</span>
+              <div className="flex items-center gap-1.5 mt-1.5">
+                <MapPin className="w-4 h-4 text-white/90" />
+                <span className="text-sm text-white/90">{creator.location}</span>
               </div>
-              <p className="text-sm text-white/90 mt-1">
+              <p className="text-sm text-white/90 mt-1.5">
                 {creator.services.join(" • ")}
               </p>
             </div>
           </div>
           
-          <div className="p-5 space-y-5">
-            <div className="flex flex-wrap gap-1">
-              {tags.map((tag, index) => (
-                <button
-                  key={index}
-                  className={cn(
-                    "text-xs px-1.5 py-0.5 rounded-full transition-colors duration-200 cursor-pointer",
-                    getTagStyle(tag)
-                  )}
-                  onClick={(e) => e.preventDefault()}
-                >
-                  {tag}
-                </button>
-              ))}
+          {/* Metadata Section */}
+          <div className="p-5">
+            <div className="space-y-5">
+              {/* Tags Section */}
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag, index) => (
+                  <button
+                    key={index}
+                    className={cn(
+                      "text-xs px-2 py-1 rounded-full transition-colors duration-200 cursor-pointer",
+                      getTagStyle(tag)
+                    )}
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Rating Section */}
+              <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
+              
+              {/* CTA Button */}
+              <Button 
+                variant="outline" 
+                size="default" 
+                className="w-full text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
+                onClick={() => setShowEmailDialog(true)}
+              >
+                Get Early Access
+              </Button>
             </div>
-            
-            <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
-            
-            <Button 
-              variant="outline" 
-              size="default" 
-              className="w-full text-sm px-4 py-2 h-10 hover:bg-primary hover:text-white transition-colors"
-              onClick={() => setShowEmailDialog(true)}
-            >
-              Get Early Access
-            </Button>
           </div>
         </div>
       </Card>
