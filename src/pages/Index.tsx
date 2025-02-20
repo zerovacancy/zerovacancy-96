@@ -14,6 +14,7 @@ import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
 import { SparklesCore } from '@/components/ui/sparkles-core';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
+import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -89,6 +90,7 @@ const Index = () => {
           
           <div className="relative py-4 sm:py-6 lg:py-8 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
+            <FeaturesSectionWithHoverEffects />
             <PreviewSearch />
           </div>
           
