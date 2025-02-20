@@ -36,7 +36,7 @@ const Index = () => {
       <Header />
       {showBanner && (
         <div className="sticky top-[4.5rem] z-40">
-          <Banner
+          <Banner 
             variant="default"
             size="lg"
             className="animate-in fade-in slide-in-from-top duration-500"
