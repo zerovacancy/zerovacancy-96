@@ -1,18 +1,21 @@
 
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 
-interface HoverBorderGradientProps {
+interface HoverBorderGradientProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   children: React.ReactNode;
+  duration?: number;
 }
 
 export const HoverBorderGradient: React.FC<HoverBorderGradientProps> = ({
   className,
   children,
+  duration,
+  ...props
 }) => {
   return (
-    <div
+    <button
       className={cn(
         "group relative rounded-lg p-px",
         "before:absolute before:inset-0",
@@ -22,8 +25,9 @@ export const HoverBorderGradient: React.FC<HoverBorderGradientProps> = ({
         "before:hover:opacity-100",
         className
       )}
+      {...props}
     >
       {children}
-    </div>
+    </button>
   );
 };
