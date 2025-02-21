@@ -36,10 +36,10 @@ export function ButtonColorful({
 
             {/* Content */}
             <div className="relative flex items-center justify-center gap-2">
-                <span className="text-sm font-medium tracking-wide">{label}</span>
+                <span className="text-sm font-medium tracking-wide text-zinc-800">{label}</span>
                 <ArrowUpRight 
                     className={cn(
-                        "w-3.5 h-3.5 transition-transform duration-300",
+                        "w-3.5 h-3.5 transition-transform duration-300 text-zinc-800",
                         "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     )} 
                 />
