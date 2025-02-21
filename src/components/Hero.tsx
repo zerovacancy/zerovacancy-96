@@ -7,6 +7,7 @@ import { Building, UserPlus } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import AuroraBackground from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -25,29 +26,53 @@ export function Hero() {
   }, [titleNumber, titles.length]);
 
   return (
-    <div className="w-full">
-      <AuroraBackground className="w-full bg-gradient-to-b from-purple-50/50 via-white to-blue-50/50">
-        <div className="flex gap-8 sm:gap-10 lg:gap-12 items-center justify-center flex-col px-4 sm:px-6 py-12 sm:py-16 lg:py-20 min-h-[calc(100vh-4.5rem)] sm:min-h-0">
+    <div className="w-full relative">
+      {/* Animated gradient background */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-purple-50/90 via-white to-blue-50/90"
+        animate={{
+          backgroundPosition: ["0% 0%", "100% 100%"],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      />
+
+      {/* Decorative element */}
+      <div className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-r from-purple-200/20 to-blue-200/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl" />
+
+      <AuroraBackground className="w-full">
+        <div className="flex gap-8 sm:gap-10 lg:gap-12 items-center justify-center flex-col px-4 sm:px-6 py-12 sm:py-16 lg:py-20 min-h-[calc(100vh-4.5rem)] sm:min-h-0 relative z-10">
           <div className="flex gap-4 sm:gap-6 flex-col max-w-5xl mx-auto w-full">
             <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-4 sm:py-6 my-4 sm:my-6 font-bold lg:text-8xl">
-              <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
+              <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Property Content that
               </span>
               <span className="relative flex w-full justify-center h-[1.2em] overflow-hidden mt-2 sm:mt-3">
                 {titles.map((title, index) => (
                   <motion.span 
                     key={index}
-                    className="absolute font-playfair tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600"
+                    className={cn(
+                      "absolute font-playfair tracking-tight bg-clip-text text-transparent",
+                      "bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700",
+                      titleNumber === index && "text-[3rem] sm:text-7xl md:text-8xl lg:text-9xl"
+                    )}
                     initial={{
                       opacity: 0,
-                      y: isMobile ? 25 : 50
+                      y: isMobile ? 25 : 50,
+                      scale: 0.9
                     }}
                     animate={titleNumber === index ? {
                       y: 0,
-                      opacity: 1
+                      opacity: 1,
+                      scale: 1
                     } : {
                       y: titleNumber > index ? (isMobile ? -25 : -50) : (isMobile ? 25 : 50),
-                      opacity: 0
+                      opacity: 0,
+                      scale: 0.9
                     }}
                     transition={{
                       type: "spring",
@@ -61,21 +86,21 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg lg:text-xl leading-relaxed tracking-wide text-muted-foreground max-w-2xl text-center mx-auto px-2 sm:px-4 [word-spacing:0.12em] sm:[word-spacing:0.16em]">
+            <p className="text-base sm:text-lg lg:text-xl leading-relaxed tracking-wide text-gray-700 max-w-2xl text-center mx-auto px-2 sm:px-4 [word-spacing:0.12em] sm:[word-spacing:0.16em] relative z-10">
               Connect with top-tier creators for photography, videography, and marketing content that elevates your
               property portfolio.
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full px-4 sm:px-6 max-w-2xl mx-auto mt-6 sm:mt-8">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full px-4 sm:px-6 max-w-2xl mx-auto mt-8 sm:mt-12">
             <ShimmerButton 
-              className="flex-1 text-sm sm:text-base font-medium gap-2 items-center justify-center sm:gap-3 min-h-[3rem] sm:min-h-[3.5rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform" 
+              className="flex-1 text-sm sm:text-base font-medium gap-2 items-center justify-center sm:gap-3 min-h-[3.5rem] sm:min-h-[4rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform shadow-lg" 
               background="rgba(255, 255, 255, 0.1)"
             >
               Find Creators <Building className="w-4 h-4 sm:w-5 sm:h-5" />
             </ShimmerButton>
             <ShimmerButton 
-              className="flex-1 text-sm sm:text-base font-medium gap-2 items-center justify-center sm:gap-3 min-h-[3rem] sm:min-h-[3.5rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform"
+              className="flex-1 text-sm sm:text-base font-medium gap-2 items-center justify-center sm:gap-3 min-h-[3.5rem] sm:min-h-[4rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform shadow-lg"
             >
               Join as Creator <UserPlus className="w-4 h-4 sm:w-5 sm:h-5" />
             </ShimmerButton>
