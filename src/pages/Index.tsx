@@ -75,40 +75,40 @@ const Index = () => {
         </div>
       )}
 
-      <main className="flex-1 pb-16 sm:pb-20">
+      <main className="flex-1 pb-12 sm:pb-16">
         {/* Hero Section */}
-        <div className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8">
+        <div className="relative overflow-hidden pt-4 sm:pt-6">
           <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
 
-        <div className="space-y-12 sm:space-y-16 lg:space-y-20">
-          {/* Featured Creators Section */}
-          <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+        <div className="space-y-8 sm:space-y-12 lg:space-y-16">
+          {/* Featured Creators Section - Closer to Hero */}
+          <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <PreviewSearch />
           </div>
 
-          {/* How It Works Section */}
-          <div className="relative bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-12 lg:py-16 overflow-hidden">
+          {/* How It Works Section - Tighter spacing */}
+          <div className="relative bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-10 lg:py-12 overflow-hidden">
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <HowItWorksSection />
           </div>
 
-          {/* Professional Content Creation Services */}
-          <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+          {/* Professional Content Creation Services - Closer to How It Works */}
+          <div className="relative py-8 sm:py-10 lg:py-12 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <FeaturesSectionWithHoverEffects />
           </div>
 
-          {/* Pricing Section */}
-          <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+          {/* Pricing Section - Tighter connection to services */}
+          <div className="relative py-8 sm:py-10 lg:py-12 overflow-hidden">
             <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
             <Pricing />
           </div>
 
-          {/* Final CTA Section */}
-          <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+          {/* Final CTA Section - Moderate spacing before footer */}
+          <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
             <CallToActionSection />
           </div>
