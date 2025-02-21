@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -47,7 +46,6 @@ const Index = () => {
               text-primary-foreground relative overflow-hidden
               min-h-[3.5rem] sm:min-h-[4rem]
             " 
-            icon={<Sparkle className="h-4 w-4 text-yellow-300 animate-pulse" />}
             action={
               <Button 
                 variant="secondary" 
