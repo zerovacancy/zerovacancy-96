@@ -82,32 +82,32 @@ const Index = () => {
           <Hero />
         </div>
 
-        <div className="space-y-8 sm:space-y-12 lg:space-y-16">
-          {/* Featured Creators Section - Closer to Hero */}
+        <div className="space-y-6 sm:space-y-10 lg:space-y-14">
+          {/* Featured Creators Section */}
           <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <PreviewSearch />
           </div>
 
-          {/* How It Works Section - Tighter spacing */}
-          <div className="relative bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-10 lg:py-12 overflow-hidden">
+          {/* How It Works Section */}
+          <div className="relative bg-gradient-to-b from-white via-gray-50 to-white py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <HowItWorksSection />
           </div>
 
-          {/* Professional Content Creation Services - Closer to How It Works */}
-          <div className="relative py-8 sm:py-10 lg:py-12 overflow-hidden">
+          {/* Professional Content Creation Services - Reduced spacing */}
+          <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <FeaturesSectionWithHoverEffects />
           </div>
 
-          {/* Pricing Section - Tighter connection to services */}
-          <div className="relative py-8 sm:py-10 lg:py-12 overflow-hidden">
+          {/* Pricing Section */}
+          <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
             <Pricing />
           </div>
 
-          {/* Final CTA Section - Moderate spacing before footer */}
+          {/* Final CTA Section */}
           <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
             <CallToActionSection />

@@ -40,10 +40,10 @@ const features = [{
 
 export function FeaturesSectionWithHoverEffects() {
   return (
-    <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="section-title mb-4 font-space tracking-tight">
+        <div className="text-center mb-8">
+          <h2 className="section-title mb-3 font-space tracking-tight">
             Professional Content Creation Services
           </h2>
           <p className="section-subtitle max-w-2xl mx-auto">
