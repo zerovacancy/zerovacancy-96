@@ -142,9 +142,9 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
-              <div className="flex justify-center">
+              <div className="flex justify-center px-4">
                 <ButtonColorful 
-                  className="w-auto px-8 min-w-[180px] max-w-[80%] mx-auto"
+                  className="w-auto px-6 py-2.5 min-w-[160px] max-w-[70%]"
                   label="Get Early Access"
                   onClick={() => setShowEmailDialog(true)}
                 />
