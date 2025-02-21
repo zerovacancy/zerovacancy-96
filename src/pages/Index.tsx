@@ -8,7 +8,7 @@ import HowItWorksSection from '../components/HowItWorksSection';
 import { BottomNav } from '../components/navigation/BottomNav';
 import { Banner } from '@/components/ui/banner';
 import { Button } from '@/components/ui/button';
-import { Star } from 'lucide-react';
+import { Star, Sparkle } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
 import { SparklesCore } from '@/components/ui/sparkles-core';
@@ -28,20 +28,58 @@ const Index = () => {
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
-  return <div className="flex flex-col min-h-screen">
+  return (
+    <div className="flex flex-col min-h-screen">
       <Header />
-      {showBanner && <div className="sticky top-16 z-40">
-          <Banner variant="default" size="lg" className="animate-in fade-in slide-in-from-top duration-500 bg-black text-primary-foreground relative overflow-hidden min-h-[4rem]" icon={<Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary-foreground flex-shrink-0" />} action={<Button variant="secondary" size="sm" className="flex text-xs sm:text-sm items-center whitespace-nowrap px-2.5 py-1.5 sm:px-3 sm:py-2 ml-2 sm:ml-3 flex-shrink-0" onClick={handleTryNowClick}>
+      {showBanner && (
+        <div className="sticky top-16 z-40">
+          <Banner 
+            variant="default" 
+            size="lg" 
+            className="
+              animate-in fade-in slide-in-from-top duration-500 
+              bg-gradient-to-r from-black via-gray-900 to-black
+              text-primary-foreground relative overflow-hidden
+              min-h-[3.5rem] sm:min-h-[4rem]
+            " 
+            icon={<Sparkle className="h-4 w-4 text-yellow-300 animate-pulse" />}
+            action={
+              <Button 
+                variant="secondary" 
+                size="sm" 
+                className="
+                  flex text-xs sm:text-sm items-center 
+                  whitespace-nowrap px-3 py-1.5 sm:px-4 sm:py-2
+                  bg-white/10 hover:bg-white/20 text-white
+                  border border-white/20
+                  transition-all duration-200
+                " 
+                onClick={handleTryNowClick}
+              >
                 Join Waitlist
-              </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)}>
-            <div className="absolute inset-0 z-0">
-              <SparklesCore background="transparent" particleColor="#ffffff" particleDensity={100} speed={2} className="w-full h-full" minSize={0.5} maxSize={1} />
+              </Button>
+            }
+            layout="complex"
+            isClosable
+            onClose={() => setShowBanner(false)}
+          >
+            <div className="flex items-center justify-center gap-2 relative z-10">
+              <Star className="h-4 w-4 text-yellow-300 animate-pulse" />
+              <AnimatedShinyText 
+                className="
+                  text-xs sm:text-sm inline-block
+                  text-white relative z-10 rounded
+                  font-medium
+                " 
+                shimmerWidth={150}
+              >
+                Get priority access to our creator marketplace!
+              </AnimatedShinyText>
+              <Star className="h-4 w-4 text-yellow-300 animate-pulse" />
             </div>
-            <AnimatedShinyText className="text-xs sm:text-sm inline-block text-left text-white relative z-10 rounded px-2 py-1 ml-2" shimmerWidth={150}>
-              Get priority access to our creator marketplace - Join the waitlist! ✨
-            </AnimatedShinyText>
           </Banner>
-        </div>}
+        </div>
+      )}
 
       <main className="flex-1 pb-12 sm:pb-16">
         {/* Hero Section */}
@@ -86,6 +124,8 @@ const Index = () => {
       </main>
       <BottomNav />
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
