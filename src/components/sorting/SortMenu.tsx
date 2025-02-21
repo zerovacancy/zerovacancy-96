@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '../ui/button';
-import { SortAsc } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,18 +37,29 @@ export const SortMenu: React.FC<SortMenuProps> = ({
       <DropdownMenuTrigger asChild>
         <Button 
           variant="outline" 
-          size="sm"
-          className="gap-2 bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 border-[#E5E7EB] rounded-lg"
+          size="default"
+          className="gap-2 bg-white hover:bg-gray-50/95 text-gray-700 border-gray-200 shadow-sm hover:shadow transition-all duration-200"
         >
-          <SortAsc className="w-4 h-4" />
-          Sort By
+          <ArrowUpDown className="w-4 h-4 text-gray-500" />
+          <span>Sort By</span>
+          {selected && options.find(opt => opt.value === selected) && (
+            <>
+              <span className="mx-1 text-gray-400">•</span>
+              <span className="text-gray-900">
+                {options.find(opt => opt.value === selected)?.label}
+              </span>
+            </>
+          )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px]">
         {options.map((option) => (
           <DropdownMenuItem
             key={option.value}
-            className={selected === option.value ? "bg-accent" : ""}
+            className={`
+              ${selected === option.value ? 'bg-primary/5 text-primary font-medium' : 'text-gray-700'}
+              cursor-pointer transition-colors hover:bg-gray-50
+            `}
             onClick={() => handleSelect(option.value)}
           >
             {option.label}
