@@ -4,7 +4,7 @@ import { IconChevronDown } from "@tabler/icons-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 export function Pricing() {
   return <section id="pricing" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 rounded-2xl bg-white/50 backdrop-blur-sm py-[48px] lg:px-[30px]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 rounded-2xl bg-white/50 backdrop-blur-sm py-[48px] lg:px-[30px] my-0">
         <div className="text-center mb-8 sm:mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">
             Simple, transparent pricing
