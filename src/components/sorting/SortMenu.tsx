@@ -38,27 +38,56 @@ export const SortMenu: React.FC<SortMenuProps> = ({
         <Button 
           variant="outline" 
           size="default"
-          className="gap-2 bg-white hover:bg-gray-50/95 text-gray-700 border-gray-200 shadow-sm hover:shadow transition-all duration-200"
+          className="
+            inline-flex items-center gap-1.5
+            px-3 h-9 text-sm
+            border border-gray-200/80
+            bg-transparent hover:bg-gray-50/80
+            text-gray-700
+            rounded-lg
+            transition-all duration-200
+            hover:border-gray-300
+            focus:outline-none focus:ring-2 focus:ring-primary/10
+          "
         >
-          <ArrowUpDown className="w-4 h-4 text-gray-500" />
-          <span>Sort By</span>
-          {selected && options.find(opt => opt.value === selected) && (
-            <>
-              <span className="mx-1 text-gray-400">•</span>
-              <span className="text-gray-900">
-                {options.find(opt => opt.value === selected)?.label}
-              </span>
-            </>
-          )}
+          <div className="flex items-center gap-1.5">
+            <ArrowUpDown className="w-3.5 h-3.5 text-gray-500" />
+            <span className="text-gray-600 font-normal">Sort By</span>
+            {selected && options.find(opt => opt.value === selected) && (
+              <>
+                <span className="text-gray-400 mx-0.5">•</span>
+                <span className="text-gray-900 font-medium">
+                  {options.find(opt => opt.value === selected)?.label}
+                </span>
+              </>
+            )}
+          </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px] bg-white shadow-lg border border-gray-200 rounded-lg overflow-hidden">
+      <DropdownMenuContent 
+        align="end" 
+        className="
+          w-[180px] 
+          bg-white 
+          shadow-lg 
+          border border-gray-200/80 
+          rounded-lg 
+          py-1
+          animate-in fade-in-0 zoom-in-95
+        "
+      >
         {options.map((option) => (
           <DropdownMenuItem
             key={option.value}
             className={`
-              ${selected === option.value ? 'bg-primary/5 text-primary font-medium' : 'text-gray-700'}
-              cursor-pointer transition-colors hover:bg-gray-50
+              px-3 py-1.5
+              text-sm
+              cursor-pointer
+              transition-colors duration-200
+              ${selected === option.value 
+                ? 'bg-primary/5 text-primary font-medium' 
+                : 'text-gray-700 hover:bg-gray-50/80'
+              }
             `}
             onClick={() => handleSelect(option.value)}
           >
