@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -92,13 +93,13 @@ const Index = () => {
 
         <div className="space-y-4 sm:space-y-6 lg:space-y-8">
           {/* Featured Creators Section */}
-          <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
+          <div id="search" className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <PreviewSearch />
           </div>
 
           {/* How It Works Section */}
-          <div className="relative bg-gradient-to-b from-white via-gray-50 to-white py-6 sm:py-8 lg:py-10 overflow-hidden">
+          <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <HowItWorksSection />
           </div>
@@ -110,7 +111,7 @@ const Index = () => {
           </div>
 
           {/* Pricing Section */}
-          <div className="relative py-6 sm:py-8 overflow-hidden lg:py-0">
+          <div id="pricing" className="relative py-6 sm:py-8 overflow-hidden lg:py-0">
             <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
             <Pricing />
           </div>
