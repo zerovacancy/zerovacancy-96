@@ -15,9 +15,11 @@ import { SparklesCore } from '@/components/ui/sparkles-core';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
+
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
+
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     if (!hasVisited) {
@@ -25,9 +27,11 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
+
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -63,8 +67,7 @@ const Index = () => {
             isClosable
             onClose={() => setShowBanner(false)}
           >
-            <div className="flex items-center justify-center gap-2 relative z-10">
-              <Star className="h-4 w-4 text-yellow-300 animate-pulse" />
+            <div className="flex items-center justify-center gap-3 relative z-10">
               <AnimatedShinyText 
                 className="
                   text-xs sm:text-sm inline-block
