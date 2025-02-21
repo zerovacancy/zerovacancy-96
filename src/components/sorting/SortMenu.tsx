@@ -52,7 +52,7 @@ export const SortMenu: React.FC<SortMenuProps> = ({
           )}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px]">
+      <DropdownMenuContent align="end" className="w-[200px] bg-white shadow-lg border border-gray-200 rounded-lg overflow-hidden">
         {options.map((option) => (
           <DropdownMenuItem
             key={option.value}
