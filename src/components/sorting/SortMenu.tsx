@@ -39,23 +39,24 @@ export const SortMenu: React.FC<SortMenuProps> = ({
           variant="outline" 
           size="default"
           className="
-            inline-flex items-center gap-1.5
-            px-3 h-9 text-sm
-            border border-gray-200/80
-            bg-transparent hover:bg-gray-50/80
+            inline-flex items-center justify-center
+            px-3.5 h-9 text-sm
+            border border-gray-200
+            bg-white hover:bg-gray-50/80
             text-gray-700
             rounded-lg
             transition-all duration-200
             hover:border-gray-300
             focus:outline-none focus:ring-2 focus:ring-primary/10
+            shadow-sm
           "
         >
-          <div className="flex items-center gap-1.5">
-            <ArrowUpDown className="w-3.5 h-3.5 text-gray-500" />
+          <div className="flex items-center gap-2">
+            <ArrowUpDown className="w-3.5 h-3.5 text-gray-500 flex-shrink-0" />
             <span className="text-gray-600 font-normal">Sort By</span>
             {selected && options.find(opt => opt.value === selected) && (
               <>
-                <span className="text-gray-400 mx-0.5">•</span>
+                <span className="text-gray-400 mx-1">•</span>
                 <span className="text-gray-900 font-medium">
                   {options.find(opt => opt.value === selected)?.label}
                 </span>

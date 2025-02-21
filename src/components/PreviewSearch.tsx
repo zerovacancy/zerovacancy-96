@@ -96,16 +96,16 @@ const PreviewSearch: React.FC = () => {
     <section id="search" className="container section-sm">
       <GlowingEffect className="bg-blue-600/20 absolute -left-24 top-1/2 -translate-y-1/2 blur-3xl opacity-50 w-[32rem] h-[32rem] md:block" />
       <div className="relative">
-        <Card className="overflow-hidden bg-white/50 backdrop-blur-sm border-2 border-gray-200/50 shadow-lg">
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4">
+        <Card className="overflow-hidden bg-white/90 backdrop-blur-sm border-[1.5px] border-gray-300/80 shadow-xl ring-1 ring-gray-200/50">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 space-y-3">
             {/* Search Header and Bar */}
-            <div className="flex flex-col gap-3 pb-3">
+            <div className="flex flex-col gap-2.5">
               <SearchHeader />
               <SearchBar onChange={handleSearchChange} value={searchQuery} />
             </div>
 
             {/* Subtle divider */}
-            <div className="h-px bg-gray-200/70 w-full -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8" />
+            <div className="h-px bg-gray-200 w-full -mx-4 sm:-mx-6 lg:-mx-8" />
 
             {/* Results Section */}
             <CreatorsList

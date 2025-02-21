@@ -1,4 +1,3 @@
-
 import React, { useState, ChangeEvent } from 'react';
 import { Search, MapPin, Camera, DollarSign, Star, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -20,9 +19,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
   ] : [];
 
   return (
-    <div className="w-full space-y-3">
+    <div className="w-full space-y-2.5">
       {/* Main Search Container */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5">
         {/* Input Fields Container */}
         <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-sm border border-gray-300 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
           {/* Content Type Dropdown */}
@@ -99,14 +98,21 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
         </div>
 
         {/* Advanced Filters Toggle */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-0.5">
           <button
             onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
+            className="
+              inline-flex items-center gap-1.5 
+              px-2 py-1 -ml-2
+              text-sm font-medium
+              text-gray-700 hover:text-gray-900 
+              hover:bg-gray-50 rounded-md
+              transition-colors duration-200
+            "
           >
             Advanced Filters
             <ChevronDown className={cn(
-              "w-3.5 h-3.5 transition-transform duration-200",
+              "w-3.5 h-3.5 text-gray-500",
               showMoreFilters ? "rotate-180" : ""
             )} />
           </button>
