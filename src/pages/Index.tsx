@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -15,9 +16,11 @@ import { SparklesCore } from '@/components/ui/sparkles-core';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
+
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
+
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     if (!hasVisited) {
@@ -25,9 +28,11 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
+
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
+
   return <div className="flex flex-col min-h-screen">
       <Header />
       {showBanner && <div className="sticky top-16 z-40">
@@ -44,7 +49,7 @@ const Index = () => {
         </div>}
       <main className="flex-1 pb-20 sm:pb-24 lg:pb-32">
         {/* Hero Section */}
-        <div className="relative overflow-hidden sm:py-16 lg:py-20 py-0">
+        <div className="relative overflow-hidden pt-4 sm:py-16 lg:py-20">
           <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
@@ -87,4 +92,5 @@ const Index = () => {
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
     </div>;
 };
+
 export default Index;
