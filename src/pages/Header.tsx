@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 import { Menu, ChevronDown } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from "framer-motion";
-import { Magnetic } from './ui/magnetic';
+import { Magnetic } from '@/components/ui/magnetic';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from "./ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
