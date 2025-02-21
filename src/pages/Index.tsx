@@ -77,23 +77,32 @@ const Index = () => {
         </div>
       )}
       <main className="flex-1 pb-16 sm:pb-20">
+        {/* Hero Section */}
         <div className="relative overflow-hidden">
           <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
         
         <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+          {/* Featured Creators Section */}
+          <div className="relative py-4 sm:py-6 lg:py-8 overflow-hidden">
+            <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
+            <PreviewSearch />
+          </div>
+          
+          {/* How It Works Section */}
           <div className="relative bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-10 lg:py-12 overflow-hidden">
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <HowItWorksSection />
           </div>
           
+          {/* Professional Content Creation Services */}
           <div className="relative py-4 sm:py-6 lg:py-8 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <FeaturesSectionWithHoverEffects />
-            <PreviewSearch />
           </div>
           
+          {/* Final CTA Section */}
           <div className="relative pt-6 sm:pt-8 lg:pt-10 overflow-hidden">
             <Spotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
             <CallToActionSection />
