@@ -87,7 +87,17 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
         <div className="relative">
           <div className="absolute top-4 right-4 z-10">
-            <span className="px-3 py-1.5 text-sm font-medium bg-black/70 text-white rounded-full backdrop-blur-sm">
+            <span className="
+              px-3 py-1.5 
+              text-sm font-medium 
+              bg-white/90 backdrop-blur-sm 
+              text-gray-900 
+              rounded-full 
+              shadow-sm 
+              border border-white/20
+              transition-all duration-200
+              group-hover:shadow-md
+            ">
               From ${creator.price}
             </span>
           </div>
