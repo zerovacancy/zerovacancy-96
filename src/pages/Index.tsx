@@ -15,6 +15,7 @@ import { Spotlight } from '@/components/ui/spotlight';
 import { SparklesCore } from '@/components/ui/sparkles-core';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
+import Pricing from '@/components/Pricing';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -100,6 +101,12 @@ const Index = () => {
           <div className="relative py-4 sm:py-6 lg:py-8 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <FeaturesSectionWithHoverEffects />
+          </div>
+
+          {/* Pricing Section */}
+          <div className="relative py-4 sm:py-6 lg:py-8 overflow-hidden">
+            <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
+            <Pricing />
           </div>
           
           {/* Final CTA Section */}
