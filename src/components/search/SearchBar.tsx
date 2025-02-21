@@ -102,11 +102,24 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
           </Button>
         </div>
 
-        {/* Advanced Filters Toggle - Desktop */}
-        <div className="hidden sm:block text-right mt-3">
+        {/* Controls Container */}
+        <div className="flex items-center justify-between pt-2">
+          {/* Advanced Filters Toggle - Desktop */}
           <button
             onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className="inline-flex items-center gap-1.5 text-sm text-gray-600/60 hover:text-gray-800 transition-colors duration-200"
+            className="hidden sm:inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
+          >
+            Advanced Filters
+            <ChevronDown className={cn(
+              "w-3.5 h-3.5 transition-transform duration-200",
+              showMoreFilters ? "rotate-180" : ""
+            )} />
+          </button>
+
+          {/* Advanced Filters Toggle - Mobile */}
+          <button
+            onClick={() => setShowMoreFilters(!showMoreFilters)}
+            className="sm:hidden text-left text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1.5 transition-colors duration-200"
           >
             Advanced Filters
             <ChevronDown className={cn(
@@ -116,27 +129,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
           </button>
         </div>
 
-        {/* Advanced Filters Toggle - Mobile */}
-        <div className="sm:hidden">
-          <div className="h-px bg-gray-200" />
-          <button
-            onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className="w-full text-left px-4 py-3 text-sm text-gray-600/60 hover:text-gray-800 flex items-center gap-1.5 transition-colors duration-200"
-          >
-            Advanced Filters
-            <ChevronDown className={cn(
-              "w-3.5 h-3.5 transition-transform duration-200",
-              showMoreFilters ? "rotate-180" : ""
-            )} />
-          </button>
-        </div>
-      </div>
-
-      {/* Filters Section */}
-      <div className={cn(
-        "grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-300",
-        showMoreFilters ? "opacity-100 h-auto mt-4" : "opacity-0 h-0 overflow-hidden"
-      )}>
+        {/* Filters Section */}
+        <div className={cn(
+          "grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-300",
+          showMoreFilters ? "opacity-100 h-auto mt-4" : "opacity-0 h-0 overflow-hidden"
+        )}>
           {/* Budget Filter */}
           <div className="relative group">
             <DollarSign className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -182,19 +179,20 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
           </div>
         </div>
 
-      {/* Popular Services */}
-      {popularServices.length > 0 && (
-        <div className="flex flex-wrap gap-2 px-2 mt-4">
-          {popularServices.map((service) => (
-            <span 
-              key={service}
-              className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
-            >
-              Popular in {location}: {service}
-            </span>
-          ))}
-        </div>
-      )}
+        {/* Popular Services */}
+        {popularServices.length > 0 && (
+          <div className="flex flex-wrap gap-2 px-2 mt-4">
+            {popularServices.map((service) => (
+              <span 
+                key={service}
+                className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
+              >
+                Popular in {location}: {service}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
