@@ -49,8 +49,6 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     setImageError(true);
   };
 
-  console.log('Creator name:', creator.name); // Debug log
-
   const getDefaultTags = (name: string, services: string[]) => {
     if (name === 'John Smith' && services.includes('Photography')) {
       return ['#RealEstate', '#Aerial', '#IndoorDroneTour'];
@@ -78,11 +76,6 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
 
   const getImageSource = () => {
     if (creator.name === 'Emily Johnson') {
-      // If the main image fails, use the first fallback
-      if (imageError) {
-        return 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=500&h=500';
-      }
-      // Use the local image as primary source
       return '/emily profile.jpeg';
     }
     if (creator.name === 'Jane Cooper') return '/janeprofile.png';
