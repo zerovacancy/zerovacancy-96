@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -68,6 +69,7 @@ const Index = () => {
             onClose={() => setShowBanner(false)}
           >
             <div className="flex items-center justify-center gap-3 relative z-10">
+              <Star className="h-4 w-4 text-yellow-300 animate-pulse" />
               <AnimatedShinyText 
                 className="
                   text-xs sm:text-sm inline-block
@@ -78,7 +80,6 @@ const Index = () => {
               >
                 Get priority access to our creator marketplace!
               </AnimatedShinyText>
-              <Star className="h-4 w-4 text-yellow-300 animate-pulse" />
             </div>
           </Banner>
         </div>
