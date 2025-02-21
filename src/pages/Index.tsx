@@ -49,7 +49,7 @@ const Index = () => {
         </div>}
       <main className="flex-1 pb-20 sm:pb-24 lg:pb-32">
         {/* Hero Section */}
-        <div className="relative overflow-hidden pt-4 sm:py-16 lg:py-20">
+        <div className="relative overflow-hidden pt-4 sm:pt-8 lg:pt-12">
           <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
