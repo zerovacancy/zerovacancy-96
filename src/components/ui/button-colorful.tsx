@@ -16,7 +16,7 @@ export function ButtonColorful({
         <Button
             className={cn(
                 "relative h-10 overflow-hidden rounded-lg",
-                "bg-white/90 text-zinc-800 border border-zinc-200/50",
+                "bg-white text-zinc-800 border border-zinc-200/50",
                 "transition-all duration-300",
                 "hover:bg-white hover:border-purple-200 hover:translate-y-[-1px]",
                 "group",
@@ -29,7 +29,7 @@ export function ButtonColorful({
                 className={cn(
                     "absolute inset-0",
                     "bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-violet-500/10",
-                    "opacity-50 group-hover:opacity-100",
+                    "opacity-0 group-hover:opacity-100",
                     "transition-opacity duration-500"
                 )}
             />
