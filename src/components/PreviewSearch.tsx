@@ -2,12 +2,10 @@
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { FeaturesSectionWithHoverEffects } from './Features';
-import { Pricing } from './Pricing';
-import { GlowingEffect } from './ui/glowing-effect';
 import { SearchHeader } from './search/SearchHeader';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
+import { GlowingEffect } from './ui/glowing-effect';
 
 const creators = [
   {
@@ -98,16 +96,18 @@ const PreviewSearch: React.FC = () => {
     <section id="search" className="container section-sm">
       <GlowingEffect className="bg-blue-600/20 absolute -left-24 top-1/2 -translate-y-1/2 blur-3xl opacity-50 w-[32rem] h-[32rem] md:block" />
       <div className="relative">
-        <Card className="overflow-hidden bg-white/50 backdrop-blur-sm border border-gray-100/50 shadow-sm">
-          <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
-            <div className="flex flex-col gap-4">
+        <Card className="overflow-hidden bg-white/50 backdrop-blur-sm border-2 border-gray-200/50 shadow-lg">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4">
+            {/* Search Header and Bar */}
+            <div className="flex flex-col gap-3 pb-3">
               <SearchHeader />
               <SearchBar onChange={handleSearchChange} value={searchQuery} />
             </div>
 
-            {/* Subtle separator */}
-            <div className="h-px bg-gray-100/70 w-full my-2" />
+            {/* Subtle divider */}
+            <div className="h-px bg-gray-200/70 w-full -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8" />
 
+            {/* Results Section */}
             <CreatorsList
               creators={sortedCreators}
               sortBy={sortBy}
