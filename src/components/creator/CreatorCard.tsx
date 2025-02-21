@@ -76,7 +76,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
 
   const getImageSource = () => {
     if (creator.name === 'Emily Johnson') {
-      return '/emily profile.jpeg';
+      return '/newemilyprofile.jpg';
     }
     if (creator.name === 'Jane Cooper') return '/janeprofile.png';
     return creator.image;
@@ -104,7 +104,6 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               onLoad={handleImageLoad}
               onError={handleImageError}
               loading="lazy"
-              crossOrigin="anonymous"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
             
