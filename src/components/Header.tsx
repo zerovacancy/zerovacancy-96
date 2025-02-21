@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
@@ -102,13 +103,13 @@ const Header = () => {
             to="/" 
             className="flex items-center gap-2 transition-opacity active:opacity-80"
           >
-            <motion.div 
+            <motion.img 
+              src="/logo.png"
+              alt="Haptik"
               initial={false}
               animate={{ scale: isOpen ? 0.95 : 1 }}
-              className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
-            >
-              Haptik
-            </motion.div>
+              className="h-8 w-auto"
+            />
           </Link>
         </Magnetic>
 
