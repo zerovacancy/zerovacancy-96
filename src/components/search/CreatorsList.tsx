@@ -40,8 +40,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
   return (
     <div>
-      <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 w-full gap-4">
-        <div className="w-full sm:w-auto sm:absolute sm:right-0">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center mb-6 w-full gap-4">
+        <div className="w-full sm:w-auto">
           <SortMenu 
             options={sortOptions}
             onSort={onSort}
