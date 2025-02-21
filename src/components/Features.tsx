@@ -40,10 +40,10 @@ const features = [{
 
 export function FeaturesSectionWithHoverEffects() {
   return (
-    <section className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
+    <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="section-title mb-3 font-space tracking-tight">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="section-title mb-2 sm:mb-3 font-space tracking-tight">
             Professional Content Creation Services
           </h2>
           <p className="section-subtitle max-w-2xl mx-auto">
@@ -51,7 +51,7 @@ export function FeaturesSectionWithHoverEffects() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
           {features.map((feature, index) => (
             <Feature
               key={index}
@@ -85,27 +85,37 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
   return (
     <button
       className={cn(
-        "w-full text-center",
+        "relative w-full text-left group",
         "rounded-xl transition-all duration-200",
-        "bg-white/50 hover:bg-white/80",
-        "border border-gray-200/50",
-        "p-6",
-        "group focus:outline-none focus:ring-2 focus:ring-primary/20",
-        !isMobile && "hover:shadow-lg"
+        "bg-white/50 hover:bg-white",
+        "border border-gray-200/50 hover:border-gray-300",
+        "p-4 sm:p-5",
+        "focus:outline-none focus:ring-2 focus:ring-primary/20",
+        !isMobile && "hover:shadow-md hover:-translate-y-0.5"
       )}
       onClick={handleClick}
       aria-expanded={isMobile ? isExpanded : undefined}
     >
-      <div className="flex flex-col items-center gap-4">
-        <Icon className={cn(
-          "w-6 h-6 text-gray-700 shrink-0",
-          "transition-transform duration-200",
-          isMobile && isExpanded && "transform rotate-90"
-        )} />
-        <div className="text-center w-full">
+      <div className="flex flex-col items-start gap-3">
+        <div className={cn(
+          "w-10 h-10 rounded-lg",
+          "flex items-center justify-center",
+          "bg-primary/5 text-primary",
+          "group-hover:bg-primary/10",
+          "transition-all duration-200"
+        )}>
+          <Icon className={cn(
+            "w-5 h-5",
+            "transition-transform duration-200",
+            isMobile && isExpanded && "transform rotate-90"
+          )} />
+        </div>
+        
+        <div className="text-left w-full">
           <h3 className={cn(
-            "text-lg font-semibold leading-6 font-space mb-2",
-            "text-gray-900"
+            "text-base font-semibold leading-6 font-space mb-1.5",
+            "text-gray-900 group-hover:text-primary",
+            "transition-colors duration-200"
           )}>
             {title}
           </h3>
@@ -113,7 +123,7 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
             "overflow-hidden transition-[max-height,opacity] duration-200",
             isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-32 opacity-100"
           )}>
-            <p className="text-sm text-gray-600 font-anek mx-auto max-w-xs">
+            <p className="text-sm text-gray-600 font-anek group-hover:text-gray-700">
               {description}
             </p>
           </div>
