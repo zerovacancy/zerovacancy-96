@@ -82,7 +82,7 @@ const Index = () => {
           <Hero />
         </div>
 
-        <div className="space-y-6 sm:space-y-10 lg:space-y-14">
+        <div className="space-y-4 sm:space-y-6 lg:space-y-8">
           {/* Featured Creators Section */}
           <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
@@ -95,7 +95,7 @@ const Index = () => {
             <HowItWorksSection />
           </div>
 
-          {/* Professional Content Creation Services - Reduced spacing */}
+          {/* Professional Content Creation Services */}
           <div className="relative py-6 sm:py-8 lg:py-10 overflow-hidden">
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <FeaturesSectionWithHoverEffects />
