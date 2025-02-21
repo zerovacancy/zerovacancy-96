@@ -40,7 +40,7 @@ export function Hero() {
         }}
       />
 
-      {/* Decorative element */}
+      {/* Decorative elements */}
       <div className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-r from-purple-200/20 to-blue-200/20 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl" />
 
@@ -51,7 +51,7 @@ export function Hero() {
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Property Content that
               </span>
-              <span className="relative flex w-full justify-center h-[1.2em] overflow-hidden mt-2 sm:mt-3">
+              <span className="relative flex w-full justify-center h-[1.5em] sm:h-[1.4em] md:h-[1.3em] lg:h-[1.2em] overflow-hidden mt-2 sm:mt-3">
                 {titles.map((title, index) => (
                   <motion.span 
                     key={index}
