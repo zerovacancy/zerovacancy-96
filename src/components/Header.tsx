@@ -28,7 +28,7 @@ const Header = () => {
           "before:bg-[#9b87f5]",
           location.pathname.startsWith('/resources')
             ? "text-[#9b87f5] before:scale-x-100"
-            : "text-muted-foreground hover:text-[#9b87f5]"
+            : "text-black hover:text-[#9b87f5]"
         )}>
           Resources
           <ChevronDown className="h-4 w-4" />
@@ -49,14 +49,14 @@ const Header = () => {
     <div className="pl-4 flex flex-col gap-4">
       <Link 
         to="/resources/blog" 
-        className="text-[15px] text-muted-foreground hover:text-foreground transition-colors"
+        className="text-[15px] text-black hover:text-[#9b87f5] transition-colors"
         onClick={onClick}
       >
         Blog
       </Link>
       <Link 
         to="/resources/learn" 
-        className="text-[15px] text-muted-foreground hover:text-foreground transition-colors"
+        className="text-[15px] text-black hover:text-[#9b87f5] transition-colors"
         onClick={onClick}
       >
         Learn
@@ -81,7 +81,7 @@ const Header = () => {
               "before:bg-[#9b87f5]",
               location.pathname === link.to 
                 ? "text-[#9b87f5] before:scale-x-100" 
-                : "text-muted-foreground hover:text-[#9b87f5]"
+                : "text-black hover:text-[#9b87f5]"
             )}
             onClick={onClick}
           >
