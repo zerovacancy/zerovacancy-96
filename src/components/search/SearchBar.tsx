@@ -13,7 +13,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
   const [location, setLocation] = useState('');
 
-  // Popular services would typically come from an API/props
   const popularServices = location ? [
     'Photography',
     'Virtual Tours',
@@ -25,18 +24,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
       {/* Main Search Container */}
       <div className="flex flex-col gap-4">
         {/* Input Fields Container */}
-        <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-md border border-gray-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+        <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-sm border border-gray-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
           {/* Content Type Dropdown */}
-          <div className="w-full sm:w-[35%] relative group order-1">
-            <Camera className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <div className="w-full sm:w-[40%] relative group">
+            <Camera className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2" />
             <select
               className={cn(
-                "w-full h-12 sm:h-14 pl-11 pr-10 appearance-none",
+                "w-full h-12 pl-11 pr-10 appearance-none",
                 "bg-white text-sm text-gray-700",
                 "transition-colors duration-200",
-                "focus:outline-none focus:bg-blue-50/50 group-hover:bg-gray-50",
-                "border-0 rounded-lg sm:rounded-none"
+                "focus:outline-none focus:ring-2 focus:ring-primary/10 group-hover:bg-gray-50",
+                "border-0"
               )}
             >
               <option value="">Select content type</option>
@@ -54,35 +53,36 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
           </div>
 
           {/* Location Input */}
-          <div className="w-full sm:w-[45%] relative group order-2">
-            <MapPin className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <div className="w-full sm:w-[40%] relative group">
+            <MapPin className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Enter city or zip code"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className={cn(
-                "w-full h-12 sm:h-14 pl-11 pr-4",
+                "w-full h-12 pl-11 pr-4",
                 "bg-white text-sm text-gray-700",
                 "transition-colors duration-200",
-                "focus:outline-none focus:bg-blue-50/50 group-hover:bg-gray-50",
-                "border-0 rounded-lg sm:rounded-none"
+                "focus:outline-none focus:ring-2 focus:ring-primary/10 group-hover:bg-gray-50",
+                "border-0",
+                "placeholder:text-gray-400"
               )}
             />
           </div>
 
-          {/* Desktop Search Button */}
-          <div className="hidden sm:block w-[20%] order-3">
+          {/* Search Button */}
+          <div className="hidden sm:block sm:w-[20%]">
             <Button 
               className={cn(
-                "w-full h-14 px-6",
-                "bg-primary hover:bg-primary/90 text-white font-medium",
+                "w-full h-12",
+                "bg-primary hover:bg-primary/90 text-white",
                 "shadow-sm hover:shadow-md transition-all duration-200",
-                "text-sm rounded-none"
+                "text-sm rounded-none",
+                "flex items-center justify-center gap-2"
               )}
             >
-              <Search className="w-4 h-4 mr-2" />
-              Search
+              <Search className="w-4 h-4" />
             </Button>
           </div>
         </div>
@@ -91,35 +91,23 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
         <div className="sm:hidden">
           <Button 
             className={cn(
-              "w-full h-12 px-6",
-              "bg-primary hover:bg-primary/90 text-white font-medium",
+              "w-full h-12",
+              "bg-primary hover:bg-primary/90 text-white",
               "shadow-sm hover:shadow-md transition-all duration-200",
-              "text-sm rounded-lg"
+              "text-sm rounded-lg",
+              "flex items-center justify-center gap-2"
             )}
           >
-            <Search className="w-4 h-4 mr-2" />
-            Search
+            <Search className="w-4 h-4" />
+            <span>Search</span>
           </Button>
         </div>
 
         {/* Controls Container */}
         <div className="flex items-center justify-between pt-2">
-          {/* Advanced Filters Toggle - Desktop */}
           <button
             onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className="hidden sm:inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
-          >
-            Advanced Filters
-            <ChevronDown className={cn(
-              "w-3.5 h-3.5 transition-transform duration-200",
-              showMoreFilters ? "rotate-180" : ""
-            )} />
-          </button>
-
-          {/* Advanced Filters Toggle - Mobile */}
-          <button
-            onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className="sm:hidden text-left text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1.5 transition-colors duration-200"
+            className="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
           >
             Advanced Filters
             <ChevronDown className={cn(
@@ -136,15 +124,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
         )}>
           {/* Budget Filter */}
           <div className="relative group">
-            <DollarSign className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <DollarSign className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2" />
             <select
               className={cn(
                 "w-full h-12 px-11 rounded-lg appearance-none",
                 "border border-gray-200 bg-white",
                 "text-sm text-gray-700",
                 "transition-colors duration-200",
-                "focus:outline-none focus:border-blue-300 focus:ring-2 focus:ring-blue-100",
+                "focus:outline-none focus:ring-2 focus:ring-primary/10",
                 "group-hover:bg-gray-50"
               )}
             >
@@ -158,15 +146,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
 
           {/* Rating Filter */}
           <div className="relative group">
-            <Star className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Star className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2" />
             <select
               className={cn(
                 "w-full h-12 px-11 rounded-lg appearance-none",
                 "border border-gray-200 bg-white",
                 "text-sm text-gray-700",
                 "transition-colors duration-200",
-                "focus:outline-none focus:border-blue-300 focus:ring-2 focus:ring-blue-100",
+                "focus:outline-none focus:ring-2 focus:ring-primary/10",
                 "group-hover:bg-gray-50"
               )}
             >
