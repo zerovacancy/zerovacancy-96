@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -97,25 +96,53 @@ const PreviewSearch: React.FC = () => {
       <GlowingEffect className="bg-blue-600/20 absolute -left-24 top-1/2 -translate-y-1/2 blur-3xl opacity-50 w-[32rem] h-[32rem] md:block" />
       <div className="relative">
         <Card className="overflow-hidden bg-white/90 backdrop-blur-sm border-[1.5px] border-gray-300/80 shadow-xl ring-1 ring-gray-200/50">
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 space-y-3">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 space-y-2.5">
             {/* Search Header and Bar */}
             <div className="flex flex-col gap-2.5">
               <SearchHeader />
               <SearchBar onChange={handleSearchChange} value={searchQuery} />
             </div>
 
-            {/* Subtle divider */}
-            <div className="h-px bg-gray-200 w-full -mx-4 sm:-mx-6 lg:-mx-8" />
+            {/* Controls Row - Advanced Filters and Sort */}
+            <div className="flex items-center justify-between px-0.5 mb-1">
+              <button
+                onClick={() => {}} // Advanced filters toggle handler
+                className="
+                  inline-flex items-center gap-1.5 
+                  px-2 py-1 -ml-2
+                  text-sm font-medium
+                  text-gray-700 hover:text-gray-900 
+                  hover:bg-gray-50 rounded-md
+                  transition-colors duration-200
+                "
+              >
+                Advanced Filters
+              </button>
+
+              {/* Sort Control */}
+              <div className="flex items-center gap-4">
+                <CreatorsList
+                  creators={sortedCreators}
+                  sortBy={sortBy}
+                  onSort={handleSort}
+                  onImageLoad={handleImageLoad}
+                  loadedImages={loadedImages}
+                  imageRef={setImageRef}
+                />
+              </div>
+            </div>
 
             {/* Results Section */}
-            <CreatorsList
-              creators={sortedCreators}
-              sortBy={sortBy}
-              onSort={handleSort}
-              onImageLoad={handleImageLoad}
-              loadedImages={loadedImages}
-              imageRef={setImageRef}
-            />
+            <div className="pt-1">
+              <CreatorsList
+                creators={sortedCreators}
+                sortBy={sortBy}
+                onSort={handleSort}
+                onImageLoad={handleImageLoad}
+                loadedImages={loadedImages}
+                imageRef={setImageRef}
+              />
+            </div>
           </div>
         </Card>
       </div>
