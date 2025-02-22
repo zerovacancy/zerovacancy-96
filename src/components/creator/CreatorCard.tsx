@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardHeader, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
@@ -86,10 +85,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     <div className="group select-text">
       <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
         <div className="relative">
-          <div className="absolute top-4 right-4 z-10">
+          <div className="absolute top-3 right-3 z-10">
             <span className="
-              px-3 py-1.5 
-              text-sm font-medium 
+              px-2.5 py-1 
+              text-xs sm:text-sm font-medium 
               bg-white/90 backdrop-blur-sm 
               text-gray-900 
               rounded-full 
@@ -117,23 +116,23 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
             
-            <div className="absolute bottom-4 left-4 text-white select-text">
+            <div className="absolute bottom-3 left-3 text-white select-text">
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-xl">{creator.name}</h3>
-                <CheckCircle className="w-5 h-5 text-blue-400" />
+                <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
+                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
               </div>
-              <div className="flex items-center gap-1.5 mt-1.5">
-                <MapPin className="w-4 h-4 text-white/90" />
-                <span className="text-sm text-white/90">{creator.location}</span>
+              <div className="flex items-center gap-1.5 mt-1">
+                <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" />
+                <span className="text-xs sm:text-sm text-white/90">{creator.location}</span>
               </div>
-              <p className="text-sm text-white/90 mt-1.5">
+              <p className="text-xs sm:text-sm text-white/90 mt-1">
                 {creator.services.join(" • ")}
               </p>
             </div>
           </div>
           
-          <div className="p-5">
-            <div className="space-y-5">
+          <div className="p-4 sm:p-5">
+            <div className="space-y-4 sm:space-y-5">
               <div className="flex flex-wrap gap-2">
                 {tags.map((tag, index) => (
                   <button
@@ -151,9 +150,9 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
-              <div className="flex justify-center px-4">
+              <div className="flex justify-center px-3 sm:px-4">
                 <ButtonColorful 
-                  className="w-auto px-6 py-2.5 min-w-[160px] max-w-[70%]"
+                  className="w-full sm:w-auto px-5 py-2 sm:py-2.5 text-sm sm:text-base"
                   label="Get Early Access"
                   onClick={() => setShowEmailDialog(true)}
                 />
