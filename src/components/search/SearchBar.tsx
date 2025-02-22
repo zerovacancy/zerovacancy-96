@@ -1,9 +1,12 @@
 
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
-import { Search, MapPin, Camera, DollarSign, Star, ChevronDown, X } from 'lucide-react';
+import { Search, MapPin, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { filterLocations, LocationSuggestion } from '@/utils/locationData';
+import { ContentTypeSelect } from './ContentTypeSelect';
+import { LocationSuggestions } from './LocationSuggestions';
+import { SearchFilters } from './SearchFilters';
 
 interface SearchBarProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -79,7 +82,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
     setShowSuggestions(false);
   };
 
-  // Close suggestions when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node)) {
@@ -93,33 +95,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
 
   return (
     <div className="w-full space-y-2.5">
-      {/* Main Search Container */}
       <div className="flex flex-col gap-2.5">
-        {/* Input Fields Container */}
         <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-sm border border-gray-300 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
-          {/* Content Type Dropdown */}
-          <div className="w-full sm:w-[40%] relative group">
-            <Camera className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
-            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2" />
-            <select
-              className={cn(
-                "w-full h-10 pl-11 pr-10 appearance-none",
-                "bg-white text-sm text-gray-700",
-                "transition-colors duration-200",
-                "focus:outline-none focus:ring-2 focus:ring-primary/10 group-hover:bg-gray-50",
-                "border-0"
-              )}
-            >
-              <option value="">Select content type</option>
-              <option value="professional-photography">Professional Photography</option>
-              <option value="virtual-tours">Virtual Tours (360° POV)</option>
-              <option value="drone-video">Drone Video Tours</option>
-              <option value="property-highlight">Property Highlight Videos</option>
-              <option value="social-media">Social Media Content Package</option>
-            </select>
-          </div>
+          <ContentTypeSelect />
 
-          {/* Location Input */}
           <div className="w-full sm:w-[40%] relative group">
             <MapPin className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
             <input
@@ -152,47 +131,16 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
               </button>
             )}
 
-            {/* Suggestions Dropdown */}
             {showSuggestions && (
-              <div
-                ref={suggestionsRef}
-                id="location-suggestions"
-                className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-[100]"
-                role="listbox"
-              >
-                {suggestions.length > 0 ? (
-                  <div className="py-1">
-                    {suggestions.map((suggestion, index) => (
-                      <button
-                        key={`${suggestion.city}-${suggestion.state}`}
-                        className={cn(
-                          "w-full text-left px-4 py-2 text-sm",
-                          "flex items-center gap-2",
-                          "transition-colors duration-150",
-                          activeIndex === index ? "bg-gray-100" : "hover:bg-gray-50",
-                          "focus:outline-none focus:bg-gray-100"
-                        )}
-                        onClick={() => handleSuggestionClick(suggestion)}
-                        role="option"
-                        aria-selected={activeIndex === index}
-                        id={`suggestion-${index}`}
-                      >
-                        <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                        <span>{suggestion.city}, {suggestion.state}</span>
-                        <span className="text-gray-400 text-xs ml-auto">{suggestion.zip}</span>
-                      </button>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="px-4 py-2 text-sm text-gray-500">
-                    No matches found
-                  </div>
-                )}
-              </div>
+              <LocationSuggestions
+                suggestions={suggestions}
+                activeIndex={activeIndex}
+                onSelect={handleSuggestionClick}
+                suggestionsRef={suggestionsRef}
+              />
             )}
           </div>
 
-          {/* Search Button */}
           <div className="hidden sm:block sm:w-[20%]">
             <Button 
               className={cn(
@@ -208,7 +156,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
           </div>
         </div>
 
-        {/* Mobile Search Button */}
         <div className="sm:hidden">
           <Button 
             className={cn(
@@ -224,76 +171,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
           </Button>
         </div>
 
-        {/* Advanced Filters Toggle */}
-        <div className="flex items-center justify-between px-0.5">
-          <button
-            onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className="
-              inline-flex items-center gap-1.5 
-              px-2 py-1 -ml-2
-              text-sm font-medium
-              text-gray-700 hover:text-gray-900 
-              hover:bg-gray-50 rounded-md
-              transition-colors duration-200
-            "
-          >
-            Advanced Filters
-            <ChevronDown className={cn(
-              "w-3.5 h-3.5 text-gray-500",
-              showMoreFilters ? "rotate-180" : ""
-            )} />
-          </button>
-        </div>
-
-        {/* Filters Section */}
-        <div className={cn(
-          "grid grid-cols-1 sm:grid-cols-2 gap-3 transition-all duration-300",
-          showMoreFilters ? "opacity-100 h-auto" : "opacity-0 h-0 overflow-hidden"
-        )}>
-          {/* Budget Filter */}
-          <div className="relative group">
-            <DollarSign className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
-            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2" />
-            <select
-              className={cn(
-                "w-full h-10 px-11 rounded-lg appearance-none",
-                "border border-gray-200 bg-white",
-                "text-sm text-gray-700",
-                "transition-colors duration-200",
-                "focus:outline-none focus:ring-2 focus:ring-primary/10",
-                "group-hover:bg-gray-50"
-              )}
-            >
-              <option value="">Select your budget range</option>
-              <option value="0-100">$0 - $100</option>
-              <option value="100-300">$100 - $300</option>
-              <option value="300-500">$300 - $500</option>
-              <option value="500+">$500+</option>
-            </select>
-          </div>
-
-          {/* Rating Filter */}
-          <div className="relative group">
-            <Star className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
-            <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2" />
-            <select
-              className={cn(
-                "w-full h-10 px-11 rounded-lg appearance-none",
-                "border border-gray-200 bg-white",
-                "text-sm text-gray-700",
-                "transition-colors duration-200",
-                "focus:outline-none focus:ring-2 focus:ring-primary/10",
-                "group-hover:bg-gray-50"
-              )}
-            >
-              <option value="">Minimum Rating</option>
-              <option value="4.5">4.5+ Stars</option>
-              <option value="4.0">4.0+ Stars</option>
-              <option value="3.5">3.5+ Stars</option>
-              <option value="3.0">3.0+ Stars</option>
-            </select>
-          </div>
-        </div>
+        <SearchFilters
+          showMoreFilters={showMoreFilters}
+          onToggleFilters={() => setShowMoreFilters(!showMoreFilters)}
+        />
       </div>
     </div>
   );
