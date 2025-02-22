@@ -51,7 +51,7 @@ export function Hero() {
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Property Content that
               </span>
-              <span className="relative flex w-full justify-center h-[1.5em] sm:h-[1.4em] md:h-[1.3em] lg:h-[1.2em] overflow-hidden mt-2 sm:mt-3">
+              <span className="relative flex w-full justify-center h-[2em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-2 sm:mt-3">
                 {titles.map((title, index) => (
                   <motion.span 
                     key={index}
