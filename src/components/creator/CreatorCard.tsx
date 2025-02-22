@@ -133,19 +133,21 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           
           <div className="p-4 sm:p-5">
             <div className="space-y-4 sm:space-y-5">
-              <div className="flex flex-wrap gap-2">
-                {tags.map((tag, index) => (
-                  <button
-                    key={index}
-                    className={cn(
-                      "text-xs px-2 py-1 rounded-full transition-colors duration-200 cursor-pointer",
-                      getTagStyle(tag)
-                    )}
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    {tag}
-                  </button>
-                ))}
+              <div className="overflow-x-auto scrollbar-hide">
+                <div className="flex flex-nowrap gap-2 pb-1">
+                  {tags.map((tag, index) => (
+                    <button
+                      key={index}
+                      className={cn(
+                        "text-xs px-2 py-1 rounded-full transition-colors duration-200 cursor-pointer whitespace-nowrap",
+                        getTagStyle(tag)
+                      )}
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
               </div>
               
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
@@ -162,6 +164,16 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
         </div>
       </Card>
       <GlowDialog open={showEmailDialog} onOpenChange={setShowEmailDialog} />
+
+      <style jsx global>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </div>
   );
 };
