@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
@@ -64,7 +65,7 @@ const Header = () => {
   );
 
   const NavLinks = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
-    <nav className={cn("flex items-center gap-10", className)}>
+    <nav className={cn("flex items-center gap-12", className)}> {/* Increased gap from 10 to 12 */}
       {[
         { to: "/search", label: "Find Creators" },
         { to: "/how-it-works", label: "How It Works" },
@@ -100,14 +101,14 @@ const Header = () => {
         <Magnetic intensity={0.3}>
           <Link 
             to="/" 
-            className="flex items-center transition-opacity active:opacity-80 -ml-1 md:ml-0"
+            className="flex items-center transition-opacity active:opacity-80 ml-6 md:ml-8" // Adjusted margins
           >
             <motion.img 
               src="/logo.png"
               alt="Haptik"
               initial={false}
               animate={{ scale: isOpen ? 0.95 : 1 }}
-              className="h-9 w-auto" // Increased from h-7 to h-9
+              className="h-[34px] w-auto my-auto" // Increased height to 34px and ensured vertical centering
             />
           </Link>
         </Magnetic>
