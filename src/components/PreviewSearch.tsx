@@ -48,7 +48,6 @@ const creators = [
 ];
 
 const PreviewSearch: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const [sortBy, setSortBy] = useState('rating');
   const [loadedImages, setLoadedImages] = useState(new Set<string>());
@@ -62,19 +61,11 @@ const PreviewSearch: React.FC = () => {
     setSortBy(value);
   };
 
-  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Location changed:', e.target.value);
-    setLocation(e.target.value);
+  const handleLocationChange = (value: string) => {
+    setLocation(value);
   };
 
-  const filteredCreators = creators.filter(creator => {
-    const locationMatch = !location || creator.location.toLowerCase().includes(location.toLowerCase());
-    return locationMatch;
-  });
-
-  console.log('Filtered creators:', filteredCreators); // Debug log
-
-  const sortedCreators = [...filteredCreators].sort((a, b) => {
+  const sortedCreators = [...creators].sort((a, b) => {
     if (sortBy === 'rating') {
       return b.rating - a.rating;
     } else if (sortBy === 'price_asc') {
@@ -104,7 +95,7 @@ const PreviewSearch: React.FC = () => {
               <SearchHeader />
               <SearchBar
                 value={location}
-                onChange={handleLocationChange}
+                onLocationSelect={handleLocationChange}
               />
             </div>
 
