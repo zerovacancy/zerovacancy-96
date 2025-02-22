@@ -1,10 +1,9 @@
-
 import React from 'react';
-import { SortMenu } from '../sorting/SortMenu';
 import { Creator } from '../../types/creator';
 import { ButtonColorful } from '../ui/button-colorful';
 import { MapPin, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SortMenu } from '../sorting/SortMenu';
 
 interface CreatorsListProps {
   creators: Creator[];
@@ -14,35 +13,6 @@ interface CreatorsListProps {
   loadedImages: Set<string>;
   imageRef: (el: HTMLImageElement | null) => void;
 }
-
-const sortOptions = [
-  { label: 'Highest Rated', value: 'rating' },
-  { label: 'Price: Low to High', value: 'price_asc' },
-  { label: 'Price: High to Low', value: 'price_desc' },
-];
-
-const getDefaultTags = (name: string, services: string[]) => {
-  if (name === 'John Smith' && services.includes('Photography')) {
-    return ['#RealEstate', '#Aerial', '#IndoorDroneTour'];
-  }
-  if (name === 'Jane Cooper') {
-    return ['#Interior', '#Design', '#Staging'];
-  }
-  if (name === 'Emily Johnson') {
-    return ['#POV', '#TikTok', '#ComeTourWithMe'];
-  }
-  return ['#Professional', '#Creative', '#Expert'];
-};
-
-const getTagStyle = (tag: string) => {
-  if (['#RealEstate', '#Aerial', '#IndoorDroneTour', '#Interior', '#Design', '#Staging'].includes(tag)) {
-    return "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA] hover:text-[#3730A3]";
-  }
-  if (['#POV', '#TikTok', '#ComeTourWithMe'].includes(tag)) {
-    return "bg-[#F2FCE2] text-[#3B823E] hover:bg-[#DCF5DC] hover:text-[#2E6A31]";
-  }
-  return "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7] hover:text-[#9D5B3F]";
-};
 
 export const CreatorsList: React.FC<CreatorsListProps> = ({
   creators,
@@ -54,92 +24,80 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 }) => {
   return (
     <div className="space-y-6">
+      {/* Controls Row - Advanced Filters and Sort */}
+      <div className="flex items-center justify-end gap-4">
+        <button
+          onClick={() => {}} // Advanced filters toggle handler
+          className="
+            inline-flex items-center gap-1.5 
+            px-2 py-1
+            text-sm font-medium
+            text-gray-700 hover:text-gray-900 
+            hover:bg-gray-50 rounded-md
+            transition-colors duration-200
+          "
+        >
+          Advanced Filters
+        </button>
+
+        <SortMenu
+          options={[
+            { label: 'Highest Rated', value: 'rating' },
+            { label: 'Price: Low to High', value: 'price_asc' },
+            { label: 'Price: High to Low', value: 'price_desc' },
+          ]}
+          onSort={onSort}
+          defaultValue={sortBy}
+        />
+      </div>
+
       {/* Creator Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {creators.map((creator, index) => (
-          <div key={index} className="group select-text">
-            <div className="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-2px] bg-white">
-              {/* Price Tag */}
-              <div className="absolute top-4 right-4 z-10">
-                <span className="
-                  px-3 py-1.5 
-                  text-sm font-medium 
-                  bg-white/90 backdrop-blur-sm 
-                  text-gray-900 
-                  rounded-full 
-                  shadow-sm 
-                  border border-white/20
-                  transition-all duration-200
-                  group-hover:shadow-md
-                ">
-                  From ${creator.price}
-                </span>
-              </div>
-
-              {/* Image Section */}
-              <div className="relative aspect-[4/3]">
+          <div key={index} className="relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-300/50 to-blue-300/50 rounded-xl blur opacity-20"></div>
+            <div className="relative rounded-xl overflow-hidden bg-white/90 backdrop-blur-sm border border-gray-200/80 shadow-md">
+              <div className="aspect-w-16 aspect-h-9">
                 <img
-                  src={creator.image}
-                  alt={creator.name}
-                  className={cn(
-                    "w-full h-full object-cover transition-opacity duration-300",
-                    !loadedImages.has(creator.image) && "opacity-0"
-                  )}
-                  onLoad={() => onImageLoad(creator.image)}
                   ref={imageRef}
+                  className="object-cover w-full h-full transition-opacity duration-300 ease-in-out"
+                  src={creator.image}
+                  alt={`Service provider ${creator.name}`}
+                  onLoad={() => onImageLoad(creator.image)}
+                  style={{ opacity: loadedImages.has(creator.image) ? 1 : 0 }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
-                
-                {/* Creator Info Overlay */}
-                <div className="absolute bottom-4 left-4 text-white select-text">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold text-xl">{creator.name}</h3>
-                    <CheckCircle className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-1.5">
-                    <MapPin className="w-4 h-4 text-white/90" />
-                    <span className="text-sm text-white/90">{creator.location}</span>
-                  </div>
-                  <p className="text-sm text-white/90 mt-1.5">
-                    {creator.services.join(" • ")}
-                  </p>
-                </div>
               </div>
 
-              {/* Card Content */}
-              <div className="p-5 space-y-5">
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {getDefaultTags(creator.name, creator.services).map((tag, idx) => (
-                    <button
-                      key={idx}
-                      className={cn(
-                        "text-xs px-2 py-1 rounded-full transition-colors duration-200 cursor-pointer",
-                        getTagStyle(tag)
-                      )}
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      {tag}
-                    </button>
+              <div className="p-4 space-y-2">
+                <h3 className="text-lg font-semibold text-gray-900">{creator.name}</h3>
+                <div className="flex items-center gap-1 text-sm text-gray-600">
+                  <MapPin className="w-4 h-4" />
+                  <span>{creator.location}</span>
+                </div>
+                <div className="flex space-x-2 text-sm">
+                  {creator.services.map((service, i) => (
+                    <ButtonColorful key={i} className="text-xs">
+                      {service}
+                    </ButtonColorful>
                   ))}
                 </div>
-
-                {/* Rating and Reviews */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="flex items-center">
-                      <span className="text-sm font-medium text-gray-900">{creator.rating}</span>
-                      <span className="text-sm text-gray-500 ml-1">({creator.reviews} reviews)</span>
-                    </div>
+                    <span className="text-sm font-medium text-gray-800">${creator.price}</span>
+                    <span className="text-gray-500">/project</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-xs text-green-600">
+                    <CheckCircle className="w-4 h-4" />
+                    <span>Verified</span>
                   </div>
                 </div>
-
-                {/* CTA Button */}
-                <div className="flex justify-center px-4">
-                  <ButtonColorful 
-                    className="w-auto px-6 py-2.5 min-w-[160px] max-w-[70%]"
-                    label="Get Early Access"
-                  />
+                <div className="flex items-center justify-between text-sm text-gray-700">
+                  <div className="flex items-center">
+                    <span className="font-medium">{creator.rating}</span>
+                    <span className="text-gray-500">
+                      ({creator.reviews} reviews)
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

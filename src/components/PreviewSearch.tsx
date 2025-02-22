@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -109,29 +108,6 @@ const PreviewSearch: React.FC = () => {
             <div className="space-y-2.5">
               <SearchHeader />
               <SearchBar onChange={handleSearchChange} value={searchQuery} />
-            </div>
-
-            {/* Controls Row - Advanced Filters and Sort */}
-            <div className="flex items-center justify-end gap-4 px-0.5">
-              <button
-                onClick={() => {}} // Advanced filters toggle handler
-                className="
-                  inline-flex items-center gap-1.5 
-                  px-2 py-1
-                  text-sm font-medium
-                  text-gray-700 hover:text-gray-900 
-                  hover:bg-gray-50 rounded-md
-                  transition-colors duration-200
-                "
-              >
-                Advanced Filters
-              </button>
-
-              <SortMenu
-                options={sortOptions}
-                onSort={handleSort}
-                defaultValue={sortBy}
-              />
             </div>
 
             {/* Results Section */}
