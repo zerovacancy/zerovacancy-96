@@ -45,13 +45,13 @@ export function Hero() {
       <div className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl" />
 
       <AuroraBackground className="w-full">
-        <div className="flex gap-8 sm:gap-10 lg:gap-12 items-center justify-center flex-col px-4 sm:px-6 py-12 sm:py-16 lg:py-20 min-h-[calc(100vh-4.5rem)] sm:min-h-0 relative z-10">
-          <div className="flex gap-4 sm:gap-6 flex-col max-w-5xl mx-auto w-full">
-            <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-4 sm:py-6 my-4 sm:my-6 font-bold lg:text-8xl">
+        <div className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col px-4 sm:px-6 py-8 sm:py-12 lg:py-16 min-h-[calc(100vh-4.5rem)] sm:min-h-0 relative z-10">
+          <div className="flex gap-3 sm:gap-4 flex-col max-w-5xl mx-auto w-full">
+            <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-2 sm:py-4 my-2 sm:my-4 font-bold lg:text-8xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Property Content that
               </span>
-              <span className="relative flex w-full justify-center h-[2em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-2 sm:mt-3">
+              <span className="relative flex w-full justify-center h-[2em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-1 sm:mt-2">
                 {titles.map((title, index) => (
                   <motion.span 
                     key={index}
@@ -92,7 +92,7 @@ export function Hero() {
             </p>
           </div>
           
-          <div className="flex justify-center w-full px-4 sm:px-6 max-w-lg mx-auto mt-8 sm:mt-12">
+          <div className="flex justify-center w-full px-4 sm:px-6 max-w-lg mx-auto mt-6 sm:mt-8">
             <ShimmerButton 
               className={cn(
                 "relative group/btn overflow-hidden",
