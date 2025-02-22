@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
@@ -108,7 +107,7 @@ const Header = () => {
               alt="Haptik"
               initial={false}
               animate={{ scale: isOpen ? 0.95 : 1 }}
-              className="h-7 w-auto"
+              className="h-9 w-auto" // Increased from h-7 to h-9
             />
           </Link>
         </Magnetic>
