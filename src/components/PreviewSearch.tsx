@@ -112,7 +112,7 @@ const PreviewSearch: React.FC = () => {
             </div>
 
             {/* Controls Row - Advanced Filters and Sort */}
-            <div className="flex items-center justify-between px-0.5">
+            <div className="flex items-center justify-end gap-4 px-0.5">
               <button
                 onClick={() => {}} // Advanced filters toggle handler
                 className="
@@ -127,7 +127,6 @@ const PreviewSearch: React.FC = () => {
                 Advanced Filters
               </button>
 
-              {/* Sort Control */}
               <SortMenu
                 options={sortOptions}
                 onSort={handleSort}
@@ -136,14 +135,16 @@ const PreviewSearch: React.FC = () => {
             </div>
 
             {/* Results Section */}
-            <CreatorsList
-              creators={sortedCreators}
-              sortBy={sortBy}
-              onSort={handleSort}
-              onImageLoad={handleImageLoad}
-              loadedImages={loadedImages}
-              imageRef={setImageRef}
-            />
+            <div className="pt-2">
+              <CreatorsList
+                creators={sortedCreators}
+                sortBy={sortBy}
+                onSort={handleSort}
+                onImageLoad={handleImageLoad}
+                loadedImages={loadedImages}
+                imageRef={setImageRef}
+              />
+            </div>
           </div>
         </Card>
       </div>
