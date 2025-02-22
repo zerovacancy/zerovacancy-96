@@ -1,7 +1,9 @@
-import React, { useState, ChangeEvent } from 'react';
-import { Search, MapPin, Camera, DollarSign, Star, ChevronDown } from 'lucide-react';
+
+import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
+import { Search, MapPin, Camera, DollarSign, Star, ChevronDown, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
+import { filterLocations, LocationSuggestion } from '@/utils/locationData';
 
 interface SearchBarProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -11,12 +13,69 @@ interface SearchBarProps {
 export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
   const [location, setLocation] = useState('');
+  const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
 
-  const popularServices = location ? [
-    'Photography',
-    'Virtual Tours',
-    'Drone Video'
-  ] : [];
+  const handleLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setLocation(value);
+    setActiveIndex(-1);
+
+    if (value.length >= 3) {
+      const filtered = filterLocations(value);
+      setSuggestions(filtered);
+      setShowSuggestions(true);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion: LocationSuggestion) => {
+    setLocation(`${suggestion.city}, ${suggestion.state}`);
+    setSuggestions([]);
+    setShowSuggestions(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveIndex(prev => 
+        prev < suggestions.length - 1 ? prev + 1 : prev
+      );
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveIndex(prev => prev > 0 ? prev - 1 : -1);
+    } else if (e.key === 'Enter' && activeIndex >= 0) {
+      e.preventDefault();
+      const selected = suggestions[activeIndex];
+      if (selected) {
+        handleSuggestionClick(selected);
+      }
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false);
+    }
+  };
+
+  const clearLocation = () => {
+    setLocation('');
+    setSuggestions([]);
+    setShowSuggestions(false);
+  };
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <div className="w-full space-y-2.5">
@@ -53,16 +112,70 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
               type="text"
               placeholder="Enter city or zip code"
               value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              onChange={handleLocationChange}
+              onKeyDown={handleKeyDown}
               className={cn(
-                "w-full h-10 pl-11 pr-4",
+                "w-full h-10 pl-11 pr-10",
                 "bg-white text-sm text-gray-700",
                 "transition-colors duration-200",
                 "focus:outline-none focus:ring-2 focus:ring-primary/10 group-hover:bg-gray-50",
                 "border-0",
                 "placeholder:text-gray-400"
               )}
+              aria-label="Location search"
+              aria-expanded={showSuggestions}
+              role="combobox"
+              aria-controls="location-suggestions"
+              aria-activedescendant={activeIndex >= 0 ? `suggestion-${activeIndex}` : undefined}
             />
+            {location && (
+              <button
+                onClick={clearLocation}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                aria-label="Clear location"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+
+            {/* Suggestions Dropdown */}
+            {showSuggestions && (
+              <div
+                ref={suggestionsRef}
+                id="location-suggestions"
+                className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+                role="listbox"
+              >
+                {suggestions.length > 0 ? (
+                  <div className="py-1">
+                    {suggestions.map((suggestion, index) => (
+                      <button
+                        key={`${suggestion.city}-${suggestion.state}`}
+                        className={cn(
+                          "w-full text-left px-4 py-2 text-sm",
+                          "flex items-center gap-2",
+                          "transition-colors duration-150",
+                          activeIndex === index ? "bg-gray-100" : "hover:bg-gray-50",
+                          "focus:outline-none focus:bg-gray-100"
+                        )}
+                        onClick={() => handleSuggestionClick(suggestion)}
+                        role="option"
+                        aria-selected={activeIndex === index}
+                        id={`suggestion-${index}`}
+                      >
+                        <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                        <span>{suggestion.city}, {suggestion.state}</span>
+                        <span className="text-gray-400 text-xs ml-auto">{suggestion.zip}</span>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="px-4 py-2 text-sm text-gray-500">
+                    No matches found
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Search Button */}
@@ -168,20 +281,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
           </div>
         </div>
       </div>
-
-      {/* Popular Services */}
-      {popularServices.length > 0 && (
-        <div className="flex flex-wrap gap-2 px-2">
-          {popularServices.map((service) => (
-            <span 
-              key={service}
-              className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
-            >
-              Popular in {location}: {service}
-            </span>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
