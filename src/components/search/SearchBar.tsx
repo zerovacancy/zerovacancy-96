@@ -1,4 +1,3 @@
-
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import { Search, MapPin, X } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -149,21 +148,20 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
           </div>
         </div>
 
-        {/* Mobile Search Button - Centered icon only */}
+        {/* Mobile Search Button */}
         <div className="sm:hidden flex flex-col items-center gap-2">
           <Button 
             className={cn(
-              "w-12 h-12",
+              "w-full h-11",
               "bg-primary hover:bg-primary/90 text-white",
               "shadow-sm hover:shadow-md transition-all duration-200",
-              "rounded-full",
+              "text-sm rounded-lg",
               "flex items-center justify-center"
             )}
           >
             <Search className="w-5 h-5" />
           </Button>
 
-          {/* Advanced Filters Button - Centered under search */}
           <button
             onClick={() => setShowMoreFilters(!showMoreFilters)}
             className={cn(
