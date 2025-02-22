@@ -87,8 +87,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
   }, []);
 
   return (
-    <div className="w-full space-y-2">
-      <div className="flex flex-col gap-2">
+    <div className="w-full space-y-3">
+      <div className="flex flex-col gap-3">
         <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-sm border border-gray-300 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
           <ContentTypeSelect />
 
@@ -149,19 +149,34 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
           </div>
         </div>
 
-        <div className="sm:hidden px-4">
+        {/* Mobile Search Button - Centered icon only */}
+        <div className="sm:hidden flex flex-col items-center gap-2">
           <Button 
             className={cn(
-              "w-full h-11",
+              "w-12 h-12",
               "bg-primary hover:bg-primary/90 text-white",
               "shadow-sm hover:shadow-md transition-all duration-200",
-              "text-sm rounded-lg",
-              "flex items-center justify-center gap-2"
+              "rounded-full",
+              "flex items-center justify-center"
             )}
           >
-            <Search className="w-4 h-4" />
-            <span>Search</span>
+            <Search className="w-5 h-5" />
           </Button>
+
+          {/* Advanced Filters Button - Centered under search */}
+          <button
+            onClick={() => setShowMoreFilters(!showMoreFilters)}
+            className={cn(
+              "inline-flex items-center gap-1.5",
+              "px-3 py-1.5",
+              "text-sm font-medium",
+              "text-gray-700 hover:text-gray-900",
+              "hover:bg-gray-50 rounded-md",
+              "transition-colors duration-200"
+            )}
+          >
+            Advanced Filters
+          </button>
         </div>
 
         <SearchFilters
