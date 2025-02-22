@@ -1,6 +1,6 @@
+
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { SearchHeader } from './search/SearchHeader';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
@@ -63,7 +63,7 @@ const PreviewSearch: React.FC = () => {
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Location changed:', e.target.value); // Debug log
+    console.log('Location changed:', e.target.value);
     setLocation(e.target.value);
   };
 
@@ -71,6 +71,8 @@ const PreviewSearch: React.FC = () => {
     const locationMatch = !location || creator.location.toLowerCase().includes(location.toLowerCase());
     return locationMatch;
   });
+
+  console.log('Filtered creators:', filteredCreators); // Debug log
 
   const sortedCreators = [...filteredCreators].sort((a, b) => {
     if (sortBy === 'rating') {

@@ -38,6 +38,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     { label: 'Distance', value: 'distance' }
   ];
 
+  console.log('Number of creators:', creators.length); // Debug log
+
   return (
     <div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center mb-6 w-full gap-4">
@@ -53,7 +55,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {creators.map((creator, index) => (
           <CreatorCard
-            key={index}
+            key={creator.name} // Changed from index to creator.name for better key uniqueness
             creator={creator}
             onImageLoad={onImageLoad}
             loadedImages={loadedImages}
