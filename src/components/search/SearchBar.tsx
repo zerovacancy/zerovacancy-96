@@ -148,7 +148,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
           </div>
         </div>
 
-        {/* Mobile Search Button */}
+        {/* Mobile Search Button and Advanced Filters */}
         <div className="sm:hidden flex flex-col items-center gap-2">
           <Button 
             className={cn(
