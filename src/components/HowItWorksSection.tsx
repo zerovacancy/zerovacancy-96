@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { Search, Users, FileCheck, Calendar } from 'lucide-react';
+import { Search, Users, FileCheck, Calendar, Sparkle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { cn } from '@/lib/utils';
 
 const HowItWorksSection = () => {
@@ -136,12 +136,27 @@ const HowItWorksSection = () => {
         </div>
 
         <div className="flex justify-center mt-6 sm:mt-8">
-          <Button 
-            variant="default"
-            className="w-full sm:w-auto sm:min-w-[200px] px-8 py-2.5 text-sm sm:text-base"
+          <ShimmerButton 
+            className={cn(
+              "relative group/btn overflow-hidden",
+              "w-full sm:w-auto min-w-[200px]",
+              "h-12 sm:h-14",
+              "text-base sm:text-lg font-medium",
+              "px-8 sm:px-12",
+              "flex items-center justify-center gap-2 sm:gap-3",
+              "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
+              "hover:from-[#8e77f3] hover:to-[#D033ED]",
+              "shadow-lg hover:shadow-xl",
+              "transition-all duration-300",
+              "hover:scale-[1.02] active:scale-[0.98]"
+            )}
+            shimmerColor="rgba(255, 255, 255, 0.2)"
+            shimmerSize="60%"
+            shimmerDuration="2s"
           >
-            Find Your Creator
-          </Button>
+            <span className="relative z-10">Join Waitlist</span>
+            <Sparkle className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+          </ShimmerButton>
         </div>
       </div>
     </section>

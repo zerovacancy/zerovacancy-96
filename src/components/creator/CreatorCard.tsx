@@ -1,14 +1,13 @@
-
 import React from 'react';
 import { Card, CardHeader, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
-import { MapPin, Star, Image, CheckCircle } from 'lucide-react';
+import { MapPin, Star, Image, CheckCircle, Sparkle } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { CreatorRating } from './CreatorRating';
 import { GlowDialog } from '../ui/glow-dialog';
-import { ButtonColorful } from '../ui/button-colorful';
+import { ShimmerButton } from '../ui/shimmer-button';
 
 interface Creator {
   name: string;
@@ -154,11 +153,28 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
               <div className="flex justify-center px-3 sm:px-4">
-                <ButtonColorful 
-                  className="w-full sm:w-auto px-5 py-2 sm:py-2.5 text-sm sm:text-base"
-                  label="Get Early Access"
+                <ShimmerButton 
+                  className={cn(
+                    "relative group/btn overflow-hidden",
+                    "w-full",
+                    "h-12 sm:h-14",
+                    "text-base sm:text-lg font-medium",
+                    "px-8 sm:px-12",
+                    "flex items-center justify-center gap-2 sm:gap-3",
+                    "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
+                    "hover:from-[#8e77f3] hover:to-[#D033ED]",
+                    "shadow-lg hover:shadow-xl",
+                    "transition-all duration-300",
+                    "hover:scale-[1.02] active:scale-[0.98]"
+                  )}
+                  shimmerColor="rgba(255, 255, 255, 0.2)"
+                  shimmerSize="60%"
+                  shimmerDuration="2s"
                   onClick={() => setShowEmailDialog(true)}
-                />
+                >
+                  <span className="relative z-10">Join Waitlist</span>
+                  <Sparkle className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+                </ShimmerButton>
               </div>
             </div>
           </div>
