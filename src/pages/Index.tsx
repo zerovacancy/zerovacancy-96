@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -15,21 +14,19 @@ import { Spotlight } from '@/components/ui/spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
-
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
-
   useEffect(() => {
     // Clear localStorage for testing
     // localStorage.removeItem('hasVisited');
-    
+
     // Check if user has visited before
     const hasVisited = localStorage.getItem('hasVisited');
-    
+
     // Set initial dialog state based on localStorage
     setShowGlowDialog(!hasVisited);
-    
+
     // Only set hasVisited when dialog is closed
     if (!hasVisited) {
       localStorage.setItem('hasVisited', 'true');
@@ -39,7 +36,6 @@ const Index = () => {
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
-
   return <div className="flex flex-col min-h-screen">
       <Header />
       {showBanner && <div className="sticky top-16 z-40">
@@ -115,5 +111,4 @@ const Index = () => {
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
     </div>;
 };
-
 export default Index;
