@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -49,7 +48,6 @@ const creators = [
 ];
 
 const PreviewSearch: React.FC = () => {
-  const isMobile = useIsMobile();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('');
   const [sortBy, setSortBy] = useState('rating');
@@ -64,18 +62,15 @@ const PreviewSearch: React.FC = () => {
     setSortBy(value);
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Location changed:', e.target.value); // Debug log
     setLocation(e.target.value);
   };
 
-  const filteredCreators = creators.filter(creator =>
-    creator.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    creator.services.some(service => service.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
+  const filteredCreators = creators.filter(creator => {
+    const locationMatch = !location || creator.location.toLowerCase().includes(location.toLowerCase());
+    return locationMatch;
+  });
 
   const sortedCreators = [...filteredCreators].sort((a, b) => {
     if (sortBy === 'rating') {
@@ -103,19 +98,16 @@ const PreviewSearch: React.FC = () => {
       <div className="relative">
         <Card className="overflow-hidden bg-white/90 backdrop-blur-sm border-[1.5px] border-gray-300/80 shadow-xl ring-1 ring-gray-200/50">
           <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 space-y-3">
-            {/* Search Header and Bar */}
             <div className="flex flex-col gap-2.5">
               <SearchHeader />
               <SearchBar
-                onChange={handleLocationChange}
                 value={location}
+                onChange={handleLocationChange}
               />
             </div>
 
-            {/* Subtle divider */}
             <div className="h-px bg-gray-200 w-full -mx-4 sm:-mx-6 lg:-mx-8" />
 
-            {/* Results Section */}
             <CreatorsList
               creators={sortedCreators}
               sortBy={sortBy}
