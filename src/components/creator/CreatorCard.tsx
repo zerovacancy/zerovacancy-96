@@ -1,11 +1,10 @@
 
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { Sparkle } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { useIsMobile } from 'usehooks-ts';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { EmailDialog } from './EmailDialog';
 
 interface Creator {

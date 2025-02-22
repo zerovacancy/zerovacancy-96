@@ -8,7 +8,10 @@ import { GlowingEffect } from './ui/glowing-effect';
 
 const creators = [
   {
+    id: '1',
     name: 'Jane Cooper',
+    title: 'Professional Photographer',
+    description: 'Specializing in real estate and architectural photography',
     services: ['Photography', 'Videography'],
     price: 499,
     rating: 4.8,
@@ -18,7 +21,10 @@ const creators = [
     workExamples: ['/janesub.jpg', '/janesub2.png', '/janesub3.webp'],
   },
   {
+    id: '2',
     name: 'John Smith',
+    title: 'Creative Director',
+    description: 'Expert in commercial and residential property showcases',
     services: ['Photography', 'Drone'],
     price: 599,
     rating: 4.9,
@@ -32,7 +38,10 @@ const creators = [
     ],
   },
   {
+    id: '3',
     name: 'Emily Johnson',
+    title: 'Content Creator',
+    description: 'Specialized in modern interior and exterior photography',
     services: ['Videography', 'Editing'],
     price: 699,
     rating: 4.7,
@@ -50,11 +59,11 @@ const creators = [
 const PreviewSearch: React.FC = () => {
   const [location, setLocation] = useState('');
   const [sortBy, setSortBy] = useState('rating');
-  const [loadedImages, setLoadedImages] = useState(new Set<string>());
-  const imageRefs = useRef<Map<string, HTMLImageElement>>(new Map());
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [loadedImagesCount, setLoadedImagesCount] = useState(0);
 
-  const handleImageLoad = (imageSrc: string) => {
-    setLoadedImages(prev => new Set(prev).add(imageSrc));
+  const handleImageLoad = () => {
+    setLoadedImagesCount(prev => prev + 1);
   };
 
   const handleSort = (value: string) => {
@@ -75,15 +84,6 @@ const PreviewSearch: React.FC = () => {
     }
     return 0;
   });
-
-  const setImageRef = (el: HTMLImageElement | null) => {
-    if (el) {
-      const key = el.src;
-      if (!imageRefs.current.has(key)) {
-        imageRefs.current.set(key, el);
-      }
-    }
-  };
 
   return (
     <section id="search" className="container section-sm">
@@ -106,8 +106,8 @@ const PreviewSearch: React.FC = () => {
               sortBy={sortBy}
               onSort={handleSort}
               onImageLoad={handleImageLoad}
-              loadedImages={loadedImages}
-              imageRef={setImageRef}
+              loadedImages={loadedImagesCount}
+              imageRef={imageRef}
             />
           </div>
         </Card>
