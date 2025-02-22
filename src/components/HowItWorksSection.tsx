@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Search, Users, FileCheck, Calendar, Sparkle } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -26,24 +27,6 @@ const HowItWorksSection = () => {
     description: "Receive and approve deliverables",
     number: "04"
   }];
-
-  React.useEffect(() => {
-    console.log('HowItWorksSection ShimmerButton mounted with styles:', {
-      className: cn(
-        "relative group/btn overflow-hidden",
-        "w-full sm:w-auto min-w-[200px]",
-        "h-12 sm:h-14",
-        "text-base sm:text-lg font-medium",
-        "px-8 sm:px-12",
-        "flex items-center justify-center gap-2 sm:gap-3",
-        "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
-        "hover:from-[#8e77f3] hover:to-[#D033ED]",
-        "shadow-lg hover:shadow-xl",
-        "transition-all duration-300",
-        "hover:scale-[1.02] active:scale-[0.98]"
-      )
-    });
-  }, []);
 
   return (
     <section className="relative overflow-hidden py-4 sm:py-6 lg:py-12 px-3 sm:px-6 lg:px-8">
@@ -170,9 +153,6 @@ const HowItWorksSection = () => {
             shimmerColor="rgba(255, 255, 255, 0.2)"
             shimmerSize="60%"
             shimmerDuration="2s"
-            onClick={(e) => {
-              console.log('HowItWorksSection ShimmerButton clicked, applied classes:', e.currentTarget.className);
-            }}
           >
             <span className="relative z-10">Join Waitlist</span>
             <Sparkle className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />

@@ -4,16 +4,13 @@ import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
 
 interface Creator {
-  id: string;
   name: string;
-  title: string;
-  image: string;
-  description: string;
   services: string[];
   price: number;
   rating: number;
   reviews: number;
   location: string;
+  image: string;
   workExamples: string[];
 }
 
@@ -21,9 +18,9 @@ interface CreatorsListProps {
   creators: Creator[];
   sortBy: string;
   onSort: (value: string) => void;
-  onImageLoad: () => void;
-  loadedImages: number;
-  imageRef: React.RefObject<HTMLImageElement>;
+  onImageLoad: (imageSrc: string) => void;
+  loadedImages: Set<string>;
+  imageRef: (node: HTMLImageElement | null) => void;
 }
 
 export const CreatorsList: React.FC<CreatorsListProps> = ({
@@ -41,6 +38,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     { label: 'Distance', value: 'distance' }
   ];
 
+  console.log('Number of creators:', creators.length); // Debug log
+
   return (
     <div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center mb-6 w-full gap-4">
@@ -54,9 +53,9 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {creators.map((creator) => (
+        {creators.map((creator, index) => (
           <CreatorCard
-            key={creator.id}
+            key={creator.name} // Changed from index to creator.name for better key uniqueness
             creator={creator}
             onImageLoad={onImageLoad}
             loadedImages={loadedImages}
