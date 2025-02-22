@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Building, UserPlus } from "lucide-react";
+import { Sparkle } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import AuroraBackground from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -92,17 +92,28 @@ export function Hero() {
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full px-4 sm:px-6 max-w-2xl mx-auto mt-8 sm:mt-12">
+          <div className="flex justify-center w-full px-4 sm:px-6 max-w-lg mx-auto mt-8 sm:mt-12">
             <ShimmerButton 
-              className="flex-1 text-sm sm:text-base font-medium gap-2 items-center justify-center sm:gap-3 min-h-[3.5rem] sm:min-h-[4rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform shadow-lg" 
-              background="rgba(255, 255, 255, 0.1)"
+              className={cn(
+                "relative group/btn overflow-hidden",
+                "w-full sm:w-auto min-w-[200px]",
+                "h-12 sm:h-14",
+                "text-base sm:text-lg font-medium",
+                "px-8 sm:px-12",
+                "flex items-center justify-center gap-2 sm:gap-3",
+                "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
+                "hover:from-[#8e77f3] hover:to-[#D033ED]",
+                "shadow-lg hover:shadow-xl",
+                "transition-all duration-300",
+                "hover:scale-[1.02] active:scale-[0.98]"
+              )}
+              shimmerColor="rgba(255, 255, 255, 0.2)"
+              shimmerSize="60%"
+              shimmerDuration="2s"
+              onClick={() => {}}
             >
-              Find Creators <Building className="w-4 h-4 sm:w-5 sm:h-5" />
-            </ShimmerButton>
-            <ShimmerButton 
-              className="flex-1 text-sm sm:text-base font-medium gap-2 items-center justify-center sm:gap-3 min-h-[3.5rem] sm:min-h-[4rem] touch-manipulation tracking-wide [word-spacing:0.16em] active:scale-[0.98] transition-transform shadow-lg"
-            >
-              Join as Creator <UserPlus className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="relative z-10">Join Waitlist</span>
+              <Sparkle className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
             </ShimmerButton>
           </div>
         </div>
