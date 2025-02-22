@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardHeader, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
@@ -133,7 +134,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           
           <div className="p-4 sm:p-5">
             <div className="space-y-4 sm:space-y-5">
-              <div className="overflow-x-auto scrollbar-hide">
+              <div className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                 <div className="flex flex-nowrap gap-2 pb-1">
                   {tags.map((tag, index) => (
                     <button
@@ -164,16 +165,6 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
         </div>
       </Card>
       <GlowDialog open={showEmailDialog} onOpenChange={setShowEmailDialog} />
-
-      <style jsx global>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </div>
   );
 };
