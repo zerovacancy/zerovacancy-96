@@ -5,7 +5,7 @@ export interface LocationSuggestion {
   zip: string;
 }
 
-// Sample of top US cities (you can expand this list)
+// Expanded list of major US cities
 export const majorUSLocations: LocationSuggestion[] = [
   { city: "New York", state: "NY", zip: "10001" },
   { city: "Los Angeles", state: "CA", zip: "90001" },
@@ -17,16 +17,26 @@ export const majorUSLocations: LocationSuggestion[] = [
   { city: "San Diego", state: "CA", zip: "92101" },
   { city: "Dallas", state: "TX", zip: "75201" },
   { city: "San Jose", state: "CA", zip: "95101" },
+  { city: "Austin", state: "TX", zip: "78701" },
+  { city: "Jacksonville", state: "FL", zip: "32201" },
+  { city: "Fort Worth", state: "TX", zip: "76101" },
+  { city: "Columbus", state: "OH", zip: "43201" },
+  { city: "San Francisco", state: "CA", zip: "94101" }
 ];
 
 export const filterLocations = (query: string): LocationSuggestion[] => {
   const searchTerm = query.toLowerCase().trim();
-  if (searchTerm.length < 3) return [];
+  
+  // Return empty array if search term is less than 2 characters
+  if (searchTerm.length < 2) return [];
 
-  return majorUSLocations
-    .filter(location => {
-      const cityState = `${location.city}, ${location.state}`.toLowerCase();
-      return cityState.includes(searchTerm) || location.zip.includes(searchTerm);
-    })
-    .slice(0, 7); // Limit to 7 suggestions
+  // Filter locations based on city, state, or zip
+  return majorUSLocations.filter(location => {
+    const cityState = `${location.city}, ${location.state}`.toLowerCase();
+    const cityMatch = location.city.toLowerCase().includes(searchTerm);
+    const stateMatch = location.state.toLowerCase().includes(searchTerm);
+    const zipMatch = location.zip.includes(searchTerm);
+    
+    return cityMatch || stateMatch || zipMatch;
+  }).slice(0, 7); // Limit to 7 suggestions
 };

@@ -13,23 +13,30 @@ interface SearchBarProps {
   value?: string;
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value = '' }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [inputValue, setInputValue] = useState(value);
   const suggestionsRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
   const handleLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    
     if (onChange) {
       onChange(e);
     }
 
-    const inputValue = e.target.value;
     setActiveIndex(-1);
 
-    if (inputValue.length >= 3) {
-      const filtered = filterLocations(inputValue);
+    if (newValue.length >= 2) {
+      const filtered = filterLocations(newValue);
       setSuggestions(filtered);
       setShowSuggestions(true);
     } else {
@@ -39,13 +46,17 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
   };
 
   const handleSuggestionClick = (suggestion: LocationSuggestion) => {
+    const newValue = `${suggestion.city}, ${suggestion.state}`;
+    setInputValue(newValue);
+    
     const syntheticEvent = {
-      target: { value: `${suggestion.city}, ${suggestion.state}` }
+      target: { value: newValue }
     } as ChangeEvent<HTMLInputElement>;
     
     if (onChange) {
       onChange(syntheticEvent);
     }
+    
     setSuggestions([]);
     setShowSuggestions(false);
   };
@@ -71,6 +82,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
   };
 
   const clearLocation = () => {
+    setInputValue('');
+    
     const syntheticEvent = {
       target: { value: '' }
     } as ChangeEvent<HTMLInputElement>;
@@ -78,6 +91,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
     if (onChange) {
       onChange(syntheticEvent);
     }
+    
     setSuggestions([]);
     setShowSuggestions(false);
   };
@@ -104,7 +118,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
             <input
               type="text"
               placeholder="Enter city or zip code"
-              value={value}
+              value={inputValue}
               onChange={handleLocationChange}
               onKeyDown={handleKeyDown}
               className={cn(
@@ -121,7 +135,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
               aria-controls="location-suggestions"
               aria-activedescendant={activeIndex >= 0 ? `suggestion-${activeIndex}` : undefined}
             />
-            {value && (
+            {inputValue && (
               <button
                 onClick={clearLocation}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
