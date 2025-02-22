@@ -51,6 +51,7 @@ const creators = [
 const PreviewSearch: React.FC = () => {
   const isMobile = useIsMobile();
   const [searchQuery, setSearchQuery] = useState('');
+  const [location, setLocation] = useState('');
   const [sortBy, setSortBy] = useState('rating');
   const [loadedImages, setLoadedImages] = useState(new Set<string>());
   const imageRefs = useRef<Map<string, HTMLImageElement>>(new Map());
@@ -65,6 +66,10 @@ const PreviewSearch: React.FC = () => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
+  };
+
+  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocation(e.target.value);
   };
 
   const filteredCreators = creators.filter(creator =>
@@ -101,7 +106,10 @@ const PreviewSearch: React.FC = () => {
             {/* Search Header and Bar */}
             <div className="flex flex-col gap-2.5">
               <SearchHeader />
-              <SearchBar onChange={handleSearchChange} value={searchQuery} />
+              <SearchBar
+                onChange={handleLocationChange}
+                value={location}
+              />
             </div>
 
             {/* Subtle divider */}

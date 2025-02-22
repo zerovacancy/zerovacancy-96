@@ -1,4 +1,3 @@
-
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import { Search, MapPin, Camera, DollarSign, Star, ChevronDown, X } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -143,7 +142,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onChange, value }) => {
               <div
                 ref={suggestionsRef}
                 id="location-suggestions"
-                className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+                className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-[100]"
                 role="listbox"
               >
                 {suggestions.length > 0 ? (
