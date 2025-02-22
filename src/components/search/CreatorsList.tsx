@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { SortMenu } from '../sorting/SortMenu';
-import { Creator } from '@/types/creator';
+import { Creator } from '../../types/creator';
 
 interface CreatorsListProps {
   creators: Creator[];
