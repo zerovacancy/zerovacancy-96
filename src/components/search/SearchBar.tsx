@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
+
+import React, { useState, ChangeEvent, useRef, useEffect, useCallback } from 'react';
 import { Search, MapPin, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
@@ -14,11 +15,13 @@ interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSelect }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
-  const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
+  const [suggestions, setSuggestions] = useState({ cities: [], zipCodes: [] });
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [inputValue, setInputValue] = useState(value);
+  const [isLoading, setIsLoading] = useState(false);
   const suggestionsRef = useRef<HTMLDivElement>(null);
+  const searchDebounceRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     setInputValue(value);
@@ -28,49 +31,65 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
     const newValue = e.target.value;
     setInputValue(newValue);
     setActiveIndex(-1);
+    setIsLoading(true);
 
-    if (newValue.length >= 2) {
-      const filtered = filterLocations(newValue);
-      setSuggestions(filtered);
-      setShowSuggestions(true);
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
+    // Clear previous debounce timeout
+    if (searchDebounceRef.current) {
+      clearTimeout(searchDebounceRef.current);
     }
+
+    // Set new debounce timeout
+    searchDebounceRef.current = setTimeout(() => {
+      if (newValue.length >= 2) {
+        const filtered = filterLocations(newValue);
+        setSuggestions(filtered);
+        setShowSuggestions(true);
+      } else {
+        setSuggestions({ cities: [], zipCodes: [] });
+        setShowSuggestions(false);
+      }
+      setIsLoading(false);
+    }, 300);
   };
 
   const handleSuggestionClick = (suggestion: LocationSuggestion) => {
     const newValue = `${suggestion.city}, ${suggestion.state}`;
     setInputValue(newValue);
     onLocationSelect(newValue);
-    setSuggestions([]);
+    setSuggestions({ cities: [], zipCodes: [] });
     setShowSuggestions(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setActiveIndex(prev => 
-        prev < suggestions.length - 1 ? prev + 1 : prev
-      );
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setActiveIndex(prev => prev > 0 ? prev - 1 : -1);
-    } else if (e.key === 'Enter' && activeIndex >= 0) {
-      e.preventDefault();
-      const selected = suggestions[activeIndex];
-      if (selected) {
-        handleSuggestionClick(selected);
-      }
-    } else if (e.key === 'Escape') {
-      setShowSuggestions(false);
+    const totalSuggestions = [...suggestions.cities, ...suggestions.zipCodes];
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setActiveIndex(prev => 
+          prev < totalSuggestions.length - 1 ? prev + 1 : prev
+        );
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setActiveIndex(prev => prev > 0 ? prev - 1 : -1);
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (activeIndex >= 0 && totalSuggestions[activeIndex]) {
+          handleSuggestionClick(totalSuggestions[activeIndex]);
+        }
+        break;
+      case 'Escape':
+        setShowSuggestions(false);
+        break;
     }
   };
 
   const clearLocation = () => {
     setInputValue('');
     onLocationSelect('');
-    setSuggestions([]);
+    setSuggestions({ cities: [], zipCodes: [] });
     setShowSuggestions(false);
   };
 
@@ -83,6 +102,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Clean up debounce timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (searchDebounceRef.current) {
+        clearTimeout(searchDebounceRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -126,9 +154,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
             {showSuggestions && (
               <LocationSuggestions
                 suggestions={suggestions}
+                searchTerm={inputValue}
                 activeIndex={activeIndex}
                 onSelect={handleSuggestionClick}
                 suggestionsRef={suggestionsRef}
+                isLoading={isLoading}
               />
             )}
           </div>
