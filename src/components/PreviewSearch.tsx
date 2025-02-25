@@ -86,7 +86,13 @@ const PreviewSearch: React.FC = () => {
   };
 
   return (
-    <section id="search" className="container section-sm">
+    <section id="search" className="container section-sm relative overflow-hidden">
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-[#F5F7FB] to-white"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
       <GlowingEffect className="bg-blue-600/20 absolute -left-24 top-1/2 -translate-y-1/2 blur-3xl opacity-50 w-[32rem] h-[32rem] md:block" />
       <div className="relative px-4 sm:px-0">
         <Card className="overflow-hidden bg-white/90 backdrop-blur-sm border-[1.5px] border-gray-300/80 shadow-xl ring-1 ring-gray-200/50">
@@ -99,7 +105,7 @@ const PreviewSearch: React.FC = () => {
               />
             </div>
 
-            <div className="h-px bg-gray-200 w-full -mx-3 sm:-mx-6 lg:-mx-8" />
+            <div className="h-px bg-gray-200/80 w-full -mx-3 sm:-mx-6 lg:-mx-8 my-2" />
 
             <CreatorsList
               creators={sortedCreators}

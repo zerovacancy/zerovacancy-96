@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
@@ -41,8 +40,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   console.log('Number of creators:', creators.length); // Debug log
 
   return (
-    <div>
-      <div className="flex flex-col sm:flex-row items-start sm:items-center mb-6 w-full gap-4">
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-4 bg-gray-50/50 p-4 rounded-lg border border-gray-100/80">
         <div className="w-full sm:w-auto">
           <SortMenu 
             options={sortOptions}
@@ -53,9 +52,9 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {creators.map((creator, index) => (
+        {creators.map((creator) => (
           <CreatorCard
-            key={creator.name} // Changed from index to creator.name for better key uniqueness
+            key={creator.name}
             creator={creator}
             onImageLoad={onImageLoad}
             loadedImages={loadedImages}

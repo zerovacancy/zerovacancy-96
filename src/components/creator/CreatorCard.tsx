@@ -83,19 +83,30 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   
   return (
     <div className="group select-text">
-      <Card className="overflow-hidden h-full will-change-transform transition-all duration-300 hover:translate-y-[-2px]">
+      <Card className="
+        overflow-hidden h-full 
+        will-change-transform 
+        transition-all duration-300 
+        hover:translate-y-[-2px]
+        bg-white
+        border border-gray-200/80
+        shadow-[0_2px_8px_rgba(0,0,0,0.05)]
+        hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)]
+        rounded-lg
+      ">
         <div className="relative">
           <div className="absolute top-3 right-3 z-10">
             <span className="
               px-2.5 py-1 
               text-xs sm:text-sm font-medium 
-              bg-white/90 backdrop-blur-sm 
+              bg-white/95 backdrop-blur-sm 
               text-gray-900 
               rounded-full 
               shadow-sm 
-              border border-white/20
+              border border-white/30
               transition-all duration-200
               group-hover:shadow-md
+              group-hover:bg-white
             ">
               From ${creator.price}
             </span>
