@@ -49,7 +49,7 @@ export function Hero() {
           <div className="flex gap-2 sm:gap-4 flex-col max-w-5xl mx-auto w-full">
             <h1 className="text-[2.25rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-1 sm:py-4 my-1 sm:my-4 font-bold lg:text-8xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
-                AI-Powered Occupancy that
+                Find the perfect content creator
               </span>
               <span className="relative flex w-full justify-center h-[1.6em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-0.5 sm:mt-2">
                 {titles.map((title, index) => (
@@ -87,7 +87,7 @@ export function Hero() {
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl leading-relaxed tracking-wide text-gray-700 max-w-2xl text-center mx-auto px-2 sm:px-4 [word-spacing:0.12em] sm:[word-spacing:0.16em] relative z-10">
-              Leverage AI and automation to reduce vacancies, streamline operations, and boost your property portfolio's performance.
+              Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </p>
           </div>
           
