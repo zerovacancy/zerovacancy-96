@@ -1,9 +1,8 @@
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Sparkle } from "lucide-react";
+import { ArrowRight, Sparkle } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import AuroraBackground from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -94,26 +93,10 @@ export function Hero() {
           
           <div className="flex justify-center w-full px-4 sm:px-6 max-w-lg mx-auto mt-6 sm:mt-8">
             <ShimmerButton 
-              className={cn(
-                "relative group/btn overflow-hidden",
-                "w-full sm:w-auto min-w-[200px]",
-                "h-12 sm:h-14",
-                "text-base sm:text-lg font-medium",
-                "px-8 sm:px-12",
-                "flex items-center justify-center gap-2 sm:gap-3",
-                "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
-                "hover:from-[#8e77f3] hover:to-[#D033ED]",
-                "shadow-lg hover:shadow-xl",
-                "transition-all duration-300",
-                "hover:scale-[1.02] active:scale-[0.98]"
-              )}
-              shimmerColor="rgba(255, 255, 255, 0.2)"
-              shimmerSize="60%"
-              shimmerDuration="2s"
               onClick={() => {}}
             >
-              <span className="relative z-10">Join Waitlist</span>
-              <Sparkle className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+              <span>Join Waitlist</span>
+              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" /> {/* Changed from Sparkle to ArrowRight */}
             </ShimmerButton>
           </div>
         </div>

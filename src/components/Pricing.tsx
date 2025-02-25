@@ -2,7 +2,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Sparkle } from "lucide-react";
+import { ArrowRight } from 'lucide-react';
 import { ShimmerButton } from "./ui/shimmer-button";
 export function Pricing() {
   return <section id="pricing" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
@@ -74,25 +74,14 @@ const PricingCard = ({
         </ul>
 
         <ShimmerButton 
-          className={cn(
-            "mt-6 relative group/btn overflow-hidden",
-            "w-full",
-            "h-12 sm:h-14",
-            "text-base sm:text-lg font-medium",
-            "px-8 sm:px-12",
-            "flex items-center justify-center gap-2 sm:gap-3",
-            "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
-            "hover:from-[#8e77f3] hover:to-[#D033ED]",
-            "shadow-lg hover:shadow-xl",
-            "transition-all duration-300",
-            "hover:scale-[1.02] active:scale-[0.98]"
-          )}
-          shimmerColor="rgba(255, 255, 255, 0.2)"
-          shimmerSize="60%"
-          shimmerDuration="2s"
+          className="mt-6"
+          onClick={e => {
+            e.stopPropagation();
+            // Your existing click handler logic
+          }}
         >
-          <span className="relative z-10">{cta}</span>
-          <Sparkle className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+          <span>{cta}</span>
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
         </ShimmerButton>
       </div>
 
