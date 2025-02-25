@@ -33,26 +33,29 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
       <button
         ref={ref}
         className={cn(
-          // Base styles
+          // Base styles - Reduced height & width
           "relative group/btn overflow-hidden",
-          "h-14 sm:h-16", // Increased height by ~15%
-          "px-8 sm:px-10", // Increased horizontal padding
-          "inline-flex min-w-[200px] max-w-[300px]", // Consistent width constraints
-          "items-center justify-center gap-2",
-          "rounded-2xl", // More rounded corners
-          "font-semibold text-base sm:text-lg", // Bolder font weight
-          "transition-all duration-300",
+          "h-11 sm:h-12", // Reduced height by ~30%
+          "px-6 sm:px-8", // Reduced horizontal padding
+          "inline-flex min-w-[160px] max-w-[240px]", // More compact width
+          "items-center justify-center gap-1.5",
+          "rounded-xl", // Slightly reduced border radius
+          "font-medium text-sm sm:text-base", // Adjusted font size
+          "transition-all duration-200",
           
-          // Background & Shadow
-          "bg-gradient-to-r from-[#8e77f3] to-[#D033ED]",
-          "shadow-[0_4px_16px_rgba(142,119,243,0.25)]", // Soft drop shadow
-          "hover:shadow-[0_6px_20px_rgba(142,119,243,0.35)]",
-          "hover:from-[#7b61f1] hover:to-[#c422e3]",
+          // Background & Shadow - Deeper purple
+          "bg-gradient-to-r from-[#7b61f1] to-[#c422e3]",
+          "shadow-[0_2px_8px_rgba(123,97,241,0.25)]", // Adjusted shadow
+          "hover:shadow-[0_4px_12px_rgba(123,97,241,0.35)]",
+          "hover:from-[#6a4def] hover:to-[#b41fd1]",
           
           // Interactive States
           "hover:scale-[1.02] active:scale-[0.98]",
           "disabled:opacity-50 disabled:pointer-events-none",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8e77f3]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#7b61f1]",
+          
+          // Spacing utilities
+          "my-1.5 sm:my-2", // Increased vertical margin for better spacing
           
           className
         )}
@@ -61,7 +64,7 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
         disabled={disabled}
         {...props}
       >
-        <span className="relative z-10 flex items-center gap-2 text-white">
+        <span className="relative z-10 flex items-center gap-1.5 text-white">
           {children}
         </span>
         
@@ -88,8 +91,8 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
         
         {/* Hover glow effect */}
         <div className={cn(
-          "absolute inset-0 transition-opacity duration-300",
-          "bg-gradient-to-r from-[#8e77f3]/20 to-[#D033ED]/20 blur-xl",
+          "absolute inset-0 transition-opacity duration-200",
+          "bg-gradient-to-r from-[#7b61f1]/20 to-[#c422e3]/20 blur-lg",
           isHovered ? "opacity-100" : "opacity-0"
         )} />
       </button>
