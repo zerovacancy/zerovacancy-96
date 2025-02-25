@@ -1,9 +1,17 @@
+
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ArrowRight } from 'lucide-react';
 import { ShimmerButton } from "./ui/shimmer-button";
+import { loadStripe } from "@stripe/stripe-js";
+import { useToast } from "./ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+
+// Initialize Stripe
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
 export function Pricing() {
   return <section id="pricing" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 rounded-2xl bg-white/50 backdrop-blur-sm py-[48px] lg:px-[30px] my-0">
@@ -27,6 +35,7 @@ export function Pricing() {
       </div>
     </section>;
 }
+
 const PricingCard = ({
   title,
   price,
@@ -43,10 +52,77 @@ const PricingCard = ({
   highlighted?: boolean;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const isMobile = useIsMobile();
+  const { toast } = useToast();
+
+  const handlePayment = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsProcessing(true);
+
+    try {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        toast({
+          title: "Authentication required",
+          description: "Please sign in to continue with your purchase",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Create payment intent
+      const response = await supabase.functions.invoke('create-payment', {
+        body: {
+          amount: price * 100, // Convert to cents
+          currency: 'usd',
+          userId: user.id,
+        },
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+
+      const { clientSecret } = response.data;
+
+      // Load Stripe
+      const stripe = await stripePromise;
+      if (!stripe) throw new Error('Stripe failed to initialize');
+
+      // Confirm payment
+      const { error: stripeError } = await stripe.confirmPayment({
+        elements: undefined,
+        clientSecret,
+        confirmParams: {
+          return_url: `${window.location.origin}/payment-confirmation`,
+        },
+      });
+
+      if (stripeError) {
+        throw new Error(stripeError.message);
+      }
+
+    } catch (error) {
+      console.error('Payment error:', error);
+      toast({
+        title: "Payment failed",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
   return <div className={cn("relative rounded-2xl p-6 shadow-xl ring-1 ring-slate-900/10 transition-all duration-300", "bg-white hover:scale-102", "cursor-pointer overflow-hidden")} onClick={isMobile ? toggleExpand : undefined} onMouseEnter={() => !isMobile && setIsExpanded(true)} onMouseLeave={() => !isMobile && setIsExpanded(false)}>
       <div className="flex items-center justify-between mb-4 relative z-10">
         <h3 className="text-lg font-semibold leading-tight text-slate-900">
@@ -75,12 +151,10 @@ const PricingCard = ({
 
         <ShimmerButton 
           className="mt-6"
-          onClick={e => {
-            e.stopPropagation();
-            // Your existing click handler logic
-          }}
+          onClick={handlePayment}
+          disabled={isProcessing}
         >
-          <span>{cta}</span>
+          <span>{isProcessing ? 'Processing...' : cta}</span>
           <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
         </ShimmerButton>
       </div>
@@ -96,4 +170,5 @@ const PricingCard = ({
       </div>
     </div>;
 };
+
 export default Pricing;
