@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -59,7 +58,7 @@ const Index = () => {
                 "
                 onClick={handleTryNowClick}
               >
-                Join Waitlist
+                Get Early Access
               </Button>
             }
             layout="complex"
@@ -76,7 +75,7 @@ const Index = () => {
                 "
                 shimmerWidth={150}
               >
-                Get priority access to our creator marketplace!
+                Join the AI-powered revolution in property management!
               </AnimatedShinyText>
             </div>
           </Banner>
@@ -130,4 +129,3 @@ const Index = () => {
 };
 
 export default Index;
-

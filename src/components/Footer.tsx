@@ -11,15 +11,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
           <div className="space-y-3">
             <h3 className="text-lg font-semibold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              CreativeEstate
+              Zero Vacancy
             </h3>
             <p className="text-muted-foreground text-sm">
-              Connecting properties with creative professionals
+              AI-powered platform helping property managers maximize occupancy rates
             </p>
           </div>
 
           <div>
-            <h4 className="font-medium mb-3 text-foreground">Discover</h4>
+            <h4 className="font-medium mb-3 text-foreground">Platform</h4>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
@@ -28,7 +28,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/search" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
-                  Find Creators
+                  Find Properties
                 </Link>
               </li>
               <li>
@@ -40,11 +40,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-medium mb-3 text-foreground">Creators</h4>
+            <h4 className="font-medium mb-3 text-foreground">Solutions</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/join" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
-                  Join as Creator
+                <Link to="/property-managers" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
+                  For Property Managers
                 </Link>
               </li>
               <li>
@@ -65,10 +65,10 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <a 
-                  href="mailto:hello@creativeestate.com" 
+                  href="mailto:hello@zerovacancy.ai" 
                   className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                 >
-                  hello@creativeestate.com
+                  hello@zerovacancy.ai
                 </a>
               </li>
               <li className="text-muted-foreground text-sm">
@@ -80,7 +80,7 @@ const Footer = () => {
 
         <div className="pt-6 mt-6 border-t border-border/40">
           <p className="text-center text-muted-foreground text-sm">
-            © {currentYear} CreativeEstate. All rights reserved.
+            © {currentYear} Zero Vacancy AI, Inc. All rights reserved.
           </p>
         </div>
       </div>

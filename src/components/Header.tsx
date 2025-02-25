@@ -65,10 +65,10 @@ const Header = () => {
   );
 
   const NavLinks = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
-    <nav className={cn("flex items-center gap-12", className)}> {/* Increased gap from 10 to 12 */}
+    <nav className={cn("flex items-center gap-12", className)}>
       {[
-        { to: "/search", label: "Find Creators" },
-        { to: "/how-it-works", label: "How It Works" },
+        { to: "/search", label: "Properties" },
+        { to: "/how-it-works", label: "Platform" },
         { to: "/pricing", label: "Pricing" },
       ].map((link) => (
         <Magnetic key={link.to} intensity={0.5}>
@@ -101,14 +101,14 @@ const Header = () => {
         <Magnetic intensity={0.3}>
           <Link 
             to="/" 
-            className="flex items-center transition-opacity active:opacity-80 ml-6 md:ml-8" // Adjusted margins
+            className="flex items-center transition-opacity active:opacity-80 ml-6 md:ml-8"
           >
             <motion.img 
               src="/logo.png"
-              alt="Haptik"
+              alt="Zero Vacancy"
               initial={false}
               animate={{ scale: isOpen ? 0.95 : 1 }}
-              className="h-[34px] w-auto my-auto" // Increased height to 34px and ensured vertical centering
+              className="h-[34px] w-auto my-auto"
             />
           </Link>
         </Magnetic>
