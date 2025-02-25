@@ -23,10 +23,20 @@ interface ShimmerButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   shimmerSize?: string;
   shimmerDuration?: string;
   disabled?: boolean;
+  variant?: 'primary' | 'ghost';
 }
 
 export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
-  ({ children, className, shimmerColor = "rgba(255, 255, 255, 0.2)", shimmerSize = "60%", shimmerDuration = "2s", disabled, ...props }, ref) => {
+  ({ 
+    children, 
+    className, 
+    shimmerColor = "rgba(255, 255, 255, 0.2)", 
+    shimmerSize = "60%", 
+    shimmerDuration = "2s", 
+    disabled,
+    variant = 'primary',
+    ...props 
+  }, ref) => {
     const [isHovered, setIsHovered] = React.useState(false);
 
     return (
@@ -35,27 +45,39 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
         className={cn(
           // Base styles - Reduced height & width
           "relative group/btn overflow-hidden",
-          "h-11 sm:h-12", // Reduced height by ~30%
-          "px-6 sm:px-8", // Reduced horizontal padding
-          "inline-flex min-w-[160px] max-w-[240px]", // More compact width
+          "h-11 sm:h-12",
+          "px-6 sm:px-8",
+          "inline-flex min-w-[160px] max-w-[240px]",
           "items-center justify-center gap-1.5",
-          "rounded-xl", // Slightly reduced border radius
-          "font-medium text-sm sm:text-base", // Adjusted font size
+          "rounded-xl",
+          "font-medium text-sm sm:text-base",
           "transition-all duration-200",
           
-          // Background & Shadow - Deeper purple
-          "bg-gradient-to-r from-[#7b61f1] to-[#c422e3]",
-          "shadow-[0_2px_8px_rgba(123,97,241,0.25)]", // Adjusted shadow
-          "hover:shadow-[0_4px_12px_rgba(123,97,241,0.35)]",
-          "hover:from-[#6a4def] hover:to-[#b41fd1]",
+          // Variant styles
+          variant === 'primary' && [
+            // Primary button styles with new blue gradient
+            "bg-gradient-to-r from-[#3182CE] to-[#2C5282]",
+            "text-white",
+            "shadow-[0_2px_8px_rgba(49,130,206,0.25)]",
+            "hover:shadow-[0_4px_12px_rgba(49,130,206,0.35)]",
+            "hover:from-[#2B6CB0] hover:to-[#2C5282]",
+          ],
+          
+          variant === 'ghost' && [
+            // Ghost button styles
+            "bg-transparent",
+            "text-[#3182CE]",
+            "border-2 border-[#3182CE]",
+            "hover:bg-[#3182CE]/5",
+          ],
           
           // Interactive States
           "hover:scale-[1.02] active:scale-[0.98]",
           "disabled:opacity-50 disabled:pointer-events-none",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#7b61f1]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3182CE]",
           
           // Spacing utilities
-          "my-1.5 sm:my-2", // Increased vertical margin for better spacing
+          "my-1.5 sm:my-2",
           
           className
         )}
@@ -64,13 +86,20 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
         disabled={disabled}
         {...props}
       >
-        <span className="relative z-10 flex items-center gap-1.5 text-white">
+        <span className={cn(
+          "relative z-10 flex items-center gap-1.5",
+          variant === 'primary' ? "text-white" : "text-[#3182CE]"
+        )}>
           {children}
+          {/* Add glow effect to icon on hover */}
+          {isHovered && variant === 'primary' && (
+            <div className="absolute inset-0 filter blur-sm opacity-50 bg-white" />
+          )}
         </span>
         
-        {/* Shimmer effect */}
+        {/* Shimmer effect - only for primary variant */}
         <AnimatePresence>
-          {!disabled && (
+          {!disabled && variant === 'primary' && (
             <motion.span
               className="absolute inset-0 z-0"
               style={{
@@ -89,10 +118,12 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
           )}
         </AnimatePresence>
         
-        {/* Hover glow effect */}
+        {/* Hover glow effect - adjusted for new blue colors */}
         <div className={cn(
           "absolute inset-0 transition-opacity duration-200",
-          "bg-gradient-to-r from-[#7b61f1]/20 to-[#c422e3]/20 blur-lg",
+          variant === 'primary'
+            ? "bg-gradient-to-r from-[#3182CE]/20 to-[#2C5282]/20 blur-lg"
+            : "bg-[#3182CE]/10 blur-lg",
           isHovered ? "opacity-100" : "opacity-0"
         )} />
       </button>
