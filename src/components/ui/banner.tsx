@@ -56,17 +56,19 @@ export function Banner({
     <div 
       className={cn(
         bannerVariants({ variant, size, layout }), 
-        "min-h-[3.5rem] sm:min-h-[4rem]",
+        "min-h-[3rem] sm:min-h-[3.5rem]",
+        "shadow-[0_2px_8px_rgba(0,0,0,0.08)]",
+        "relative z-50",
         className
       )} 
       {...props}
     >
       <div className="
-        flex items-center justify-center gap-3 sm:gap-4 flex-1
+        flex items-center justify-center gap-2 sm:gap-3 flex-1
         flex-nowrap
         px-2 sm:px-4
       ">
-        <div className="flex items-center gap-2 justify-center text-center text-sm sm:text-base">
+        <div className="flex items-center gap-2 justify-center text-center text-sm">
           {children}
         </div>
 
@@ -87,3 +89,4 @@ export function Banner({
     </div>
   );
 }
+
