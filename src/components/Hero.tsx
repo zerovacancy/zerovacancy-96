@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const isMobile = useIsMobile();
-  const titles = useMemo(() => ["optimizes", "automates", "maximizes", "transforms", "scales"], []);
+  const titles = useMemo(() => ["Converts", "Engages", "Drives Leads"], []);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -56,12 +56,12 @@ export function Hero() {
           <div className="flex gap-2 sm:gap-4 flex-col max-w-5xl mx-auto w-full">
             <h1 className="text-[2.25rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-1 sm:py-4 my-1 sm:my-4 font-bold lg:text-8xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
-                Find the perfect content creator
+                Property Content that
               </span>
               <span 
                 className="relative flex w-full justify-center h-[1.6em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-0.5 sm:mt-2"
                 role="text"
-                aria-label={`Your content ${titles[titleNumber]} your property marketing`}
+                aria-label={`Property Content that ${titles[titleNumber]}`}
               >
                 {titles.map((title, index) => (
                   <motion.span 
