@@ -53,9 +53,9 @@ export function Hero() {
       />
 
       <AuroraBackground className="w-full">
-        <section className="flex gap-2 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-3 sm:px-6 py-4 sm:py-8 lg:py-12 min-h-[calc(100vh-4.5rem)] sm:min-h-0 relative z-10">
-          <div className="flex gap-2 sm:gap-4 flex-col max-w-5xl mx-auto w-full">
-            <h1 className="text-[2rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-1 sm:py-4 my-1 sm:my-4 font-bold lg:text-8xl">
+        <section className="flex gap-2 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-3 sm:px-6 py-2 sm:py-8 lg:py-12 min-h-[calc(85vh-4.5rem)] sm:min-h-[60vh] relative z-10">
+          <div className="flex gap-2 sm:gap-4 flex-col max-w-5xl mx-auto w-full mt-0 sm:mt-4">
+            <h1 className="text-[2rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-1 sm:py-4 my-0 sm:my-4 font-bold lg:text-8xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Property Content that
               </span>
@@ -104,7 +104,7 @@ export function Hero() {
             </p>
           </div>
           
-          <div className="flex justify-center w-full px-3 sm:px-6 max-w-lg mx-auto mt-4 sm:mt-8">
+          <div className="flex justify-center w-full px-3 sm:px-6 max-w-lg mx-auto mt-2 sm:mt-8">
             <ShimmerButton 
               onClick={() => {}}
               aria-label="Get early access to our platform"
