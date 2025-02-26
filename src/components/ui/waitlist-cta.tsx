@@ -38,17 +38,22 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={cn(
+              // Input dimensions
               "w-full h-[48px]",
               "inline-flex items-center",
               "px-4",
               "text-base leading-none",
+              // Enhanced mobile styling
               "bg-[#F0F0F5]",
               "border border-gray-200/20",
               "rounded-lg",
+              // Text and placeholder styling
               "text-gray-800 placeholder:text-gray-500 placeholder:text-[15px] md:placeholder:text-base",
+              // Focus and interaction states
               "transition-all duration-200 ease-in-out",
               "focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20",
               "disabled:opacity-50",
+              // Layout
               "flex-1",
               "m-0"
             )}
