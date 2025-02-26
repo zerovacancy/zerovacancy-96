@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { ShimmerButton } from "./shimmer-button";
+import { AvatarPlaceholder } from "./avatar-placeholder";
 import { cn } from "@/lib/utils";
 
 interface WaitlistCTAProps {
@@ -81,6 +82,14 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
 
       <div className="flex justify-center items-center mt-3 text-[14px] text-[#6B7280] font-normal">
         <p className="flex items-center">
+          <span className="flex -space-x-1.5 mr-2" aria-hidden="true">
+            <AvatarPlaceholder initials="JT" />
+            <AvatarPlaceholder initials="MK" />
+            <AvatarPlaceholder 
+              initials="AS" 
+              className="hidden sm:flex"
+            />
+          </span>
           <span>2,165+ people joined</span>
           <span className="mx-4 w-1 h-1 rounded-full bg-gray-400 inline-block relative top-[0.5px]" aria-hidden="true" />
           <span>Queue: 1-2 days</span>
