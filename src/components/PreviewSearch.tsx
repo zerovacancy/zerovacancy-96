@@ -54,9 +54,7 @@ const PreviewSearch: React.FC = () => {
   const imageRefs = useRef<Map<string, HTMLImageElement>>(new Map());
 
   const handleImageLoad = (imageSrc: string) => {
-    if (onImageLoad) {
-      onImageLoad(imageSrc);
-    }
+    setLoadedImages(prev => new Set(prev).add(imageSrc));
   };
 
   const handleSort = (value: string) => {
