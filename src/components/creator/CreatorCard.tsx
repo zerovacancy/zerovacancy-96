@@ -156,14 +156,13 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
           
           <div className="p-3 sm:p-4">
-            <div className="space-y-3 sm:space-y-4">
-              <div className="border-t border-gray-100/10 pt-3" />
+            <div className="space-y-2 sm:space-y-3">
               <div 
                 className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
                 role="list"
                 aria-label="Creator specialties"
               >
-                <div className="flex flex-nowrap gap-1.5 sm:gap-2 pb-1">
+                <div className="flex flex-nowrap gap-1.5 sm:gap-2">
                   {tags.map((tag, index) => (
                     <span
                       key={index}
@@ -179,15 +178,15 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 </div>
               </div>
               
-              <div className="border-t border-gray-100/10 pt-3" />
+              <div className="border-t border-gray-100/10 my-2 sm:my-3" />
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
-              <div className="border-t border-gray-100/10 pt-3" />
-              <div className="flex justify-center px-2 sm:px-3">
+              <div className="border-t border-gray-100/10 my-2 sm:my-3" />
+              <div className="flex justify-center px-1 sm:px-2">
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
                   aria-label={`Join waitlist to work with ${creator.name}`}
-                  className="w-full h-11 sm:h-12 text-sm sm:text-base"
+                  className="w-full h-10 sm:h-11 text-sm sm:text-base"
                 >
                   <span>Join Waitlist</span>
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/90" aria-hidden="true" />
