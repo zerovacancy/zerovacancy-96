@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -12,6 +13,28 @@ import { supabase } from "@/integrations/supabase/client";
 const stripePromise = loadStripe('pk_live_51QtulpAIAL4hcfkS0KfdqCUoUQtz3eDphv2xibo0oIyQGTmtFnSWgTMGghDsj4J5Ff6htMYmGi2iWZmKDDvgJQM700gD6Qtd7Z');
 
 export function Pricing() {
+  const [subscription, setSubscription] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchSubscription = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: subs } = await supabase
+          .from('customer_subscriptions')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
+          .limit(1);
+        
+        if (subs && subs.length > 0) {
+          setSubscription(subs[0]);
+        }
+      }
+    };
+
+    fetchSubscription();
+  }, []);
+
   return (
     <section id="pricing" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 rounded-2xl bg-white/50 backdrop-blur-sm py-[48px] lg:px-[30px] my-0">
@@ -28,6 +51,7 @@ export function Pricing() {
           <PricingCard
             title="Basic"
             price={299}
+            interval="month"
             features={[
               "Professional photography (up to 25 photos)",
               "Basic photo editing",
@@ -37,12 +61,14 @@ export function Pricing() {
             ]}
             description="Perfect for single-family homes and small properties"
             cta="Get Started"
+            subscription={subscription}
           />
           <div className="relative group">
             <div className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-purple-500 via-cyan-300 to-emerald-400 opacity-75 blur-lg transition-all group-hover:opacity-100 group-hover:blur-xl" />
             <PricingCard
               title="Professional"
               price={499}
+              interval="month"
               features={[
                 "Everything in Basic, plus:",
                 "Up to 40 professional photos",
@@ -55,11 +81,13 @@ export function Pricing() {
               description="Ideal for luxury homes and medium-sized properties"
               cta="Go Professional"
               highlighted
+              subscription={subscription}
             />
           </div>
           <PricingCard
             title="Premium"
             price={799}
+            interval="month"
             features={[
               "Everything in Professional, plus:",
               "Unlimited professional photos",
@@ -72,6 +100,7 @@ export function Pricing() {
             ]}
             description="Best for luxury estates and commercial properties"
             cta="Go Premium"
+            subscription={subscription}
           />
         </div>
       </div>
@@ -82,24 +111,30 @@ export function Pricing() {
 const PricingCard = ({
   title,
   price,
+  interval,
   description,
   features,
   cta,
-  highlighted = false
+  highlighted = false,
+  subscription
 }: {
   title: string;
   price: number;
+  interval: string;
   description: string;
   features: string[];
   cta: string;
   highlighted?: boolean;
+  subscription?: any;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const isMobile = useIsMobile();
   const { toast } = useToast();
 
-  const handlePayment = async (e: React.MouseEvent) => {
+  const isCurrentPlan = subscription?.plan_id === `price_${title.toLowerCase()}`;
+
+  const handleSubscription = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsProcessing(true);
@@ -113,20 +148,18 @@ const PricingCard = ({
       if (userError || !user) {
         toast({
           title: "Authentication required",
-          description: "Please sign in to continue with your purchase",
+          description: "Please sign in to continue with your subscription",
           variant: "destructive",
         });
         setIsProcessing(false);
         return;
       }
 
-      // Create payment intent
-      const response = await supabase.functions.invoke('create-payment', {
+      // Create subscription
+      const response = await supabase.functions.invoke('create-subscription', {
         body: {
-          amount: price * 100, // Convert to cents
-          currency: 'usd',
-          userId: user.id,
           packageName: title,
+          userId: user.id,
         },
       });
 
@@ -134,10 +167,10 @@ const PricingCard = ({
         throw new Error(response.error.message);
       }
 
-      const { clientSecret } = response.data;
+      const { subscriptionId, clientSecret } = response.data;
 
       if (!clientSecret) {
-        throw new Error('Failed to create payment intent');
+        throw new Error('Failed to create subscription');
       }
 
       // Load Stripe
@@ -158,9 +191,9 @@ const PricingCard = ({
       }
 
     } catch (error) {
-      console.error('Payment error:', error);
+      console.error('Subscription error:', error);
       toast({
-        title: "Payment failed",
+        title: "Subscription failed",
         description: error instanceof Error ? error.message : "Something went wrong. Please try again.",
         variant: "destructive",
       });
@@ -182,11 +215,16 @@ const PricingCard = ({
         <h3 className="text-lg font-semibold leading-tight text-slate-900">
           {title}
         </h3>
+        {isCurrentPlan && (
+          <span className="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded-full">
+            Current Plan
+          </span>
+        )}
       </div>
       
       <div className="mt-3 flex items-baseline text-slate-900 relative z-10">
         <span className="text-4xl font-bold tracking-tight">${price}</span>
-        <span className="ml-1 text-sm font-medium text-slate-600">/project</span>
+        <span className="ml-1 text-sm font-medium text-slate-600">/{interval}</span>
       </div>
 
       <p className="mt-3 text-sm text-slate-600 relative z-10">
@@ -230,14 +268,16 @@ const PricingCard = ({
           ))}
         </ul>
 
-        <ShimmerButton 
-          className="mt-6 w-full h-11 sm:h-12 text-sm sm:text-base"
-          onClick={handlePayment}
-          disabled={isProcessing}
-        >
-          <span>{isProcessing ? 'Processing...' : cta}</span>
-          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/90" />
-        </ShimmerButton>
+        {!isCurrentPlan && (
+          <ShimmerButton 
+            className="mt-6 w-full h-11 sm:h-12 text-sm sm:text-base"
+            onClick={handleSubscription}
+            disabled={isProcessing}
+          >
+            <span>{isProcessing ? 'Processing...' : cta}</span>
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/90" />
+          </ShimmerButton>
+        )}
       </div>
     </div>
   );

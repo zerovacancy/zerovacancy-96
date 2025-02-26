@@ -9,6 +9,48 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      customer_subscriptions: {
+        Row: {
+          cancel_at: string | null
+          created_at: string | null
+          current_period_end: string | null
+          current_period_start: string | null
+          id: string
+          metadata: Json | null
+          plan_id: string
+          status: string
+          stripe_customer_id: string
+          stripe_subscription_id: string
+          user_id: string | null
+        }
+        Insert: {
+          cancel_at?: string | null
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          metadata?: Json | null
+          plan_id: string
+          status: string
+          stripe_customer_id: string
+          stripe_subscription_id: string
+          user_id?: string | null
+        }
+        Update: {
+          cancel_at?: string | null
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          metadata?: Json | null
+          plan_id?: string
+          status?: string
+          stripe_customer_id?: string
+          stripe_subscription_id?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       payments: {
         Row: {
           amount: number
@@ -19,6 +61,10 @@ export type Database = {
           status: string
           stripe_customer_id: string | null
           stripe_payment_id: string | null
+          subscription_id: string | null
+          subscription_period_end: string | null
+          subscription_period_start: string | null
+          subscription_status: string | null
           user_id: string
         }
         Insert: {
@@ -30,6 +76,10 @@ export type Database = {
           status: string
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
+          subscription_id?: string | null
+          subscription_period_end?: string | null
+          subscription_period_start?: string | null
+          subscription_status?: string | null
           user_id: string
         }
         Update: {
@@ -41,6 +91,10 @@ export type Database = {
           status?: string
           stripe_customer_id?: string | null
           stripe_payment_id?: string | null
+          subscription_id?: string | null
+          subscription_period_end?: string | null
+          subscription_period_start?: string | null
+          subscription_status?: string | null
           user_id?: string
         }
         Relationships: []

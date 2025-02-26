@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -14,6 +14,7 @@ const PaymentConfirmation = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const paymentIntent = queryParams.get('payment_intent');
     const paymentIntentClientSecret = queryParams.get('payment_intent_client_secret');
+    const redirectStatus = queryParams.get('redirect_status');
 
     const checkPaymentStatus = async () => {
       if (!paymentIntent || !paymentIntentClientSecret) {
@@ -27,27 +28,11 @@ const PaymentConfirmation = () => {
       }
 
       try {
-        const stripe = await loadStripe('pk_live_51QtulpAIAL4hcfkS0KfdqCUoUQtz3eDphv2xibo0oIyQGTmtFnSWgTMGghDsj4J5Ff6htMYmGi2iWZmKDDvgJQM700gD6Qtd7Z');
-        if (!stripe) throw new Error('Failed to load Stripe');
-
-        const { paymentIntent: stripePaymentIntent } = await stripe.retrievePaymentIntent(paymentIntentClientSecret);
-
-        if (stripePaymentIntent?.status === 'succeeded') {
+        if (redirectStatus === 'succeeded') {
           setStatus('success');
-          
-          // Update payment status in database
-          const { error: updateError } = await supabase
-            .from('payments')
-            .update({ status: 'completed' })
-            .eq('stripe_payment_id', paymentIntent);
-
-          if (updateError) {
-            console.error('Error updating payment status:', updateError);
-          }
-
           toast({
-            title: "Payment Successful",
-            description: "Thank you for your purchase! We'll get started right away.",
+            title: "Subscription Successful",
+            description: "Thank you for subscribing! Your account has been updated.",
           });
         } else {
           setStatus('failed');
@@ -78,7 +63,7 @@ const PaymentConfirmation = () => {
           <>
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-              Processing your payment...
+              Processing your subscription...
             </h2>
             <p className="mt-2 text-sm text-gray-600">
               Please wait while we confirm your payment.
@@ -94,10 +79,10 @@ const PaymentConfirmation = () => {
               </svg>
             </div>
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-              Payment Successful!
+              Subscription Activated!
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Thank you for your purchase. We'll get started on your project right away.
+              Thank you for subscribing. Your account has been successfully updated.
             </p>
             <div className="mt-6">
               <button
@@ -118,10 +103,10 @@ const PaymentConfirmation = () => {
               </svg>
             </div>
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-              Payment Failed
+              Subscription Failed
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Something went wrong with your payment. Please try again.
+              Something went wrong with your subscription. Please try again.
             </p>
             <div className="mt-6">
               <button
