@@ -39,6 +39,11 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
+    dragFree: true,
+    skipSnaps: false,
+    startIndex: 0,
+    slidesToScroll: 1,
+    speed: 15,
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = React.useState(false);
@@ -87,12 +92,16 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
       {/* Creators Grid/Carousel */}
       {isMobile ? (
-        <div className="relative pt-2">
+        <div className="relative pt-2 select-none touch-pan-y">
           {/* Carousel Container */}
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex touch-pan-y">
+          <div className="overflow-hidden -mx-4 px-4" ref={emblaRef}>
+            <div className="flex transition-transform duration-300 ease-out backface-visible-hidden">
               {creators.map((creator, index) => (
-                <div key={creator.name} className="flex-[0_0_85%] min-w-0 pl-4 first:pl-0">
+                <div 
+                  key={creator.name} 
+                  className="flex-[0_0_80%] min-w-0 pl-4 first:pl-0 transition-opacity duration-300"
+                  style={{ opacity: selectedIndex === index ? 1 : 0.5 }}
+                >
                   <CreatorCard
                     creator={creator}
                     onImageLoad={onImageLoad}
@@ -108,32 +117,43 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           <button
             onClick={scrollPrev}
             className={cn(
-              "absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity",
+              "absolute left-0 top-1/2 -translate-y-1/2 z-10",
+              "h-12 w-12 flex items-center justify-center",
+              "rounded-r-xl bg-gradient-to-r from-black/30 to-transparent",
+              "text-white backdrop-blur-sm transition-all duration-200",
+              "hover:from-black/40 hover:to-transparent/20",
               !prevBtnEnabled && "opacity-0 pointer-events-none"
             )}
             aria-label="Previous creator"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={scrollNext}
             className={cn(
-              "absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity",
+              "absolute right-0 top-1/2 -translate-y-1/2 z-10",
+              "h-12 w-12 flex items-center justify-center",
+              "rounded-l-xl bg-gradient-to-l from-black/30 to-transparent",
+              "text-white backdrop-blur-sm transition-all duration-200",
+              "hover:from-black/40 hover:to-transparent/20",
               !nextBtnEnabled && "opacity-0 pointer-events-none"
             )}
             aria-label="Next creator"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-6 h-6" />
           </button>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-1.5 mt-4">
+          <div className="flex justify-center gap-2 mt-6 pb-2">
             {creators.map((_, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-colors",
-                  index === selectedIndex ? "bg-primary" : "bg-gray-300"
+                  "w-2.5 h-2.5 rounded-full transition-all duration-300",
+                  "hover:bg-primary/80",
+                  index === selectedIndex 
+                    ? "bg-primary scale-110" 
+                    : "bg-gray-300 hover:bg-gray-400"
                 )}
                 onClick={() => emblaApi?.scrollTo(index)}
                 aria-label={`Go to creator ${index + 1}`}
