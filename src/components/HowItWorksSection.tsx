@@ -1,8 +1,7 @@
 
 import React from 'react';
-import { Search, Users, FileCheck, Calendar, Sparkle } from 'lucide-react';
+import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { cn } from '@/lib/utils';
 
 const HowItWorksSection = () => {
@@ -45,7 +44,6 @@ const HowItWorksSection = () => {
           </p>
         </div>
         
-        {/* Standardized grid container */}
         <div className="w-[75%] max-w-[260px] sm:max-w-none sm:w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-4 lg:gap-6 relative pl-8 sm:pl-0">
           {steps.map((step, index) => (
             <motion.div
@@ -68,10 +66,10 @@ const HowItWorksSection = () => {
               viewport={{ once: true, margin: "-50px" }}
               className={cn(
                 "relative bg-white",
-                "h-[120px] overflow-hidden", // Fixed height
-                "p-4", // Consistent padding
-                "rounded-lg", // 8px border radius
-                "shadow-[0_2px_8px_rgba(0,0,0,0.1)]", // Standardized shadow
+                "h-[120px] overflow-hidden",
+                "p-4",
+                "rounded-lg",
+                "shadow-[0_2px_8px_rgba(0,0,0,0.1)]",
                 "transition-all duration-200",
                 "group",
                 "border border-gray-100",
@@ -146,30 +144,6 @@ const HowItWorksSection = () => {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="flex justify-center mt-6 sm:mt-8 w-[75%] max-w-[260px] sm:max-w-none sm:w-full mx-auto">
-          <ShimmerButton 
-            className={cn(
-              "relative group/btn overflow-hidden",
-              "w-full sm:w-auto min-w-[200px]",
-              "h-11 sm:h-12",
-              "text-sm sm:text-base font-medium",
-              "px-6 sm:px-8",
-              "flex items-center justify-center gap-2",
-              "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
-              "hover:from-[#8e77f3] hover:to-[#D033ED]",
-              "shadow-lg hover:shadow-xl",
-              "transition-all duration-300",
-              "hover:scale-[1.02] active:scale-[0.98]"
-            )}
-            shimmerColor="rgba(255, 255, 255, 0.2)"
-            shimmerSize="60%"
-            shimmerDuration="2s"
-          >
-            <span className="relative z-10">Join Waitlist</span>
-            <Sparkle className="w-4 h-4 sm:w-5 sm:h-5 text-white/90" />
-          </ShimmerButton>
         </div>
       </div>
     </section>
