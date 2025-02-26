@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -15,11 +14,9 @@ import { Spotlight } from '@/components/ui/spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
-
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
-
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     setShowGlowDialog(!hasVisited);
@@ -27,20 +24,13 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
-
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
-
   return <div className="flex flex-col min-h-screen">
       <Header />
       {showBanner && <div className="sticky top-16 z-40">
-          <Banner variant="default" size="lg" className="
-              animate-in fade-in slide-in-from-top duration-500 
-              bg-gradient-to-r from-black via-gray-900 to-black
-              text-primary-foreground relative overflow-hidden
-              min-h-[3.25rem] sm:min-h-[3.5rem]
-            " action={<Button variant="secondary" size="sm" className="
+          <Banner variant="default" size="lg" action={<Button variant="secondary" size="sm" className="
                   flex text-xs sm:text-sm items-center 
                   whitespace-nowrap px-2.5 py-1.5 sm:px-4 sm:py-2
                   bg-white/10 hover:bg-white/20 text-white
@@ -51,7 +41,7 @@ const Index = () => {
                   touch-manipulation
                 " onClick={handleTryNowClick}>
                 Get Early Access
-              </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)}>
+              </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)} className="animate-in fade-in slide-in-from-top duration-500 bg-gradient-to-r from-black via-gray-900 to-black text-primary-foreground relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0">
             <div className="flex items-center justify-center gap-2 sm:gap-3 relative z-10">
               <Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-yellow-300 animate-pulse" />
               <AnimatedShinyText className="
@@ -109,5 +99,4 @@ const Index = () => {
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
     </div>;
 };
-
 export default Index;
