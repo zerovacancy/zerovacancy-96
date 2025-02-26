@@ -27,7 +27,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
   return (
     <div className={cn("w-full max-w-2xl mx-auto", className)}>
       <form onSubmit={handleSubmit} className="w-full">
-        <div className="flex flex-col md:flex-row gap-3 w-full">
+        <div className="flex flex-col md:flex-row items-center gap-3 w-full">
           <input
             type="email"
             placeholder="Enter your email"
@@ -35,16 +35,18 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
             onChange={(e) => setEmail(e.target.value)}
             className={cn(
               "w-full h-[48px]",
+              "inline-flex items-center",
               "px-4",
-              "text-base",
+              "text-base leading-none",
               "bg-[#F0F0F5]",
               "border border-gray-200/20",
               "rounded-lg",
-              "text-gray-800 placeholder:text-gray-500",
+              "text-gray-800 placeholder:text-gray-500 placeholder:text-base",
               "transition-all duration-200 ease-in-out",
               "focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20",
               "disabled:opacity-50",
-              "flex-1"
+              "flex-1",
+              "m-0"
             )}
             style={{
               padding: "0 16px",
@@ -57,10 +59,10 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
             type="submit"
             disabled={isSubmitting}
             className={cn(
-              "h-[48px]",
+              "h-[48px] m-0",
               "px-6",
-              "text-base",
-              "flex items-center justify-center gap-3",
+              "text-base leading-none",
+              "inline-flex items-center justify-center gap-3",
               "flex-shrink-0",
               "w-full md:w-auto min-w-[160px]",
               "rounded-lg",
@@ -72,9 +74,6 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
             <ArrowRight 
               className="w-5 h-5 text-white/90 flex-shrink-0" 
               aria-hidden="true"
-              style={{
-                marginTop: "1px", // Fine-tune vertical alignment
-              }}
             />
           </ShimmerButton>
         </div>
