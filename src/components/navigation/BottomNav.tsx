@@ -41,7 +41,7 @@ const NavItem = ({ icon, label, to = '/' }: NavItemProps) => {
 
 export const BottomNav = () => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-[100] bg-background/95 backdrop-blur-sm border-t border-border/40 pb-safe sm:hidden">
+    <nav className="hidden">
       <div className="flex items-center justify-around max-w-md mx-auto h-16">
         <NavItem icon="home" label="Home" to="/" />
         <NavItem icon="search" label="Discover" to="/search" />
