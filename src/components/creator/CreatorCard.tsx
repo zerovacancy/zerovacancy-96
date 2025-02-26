@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
@@ -87,20 +86,20 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       <Card className={cn(
         "overflow-hidden h-full",
         "will-change-transform transition-all duration-300",
-        "hover:translate-y-[-4px]",
+        "hover:translate-y-[-2px]",
         "bg-white border border-gray-200/80",
-        "shadow-[0_2px_8px_rgba(0,0,0,0.06)]",
-        "hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]",
-        "rounded-xl"
+        "shadow-[0_2px_8px_rgba(0,0,0,0.05)]",
+        "hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)]",
+        "rounded-lg"
       )}>
         <div className="relative">
-          <div className="absolute top-3 right-3 z-10">
+          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10">
             <span className={cn(
-              "px-2.5 py-1.5",
-              "text-sm font-medium",
+              "px-2 sm:px-2.5 py-1",
+              "text-xs sm:text-sm font-medium",
               "bg-white/95 backdrop-blur-sm",
               "text-gray-900 rounded-full",
-              "shadow-sm border border-white/40",
+              "shadow-sm border border-white/30",
               "transition-all duration-200",
               "group-hover:shadow-md",
               "group-hover:bg-white"
@@ -115,8 +114,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               src={getImageSource()}
               alt={`${creator.name} - ${creator.services.join(", ")} specialist in ${creator.location}`}
               className={cn(
-                "w-full h-full object-cover object-center transition-all duration-300",
-                "group-hover:scale-105",
+                "w-full h-full object-cover object-center transition-opacity duration-300",
                 !loadedImages.has(creator.image) && "opacity-0"
               )}
               onLoad={handleImageLoad}
@@ -124,45 +122,44 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               loading="lazy"
             />
             <div 
-              className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" 
+              className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" 
               aria-hidden="true"
             />
             
-            <div className="absolute bottom-3 left-3 text-white select-text">
-              <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-xl">{creator.name}</h3>
+            <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 text-white select-text">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <h3 className="font-semibold text-base sm:text-xl">{creator.name}</h3>
                 <CheckCircle 
-                  className="w-5 h-5 text-blue-400 animate-pulse" 
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" 
                   aria-label="Verified Creator"
                 />
               </div>
-              <div className="flex items-center gap-1.5 mt-1">
+              <div className="flex items-center gap-1.5 mt-0.5 sm:mt-1">
                 <MapPin 
-                  className="w-4 h-4 text-white/90" 
+                  className="w-3.5 h-3.5 text-white/90" 
                   aria-hidden="true"
                 />
-                <span className="text-sm text-white/90">{creator.location}</span>
+                <span className="text-xs sm:text-sm text-white/90">{creator.location}</span>
               </div>
-              <p className="text-sm text-white/90 mt-1">
+              <p className="text-xs sm:text-sm text-white/90 mt-0.5 sm:mt-1">
                 {creator.services.join(" • ")}
               </p>
             </div>
           </div>
           
-          <div className="p-4">
-            <div className="space-y-4">
+          <div className="p-3 sm:p-4">
+            <div className="space-y-3 sm:space-y-4">
               <div 
                 className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
                 role="list"
                 aria-label="Creator specialties"
               >
-                <div className="flex flex-nowrap gap-2 pb-1">
+                <div className="flex flex-nowrap gap-1.5 sm:gap-2 pb-1">
                   {tags.map((tag, index) => (
                     <span
                       key={index}
                       className={cn(
-                        "text-xs px-2.5 py-1 rounded-full transition-colors duration-200 whitespace-nowrap",
-                        "hover:shadow-sm",
+                        "text-[10px] sm:text-xs px-2 py-1 rounded-full transition-colors duration-200 whitespace-nowrap",
                         getTagStyle(tag)
                       )}
                       role="listitem"
@@ -175,14 +172,14 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
-              <div className="flex justify-center px-3">
+              <div className="flex justify-center px-2 sm:px-3">
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
                   aria-label={`Join waitlist to work with ${creator.name}`}
-                  className="w-full h-12 text-base"
+                  className="w-full h-11 sm:h-12 text-sm sm:text-base"
                 >
                   <span>Join Waitlist</span>
-                  <ArrowRight className="w-5 h-5 text-white/90" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/90" aria-hidden="true" />
                 </ShimmerButton>
               </div>
             </div>
