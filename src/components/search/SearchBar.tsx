@@ -128,7 +128,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
               onChange={handleLocationChange}
               onKeyDown={handleKeyDown}
               className={cn(
-                "w-full h-10 pl-9 sm:pl-11 pr-8 sm:pr-10",
+                "w-full h-11 pl-9 sm:pl-11 pr-8 sm:pr-10",
                 "bg-white text-sm text-gray-700",
                 "transition-colors duration-200",
                 "focus:outline-none focus:ring-2 focus:ring-primary/10 group-hover:bg-gray-50",
@@ -166,7 +166,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
           <div className="hidden sm:block sm:w-[20%]">
             <Button 
               className={cn(
-                "w-full h-10",
+                "w-full h-11",
                 "bg-primary hover:bg-primary/90 text-white",
                 "shadow-sm hover:shadow-md transition-all duration-200",
                 "text-sm rounded-none",
@@ -196,11 +196,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
             onClick={() => setShowMoreFilters(!showMoreFilters)}
             className={cn(
               "inline-flex items-center gap-1.5",
-              "px-3 py-1.5",
+              "px-3 py-2",
               "text-sm font-medium",
               "text-gray-700 hover:text-gray-900",
               "hover:bg-gray-50 rounded-md",
-              "transition-colors duration-200"
+              "transition-colors duration-200",
+              "min-h-[2.75rem]"
             )}
           >
             Advanced Filters

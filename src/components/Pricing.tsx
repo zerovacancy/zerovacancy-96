@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconChevronDown } from "@tabler/icons-react";
@@ -194,6 +193,19 @@ const PricingCard = ({
         {description}
       </p>
 
+      <div className="flex items-center justify-center pt-4 mt-4 border-t">
+        <button
+          className="text-sm text-slate-600 hover:text-primary flex items-center gap-1 group/btn transition-all duration-300 h-11"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          See Features
+          <IconChevronDown className={cn(
+            "w-4 h-4 transition-transform duration-300",
+            isExpanded ? "rotate-180" : "group-hover/btn:translate-y-0.5"
+          )} />
+        </button>
+      </div>
+
       <div className={cn(
         "mt-4 overflow-hidden transition-all duration-300 relative z-10",
         isExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
@@ -219,26 +231,13 @@ const PricingCard = ({
         </ul>
 
         <ShimmerButton 
-          className="mt-6 w-full"
+          className="mt-6 w-full h-11 sm:h-12 text-sm sm:text-base"
           onClick={handlePayment}
           disabled={isProcessing}
         >
           <span>{isProcessing ? 'Processing...' : cta}</span>
-          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/90" />
         </ShimmerButton>
-      </div>
-
-      <div className="flex items-center justify-center pt-4 mt-4 border-t">
-        <button
-          className="text-sm text-slate-600 hover:text-primary flex items-center gap-1 group/btn transition-all duration-300"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          See Features
-          <IconChevronDown className={cn(
-            "w-4 h-4 transition-transform duration-300",
-            isExpanded ? "rotate-180" : "group-hover/btn:translate-y-0.5"
-          )} />
-        </button>
       </div>
     </div>
   );
