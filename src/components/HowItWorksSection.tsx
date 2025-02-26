@@ -45,7 +45,8 @@ const HowItWorksSection = () => {
           </p>
         </div>
         
-        <div className="w-[90%] sm:w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-6">
+        {/* Updated grid container with new mobile-first layout */}
+        <div className="w-[80%] max-w-[280px] sm:max-w-none sm:w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-6 relative pl-8 sm:pl-0">
           {steps.map((step, index) => (
             <motion.div
               key={index}
@@ -67,22 +68,22 @@ const HowItWorksSection = () => {
               viewport={{ once: true, margin: "-50px" }}
               className={cn(
                 "relative bg-white",
-                "p-3 sm:p-4 lg:p-5",
+                "px-3 py-3 sm:p-4 lg:p-5", // Reduced horizontal padding
                 "rounded-xl",
                 "shadow-sm hover:shadow-md",
                 "transition-all duration-200",
-                "group text-center",
+                "group",
                 "border border-gray-100",
                 "active:scale-[0.98]",
                 "touch-manipulation"
               )}
             >
-              <div className="flex flex-col items-center relative">
-                {/* Step Number with connecting line */}
-                <div className="absolute -left-4 top-0 h-full" aria-hidden="true">
+              <div className="flex flex-col items-start relative"> {/* Changed to left alignment */}
+                {/* Step Number with connecting line - Repositioned */}
+                <div className="absolute -left-[2.75rem] top-0 h-full" aria-hidden="true">
                   <motion.span 
                     className={cn(
-                      "absolute -top-2 -left-1",
+                      "absolute -top-2 left-0",
                       "w-6 h-6 sm:w-7 sm:h-7",
                       "bg-primary text-white rounded-full",
                       "flex items-center justify-center",
@@ -105,10 +106,10 @@ const HowItWorksSection = () => {
                     {step.number}
                   </motion.span>
                   
-                  {/* Vertical connecting line */}
+                  {/* Updated vertical connecting line */}
                   {index < steps.length - 1 && (
                     <motion.div 
-                      className="absolute top-5 left-2 w-[1px] h-[calc(100%+0.625rem)] bg-gray-200"
+                      className="absolute top-5 left-[0.6875rem] w-[1px] h-[calc(100%+0.625rem)] bg-primary/30"
                       initial={{ scaleY: 0 }}
                       whileInView={{
                         scaleY: 1,
@@ -122,7 +123,7 @@ const HowItWorksSection = () => {
                   )}
                 </div>
                 
-                {/* Icon with enhanced hover effect */}
+                {/* Icon with enhanced hover effect - Left aligned */}
                 <motion.div 
                   className={cn(
                     "mb-2 sm:mb-3",
@@ -136,10 +137,10 @@ const HowItWorksSection = () => {
                   {step.icon}
                 </motion.div>
                 
-                <h4 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 mb-1 sm:mb-1.5">
+                <h4 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 mb-1 sm:mb-1.5 text-left">
                   {step.title}
                 </h4>
-                <p className="text-xs sm:text-sm text-gray-600 max-w-[180px] mx-auto leading-relaxed">
+                <p className="text-[0.8125rem] sm:text-sm text-gray-600 leading-relaxed text-left">
                   {step.description}
                 </p>
               </div>
@@ -161,7 +162,7 @@ const HowItWorksSection = () => {
                     viewport={{ once: true }}
                   />
                   
-                  {/* Tablet connector (horizontal) */}
+                  {/* Tablet connector */}
                   <motion.div 
                     className="hidden md:block lg:hidden absolute -right-2 top-1/2 w-4 h-[1px] bg-gray-200"
                     initial={{ scaleX: 0 }}
@@ -180,7 +181,7 @@ const HowItWorksSection = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-6 sm:mt-8 w-[90%] sm:w-full mx-auto">
+        <div className="flex justify-center mt-6 sm:mt-8 w-[80%] max-w-[280px] sm:max-w-none sm:w-full mx-auto">
           <ShimmerButton 
             className={cn(
               "relative group/btn overflow-hidden",
