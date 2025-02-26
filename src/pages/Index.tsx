@@ -14,11 +14,9 @@ import { Spotlight } from '@/components/ui/spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
-
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
-
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     setShowGlowDialog(!hasVisited);
@@ -26,64 +24,41 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
-
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
-
-  return (
-    <div className="flex flex-col min-h-screen">
+  return <div className="flex flex-col min-h-screen">
       <Header />
-      {showBanner && (
-        <div className="sticky top-16 z-40">
-          <Banner
-            variant="default"
-            size="lg"
-            className="
+      {showBanner && <div className="sticky top-16 z-40">
+          <Banner variant="default" size="lg" className="
               animate-in fade-in slide-in-from-top duration-500 
               bg-gradient-to-r from-black via-gray-900 to-black
               text-primary-foreground relative overflow-hidden
               min-h-[3rem] sm:min-h-[3.5rem]
-            "
-            action={
-              <Button
-                variant="secondary"
-                size="sm"
-                className="
+            " action={<Button variant="secondary" size="sm" className="
                   flex text-xs sm:text-sm items-center 
                   whitespace-nowrap px-3 py-1.5 sm:px-4 sm:py-2
                   bg-white/10 hover:bg-white/20 text-white
                   border border-white/20
                   transition-all duration-200
-                "
-                onClick={handleTryNowClick}
-              >
+                " onClick={handleTryNowClick}>
                 Get Early Access
-              </Button>
-            }
-            layout="complex"
-            isClosable
-            onClose={() => setShowBanner(false)}
-          >
+              </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)}>
             <div className="flex items-center justify-center gap-3 relative z-10">
               <Star className="h-4 w-4 text-yellow-300 animate-pulse" />
-              <AnimatedShinyText
-                className="
+              <AnimatedShinyText className="
                   text-xs sm:text-sm inline-block
                   text-white relative z-10 rounded
                   font-medium
-                "
-                shimmerWidth={150}
-              >
+                " shimmerWidth={150}>
                 Join the AI-powered revolution in property management!
               </AnimatedShinyText>
             </div>
           </Banner>
-        </div>
-      )}
+        </div>}
 
       <main className="flex-1 pb-16 sm:pb-0">
-        <div className="relative overflow-hidden pt-2 sm:pt-6">
+        <div className="relative overflow-hidden pt-2 sm:pt-6 py-0">
           <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
@@ -124,8 +99,6 @@ const Index = () => {
       </main>
       <BottomNav />
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
