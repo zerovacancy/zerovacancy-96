@@ -4,7 +4,7 @@ import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
 import useEmblaCarousel from 'embla-carousel-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Creator {
@@ -70,42 +70,53 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     { label: 'Rating', value: 'rating' },
     { label: 'Price: Low to High', value: 'price_asc' },
     { label: 'Price: High to Low', value: 'price_desc' },
-    { label: 'Distance', value: 'distance' }
+    { label: 'Distance', value: 'distance' },
+    { label: 'Specialization', value: 'specialization' }
   ];
 
   return (
-    <div className="space-y-8">
-      {/* Section Header */}
-      <div className="space-y-6">
-        <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Featured Creators
-          </h2>
-          <p className="text-gray-600">
-            Browse our top-rated content creators specializing in real estate photography and videography
-          </p>
-        </div>
+    <div className="space-y-6 pt-6">
+      {/* Section Header with Unified Background */}
+      <div className="bg-[#F5F7FB] -mx-4 px-4 pt-6 pb-8 sm:pb-10">
+        <div className="space-y-4">
+          {/* Title and Description */}
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-2">
+              <h2 className="text-2xl sm:text-[24px] font-bold text-gray-900 tracking-tight">
+                Featured Creators
+              </h2>
+              <div className="flex items-center gap-1 text-sm text-primary bg-primary/5 px-2 py-0.5 rounded-full">
+                <Star className="w-3.5 h-3.5 fill-primary text-primary" />
+                <span>{creators.length}+ available</span>
+              </div>
+            </div>
+            <p className="text-[15px] leading-relaxed text-gray-600 max-w-3xl">
+              Browse our top-rated content creators specializing in real estate photography and videography, 
+              each handpicked for their exceptional quality and expertise
+            </p>
+          </div>
 
-        {/* Sort Controls */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-3 sm:gap-4">
-          <div className="w-full sm:w-auto">
-            <SortMenu 
-              options={sortOptions}
-              onSort={onSort}
-              defaultValue={sortBy}
-            />
+          {/* Sort Controls */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-3 sm:gap-4 pt-1">
+            <div className="w-full sm:w-auto">
+              <SortMenu 
+                options={sortOptions}
+                onSort={onSort}
+                defaultValue={sortBy}
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Visual Separator */}
-      <div className="relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-50/80 to-transparent -z-10" />
-        <div className="h-px bg-gray-200 w-full" role="separator" />
+        {/* Visual Separator */}
+        <div className="relative mt-8">
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent -z-10" />
+          <div className="h-px bg-gray-200/70 w-full" role="separator" />
+        </div>
       </div>
 
       {/* Creators Grid/Carousel */}
-      <div className="pt-4">
+      <div className="pt-2">
         {isMobile ? (
           <div className="relative pt-2 select-none touch-pan-y">
             {/* Carousel Container */}
