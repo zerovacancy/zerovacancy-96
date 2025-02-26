@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -7,10 +8,12 @@ import { ShimmerButton } from "@/components/ui/shimmer-button";
 import AuroraBackground from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const isMobile = useIsMobile();
   const titles = useMemo(() => ["Converts", "Engages", "Drives Leads"], []);
+  
   useEffect(() => {
     // Adjust animation timing for mobile
     const timeout = isMobile ? 2500 : 2000;
@@ -23,6 +26,7 @@ export function Hero() {
     }, timeout);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length, isMobile]);
+
   return <div className="w-full relative">
       <motion.div className="absolute inset-0 bg-gradient-to-br from-purple-50/90 via-white to-blue-50/90" animate={{
       backgroundPosition: ["0% 0%", "100% 100%"]
