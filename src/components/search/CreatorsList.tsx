@@ -70,8 +70,9 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   ];
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-3 sm:gap-4 bg-gray-50/50 p-3 sm:p-4 rounded-lg border border-gray-100/80">
+    <div className="space-y-6">
+      {/* Sort Controls */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-3 sm:gap-4">
         <div className="w-full sm:w-auto">
           <SortMenu 
             options={sortOptions}
@@ -81,8 +82,12 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
         </div>
       </div>
 
+      {/* Visual Separator */}
+      <div className="h-px bg-gray-200 w-full" role="separator" />
+
+      {/* Creators Grid/Carousel */}
       {isMobile ? (
-        <div className="relative">
+        <div className="relative pt-2">
           {/* Carousel Container */}
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex touch-pan-y">
@@ -137,7 +142,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
           {creators.map((creator) => (
             <CreatorCard
               key={creator.name}

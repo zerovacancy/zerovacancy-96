@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { SearchHeader } from './search/SearchHeader';
@@ -101,29 +100,27 @@ const PreviewSearch: React.FC = () => {
         aria-hidden="true"
       />
       <GlowingEffect className="bg-blue-600/20 absolute -left-24 top-1/2 -translate-y-1/2 blur-3xl opacity-50 w-[32rem] h-[32rem] md:block" aria-hidden="true" />
-      <div className="relative">
-        <Card className="overflow-hidden bg-white/90 backdrop-blur-sm border-[1.5px] border-gray-300/80 shadow-xl ring-1 ring-gray-200/50">
-          <div className="px-2 sm:px-6 lg:px-8 py-3 sm:py-5 space-y-3">
-            <div className="flex flex-col gap-2">
+      <div className="relative space-y-6">
+        <Card className="overflow-hidden bg-white/90 backdrop-blur-sm shadow-sm ring-1 ring-gray-200/50">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <div className="flex flex-col gap-4">
               <SearchHeader />
               <SearchBar
                 value={location}
                 onLocationSelect={handleLocationChange}
               />
             </div>
-
-            <div className="h-px bg-gray-200/80 w-full -mx-2 sm:-mx-6 lg:-mx-8 my-2" role="separator" />
-
-            <CreatorsList
-              creators={sortedCreators}
-              sortBy={sortBy}
-              onSort={handleSort}
-              onImageLoad={handleImageLoad}
-              loadedImages={loadedImages}
-              imageRef={setImageRef}
-            />
           </div>
         </Card>
+
+        <CreatorsList
+          creators={sortedCreators}
+          sortBy={sortBy}
+          onSort={handleSort}
+          onImageLoad={handleImageLoad}
+          loadedImages={loadedImages}
+          imageRef={setImageRef}
+        />
       </div>
     </section>
   );
