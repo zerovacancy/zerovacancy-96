@@ -26,9 +26,12 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
   };
 
   return (
-    <div className={cn("w-full max-w-2xl mx-auto", className)}>
+    <div className={cn(
+      "w-full max-w-2xl mx-auto px-4 sm:px-6", 
+      className
+    )}>
       <form onSubmit={handleSubmit} className="w-full">
-        <div className="flex flex-col md:flex-row items-center gap-3 w-full">
+        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full">
           <input
             type="email"
             placeholder="Enter your email"
@@ -42,7 +45,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
               "bg-[#F0F0F5]",
               "border border-gray-200/20",
               "rounded-lg",
-              "text-gray-800 placeholder:text-gray-500 placeholder:text-base",
+              "text-gray-800 placeholder:text-gray-500 placeholder:text-[15px] md:placeholder:text-base",
               "transition-all duration-200 ease-in-out",
               "focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20",
               "disabled:opacity-50",
@@ -80,9 +83,9 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
         </div>
       </form>
 
-      <div className="flex justify-center items-center mt-3 text-[14px] text-[#6B7280] font-normal">
-        <p className="flex items-center">
-          <span className="flex -space-x-1.5 mr-2" aria-hidden="true">
+      <div className="flex justify-center items-center mt-4 md:mt-3 text-[14px] text-[#6B7280] font-normal">
+        <p className="flex items-center flex-wrap justify-center gap-y-2">
+          <span className="flex -space-x-1.5 mr-2.5" aria-hidden="true">
             <AvatarPlaceholder initials="JT" />
             <AvatarPlaceholder initials="MK" />
             <AvatarPlaceholder 
@@ -90,9 +93,9 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
               className="hidden sm:flex"
             />
           </span>
-          <span>2,165+ people joined</span>
-          <span className="mx-4 w-1 h-1 rounded-full bg-gray-400 inline-block relative top-[0.5px]" aria-hidden="true" />
-          <span>Queue: 1-2 days</span>
+          <span className="whitespace-nowrap">2,165+ people joined</span>
+          <span className="mx-3 sm:mx-4 w-1 h-1 rounded-full bg-gray-400 inline-block relative top-[0.5px]" aria-hidden="true" />
+          <span className="whitespace-nowrap">Queue: 1-2 days</span>
         </p>
       </div>
     </div>
