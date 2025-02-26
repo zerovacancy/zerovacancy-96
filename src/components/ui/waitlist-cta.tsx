@@ -27,7 +27,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
 
   return (
     <div className={cn(
-      "w-full max-w-2xl mx-auto px-4 sm:px-6", 
+      "flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-4 sm:px-6", 
       className
     )}>
       <form onSubmit={handleSubmit} className="w-full flex justify-center">
