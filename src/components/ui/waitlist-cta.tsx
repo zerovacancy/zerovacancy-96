@@ -30,8 +30,8 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
       "w-full max-w-2xl mx-auto px-4 sm:px-6", 
       className
     )}>
-      <form onSubmit={handleSubmit} className="w-full">
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full">
+      <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+        <div className="flex flex-col items-center gap-3 w-full max-w-[260px]">
           <input
             type="email"
             placeholder="Enter your email"
@@ -73,7 +73,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
               "text-base leading-none",
               "inline-flex items-center justify-center gap-3",
               "flex-shrink-0",
-              "w-full md:w-auto min-w-[160px]",
+              "w-full",
               "rounded-lg",
               "bg-blue-600 hover:bg-blue-700",
               "transition-all duration-200 ease-in-out"
@@ -88,7 +88,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
         </div>
       </form>
 
-      <div className="flex justify-center items-center mt-4 md:mt-3 text-[14px] text-[#6B7280] font-normal">
+      <div className="flex justify-center items-center mt-4 text-[14px] text-[#6B7280] font-normal">
         <p className="flex items-center flex-wrap justify-center gap-y-2">
           <span className="flex -space-x-1.5 mr-2.5" aria-hidden="true">
             <AvatarPlaceholder initials="JT" />
