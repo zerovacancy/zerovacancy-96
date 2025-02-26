@@ -28,35 +28,27 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
     <div className={cn("w-full max-w-2xl mx-auto", className)}>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="flex flex-col sm:flex-row gap-3 w-full">
-          <div className="relative flex-1">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={cn(
-                "w-full h-12 sm:h-14",
-                "px-4 py-3",
-                "text-base sm:text-lg",
-                "bg-gray-900/5 backdrop-blur-sm",
-                "border border-gray-200/20",
-                "rounded-xl",
-                "text-gray-800 placeholder:text-gray-500",
-                "transition-all duration-200",
-                "focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20",
-                "disabled:opacity-50"
-              )}
-              disabled={isSubmitting}
-              required
-            />
-            <div
-              className="absolute inset-0 rounded-xl pointer-events-none"
-              style={{
-                background: "linear-gradient(45deg, rgba(59,130,246,0.05), rgba(139,92,246,0.05))",
-              }}
-              aria-hidden="true"
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={cn(
+              "w-full h-12 sm:h-14",
+              "px-4 py-3",
+              "text-base sm:text-lg",
+              "bg-gray-900/5 backdrop-blur-sm",
+              "border border-gray-200/20",
+              "rounded-xl",
+              "text-gray-800 placeholder:text-gray-500",
+              "transition-all duration-200",
+              "focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20",
+              "disabled:opacity-50",
+              "flex-1"
+            )}
+            disabled={isSubmitting}
+            required
+          />
 
           <ShimmerButton
             type="submit"
