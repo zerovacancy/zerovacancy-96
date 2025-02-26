@@ -85,8 +85,14 @@ const Footer = () => {
                 onClick={() => setShowTerms(true)}
                 className="text-muted-foreground hover:text-foreground text-sm transition-colors"
               >
-                Terms & Conditions
+                Terms & Conditions (Modal)
               </button>
+              <Link
+                to="/terms"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+              >
+                Terms & Conditions (Page)
+              </Link>
               <Link
                 to="/privacy"
                 className="text-muted-foreground hover:text-foreground text-sm transition-colors"
