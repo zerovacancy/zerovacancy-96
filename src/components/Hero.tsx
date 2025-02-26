@@ -3,11 +3,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
 import AuroraBackground from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { WaitlistCTA } from "./ui/waitlist-cta";
 
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -76,10 +75,7 @@ export function Hero() {
           </div>
           
           <div className="flex justify-center w-full sm:px-3 max-w-xs mx-auto mt-2 sm:mt-8 px-[3px] mb-2 sm:mb-20 py-0">
-            <ShimmerButton onClick={() => {}} aria-label="Get early access to our platform" className="w-full sm:w-auto min-h-[3rem] sm:min-h-[3.25rem] px-4 sm:px-6 text-sm sm:text-base">
-              <span>Get Early Access</span>
-              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" aria-hidden="true" />
-            </ShimmerButton>
+            <WaitlistCTA className="w-full" />
           </div>
         </section>
       </AuroraBackground>
