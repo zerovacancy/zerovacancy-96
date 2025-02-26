@@ -4,7 +4,7 @@ import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
 import useEmblaCarousel from 'embla-carousel-react';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, ArrowDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Creator {
@@ -75,12 +75,12 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   ];
 
   return (
-    <div className="space-y-6 pt-6">
+    <div className="space-y-4">
       {/* Section Header with Unified Background */}
-      <div className="bg-[#F5F7FB] -mx-4 px-4 pt-6 pb-8 sm:pb-10">
+      <div className="bg-[#F5F7FB] -mx-4 px-4 py-6">
         <div className="space-y-4">
-          {/* Title and Description */}
-          <div className="flex flex-col gap-3">
+          {/* Title Row with Sort */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-2">
               <h2 className="text-2xl sm:text-[24px] font-bold text-gray-900 tracking-tight">
                 Featured Creators
@@ -90,15 +90,9 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
                 <span>{creators.length}+ available</span>
               </div>
             </div>
-            <p className="text-[15px] leading-relaxed text-gray-600 max-w-3xl">
-              Browse our top-rated content creators specializing in real estate photography and videography, 
-              each handpicked for their exceptional quality and expertise
-            </p>
-          </div>
-
-          {/* Sort Controls */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-3 sm:gap-4 pt-1">
-            <div className="w-full sm:w-auto">
+            
+            <div className="flex items-center gap-3">
+              <span className="hidden sm:block text-sm text-gray-500">Sort by:</span>
               <SortMenu 
                 options={sortOptions}
                 onSort={onSort}
@@ -106,17 +100,29 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
               />
             </div>
           </div>
+
+          {/* Description and Context */}
+          <div className="space-y-3">
+            <p className="text-[15px] leading-relaxed text-gray-600 max-w-3xl">
+              Browse our top-rated content creators specializing in real estate photography and videography, 
+              each handpicked for their exceptional quality and expertise
+            </p>
+            
+            <p className="text-sm text-gray-500 border-l-2 border-primary/20 pl-3">
+              These creators match common search criteria for professional real estate photography services
+            </p>
+          </div>
         </div>
 
         {/* Visual Separator */}
-        <div className="relative mt-8">
+        <div className="relative mt-6">
           <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent -z-10" />
           <div className="h-px bg-gray-200/70 w-full" role="separator" />
         </div>
       </div>
 
       {/* Creators Grid/Carousel */}
-      <div className="pt-2">
+      <div className="pt-2 pb-4">
         {isMobile ? (
           <div className="relative pt-2 select-none touch-pan-y">
             {/* Carousel Container */}
@@ -188,7 +194,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {creators.map((creator) => (
               <CreatorCard
                 key={creator.name}

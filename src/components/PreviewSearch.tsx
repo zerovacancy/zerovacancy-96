@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { SearchHeader } from './search/SearchHeader';
@@ -6,6 +5,8 @@ import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
 import { GlowingEffect } from './ui/glowing-effect';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ArrowDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const creators = [
   {
@@ -101,7 +102,8 @@ const PreviewSearch: React.FC = () => {
         aria-hidden="true"
       />
       <GlowingEffect className="bg-blue-600/20 absolute -left-24 top-1/2 -translate-y-1/2 blur-3xl opacity-50 w-[32rem] h-[32rem] md:block" aria-hidden="true" />
-      <div className="relative space-y-8">
+      
+      <div className="relative space-y-6">
         <Card className="overflow-hidden bg-white/90 backdrop-blur-sm shadow-sm ring-1 ring-gray-200/50 animate-fade-in">
           <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
             <div className="flex flex-col gap-6">
@@ -113,6 +115,27 @@ const PreviewSearch: React.FC = () => {
             </div>
           </div>
         </Card>
+
+        {/* Visual Connection Element */}
+        <div className="flex flex-col items-center gap-2 py-2 animate-fade-in">
+          <ArrowDown className="w-5 h-5 text-gray-400 animate-bounce" />
+          <p className="text-sm text-gray-500 text-center px-4">
+            Search above or browse our featured creators below
+          </p>
+        </div>
+
+        {/* Popular Searches */}
+        <div className="flex flex-wrap gap-2 justify-center px-4 animate-fade-in">
+          <button className="px-3 py-1.5 text-sm bg-white/80 hover:bg-white text-gray-600 rounded-full border border-gray-200/80 transition-colors duration-200">
+            📸 Real Estate Photography
+          </button>
+          <button className="px-3 py-1.5 text-sm bg-white/80 hover:bg-white text-gray-600 rounded-full border border-gray-200/80 transition-colors duration-200">
+            🎥 Property Videos
+          </button>
+          <button className="px-3 py-1.5 text-sm bg-white/80 hover:bg-white text-gray-600 rounded-full border border-gray-200/80 transition-colors duration-200">
+            🚁 Drone Photography
+          </button>
+        </div>
 
         <CreatorsList
           creators={sortedCreators}
