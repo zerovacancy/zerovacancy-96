@@ -62,15 +62,18 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   };
 
   const getTagStyle = (tag: string) => {
-    if (['#RealEstate', '#Aerial', '#IndoorDroneTour', '#Portrait', '#Wedding', '#Editorial', '#Interior', '#Design', '#Staging', '#POV', '#TikTok', '#ComeTourWithMe'].includes(tag)) {
-      return "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA] hover:text-[#3730A3]";
+    if (['#RealEstate', '#Aerial', '#IndoorDroneTour'].includes(tag)) {
+      return "bg-[#E5DEFF] text-[#4F46E5] hover:bg-[#D6BCFA] hover:text-[#3730A3] border border-[#4F46E5]/10";
     }
-    if (['#Professional', '#Creative', '#Expert'].includes(tag)) {
-      return "bg-[#F2FCE2] text-[#3B823E] hover:bg-[#DCF5DC] hover:text-[#2E6A31]";
+    if (['#Interior', '#Design', '#Staging'].includes(tag)) {
+      return "bg-[#F2FCE2] text-[#3B823E] hover:bg-[#DCF5DC] hover:text-[#2E6A31] border border-[#3B823E]/10";
     }
-    return "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7] hover:text-[#9D5B3F]";
+    if (['#POV', '#TikTok', '#ComeTourWithMe'].includes(tag)) {
+      return "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7] hover:text-[#9D5B3F] border border-[#C4704F]/10";
+    }
+    return "bg-[#F3F4F6] text-gray-600 hover:bg-gray-200 hover:text-gray-800 border border-gray-200";
   };
-  
+
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
 
   const getImageSource = () => {
@@ -86,11 +89,11 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       <Card className={cn(
         "overflow-hidden h-full",
         "will-change-transform transition-all duration-300",
-        "hover:translate-y-[-2px]",
+        "hover:translate-y-[-2px] hover:scale-[1.01]",
         "bg-white border border-gray-200/80",
         "shadow-[0_2px_8px_rgba(0,0,0,0.05)]",
         "hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)]",
-        "rounded-lg"
+        "rounded-xl"
       )}>
         <div className="relative">
           <div className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10">
@@ -130,7 +133,12 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <h3 className="font-semibold text-base sm:text-xl">{creator.name}</h3>
                 <CheckCircle 
-                  className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" 
+                  className={cn(
+                    "w-4 h-4 sm:w-5 sm:h-5 text-blue-400",
+                    "transition-all duration-300",
+                    "group-hover:text-blue-300",
+                    "group-hover:drop-shadow-[0_0_3px_rgba(59,130,246,0.5)]"
+                  )}
                   aria-label="Verified Creator"
                 />
               </div>
@@ -149,6 +157,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           
           <div className="p-3 sm:p-4">
             <div className="space-y-3 sm:space-y-4">
+              <div className="border-t border-gray-100/10 pt-3" />
               <div 
                 className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
                 role="list"
@@ -170,8 +179,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 </div>
               </div>
               
+              <div className="border-t border-gray-100/10 pt-3" />
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
+              <div className="border-t border-gray-100/10 pt-3" />
               <div className="flex justify-center px-2 sm:px-3">
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}

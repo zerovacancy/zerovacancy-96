@@ -33,8 +33,8 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
       <div className="flex items-start justify-between">
         <div className="flex flex-col items-start gap-0.5">
           <div className="flex items-center gap-2">
-            <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-            <span className="text-sm font-medium">{rating}</span>
+            <Star className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+            <span className="text-base font-semibold">{rating}</span>
           </div>
           <span className="text-sm text-muted-foreground">({reviews} reviews)</span>
         </div>
@@ -51,16 +51,15 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
   return (
     <div className="flex items-center justify-between gap-8">
       <div className="flex items-center gap-2">
-        <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-        <span className="text-sm font-medium">{rating}</span>
+        <Star className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+        <span className="text-base font-semibold">{rating}</span>
         <span className="text-sm text-muted-foreground">({reviews} reviews)</span>
       </div>
       {hourlyRate && (
         <div className="text-sm text-muted-foreground">
-          Starting at ${hourlyRate}/hr
+          Starting at <span className="font-medium text-gray-900">${hourlyRate}/hr</span>
         </div>
       )}
     </div>
   );
 };
-
