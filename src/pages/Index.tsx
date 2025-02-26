@@ -69,7 +69,7 @@ const Index = () => {
           </div>
 
           {/* How It Works Section */}
-          <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-4 sm:py-8 lg:py-10 overflow-hidden">
+          <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-4 sm:py-8 overflow-hidden lg:py-0">
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <HowItWorksSection />
           </div>
