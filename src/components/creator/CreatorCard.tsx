@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Card, CardHeader, CardContent } from '../ui/card';
+import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { MapPin, Star, Image, CheckCircle, Sparkle, ArrowRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
@@ -82,7 +83,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   };
   
   return (
-    <div className="group select-text">
+    <article className="group select-text">
       <Card className="
         overflow-hidden h-full 
         will-change-transform 
@@ -116,7 +117,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             <img 
               ref={imageRef}
               src={getImageSource()}
-              alt={creator.name} 
+              alt={`${creator.name} - ${creator.services.join(", ")} specialist in ${creator.location}`}
               className={cn(
                 "w-full h-full object-cover object-center transition-opacity duration-300",
                 !loadedImages.has(creator.image) && "opacity-0"
@@ -125,15 +126,24 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               onError={handleImageError}
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
+            <div 
+              className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" 
+              aria-hidden="true"
+            />
             
             <div className="absolute bottom-3 left-3 text-white select-text">
               <div className="flex items-center gap-2">
                 <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
+                <CheckCircle 
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" 
+                  aria-label="Verified Creator"
+                />
               </div>
               <div className="flex items-center gap-1.5 mt-1">
-                <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" />
+                <MapPin 
+                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/90" 
+                  aria-hidden="true"
+                />
                 <span className="text-xs sm:text-sm text-white/90">{creator.location}</span>
               </div>
               <p className="text-xs sm:text-sm text-white/90 mt-1">
@@ -144,19 +154,23 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           
           <div className="p-4 sm:p-5">
             <div className="space-y-4 sm:space-y-5">
-              <div className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+              <div 
+                className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+                role="list"
+                aria-label="Creator specialties"
+              >
                 <div className="flex flex-nowrap gap-2 pb-1">
                   {tags.map((tag, index) => (
-                    <button
+                    <span
                       key={index}
                       className={cn(
-                        "text-xs px-2 py-1 rounded-full transition-colors duration-200 cursor-pointer whitespace-nowrap",
+                        "text-xs px-2 py-1 rounded-full transition-colors duration-200 whitespace-nowrap",
                         getTagStyle(tag)
                       )}
-                      onClick={(e) => e.preventDefault()}
+                      role="listitem"
                     >
                       {tag}
-                    </button>
+                    </span>
                   ))}
                 </div>
               </div>
@@ -166,9 +180,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <div className="flex justify-center px-3 sm:px-4">
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
+                  aria-label={`Join waitlist to work with ${creator.name}`}
                 >
                   <span>Join Waitlist</span>
-                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" aria-hidden="true" />
                 </ShimmerButton>
               </div>
             </div>
@@ -176,6 +191,6 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
         </div>
       </Card>
       <GlowDialog open={showEmailDialog} onOpenChange={setShowEmailDialog} />
-    </div>
+    </article>
   );
 };

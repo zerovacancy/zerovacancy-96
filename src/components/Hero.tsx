@@ -38,20 +38,31 @@ export function Hero() {
           repeat: Infinity,
           repeatType: "reverse",
         }}
+        aria-hidden="true"
       />
 
       {/* Decorative elements */}
-      <div className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-r from-purple-200/20 to-blue-200/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl" />
+      <div 
+        className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-r from-purple-200/20 to-blue-200/20 rounded-full blur-3xl"
+        aria-hidden="true"
+      />
+      <div 
+        className="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"
+        aria-hidden="true"
+      />
 
       <AuroraBackground className="w-full">
-        <div className="flex gap-3 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-4 sm:px-6 py-4 sm:py-8 lg:py-12 min-h-[calc(100vh-4.5rem)] sm:min-h-0 relative z-10">
+        <section className="flex gap-3 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-4 sm:px-6 py-4 sm:py-8 lg:py-12 min-h-[calc(100vh-4.5rem)] sm:min-h-0 relative z-10">
           <div className="flex gap-2 sm:gap-4 flex-col max-w-5xl mx-auto w-full">
             <h1 className="text-[2.25rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-1 sm:py-4 my-1 sm:my-4 font-bold lg:text-8xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Find the perfect content creator
               </span>
-              <span className="relative flex w-full justify-center h-[1.6em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-0.5 sm:mt-2">
+              <span 
+                className="relative flex w-full justify-center h-[1.6em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-0.5 sm:mt-2"
+                role="text"
+                aria-label={`Your content ${titles[titleNumber]} your property marketing`}
+              >
                 {titles.map((title, index) => (
                   <motion.span 
                     key={index}
@@ -94,12 +105,13 @@ export function Hero() {
           <div className="flex justify-center w-full px-4 sm:px-6 max-w-lg mx-auto mt-4 sm:mt-8">
             <ShimmerButton 
               onClick={() => {}}
+              aria-label="Get early access to our platform"
             >
               <span>Get Early Access</span>
-              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" aria-hidden="true" />
             </ShimmerButton>
           </div>
-        </div>
+        </section>
       </AuroraBackground>
     </div>
   );
