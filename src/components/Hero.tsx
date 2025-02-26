@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -7,12 +6,10 @@ import AuroraBackground from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "./ui/waitlist-cta";
-
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const isMobile = useIsMobile();
   const titles = useMemo(() => ["Converts", "Engages", "Drives Leads"], []);
-  
   useEffect(() => {
     // Adjust animation timing for mobile
     const timeout = isMobile ? 2500 : 2000;
@@ -25,7 +22,6 @@ export function Hero() {
     }, timeout);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length, isMobile]);
-
   return <div className="w-full relative">
       <motion.div className="absolute inset-0 bg-gradient-to-br from-purple-50/90 via-white to-blue-50/90" animate={{
       backgroundPosition: ["0% 0%", "100% 100%"]
@@ -40,7 +36,7 @@ export function Hero() {
 
       <AuroraBackground className="w-full">
         <section className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col px-4 sm:px-6 pt-0 pb-4 sm:py-12 min-h-fit sm:min-h-[60vh] relative z-10">
-          <div className="flex gap-4 sm:gap-6 flex-col max-w-5xl mx-auto w-full mt-0 sm:mt-4">
+          <div className="flex gap-4 sm:gap-6 flex-col max-w-5xl mx-auto w-full mt-0 sm:mt-4 my-[12px] py-[75px]">
             <h1 className="text-[2rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-1 sm:py-4 my-0 sm:my-4 font-bold lg:text-8xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Property Content that
@@ -74,7 +70,7 @@ export function Hero() {
             </p>
           </div>
           
-          <div className="w-full px-4 sm:px-6 mt-4 sm:mt-8 mb-8 sm:mb-16">
+          <div className="w-full px-4 sm:px-6 mt-4 sm:mt-8 mb-8 sm:mb-16 py-0 my-0">
             <WaitlistCTA />
           </div>
         </section>
