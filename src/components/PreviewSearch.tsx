@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Card } from './ui/card';
 import { SearchHeader } from './search/SearchHeader';
@@ -100,10 +101,10 @@ const PreviewSearch: React.FC = () => {
         aria-hidden="true"
       />
       <GlowingEffect className="bg-blue-600/20 absolute -left-24 top-1/2 -translate-y-1/2 blur-3xl opacity-50 w-[32rem] h-[32rem] md:block" aria-hidden="true" />
-      <div className="relative space-y-6">
-        <Card className="overflow-hidden bg-white/90 backdrop-blur-sm shadow-sm ring-1 ring-gray-200/50">
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-            <div className="flex flex-col gap-4">
+      <div className="relative space-y-8">
+        <Card className="overflow-hidden bg-white/90 backdrop-blur-sm shadow-sm ring-1 ring-gray-200/50 animate-fade-in">
+          <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <div className="flex flex-col gap-6">
               <SearchHeader />
               <SearchBar
                 value={location}
