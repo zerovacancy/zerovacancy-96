@@ -44,8 +44,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
                 "text-gray-800 placeholder:text-gray-500",
                 "transition-all duration-200",
                 "focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20",
-                "disabled:opacity-50",
-                "shadow-sm"
+                "disabled:opacity-50"
               )}
               disabled={isSubmitting}
               required
@@ -68,7 +67,8 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
               "text-base",
               "flex items-center justify-center gap-2",
               "flex-shrink-0",
-              "w-full sm:w-auto min-w-[160px]"
+              "w-full sm:w-auto min-w-[160px]",
+              "rounded-xl"
             )}
           >
             <span>Get Early Access</span>
@@ -77,9 +77,12 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
         </div>
       </form>
 
-      <div className="flex justify-between items-center mt-4 text-sm text-gray-600">
-        <p>2,165+ people joined</p>
-        <p>Queue: 1-2 days</p>
+      <div className="flex justify-center items-center mt-4 text-sm text-gray-600">
+        <p className="flex items-center gap-3">
+          <span>2,165+ people joined</span>
+          <span className="w-1 h-1 rounded-full bg-gray-400" aria-hidden="true" />
+          <span>Queue: 1-2 days</span>
+        </p>
       </div>
     </div>
   );
