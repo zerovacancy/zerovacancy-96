@@ -39,8 +39,8 @@ export function Hero() {
       <div className="absolute bottom-20 left-10 w-32 sm:w-48 h-32 sm:h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl" aria-hidden="true" />
 
       <AuroraBackground className="w-full">
-        <section className="flex gap-1 sm:gap-6 lg:gap-8 items-center justify-center flex-col px-3 sm:px-6 pt-0 pb-2 sm:py-8 lg:py-12 min-h-fit sm:min-h-[60vh] relative z-10">
-          <div className="flex gap-2 sm:gap-4 flex-col max-w-5xl mx-auto w-full mt-0 sm:mt-4 my-0">
+        <section className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col px-4 sm:px-6 pt-0 pb-4 sm:py-12 min-h-fit sm:min-h-[60vh] relative z-10">
+          <div className="flex gap-4 sm:gap-6 flex-col max-w-5xl mx-auto w-full mt-0 sm:mt-4">
             <h1 className="text-[2rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-1 sm:py-4 my-0 sm:my-4 font-bold lg:text-8xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Property Content that
@@ -74,8 +74,8 @@ export function Hero() {
             </p>
           </div>
           
-          <div className="flex justify-center w-full sm:px-3 max-w-xs mx-auto mt-2 sm:mt-8 px-[3px] mb-2 sm:mb-20 py-0">
-            <WaitlistCTA className="w-full" />
+          <div className="w-full px-4 sm:px-6 mt-4 sm:mt-8 mb-8 sm:mb-16">
+            <WaitlistCTA />
           </div>
         </section>
       </AuroraBackground>

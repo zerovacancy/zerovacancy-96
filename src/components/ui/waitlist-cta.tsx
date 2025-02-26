@@ -25,9 +25,9 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
   };
 
   return (
-    <div className={cn("w-full", className)}>
+    <div className={cn("w-full max-w-2xl mx-auto", className)}>
       <form onSubmit={handleSubmit} className="w-full">
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full max-w-lg mx-auto">
+        <div className="flex flex-col sm:flex-row gap-3 w-full">
           <div className="relative flex-1">
             <input
               type="email"
@@ -35,16 +35,17 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={cn(
-                "w-full min-h-[3rem] sm:min-h-[3.25rem]",
-                "px-4 py-2 text-base sm:text-lg",
-                "bg-white/5 backdrop-blur-sm",
-                "border border-white/10",
+                "w-full h-12 sm:h-14",
+                "px-4 py-3",
+                "text-base sm:text-lg",
+                "bg-gray-900/5 backdrop-blur-sm",
+                "border border-gray-200/20",
                 "rounded-xl",
                 "text-gray-800 placeholder:text-gray-500",
                 "transition-all duration-200",
-                "focus:outline-none focus:ring-2 focus:ring-purple-500/20",
+                "focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20",
                 "disabled:opacity-50",
-                "shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+                "shadow-sm"
               )}
               disabled={isSubmitting}
               required
@@ -52,7 +53,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
             <div
               className="absolute inset-0 rounded-xl pointer-events-none"
               style={{
-                background: "linear-gradient(45deg, rgba(139,92,246,0.1), rgba(59,130,246,0.1))",
+                background: "linear-gradient(45deg, rgba(59,130,246,0.05), rgba(139,92,246,0.05))",
               }}
               aria-hidden="true"
             />
@@ -62,25 +63,22 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
             type="submit"
             disabled={isSubmitting}
             className={cn(
-              "min-h-[3rem] sm:min-h-[3.25rem]",
-              "px-6 py-2",
-              "text-base sm:text-lg",
-              "whitespace-nowrap",
+              "h-12 sm:h-14",
+              "px-6 sm:px-8",
+              "text-base",
+              "flex items-center justify-center gap-2",
               "flex-shrink-0",
-              "w-full sm:w-auto"
+              "w-full sm:w-auto min-w-[160px]"
             )}
           >
             <span>Get Early Access</span>
-            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" aria-hidden="true" />
+            <ArrowRight className="w-5 h-5 text-white/90" aria-hidden="true" />
           </ShimmerButton>
         </div>
       </form>
 
-      <div className="flex justify-between items-center mt-3 px-1 max-w-lg mx-auto text-xs sm:text-sm text-gray-600">
-        <p className="flex items-center gap-1.5">
-          <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          2,165+ people joined
-        </p>
+      <div className="flex justify-between items-center mt-4 text-sm text-gray-600">
+        <p>2,165+ people joined</p>
         <p>Queue: 1-2 days</p>
       </div>
     </div>
