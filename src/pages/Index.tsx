@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -14,9 +15,11 @@ import { Spotlight } from '@/components/ui/spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
+
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
+
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     setShowGlowDialog(!hasVisited);
@@ -24,9 +27,11 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
+
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
+
   return <div className="flex flex-col min-h-screen">
       <Header />
       {showBanner && <div className="sticky top-16 z-40">
@@ -58,7 +63,7 @@ const Index = () => {
         </div>}
 
       <main className="flex-1 pb-16 sm:pb-0">
-        <div className="relative overflow-hidden pt-2 sm:pt-6 py-0">
+        <div className="relative overflow-hidden">
           <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
@@ -101,4 +106,5 @@ const Index = () => {
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
     </div>;
 };
+
 export default Index;
