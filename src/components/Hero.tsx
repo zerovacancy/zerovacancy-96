@@ -38,7 +38,7 @@ export function Hero() {
         <section className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col px-4 sm:px-6 pt-0 pb-4 sm:py-12 min-h-fit sm:min-h-[60vh] relative z-10 py-[62px] my-[42px]">
           <div className="flex gap-4 sm:gap-6 flex-col max-w-5xl mx-auto w-full mt-0 sm:mt-4 my-[12px] py-0">
             <h1 className="text-[2rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center sm:py-4 sm:my-4 font-bold lg:text-8xl py-0 my-0">
-              <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
+              <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black text-5xl">
                 Property Content that
               </span>
               <span role="text" aria-label={`Property Content that ${titles[titleNumber]}`} className="relative flex w-full justify-center h-[1.6em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-0.5 sm:mt-2 my-0">
@@ -65,7 +65,7 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="text-sm sm:text-lg lg:text-xl leading-relaxed tracking-wide text-gray-700 max-w-2xl text-center mx-auto px-2 sm:px-4 [word-spacing:0.12em] sm:[word-spacing:0.16em] relative z-10">
+            <p className="sm:text-lg lg:text-xl leading-relaxed tracking-wide text-gray-700 max-w-2xl text-center sm:px-4 [word-spacing:0.12em] sm:[word-spacing:0.16em] relative z-10 px-0 text-sm mx-[34px] my-0">
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </p>
           </div>
