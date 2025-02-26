@@ -178,10 +178,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 </div>
               </div>
               
-              <div className="border-t border-gray-100/10 my-2 sm:my-3" />
+              <div className="pt-1" />
               <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               
-              <div className="border-t border-gray-100/10 my-2 sm:my-3" />
+              <div className="pt-1" />
               <div className="flex justify-center px-1 sm:px-2">
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
