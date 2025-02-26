@@ -1,4 +1,3 @@
-
 import React, { useCallback, useEffect } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
@@ -71,14 +70,12 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-3 sm:gap-4 bg-gray-50/50 p-3 sm:p-4 rounded-lg border border-gray-100/80">
-        <div className="w-full sm:w-auto">
-          <SortMenu 
-            options={sortOptions}
-            onSort={onSort}
-            defaultValue={sortBy}
-          />
-        </div>
+      <div className="w-full sm:w-auto">
+        <SortMenu 
+          options={sortOptions}
+          onSort={onSort}
+          defaultValue={sortBy}
+        />
       </div>
 
       {isMobile ? (
