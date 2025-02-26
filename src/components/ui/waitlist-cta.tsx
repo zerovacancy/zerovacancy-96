@@ -27,11 +27,11 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
 
   return (
     <div className={cn(
-      "flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-4 sm:px-6", 
+      "flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-4 sm:px-6 mt-8", 
       className
     )}>
       <form onSubmit={handleSubmit} className="w-full flex justify-center">
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full max-w-[300px] md:max-w-none">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 w-full max-w-[480px]">
           <div className="w-full md:w-[300px]">
             <input
               type="email"
@@ -69,6 +69,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
             className={cn(
               "h-[48px] m-0",
               "px-6",
+              "whitespace-nowrap",
               "text-base leading-none",
               "inline-flex items-center justify-center gap-3",
               "flex-shrink-0",
@@ -78,7 +79,7 @@ export function WaitlistCTA({ className, onSubmit }: WaitlistCTAProps) {
               "transition-all duration-200 ease-in-out"
             )}
           >
-            <span className="flex-1 text-center">Get Early Access</span>
+            <span className="flex-1 text-center whitespace-nowrap">Get Early Access</span>
             <ArrowRight 
               className="w-5 h-5 text-white/90 flex-shrink-0" 
               aria-hidden="true"
