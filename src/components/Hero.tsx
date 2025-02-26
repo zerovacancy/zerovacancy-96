@@ -36,7 +36,7 @@ export function Hero() {
 
       <AuroraBackground className="w-full">
         <section className="flex gap-6 sm:gap-8 lg:gap-10 items-center justify-center flex-col px-4 sm:px-6 pt-0 pb-4 sm:py-12 min-h-fit sm:min-h-[60vh] relative z-10">
-          <div className="flex gap-4 sm:gap-6 flex-col max-w-5xl mx-auto w-full mt-0 sm:mt-4 my-[12px] py-[75px]">
+          <div className="flex gap-4 sm:gap-6 flex-col max-w-5xl mx-auto w-full mt-0 sm:mt-4 my-[12px] py-0">
             <h1 className="text-[2rem] sm:text-6xl md:text-7xl tracking-tight leading-[1.1] sm:leading-[1.1] text-center py-1 sm:py-4 my-0 sm:my-4 font-bold lg:text-8xl">
               <span className="text-primary inline whitespace-normal sm:whitespace-nowrap tracking-tight font-light bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black">
                 Property Content that
