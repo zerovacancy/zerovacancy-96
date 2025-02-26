@@ -1,8 +1,11 @@
 
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
+import useEmblaCarousel from 'embla-carousel-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface Creator {
   name: string;
@@ -33,6 +36,31 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   imageRef,
 }) => {
   const isMobile = useIsMobile();
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: 'start',
+    containScroll: 'trimSnaps',
+  });
+
+  const [prevBtnEnabled, setPrevBtnEnabled] = React.useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = React.useState(true);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+  }, [emblaApi, onSelect]);
   
   const sortOptions = [
     { label: 'Rating', value: 'rating' },
@@ -53,17 +81,74 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-        {creators.map((creator) => (
-          <CreatorCard
-            key={creator.name}
-            creator={creator}
-            onImageLoad={onImageLoad}
-            loadedImages={loadedImages}
-            imageRef={imageRef}
-          />
-        ))}
-      </div>
+      {isMobile ? (
+        <div className="relative">
+          {/* Carousel Container */}
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex touch-pan-y">
+              {creators.map((creator, index) => (
+                <div key={creator.name} className="flex-[0_0_85%] min-w-0 pl-4 first:pl-0">
+                  <CreatorCard
+                    creator={creator}
+                    onImageLoad={onImageLoad}
+                    loadedImages={loadedImages}
+                    imageRef={imageRef}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={scrollPrev}
+            className={cn(
+              "absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity",
+              !prevBtnEnabled && "opacity-0 pointer-events-none"
+            )}
+            aria-label="Previous creator"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className={cn(
+              "absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity",
+              !nextBtnEnabled && "opacity-0 pointer-events-none"
+            )}
+            aria-label="Next creator"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center gap-1.5 mt-4">
+            {creators.map((_, index) => (
+              <button
+                key={index}
+                className={cn(
+                  "w-2 h-2 rounded-full transition-colors",
+                  index === selectedIndex ? "bg-primary" : "bg-gray-300"
+                )}
+                onClick={() => emblaApi?.scrollTo(index)}
+                aria-label={`Go to creator ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+          {creators.map((creator) => (
+            <CreatorCard
+              key={creator.name}
+              creator={creator}
+              onImageLoad={onImageLoad}
+              loadedImages={loadedImages}
+              imageRef={imageRef}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
