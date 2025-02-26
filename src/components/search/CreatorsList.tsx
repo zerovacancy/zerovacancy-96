@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Creator {
   name: string;
@@ -30,6 +32,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   loadedImages,
   imageRef,
 }) => {
+  const isMobile = useIsMobile();
+  
   const sortOptions = [
     { label: 'Rating', value: 'rating' },
     { label: 'Price: Low to High', value: 'price_asc' },
@@ -37,11 +41,9 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     { label: 'Distance', value: 'distance' }
   ];
 
-  console.log('Number of creators:', creators.length); // Debug log
-
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-4 bg-gray-50/50 p-4 rounded-lg border border-gray-100/80">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center w-full gap-3 sm:gap-4 bg-gray-50/50 p-3 sm:p-4 rounded-lg border border-gray-100/80">
         <div className="w-full sm:w-auto">
           <SortMenu 
             options={sortOptions}
@@ -51,7 +53,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         {creators.map((creator) => (
           <CreatorCard
             key={creator.name}
