@@ -145,10 +145,7 @@ const HowItWorksSection = () => {
                       {index + 1}
                     </span>
                     
-                    {/* Icon as overlay inside number circle */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                      {step.icon}
-                    </div>
+                    {/* Removed the icon overlay inside number circle */}
                     
                     {/* Completed checkmark */}
                     {completedSteps.includes(index) && (
