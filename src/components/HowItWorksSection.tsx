@@ -1,7 +1,17 @@
+
 import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+
+// Define colorful backgrounds for each step
+const stepColors = [
+  { iconBg: "bg-violet-100", iconText: "text-violet-600", numBg: "bg-violet-600", numText: "text-white" },
+  { iconBg: "bg-blue-100", iconText: "text-blue-500", numBg: "bg-blue-500", numText: "text-white" },
+  { iconBg: "bg-amber-100", iconText: "text-amber-600", numBg: "bg-amber-600", numText: "text-white" },
+  { iconBg: "bg-emerald-100", iconText: "text-emerald-600", numBg: "bg-emerald-600", numText: "text-white" }
+];
+
 const HowItWorksSection = () => {
   const steps = [{
     icon: <Search className="w-6 h-6 sm:w-8 sm:h-8" />,
@@ -56,13 +66,21 @@ const HowItWorksSection = () => {
             margin: "-30px"
           }} className={cn("relative flex-shrink-0 bg-white", "w-[180px] min-h-[120px]", "p-3", "rounded-lg", "shadow-[0_2px_8px_rgba(0,0,0,0.06)]", "border border-gray-100", "touch-manipulation")}>
                 <div className="flex flex-col items-center justify-start h-full relative">
-                  {/* Circle with number */}
-                  <div className="absolute -left-1 -top-3 bg-primary text-white w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium">
+                  {/* Circle with number - colorful variant */}
+                  <div className={cn(
+                    "absolute -left-1 -top-3", 
+                    stepColors[index].numBg, stepColors[index].numText, 
+                    "w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium",
+                    "ring-2 ring-white"
+                  )}>
                     {step.number}
                   </div>
                   
-                  {/* Icon */}
-                  <div className="mt-4 mb-2 text-primary bg-primary/5 rounded-lg p-2">
+                  {/* Icon - colorful background */}
+                  <div className={cn(
+                    "mt-4 mb-2 rounded-lg p-2",
+                    stepColors[index].iconBg, stepColors[index].iconText
+                  )}>
                     {step.icon}
                   </div>
                   
@@ -107,7 +125,16 @@ const HowItWorksSection = () => {
               <div className="flex flex-col items-center justify-start h-full relative">
                 {/* Step Number with connecting line */}
                 <div className="absolute -left-[3.25rem] top-0 h-full" aria-hidden="true">
-                  <motion.span className={cn("absolute -top-2 left-0", "w-8 h-8", "bg-primary text-white rounded-full", "flex items-center justify-center", "text-sm font-medium", "ring-4 ring-white", "z-10")} initial={{
+                  <motion.span className={cn(
+                    "absolute -top-2 left-0", 
+                    "w-8 h-8", 
+                    stepColors[index].numBg, stepColors[index].numText,
+                    "rounded-full", 
+                    "flex items-center justify-center", 
+                    "text-sm font-medium", 
+                    "ring-4 ring-white", 
+                    "z-10"
+                  )} initial={{
                 scale: 0.8,
                 opacity: 0
               }} whileInView={{
@@ -124,8 +151,11 @@ const HowItWorksSection = () => {
                     {step.number}
                   </motion.span>
                   
-                  {/* Enhanced vertical connecting line */}
-                  {index < steps.length - 1 && <motion.div className="absolute top-7 left-[0.875rem] w-[2px] h-[calc(100%+2rem)] bg-gradient-to-b from-primary/30 to-primary/10" initial={{
+                  {/* Enhanced vertical connecting line with gradient matching the number colors */}
+                  {index < steps.length - 1 && <motion.div className={cn(
+                    "absolute top-7 left-[0.875rem] w-[2px] h-[calc(100%+2rem)]",
+                    `bg-gradient-to-b from-${stepColors[index].numBg.split('-')[1]}-500/70 to-${stepColors[index+1].numBg.split('-')[1]}-500/30`
+                  )} initial={{
                 scaleY: 0
               }} whileInView={{
                 scaleY: 1,
@@ -138,8 +168,14 @@ const HowItWorksSection = () => {
               }} />}
                 </div>
                 
-                {/* Icon with enhanced hover effect */}
-                <motion.div className={cn("mb-4", "text-primary", "transition-all duration-300", "bg-primary/5 rounded-xl p-3", "group-hover:bg-primary/10")} whileHover={{
+                {/* Icon with enhanced colorful background */}
+                <motion.div className={cn(
+                  "mb-4", 
+                  stepColors[index].iconBg, stepColors[index].iconText,
+                  "transition-all duration-300", 
+                  "rounded-xl p-3", 
+                  "group-hover:saturate-150"
+                )} whileHover={{
               scale: 1.1
             }} whileTap={{
               scale: 0.95
