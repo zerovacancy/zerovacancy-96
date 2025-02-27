@@ -16,12 +16,12 @@ const PreviewSearch = () => {
       </div>
       
       <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100">
-        <div className="bg-white px-4 py-5 sm:px-6 border-b">
-          <SearchBar onLocationSelect={() => {}} />
-          <SearchFilters showMoreFilters={false} onToggleFilters={() => {}} />
-        </div>
-        
         <AuroraBackground className="min-h-0" showRadialGradient={false}>
+          <div className="px-4 py-5 sm:px-6 border-b">
+            <SearchBar onLocationSelect={() => {}} />
+            <SearchFilters showMoreFilters={false} onToggleFilters={() => {}} />
+          </div>
+        
           <div className="px-2 sm:px-6 lg:px-8 py-3 sm:py-5 space-y-4">
             <CreatorsList 
               creators={[
