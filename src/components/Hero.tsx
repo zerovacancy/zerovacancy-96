@@ -1,11 +1,13 @@
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import AuroraBackground from "@/components/ui/aurora-background";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "./ui/waitlist-cta";
+
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const isMobile = useIsMobile();
@@ -22,18 +24,7 @@ export function Hero() {
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length, isMobile]);
   return <div className="w-full relative">
-      <motion.div className="absolute inset-0 bg-gradient-to-br from-purple-50/90 via-white to-blue-50/90" animate={{
-      backgroundPosition: ["0% 0%", "100% 100%"]
-    }} transition={{
-      duration: isMobile ? 15 : 20,
-      repeat: Infinity,
-      repeatType: "reverse"
-    }} aria-hidden="true" />
-
-      <div className="absolute top-20 right-10 w-48 sm:w-64 h-48 sm:h-64 bg-gradient-to-r from-purple-200/20 to-blue-200/20 rounded-full blur-3xl" aria-hidden="true" />
-      <div className="absolute bottom-20 left-10 w-32 sm:w-48 h-32 sm:h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl" aria-hidden="true" />
-
-      <AuroraBackground className="w-full py-0">
+      <AuroraBackground className="w-full py-0" showRadialGradient={false}>
         <motion.section className={cn("flex items-center justify-center flex-col", "px-4 sm:px-6", "py-[40px] sm:py-[64px]", "my-[32px] sm:my-[48px]", "min-h-fit sm:min-h-[70vh]", "relative z-10", "gap-4 sm:gap-6")} initial={{
         opacity: 0,
         y: 20
