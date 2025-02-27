@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -38,7 +39,7 @@ export function Hero() {
       <AuroraBackground className="max-w-screen-xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         <motion.section className={cn(
             "flex items-center justify-center flex-col",
-            "px-4 sm:px-6",
+            "px-2 sm:px-6", // Reduced padding on mobile
             "py-[40px] sm:py-[64px]",
             "my-[32px] sm:my-[48px]",
             "min-h-fit sm:min-h-[70vh]",
@@ -65,19 +66,19 @@ export function Hero() {
         }}>
             <h1 className="tracking-tight leading-[1.1] text-center font-bold">
               <span className={cn(
-                "text-primary whitespace-nowrap font-light",
-                "text-5xl sm:text-6xl lg:text-8xl",
+                "text-primary whitespace-normal sm:whitespace-nowrap font-light", // Allow wrap on mobile
+                "text-3xl sm:text-5xl lg:text-6xl", // Reduced font size on mobile
                 "tracking-[-0.02em]",
                 "bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black",
-                "inline-block"
+                "inline-block px-2" // Added horizontal padding
               )}>
                 Property Content that
               </span>
-              <span role="text" aria-label={`Property Content that ${titles[titleNumber]}`} className="relative flex w-full justify-center h-[1.6em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-2 sm:mt-3">
+              <span role="text" aria-label={`Property Content that ${titles[titleNumber]}`} className="relative flex w-full justify-center h-[1.8em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-2 sm:mt-3">
                 {titles.map((title, index) => <motion.span key={index} className={cn(
                     "absolute font-playfair tracking-[-0.02em] bg-clip-text text-transparent",
                     "bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700",
-                    titleNumber === index && "text-5xl sm:text-6xl lg:text-7xl" // Increased animation font size
+                    titleNumber === index && "text-3xl sm:text-5xl lg:text-6xl" // Reduced font size on mobile
                   )} initial={{
                   opacity: 0,
                   y: isMobile ? 15 : 40,
@@ -110,7 +111,7 @@ export function Hero() {
           }} transition={{
             duration: 0.3,
             delay: 0.2
-          }} className="py-2 mt-6 text-center mx-auto max-w-2xl text-lg font-normal leading-relaxed relative -bottom-5 px-[9px]">
+          }} className="py-2 mt-6 text-center mx-auto max-w-2xl text-sm sm:text-lg font-normal leading-relaxed px-4">
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </motion.p>
           </motion.div>
