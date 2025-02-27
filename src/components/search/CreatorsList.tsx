@@ -36,11 +36,15 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   imageRef,
 }) => {
   const isMobile = useIsMobile();
+  
+  // Configure carousel with mobile-specific options
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
     loop: false,
-    dragFree: false,
+    dragFree: true,
+    skipSnaps: false,
+    inViewThreshold: 0.7,
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = React.useState(false);
@@ -62,6 +66,17 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     onSelect();
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
+    
+    // Force a reInit after a short delay to ensure proper sizing
+    const timer = setTimeout(() => {
+      emblaApi.reInit();
+    }, 100);
+    
+    return () => {
+      clearTimeout(timer);
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
   }, [emblaApi, onSelect]);
   
   const sortOptions = [
@@ -72,7 +87,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   ];
 
   return (
-    <div className="space-y-2 sm:space-y-6 w-full">
+    <div className="w-full space-y-2 sm:space-y-6">
       {/* Sort menu div - completely removed for now */}
       {false && (
         <div className={cn(
@@ -88,14 +103,18 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
       )}
 
       {isMobile ? (
-        <div className="relative w-full">
-          {/* Carousel Container */}
-          <div className="overflow-hidden w-full" ref={emblaRef}>
-            <div className="flex w-full">
+        <div className="w-full relative">
+          {/* Carousel Container - Fix width and overflow */}
+          <div 
+            className="w-full overflow-hidden" 
+            ref={emblaRef}
+          >
+            <div className="flex">
               {creators.map((creator, index) => (
                 <div 
                   key={creator.name} 
-                  className="min-w-0 flex-[0_0_90%] mx-1 first:ml-2 last:mr-2"
+                  className="w-[85%] shrink-0 pl-2 pr-2"
+                  style={{ flex: '0 0 auto' }}
                 >
                   <CreatorCard
                     creator={creator}
