@@ -4,7 +4,7 @@ import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
 import useEmblaCarousel from 'embla-carousel-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Users, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Creator {
@@ -86,17 +86,40 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
   return (
     <div className="w-full space-y-2 sm:space-y-6">
-      {/* Sort menu div - completely removed for now */}
-      {false && (
-        <div className={cn(
-          "w-full",
-          isMobile ? "flex justify-start pl-4" : "flex justify-end"
-        )}>
-          <SortMenu 
-            options={sortOptions}
-            onSort={onSort}
-            defaultValue={sortBy}
-          />
+      {/* Desktop Social Proof Stats - Only visible on desktop */}
+      {!isMobile && (
+        <div className="hidden sm:flex justify-between items-center mb-4">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center">
+              <div className="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                <Users className="w-3.5 h-3.5 text-indigo-600" />
+              </div>
+              <div>
+                <span className="text-sm font-semibold text-gray-900">85+ Verified Creators</span>
+                <div className="text-xs text-gray-500">in your area</div>
+              </div>
+            </div>
+            
+            <div className="flex items-center">
+              <div className="w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center mr-2">
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+              </div>
+              <div>
+                <span className="text-sm font-semibold text-gray-900">100% Satisfaction</span>
+                <div className="text-xs text-gray-500">guaranteed</div>
+              </div>
+            </div>
+          </div>
+          
+          <div className={cn(
+            "flex justify-end"
+          )}>
+            <SortMenu 
+              options={sortOptions}
+              onSort={onSort}
+              defaultValue={sortBy}
+            />
+          </div>
         </div>
       )}
 

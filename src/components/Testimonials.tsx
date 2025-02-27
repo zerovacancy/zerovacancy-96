@@ -1,120 +1,138 @@
 
 import React from 'react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
-const Testimonials = () => {
-  const testimonials = [
-    {
-      name: "Michael Thompson",
-      role: "Property Manager",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
-      review: "The quality of content from Luxe Content Connect has completely transformed our marketing approach. Their team consistently delivers stunning visuals that capture the essence of our properties.",
-      rating: 5,
-      highlight: "transformed our marketing approach"
-    },
-    {
-      name: "Sarah Martinez",
-      role: "Real Estate Agent",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
-      review: "Working with this platform has been a game-changer for my listings. The professional photos and virtual tours help my properties stand out in a competitive market.",
-      rating: 5,
-      highlight: "game-changer for my listings"
-    },
-    {
-      name: "David Chen",
-      role: "Content Creator",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-      review: "As a photographer, this platform has connected me with amazing clients. The streamlined booking process and clear communication make everything effortless.",
-      rating: 5,
-      highlight: "streamlined booking process"
-    },
-    {
-      name: "Emily Wright",
-      role: "Marketing Director",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-      review: "The consistency and quality of content we receive is outstanding. Our properties receive more engagement and inquiries thanks to the professional presentation.",
-      rating: 5,
-      highlight: "more engagement and inquiries"
-    }
-  ];
+interface Testimonial {
+  text: string;
+  name: string;
+  title: string;
+  rating: number;
+  image?: string;
+}
 
+const testimonials: Testimonial[] = [
+  {
+    text: "This platform made finding the right photographer for our property listings incredibly easy. We've seen a 30% increase in engagement since upgrading our visuals.",
+    name: "Sarah Johnson",
+    title: "Real Estate Agent, Century 21",
+    rating: 5
+  },
+  {
+    text: "The quality of content creators is exceptional. Our properties now stand out with professional photography that truly showcases their best features.",
+    name: "Michael Chen",
+    title: "Property Manager, Urban Living",
+    rating: 5
+  },
+  {
+    text: "Streamlined our entire content creation process and saved us countless hours. The results speak for themselves - highly recommended!",
+    name: "Jennifer Williams",
+    title: "Marketing Director, Premier Properties",
+    rating: 4
+  }
+];
+
+export const Testimonials: React.FC = () => {
   return (
-    <section className="section-padding bg-background">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="section-title text-3xl sm:text-4xl lg:text-5xl mb-4 font-bold">
-          What Our Community Says
-        </h2>
-        <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto text-lg">
-          Join thousands of satisfied professionals who trust our platform
-        </p>
+    <section className="hidden sm:block relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-12 lg:py-16 border-t border-gray-100">
+      <div className="absolute inset-0 bg-[radial-gradient(#f1f1f1_1px,transparent_1px)] [background-size:20px_20px] opacity-50"></div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3">
+            Trusted by Property Professionals
+          </h2>
+          <p className="max-w-2xl mx-auto text-lg text-gray-600">
+            See what our customers have to say about their experience
+          </p>
+        </div>
 
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-4">
-            {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <Card className="bg-secondary/50 border-0 h-full transition-all duration-300 hover:bg-secondary">
-                  <CardContent className="p-6 sm:p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="relative">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/10"
-                        />
-                        <div className="absolute -bottom-1 -right-1 bg-primary rounded-full p-0.5">
-                          <Star className="w-4 h-4 fill-white text-white" />
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-lg text-foreground">{testimonial.name}</h3>
-                        <p className="text-muted-foreground text-base">{testimonial.role}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex mb-4">
-                      {Array.from({ length: testimonial.rating }).map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                      ))}
-                    </div>
-
-                    <p className="text-muted-foreground text-base leading-relaxed">
-                      {testimonial.review.split(testimonial.highlight).map((part, i, arr) => (
-                        <React.Fragment key={i}>
-                          {part}
-                          {i < arr.length - 1 && (
-                            <span className="font-medium text-foreground">
-                              {testimonial.highlight}
-                            </span>
-                          )}
-                        </React.Fragment>
-                      ))}
-                    </p>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <CarouselPrevious className="relative static translate-y-0 h-9 w-9" />
-            <CarouselNext className="relative static translate-y-0 h-9 w-9" />
+        <div className="flex flex-col lg:flex-row gap-6 justify-center">
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCard key={index} testimonial={testimonial} index={index} />
+          ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <div className="inline-flex items-center gap-2 py-2 px-4 bg-indigo-50 rounded-full">
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star 
+                  key={star} 
+                  className="w-4 h-4 text-amber-400 fill-amber-400"
+                />
+              ))}
+            </div>
+            <span className="text-sm font-medium text-gray-800">
+              4.9 out of 5 based on 200+ reviews
+            </span>
           </div>
-        </Carousel>
+        </div>
       </div>
     </section>
+  );
+};
+
+interface TestimonialCardProps {
+  testimonial: Testimonial;
+  index: number;
+}
+
+const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial, index }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ 
+        opacity: 1, 
+        y: 0,
+        transition: { 
+          duration: 0.5,
+          delay: index * 0.2
+        }
+      }}
+      viewport={{ once: true, margin: "-50px" }}
+      className={cn(
+        "bg-white rounded-xl shadow-sm",
+        "border border-gray-100",
+        "p-6",
+        "flex flex-col",
+        "relative",
+        "max-w-md",
+        "hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+      )}
+    >
+      <div className="absolute top-6 right-6 text-indigo-400 opacity-20">
+        <Quote size={48} />
+      </div>
+      
+      <div className="flex mb-4">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star 
+            key={i} 
+            className={cn(
+              "w-5 h-5",
+              i < testimonial.rating ? "text-amber-400 fill-amber-400" : "text-gray-300"
+            )}
+          />
+        ))}
+      </div>
+      
+      <p className="text-gray-700 italic mb-6 relative z-10">
+        "{testimonial.text}"
+      </p>
+      
+      <div className="mt-auto flex items-center">
+        <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3 flex-shrink-0">
+          <span className="font-semibold text-indigo-600">
+            {testimonial.name.split(' ').map(n => n[0]).join('')}
+          </span>
+        </div>
+        <div>
+          <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+          <p className="text-sm text-gray-500">{testimonial.title}</p>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
