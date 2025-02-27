@@ -1,17 +1,30 @@
-
 import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 // Define colorful backgrounds for each step
-const stepColors = [
-  { iconBg: "bg-violet-100", iconText: "text-violet-600", numBg: "bg-violet-600", numText: "text-white" },
-  { iconBg: "bg-blue-100", iconText: "text-blue-500", numBg: "bg-blue-500", numText: "text-white" },
-  { iconBg: "bg-amber-100", iconText: "text-amber-600", numBg: "bg-amber-600", numText: "text-white" },
-  { iconBg: "bg-emerald-100", iconText: "text-emerald-600", numBg: "bg-emerald-600", numText: "text-white" }
-];
-
+const stepColors = [{
+  iconBg: "bg-violet-100",
+  iconText: "text-violet-600",
+  numBg: "bg-violet-600",
+  numText: "text-white"
+}, {
+  iconBg: "bg-blue-100",
+  iconText: "text-blue-500",
+  numBg: "bg-blue-500",
+  numText: "text-white"
+}, {
+  iconBg: "bg-amber-100",
+  iconText: "text-amber-600",
+  numBg: "bg-amber-600",
+  numText: "text-white"
+}, {
+  iconBg: "bg-emerald-100",
+  iconText: "text-emerald-600",
+  numBg: "bg-emerald-600",
+  numText: "text-white"
+}];
 const HowItWorksSection = () => {
   const steps = [{
     icon: <Search className="w-6 h-6 sm:w-8 sm:h-8" />,
@@ -34,7 +47,7 @@ const HowItWorksSection = () => {
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
   }];
-  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white lg:py-0 my-[8px]">
+  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white lg:py-0 my-[10px]">
       <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-b from-white/95 via-white/90 to-white/95 backdrop-blur-sm" aria-hidden="true" />
       
       <div className="max-w-7xl mx-auto">
@@ -67,20 +80,12 @@ const HowItWorksSection = () => {
           }} className={cn("relative flex-shrink-0 bg-white", "w-[180px] min-h-[120px]", "p-3", "rounded-lg", "shadow-[0_2px_8px_rgba(0,0,0,0.06)]", "border border-gray-100", "touch-manipulation")}>
                 <div className="flex flex-col items-center justify-start h-full relative">
                   {/* Circle with number - colorful variant */}
-                  <div className={cn(
-                    "absolute -left-1 -top-3", 
-                    stepColors[index].numBg, stepColors[index].numText, 
-                    "w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium",
-                    "ring-2 ring-white"
-                  )}>
+                  <div className={cn("absolute -left-1 -top-3", stepColors[index].numBg, stepColors[index].numText, "w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium", "ring-2 ring-white")}>
                     {step.number}
                   </div>
                   
                   {/* Icon - colorful background */}
-                  <div className={cn(
-                    "mt-4 mb-2 rounded-lg p-2",
-                    stepColors[index].iconBg, stepColors[index].iconText
-                  )}>
+                  <div className={cn("mt-4 mb-2 rounded-lg p-2", stepColors[index].iconBg, stepColors[index].iconText)}>
                     {step.icon}
                   </div>
                   
@@ -125,16 +130,7 @@ const HowItWorksSection = () => {
               <div className="flex flex-col items-center justify-start h-full relative">
                 {/* Step Number with connecting line */}
                 <div className="absolute -left-[3.25rem] top-0 h-full" aria-hidden="true">
-                  <motion.span className={cn(
-                    "absolute -top-2 left-0", 
-                    "w-8 h-8", 
-                    stepColors[index].numBg, stepColors[index].numText,
-                    "rounded-full", 
-                    "flex items-center justify-center", 
-                    "text-sm font-medium", 
-                    "ring-4 ring-white", 
-                    "z-10"
-                  )} initial={{
+                  <motion.span className={cn("absolute -top-2 left-0", "w-8 h-8", stepColors[index].numBg, stepColors[index].numText, "rounded-full", "flex items-center justify-center", "text-sm font-medium", "ring-4 ring-white", "z-10")} initial={{
                 scale: 0.8,
                 opacity: 0
               }} whileInView={{
@@ -152,10 +148,7 @@ const HowItWorksSection = () => {
                   </motion.span>
                   
                   {/* Enhanced vertical connecting line with gradient matching the number colors */}
-                  {index < steps.length - 1 && <motion.div className={cn(
-                    "absolute top-7 left-[0.875rem] w-[2px] h-[calc(100%+2rem)]",
-                    `bg-gradient-to-b from-${stepColors[index].numBg.split('-')[1]}-500/70 to-${stepColors[index+1].numBg.split('-')[1]}-500/30`
-                  )} initial={{
+                  {index < steps.length - 1 && <motion.div className={cn("absolute top-7 left-[0.875rem] w-[2px] h-[calc(100%+2rem)]", `bg-gradient-to-b from-${stepColors[index].numBg.split('-')[1]}-500/70 to-${stepColors[index + 1].numBg.split('-')[1]}-500/30`)} initial={{
                 scaleY: 0
               }} whileInView={{
                 scaleY: 1,
@@ -169,13 +162,7 @@ const HowItWorksSection = () => {
                 </div>
                 
                 {/* Icon with enhanced colorful background */}
-                <motion.div className={cn(
-                  "mb-4", 
-                  stepColors[index].iconBg, stepColors[index].iconText,
-                  "transition-all duration-300", 
-                  "rounded-xl p-3", 
-                  "group-hover:saturate-150"
-                )} whileHover={{
+                <motion.div className={cn("mb-4", stepColors[index].iconBg, stepColors[index].iconText, "transition-all duration-300", "rounded-xl p-3", "group-hover:saturate-150")} whileHover={{
               scale: 1.1
             }} whileTap={{
               scale: 0.95
