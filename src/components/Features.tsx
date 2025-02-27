@@ -1,19 +1,19 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Camera, Plane, Video, Instagram, UserCheck, Clock, CreditCard, Award } from "lucide-react";
+import { Camera, Image, Video, Instagram, UserCheck, Clock, CreditCard, Award } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// Define colorful backgrounds for each icon
+// Define a more consistent color palette for icons
 const iconColors = {
-  Camera: { bg: "bg-violet-100", text: "text-violet-600" },
-  Plane: { bg: "bg-blue-100", text: "text-blue-500" },
+  Camera: { bg: "bg-indigo-100", text: "text-indigo-600" },
+  Image: { bg: "bg-indigo-100", text: "text-indigo-600" },
   Video: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  Instagram: { bg: "bg-pink-100", text: "text-pink-600" },
-  UserCheck: { bg: "bg-teal-100", text: "text-teal-600" },
-  Clock: { bg: "bg-amber-100", text: "text-amber-600" },
-  CreditCard: { bg: "bg-emerald-100", text: "text-emerald-600" },
-  Award: { bg: "bg-rose-100", text: "text-rose-600" },
+  Instagram: { bg: "bg-indigo-100", text: "text-indigo-600" },
+  UserCheck: { bg: "bg-indigo-100", text: "text-indigo-600" },
+  Clock: { bg: "bg-indigo-100", text: "text-indigo-600" },
+  CreditCard: { bg: "bg-indigo-100", text: "text-indigo-600" },
+  Award: { bg: "bg-indigo-100", text: "text-indigo-600" },
 };
 
 const features = [{
@@ -23,7 +23,7 @@ const features = [{
 }, {
   title: "Drone Aerial Coverage",
   description: "FAA-certified drone operators capturing stunning aerial views and property surroundings.",
-  icon: Plane
+  icon: Image
 }, {
   title: "Video Production",
   description: "Cinematic property tours and promotional videos that tell your property's unique story.",
@@ -96,7 +96,7 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
   
   // Get the color scheme for this icon
   const iconName = Icon.name || Icon.displayName || "";
-  const colorScheme = iconColors[iconName as keyof typeof iconColors] || { bg: "bg-primary/5", text: "text-primary" };
+  const colorScheme = iconColors[iconName as keyof typeof iconColors] || { bg: "bg-indigo-100", text: "text-indigo-600" };
   
   return (
     <button
@@ -113,24 +113,29 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
       aria-expanded={isMobile ? isExpanded : undefined}
     >
       <div className="flex flex-col items-start gap-3">
+        {/* Standardized icon container with consistent sizing and styling */}
         <div className={cn(
-          "w-10 h-10 rounded-lg",
           "flex items-center justify-center",
-          colorScheme.bg, colorScheme.text,
-          "group-hover:saturate-150",
-          "transition-all duration-200"
+          "w-12 h-12", // Increased size for better visibility on desktop
+          "rounded-xl", // More pronounced rounded corners
+          "transition-all duration-200",
+          colorScheme.bg,
+          "group-hover:shadow-sm",
+          "border border-indigo-200/30" // Subtle border for more dimension
         )}>
           <Icon className={cn(
-            "w-5 h-5",
-            "transition-transform duration-200",
+            "w-6 h-6", // Consistent icon size
+            colorScheme.text,
+            "transition-all duration-200",
+            "group-hover:scale-110",
             isMobile && isExpanded && "transform rotate-90"
-          )} />
+          )} strokeWidth={1.75} /> {/* Slightly thinner stroke for refined appearance */}
         </div>
         
         <div className="text-left w-full">
           <h3 className={cn(
             "text-base font-semibold leading-6 font-space mb-1.5",
-            "text-gray-900 group-hover:text-primary",
+            "text-gray-900 group-hover:text-indigo-600", // Matching hover color to icon theme
             "transition-colors duration-200"
           )}>
             {title}
