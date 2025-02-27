@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Search, Users, FileCheck, Calendar, ChevronDown, Check } from 'lucide-react';
+import { Search, Users, FileCheck, Calendar, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -13,7 +13,8 @@ const stepColors = [{
   numText: "text-white",
   lineColor: "from-violet-600/70 to-blue-500/50",
   borderColor: "border-violet-600",
-  glowColor: "shadow-violet-500/20"
+  glowColor: "shadow-violet-500/20",
+  tintBg: "bg-violet-50/10"
 }, {
   iconBg: "bg-blue-100",
   iconText: "text-blue-500",
@@ -21,15 +22,17 @@ const stepColors = [{
   numText: "text-white",
   lineColor: "from-blue-500/70 to-amber-600/50",
   borderColor: "border-blue-500",
-  glowColor: "shadow-blue-500/20"
+  glowColor: "shadow-blue-500/20",
+  tintBg: "bg-blue-50/10"
 }, {
-  iconBg: "bg-amber-100",
+  iconBg: "bg-amber-100", 
   iconText: "text-amber-600",
   numBg: "bg-amber-600",
   numText: "text-white",
   lineColor: "from-amber-600/70 to-emerald-600/50",
   borderColor: "border-amber-600",
-  glowColor: "shadow-amber-500/20"
+  glowColor: "shadow-amber-500/20",
+  tintBg: "bg-amber-50/10"
 }, {
   iconBg: "bg-emerald-100",
   iconText: "text-emerald-600",
@@ -37,7 +40,8 @@ const stepColors = [{
   numText: "text-white",
   lineColor: "from-emerald-600/50 to-emerald-600/10",
   borderColor: "border-emerald-600",
-  glowColor: "shadow-emerald-500/20"
+  glowColor: "shadow-emerald-500/20",
+  tintBg: "bg-emerald-50/10"
 }];
 
 const HowItWorksSection = () => {
@@ -74,7 +78,7 @@ const HowItWorksSection = () => {
     number: "04"
   }];
   
-  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white/80">
+  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50/5">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 sm:mb-14">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
@@ -86,115 +90,97 @@ const HowItWorksSection = () => {
         </div>
         
         {/* Mobile vertical layout */}
-        <div className="md:hidden space-y-6 relative">
-          {/* Enhanced gradient vertical line connecting all steps */}
-          <div className="absolute left-[42px] top-[60px] bottom-12 w-[2px] bg-gradient-to-b from-violet-500 via-blue-500 via-amber-500 to-emerald-500 opacity-70"></div>
+        <div className="md:hidden space-y-[14px] relative">
+          {/* Enhanced continuous gradient vertical line connecting all steps */}
+          <div className="absolute left-[36px] top-[52px] bottom-12 w-[2px] bg-gradient-to-b from-violet-500 via-blue-500 via-amber-500 to-emerald-500"></div>
           
           {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    type: "spring",
-                    duration: 0.6,
-                    delay: index * 0.15
-                  }
-                }}
-                whileTap={{
-                  scale: 1.02,
-                  transition: { duration: 0.2 }
-                }}
-                viewport={{ once: true, margin: "-30px" }}
-                className={cn(
-                  "relative bg-white",
-                  "w-full max-w-[327px] min-h-[120px]",
-                  "p-[18px]",
-                  "rounded-lg",
-                  "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]",
-                  "border border-gray-100",
-                  stepColors[index].borderColor,
-                  "border-l-[3px]",
-                  "touch-manipulation",
-                  "mx-auto",
-                  "transition-transform duration-200"
-                )}
-              >
-                <div className="flex h-full">
-                  {/* Left column: Number and Icon */}
-                  <div className="flex flex-col items-center mr-4 relative z-10">
-                    {/* Enhanced number circle with glow */}
-                    <div className={cn(
-                      "w-7 h-7", // Increased to 28px
-                      stepColors[index].numBg,
-                      stepColors[index].numText,
-                      "rounded-full",
-                      "flex items-center justify-center",
-                      "text-sm font-medium",
-                      "ring-2 ring-white",
-                      "mb-2",
-                      stepColors[index].glowColor,
-                      "shadow-[0_0_8px_2px_rgba(0,0,0,0.1)]",
-                      "relative"
-                    )}>
-                      <span className="flex items-center justify-center w-full h-full p-1">
-                        {index + 1}
-                      </span>
-                      {/* Completed checkmark */}
-                      {completedSteps.includes(index) && (
-                        <div className="absolute -right-2 -top-1 bg-white rounded-full p-0.5 shadow-sm">
-                          <Check className="w-3 h-3 text-green-500" />
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Icon with colorful background */}
-                    <div className={cn(
-                      "rounded-lg p-2",
-                      stepColors[index].iconBg,
-                      stepColors[index].iconText,
-                      "ml-4" // 16px from left border
-                    )}>
-                      {step.icon}
-                    </div>
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  type: "spring",
+                  duration: 0.6,
+                  delay: index * 0.15
+                }
+              }}
+              whileTap={{
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
+              viewport={{ once: true, margin: "-30px" }}
+              className={cn(
+                "relative bg-white",
+                "w-full max-w-[327px] min-h-[120px]",
+                "p-5", // Consistent 20px padding
+                "rounded-lg", // 8px corners
+                "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]",
+                "border border-gray-100",
+                stepColors[index].borderColor,
+                "border-l-[1.5px]", // Reduced from 3px to 1.5px
+                "touch-manipulation",
+                "mx-auto",
+                "transition-transform duration-200",
+                "cursor-pointer"
+              )}
+            >
+              <div className="flex h-full">
+                {/* Left column: Number and Icon */}
+                <div className="flex flex-col items-center mr-4 relative z-10">
+                  {/* Enhanced number circle with inset shadow - standardized positioning */}
+                  <div className={cn(
+                    "w-7 h-7",
+                    stepColors[index].numBg,
+                    stepColors[index].numText,
+                    "rounded-full",
+                    "flex items-center justify-center",
+                    "text-sm font-medium",
+                    "ring-2 ring-white",
+                    "mb-2",
+                    "shadow-inner shadow-black/10", // Inset shadow
+                    "relative",
+                    "ml-[6px]" // Helps position at 16px from left edge
+                  )}>
+                    <span className="flex items-center justify-center w-full h-full p-1">
+                      {index + 1}
+                    </span>
+                    {/* Completed checkmark */}
+                    {completedSteps.includes(index) && (
+                      <div className="absolute -right-2 -top-1 bg-white rounded-full p-0.5 shadow-sm">
+                        <Check className="w-3 h-3 text-green-500" />
+                      </div>
+                    )}
                   </div>
                   
-                  {/* Right column: Content */}
-                  <div className="flex-1 max-w-[240px]">
-                    {/* Title */}
-                    <h4 className="text-base font-semibold text-gray-900 mb-1.5 text-[16px]">
-                      {step.title}
-                    </h4>
-                    
-                    {/* Description */}
-                    <p className="text-[14px] text-gray-600 leading-[1.5]">
-                      {step.description}
-                    </p>
-
-                    {/* Learn More link */}
-                    <div className="flex justify-end mt-2">
-                      <button className="text-[12px] text-gray-400 hover:text-gray-600 transition-colors">
-                        Learn more
-                      </button>
-                    </div>
+                  {/* Icon with colorful background tint */}
+                  <div className={cn(
+                    "rounded-lg p-2",
+                    stepColors[index].iconBg,
+                    stepColors[index].tintBg, // Added 10% color tint
+                    stepColors[index].iconText,
+                    "ml-4" // 16px from left border
+                  )}>
+                    {step.icon}
                   </div>
                 </div>
-              </motion.div>
-
-              {/* Chevron indicator between steps */}
-              {index < steps.length - 1 && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="absolute -bottom-4 left-[38px] z-10"
-                >
-                  <ChevronDown className="w-4 h-4 text-gray-400" />
-                </motion.div>
-              )}
-            </div>
+                
+                {/* Right column: Content */}
+                <div className="flex-1 max-w-[240px]">
+                  {/* Title with increased font weight */}
+                  <h4 className="text-[16px] font-semibold text-gray-900 mb-3"> {/* 12px spacing */}
+                    {step.title}
+                  </h4>
+                  
+                  {/* Description */}
+                  <p className="text-[14px] text-gray-600 leading-[1.5]">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
         
