@@ -37,14 +37,12 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
-  // Configure carousel with mobile-specific options
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
     loop: false,
-    dragFree: true,
-    skipSnaps: false,
-    inViewThreshold: 0.7,
+    dragFree: false,
+    skipSnaps: true,
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = React.useState(false);
@@ -67,7 +65,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
     
-    // Force a reInit after a short delay to ensure proper sizing
+    // Force a reInit after mount
     const timer = setTimeout(() => {
       emblaApi.reInit();
     }, 100);
@@ -104,17 +102,12 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
       {isMobile ? (
         <div className="w-full relative">
-          {/* Carousel Container - Fix width and overflow */}
-          <div 
-            className="w-full overflow-hidden" 
-            ref={emblaRef}
-          >
+          <div className="w-full overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {creators.map((creator, index) => (
                 <div 
                   key={creator.name} 
-                  className="w-[85%] shrink-0 pl-2 pr-2"
-                  style={{ flex: '0 0 auto' }}
+                  className="min-w-[90%] w-[90%] pl-2 pr-2"
                 >
                   <CreatorCard
                     creator={creator}
