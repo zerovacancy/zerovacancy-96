@@ -57,22 +57,22 @@ const HowItWorksSection = () => {
   }, []);
   
   const steps = [{
-    icon: <Search className="w-6 h-6" />,
+    icon: <Search className="w-7 h-7" />,
     title: "Search & Filter",
     description: "Find your perfect creator match based on your specific needs and requirements",
     number: "01"
   }, {
-    icon: <Users className="w-6 h-6" />,
+    icon: <Users className="w-7 h-7" />,
     title: "Review & Compare",
     description: "Browse portfolios and reviews to find the perfect match for your project",
     number: "02"
   }, {
-    icon: <Calendar className="w-6 h-6" />,
+    icon: <Calendar className="w-7 h-7" />,
     title: "Book & Pay",
     description: "Schedule securely through our platform with protected payments",
     number: "03"
   }, {
-    icon: <FileCheck className="w-6 h-6" />,
+    icon: <FileCheck className="w-7 h-7" />,
     title: "Get Content",
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
@@ -91,8 +91,11 @@ const HowItWorksSection = () => {
         
         {/* Mobile vertical layout */}
         <div className="md:hidden space-y-[14px] relative">
-          {/* Enhanced continuous gradient vertical line connecting all steps */}
-          <div className="absolute left-[36px] top-[52px] bottom-12 w-[2px] bg-gradient-to-b from-violet-500 via-blue-500 via-amber-500 to-emerald-500"></div>
+          {/* Replace thin line with gradient background strip */}
+          <div className="absolute left-[24px] top-0 bottom-0 w-[40px] bg-gradient-to-b from-violet-500/10 via-blue-500/10 via-amber-500/10 to-emerald-500/10"></div>
+          
+          {/* Dotted connecting line */}
+          <div className="absolute left-[44px] top-[60px] bottom-[60px] w-0 border-l-[3px] border-dotted border-gray-300/20"></div>
           
           {steps.map((step, index) => (
             <motion.div 
@@ -115,62 +118,47 @@ const HowItWorksSection = () => {
               className={cn(
                 "relative bg-white",
                 "w-full max-w-[327px] min-h-[120px]",
-                "p-5", // Consistent 20px padding
-                "rounded-lg", // 8px corners
+                "p-5", // 20px padding
+                "rounded-lg",
                 "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]",
                 "border border-gray-100",
-                stepColors[index].borderColor,
-                "border-l-[1.5px]", // Reduced from 3px to 1.5px
                 "touch-manipulation",
                 "mx-auto",
                 "transition-transform duration-200",
                 "cursor-pointer"
               )}
             >
-              <div className="flex h-full">
-                {/* Left column: Number and Icon */}
-                <div className="flex flex-col items-center mr-4 relative z-10">
-                  {/* Enhanced number circle with inset shadow - standardized positioning */}
+              <div className="flex items-center h-full">
+                {/* Left side: Number circle repositioned */}
+                <div className="relative">
+                  {/* Enhanced number circle with larger size and shadow */}
                   <div className={cn(
-                    "w-7 h-7",
+                    "w-9 h-9", // Increased to 36px
                     stepColors[index].numBg,
                     stepColors[index].numText,
                     "rounded-full",
                     "flex items-center justify-center",
                     "text-sm font-medium",
-                    "ring-2 ring-white",
-                    "mb-2",
-                    "shadow-inner shadow-black/10", // Inset shadow
+                    "shadow-[0_2px_4px_rgba(0,0,0,0.1)]", // Subtle shadow
                     "relative",
-                    "ml-[6px]" // Helps position at 16px from left edge
+                    "ml-0" // Aligns with left edge of content (24px from card edge due to parent padding)
                   )}>
                     <span className="flex items-center justify-center w-full h-full p-1">
                       {index + 1}
                     </span>
                     {/* Completed checkmark */}
                     {completedSteps.includes(index) && (
-                      <div className="absolute -right-2 -top-1 bg-white rounded-full p-0.5 shadow-sm">
-                        <Check className="w-3 h-3 text-green-500" />
+                      <div className="absolute -right-1.5 -top-1.5 bg-white rounded-full p-0.5 shadow-sm">
+                        <Check className="w-3.5 h-3.5 text-green-500" />
                       </div>
                     )}
                   </div>
-                  
-                  {/* Icon with colorful background tint */}
-                  <div className={cn(
-                    "rounded-lg p-2",
-                    stepColors[index].iconBg,
-                    stepColors[index].tintBg, // Added 10% color tint
-                    stepColors[index].iconText,
-                    "ml-4" // 16px from left border
-                  )}>
-                    {step.icon}
-                  </div>
                 </div>
                 
-                {/* Right column: Content */}
-                <div className="flex-1 max-w-[240px]">
-                  {/* Title with increased font weight */}
-                  <h4 className="text-[16px] font-semibold text-gray-900 mb-3"> {/* 12px spacing */}
+                {/* Middle: Content */}
+                <div className="flex-1 ml-4 max-w-[200px]">
+                  {/* Title with consistent vertical alignment with number */}
+                  <h4 className="text-[16px] font-semibold text-gray-900 mb-3">
                     {step.title}
                   </h4>
                   
@@ -178,6 +166,17 @@ const HowItWorksSection = () => {
                   <p className="text-[14px] text-gray-600 leading-[1.5]">
                     {step.description}
                   </p>
+                </div>
+                
+                {/* Right side: Icon moved to right */}
+                <div className={cn(
+                  "rounded-lg p-2",
+                  stepColors[index].iconBg,
+                  stepColors[index].tintBg,
+                  stepColors[index].iconText,
+                  "ml-auto" // Pushes to the right edge
+                )}>
+                  {step.icon}
                 </div>
               </div>
             </motion.div>
