@@ -54,8 +54,8 @@ export function FeaturesSectionWithHoverEffects() {
   return (
     <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-6 sm:mb-8">
-          <h2 className="section-title mb-2 sm:mb-3 font-space tracking-tight">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="section-title mb-3 sm:mb-4 font-space tracking-tight">
             Professional Content Creation Services
           </h2>
           <p className="section-subtitle max-w-2xl mx-auto">
@@ -63,7 +63,7 @@ export function FeaturesSectionWithHoverEffects() {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
           {features.map((feature, index) => (
             <Feature
               key={index}
@@ -103,8 +103,8 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
       className={cn(
         "relative w-full text-left group",
         "rounded-xl transition-all duration-200",
-        "bg-white/50 hover:bg-white",
-        "border border-gray-200/50 hover:border-gray-300",
+        "bg-white/90 hover:bg-white",
+        "border border-gray-200/80 hover:border-gray-300",
         "p-4 sm:p-5",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
         !isMobile && "hover:shadow-md hover:-translate-y-0.5"

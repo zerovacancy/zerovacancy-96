@@ -63,41 +63,55 @@ const Index = () => {
         </div>}
 
       <main className="flex-1 pb-16 sm:pb-0">
+        {/* Hero Section */}
         <div className="relative overflow-hidden">
           <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
 
-        <div className="space-y-3 sm:space-y-6 lg:space-y-8">
-          {/* How It Works Section - Moved up to be right after Hero */}
-          <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-4 sm:py-8 overflow-hidden lg:py-0">
+        <div className="space-y-0">
+          {/* How It Works Section */}
+          <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-6 sm:py-12 lg:py-16 overflow-hidden border-t border-b border-gray-100">
+            <div className="absolute inset-0 bg-[radial-gradient(#f1f1f1_1px,transparent_1px)] [background-size:20px_20px] opacity-50"></div>
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
-            <HowItWorksSection />
+            <div className="relative z-10">
+              <HowItWorksSection />
+            </div>
           </div>
           
-          {/* Featured Creators Section */}
-          <div className="bg-white py-4 sm:py-8 lg:py-10">
-            <div id="search" className="relative overflow-hidden w-full">
-              <PreviewSearch />
+          {/* Featured Creators Section - with subtle light background */}
+          <div className="bg-white py-8 sm:py-12 lg:py-16 border-b border-gray-100">
+            <div className="max-w-7xl mx-auto">
+              <div id="search" className="relative overflow-hidden w-full">
+                <PreviewSearch />
+              </div>
             </div>
           </div>
 
-          {/* Professional Content Creation Services */}
-          <div className="relative py-4 sm:py-8 overflow-hidden lg:py-0">
+          {/* Professional Content Creation Services - with different background */}
+          <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100">
+            <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
-            <FeaturesSectionWithHoverEffects />
+            <div className="relative z-10 max-w-7xl mx-auto">
+              <FeaturesSectionWithHoverEffects />
+            </div>
           </div>
 
-          {/* Pricing Section */}
-          <div id="pricing" className="relative py-4 sm:py-8 overflow-hidden lg:py-0">
+          {/* Pricing Section - with subtle grid background */}
+          <div id="pricing" className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-white border-b border-gray-100">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#f3f3f3_1px,transparent_1px),linear-gradient(to_bottom,#f3f3f3_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
             <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
-            <Pricing />
+            <div className="relative z-10 max-w-7xl mx-auto">
+              <Pricing />
+            </div>
           </div>
 
-          {/* Final CTA Section */}
-          <div className="relative py-4 sm:py-8 lg:py-10 overflow-hidden">
+          {/* Final CTA Section - with gradient background */}
+          <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7]">
             <Spotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
-            <CallToActionSection />
+            <div className="relative z-10 max-w-7xl mx-auto">
+              <CallToActionSection />
+            </div>
           </div>
         </div>
 

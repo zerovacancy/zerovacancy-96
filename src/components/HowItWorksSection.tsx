@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -47,12 +48,10 @@ const HowItWorksSection = () => {
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
   }];
-  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white lg:py-0 my-[10px]">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-b from-white/95 via-white/90 to-white/95 backdrop-blur-sm" aria-hidden="true" />
-      
+  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white/80">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-6 sm:mb-16">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-2 sm:mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
             How It Works
           </h3>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">

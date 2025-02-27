@@ -6,9 +6,9 @@ import { AuroraBackground } from './ui/aurora-background';
 
 const PreviewSearch = () => {
   return (
-    <div className="w-full">
-      <div className="container mx-auto px-2 sm:px-4">
-        <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto">
+        <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 bg-white">
           <AuroraBackground className="min-h-0 w-full" showRadialGradient={false}>
             {/* Title and subtitle */}
             <div className="text-center pt-6 pb-2 w-full">
