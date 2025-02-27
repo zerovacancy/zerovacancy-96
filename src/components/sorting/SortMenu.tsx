@@ -39,19 +39,17 @@ export const SortMenu: React.FC<SortMenuProps> = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button 
-          variant="outline" 
+          variant="ghost" 
           size={isMobile ? "sm" : "default"}
           className={cn(
             "inline-flex items-center justify-center",
-            "border border-gray-200/70",
-            "bg-white/80 hover:bg-gray-50/90",
+            "border-0",
+            "bg-transparent hover:bg-gray-50/30",
             "text-gray-700",
             "rounded-lg",
             "transition-all duration-200",
-            "hover:border-gray-300",
             "focus:outline-none focus:ring-2 focus:ring-primary/10",
-            "shadow-sm",
-            isMobile ? "h-8 px-2.5 text-xs" : "h-9 px-3.5 text-sm"
+            isMobile ? "h-7 px-2 text-xs" : "h-9 px-3.5 text-sm"
           )}
         >
           <div className="flex items-center gap-1.5">
