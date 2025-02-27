@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -7,12 +6,10 @@ import AuroraBackground from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "./ui/waitlist-cta";
-
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const isMobile = useIsMobile();
   const titles = useMemo(() => ["Converts", "Engages", "Drives Leads"], []);
-
   useEffect(() => {
     const timeout = isMobile ? 2500 : 2000;
     const timeoutId = setTimeout(() => {
@@ -24,7 +21,6 @@ export function Hero() {
     }, timeout);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles.length, isMobile]);
-
   return <div className="w-full relative">
       <motion.div className="absolute inset-0 bg-gradient-to-br from-purple-50/90 via-white to-blue-50/90" animate={{
       backgroundPosition: ["0% 0%", "100% 100%"]
@@ -47,19 +43,6 @@ export function Hero() {
       }} transition={{
         duration: 0.3
       }}>
-          <motion.div className={cn("w-full", "mb-8 sm:mb-10", "px-4 sm:px-6")} initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.3,
-          delay: 0.3
-        }}>
-            <WaitlistCTA className="mt-10" />
-          </motion.div>
-
           <motion.div initial={{
           opacity: 0,
           y: 20
@@ -107,13 +90,26 @@ export function Hero() {
           }} transition={{
             duration: 0.3,
             delay: 0.2
-          }} className={cn("text-sm sm:text-lg lg:text-xl", "leading-[1.6]", "tracking-wide", "text-gray-700", "text-center", "max-w-[650px]", "mx-auto", "px-4 sm:px-6", "[word-spacing:0.12em] sm:[word-spacing:0.16em]", "relative z-10", "mt-2 mb-2")}>
+          }} className={cn("text-sm sm:text-lg lg:text-xl", "leading-[1.6]", "tracking-wide", "text-gray-700", "text-center", "max-w-[650px]", "mx-auto", "px-4 sm:px-6", "[word-spacing:0.12em] sm:[word-spacing:0.16em]", "relative z-10", "mt-2 mb-2" // Adjusted to match the spacing from h1
+          )}>
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </motion.p>
+          </motion.div>
+          
+          <motion.div className={cn("w-full", "mt-8 sm:mt-10", "px-4 sm:px-6")} initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.3,
+          delay: 0.3
+        }}>
+            <WaitlistCTA className="mb-10" />
           </motion.div>
         </motion.section>
       </AuroraBackground>
     </div>;
 }
-
 export default Hero;
