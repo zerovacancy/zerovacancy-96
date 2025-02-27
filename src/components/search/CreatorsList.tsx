@@ -71,17 +71,19 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
   return (
     <div className="space-y-2 sm:space-y-6">
-      {/* Sort menu div - hidden for now */}
-      <div className={cn(
-        "w-full hidden", // Added 'hidden' class to hide this element
-        isMobile ? "flex justify-start pl-4" : "flex justify-end"
-      )}>
-        <SortMenu 
-          options={sortOptions}
-          onSort={onSort}
-          defaultValue={sortBy}
-        />
-      </div>
+      {/* Sort menu div - completely removed for now */}
+      {false && (
+        <div className={cn(
+          "w-full",
+          isMobile ? "flex justify-start pl-4" : "flex justify-end"
+        )}>
+          <SortMenu 
+            options={sortOptions}
+            onSort={onSort}
+            defaultValue={sortBy}
+          />
+        </div>
+      )}
 
       {isMobile ? (
         <div className="relative">
