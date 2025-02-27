@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { SearchBar } from './search/SearchBar';
-import { SearchFilters } from './search/SearchFilters';
 import { CreatorsList } from './search/CreatorsList';
 import { AuroraBackground } from './ui/aurora-background';
 
@@ -19,7 +18,6 @@ const PreviewSearch = () => {
         <AuroraBackground className="min-h-0" showRadialGradient={false}>
           <div className="px-4 py-5 sm:px-6 border-b">
             <SearchBar onLocationSelect={() => {}} />
-            <SearchFilters showMoreFilters={false} onToggleFilters={() => {}} />
           </div>
         
           <div className="px-2 sm:px-6 lg:px-8 py-3 sm:py-5 space-y-4">
