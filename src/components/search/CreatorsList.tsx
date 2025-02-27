@@ -71,7 +71,10 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <div className="flex justify-end w-full">
+      <div className={cn(
+        "w-full",
+        isMobile ? "flex justify-start pl-4" : "flex justify-end"
+      )}>
         <SortMenu 
           options={sortOptions}
           onSort={onSort}
