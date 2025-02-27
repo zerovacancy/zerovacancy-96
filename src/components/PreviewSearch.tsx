@@ -21,7 +21,7 @@ const PreviewSearch = () => {
             <SearchBar onLocationSelect={() => {}} />
           </div>
         
-          <div className="px-2 sm:px-6 lg:px-8 py-3 sm:py-5 space-y-4">
+          <div className="px-2 py-3 sm:px-6 lg:px-8 sm:py-5 space-y-4">
             <CreatorsList 
               creators={[
                 {
