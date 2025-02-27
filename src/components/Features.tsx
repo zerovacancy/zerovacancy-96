@@ -4,6 +4,18 @@ import { cn } from "@/lib/utils";
 import { Camera, Plane, Video, Instagram, UserCheck, Clock, CreditCard, Award } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+// Define colorful backgrounds for each icon
+const iconColors = {
+  Camera: { bg: "bg-violet-100", text: "text-violet-600" },
+  Plane: { bg: "bg-blue-100", text: "text-blue-500" },
+  Video: { bg: "bg-indigo-100", text: "text-indigo-600" },
+  Instagram: { bg: "bg-pink-100", text: "text-pink-600" },
+  UserCheck: { bg: "bg-teal-100", text: "text-teal-600" },
+  Clock: { bg: "bg-amber-100", text: "text-amber-600" },
+  CreditCard: { bg: "bg-emerald-100", text: "text-emerald-600" },
+  Award: { bg: "bg-rose-100", text: "text-rose-600" },
+};
+
 const features = [{
   title: "Professional Photography",
   description: "High-quality, professionally edited real estate photography that showcases properties at their best.",
@@ -82,6 +94,10 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
     }
   };
   
+  // Get the color scheme for this icon
+  const iconName = Icon.name || Icon.displayName || "";
+  const colorScheme = iconColors[iconName as keyof typeof iconColors] || { bg: "bg-primary/5", text: "text-primary" };
+  
   return (
     <button
       className={cn(
@@ -100,8 +116,8 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
         <div className={cn(
           "w-10 h-10 rounded-lg",
           "flex items-center justify-center",
-          "bg-primary/5 text-primary",
-          "group-hover:bg-primary/10",
+          colorScheme.bg, colorScheme.text,
+          "group-hover:saturate-150",
           "transition-all duration-200"
         )}>
           <Icon className={cn(
