@@ -55,7 +55,7 @@ export function Hero() {
           duration: 0.3,
           delay: 0.1
         }}>
-            <h1 className="tracking-tight leading-[1.1] text-center font-bold">
+            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-center leading-[1.1] mb-6">
               <span className={cn("text-primary whitespace-normal sm:whitespace-nowrap font-light",
             // Allow wrap on mobile
             "text-3xl sm:text-5xl lg:text-6xl",
@@ -98,7 +98,7 @@ export function Hero() {
           }} transition={{
             duration: 0.3,
             delay: 0.2
-          }} className="text-center text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto py-1 text-gray-700 mb-0 mt-0">
+          }} className="text-center text-base leading-relaxed max-w-2xl mx-auto py-1 text-gray-700 mb-0 mt-0 font-medium sm:text-base">
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </motion.p>
           </motion.div>
