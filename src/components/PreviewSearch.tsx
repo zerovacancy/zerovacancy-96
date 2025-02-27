@@ -1,8 +1,8 @@
 
 import React from 'react';
-import SearchBar from './search/SearchBar';
-import SearchFilters from './search/SearchFilters';
-import CreatorsList from './search/CreatorsList';
+import { SearchBar } from './search/SearchBar';
+import { SearchFilters } from './search/SearchFilters';
+import { CreatorsList } from './search/CreatorsList';
 import { AuroraBackground } from './ui/aurora-background';
 
 const PreviewSearch = () => {
@@ -17,13 +17,51 @@ const PreviewSearch = () => {
       
       <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100">
         <div className="bg-white px-4 py-5 sm:px-6 border-b">
-          <SearchBar />
-          <SearchFilters />
+          <SearchBar onLocationSelect={() => {}} />
+          <SearchFilters showMoreFilters={false} onToggleFilters={() => {}} />
         </div>
         
         <AuroraBackground className="min-h-0" showRadialGradient={false}>
           <div className="px-2 sm:px-6 lg:px-8 py-3 sm:py-5 space-y-4">
-            <CreatorsList />
+            <CreatorsList 
+              creators={[
+                {
+                  name: "Emily Johnson",
+                  services: ["Photography", "Virtual Staging"],
+                  price: 150,
+                  rating: 4.9,
+                  reviews: 127,
+                  location: "New York, NY",
+                  image: "/newemilyprofile.jpg",
+                  workExamples: ["/1-d2e3f802.jpg"]
+                },
+                {
+                  name: "Jane Smith",
+                  services: ["Video Tours", "Drone Footage"],
+                  price: 200,
+                  rating: 4.8,
+                  reviews: 98,
+                  location: "Los Angeles, CA",
+                  image: "/janeprofile.png",
+                  workExamples: ["/janesub.jpg", "/janesub2.png", "/janesub3.webp"]
+                },
+                {
+                  name: "Michael Brown",
+                  services: ["3D Tours", "Floor Plans"],
+                  price: 175,
+                  rating: 4.7,
+                  reviews: 82,
+                  location: "Chicago, IL",
+                  image: "/emily profile.jpeg",
+                  workExamples: ["/1-d2e3f802.jpg"]
+                }
+              ]}
+              sortBy="rating"
+              onSort={() => {}}
+              onImageLoad={() => {}}
+              loadedImages={new Set()}
+              imageRef={() => {}}
+            />
           </div>
         </AuroraBackground>
       </div>
