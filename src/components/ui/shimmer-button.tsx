@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -42,12 +43,12 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
   "relative group/btn overflow-hidden", "h-11 sm:h-12", "px-6 sm:px-8", "inline-flex min-w-[160px] max-w-[240px]", "items-center justify-center gap-1.5", "rounded-xl", "font-medium text-sm sm:text-base", "transition-all duration-200",
   // Variant styles
   variant === 'primary' && [
-  // Primary button styles with new blue gradient
-  "bg-gradient-to-r from-[#3182CE] to-[#2C5282]", "text-white", "shadow-[0_2px_8px_rgba(49,130,206,0.25)]", "hover:shadow-[0_4px_12px_rgba(49,130,206,0.35)]", "hover:from-[#2B6CB0] hover:to-[#2C5282]"], variant === 'ghost' && [
+  // Primary button styles with purple-blue gradient to match animated text
+  "bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700", "text-white", "shadow-[0_2px_8px_rgba(109,40,217,0.25)]", "hover:shadow-[0_4px_12px_rgba(109,40,217,0.35)]"], variant === 'ghost' && [
   // Ghost button styles
   "bg-transparent", "text-[#3182CE]", "border-2 border-[#3182CE]", "hover:bg-[#3182CE]/5"],
   // Interactive States
-  "hover:scale-[1.02] active:scale-[0.98]", "disabled:opacity-50 disabled:pointer-events-none", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3182CE]",
+  "hover:scale-[1.02] active:scale-[0.98]", "disabled:opacity-50 disabled:pointer-events-none", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-purple-700",
   // Spacing utilities
   "my-1.5 sm:my-2", className)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} disabled={disabled} {...props}>
         <span className={cn("relative z-10 flex items-center gap-1.5", variant === 'primary' ? "text-white" : "text-[#3182CE]")}>
@@ -68,7 +69,7 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
       }} />}
         </AnimatePresence>
         
-        {/* Hover glow effect - adjusted for new blue colors */}
+        {/* Hover glow effect - adjusted for purple-blue colors */}
         <div className="" />
       </button>;
 });
