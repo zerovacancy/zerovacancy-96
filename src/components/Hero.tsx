@@ -90,7 +90,7 @@ export function Hero() {
           }} transition={{
             duration: 0.3,
             delay: 0.2
-          }} className="py-2 mt-6 mb--9 text-center mx-auto max-w-2xl text-lg font-normal leading-relaxed">
+          }} className="py-2 mt-6 text-center mx-auto max-w-2xl text-lg font-normal leading-relaxed relative -bottom-5 px-[9px]">
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </motion.p>
           </motion.div>
