@@ -34,7 +34,7 @@ export function Hero() {
       <div className="absolute bottom-20 left-10 w-32 sm:w-48 h-32 sm:h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl" aria-hidden="true" />
 
       <AuroraBackground className="w-full py-0">
-        <motion.section className={cn("flex items-center justify-center flex-col", "px-4 sm:px-6", "py-[40px] sm:py-[64px]", "my-[32px] sm:my-[48px]", "min-h-fit sm:min-h-[70vh]", "relative z-10", "gap-4 sm:gap-8")} initial={{
+        <motion.section className={cn("flex items-center justify-center flex-col", "px-4 sm:px-6", "py-[40px] sm:py-[64px]", "my-[32px] sm:my-[48px]", "min-h-fit sm:min-h-[70vh]", "relative z-10", "gap-4 sm:gap-6")} initial={{
         opacity: 0,
         y: 20
       }} animate={{
@@ -95,7 +95,7 @@ export function Hero() {
             </motion.p>
           </motion.div>
           
-          <motion.div className={cn("w-full", "mt-4 sm:mt-10", "px-4 sm:px-6")} initial={{
+          <motion.div className={cn("w-full", "mt-4 sm:mt-6", "px-4 sm:px-6")} initial={{
           opacity: 0,
           y: 20
         }} animate={{
