@@ -30,18 +30,18 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
 
   if (isMobile) {
     return (
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between w-full">
         <div className="flex flex-col items-start gap-0.5">
-          <div className="flex items-center gap-2">
-            <Star className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
-            <span className="text-base font-semibold">{rating}</span>
+          <div className="flex items-center gap-1.5">
+            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+            <span className="text-sm font-semibold">{rating}</span>
           </div>
-          <span className="text-sm text-muted-foreground">({reviews} reviews)</span>
+          <span className="text-xs text-muted-foreground">({reviews} reviews)</span>
         </div>
         {hourlyRate && (
           <div className="flex flex-col items-end gap-0.5">
-            <span className="text-sm text-muted-foreground">Starting at</span>
-            <span className="text-sm font-medium">${hourlyRate}/hr</span>
+            <span className="text-xs text-muted-foreground">Starting at</span>
+            <span className="text-xs font-medium">${hourlyRate}/hr</span>
           </div>
         )}
       </div>
@@ -49,14 +49,14 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
   }
 
   return (
-    <div className="flex items-center justify-between gap-8">
+    <div className="flex items-center justify-between w-full">
       <div className="flex items-center gap-2">
-        <Star className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
-        <span className="text-base font-semibold">{rating}</span>
-        <span className="text-sm text-muted-foreground">({reviews} reviews)</span>
+        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+        <span className="text-sm font-semibold">{rating}</span>
+        <span className="text-xs text-muted-foreground">({reviews} reviews)</span>
       </div>
       {hourlyRate && (
-        <div className="text-sm text-muted-foreground">
+        <div className="text-xs text-muted-foreground">
           Starting at <span className="font-medium text-gray-900">${hourlyRate}/hr</span>
         </div>
       )}

@@ -167,38 +167,43 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             </div>
           </div>
           
-          <div className="p-3 sm:p-4">
-            <div className="space-y-2 sm:space-y-3">
-              <div 
-                className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
-                role="list"
-                aria-label="Creator specialties"
-              >
-                <div className="flex flex-nowrap gap-1.5 sm:gap-2">
-                  {tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className={cn(
-                        "text-[10px] sm:text-xs px-2 py-1 rounded-full transition-colors duration-200 whitespace-nowrap",
-                        getTagStyle(tag)
-                      )}
-                      role="listitem"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+          <div className="p-3 sm:p-4 flex flex-col h-[180px]">
+            <div className="flex flex-col h-full">
+              {/* Tags section - fixed height */}
+              <div className="mb-3">
+                <div 
+                  className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+                  role="list"
+                  aria-label="Creator specialties"
+                >
+                  <div className="flex flex-nowrap gap-1.5 sm:gap-2">
+                    {tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className={cn(
+                          "text-[10px] sm:text-xs px-2 py-1 rounded-full transition-colors duration-200 whitespace-nowrap",
+                          getTagStyle(tag)
+                        )}
+                        role="listitem"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
               
-              <div className="pt-1" />
-              <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
+              {/* Rating section - consistent height */}
+              <div className="mb-auto">
+                <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
+              </div>
               
-              <div className="pt-1" />
-              <div className="flex justify-center px-1 sm:px-2">
+              {/* Button section - fixed at bottom with consistent height */}
+              <div className="flex justify-center mt-3">
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
                   aria-label={`Join waitlist to work with ${creator.name}`}
-                  className="w-[60%] h-9 sm:h-10 text-xs sm:text-sm px-3 sm:px-4"
+                  className="w-[70%] h-9 sm:h-10 text-xs sm:text-sm px-3 sm:px-4"
                 >
                   <span>Join Waitlist</span>
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1" aria-hidden="true" />
