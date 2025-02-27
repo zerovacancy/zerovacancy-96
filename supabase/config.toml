@@ -104,3 +104,9 @@ verify_jwt = true
 
 [functions.stripe-webhook]
 verify_jwt = false  # Webhook doesn't need JWT verification
+
+[functions.cancel-subscription]
+verify_jwt = true
+
+[functions.create-payment-update-session]
+verify_jwt = true

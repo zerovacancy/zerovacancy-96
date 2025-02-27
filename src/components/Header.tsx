@@ -1,232 +1,252 @@
 
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from './ui/button';
-import { Menu, ChevronDown } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from "framer-motion";
-import { Magnetic } from './ui/magnetic';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { 
+  Menu, 
+  X, 
+  ChevronDown, 
+  LogIn,
+  UserCircle
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { GlowDialog } from '@/components/ui/glow-dialog';
+import { supabase } from '@/integrations/supabase/client';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuTrigger,
   DropdownMenuItem,
-} from "./ui/dropdown-menu";
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useToast } from '@/hooks/use-toast';
+
+type MenuItem = {
+  label: string;
+  href: string;
+  isExternal?: boolean;
+  children?: MenuItem[];
+};
+
+const menuItems: MenuItem[] = [
+  {
+    label: 'Home',
+    href: '/',
+  },
+  {
+    label: 'Features',
+    href: '/#features',
+  },
+  {
+    label: 'How It Works',
+    href: '/#how-it-works',
+  },
+  {
+    label: 'Pricing',
+    href: '/#pricing',
+  },
+];
 
 const Header = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
-  const ResourcesDropdown = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="group">
-        <span className={cn(
-          "text-[15px] font-medium transition-colors relative py-1.5 inline-flex items-center gap-1.5",
-          "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
-          "before:transition-transform before:duration-300 group-hover:before:scale-x-100 before:origin-left",
-          "before:bg-[#9b87f5]",
-          location.pathname.startsWith('/resources')
-            ? "text-[#9b87f5] before:scale-x-100"
-            : "text-black hover:text-[#9b87f5]"
-        )}>
-          Resources
-          <ChevronDown className="h-4 w-4" />
-        </span>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-[180px] bg-white border border-border/40 shadow-lg">
-        <DropdownMenuItem asChild onClick={onClick} className="hover:bg-accent focus:bg-accent">
-          <Link to="/resources/blog" className="w-full cursor-pointer">Blog</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild onClick={onClick} className="hover:bg-accent focus:bg-accent">
-          <Link to="/resources/learn" className="w-full cursor-pointer">Learn</Link>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    
+    checkUser();
+    
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
-  const MobileResourcesLinks = ({ onClick }: { onClick?: () => void }) => (
-    <div className="pl-4 flex flex-col gap-4">
-      <Link 
-        to="/resources/blog" 
-        className="text-[15px] text-black hover:text-[#9b87f5] transition-colors"
-        onClick={onClick}
-      >
-        Blog
-      </Link>
-      <Link 
-        to="/resources/learn" 
-        className="text-[15px] text-black hover:text-[#9b87f5] transition-colors"
-        onClick={onClick}
-      >
-        Learn
-      </Link>
-    </div>
-  );
-
-  const NavLinks = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
-    <nav className={cn("flex items-center gap-8", className)}>
-      {[
-        { to: "/search", label: "Properties" },
-        { to: "/how-it-works", label: "Platform" },
-        { to: "/pricing", label: "Pricing" },
-      ].map((link) => (
-        <Magnetic key={link.to} intensity={0.5}>
-          <Link 
-            to={link.to} 
-            className={cn(
-              "text-[15px] font-medium transition-colors relative py-1.5",
-              "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:scale-x-0 before:origin-right",
-              "before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left",
-              "before:bg-[#9b87f5]",
-              location.pathname === link.to 
-                ? "text-[#9b87f5] before:scale-x-100" 
-                : "text-black hover:text-[#9b87f5]"
-            )}
-            onClick={onClick}
-          >
-            {link.label}
-          </Link>
-        </Magnetic>
-      ))}
-      <Magnetic intensity={0.5}>
-        <ResourcesDropdown onClick={onClick} />
-      </Magnetic>
-    </nav>
-  );
+  const handleSignOut = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Signed out",
+        description: "You have been successfully signed out."
+      });
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+      toast({
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+        variant: "destructive"
+      });
+    }
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 shadow-sm backdrop-blur-sm supports-[backdrop-filter]:bg-white/90">
-      <div className="container flex h-[70px] items-center justify-between lg:px-10 md:px-8 px-4">
-        <Magnetic intensity={0.3}>
-          <Link 
-            to="/" 
-            className="flex items-center transition-opacity active:opacity-80 ml-0 md:ml-0"
-          >
-            <motion.img 
-              src="/logo.png"
-              alt="Zero Vacancy"
-              initial={false}
-              animate={{ scale: isOpen ? 0.95 : 1 }}
-              className="h-[36px] w-auto my-auto"
-            />
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur-sm">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center">
+          <Link to="/" className="flex items-center">
+            <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
+            <span className="ml-2 text-xl font-semibold">PropertyCam</span>
           </Link>
-        </Magnetic>
+        </div>
 
-        <NavLinks className="hidden md:flex" />
+        {/* Desktop navigation */}
+        <nav className="hidden md:flex items-center space-x-1">
+          {menuItems.map((item) => {
+            if (item.children) {
+              return (
+                <DropdownMenu key={item.label}>
+                  <DropdownMenuTrigger asChild>
+                    <button className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900">
+                      {item.label}
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    {item.children.map((child) => (
+                      <DropdownMenuItem key={child.label}>
+                        <Link
+                          to={child.href}
+                          target={child.isExternal ? '_blank' : undefined}
+                          rel={child.isExternal ? 'noopener noreferrer' : undefined}
+                          className="w-full"
+                        >
+                          {child.label}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              );
+            }
 
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="h-10 w-10 rounded-full hover:bg-accent active:scale-95 transition-all duration-200"
+            return (
+              <Link
+                key={item.label}
+                to={item.href}
+                className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="flex items-center space-x-3">
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="rounded-full">
+                  <UserCircle className="h-5 w-5 mr-1" />
+                  <span className="hidden sm:inline-block">Account</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => navigate('/account')}>
+                  My Account
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut}>
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowSignInModal(true)}
+              className="hidden sm:flex"
             >
-              <Menu 
-                className="h-5 w-5 transition-all duration-300" 
-                style={{ 
-                  transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                  opacity: isOpen ? 0.5 : 1
-                }}
-              />
-              <span className="sr-only">Toggle menu</span>
+              <LogIn className="h-4 w-4 mr-2" />
+              Sign In
             </Button>
-          </SheetTrigger>
-          <SheetContent 
-            side="right" 
-            className="w-full sm:w-[380px] pr-0 border-l border-border/40"
+          )}
+          
+          <Button
+            size="sm"
+            className="hidden sm:flex"
+            onClick={() => user ? navigate('/account') : setShowSignInModal(true)}
           >
-            <div className="flex flex-col gap-8 mt-8">
-              <div className="flex flex-col gap-8">
-                {[
-                  { to: "/search", label: "Find Creators" },
-                  { to: "/how-it-works", label: "How It Works" },
-                  { to: "/pricing", label: "Pricing" },
-                ].map((link) => (
-                  <Link 
-                    key={link.to}
-                    to={link.to} 
-                    className={cn(
-                      "text-[15px] font-medium transition-colors",
-                      location.pathname === link.to 
-                        ? "text-foreground" 
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className="flex flex-col gap-2">
-                  <Link 
-                    to="/resources"
-                    className={cn(
-                      "text-[15px] font-medium transition-colors",
-                      location.pathname.startsWith('/resources')
-                        ? "text-foreground" 
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
-                  >
-                    Resources
-                  </Link>
-                  <MobileResourcesLinks onClick={() => setIsOpen(false)} />
-                </div>
-              </div>
-              <div className="flex flex-col gap-3 mt-4">
-                <AnimatePresence>
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="space-y-3"
-                  >
-                    <Magnetic intensity={0.4}>
-                      <Button 
-                        variant="ghost" 
-                        asChild 
-                        onClick={() => setIsOpen(false)}
-                        className="w-full justify-start text-[15px] font-medium h-11"
-                      >
-                        <Link to="/login">Log In</Link>
-                      </Button>
-                    </Magnetic>
-                    <Magnetic intensity={0.4}>
-                      <Button 
-                        asChild 
-                        onClick={() => setIsOpen(false)}
-                        className="w-full justify-start text-[15px] font-medium h-11 bg-primary hover:bg-primary/90"
-                      >
-                        <Link to="/signup">Sign Up</Link>
-                      </Button>
-                    </Magnetic>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+            {user ? 'My Dashboard' : 'Get Started'}
+          </Button>
 
-        <div className="hidden md:flex items-center gap-4">
-          <Magnetic intensity={0.4}>
-            <Button 
-              variant="ghost" 
-              asChild 
-              className="h-11 px-6 text-[15px] font-medium hover:bg-accent/50"
-            >
-              <Link to="/login">Log In</Link>
-            </Button>
-          </Magnetic>
-          <Magnetic intensity={0.4}>
-            <Button 
-              asChild 
-              className="h-11 px-6 text-[15px] font-medium bg-primary hover:bg-primary/90 hover:shadow-lg transition-all duration-200"
-            >
-              <Link to="/signup">Sign Up</Link>
-            </Button>
-          </Magnetic>
+          {/* Mobile menu button */}
+          <button
+            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <span className="sr-only">Open main menu</span>
+            {isMenuOpen ? (
+              <X className="block h-6 w-6" aria-hidden="true" />
+            ) : (
+              <Menu className="block h-6 w-6" aria-hidden="true" />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden">
+          <div className="pt-2 pb-4 space-y-1 sm:px-3">
+            {menuItems.map((item) => (
+              <Link
+                key={item.label}
+                to={item.href}
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            
+            {!user ? (
+              <Button 
+                variant="ghost" 
+                className="w-full justify-start"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  setShowSignInModal(true);
+                }}
+              >
+                <LogIn className="h-4 w-4 mr-2" />
+                Sign In
+              </Button>
+            ) : (
+              <>
+                <Link
+                  to="/account"
+                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  My Account
+                </Link>
+                <button
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  onClick={() => {
+                    handleSignOut();
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Sign Out
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+      
+      {/* Sign In Dialog */}
+      <GlowDialog open={showSignInModal} onOpenChange={setShowSignInModal} />
     </header>
   );
 };
