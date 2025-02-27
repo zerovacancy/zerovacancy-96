@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Search, Users, FileCheck, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -25,7 +24,7 @@ const HowItWorksSection = () => {
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
   }];
-  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white lg:py-0 my-0">
+  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white lg:py-0 my-[8px]">
       <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-b from-white/95 via-white/90 to-white/95 backdrop-blur-sm" aria-hidden="true" />
       
       <div className="max-w-7xl mx-auto">
@@ -41,26 +40,21 @@ const HowItWorksSection = () => {
         {/* Mobile horizontal scrollable container */}
         <div className="overflow-x-auto pb-4 -mx-4 px-4 md:hidden">
           <div className="flex gap-3 w-max min-w-full">
-            {steps.map((step, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  transition: { type: "spring", duration: 0.6, delay: index * 0.1 }
-                }}
-                viewport={{ once: true, margin: "-30px" }}
-                className={cn(
-                  "relative flex-shrink-0 bg-white",
-                  "w-[180px] min-h-[120px]",
-                  "p-3",
-                  "rounded-lg",
-                  "shadow-[0_2px_8px_rgba(0,0,0,0.06)]",
-                  "border border-gray-100",
-                  "touch-manipulation"
-                )}
-              >
+            {steps.map((step, index) => <motion.div key={index} initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: {
+              type: "spring",
+              duration: 0.6,
+              delay: index * 0.1
+            }
+          }} viewport={{
+            once: true,
+            margin: "-30px"
+          }} className={cn("relative flex-shrink-0 bg-white", "w-[180px] min-h-[120px]", "p-3", "rounded-lg", "shadow-[0_2px_8px_rgba(0,0,0,0.06)]", "border border-gray-100", "touch-manipulation")}>
                 <div className="flex flex-col items-center justify-start h-full relative">
                   {/* Circle with number */}
                   <div className="absolute -left-1 -top-3 bg-primary text-white w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium">
@@ -82,8 +76,7 @@ const HowItWorksSection = () => {
                     {step.description}
                   </p>
                 </div>
-              </motion.div>
-            ))}
+              </motion.div>)}
           </div>
         </div>
         
