@@ -17,12 +17,17 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
     switch (name) {
       case 'John Smith':
         return 85;
+      case 'Jane Smith':
+        return 80;
       case 'Jane Cooper':
         return 75;
       case 'Emily Johnson':
         return 45;
+      case 'Michael Brown':
+        return 60;
       default:
-        return null;
+        // Provide a fallback rate for any other creators
+        return 50;
     }
   };
 
