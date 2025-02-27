@@ -121,6 +121,9 @@ export function Hero() {
             </h1>
 
             <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
               className={cn(
                 "text-sm sm:text-lg lg:text-xl",
                 "leading-[1.6]",
@@ -131,11 +134,9 @@ export function Hero() {
                 "mx-auto",
                 "px-4 sm:px-6",
                 "[word-spacing:0.12em] sm:[word-spacing:0.16em]",
-                "relative z-10"
+                "relative z-10",
+                "mt-2 mb-2" // Adjusted to match the spacing from h1
               )}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
             >
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </motion.p>
