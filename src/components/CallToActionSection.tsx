@@ -4,7 +4,7 @@
 import React from 'react';
 import { ShimmerButton } from './ui/shimmer-button';
 import { AuroraBackground } from './ui/aurora-background';
-import { ArrowRight } from 'lucide-react'; // Changed from Sparkle to ArrowRight
+import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const CallToActionSection = () => {
@@ -17,10 +17,13 @@ const CallToActionSection = () => {
         <p className="text-slate-700 dark:text-slate-300 max-w-2xl mx-auto mb-6 sm:mb-8 text-sm sm:text-base lg:text-lg">
           Join thousands of property managers and content creators who trust Luxe Content Connect for their marketing needs
         </p>
-        <div className="flex justify-center">
-          <ShimmerButton>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+          <ShimmerButton variant="primary" className="w-full sm:w-auto min-w-[180px]">
             <span>Join Waitlist</span>
             <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+          </ShimmerButton>
+          <ShimmerButton variant="tertiary" className="w-full sm:w-auto min-w-[160px]">
+            <span>Learn More</span>
           </ShimmerButton>
         </div>
       </div>
