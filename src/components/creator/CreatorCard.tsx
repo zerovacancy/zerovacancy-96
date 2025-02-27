@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
@@ -186,10 +187,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
                   aria-label={`Join waitlist to work with ${creator.name}`}
-                  className="w-full h-10 sm:h-11 text-sm sm:text-base"
+                  className="w-[80%] h-9 sm:h-10 text-xs sm:text-sm px-3 sm:px-4"
                 >
                   <span>Join Waitlist</span>
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/90" aria-hidden="true" />
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1" aria-hidden="true" />
                 </ShimmerButton>
               </div>
             </div>
