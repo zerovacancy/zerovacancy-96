@@ -39,6 +39,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
+    loop: false,
+    dragFree: false,
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = React.useState(false);
@@ -70,7 +72,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   ];
 
   return (
-    <div className="space-y-2 sm:space-y-6">
+    <div className="space-y-2 sm:space-y-6 w-full">
       {/* Sort menu div - completely removed for now */}
       {false && (
         <div className={cn(
@@ -86,12 +88,15 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
       )}
 
       {isMobile ? (
-        <div className="relative">
+        <div className="relative w-full">
           {/* Carousel Container */}
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex touch-pan-y">
+          <div className="overflow-hidden w-full" ref={emblaRef}>
+            <div className="flex w-full">
               {creators.map((creator, index) => (
-                <div key={creator.name} className="flex-[0_0_85%] min-w-0 pl-4 first:pl-0">
+                <div 
+                  key={creator.name} 
+                  className="min-w-0 flex-[0_0_90%] mx-1 first:ml-2 last:mr-2"
+                >
                   <CreatorCard
                     creator={creator}
                     onImageLoad={onImageLoad}
