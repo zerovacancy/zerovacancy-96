@@ -51,3 +51,9 @@ verify_jwt = true
 
 [functions.create-payment-update-session]
 verify_jwt = true
+
+[functions.create-connect-account]
+verify_jwt = true
+
+[functions.create-connect-payment]
+verify_jwt = true
