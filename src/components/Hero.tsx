@@ -98,7 +98,7 @@ export function Hero() {
           }} transition={{
             duration: 0.3,
             delay: 0.2
-          }} className="text-center text-base leading-relaxed max-w-2xl mx-auto py-1 text-gray-700 mb-0 mt-0 font-medium sm:text-base">
+          }} className="text-center text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto py-2 my-4 text-gray-700">
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </motion.p>
           </motion.div>
