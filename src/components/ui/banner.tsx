@@ -64,12 +64,16 @@ export function Banner({
       )} 
       {...props}
     >
+      {/* Enhanced pattern overlay for visual interest */}
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[length:20px_20px] z-0"></div>
+      
       <div className="
-        flex items-center justify-center gap-2 sm:gap-3 flex-1
+        flex items-center justify-center gap-4 sm:gap-6 flex-1
         flex-nowrap
         px-2 sm:px-4
+        relative z-10
       ">
-        <div className="flex items-center gap-2 justify-center text-center text-sm">
+        <div className="flex items-center gap-3 justify-center text-center">
           {children}
         </div>
 
@@ -81,7 +85,7 @@ export function Banner({
 
         {action && (
           <div className="flex-shrink-0">
-            <div className="scale-90 sm:scale-100">
+            <div className="scale-95 sm:scale-100 transform hover:scale-105 transition-all duration-300">
               {action}
             </div>
           </div>
