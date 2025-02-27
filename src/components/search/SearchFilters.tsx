@@ -14,7 +14,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
 }) => {
   return (
     <>
-      <div className="hidden sm:flex items-center justify-between px-0.5">
+      <div className="flex items-center justify-between px-0.5">
         <button
           onClick={onToggleFilters}
           className="
