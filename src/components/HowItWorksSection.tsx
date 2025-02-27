@@ -225,14 +225,12 @@ const HowItWorksSection = () => {
                     {step.number}
                   </motion.span>
                   
-                  {/* Vertical connecting line for all steps, including the last one */}
+                  {/* Vertical connecting line for all steps with shorter length */}
                   <motion.div 
                     className={cn(
-                      "absolute top-7 left-[0.875rem] w-[2px]", 
-                      index < steps.length - 1 
-                        ? `h-[calc(100%+2rem)] ${stepColors[index].lineColor} bg-gradient-to-b` 
-                        : `h-[calc(50%)] ${stepColors[index].lineColor} bg-gradient-to-b opacity-70`
-                    )} 
+                      "absolute top-7 left-[0.875rem] w-[2px]",
+                      `h-[calc(50%)] ${stepColors[index].lineColor} bg-gradient-to-b opacity-70`
+                    )}
                     initial={{
                       scaleY: 0
                     }} 
