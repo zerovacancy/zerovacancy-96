@@ -4,6 +4,7 @@ import { MapPin, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { LocationSuggestions } from './LocationSuggestions';
 import { filterLocations } from '@/utils/locationData';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LocationInputProps {
   value: string;
@@ -18,6 +19,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({ value, onLocationS
   const [isLoading, setIsLoading] = useState(false);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const searchDebounceRef = useRef<NodeJS.Timeout>();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setInputValue(value);
@@ -108,7 +110,11 @@ export const LocationInput: React.FC<LocationInputProps> = ({ value, onLocationS
 
   return (
     <div className="w-full sm:w-[40%] relative group">
-      <MapPin className="w-4 h-4 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2" />
+      <MapPin className={cn(
+        "w-4 h-4 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2",
+        "transition-all duration-200",
+        "group-hover:text-indigo-500"
+      )} />
       <input
         type="text"
         placeholder="Enter city or zip code"
@@ -116,12 +122,13 @@ export const LocationInput: React.FC<LocationInputProps> = ({ value, onLocationS
         onChange={handleLocationChange}
         onKeyDown={handleKeyDown}
         className={cn(
-          "w-full h-11 pl-9 sm:pl-11 pr-8 sm:pr-10",
+          "w-full h-11 sm:h-12 pl-9 sm:pl-11 pr-8 sm:pr-10",
           "bg-white text-sm text-gray-700",
           "transition-colors duration-200",
-          "focus:outline-none focus:ring-2 focus:ring-primary/10 group-hover:bg-gray-50",
+          "focus:outline-none focus:ring-2 focus:ring-indigo-500/30 group-hover:bg-gray-50/80",
           "border-0",
-          "placeholder:text-gray-400"
+          "placeholder:text-gray-400",
+          "font-medium"
         )}
         aria-label="Location search"
         aria-expanded={showSuggestions}
@@ -132,7 +139,11 @@ export const LocationInput: React.FC<LocationInputProps> = ({ value, onLocationS
       {inputValue && (
         <button
           onClick={clearLocation}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          className={cn(
+            "absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600",
+            "transition-all duration-200",
+            "rounded-full p-1 hover:bg-gray-100"
+          )}
           aria-label="Clear location"
         >
           <X className="w-4 h-4" />

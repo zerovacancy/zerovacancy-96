@@ -129,7 +129,7 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
             "transition-all duration-200",
             "group-hover:scale-110",
             isMobile && isExpanded && "transform rotate-90"
-          )} strokeWidth={1.75} /> {/* Slightly thinner stroke for refined appearance */}
+          )} />
         </div>
         
         <div className="text-left w-full">

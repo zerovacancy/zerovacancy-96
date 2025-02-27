@@ -7,6 +7,7 @@ import { ContentTypeSelect } from './ContentTypeSelect';
 import { LocationInput } from './LocationInput';
 import { SearchButton } from './SearchButton';
 import { SearchFilters } from './SearchFilters';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SearchBarProps {
   value?: string;
@@ -15,11 +16,19 @@ interface SearchBarProps {
 
 export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSelect }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <div className="w-full space-y-3">
       <div className="flex flex-col gap-3">
-        <div className="relative flex flex-col sm:flex-row w-full rounded-lg overflow-hidden shadow-sm border border-gray-300 bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+        <div className={cn(
+          "relative flex flex-col sm:flex-row w-full rounded-lg sm:rounded-xl overflow-hidden",
+          "sm:shadow-[0_3px_16px_rgba(0,0,0,0.08)]",
+          "border border-gray-300 sm:border-gray-200",
+          "bg-white divide-y sm:divide-y-0 sm:divide-x divide-gray-200",
+          "transition-all duration-300",
+          "hover:shadow-[0_5px_20px_rgba(0,0,0,0.1)]"
+        )}>
           <ContentTypeSelect />
           <LocationInput value={value} onLocationSelect={onLocationSelect} />
           <SearchButton />
