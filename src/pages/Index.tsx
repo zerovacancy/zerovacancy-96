@@ -74,11 +74,9 @@ const Index = () => {
           
           {/* Featured Creators Section */}
           <div className="bg-white py-4 sm:py-8 lg:py-10">
-            <AuroraBackground className="min-h-0 py-8 rounded-xl" showRadialGradient={false}>
-              <div id="search" className="relative overflow-hidden w-full">
-                <PreviewSearch />
-              </div>
-            </AuroraBackground>
+            <div id="search" className="relative overflow-hidden w-full">
+              <PreviewSearch />
+            </div>
           </div>
 
           {/* Professional Content Creation Services */}
