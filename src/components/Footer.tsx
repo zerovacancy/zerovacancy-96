@@ -9,8 +9,8 @@ const Footer = () => {
 
   return (
     <footer className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border/40">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
           {/* Column 1: Company Info */}
           <div className="space-y-3">
             <h3 className="text-lg font-semibold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
@@ -24,7 +24,7 @@ const Footer = () => {
           {/* Column 2: Discover */}
           <div>
             <h4 className="font-medium mb-3 text-foreground">Discover</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               <li>
                 <Link to="/search" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
                   Find Creators
@@ -41,7 +41,7 @@ const Footer = () => {
           {/* Column 3: Creators */}
           <div>
             <h4 className="font-medium mb-3 text-foreground">Creators</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               <li>
                 <Link to="/join-as-creator" className="text-muted-foreground hover:text-foreground text-sm transition-colors">
                   Join as Creator
@@ -58,7 +58,7 @@ const Footer = () => {
           {/* Column 4: Support */}
           <div>
             <h4 className="font-medium mb-3 text-foreground">Support</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               <li>
                 <a 
                   href="mailto:help@zerovacancy.ai" 
@@ -75,7 +75,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom row with copyright and legal links */}
-        <div className="pt-8 mt-8 border-t border-border/40">
+        <div className="pt-10 mt-10 border-t border-border/40">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-muted-foreground text-sm">
               © {currentYear} ZeroVacancy. All rights reserved.

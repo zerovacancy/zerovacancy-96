@@ -26,6 +26,7 @@ const stepColors = [{
   numBg: "bg-emerald-600",
   numText: "text-white"
 }];
+
 const HowItWorksSection = () => {
   const steps = [{
     icon: <Search className="w-6 h-6 sm:w-8 sm:h-8" />,
@@ -48,9 +49,10 @@ const HowItWorksSection = () => {
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
   }];
+  
   return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white/80">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-10 sm:mb-14">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
             How It Works
           </h3>
@@ -103,7 +105,7 @@ const HowItWorksSection = () => {
         </div>
         
         {/* Desktop grid layout */}
-        <div className="hidden md:grid w-full mx-auto grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative">
+        <div className="hidden md:grid w-full mx-auto grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10 relative">
           {steps.map((step, index) => <motion.div key={index} initial={{
           opacity: 0,
           y: 20
@@ -125,7 +127,7 @@ const HowItWorksSection = () => {
         }} viewport={{
           once: true,
           margin: "-50px"
-        }} className={cn("relative bg-white", "min-h-[150px]", "px-5 py-6", "rounded-xl", "shadow-[0_4px_12px_rgba(0,0,0,0.08)]", "transition-all duration-200", "group", "border border-gray-100", "active:scale-[0.98]", "touch-manipulation", "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]")}>
+        }} className={cn("relative bg-white", "min-h-[180px] sm:min-h-[200px]", "px-6 py-8", "rounded-xl", "shadow-[0_4px_12px_rgba(0,0,0,0.08)]", "transition-all duration-200", "group", "border border-gray-100", "active:scale-[0.98]", "touch-manipulation", "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]")}>
               <div className="flex flex-col items-center justify-start h-full relative">
                 {/* Step Number with connecting line */}
                 <div className="absolute -left-[3.25rem] top-0 h-full" aria-hidden="true">
@@ -161,7 +163,7 @@ const HowItWorksSection = () => {
                 </div>
                 
                 {/* Icon with enhanced colorful background */}
-                <motion.div className={cn("mb-4", stepColors[index].iconBg, stepColors[index].iconText, "transition-all duration-300", "rounded-xl p-3", "group-hover:saturate-150")} whileHover={{
+                <motion.div className={cn("mb-5", stepColors[index].iconBg, stepColors[index].iconText, "transition-all duration-300", "rounded-xl p-4", "group-hover:saturate-150")} whileHover={{
               scale: 1.1
             }} whileTap={{
               scale: 0.95
@@ -169,10 +171,10 @@ const HowItWorksSection = () => {
                   {step.icon}
                 </motion.div>
                 
-                <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 text-center line-clamp-1">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 text-center line-clamp-1">
                   {step.title}
                 </h4>
-                <p className="text-sm text-gray-600 leading-relaxed text-center line-clamp-3">
+                <p className="text-sm text-gray-600 leading-relaxed text-center">
                   {step.description}
                 </p>
               </div>

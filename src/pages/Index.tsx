@@ -70,8 +70,8 @@ const Index = () => {
         </div>
 
         <div className="space-y-0">
-          {/* How It Works Section */}
-          <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-6 sm:py-12 lg:py-16 overflow-hidden border-t border-b border-gray-100">
+          {/* How It Works Section - Adjusted spacing */}
+          <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100">
             <div className="absolute inset-0 bg-[radial-gradient(#f1f1f1_1px,transparent_1px)] [background-size:20px_20px] opacity-50"></div>
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
@@ -79,8 +79,8 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Featured Creators Section - with subtle light background */}
-          <div className="bg-white py-8 sm:py-12 lg:py-16 border-b border-gray-100">
+          {/* Featured Creators Section - Adjusted spacing */}
+          <div className="bg-white py-10 sm:py-16 lg:py-20 border-b border-gray-100">
             <div className="max-w-7xl mx-auto">
               <div id="search" className="relative overflow-hidden w-full">
                 <PreviewSearch />
@@ -88,8 +88,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Professional Content Creation Services - with different background */}
-          <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100">
+          {/* Professional Content Creation Services - Adjusted spacing */}
+          <div className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100">
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
@@ -97,8 +97,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Pricing Section - with subtle grid background */}
-          <div id="pricing" className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-white border-b border-gray-100">
+          {/* Pricing Section - Adjusted spacing */}
+          <div id="pricing" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-white border-b border-gray-100">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#f3f3f3_1px,transparent_1px),linear-gradient(to_bottom,#f3f3f3_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
             <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
@@ -106,8 +106,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Final CTA Section - with gradient background */}
-          <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7]">
+          {/* Final CTA Section - Adjusted spacing */}
+          <div className="relative py-14 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7]">
             <Spotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <CallToActionSection />

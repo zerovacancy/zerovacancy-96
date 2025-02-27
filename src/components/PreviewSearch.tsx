@@ -11,8 +11,8 @@ const PreviewSearch = () => {
         <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 bg-white">
           <AuroraBackground className="min-h-0 w-full" showRadialGradient={false}>
             {/* Title and subtitle */}
-            <div className="text-center pt-6 pb-4 sm:pt-8 sm:pb-6 w-full">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-2 sm:mb-3">Discover Featured Creators</h2>
+            <div className="text-center pt-8 pb-6 sm:pt-10 sm:pb-8 w-full">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-3 sm:mb-4">Discover Featured Creators</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4">
                 Find the perfect professional for your property content needs
               </p>
@@ -22,7 +22,7 @@ const PreviewSearch = () => {
               <SearchBar onLocationSelect={() => {}} />
             </div>
           
-            <div className="w-full px-2 py-4 sm:px-6 lg:px-8 sm:py-5">
+            <div className="w-full px-4 py-6 sm:px-8 sm:py-8">
               <CreatorsList 
                 creators={[
                   {
