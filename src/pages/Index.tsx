@@ -43,9 +43,7 @@ const Index = () => {
                   min-w-[8rem] sm:min-w-[9rem]
                   touch-manipulation
                   shadow-[0_2px_10px_rgba(0,0,0,0.15)]
-                  animate-pulse
                 " onClick={handleTryNowClick}>
-                <Sparkle className="w-4 h-4 mr-1" />
                 Get Early Access
               </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)} className="animate-in fade-in slide-in-from-top duration-500 relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0">
             <div className="flex items-center justify-center gap-3 sm:gap-4 relative z-10">
