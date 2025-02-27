@@ -65,7 +65,7 @@ const Header = () => {
   );
 
   const NavLinks = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
-    <nav className={cn("flex items-center gap-12", className)}>
+    <nav className={cn("flex items-center gap-8", className)}>
       {[
         { to: "/search", label: "Properties" },
         { to: "/how-it-works", label: "Platform" },
@@ -96,19 +96,19 @@ const Header = () => {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40">
-      <div className="container flex h-16 items-center justify-between lg:px-8 md:px-6 px-4">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 shadow-sm backdrop-blur-sm supports-[backdrop-filter]:bg-white/90">
+      <div className="container flex h-[70px] items-center justify-between lg:px-10 md:px-8 px-4">
         <Magnetic intensity={0.3}>
           <Link 
             to="/" 
-            className="flex items-center transition-opacity active:opacity-80 ml-6 md:ml-8"
+            className="flex items-center transition-opacity active:opacity-80 ml-0 md:ml-0"
           >
             <motion.img 
               src="/logo.png"
               alt="Zero Vacancy"
               initial={false}
               animate={{ scale: isOpen ? 0.95 : 1 }}
-              className="h-[34px] w-auto my-auto"
+              className="h-[36px] w-auto my-auto"
             />
           </Link>
         </Magnetic>
@@ -207,12 +207,12 @@ const Header = () => {
           </SheetContent>
         </Sheet>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-4">
           <Magnetic intensity={0.4}>
             <Button 
               variant="ghost" 
               asChild 
-              className="h-11 px-5 text-[15px] font-medium hover:bg-accent/50"
+              className="h-11 px-6 text-[15px] font-medium hover:bg-accent/50"
             >
               <Link to="/login">Log In</Link>
             </Button>
@@ -220,7 +220,7 @@ const Header = () => {
           <Magnetic intensity={0.4}>
             <Button 
               asChild 
-              className="h-11 px-5 text-[15px] font-medium bg-primary hover:bg-primary/90 hover:shadow-lg transition-all duration-200"
+              className="h-11 px-6 text-[15px] font-medium bg-primary hover:bg-primary/90 hover:shadow-lg transition-all duration-200"
             >
               <Link to="/signup">Sign Up</Link>
             </Button>

@@ -58,8 +58,9 @@ export function Banner({
       className={cn(
         bannerVariants({ variant, size, layout }), 
         "min-h-[3rem] sm:min-h-[3.5rem]",
-        "shadow-[0_2px_8px_rgba(0,0,0,0.08)]",
-        "relative z-50",
+        "shadow-[0_3px_10px_rgba(0,0,0,0.1)]",
+        "relative z-40",
+        "mt-0.5", // Add a small margin to create visual separation from header
         className
       )} 
       {...props}

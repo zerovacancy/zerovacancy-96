@@ -20,6 +20,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background';
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
+
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     setShowGlowDialog(!hasVisited);
@@ -27,12 +28,14 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
+
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
+
   return <div className="flex flex-col min-h-screen">
       <Header />
-      {showBanner && <div className="sticky top-16 z-40">
+      {showBanner && <div className="relative">
           <Banner variant="purple" size="lg" action={<Button variant="secondary" size="sm" className="
                   flex text-xs sm:text-sm items-center 
                   whitespace-nowrap px-3 py-2 sm:px-5 sm:py-2.5
