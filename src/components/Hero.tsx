@@ -43,7 +43,7 @@ export function Hero() {
       }} transition={{
         duration: 0.3
       }}>
-          <motion.div className="flex gap-6 sm:gap-8 flex-col max-w-5xl mx-auto w-full" initial={{
+          <motion.div initial={{
           opacity: 0,
           y: 20
         }} animate={{
@@ -52,7 +52,7 @@ export function Hero() {
         }} transition={{
           duration: 0.3,
           delay: 0.1
-        }}>
+        }} className="flex gap-6 sm:gap-8 flex-col max-w-10xl mx-auto w-full px-[3px]">
             <h1 className="tracking-tight leading-[1.1] text-center font-bold">
               <span className={cn("text-primary inline font-light", "text-4xl sm:text-5xl lg:text-6xl", "tracking-[-0.02em]", "bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black", "block sm:inline-block mb-2 sm:mb-0")}>
                 Property Content that
