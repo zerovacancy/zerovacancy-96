@@ -54,11 +54,11 @@ export function Hero() {
           delay: 0.1
         }} className="flex gap-6 sm:gap-8 flex-col max-w-10xl mx-auto w-full px-[3px]">
             <h1 className="tracking-tight leading-[1.1] text-center font-bold">
-              <span className={cn("text-primary inline font-light", "text-4xl sm:text-5xl lg:text-6xl", "tracking-[-0.02em]", "bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black", "block sm:inline-block mb-2 sm:mb-0")}>
+              <span className={cn("text-primary inline font-light", "text-2xl sm:text-5xl lg:text-6xl", "tracking-[-0.02em]", "bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black", "block sm:inline-block mb-2 sm:mb-0")}>
                 Property Content that
               </span>
               <span role="text" aria-label={`Property Content that ${titles[titleNumber]}`} className="relative flex w-full justify-center h-[1.6em] sm:h-[1.8em] md:h-[1.6em] lg:h-[1.4em] overflow-hidden mt-2 sm:mt-3">
-                {titles.map((title, index) => <motion.span key={index} className={cn("absolute font-playfair tracking-[-0.02em] bg-clip-text text-transparent", "bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700", titleNumber === index && "text-5xl sm:text-6xl lg:text-7xl")} initial={{
+                {titles.map((title, index) => <motion.span key={index} className={cn("absolute font-playfair tracking-[-0.02em] bg-clip-text text-transparent", "bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700", titleNumber === index && "text-3xl sm:text-6xl lg:text-7xl")} initial={{
                 opacity: 0,
                 y: isMobile ? 15 : 40,
                 scale: 0.95
@@ -112,4 +112,5 @@ export function Hero() {
       </AuroraBackground>
     </div>;
 }
+
 export default Hero;
