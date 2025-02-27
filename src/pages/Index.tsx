@@ -16,7 +16,6 @@ import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import { AuroraBackground } from '@/components/ui/aurora-background';
-import { Testimonials } from '@/components/Testimonials';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -88,9 +87,6 @@ const Index = () => {
               </div>
             </div>
           </div>
-
-          {/* Testimonials Section - only visible on desktop */}
-          <Testimonials />
 
           {/* Professional Content Creation Services - with different background */}
           <div className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100">
