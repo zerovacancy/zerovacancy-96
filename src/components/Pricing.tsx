@@ -14,26 +14,42 @@ const stripePromise = loadStripe('pk_live_51QtulpAIAL4hcfkS0KfdqCUoUQtz3eDphv2xi
 
 export function Pricing() {
   const [subscription, setSubscription] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchSubscription = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data: subs } = await supabase
-          .from('customer_subscriptions')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false })
-          .limit(1);
-        
-        if (subs && subs.length > 0) {
-          setSubscription(subs[0]);
+      setIsLoading(true);
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: subs, error } = await supabase
+            .from('customer_subscriptions')
+            .select('*')
+            .eq('user_id', user.id)
+            .order('created_at', { ascending: false })
+            .limit(1);
+          
+          if (error) throw error;
+          
+          if (subs && subs.length > 0) {
+            setSubscription(subs[0]);
+          }
         }
+      } catch (error) {
+        console.error('Error fetching subscription:', error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch subscription information",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchSubscription();
-  }, []);
+  }, [toast]);
 
   return (
     <section id="pricing" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
@@ -62,6 +78,7 @@ export function Pricing() {
             description="Perfect for single-family homes and small properties"
             cta="Get Started"
             subscription={subscription}
+            isLoading={isLoading}
           />
           <div className="relative group">
             <div className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-purple-500 via-cyan-300 to-emerald-400 opacity-75 blur-lg transition-all group-hover:opacity-100 group-hover:blur-xl" />
@@ -82,6 +99,7 @@ export function Pricing() {
               cta="Go Professional"
               highlighted
               subscription={subscription}
+              isLoading={isLoading}
             />
           </div>
           <PricingCard
@@ -101,6 +119,7 @@ export function Pricing() {
             description="Best for luxury estates and commercial properties"
             cta="Go Premium"
             subscription={subscription}
+            isLoading={isLoading}
           />
         </div>
       </div>
@@ -116,7 +135,8 @@ const PricingCard = ({
   features,
   cta,
   highlighted = false,
-  subscription
+  subscription,
+  isLoading
 }: {
   title: string;
   price: number;
@@ -126,13 +146,16 @@ const PricingCard = ({
   cta: string;
   highlighted?: boolean;
   subscription?: any;
+  isLoading?: boolean;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const isMobile = useIsMobile();
   const { toast } = useToast();
 
-  const isCurrentPlan = subscription?.plan_id === `price_${title.toLowerCase()}`;
+  const planId = `price_${title.toLowerCase()}`;
+  const isCurrentPlan = subscription?.plan_id === planId;
+  const isSubscriptionActive = subscription?.status === 'active' || subscription?.status === 'trialing';
 
   const handleSubscription = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -155,39 +178,79 @@ const PricingCard = ({
         return;
       }
 
-      // Create subscription
-      const response = await supabase.functions.invoke('create-subscription', {
-        body: {
-          packageName: title,
-          userId: user.id,
-        },
-      });
+      // If user already has an active subscription
+      if (isSubscriptionActive && !isCurrentPlan) {
+        // This is a plan change
+        const response = await supabase.functions.invoke('create-subscription', {
+          body: {
+            packageName: title,
+            userId: user.id,
+            isUpgrade: true,
+            currentSubscriptionId: subscription?.stripe_subscription_id
+          },
+        });
 
-      if (response.error) {
-        throw new Error(response.error.message);
-      }
+        if (response.error) {
+          throw new Error(response.error.message || 'Failed to update subscription');
+        }
 
-      const { subscriptionId, clientSecret } = response.data;
+        const { clientSecret, subscriptionId } = response.data;
 
-      if (!clientSecret) {
-        throw new Error('Failed to create subscription');
-      }
+        if (!clientSecret) {
+          throw new Error('Failed to create subscription update');
+        }
 
-      // Load Stripe
-      const stripe = await stripePromise;
-      if (!stripe) throw new Error('Stripe failed to initialize');
+        // Load Stripe
+        const stripe = await stripePromise;
+        if (!stripe) throw new Error('Stripe failed to initialize');
 
-      // Confirm payment
-      const { error: stripeError } = await stripe.confirmPayment({
-        elements: undefined,
-        clientSecret,
-        confirmParams: {
-          return_url: `${window.location.origin}/payment-confirmation`,
-        },
-      });
+        // Confirm payment with setup intent for subscription update
+        const { error: stripeError } = await stripe.confirmPayment({
+          elements: undefined,
+          clientSecret,
+          confirmParams: {
+            return_url: `${window.location.origin}/payment-confirmation`,
+          },
+        });
 
-      if (stripeError) {
-        throw new Error(stripeError.message);
+        if (stripeError) {
+          throw new Error(stripeError.message || 'Payment confirmation failed');
+        }
+      } else {
+        // Create new subscription
+        const response = await supabase.functions.invoke('create-subscription', {
+          body: {
+            packageName: title,
+            userId: user.id,
+          },
+        });
+
+        if (response.error) {
+          throw new Error(response.error.message || 'Failed to create subscription');
+        }
+
+        const { clientSecret } = response.data;
+
+        if (!clientSecret) {
+          throw new Error('Failed to create subscription');
+        }
+
+        // Load Stripe
+        const stripe = await stripePromise;
+        if (!stripe) throw new Error('Stripe failed to initialize');
+
+        // Confirm payment
+        const { error: stripeError } = await stripe.confirmPayment({
+          elements: undefined,
+          clientSecret,
+          confirmParams: {
+            return_url: `${window.location.origin}/payment-confirmation`,
+          },
+        });
+
+        if (stripeError) {
+          throw new Error(stripeError.message || 'Payment confirmation failed');
+        }
       }
 
     } catch (error) {
@@ -215,7 +278,7 @@ const PricingCard = ({
         <h3 className="text-lg font-semibold leading-tight text-slate-900">
           {title}
         </h3>
-        {isCurrentPlan && (
+        {isCurrentPlan && isSubscriptionActive && (
           <span className="px-2 py-1 text-xs font-medium text-white bg-green-500 rounded-full">
             Current Plan
           </span>
@@ -268,7 +331,18 @@ const PricingCard = ({
           ))}
         </ul>
 
-        {!isCurrentPlan && (
+        {isLoading ? (
+          <div className="mt-6 flex justify-center">
+            <div className="animate-pulse h-11 w-full bg-gray-200 rounded-md"></div>
+          </div>
+        ) : isCurrentPlan && isSubscriptionActive ? (
+          <button
+            className="mt-6 w-full py-2 px-3 bg-gray-100 text-gray-700 rounded-md text-sm font-medium"
+            disabled
+          >
+            Current Plan
+          </button>
+        ) : (
           <ShimmerButton 
             className="mt-6 w-full h-11 sm:h-12 text-sm sm:text-base"
             onClick={handleSubscription}
