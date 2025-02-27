@@ -25,8 +25,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
           <SearchButton />
         </div>
 
-        {/* Mobile Search Button and Advanced Filters */}
-        <div className="sm:hidden flex flex-col items-center gap-2">
+        {/* Mobile Search Button */}
+        <div className="sm:hidden">
           <Button 
             className={cn(
               "w-full h-11",
@@ -38,21 +38,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
           >
             <Search className="w-5 h-5" />
           </Button>
-
-          <button
-            onClick={() => setShowMoreFilters(!showMoreFilters)}
-            className={cn(
-              "inline-flex items-center gap-1.5",
-              "px-3 py-2",
-              "text-sm font-medium",
-              "text-gray-700 hover:text-gray-900",
-              "hover:bg-gray-50 rounded-md",
-              "transition-colors duration-200",
-              "min-h-[2.75rem]"
-            )}
-          >
-            Advanced Filters
-          </button>
         </div>
 
         <SearchFilters
