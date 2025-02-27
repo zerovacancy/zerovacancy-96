@@ -9,6 +9,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { CreatorRating } from './CreatorRating';
 import { GlowDialog } from '../ui/glow-dialog';
 import { ShimmerButton } from '../ui/shimmer-button';
+import { BorderBeam } from '../ui/border-beam';
 
 interface Creator {
   name: string;
@@ -156,7 +157,16 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             </div>
           </div>
           
-          <div className="p-3 sm:p-4">
+          <div className="p-3 sm:p-4 relative overflow-hidden rounded-b-xl">
+            {/* Animated border that matches CTA gradient */}
+            <BorderBeam 
+              colorFrom="#9c40ff" 
+              colorTo="#3182CE" 
+              duration={20} 
+              borderWidth={1.2} 
+              size={300}
+            />
+            
             <div className="space-y-2 sm:space-y-3">
               <div 
                 className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
