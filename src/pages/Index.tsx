@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -14,6 +15,8 @@ import { Spotlight } from '@/components/ui/spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
+import { AuroraBackground } from '@/components/ui/aurora-background';
+
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
@@ -63,10 +66,11 @@ const Index = () => {
 
         <div className="space-y-3 sm:space-y-6 lg:space-y-8">
           {/* Featured Creators Section */}
-          <div id="search" className="relative py-4 sm:py-8 lg:py-10 overflow-hidden">
-            <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
-            <PreviewSearch />
-          </div>
+          <AuroraBackground className="py-4 sm:py-8 lg:py-10 min-h-0" showRadialGradient={false}>
+            <div id="search" className="relative overflow-hidden w-full">
+              <PreviewSearch />
+            </div>
+          </AuroraBackground>
 
           {/* How It Works Section */}
           <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-4 sm:py-8 overflow-hidden lg:py-0">
