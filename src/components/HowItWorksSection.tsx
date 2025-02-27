@@ -225,18 +225,28 @@ const HowItWorksSection = () => {
                     {step.number}
                   </motion.span>
                   
-                  {/* Enhanced vertical connecting line with gradient matching the number colors */}
-                  {index < steps.length - 1 && <motion.div className={cn("absolute top-7 left-[0.875rem] w-[2px] h-[calc(100%+2rem)]", stepColors[index].lineColor, "bg-gradient-to-b")} initial={{
-                scaleY: 0
-              }} whileInView={{
-                scaleY: 1,
-                transition: {
-                  delay: index * 0.2 + 0.4,
-                  duration: 0.5
-                }
-              }} viewport={{
-                once: true
-              }} />}
+                  {/* Vertical connecting line for all steps, including the last one */}
+                  <motion.div 
+                    className={cn(
+                      "absolute top-7 left-[0.875rem] w-[2px]", 
+                      index < steps.length - 1 
+                        ? `h-[calc(100%+2rem)] ${stepColors[index].lineColor} bg-gradient-to-b` 
+                        : `h-[calc(50%)] ${stepColors[index].lineColor} bg-gradient-to-b opacity-70`
+                    )} 
+                    initial={{
+                      scaleY: 0
+                    }} 
+                    whileInView={{
+                      scaleY: 1,
+                      transition: {
+                        delay: index * 0.2 + 0.4,
+                        duration: 0.5
+                      }
+                    }} 
+                    viewport={{
+                      once: true
+                    }} 
+                  />
                 </div>
                 
                 {/* Icon with enhanced colorful background */}
