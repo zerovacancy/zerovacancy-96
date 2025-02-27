@@ -95,8 +95,18 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
         "bg-white border border-gray-200/80",
         "shadow-[0_2px_8px_rgba(0,0,0,0.05)]",
         "hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)]",
-        "rounded-xl"
+        "rounded-xl relative"
       )}>
+        {/* Animated border around the entire card */}
+        <BorderBeam 
+          colorFrom="#9c40ff" 
+          colorTo="#3182CE" 
+          duration={20} 
+          borderWidth={1.2} 
+          size={500}
+          className="rounded-xl"
+        />
+        
         <div className="relative">
           <div className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10">
             <span className={cn(
@@ -157,16 +167,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             </div>
           </div>
           
-          <div className="p-3 sm:p-4 relative overflow-hidden rounded-b-xl">
-            {/* Animated border that matches CTA gradient */}
-            <BorderBeam 
-              colorFrom="#9c40ff" 
-              colorTo="#3182CE" 
-              duration={20} 
-              borderWidth={1.2} 
-              size={300}
-            />
-            
+          <div className="p-3 sm:p-4">
             <div className="space-y-2 sm:space-y-3">
               <div 
                 className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
@@ -197,7 +198,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
                   aria-label={`Join waitlist to work with ${creator.name}`}
-                  className="w-[80%] h-9 sm:h-10 text-xs sm:text-sm px-3 sm:px-4"
+                  className="w-[60%] h-9 sm:h-10 text-xs sm:text-sm px-3 sm:px-4"
                 >
                   <span>Join Waitlist</span>
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1" aria-hidden="true" />
