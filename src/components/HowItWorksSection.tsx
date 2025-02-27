@@ -57,22 +57,22 @@ const HowItWorksSection = () => {
   }, []);
   
   const steps = [{
-    icon: <Search className="w-7 h-7" />,
+    icon: <Search className="w-5 h-5" />,
     title: "Search & Filter",
     description: "Find your perfect creator match based on your specific needs and requirements",
     number: "01"
   }, {
-    icon: <Users className="w-7 h-7" />,
+    icon: <Users className="w-5 h-5" />,
     title: "Review & Compare",
     description: "Browse portfolios and reviews to find the perfect match for your project",
     number: "02"
   }, {
-    icon: <Calendar className="w-7 h-7" />,
+    icon: <Calendar className="w-5 h-5" />,
     title: "Book & Pay",
     description: "Schedule securely through our platform with protected payments",
     number: "03"
   }, {
-    icon: <FileCheck className="w-7 h-7" />,
+    icon: <FileCheck className="w-5 h-5" />,
     title: "Get Content",
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
@@ -91,11 +91,8 @@ const HowItWorksSection = () => {
         
         {/* Mobile vertical layout */}
         <div className="md:hidden space-y-[14px] relative">
-          {/* Replace thin line with gradient background strip */}
-          <div className="absolute left-[24px] top-0 bottom-0 w-[40px] bg-gradient-to-b from-violet-500/10 via-blue-500/10 via-amber-500/10 to-emerald-500/10"></div>
-          
-          {/* Dotted connecting line */}
-          <div className="absolute left-[44px] top-[60px] bottom-[60px] w-0 border-l-[3px] border-dotted border-gray-300/20"></div>
+          {/* Connecting gradient line */}
+          <div className="absolute left-[8px] top-0 bottom-0 w-[3px] bg-gradient-to-b from-violet-500 via-blue-500 via-amber-500 to-emerald-500 opacity-60"></div>
           
           {steps.map((step, index) => (
             <motion.div 
@@ -117,66 +114,70 @@ const HowItWorksSection = () => {
               viewport={{ once: true, margin: "-30px" }}
               className={cn(
                 "relative bg-white",
-                "w-full max-w-[327px] min-h-[120px]",
-                "p-5", // 20px padding
+                "w-full max-w-[327px] min-h-[100px]", // Reduced height
+                "p-4", // Reduced to 16px padding
                 "rounded-lg",
                 "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]",
                 "border border-gray-100",
+                stepColors[index].borderColor,
+                "border-l-[3px]", // 3px left border
                 "touch-manipulation",
                 "mx-auto",
                 "transition-transform duration-200",
                 "cursor-pointer"
               )}
             >
-              <div className="flex items-center h-full">
-                {/* Left side: Number circle repositioned */}
-                <div className="relative">
-                  {/* Enhanced number circle with larger size and shadow */}
+              <div className="flex items-start">
+                {/* Left side: Number circle with integrated icon */}
+                <div className="relative mr-3">
                   <div className={cn(
-                    "w-9 h-9", // Increased to 36px
+                    "w-8 h-8", // Slightly smaller (32px)
                     stepColors[index].numBg,
                     stepColors[index].numText,
                     "rounded-full",
                     "flex items-center justify-center",
                     "text-sm font-medium",
-                    "shadow-[0_2px_4px_rgba(0,0,0,0.1)]", // Subtle shadow
+                    "shadow-sm",
                     "relative",
-                    "ml-0" // Aligns with left edge of content (24px from card edge due to parent padding)
+                    "mt-[2px]" // Align with first line of title
                   )}>
-                    <span className="flex items-center justify-center w-full h-full p-1">
+                    <span className="flex items-center justify-center w-full h-full">
                       {index + 1}
                     </span>
+                    
+                    {/* Icon as overlay inside number circle */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                      {step.icon}
+                    </div>
+                    
                     {/* Completed checkmark */}
                     {completedSteps.includes(index) && (
-                      <div className="absolute -right-1.5 -top-1.5 bg-white rounded-full p-0.5 shadow-sm">
-                        <Check className="w-3.5 h-3.5 text-green-500" />
+                      <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
+                        <Check className="w-3 h-3 text-green-500" />
                       </div>
                     )}
                   </div>
                 </div>
                 
-                {/* Middle: Content */}
-                <div className="flex-1 ml-4 max-w-[200px]">
-                  {/* Title with consistent vertical alignment with number */}
-                  <h4 className="text-[16px] font-semibold text-gray-900 mb-3">
-                    {step.title}
-                  </h4>
+                {/* Content */}
+                <div className="flex-1">
+                  {/* Title with icon next to it */}
+                  <div className="flex items-center">
+                    <h4 className="text-[16px] font-semibold text-gray-900">
+                      {step.title}
+                    </h4>
+                    <div className={cn(
+                      "ml-2", // 8px spacing
+                      stepColors[index].iconText
+                    )}>
+                      {step.icon}
+                    </div>
+                  </div>
                   
-                  {/* Description */}
-                  <p className="text-[14px] text-gray-600 leading-[1.5]">
+                  {/* Description with reduced spacing */}
+                  <p className="text-[14px] text-gray-600 leading-[1.4] mt-1">
                     {step.description}
                   </p>
-                </div>
-                
-                {/* Right side: Icon moved to right */}
-                <div className={cn(
-                  "rounded-lg p-2",
-                  stepColors[index].iconBg,
-                  stepColors[index].tintBg,
-                  stepColors[index].iconText,
-                  "ml-auto" // Pushes to the right edge
-                )}>
-                  {step.icon}
                 </div>
               </div>
             </motion.div>
@@ -247,7 +248,7 @@ const HowItWorksSection = () => {
             }} whileTap={{
               scale: 0.95
             }}>
-                  {step.icon}
+                  {React.cloneElement(step.icon, { className: "w-7 h-7" })}
                 </motion.div>
                 
                 <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 text-center line-clamp-1">
