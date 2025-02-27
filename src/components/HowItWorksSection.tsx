@@ -24,7 +24,7 @@ const HowItWorksSection = () => {
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
   }];
-  return <section className="relative overflow-hidden py-12 sm:py-16 px-4 sm:px-6 lg:px-8 lg:py-[34px] my-[17px] bg-blue-100">
+  return <section className="relative overflow-hidden py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white lg:py-0 my-0">
       <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-b from-white/95 via-white/90 to-white/95 backdrop-blur-sm" aria-hidden="true" />
       
       <div className="max-w-7xl mx-auto">
