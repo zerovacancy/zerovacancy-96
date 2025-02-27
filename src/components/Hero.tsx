@@ -34,7 +34,7 @@ export function Hero() {
       <div className="absolute bottom-20 left-10 w-32 sm:w-48 h-32 sm:h-48 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full blur-3xl" aria-hidden="true" />
 
       <AuroraBackground className="w-full py-0">
-        <motion.section className={cn("flex items-center justify-center flex-col", "px-4 sm:px-6", "py-[40px] sm:py-[64px]", "my-[32px] sm:my-[48px]", "min-h-fit sm:min-h-[70vh]", "relative z-10", "gap-6 sm:gap-8")} initial={{
+        <motion.section className={cn("flex items-center justify-center flex-col", "px-4 sm:px-6", "py-[40px] sm:py-[64px]", "my-[32px] sm:my-[48px]", "min-h-fit sm:min-h-[70vh]", "relative z-10", "gap-4 sm:gap-8")} initial={{
         opacity: 0,
         y: 20
       }} animate={{
@@ -90,13 +90,12 @@ export function Hero() {
           }} transition={{
             duration: 0.3,
             delay: 0.2
-          }} className={cn("text-sm sm:text-lg lg:text-xl", "leading-[1.6]", "tracking-wide", "text-gray-700", "text-center", "max-w-[650px]", "mx-auto", "px-4 sm:px-6", "[word-spacing:0.12em] sm:[word-spacing:0.16em]", "relative z-10", "mt-2 mb-2" // Adjusted to match the spacing from h1
-          )}>
+          }} className={cn("text-sm sm:text-lg lg:text-xl", "leading-[1.6]", "tracking-wide", "text-gray-700", "text-center", "max-w-[650px]", "mx-auto", "px-4 sm:px-6", "[word-spacing:0.12em] sm:[word-spacing:0.16em]", "relative z-10", "mt-2 mb-0")}>
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </motion.p>
           </motion.div>
           
-          <motion.div className={cn("w-full", "mt-8 sm:mt-10", "px-4 sm:px-6")} initial={{
+          <motion.div className={cn("w-full", "mt-4 sm:mt-10", "px-4 sm:px-6")} initial={{
           opacity: 0,
           y: 20
         }} animate={{
@@ -112,4 +111,5 @@ export function Hero() {
       </AuroraBackground>
     </div>;
 }
+
 export default Hero;
