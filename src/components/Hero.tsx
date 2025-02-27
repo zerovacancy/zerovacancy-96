@@ -81,7 +81,7 @@ export function Hero() {
               </span>
             </h1>
 
-            <motion.p className={cn("text-sm sm:text-lg lg:text-xl", "leading-[1.6]", "tracking-wide", "text-gray-700", "text-center", "max-w-[650px]", "mx-auto", "px-4 sm:px-6", "[word-spacing:0.12em] sm:[word-spacing:0.16em]", "relative z-10")} initial={{
+            <motion.p initial={{
             opacity: 0,
             y: 20
           }} animate={{
@@ -90,7 +90,7 @@ export function Hero() {
           }} transition={{
             duration: 0.3,
             delay: 0.2
-          }}>
+          }} className="text-center text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto py-2 my-4 text-gray-700">
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
             </motion.p>
           </motion.div>
