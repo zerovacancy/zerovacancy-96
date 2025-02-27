@@ -7,22 +7,22 @@ import { AuroraBackground } from './ui/aurora-background';
 const PreviewSearch = () => {
   return (
     <div className="w-full">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-2 sm:px-4">
         <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100">
           <AuroraBackground className="min-h-0 w-full" showRadialGradient={false}>
             {/* Title and subtitle */}
-            <div className="text-center pt-8 pb-4 w-full">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-3">Discover Featured Creators</h2>
+            <div className="text-center pt-6 pb-2 w-full">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-2">Discover Featured Creators</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto px-4">
                 Find the perfect professional for your property content needs
               </p>
             </div>
             
-            <div className="w-full px-4 py-5 sm:px-6 border-b">
+            <div className="w-full px-4 py-4 sm:px-6 border-b">
               <SearchBar onLocationSelect={() => {}} />
             </div>
           
-            <div className="w-full py-6 sm:py-8 lg:px-4">
+            <div className="w-full px-2 py-4 sm:px-6 lg:px-8 sm:py-5">
               <CreatorsList 
                 creators={[
                   {
