@@ -13,7 +13,8 @@ const bannerVariants = cva(
         default: "bg-primary text-primary-foreground",
         success: "bg-green-500 text-white",
         warning: "bg-yellow-500 text-white",
-        error: "bg-red-500 text-white"
+        error: "bg-red-500 text-white",
+        purple: "bg-gradient-to-r from-violet-600 via-purple-500 to-indigo-600 text-white"
       },
       size: {
         sm: "text-sm",
@@ -89,4 +90,3 @@ export function Banner({
     </div>
   );
 }
-
