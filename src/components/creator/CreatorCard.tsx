@@ -94,7 +94,8 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
 
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
 
-  const getMediaSource = () => {
+  // Determine if we should use a video, image, or fallback for each creator
+  const getMedia = () => {
     if (creator.name === 'Emily Johnson') {
       return { type: 'image', src: '/newemilyprofile.jpg' };
     }
@@ -102,12 +103,16 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       return { type: 'image', src: '/janeprofile.png' };
     }
     if (creator.name === 'Michael Brown') {
+      // Provide fallback image in case video fails
+      if (imageError) {
+        return { type: 'image', src: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952' };
+      }
       return { type: 'video', src: '/michaelprofile.mov' };
     }
     return { type: 'image', src: creator.image };
   };
 
-  const mediaInfo = getMediaSource();
+  const media = getMedia();
   
   return (
     <article className="group select-text">
@@ -147,31 +152,33 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
 
           <div className="relative aspect-[4/3]">
-            {mediaInfo.type === 'image' ? (
+            {media.type === 'image' ? (
               <img 
-                src={mediaInfo.src}
+                src={media.src}
                 alt={`${creator.name} - ${creator.services.join(", ")} specialist in ${creator.location}`}
-                className={cn(
-                  "w-full h-full object-cover object-center transition-opacity duration-300",
-                  !isImageLoaded && "opacity-0"
-                )}
+                className="w-full h-full object-cover object-center"
                 onLoad={handleImageLoad}
                 onError={handleImageError}
                 loading="lazy"
               />
             ) : (
-              <video
-                src={mediaInfo.src}
-                className={cn(
-                  "w-full h-full object-cover object-center transition-opacity duration-300",
-                  !isVideoLoaded && "opacity-0"
+              <>
+                {/* Video element with fallback in case it fails to load */}
+                <video
+                  src={media.src}
+                  className="w-full h-full object-cover object-center"
+                  onError={() => setImageError(true)}
+                  onLoadedData={handleVideoLoad}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+                {/* Fallback image that shows while video is loading */}
+                {!isVideoLoaded && (
+                  <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
                 )}
-                onLoadedData={handleVideoLoad}
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
+              </>
             )}
             <div 
               className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" 
