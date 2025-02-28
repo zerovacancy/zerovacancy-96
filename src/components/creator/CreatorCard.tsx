@@ -39,8 +39,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   const isMobile = useIsMobile();
   const [showEmailDialog, setShowEmailDialog] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   
   const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    setIsImageLoaded(true);
     if (onImageLoad) {
       onImageLoad(creator.image);
     }
@@ -126,12 +128,11 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
 
           <div className="relative aspect-[4/3]">
             <img 
-              ref={imageRef}
               src={getImageSource()}
               alt={`${creator.name} - ${creator.services.join(", ")} specialist in ${creator.location}`}
               className={cn(
                 "w-full h-full object-cover object-center transition-opacity duration-300",
-                !loadedImages.has(creator.image) && "opacity-0"
+                !isImageLoaded && "opacity-0"
               )}
               onLoad={handleImageLoad}
               onError={handleImageError}

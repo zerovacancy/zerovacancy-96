@@ -1,5 +1,5 @@
 
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -36,6 +36,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   imageRef,
 }) => {
   const isMobile = useIsMobile();
+  const [loadedImageUrls, setLoadedImageUrls] = useState<Set<string>>(new Set());
   
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
@@ -77,6 +78,17 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     };
   }, [emblaApi, onSelect]);
   
+  const handleImageLoad = (imageSrc: string) => {
+    setLoadedImageUrls(prev => {
+      const updated = new Set(prev);
+      updated.add(imageSrc);
+      return updated;
+    });
+    if (onImageLoad) {
+      onImageLoad(imageSrc);
+    }
+  };
+  
   const sortOptions = [
     { label: 'Rating', value: 'rating' },
     { label: 'Price: Low to High', value: 'price_asc' },
@@ -111,8 +123,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
                 >
                   <CreatorCard
                     creator={creator}
-                    onImageLoad={onImageLoad}
-                    loadedImages={loadedImages}
+                    onImageLoad={handleImageLoad}
+                    loadedImages={loadedImageUrls}
                     imageRef={imageRef}
                   />
                 </div>
@@ -163,8 +175,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             <CreatorCard
               key={creator.name}
               creator={creator}
-              onImageLoad={onImageLoad}
-              loadedImages={loadedImages}
+              onImageLoad={handleImageLoad}
+              loadedImages={loadedImageUrls}
               imageRef={imageRef}
             />
           ))}
