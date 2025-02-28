@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
@@ -9,7 +10,8 @@ import { Card } from '@/components/ui/card';
 import { CreditCard, DollarSign, Info, RefreshCw, CheckCircle } from 'lucide-react';
 
 const ConnectOnboarding = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [authChecking, setAuthChecking] = useState(true);
   const [accountStatus, setAccountStatus] = useState<{
     exists: boolean;
     isOnboarded: boolean;
@@ -17,6 +19,28 @@ const ConnectOnboarding = () => {
   } | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  // Check authentication first
+  useEffect(() => {
+    const checkAuth = async () => {
+      setAuthChecking(true);
+      const { data } = await supabase.auth.getUser();
+      
+      if (!data?.user) {
+        toast({
+          title: "Authentication Required",
+          description: "Please sign in to access this page.",
+          variant: "destructive",
+        });
+        navigate('/');
+        return;
+      }
+      
+      setAuthChecking(false);
+    };
+    
+    checkAuth();
+  }, [navigate, toast]);
 
   const checkAccountStatus = async () => {
     try {
@@ -126,9 +150,27 @@ const ConnectOnboarding = () => {
     }
   };
 
-  React.useEffect(() => {
-    checkAccountStatus();
-  }, []);
+  // Once authentication is confirmed, check account status
+  useEffect(() => {
+    if (!authChecking) {
+      checkAccountStatus();
+    }
+  }, [authChecking]);
+
+  if (authChecking) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <span className="ml-3 text-gray-600">Checking authentication...</span>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

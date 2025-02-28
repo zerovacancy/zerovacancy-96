@@ -153,6 +153,9 @@ const Header = () => {
                 <DropdownMenuItem onClick={() => navigate('/account')}>
                   My Account
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/connect/onboarding')}>
+                  Connect Setup
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut}>
                   Sign Out
@@ -229,6 +232,13 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   My Account
+                </Link>
+                <Link
+                  to="/connect/onboarding"
+                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Connect Setup
                 </Link>
                 <button
                   className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
