@@ -79,6 +79,7 @@ export function Pricing() {
             cta="Get Started"
             subscription={subscription}
             isLoading={isLoading}
+            defaultExpanded={false}
           />
           <div className="relative group">
             <div className="absolute -inset-[2px] rounded-2xl bg-gradient-to-r from-purple-500 via-cyan-300 to-emerald-400 opacity-75 blur-lg transition-all group-hover:opacity-100 group-hover:blur-xl" />
@@ -100,6 +101,7 @@ export function Pricing() {
               highlighted
               subscription={subscription}
               isLoading={isLoading}
+              defaultExpanded={true}
             />
           </div>
           <PricingCard
@@ -120,6 +122,7 @@ export function Pricing() {
             cta="Go Premium"
             subscription={subscription}
             isLoading={isLoading}
+            defaultExpanded={false}
           />
         </div>
       </div>
@@ -136,7 +139,8 @@ const PricingCard = ({
   cta,
   highlighted = false,
   subscription,
-  isLoading
+  isLoading,
+  defaultExpanded = false
 }: {
   title: string;
   price: number;
@@ -147,8 +151,9 @@ const PricingCard = ({
   highlighted?: boolean;
   subscription?: any;
   isLoading?: boolean;
+  defaultExpanded?: boolean;
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const [isProcessing, setIsProcessing] = useState(false);
   const isMobile = useIsMobile();
   const { toast } = useToast();
