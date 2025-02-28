@@ -40,9 +40,17 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   const [showEmailDialog, setShowEmailDialog] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   
   const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
     setIsImageLoaded(true);
+    if (onImageLoad) {
+      onImageLoad(creator.image);
+    }
+  };
+
+  const handleVideoLoad = () => {
+    setIsVideoLoaded(true);
     if (onImageLoad) {
       onImageLoad(creator.image);
     }
@@ -62,6 +70,9 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     if (name === 'Emily Johnson') {
       return ['#POV', '#TikTok', '#ComeTourWithMe'];
     }
+    if (name === 'Michael Brown') {
+      return ['#3DTours', '#FloorPlans', '#Interactive'];
+    }
     return ['#Professional', '#Creative', '#Expert'];
   };
 
@@ -75,19 +86,28 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     if (['#POV', '#TikTok', '#ComeTourWithMe'].includes(tag)) {
       return "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7] hover:text-[#9D5B3F] border border-[#C4704F]/10";
     }
+    if (['#3DTours', '#FloorPlans', '#Interactive'].includes(tag)) {
+      return "bg-[#E0F2FE] text-[#0369A1] hover:bg-[#BAE6FD] hover:text-[#0284C7] border border-[#0EA5E9]/10";
+    }
     return "bg-[#F3F4F6] text-gray-600 hover:bg-gray-200 hover:text-gray-800 border border-gray-200";
   };
 
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
 
-  const getImageSource = () => {
+  const getMediaSource = () => {
     if (creator.name === 'Emily Johnson') {
-      return '/newemilyprofile.jpg';
+      return { type: 'image', src: '/newemilyprofile.jpg' };
     }
-    if (creator.name === 'Jane Cooper') return '/janeprofile.png';
-    if (creator.name === 'Michael Brown') return '/emily profile.jpeg';
-    return creator.image;
+    if (creator.name === 'Jane Cooper') {
+      return { type: 'image', src: '/janeprofile.png' };
+    }
+    if (creator.name === 'Michael Brown') {
+      return { type: 'video', src: '/michaelprofile.mov' };
+    }
+    return { type: 'image', src: creator.image };
   };
+
+  const mediaInfo = getMediaSource();
   
   return (
     <article className="group select-text">
@@ -127,17 +147,32 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
 
           <div className="relative aspect-[4/3]">
-            <img 
-              src={getImageSource()}
-              alt={`${creator.name} - ${creator.services.join(", ")} specialist in ${creator.location}`}
-              className={cn(
-                "w-full h-full object-cover object-center transition-opacity duration-300",
-                !isImageLoaded && "opacity-0"
-              )}
-              onLoad={handleImageLoad}
-              onError={handleImageError}
-              loading="lazy"
-            />
+            {mediaInfo.type === 'image' ? (
+              <img 
+                src={mediaInfo.src}
+                alt={`${creator.name} - ${creator.services.join(", ")} specialist in ${creator.location}`}
+                className={cn(
+                  "w-full h-full object-cover object-center transition-opacity duration-300",
+                  !isImageLoaded && "opacity-0"
+                )}
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+                loading="lazy"
+              />
+            ) : (
+              <video
+                src={mediaInfo.src}
+                className={cn(
+                  "w-full h-full object-cover object-center transition-opacity duration-300",
+                  !isVideoLoaded && "opacity-0"
+                )}
+                onLoadedData={handleVideoLoad}
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            )}
             <div 
               className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" 
               aria-hidden="true"
