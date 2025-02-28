@@ -35,7 +35,8 @@ port = 54327
 vector_port = 54328
 
 [functions]
-port = 54321
+# Port to use for Functions API serving.
+enabled = true
 
 [functions.verify-payment]
 verify_jwt = true

@@ -32,22 +32,12 @@ const ConnectRefresh = () => {
           return;
         }
         
-        // Get the user's email for passing to create-connect-account
-        const { data: userData } = await supabase
-          .from('profiles')
-          .select('email, full_name')
-          .eq('id', user.id)
-          .single();
-          
-        const email = userData?.email || user.email;
-        const name = userData?.full_name;
-        
         // Create or retrieve connect account with new onboarding link
         const { data, error } = await supabase.functions.invoke('create-connect-account', {
           body: {
             userId: user.id,
-            email,
-            name
+            email: user.email,
+            name: user.user_metadata?.full_name || ''
           },
         });
         

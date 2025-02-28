@@ -32,28 +32,22 @@ const ConnectSuccess = () => {
           return;
         }
         
-        // Get the user's connect account
-        const { data: connectAccount, error } = await supabase
-          .from("stripe_connect_accounts")
-          .select("*")
-          .eq("user_id", user.id)
-          .single();
-          
-        if (error || !connectAccount) {
-          throw new Error("Connect account not found");
+        // Get the account data from the create-connect-account function
+        const { data, error } = await supabase.functions.invoke('create-connect-account', {
+          body: {
+            userId: user.id,
+            email: user.email,
+          },
+        });
+        
+        if (error) {
+          throw new Error(error.message);
         }
         
-        // Update the onboarded status
-        const { error: updateError } = await supabase
-          .from("stripe_connect_accounts")
-          .update({ onboarded: true })
-          .eq("user_id", user.id);
-          
-        if (updateError) {
-          throw updateError;
-        }
-        
-        setAccountData(connectAccount);
+        setAccountData({
+          stripe_account_id: data.accountId,
+          onboarded: data.isFullyOnboarded
+        });
         
         toast({
           title: "Stripe Connect Account Setup Complete",
