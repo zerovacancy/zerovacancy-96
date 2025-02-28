@@ -36,7 +36,7 @@ export function Hero() {
             "my-[16px] sm:my-[24px]",
             "min-h-fit sm:min-h-[60vh]",
             "relative z-10",
-            "gap-3 sm:gap-4" // Reduced gap between elements
+            "gap-3 sm:gap-4"
           )}
         >
           <div className="flex gap-4 sm:gap-6 flex-col max-w-10xl mx-auto w-full px-[3px]">
@@ -47,7 +47,7 @@ export function Hero() {
                   "text-4xl sm:text-5xl lg:text-6xl",
                   "tracking-[-0.02em]",
                   "text-gray-900",
-                  "block sm:inline-block mb-1 sm:mb-0" // Reduced margin
+                  "block sm:inline-block mb-1 sm:mb-0"
                 )}
               >
                 Property Content that
@@ -79,7 +79,7 @@ export function Hero() {
                 ))}
               </span>
             </h1>
-            <p
+            <div
               className={cn(
                 "text-sm sm:text-lg lg:text-xl",
                 "leading-[1.5]",
@@ -91,16 +91,15 @@ export function Hero() {
                 "px-4 sm:px-6",
                 "[word-spacing:0.12em] sm:[word-spacing:0.16em]",
                 "relative z-10",
-                "mt-1 mb-0" // Reduced top margin
+                "mt-1 mb-0"
               )}
             >
               Connect with expert content creators for your next project. Our AI-powered
               platform matches you with the perfect professional for your needs and budget.
-            </p>
+            </div>
           </div>
           <div className={cn("w-full", "mt-2 sm:mt-4", "px-4 sm:px-6")}>
-            {" "}
-            <WaitlistCTA className="mb-4" />{" "}
+            <WaitlistCTA className="mb-4" />
           </div>
         </section>
       </div>
