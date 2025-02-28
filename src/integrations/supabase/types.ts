@@ -9,6 +9,57 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      connect_payments: {
+        Row: {
+          amount: number
+          created_at: string | null
+          currency: string
+          description: string | null
+          id: string
+          metadata: Json | null
+          photographer_id: string | null
+          platform_fee: number
+          service_type: string | null
+          status: string
+          stripe_connect_account_id: string
+          stripe_payment_intent_id: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          currency?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          photographer_id?: string | null
+          platform_fee: number
+          service_type?: string | null
+          status: string
+          stripe_connect_account_id: string
+          stripe_payment_intent_id: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          currency?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          photographer_id?: string | null
+          platform_fee?: number
+          service_type?: string | null
+          status?: string
+          stripe_connect_account_id?: string
+          stripe_payment_intent_id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       customer_subscriptions: {
         Row: {
           cancel_at: string | null
@@ -95,6 +146,42 @@ export type Database = {
           subscription_period_end?: string | null
           subscription_period_start?: string | null
           subscription_status?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      stripe_connect_accounts: {
+        Row: {
+          country: string
+          created_at: string | null
+          email: string
+          id: string
+          metadata: Json | null
+          onboarded: boolean
+          stripe_account_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          country?: string
+          created_at?: string | null
+          email: string
+          id?: string
+          metadata?: Json | null
+          onboarded?: boolean
+          stripe_account_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          country?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          metadata?: Json | null
+          onboarded?: boolean
+          stripe_account_id?: string
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: []
