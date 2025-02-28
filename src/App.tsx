@@ -7,6 +7,7 @@ import Terms from './pages/Terms';
 import Account from './pages/Account';
 import ConnectSuccess from './pages/ConnectSuccess';
 import ConnectRefresh from './pages/ConnectRefresh';
+import ConnectOnboarding from './pages/ConnectOnboarding';
 import FontLoader from './components/FontLoader';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/account" element={<Account />} />
         <Route path="/connect/success" element={<ConnectSuccess />} />
         <Route path="/connect/refresh" element={<ConnectRefresh />} />
+        <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
       </Routes>
     </Router>
   );
