@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,17 +32,8 @@
     @apply border-border font-sans;
   }
 
-  html, body {
-    @apply overscroll-none;
-    width: 100%;
-    position: relative;
-    min-height: 100%;
-  }
-
   body {
     @apply bg-background text-foreground antialiased min-h-screen font-sans font-normal;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
   }
 
   h1 {

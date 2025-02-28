@@ -4,7 +4,6 @@ import { Search, Users, FileCheck, Calendar, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Waves } from '@/components/ui/waves';
 
 // Define colorful backgrounds for each step with enhanced styling options
 const stepColors = [{
@@ -26,7 +25,7 @@ const stepColors = [{
   glowColor: "shadow-blue-500/20",
   tintBg: "bg-blue-50/10"
 }, {
-  iconBg: "bg-amber-100",
+  iconBg: "bg-amber-100", 
   iconText: "text-amber-600",
   numBg: "bg-amber-600",
   numText: "text-white",
@@ -44,6 +43,7 @@ const stepColors = [{
   glowColor: "shadow-emerald-500/20",
   tintBg: "bg-emerald-50/10"
 }];
+
 const HowItWorksSection = () => {
   const isMobile = useIsMobile();
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -55,6 +55,7 @@ const HowItWorksSection = () => {
       setCompletedSteps(JSON.parse(savedProgress));
     }
   }, []);
+  
   const steps = [{
     icon: <Search className="w-5 h-5" />,
     title: "Search & Filter",
@@ -76,14 +77,9 @@ const HowItWorksSection = () => {
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
   }];
-  return <section className="relative bg-white p-0 w-full">
-      {/* Wave background with gradient - fix: removed overflow-hidden */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#a880e0]/10 to-[#80b0e0]/10 rounded-lg">
-        <Waves lineColor="rgba(120, 100, 200, 0.07)" backgroundColor="transparent" waveSpeedX={0.008} waveSpeedY={0.005} waveAmpX={40} waveAmpY={15} xGap={20} yGap={30} className="opacity-12" />
-      </div>
-      
-      {/* Content container with subtle shadow and border - fix: removed overflow-hidden from parent, adjusted padding */}
-      <div className="relative z-10 max-w-7xl mx-auto p-4 sm:p-6 md:p-10 backdrop-blur-[1px] rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-[#f0f0f0] bg-transparent">
+  
+  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50/5">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 sm:mb-14">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
             How It Works
@@ -98,39 +94,53 @@ const HowItWorksSection = () => {
           {/* Connecting gradient line */}
           <div className="absolute left-[8px] top-0 bottom-0 w-[3px] bg-gradient-to-b from-violet-500 via-blue-500 via-amber-500 to-emerald-500 opacity-60"></div>
           
-          {steps.map((step, index) => <motion.div key={index} initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0,
-          transition: {
-            type: "spring",
-            duration: 0.6,
-            delay: index * 0.15
-          }
-        }} whileTap={{
-          scale: 1.02,
-          transition: {
-            duration: 0.2
-          }
-        }} viewport={{
-          once: true,
-          margin: "-30px"
-        }} className={cn("relative bg-white", "w-full max-w-[327px] min-h-[100px]",
-        // Reduced height
-        "p-4",
-        // Reduced to 16px padding
-        "rounded-lg", "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]", "border border-gray-100", stepColors[index].borderColor, "border-l-[3px]",
-        // 3px left border
-        "touch-manipulation", "mx-auto", "transition-transform duration-200", "cursor-pointer")}>
+          {steps.map((step, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  type: "spring",
+                  duration: 0.6,
+                  delay: index * 0.15
+                }
+              }}
+              whileTap={{
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
+              viewport={{ once: true, margin: "-30px" }}
+              className={cn(
+                "relative bg-white",
+                "w-full max-w-[327px] min-h-[100px]", // Reduced height
+                "p-4", // Reduced to 16px padding
+                "rounded-lg",
+                "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]",
+                "border border-gray-100",
+                stepColors[index].borderColor,
+                "border-l-[3px]", // 3px left border
+                "touch-manipulation",
+                "mx-auto",
+                "transition-transform duration-200",
+                "cursor-pointer"
+              )}
+            >
               <div className="flex items-start">
                 {/* Left side: Number circle with integrated icon */}
                 <div className="relative mr-3">
-                  <div className={cn("w-8 h-8",
-              // Slightly smaller (32px)
-              stepColors[index].numBg, stepColors[index].numText, "rounded-full", "flex items-center justify-center", "text-sm font-medium", "shadow-sm", "relative", "mt-[2px]" // Align with first line of title
-              )}>
+                  <div className={cn(
+                    "w-8 h-8", // Slightly smaller (32px)
+                    stepColors[index].numBg,
+                    stepColors[index].numText,
+                    "rounded-full",
+                    "flex items-center justify-center",
+                    "text-sm font-medium",
+                    "shadow-sm",
+                    "relative",
+                    "mt-[2px]" // Align with first line of title
+                  )}>
                     <span className="flex items-center justify-center w-full h-full">
                       {index + 1}
                     </span>
@@ -138,9 +148,11 @@ const HowItWorksSection = () => {
                     {/* Removed the icon overlay inside number circle */}
                     
                     {/* Completed checkmark */}
-                    {completedSteps.includes(index) && <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
+                    {completedSteps.includes(index) && (
+                      <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
                         <Check className="w-3 h-3 text-green-500" />
-                      </div>}
+                      </div>
+                    )}
                   </div>
                 </div>
                 
@@ -151,9 +163,10 @@ const HowItWorksSection = () => {
                     <h4 className="text-[16px] font-semibold text-gray-900">
                       {step.title}
                     </h4>
-                    <div className={cn("ml-2",
-                // 8px spacing
-                stepColors[index].iconText)}>
+                    <div className={cn(
+                      "ml-2", // 8px spacing
+                      stepColors[index].iconText
+                    )}>
                       {step.icon}
                     </div>
                   </div>
@@ -164,7 +177,8 @@ const HowItWorksSection = () => {
                   </p>
                 </div>
               </div>
-            </motion.div>)}
+            </motion.div>
+          ))}
         </div>
         
         {/* Desktop grid layout */}
@@ -212,17 +226,25 @@ const HowItWorksSection = () => {
                   </motion.span>
                   
                   {/* Vertical connecting line for all steps with shorter length */}
-                  <motion.div className={cn("absolute top-7 left-[0.875rem] w-[2px]", `h-[calc(50%)] ${stepColors[index].lineColor} bg-gradient-to-b opacity-70`)} initial={{
-                scaleY: 0
-              }} whileInView={{
-                scaleY: 1,
-                transition: {
-                  delay: index * 0.2 + 0.4,
-                  duration: 0.5
-                }
-              }} viewport={{
-                once: true
-              }} />
+                  <motion.div 
+                    className={cn(
+                      "absolute top-7 left-[0.875rem] w-[2px]",
+                      `h-[calc(50%)] ${stepColors[index].lineColor} bg-gradient-to-b opacity-70`
+                    )}
+                    initial={{
+                      scaleY: 0
+                    }} 
+                    whileInView={{
+                      scaleY: 1,
+                      transition: {
+                        delay: index * 0.2 + 0.4,
+                        duration: 0.5
+                      }
+                    }} 
+                    viewport={{
+                      once: true
+                    }} 
+                  />
                 </div>
                 
                 {/* Icon with enhanced colorful background */}
@@ -231,9 +253,7 @@ const HowItWorksSection = () => {
             }} whileTap={{
               scale: 0.95
             }}>
-                  {React.cloneElement(step.icon, {
-                className: "w-7 h-7"
-              })}
+                  {React.cloneElement(step.icon, { className: "w-7 h-7" })}
                 </motion.div>
                 
                 <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 text-center line-clamp-1">
@@ -248,4 +268,5 @@ const HowItWorksSection = () => {
       </div>
     </section>;
 };
+
 export default HowItWorksSection;
