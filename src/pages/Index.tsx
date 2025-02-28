@@ -16,7 +16,6 @@ import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import { AuroraBackground } from '@/components/ui/aurora-background';
-import { Waves } from '@/components/ui/waves';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -72,19 +71,8 @@ const Index = () => {
 
         <div className="space-y-0">
           {/* How It Works Section - Adjusted spacing */}
-          <div id="how-it-works" className="relative bg-[#f8f9ff] py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100">
-            {/* Replace the radial gradient background with Waves */}
-            <Waves 
-              lineColor="rgba(147, 112, 219, 0.2)" 
-              backgroundColor="#f8f9ff"
-              waveSpeedX={0.01}
-              waveSpeedY={0.008}
-              waveAmpX={25}
-              waveAmpY={12}
-              xGap={15}
-              yGap={30}
-              className="opacity-70"
-            />
+          <div id="how-it-works" className="relative bg-gradient-to-b from-white via-gray-50 to-white py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100">
+            <div className="absolute inset-0 bg-[radial-gradient(#f1f1f1_1px,transparent_1px)] [background-size:20px_20px] opacity-50"></div>
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
               <HowItWorksSection />

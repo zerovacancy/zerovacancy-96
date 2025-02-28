@@ -4,7 +4,6 @@ import { Search, Users, FileCheck, Calendar, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Waves } from '@/components/ui/waves';
 
 // Define colorful backgrounds for each step with enhanced styling options
 const stepColors = [{
@@ -79,24 +78,8 @@ const HowItWorksSection = () => {
     number: "04"
   }];
   
-  return <section className="relative overflow-hidden bg-white p-0">
-      {/* Wave background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#a880e0]/10 to-[#80b0e0]/10 overflow-hidden rounded-lg">
-        <Waves 
-          lineColor="rgba(120, 100, 200, 0.07)" 
-          backgroundColor="transparent"
-          waveSpeedX={0.008} 
-          waveSpeedY={0.005}
-          waveAmpX={40}
-          waveAmpY={15}
-          xGap={20}
-          yGap={30}
-          className="opacity-12" 
-        />
-      </div>
-      
-      {/* Content container with subtle shadow and border */}
-      <div className="relative z-10 max-w-7xl mx-auto p-10 bg-white/30 backdrop-blur-[1px] rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-[#f0f0f0]">
+  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50/5">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 sm:mb-14">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
             How It Works
