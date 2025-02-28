@@ -52,18 +52,18 @@ const features = [{
 
 export function FeaturesSectionWithHoverEffects() {
   return (
-    <section className="py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
+    <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-6 sm:mb-8">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-2 sm:mb-3">
-            Elevate Your Property Marketing
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="section-title mb-3 sm:mb-4 font-space tracking-tight">
+            Professional Content Creation Services
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Premium services designed to make your real estate listings stand out from the competition
+          <p className="section-subtitle max-w-2xl mx-auto">
+            Everything you need to showcase your properties with stunning visuals and engaging content
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
           {features.map((feature, index) => (
             <Feature
               key={index}
@@ -105,26 +105,26 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
         "rounded-xl transition-all duration-200",
         "bg-white/90 hover:bg-white",
         "border border-gray-200/80 hover:border-gray-300",
-        "p-3 sm:p-4",
+        "p-4 sm:p-5",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
         !isMobile && "hover:shadow-md hover:-translate-y-0.5"
       )}
       onClick={handleClick}
       aria-expanded={isMobile ? isExpanded : undefined}
     >
-      <div className="flex flex-col items-start gap-2.5">
+      <div className="flex flex-col items-start gap-3">
         {/* Standardized icon container with consistent sizing and styling */}
         <div className={cn(
           "flex items-center justify-center",
-          "w-10 h-10", 
-          "rounded-xl", 
+          "w-12 h-12", // Increased size for better visibility on desktop
+          "rounded-xl", // More pronounced rounded corners
           "transition-all duration-200",
           colorScheme.bg,
           "group-hover:shadow-sm",
-          "border border-indigo-200/30" 
+          "border border-indigo-200/30" // Subtle border for more dimension
         )}>
           <Icon className={cn(
-            "w-5 h-5", 
+            "w-6 h-6", // Consistent icon size
             colorScheme.text,
             "transition-all duration-200",
             "group-hover:scale-110",
@@ -134,8 +134,8 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
         
         <div className="text-left w-full">
           <h3 className={cn(
-            "text-base font-semibold leading-6 font-space mb-1",
-            "text-gray-900 group-hover:text-indigo-600", 
+            "text-base font-semibold leading-6 font-space mb-1.5",
+            "text-gray-900 group-hover:text-indigo-600", // Matching hover color to icon theme
             "transition-colors duration-200"
           )}>
             {title}
@@ -144,7 +144,7 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
             "overflow-hidden transition-[max-height,opacity] duration-200",
             isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-32 opacity-100"
           )}>
-            <p className="text-sm text-gray-600 font-anek group-hover:text-gray-700 leading-snug">
+            <p className="text-sm text-gray-600 font-anek group-hover:text-gray-700">
               {description}
             </p>
           </div>

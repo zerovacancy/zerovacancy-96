@@ -4,6 +4,7 @@ import { Search, Users, FileCheck, Calendar, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Waves } from '@/components/ui/waves';
 
 // Define colorful backgrounds for each step with enhanced styling options
 const stepColors = [{
@@ -78,19 +79,35 @@ const HowItWorksSection = () => {
     number: "04"
   }];
   
-  return <section className="relative overflow-hidden py-6 sm:py-10 px-4 sm:px-6 lg:px-8 bg-gray-50/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-5 sm:mb-8">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-2 sm:mb-3">
-            Seamless Content Creation Process
+  return <section className="relative overflow-hidden bg-white p-0">
+      {/* Wave background with gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#a880e0]/10 to-[#80b0e0]/10 overflow-hidden rounded-lg">
+        <Waves 
+          lineColor="rgba(120, 100, 200, 0.07)" 
+          backgroundColor="transparent"
+          waveSpeedX={0.008} 
+          waveSpeedY={0.005}
+          waveAmpX={40}
+          waveAmpY={15}
+          xGap={20}
+          yGap={30}
+          className="opacity-12" 
+        />
+      </div>
+      
+      {/* Content container with subtle shadow and border */}
+      <div className="relative z-10 max-w-7xl mx-auto p-10 bg-white/30 backdrop-blur-[1px] rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-[#f0f0f0]">
+        <div className="text-center mb-6 sm:mb-14">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
+            How It Works
           </h3>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            From finding your creator to receiving stunning deliverables in four easy steps
+            Your journey to amazing content in four simple steps
           </p>
         </div>
         
         {/* Mobile vertical layout */}
-        <div className="md:hidden space-y-[12px] relative">
+        <div className="md:hidden space-y-[14px] relative">
           {/* Connecting gradient line */}
           <div className="absolute left-[8px] top-0 bottom-0 w-[3px] bg-gradient-to-b from-violet-500 via-blue-500 via-amber-500 to-emerald-500 opacity-60"></div>
           
@@ -114,8 +131,8 @@ const HowItWorksSection = () => {
               viewport={{ once: true, margin: "-30px" }}
               className={cn(
                 "relative bg-white",
-                "w-full max-w-[327px] min-h-[90px]", // Reduced height
-                "p-3", // Reduced padding
+                "w-full max-w-[327px] min-h-[100px]", // Reduced height
+                "p-4", // Reduced to 16px padding
                 "rounded-lg",
                 "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]",
                 "border border-gray-100",
@@ -131,12 +148,12 @@ const HowItWorksSection = () => {
                 {/* Left side: Number circle with integrated icon */}
                 <div className="relative mr-3">
                   <div className={cn(
-                    "w-7 h-7", // Slightly smaller
+                    "w-8 h-8", // Slightly smaller (32px)
                     stepColors[index].numBg,
                     stepColors[index].numText,
                     "rounded-full",
                     "flex items-center justify-center",
-                    "text-xs font-medium",
+                    "text-sm font-medium",
                     "shadow-sm",
                     "relative",
                     "mt-[2px]" // Align with first line of title
@@ -144,6 +161,8 @@ const HowItWorksSection = () => {
                     <span className="flex items-center justify-center w-full h-full">
                       {index + 1}
                     </span>
+                    
+                    {/* Removed the icon overlay inside number circle */}
                     
                     {/* Completed checkmark */}
                     {completedSteps.includes(index) && (
@@ -158,7 +177,7 @@ const HowItWorksSection = () => {
                 <div className="flex-1">
                   {/* Title with icon next to it */}
                   <div className="flex items-center">
-                    <h4 className="text-[15px] font-semibold text-gray-900">
+                    <h4 className="text-[16px] font-semibold text-gray-900">
                       {step.title}
                     </h4>
                     <div className={cn(
@@ -170,7 +189,7 @@ const HowItWorksSection = () => {
                   </div>
                   
                   {/* Description with reduced spacing */}
-                  <p className="text-[13px] text-gray-600 leading-[1.3] mt-1">
+                  <p className="text-[14px] text-gray-600 leading-[1.4] mt-1">
                     {step.description}
                   </p>
                 </div>
@@ -180,7 +199,7 @@ const HowItWorksSection = () => {
         </div>
         
         {/* Desktop grid layout */}
-        <div className="hidden md:grid w-full mx-auto grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 relative">
+        <div className="hidden md:grid w-full mx-auto grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10 relative">
           {steps.map((step, index) => <motion.div key={index} initial={{
           opacity: 0,
           y: 20
@@ -202,11 +221,11 @@ const HowItWorksSection = () => {
         }} viewport={{
           once: true,
           margin: "-50px"
-        }} className={cn("relative bg-white", "min-h-[160px] sm:min-h-[180px]", "px-5 py-6", "rounded-xl", "shadow-[0_4px_12px_rgba(0,0,0,0.08)]", "transition-all duration-200", "group", "border border-gray-100", "active:scale-[0.98]", "touch-manipulation", "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]")}>
+        }} className={cn("relative bg-white", "min-h-[180px] sm:min-h-[200px]", "px-6 py-8", "rounded-xl", "shadow-[0_4px_12px_rgba(0,0,0,0.08)]", "transition-all duration-200", "group", "border border-gray-100", "active:scale-[0.98]", "touch-manipulation", "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]")}>
               <div className="flex flex-col items-center justify-start h-full relative">
                 {/* Step Number with connecting line */}
                 <div className="absolute -left-[3.25rem] top-0 h-full" aria-hidden="true">
-                  <motion.span className={cn("absolute -top-2 left-0", "w-7 h-7", stepColors[index].numBg, stepColors[index].numText, "rounded-full", "flex items-center justify-center", "text-xs font-medium", "ring-4 ring-white", "z-10")} initial={{
+                  <motion.span className={cn("absolute -top-2 left-0", "w-8 h-8", stepColors[index].numBg, stepColors[index].numText, "rounded-full", "flex items-center justify-center", "text-sm font-medium", "ring-4 ring-white", "z-10")} initial={{
                 scale: 0.8,
                 opacity: 0
               }} whileInView={{
@@ -226,7 +245,7 @@ const HowItWorksSection = () => {
                   {/* Vertical connecting line for all steps with shorter length */}
                   <motion.div 
                     className={cn(
-                      "absolute top-6 left-[0.875rem] w-[2px]",
+                      "absolute top-7 left-[0.875rem] w-[2px]",
                       `h-[calc(50%)] ${stepColors[index].lineColor} bg-gradient-to-b opacity-70`
                     )}
                     initial={{
@@ -246,18 +265,18 @@ const HowItWorksSection = () => {
                 </div>
                 
                 {/* Icon with enhanced colorful background */}
-                <motion.div className={cn("mb-4", stepColors[index].iconBg, stepColors[index].iconText, "transition-all duration-300", "rounded-xl p-3", "group-hover:saturate-150")} whileHover={{
+                <motion.div className={cn("mb-5", stepColors[index].iconBg, stepColors[index].iconText, "transition-all duration-300", "rounded-xl p-4", "group-hover:saturate-150")} whileHover={{
               scale: 1.1
             }} whileTap={{
               scale: 0.95
             }}>
-                  {React.cloneElement(step.icon, { className: "w-6 h-6" })}
+                  {React.cloneElement(step.icon, { className: "w-7 h-7" })}
                 </motion.div>
                 
-                <h4 className="text-base font-semibold text-gray-900 mb-2 text-center line-clamp-1">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 text-center line-clamp-1">
                   {step.title}
                 </h4>
-                <p className="text-sm text-gray-600 leading-snug text-center">
+                <p className="text-sm text-gray-600 leading-relaxed text-center">
                   {step.description}
                 </p>
               </div>
@@ -266,7 +285,5 @@ const HowItWorksSection = () => {
       </div>
     </section>;
 };
-
-export default HowItWorksSection;
 
 export default HowItWorksSection;
