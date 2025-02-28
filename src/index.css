@@ -33,14 +33,15 @@
   }
 
   html, body {
-    @apply overflow-x-hidden overscroll-none; /* Added this line to prevent horizontal scroll */
+    @apply overscroll-none; /* Removed overflow-x-hidden to allow scrolling */
     width: 100%;
     position: relative;
   }
 
   body {
     @apply bg-background text-foreground antialiased min-h-screen font-sans font-normal;
-    /* Removed scroll-behavior: smooth that might be causing mobile scroll issues */
+    overflow-y: auto !important; /* Force vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* Improve mobile scrolling */
   }
 
   h1 {
