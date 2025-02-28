@@ -83,6 +83,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       return '/newemilyprofile.jpg';
     }
     if (creator.name === 'Jane Cooper') return '/janeprofile.png';
+    if (creator.name === 'Michael Brown') return '/emily profile.jpeg';
     return creator.image;
   };
   

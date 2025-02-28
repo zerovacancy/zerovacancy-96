@@ -36,7 +36,7 @@ const PreviewSearch = () => {
                     workExamples: ["/1-d2e3f802.jpg"]
                   },
                   {
-                    name: "Jane Smith",
+                    name: "Jane Cooper",
                     services: ["Video Tours", "Drone Footage"],
                     price: 200,
                     rating: 4.8,
