@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Search, Users, FileCheck, Calendar, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -75,14 +76,14 @@ const HowItWorksSection = () => {
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04"
   }];
-  return <section className="relative overflow-hidden bg-white p-0">
-      {/* Wave background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#a880e0]/10 to-[#80b0e0]/10 overflow-hidden rounded-lg">
+  return <section className="relative bg-white p-0 w-full">
+      {/* Wave background with gradient - fix: removed overflow-hidden */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#a880e0]/10 to-[#80b0e0]/10 rounded-lg">
         <Waves lineColor="rgba(120, 100, 200, 0.07)" backgroundColor="transparent" waveSpeedX={0.008} waveSpeedY={0.005} waveAmpX={40} waveAmpY={15} xGap={20} yGap={30} className="opacity-12" />
       </div>
       
-      {/* Content container with subtle shadow and border */}
-      <div className="relative z-10 max-w-7xl mx-auto p-10 backdrop-blur-[1px] rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-[#f0f0f0] bg-transparent">
+      {/* Content container with subtle shadow and border - fix: removed overflow-hidden from parent, adjusted padding */}
+      <div className="relative z-10 max-w-7xl mx-auto p-4 sm:p-6 md:p-10 backdrop-blur-[1px] rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-[#f0f0f0] bg-transparent">
         <div className="text-center mb-6 sm:mb-14">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
             How It Works

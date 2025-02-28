@@ -32,8 +32,15 @@
     @apply border-border font-sans;
   }
 
+  html, body {
+    @apply overflow-x-hidden overscroll-none; /* Added this line to prevent horizontal scroll */
+    width: 100%;
+    position: relative;
+  }
+
   body {
     @apply bg-background text-foreground antialiased min-h-screen font-sans font-normal;
+    /* Removed scroll-behavior: smooth that might be causing mobile scroll issues */
   }
 
   h1 {
