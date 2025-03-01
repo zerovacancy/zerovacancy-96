@@ -1,13 +1,13 @@
 
 import type { Config } from "tailwindcss";
 
-const config = {
+const config: Config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   prefix: "",
   theme: {
@@ -19,10 +19,6 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
-        'space': ['Space Grotesk', 'sans-serif'],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -30,20 +26,32 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#1A1F2C",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#F6F6F7",
-          foreground: "#1A1F2C",
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
-        accent: {
-          DEFAULT: "#E5DEFF",
-          foreground: "#1A1F2C",
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "#F1F0FB",
-          foreground: "#666666",
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
       },
       borderRadius: {
@@ -52,61 +60,57 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        "fade-up": {
-          "0%": {
-            opacity: "0",
-            transform: "translateY(10px)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateY(0)",
-          },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        "fade-in": {
-          "0%": {
-            opacity: "0",
-          },
-          "100%": {
-            opacity: "1",
-          },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
-        "spin-around": {
-          "0%": {
-            transform: "translateZ(0) rotate(0)",
-          },
-          "15%, 35%": {
-            transform: "translateZ(0) rotate(90deg)",
-          },
-          "65%, 85%": {
-            transform: "translateZ(0) rotate(270deg)",
-          },
-          "100%": {
-            transform: "translateZ(0) rotate(360deg)",
-          },
+        first: {
+          "0%": { transform: "translateY(0px) scale(1)" },
+          "33%": { transform: "translateY(-10px) scale(1.03)" },
+          "66%": { transform: "translateY(7px) scale(0.98)" },
+          "100%": { transform: "translateY(0px) scale(1)" },
         },
-        "shimmer-slide": {
-          to: {
-            transform: "translate(calc(100cqw - 100%), 0)",
-          },
+        second: {
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(10px, 10px) scale(1.02)" },
+          "66%": { transform: "translate(-7px, -7px) scale(0.98)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
         },
-        "border-beam": {
-          "0%": { "--offset-distance": "0%" },
-          "100%": { "--offset-distance": "100%" }
-        }
+        third: {
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(-10px, 10px) scale(1.02)" },
+          "66%": { transform: "translate(7px, -7px) scale(0.98)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
+        },
+        fourth: {
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(10px, -10px) scale(1.02)" },
+          "66%": { transform: "translate(-7px, 7px) scale(0.98)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
+        },
+        fifth: {
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(-10px, -10px) scale(1.02)" },
+          "66%": { transform: "translate(7px, 7px) scale(0.98)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
+        },
       },
       animation: {
-        "fade-up": "fade-up 0.5s ease-out",
-        "fade-in": "fade-in 0.3s ease-out",
-        "shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
-        "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
-        "border-beam": "border-beam var(--duration) infinite linear"
-      },
-      backgroundImage: {
-        'gradient-conic': 'conic-gradient(var(--conic-position), var(--tw-gradient-stops))',
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        first: "first 10s infinite",
+        second: "second 12s infinite",
+        third: "third 8s infinite",
+        fourth: "fourth 14s infinite", 
+        fifth: "fifth 6s infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+};
 
 export default config;
