@@ -84,19 +84,21 @@ export function WaitlistCTA({ className }: { className?: string }) {
         <Button 
           type="submit" 
           className={cn(
-            "flex items-center justify-center whitespace-nowrap",
+            "flex items-center justify-start whitespace-nowrap",
             isMobile ? [
               "w-full", 
               "rounded-lg", 
               "h-[56px]",
               "bg-gradient-to-r from-purple-600 to-cyan-500",
               "text-white",
-              "font-medium"
+              "font-medium",
+              "px-4"
             ] : [
               "h-12",
-              "rounded-lg w-[180px] px-6",
+              "rounded-lg w-[180px] px-4",
               "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700",
-              "text-white font-medium shadow-sm"
+              "text-white font-medium shadow-sm",
+              "justify-start"
             ]
           )}
           disabled={isLoading}
