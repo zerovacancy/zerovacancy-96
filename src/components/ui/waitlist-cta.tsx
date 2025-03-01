@@ -39,21 +39,23 @@ export function WaitlistCTA({ className }: { className?: string }) {
       "w-full max-w-xl mx-auto", 
       className
     )}>
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3 w-full">
-        <Input
-          ref={inputRef}
-          type="email"
-          placeholder="Enter your email address"
-          className="flex-1 h-12 px-4 border border-gray-200 focus:ring-2 focus:ring-primary/50 shadow-sm"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          aria-label="Email address"
-          required
-          disabled={isLoading}
-        />
+      <form onSubmit={handleSubmit} className="flex w-full">
+        <div className="flex-1 relative">
+          <Input
+            ref={inputRef}
+            type="email"
+            placeholder="Enter your email"
+            className="flex-1 h-[52px] rounded-l-md border border-r-0 border-gray-200 focus:ring-2 focus:ring-primary/50 px-4"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            aria-label="Email address"
+            required
+            disabled={isLoading}
+          />
+        </div>
         <Button 
           type="submit" 
-          className="group w-full sm:w-auto rounded-md h-12 px-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium shadow-sm touch-manipulation"
+          className="group h-[52px] rounded-l-none rounded-r-md min-w-[160px] px-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium shadow-sm flex items-center justify-center"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -66,8 +68,15 @@ export function WaitlistCTA({ className }: { className?: string }) {
           )}
         </Button>
       </form>
-      <div className="text-center text-xs text-gray-500 mt-3">
-        2,165+ people joined • Queue: 2-3 weeks
+      <div className="flex items-center justify-center gap-2 mt-3">
+        <div className="flex -space-x-1">
+          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">JT</div>
+          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">MI</div>
+          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">AS</div>
+        </div>
+        <div className="text-xs text-gray-500">
+          2,165+ people joined • Queue: 2-3 weeks
+        </div>
       </div>
     </div>
   );
