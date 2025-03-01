@@ -14,15 +14,17 @@ function App() {
   return (
     <Router>
       <FontLoader />
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/connect/success" element={<ConnectSuccess />} />
-        <Route path="/connect/refresh" element={<ConnectRefresh />} />
-        <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
-      </Routes>
+      <div className="min-h-screen flex flex-col">
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/connect/success" element={<ConnectSuccess />} />
+          <Route path="/connect/refresh" element={<ConnectRefresh />} />
+          <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

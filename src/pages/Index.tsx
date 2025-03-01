@@ -9,13 +9,12 @@ import HowItWorksSection from '../components/HowItWorksSection';
 import { BottomNav } from '../components/navigation/BottomNav';
 import { Banner } from '@/components/ui/banner';
 import { Button } from '@/components/ui/button';
-import { Star, Sparkle } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { Spotlight } from '@/components/ui/spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
-import { AuroraBackground } from '@/components/ui/aurora-background';
 import { Waves } from '@/components/ui/waves';
 
 const Index = () => {
@@ -34,10 +33,19 @@ const Index = () => {
     setShowGlowDialog(true);
   };
 
-  return <div className="flex flex-col min-h-screen">
+  return (
+    <div className="flex flex-col min-h-screen w-full max-w-screen overflow-x-hidden">
       <Header />
-      {showBanner && <div className="relative">
-          <Banner variant="purple" size="lg" action={<Button variant="secondary" size="sm" className="
+      {showBanner && (
+        <div className="relative">
+          <Banner 
+            variant="purple" 
+            size="lg" 
+            action={
+              <Button 
+                variant="secondary" 
+                size="sm" 
+                className="
                   flex text-xs sm:text-sm items-center 
                   whitespace-nowrap px-3 py-2 sm:px-5 sm:py-2.5
                   bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold
@@ -47,33 +55,44 @@ const Index = () => {
                   min-w-[8rem] sm:min-w-[9rem]
                   touch-manipulation
                   shadow-[0_2px_10px_rgba(0,0,0,0.15)]
-                " onClick={handleTryNowClick}>
+                " 
+                onClick={handleTryNowClick}
+              >
                 Get Early Access
-              </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)} className="animate-in fade-in slide-in-from-top duration-500 relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0">
+              </Button>
+            } 
+            layout="complex" 
+            isClosable 
+            onClose={() => setShowBanner(false)} 
+            className="animate-in fade-in slide-in-from-top duration-500 relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0"
+          >
             <div className="flex items-center justify-center gap-3 sm:gap-4 relative z-10">
               <Star className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-300 animate-pulse" />
-              <AnimatedShinyText className="
+              <AnimatedShinyText 
+                className="
                   text-sm sm:text-base font-bold inline-block
                   text-white relative z-10 rounded
                   px-1 tracking-wide
-                " shimmerWidth={200}>
+                " 
+                shimmerWidth={200}
+              >
                 Join the AI-powered revolution in property management!
               </AnimatedShinyText>
             </div>
           </Banner>
-        </div>}
+        </div>
+      )}
 
-      <main className="flex-1 pb-16 sm:pb-0">
+      <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
         {/* Hero Section */}
         <div className="relative overflow-hidden">
           <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
 
-        <div className="space-y-0">
-          {/* How It Works Section - Adjusted spacing */}
-          <div id="how-it-works" className="relative bg-[#f8f9ff] py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100">
-            {/* Replace the radial gradient background with Waves */}
+        <div className="space-y-0 w-full">
+          {/* How It Works Section */}
+          <div id="how-it-works" className="relative bg-[#f8f9ff] py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full">
             <Waves 
               lineColor="rgba(147, 112, 219, 0.2)" 
               backgroundColor="#f8f9ff"
@@ -91,8 +110,8 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Featured Creators Section - Adjusted spacing */}
-          <div className="bg-white py-10 sm:py-16 lg:py-20 border-b border-gray-100">
+          {/* Featured Creators Section */}
+          <div className="bg-white py-10 sm:py-16 lg:py-20 border-b border-gray-100 w-full">
             <div className="max-w-7xl mx-auto">
               <div id="search" className="relative overflow-hidden w-full">
                 <PreviewSearch />
@@ -100,8 +119,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Professional Content Creation Services - Adjusted spacing */}
-          <div className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100">
+          {/* Professional Content Creation Services */}
+          <div className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100 w-full">
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
             <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
@@ -109,8 +128,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Pricing Section - Adjusted spacing */}
-          <div id="pricing" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-white border-b border-gray-100">
+          {/* Pricing Section */}
+          <div id="pricing" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-white border-b border-gray-100 w-full">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#f3f3f3_1px,transparent_1px),linear-gradient(to_bottom,#f3f3f3_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
             <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
@@ -118,8 +137,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Final CTA Section - Adjusted spacing */}
-          <div className="relative py-14 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7]">
+          {/* Final CTA Section */}
+          <div className="relative py-14 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7] w-full">
             <Spotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <CallToActionSection />
@@ -131,6 +150,7 @@ const Index = () => {
       </main>
       <BottomNav />
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
-    </div>;
+    </div>
+  );
 };
 export default Index;

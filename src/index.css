@@ -28,12 +28,17 @@
     --color-5: 198 93% 60%;
   }
 
+  html, body {
+    @apply h-full overflow-x-hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   * {
     @apply border-border font-sans;
   }
 
   body {
-    @apply bg-background text-foreground antialiased min-h-screen font-sans font-normal;
+    @apply bg-background text-foreground antialiased min-h-screen font-sans font-normal overflow-x-hidden;
   }
 
   h1 {
