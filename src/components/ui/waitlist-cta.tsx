@@ -38,8 +38,7 @@ export function WaitlistCTA({ className }: { className?: string }) {
 
   return (
     <div className={cn(
-      "w-full max-w-xl mx-auto", 
-      isMobile ? "px-4" : "",
+      "w-full max-w-xl mx-auto px-5 sm:px-0",
       className
     )}>
       <form onSubmit={handleSubmit} className={cn(
@@ -58,7 +57,7 @@ export function WaitlistCTA({ className }: { className?: string }) {
               "h-12 border border-gray-200 bg-[#F5F5F8]",
               "focus:ring-2 focus:ring-primary/50 focus:border-transparent",
               "px-4 py-3 text-base placeholder:text-gray-400",
-              isMobile ? "rounded-full w-full" : "rounded-md w-full"
+              "rounded-lg"
             )}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -73,8 +72,8 @@ export function WaitlistCTA({ className }: { className?: string }) {
           className={cn(
             "h-12 flex items-center justify-center whitespace-nowrap",
             isMobile 
-              ? "w-full rounded-full bg-gradient-to-r from-purple-600 to-cyan-500" 
-              : "rounded-md w-[180px] px-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700",
+              ? "w-full rounded-lg bg-gradient-to-r from-purple-600 to-cyan-500" 
+              : "rounded-lg w-[180px] px-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700",
             "text-white font-medium shadow-sm"
           )}
           disabled={isLoading}
@@ -95,18 +94,18 @@ export function WaitlistCTA({ className }: { className?: string }) {
       
       <div className={cn(
         "flex items-center justify-center",
-        isMobile ? "mt-3" : "mt-4"
+        "mt-4"
       )}>
         <div className={cn(
           "flex -space-x-1.5 mr-2",
-          isMobile && "items-center"
+          "items-center"
         )}>
           <div className={cn(
-            isMobile ? "w-5 h-5" : "w-5 h-5",
+            "w-5 h-5",
             "rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold"
           )}>JT</div>
           <div className={cn(
-            isMobile ? "w-5 h-5" : "w-5 h-5",
+            "w-5 h-5",
             "rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold"
           )}>MI</div>
           {!isMobile && (
@@ -116,9 +115,11 @@ export function WaitlistCTA({ className }: { className?: string }) {
         
         <div className={cn(
           "text-xs text-gray-500",
-          isMobile && "flex items-center"
+          "flex items-center"
         )}>
-          2,165+ people joined • Queue: {isMobile ? "1-2 days" : "2-3 weeks"}
+          <span>2,165+ people joined</span>
+          <span className="mx-1.5">•</span>
+          <span>Queue: {isMobile ? "1-2 days" : "2-3 weeks"}</span>
         </div>
       </div>
     </div>

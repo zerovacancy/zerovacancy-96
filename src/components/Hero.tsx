@@ -146,7 +146,7 @@ export function Hero() {
           <motion.div 
             className={cn(
               "w-full", 
-              isMobile ? "mt-6" : "mt-8", 
+              "mt-8", 
               "px-4 sm:px-6"
             )} 
             initial={{
@@ -162,7 +162,7 @@ export function Hero() {
               delay: 0.3
             }}
           >
-            <WaitlistCTA className={isMobile ? "mb-8" : "mb-10"} />
+            <WaitlistCTA className="mb-10" />
           </motion.div>
         </motion.section>
       </AuroraBackground>
