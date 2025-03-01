@@ -32,9 +32,9 @@ export function WaitlistCTA({ className }: { className?: string }) {
   return (
     <div className={cn("w-full max-w-2xl mx-auto", className)}>
       <div className="flex flex-wrap gap-2 justify-center mb-4">
-        <AvatarPlaceholder className="border-2 border-white" />
-        <AvatarPlaceholder className="border-2 border-white" />
-        <AvatarPlaceholder className="border-2 border-white" />
+        <AvatarPlaceholder initials="JD" className="border-2 border-white" />
+        <AvatarPlaceholder initials="AB" className="border-2 border-white" />
+        <AvatarPlaceholder initials="MK" className="border-2 border-white" />
       </div>
       
       <div className="text-center text-sm mb-6 text-muted-foreground">
