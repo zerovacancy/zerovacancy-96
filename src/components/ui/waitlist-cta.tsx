@@ -37,7 +37,11 @@ export function WaitlistCTA({ className }: { className?: string }) {
   };
 
   return (
-    <div className={cn("w-full max-w-xl mx-auto", className)}>
+    <div className={cn(
+      "w-full max-w-xl mx-auto", 
+      isMobile ? "px-4" : "",
+      className
+    )}>
       <form onSubmit={handleSubmit} className={cn(
         "flex w-full",
         isMobile ? "flex-col space-y-2" : "flex-row items-center justify-center gap-2"
@@ -89,16 +93,31 @@ export function WaitlistCTA({ className }: { className?: string }) {
         </Button>
       </form>
       
-      <div className="flex items-center justify-center mt-4">
-        <div className="flex -space-x-1.5 mr-2">
-          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">JT</div>
-          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">MI</div>
+      <div className={cn(
+        "flex items-center justify-center",
+        isMobile ? "mt-3" : "mt-4"
+      )}>
+        <div className={cn(
+          "flex -space-x-1.5 mr-2",
+          isMobile && "items-center"
+        )}>
+          <div className={cn(
+            isMobile ? "w-5 h-5" : "w-5 h-5",
+            "rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold"
+          )}>JT</div>
+          <div className={cn(
+            isMobile ? "w-5 h-5" : "w-5 h-5",
+            "rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold"
+          )}>MI</div>
           {!isMobile && (
             <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">AS</div>
           )}
         </div>
         
-        <div className="text-xs text-gray-500">
+        <div className={cn(
+          "text-xs text-gray-500",
+          isMobile && "flex items-center"
+        )}>
           2,165+ people joined • Queue: {isMobile ? "1-2 days" : "2-3 weeks"}
         </div>
       </div>
