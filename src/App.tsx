@@ -14,7 +14,7 @@ function App() {
   return (
     <Router>
       <FontLoader />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col w-full overflow-x-hidden">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/payment-confirmation" element={<PaymentConfirmation />} />

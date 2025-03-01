@@ -34,7 +34,7 @@ const Index = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen w-full max-w-screen overflow-x-hidden">
+    <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       <Header />
       {showBanner && (
         <div className="relative">
@@ -153,4 +153,5 @@ const Index = () => {
     </div>
   );
 };
+
 export default Index;

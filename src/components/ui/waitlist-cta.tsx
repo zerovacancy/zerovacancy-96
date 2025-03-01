@@ -2,64 +2,70 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
-import { ShimmerButton } from "./shimmer-button";
-import { AvatarPlaceholder } from "./avatar-placeholder";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-interface WaitlistCTAProps {
-  className?: string;
-  onSubmit?: (email: string) => void;
-}
-export function WaitlistCTA({
-  className,
-  onSubmit
-}: WaitlistCTAProps) {
+import { ArrowRight, Loader2 } from "lucide-react";
+import { AvatarPlaceholder } from "./avatar-placeholder";
+import { toast } from "sonner";
+
+export function WaitlistCTA({ className }: { className?: string }) {
   const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    setIsSubmitting(true);
-    onSubmit?.(email);
-    setIsSubmitting(false);
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsLoading(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+      setEmail("");
+      toast.success("Thanks for joining our waitlist!");
+    }, 1000);
   };
-  return <div className={cn("flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-4 sm:px-6 mt-8", className)}>
-      <form onSubmit={handleSubmit} className="w-full flex justify-center">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3 w-full max-w-[480px] py-0 my-0">
-          <div className="w-full md:w-[300px]">
-            <input type="email" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} className={cn(
-          // Base dimensions
-          "w-full h-12", "inline-flex items-center",
-          // Enhanced styling
-          "bg-white", "border border-gray-200", "rounded-lg",
-          // Text styling
-          "text-base text-gray-800", "placeholder:text-gray-500", "placeholder:text-[15px] md:placeholder:text-base",
-          // Focus states
-          "transition-all duration-200 ease-in-out", "focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500/20", "disabled:opacity-50",
-          // Spacing
-          "px-4", "m-0",
-          // Shadow
-          "shadow-sm hover:shadow")} disabled={isSubmitting} required />
-          </div>
 
-          <ShimmerButton type="submit" disabled={isSubmitting} variant="primary" className="h-12 w-full md:w-[180px]">
-            <span className="flex-1 text-center whitespace-nowrap">Get Early Access</span>
-            <ArrowRight className="w-5 h-5 text-white/90 flex-shrink-0" aria-hidden="true" />
-          </ShimmerButton>
-        </div>
-      </form>
-
-      <div className="flex justify-center items-center mt-4 text-[14px] text-[#6B7280] font-normal">
-        <div className="flex items-center flex-wrap justify-center gap-y-2">
-          <span className="flex -space-x-1.5 mr-2.5" aria-hidden="true">
-            <AvatarPlaceholder initials="JT" />
-            <AvatarPlaceholder initials="MK" />
-            <AvatarPlaceholder initials="AS" className="hidden sm:flex" />
-          </span>
-          <span className="whitespace-nowrap">2,165+ people joined</span>
-          <span className="mx-3 sm:mx-4 w-1 h-1 rounded-full bg-gray-400 inline-block relative top-[0.5px]" aria-hidden="true" />
-          <span className="whitespace-nowrap">Queue: 2-3 weeks</span>
-        </div>
+  return (
+    <div className={cn("w-full max-w-2xl mx-auto", className)}>
+      <div className="flex flex-wrap gap-2 justify-center mb-4">
+        <AvatarPlaceholder className="border-2 border-white" />
+        <AvatarPlaceholder className="border-2 border-white" />
+        <AvatarPlaceholder className="border-2 border-white" />
       </div>
-    </div>;
+      
+      <div className="text-center text-sm mb-6 text-muted-foreground">
+        Join 3,200+ professionals on our waitlist
+      </div>
+      
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full">
+        <Input
+          type="email"
+          placeholder="Enter your email address"
+          className="flex-1"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          aria-label="Email address"
+          required
+        />
+        <Button 
+          type="submit" 
+          className="group rounded-md px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium shadow-sm"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+          ) : (
+            <>
+              Join Waitlist
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </>
+          )}
+        </Button>
+      </form>
+    </div>
+  );
 }
