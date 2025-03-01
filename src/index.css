@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,9 +28,10 @@
   }
 
   html, body {
-    @apply h-full overflow-x-hidden;
+    @apply h-full;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: none;
+    overscroll-behavior-y: auto;
+    position: relative;
   }
 
   * {
@@ -39,9 +39,11 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased min-h-screen font-sans font-normal overflow-x-hidden;
-    overscroll-behavior-y: none;
+    @apply bg-background text-foreground antialiased min-h-screen font-sans font-normal;
+    overscroll-behavior-y: auto;
     max-width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   h1 {
