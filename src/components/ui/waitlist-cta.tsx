@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -49,7 +50,7 @@ export function WaitlistCTA({
       </form>
 
       <div className="flex justify-center items-center mt-4 text-[14px] text-[#6B7280] font-normal">
-        <p className="flex items-center flex-wrap justify-center gap-y-2">
+        <div className="flex items-center flex-wrap justify-center gap-y-2">
           <span className="flex -space-x-1.5 mr-2.5" aria-hidden="true">
             <AvatarPlaceholder initials="JT" />
             <AvatarPlaceholder initials="MK" />
@@ -58,7 +59,7 @@ export function WaitlistCTA({
           <span className="whitespace-nowrap">2,165+ people joined</span>
           <span className="mx-3 sm:mx-4 w-1 h-1 rounded-full bg-gray-400 inline-block relative top-[0.5px]" aria-hidden="true" />
           <span className="whitespace-nowrap">Queue: 2-3 weeks</span>
-        </p>
+        </div>
       </div>
     </div>;
 }
