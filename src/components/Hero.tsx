@@ -1,8 +1,8 @@
 
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useMemo, useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
@@ -11,8 +11,14 @@ import { WaitlistCTA } from "./ui/waitlist-cta";
 export function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const isMobile = useIsMobile();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
+  
   const titles = useMemo(() => ["Converts", "Engages", "Drives Leads"], []);
+  
   useEffect(() => {
+    if (!isInView) return;
+    
     const timeout = isMobile ? 2500 : 2000;
     const timeoutId = setTimeout(() => {
       if (titleNumber === titles.length - 1) {
@@ -22,12 +28,13 @@ export function Hero() {
       }
     }, timeout);
     return () => clearTimeout(timeoutId);
-  }, [titleNumber, titles.length, isMobile]);
+  }, [titleNumber, titles.length, isMobile, isInView]);
   
   return (
     <div className="w-full relative">
       <AuroraBackground className="w-full py-0" showRadialGradient={false}>
         <motion.section 
+          ref={sectionRef}
           className={cn(
             "flex items-center justify-center flex-col", 
             "px-4 sm:px-6", 
@@ -35,16 +42,17 @@ export function Hero() {
             "my-[32px] sm:my-[48px]", 
             "min-h-fit sm:min-h-[70vh]", 
             "relative z-10", 
-            "gap-4 sm:gap-6"
+            "gap-4 sm:gap-6",
+            "touch-manipulation"
           )} 
           initial={{
             opacity: 0,
             y: 20
           }} 
-          animate={{
+          animate={isInView ? {
             opacity: 1,
             y: 0
-          }} 
+          } : {}}
           transition={{
             duration: 0.3
           }}
@@ -54,10 +62,10 @@ export function Hero() {
               opacity: 0,
               y: 20
             }} 
-            animate={{
+            animate={isInView ? {
               opacity: 1,
               y: 0
-            }} 
+            } : {}}
             transition={{
               duration: 0.3,
               delay: 0.1
@@ -141,10 +149,10 @@ export function Hero() {
               opacity: 0,
               y: 20
             }} 
-            animate={{
+            animate={isInView ? {
               opacity: 1,
               y: 0
-            }} 
+            } : {}}
             transition={{
               duration: 0.3,
               delay: 0.3

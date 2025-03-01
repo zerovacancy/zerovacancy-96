@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -147,6 +148,18 @@
   }
   .animate-rainbow {
     animation: rainbow 8s linear infinite;
+  }
+  .will-change-transform {
+    will-change: transform;
+  }
+  .backface-visible {
+    backface-visibility: visible;
+  }
+  .overscroll-y-auto {
+    overscroll-behavior-y: auto;
+  }
+  .touch-manipulation {
+    touch-action: manipulation;
   }
 }
 
