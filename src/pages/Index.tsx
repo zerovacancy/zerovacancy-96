@@ -15,7 +15,7 @@ import { Spotlight } from '@/components/ui/spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
-import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation';
+import { Waves } from '@/components/ui/waves';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -93,21 +93,17 @@ const Index = () => {
         <div className="space-y-0 w-full">
           {/* How It Works Section */}
           <div id="how-it-works" className="relative bg-[#f8f9ff] py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full">
-            <div className="absolute inset-0 w-full h-full">
-              <BackgroundGradientAnimation 
-                gradientBackgroundStart="rgb(235, 235, 255)" 
-                gradientBackgroundEnd="rgb(245, 245, 255)"
-                firstColor="136, 58, 234"
-                secondColor="224, 195, 252"
-                thirdColor="142, 197, 252"
-                fourthColor="224, 195, 252"
-                fifthColor="142, 197, 252"
-                interactive={false}
-                size="100%"
-                blendingValue="soft-light"
-                containerClassName="absolute inset-0"
-              />
-            </div>
+            <Waves 
+              lineColor="rgba(147, 112, 219, 0.2)" 
+              backgroundColor="#f8f9ff"
+              waveSpeedX={0.01}
+              waveSpeedY={0.008}
+              waveAmpX={25}
+              waveAmpY={12}
+              xGap={15}
+              yGap={30}
+              className="opacity-70"
+            />
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
               <HowItWorksSection />
@@ -125,21 +121,8 @@ const Index = () => {
 
           {/* Professional Content Creation Services */}
           <div className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100 w-full">
-            <div className="absolute inset-0 w-full h-full">
-              <BackgroundGradientAnimation 
-                gradientBackgroundStart="rgb(235, 235, 255)" 
-                gradientBackgroundEnd="rgb(245, 245, 255)"
-                firstColor="148, 233, 168"
-                secondColor="208, 233, 177"
-                thirdColor="120, 220, 232"
-                fourthColor="148, 233, 168"
-                fifthColor="208, 233, 177"
-                interactive={false}
-                size="100%"
-                blendingValue="soft-light"
-                containerClassName="absolute inset-0"
-              />
-            </div>
+            <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
+            <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <FeaturesSectionWithHoverEffects />
             </div>
@@ -147,21 +130,8 @@ const Index = () => {
 
           {/* Pricing Section */}
           <div id="pricing" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-white border-b border-gray-100 w-full">
-            <div className="absolute inset-0 w-full h-full">
-              <BackgroundGradientAnimation 
-                gradientBackgroundStart="rgb(250, 250, 252)" 
-                gradientBackgroundEnd="rgb(255, 255, 255)"
-                firstColor="200, 200, 255"
-                secondColor="180, 180, 255"
-                thirdColor="160, 160, 255"
-                fourthColor="170, 170, 255"
-                fifthColor="190, 190, 255"
-                interactive={false}
-                size="100%"
-                blendingValue="soft-light"
-                containerClassName="absolute inset-0"
-              />
-            </div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#f3f3f3_1px,transparent_1px),linear-gradient(to_bottom,#f3f3f3_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
+            <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <Pricing />
             </div>
@@ -169,21 +139,7 @@ const Index = () => {
 
           {/* Final CTA Section */}
           <div className="relative py-14 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7] w-full">
-            <div className="absolute inset-0 w-full h-full">
-              <BackgroundGradientAnimation 
-                gradientBackgroundStart="rgb(248, 248, 252)" 
-                gradientBackgroundEnd="rgb(252, 252, 255)"
-                firstColor="153, 51, 255"
-                secondColor="233, 168, 219"
-                thirdColor="113, 94, 255"
-                fourthColor="216, 180, 254"
-                fifthColor="192, 132, 252"
-                interactive={true}
-                size="100%"
-                blendingValue="soft-light"
-                containerClassName="absolute inset-0"
-              />
-            </div>
+            <Spotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <CallToActionSection />
             </div>
