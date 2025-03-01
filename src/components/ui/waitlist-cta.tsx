@@ -84,7 +84,7 @@ export function WaitlistCTA({ className }: { className?: string }) {
         <Button 
           type="submit" 
           className={cn(
-            "flex items-center whitespace-nowrap",
+            "flex items-center justify-center whitespace-nowrap",
             isMobile ? [
               "w-full", 
               "rounded-lg", 
@@ -92,23 +92,28 @@ export function WaitlistCTA({ className }: { className?: string }) {
               "bg-gradient-to-r from-purple-600 to-cyan-500",
               "text-white",
               "font-medium",
-              "px-5",
-              "justify-start"
+              "px-4",
+              "gap-2"
             ] : [
               "h-12",
               "rounded-lg w-[180px] px-5",
-              "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700",
+              "bg-[#7339E5] hover:bg-[#6432cc]", 
               "text-white font-medium shadow-sm",
-              "justify-start"
+              "gap-2"
             ]
           )}
           disabled={isLoading}
         >
           {isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+            <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
             <>
-              <span className="flex-shrink-0 mr-2">Get Early Access</span>
+              <span className={cn(
+                "text-sm leading-tight tracking-wide",
+                isMobile ? "text-base" : "text-sm"
+              )}>
+                Get Early Access
+              </span>
               <ArrowRight className="h-4 w-4 flex-shrink-0" />
             </>
           )}
