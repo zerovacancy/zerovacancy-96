@@ -40,11 +40,11 @@ export function WaitlistCTA({ className }: { className?: string }) {
     <div className={cn("w-full max-w-xl mx-auto", className)}>
       <form onSubmit={handleSubmit} className={cn(
         "flex w-full",
-        isMobile ? "flex-col space-y-2" : "flex-row gap-2 items-center"
+        isMobile ? "flex-col space-y-2" : "flex-row items-center justify-center gap-2"
       )}>
         <div className={cn(
           "relative",
-          isMobile ? "w-full" : "flex-1 max-w-[300px]"
+          isMobile ? "w-full" : "w-[300px]"
         )}>
           <Input
             ref={inputRef}
@@ -67,10 +67,10 @@ export function WaitlistCTA({ className }: { className?: string }) {
         <Button 
           type="submit" 
           className={cn(
-            "h-12 flex items-center justify-center",
+            "h-12 flex items-center justify-center whitespace-nowrap",
             isMobile 
               ? "w-full rounded-full bg-gradient-to-r from-purple-600 to-cyan-500" 
-              : "rounded-md w-[180px] bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700",
+              : "rounded-md w-[180px] px-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700",
             "text-white font-medium shadow-sm"
           )}
           disabled={isLoading}

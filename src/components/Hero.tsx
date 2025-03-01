@@ -144,7 +144,7 @@ export function Hero() {
           </motion.div>
           
           <motion.div 
-            className={cn("w-full", "mt-4 sm:mt-6", "px-4 sm:px-6")} 
+            className={cn("w-full", "mt-8 sm:mt-8", "px-4 sm:px-6")} 
             initial={{
               opacity: 0,
               y: 20
