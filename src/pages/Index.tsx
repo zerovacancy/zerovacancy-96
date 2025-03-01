@@ -15,7 +15,6 @@ import { Spotlight } from '@/components/ui/spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
-import { Waves } from '@/components/ui/waves';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -93,17 +92,6 @@ const Index = () => {
         <div className="space-y-0 w-full">
           {/* How It Works Section */}
           <div id="how-it-works" className="relative bg-[#f8f9ff] py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full">
-            <Waves 
-              lineColor="rgba(147, 112, 219, 0.2)" 
-              backgroundColor="#f8f9ff"
-              waveSpeedX={0.01}
-              waveSpeedY={0.008}
-              waveAmpX={25}
-              waveAmpY={12}
-              xGap={15}
-              yGap={30}
-              className="opacity-70"
-            />
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
               <HowItWorksSection />

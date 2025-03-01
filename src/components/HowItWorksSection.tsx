@@ -78,7 +78,8 @@ const HowItWorksSection = () => {
     number: "04"
   }];
   
-  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50/5">
+  return (
+    <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50/5 before:absolute before:inset-0 before:bg-[radial-gradient(#ffffff_1px,transparent_1px)] before:[background-size:16px_16px] before:opacity-40 before:z-0">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6 sm:mb-14">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
@@ -266,7 +267,8 @@ const HowItWorksSection = () => {
             </motion.div>)}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default HowItWorksSection;
