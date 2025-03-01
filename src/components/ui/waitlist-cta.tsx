@@ -43,7 +43,7 @@ export function WaitlistCTA({ className }: { className?: string }) {
     )}>
       <form onSubmit={handleSubmit} className={cn(
         "flex w-full",
-        isMobile ? "flex-col space-y-2" : "flex-row items-center justify-center gap-2"
+        isMobile ? "flex-col space-y-4" : "flex-row items-center justify-center gap-2"
       )}>
         <div className={cn(
           "relative",
@@ -54,10 +54,24 @@ export function WaitlistCTA({ className }: { className?: string }) {
             type="email"
             placeholder="Enter your email"
             className={cn(
-              "h-12 border border-gray-200 bg-[#F5F5F8]",
-              "focus:ring-2 focus:ring-primary/50 focus:border-transparent",
-              "px-4 py-3 text-base placeholder:text-gray-400",
-              "rounded-lg"
+              "border",
+              isMobile ? [
+                "h-[56px]", 
+                "bg-white", 
+                "border-gray-100",
+                "px-4 py-4",
+                "text-base",
+                "placeholder:text-gray-400",
+                "rounded-lg",
+                "w-full",
+                "shadow-none"
+              ] : [
+                "h-12 border-gray-200 bg-[#F5F5F8]",
+                "focus:ring-2 focus:ring-primary/50 focus:border-transparent",
+                "px-4 py-3",
+                "text-base placeholder:text-gray-400",
+                "rounded-lg"
+              ]
             )}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -70,11 +84,20 @@ export function WaitlistCTA({ className }: { className?: string }) {
         <Button 
           type="submit" 
           className={cn(
-            "h-12 flex items-center justify-center whitespace-nowrap",
-            isMobile 
-              ? "w-full rounded-lg bg-gradient-to-r from-purple-600 to-cyan-500" 
-              : "rounded-lg w-[180px] px-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700",
-            "text-white font-medium shadow-sm"
+            "flex items-center justify-center whitespace-nowrap",
+            isMobile ? [
+              "w-full", 
+              "rounded-lg", 
+              "h-[56px]",
+              "bg-gradient-to-r from-purple-600 to-cyan-500",
+              "text-white",
+              "font-medium"
+            ] : [
+              "h-12",
+              "rounded-lg w-[180px] px-6",
+              "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700",
+              "text-white font-medium shadow-sm"
+            ]
           )}
           disabled={isLoading}
         >
@@ -94,7 +117,7 @@ export function WaitlistCTA({ className }: { className?: string }) {
       
       <div className={cn(
         "flex items-center justify-center",
-        "mt-4"
+        isMobile ? "mt-4" : "mt-4"
       )}>
         <div className={cn(
           "flex -space-x-1.5 mr-2",
