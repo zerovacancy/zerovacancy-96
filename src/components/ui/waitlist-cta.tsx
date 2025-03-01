@@ -115,30 +115,16 @@ export function WaitlistCTA({ className }: { className?: string }) {
         </Button>
       </form>
       
-      <div className={cn(
-        "flex items-center justify-center mt-4"
-      )}>
-        <div className={cn(
-          "flex -space-x-1.5 mr-2",
-          "items-center"
-        )}>
-          <div className={cn(
-            "w-5 h-5",
-            "rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold"
-          )}>JT</div>
-          <div className={cn(
-            "w-5 h-5",
-            "rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold"
-          )}>MI</div>
+      <div className="flex items-center justify-center mt-4">
+        <div className="flex -space-x-1.5 mr-2 items-center">
+          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">JT</div>
+          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">MI</div>
           {!isMobile && (
             <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">AS</div>
           )}
         </div>
         
-        <div className={cn(
-          "text-xs text-gray-500",
-          "flex items-center"
-        )}>
+        <div className="text-xs text-gray-500 flex items-center whitespace-nowrap">
           <span>2,165+ people joined</span>
           <span className="mx-1.5">•</span>
           <span>Queue: {isMobile ? "1-2 days" : "2-3 weeks"}</span>
