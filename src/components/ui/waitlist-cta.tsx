@@ -116,8 +116,7 @@ export function WaitlistCTA({ className }: { className?: string }) {
       </form>
       
       <div className={cn(
-        "flex items-center justify-center",
-        isMobile ? "mt-4" : "mt-4"
+        "flex items-center justify-center mt-4"
       )}>
         <div className={cn(
           "flex -space-x-1.5 mr-2",
