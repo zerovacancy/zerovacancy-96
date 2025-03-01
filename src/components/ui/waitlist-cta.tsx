@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef } from "react";
@@ -123,10 +122,10 @@ export function WaitlistCTA({ className }: { className?: string }) {
       
       <div className="flex items-center justify-center mt-4">
         <div className="flex -space-x-1.5 mr-2 items-center">
-          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">JT</div>
-          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">MI</div>
+          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold border border-[#7339E5]">JT</div>
+          <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold border border-[#7339E5]">MI</div>
           {!isMobile && (
-            <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">AS</div>
+            <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold border border-[#7339E5]">AS</div>
           )}
         </div>
         
