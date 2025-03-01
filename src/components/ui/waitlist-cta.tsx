@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef } from "react";
@@ -35,49 +36,55 @@ export function WaitlistCTA({ className }: { className?: string }) {
     }
   };
 
-  // Mobile design matches the screenshot
+  // Mobile design matches the screenshot exactly
   if (isMobile) {
     return (
       <div className={cn("w-full max-w-xl mx-auto", className)}>
-        <form onSubmit={handleSubmit} className="flex flex-col w-full gap-3">
-          <Input
-            ref={inputRef}
-            type="email"
-            placeholder="Enter your email"
-            className="h-[52px] rounded-full border border-gray-200 focus:ring-2 focus:ring-primary/50 px-4 shadow-sm"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            aria-label="Email address"
-            required
-            disabled={isLoading}
-          />
-          <Button 
-            type="submit" 
-            className="group h-[52px] rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-medium shadow-sm flex items-center justify-center"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin mr-2" />
-            ) : (
-              <>
-                Get Early Access
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </>
-            )}
-          </Button>
-        </form>
-        <div className="flex items-center justify-center gap-2 mt-4">
-          <div className="flex -space-x-1">
-            <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">JT</div>
-            <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">MI</div>
+        <form onSubmit={handleSubmit} className="flex flex-col w-full">
+          <div className="relative w-full space-y-2">
+            <Input
+              ref={inputRef}
+              type="email"
+              placeholder="Enter your email"
+              className="h-[50px] rounded-full border border-gray-200 focus:ring-2 focus:ring-primary/50 px-4 shadow-sm bg-white"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              aria-label="Email address"
+              required
+              disabled={isLoading}
+            />
+            
+            <Button 
+              type="submit" 
+              className="h-[50px] w-full rounded-full bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-medium shadow-sm flex items-center justify-center"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+              ) : (
+                <>
+                  Get Early Access
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </>
+              )}
+            </Button>
           </div>
-          <div className="flex flex-col items-start">
-            <div className="text-xs text-gray-500">
-              2,165+ people joined •
+        </form>
+        
+        <div className="flex flex-col items-center mt-3">
+          <div className="flex items-center">
+            <div className="flex -space-x-1.5 mr-2">
+              <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">JT</div>
+              <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center text-[6px] text-white font-bold">MI</div>
             </div>
             <div className="text-xs text-gray-500">
-              Queue: 1-2 days
+              2,165+ people joined
             </div>
+            <div className="text-xs text-gray-500 mx-1">•</div>
+          </div>
+          
+          <div className="text-xs text-gray-500">
+            Queue: 1-2 days
           </div>
         </div>
       </div>
