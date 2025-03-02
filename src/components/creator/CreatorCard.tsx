@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
@@ -136,17 +135,15 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
         />
         
         <div className="relative">
-          {/* Price tag - Redesigned with more opacity and consistent padding */}
+          {/* Price tag - Modified to always have filled background */}
           <div className="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 z-10">
             <span className={cn(
               "px-2.5 sm:px-3 py-1.5",
               "text-xs sm:text-sm font-medium",
-              "bg-white/98 backdrop-blur-sm",
+              "bg-white shadow-sm border border-white/40",
               "text-gray-900 rounded-full",
-              "shadow-sm border border-white/40",
               "transition-all duration-200",
-              "group-hover:shadow-md group-hover:scale-105",
-              "group-hover:bg-white"
+              "group-hover:scale-105"
             )}>
               From ${creator.price}
             </span>
