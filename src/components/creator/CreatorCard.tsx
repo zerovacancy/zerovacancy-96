@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
-import { MapPin, Star, Image, Shield, ArrowRight } from 'lucide-react';
+import { MapPin, Star, Image, BadgeCheck, ArrowRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -187,18 +187,19 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-white select-text">
               <div className="flex items-center gap-2 sm:gap-2.5">
                 <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
-                {/* Updated verification badge to use Shield icon */}
-                <Shield 
-                  className={cn(
-                    "w-5 h-5 sm:w-6 sm:h-6 text-blue-400",
-                    "transition-all duration-300",
-                    "group-hover:text-blue-300",
-                    "group-hover:drop-shadow-[0_0_3px_rgba(59,130,246,0.5)]",
-                    "group-hover:animate-[pulse_1.5s_ease-in-out_infinite]",
-                    "bg-white/30 rounded-full backdrop-blur-sm"
-                  )}
+                {/* Updated verification badge using BadgeCheck with solid background */}
+                <span 
+                  className="flex items-center justify-center rounded-full bg-[#4F46E5] p-0.5 sm:p-1"
                   aria-label="Verified Creator"
-                />
+                >
+                  <BadgeCheck 
+                    className={cn(
+                      "w-4 h-4 sm:w-4 sm:h-4 text-white",
+                      "transition-all duration-300",
+                      "group-hover:animate-[pulse_1.5s_ease-in-out_infinite]"
+                    )}
+                  />
+                </span>
               </div>
               
               {/* Enhanced location display */}
