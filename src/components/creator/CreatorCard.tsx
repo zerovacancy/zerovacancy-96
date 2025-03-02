@@ -136,15 +136,16 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
         />
         
         <div className="relative">
-          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10">
+          {/* Price tag - Redesigned with more opacity and consistent padding */}
+          <div className="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 z-10">
             <span className={cn(
-              "px-2 sm:px-2.5 py-1",
+              "px-2.5 sm:px-3 py-1.5",
               "text-xs sm:text-sm font-medium",
-              "bg-white/95 backdrop-blur-sm",
+              "bg-white/98 backdrop-blur-sm",
               "text-gray-900 rounded-full",
-              "shadow-sm border border-white/30",
+              "shadow-sm border border-white/40",
               "transition-all duration-200",
-              "group-hover:shadow-md",
+              "group-hover:shadow-md group-hover:scale-105",
               "group-hover:bg-white"
             )}>
               From ${creator.price}
@@ -185,47 +186,63 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               aria-hidden="true"
             />
             
-            <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 text-white select-text">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <h3 className="font-semibold text-base sm:text-xl">{creator.name}</h3>
+            {/* Improved name, location and services section */}
+            <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-white select-text">
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
+                {/* Enhanced verification badge */}
                 <CheckCircle 
                   className={cn(
-                    "w-4 h-4 sm:w-5 sm:h-5 text-blue-400",
+                    "w-5 h-5 sm:w-6 sm:h-6 text-blue-400",
                     "transition-all duration-300",
                     "group-hover:text-blue-300",
-                    "group-hover:drop-shadow-[0_0_3px_rgba(59,130,246,0.5)]"
+                    "group-hover:drop-shadow-[0_0_3px_rgba(59,130,246,0.5)]",
+                    "group-hover:animate-[pulse_1.5s_ease-in-out_infinite]",
+                    "bg-white/30 rounded-full backdrop-blur-sm"
                   )}
                   aria-label="Verified Creator"
                 />
               </div>
-              <div className="flex items-center gap-1.5 mt-0.5 sm:mt-1">
+              
+              {/* Enhanced location display */}
+              <div className="flex items-center gap-1.5 mt-1.5 sm:mt-2">
                 <MapPin 
-                  className="w-3.5 h-3.5 text-white/90" 
+                  className="w-4 h-4 text-white/95 flex-shrink-0" 
                   aria-hidden="true"
                 />
-                <span className="text-xs sm:text-sm text-white/90">{creator.location}</span>
+                <span className="text-xs sm:text-sm text-white/95">{creator.location}</span>
               </div>
-              <p className="text-xs sm:text-sm text-white/90 mt-0.5 sm:mt-1">
-                {creator.services.join(" • ")}
-              </p>
+              
+              {/* Enhanced services display */}
+              <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5">
+                <Image
+                  className="w-3.5 h-3.5 text-white/90 flex-shrink-0"
+                  aria-hidden="true"
+                />
+                <p className="text-xs sm:text-sm text-white/90">
+                  {creator.services.join(" • ")}
+                </p>
+              </div>
             </div>
           </div>
           
-          <div className="p-3 sm:p-4 flex flex-col h-[180px]">
+          <div className="p-3.5 sm:p-4.5 flex flex-col h-[180px]">
             <div className="flex flex-col h-full">
-              {/* Tags section - fixed height */}
-              <div className="mb-3">
+              {/* Enhanced tags section with hover effects */}
+              <div className="mb-3.5">
                 <div 
                   className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
                   role="list"
                   aria-label="Creator specialties"
                 >
-                  <div className="flex flex-nowrap gap-1.5 sm:gap-2">
+                  <div className="flex flex-nowrap gap-2 sm:gap-2.5">
                     {tags.map((tag, index) => (
                       <span
                         key={index}
                         className={cn(
-                          "text-[10px] sm:text-xs px-2 py-1 rounded-full transition-colors duration-200 whitespace-nowrap",
+                          "text-[10px] sm:text-xs px-2.5 py-1.5 rounded-full",
+                          "transition-all duration-200 whitespace-nowrap",
+                          "hover:scale-105 cursor-pointer",
                           getTagStyle(tag)
                         )}
                         role="listitem"
@@ -237,20 +254,20 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 </div>
               </div>
               
-              {/* Rating section - consistent height */}
-              <div className="mb-auto">
+              {/* Enhanced rating section with separator */}
+              <div className="mb-auto border-b border-gray-100 pb-3">
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
               
-              {/* Button section - fixed at bottom with consistent height */}
-              <div className="flex justify-center mt-3">
+              {/* Enhanced CTA button section */}
+              <div className="flex justify-center mt-4">
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
                   aria-label={`Join waitlist to work with ${creator.name}`}
-                  className="w-[70%] h-9 sm:h-10 text-xs sm:text-sm px-3 sm:px-4"
+                  className="w-[80%] h-10 sm:h-11 text-xs sm:text-sm px-3 sm:px-4 hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200"
                 >
                   <span>Join Waitlist</span>
-                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 ml-1.5" aria-hidden="true" />
                 </ShimmerButton>
               </div>
             </div>
