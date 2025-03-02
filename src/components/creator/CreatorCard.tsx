@@ -187,19 +187,16 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-white select-text">
               <div className="flex items-center gap-2 sm:gap-2.5">
                 <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
-                {/* Updated verification badge using BadgeCheck with solid background */}
-                <span 
-                  className="flex items-center justify-center rounded-full bg-[#4F46E5] p-0.5 sm:p-1"
+                {/* Updated verification badge - now just white circle and checkmark */}
+                <BadgeCheck 
+                  className={cn(
+                    "w-5 h-5 sm:w-5 sm:h-5 text-white",
+                    "transition-all duration-300",
+                    "group-hover:animate-[pulse_1.5s_ease-in-out_infinite]",
+                    "bg-white/30 rounded-full p-0.5"
+                  )}
                   aria-label="Verified Creator"
-                >
-                  <BadgeCheck 
-                    className={cn(
-                      "w-4 h-4 sm:w-4 sm:h-4 text-white",
-                      "transition-all duration-300",
-                      "group-hover:animate-[pulse_1.5s_ease-in-out_infinite]"
-                    )}
-                  />
-                </span>
+                />
               </div>
               
               {/* Enhanced location display */}
