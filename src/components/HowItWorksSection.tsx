@@ -223,74 +223,127 @@ const HowItWorksSection = () => {
           </p>
         </div>
         
-        {/* Mobile horizontal scroll layout */}
-        <div className="md:hidden w-full relative mb-3">
-          {/* Scroll navigation buttons */}
-          <div className="flex justify-between absolute -left-1 -right-1 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none">
-            <button onClick={handleScrollLeft} className={cn("w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto", scrollPosition <= 10 ? "opacity-40" : "opacity-80")} disabled={scrollPosition <= 10}>
-              <ChevronLeft className="w-5 h-5 text-gray-700" />
-            </button>
-            <button onClick={handleScrollRight} className={cn("w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto", scrollPosition >= maxScroll - 10 ? "opacity-40" : "opacity-80")} disabled={scrollPosition >= maxScroll - 10}>
-              <ChevronRight className="w-5 h-5 text-gray-700" />
-            </button>
+       // Mobile horizontal scroll layout with improvements
+<div className="md:hidden w-full relative mb-0">
+  {/* Scroll navigation buttons */}
+  <div className="flex justify-between absolute -left-1 -right-1 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none">
+    <button onClick={handleScrollLeft} className={cn("w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto", scrollPosition <= 10 ? "opacity-40" : "opacity-80")} disabled={scrollPosition <= 10}>
+      <ChevronLeft className="w-5 h-5 text-gray-700" />
+    </button>
+    <button onClick={handleScrollRight} className={cn("w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto", scrollPosition >= maxScroll - 10 ? "opacity-40" : "opacity-80")} disabled={scrollPosition >= maxScroll - 10}>
+      <ChevronRight className="w-5 h-5 text-gray-700" />
+    </button>
+  </div>
+  
+  {/* Horizontal scroll container - improved with more compact styling */}
+  <div 
+    ref={scrollContainerRef} 
+    className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-0 px-1" 
+    onScroll={handleScroll} 
+    style={{
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none'
+    }}
+  >
+    {steps.map((step, index) => (
+      <motion.div 
+        key={index} 
+        initial={{
+          opacity: 0,
+          y: 10
+        }} 
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: "spring",
+            duration: 0.5,
+            delay: index * 0.1
+          }
+        }} 
+        whileTap={{
+          scale: 0.98
+        }} 
+        viewport={{
+          once: true,
+          margin: "-10px"
+        }} 
+        className={cn(
+          "relative",
+          "flex-shrink-0 w-[240px] min-h-[120px]", // Reduced min-height
+          "p-3", // Reduced padding from p-4
+          "rounded-xl",
+          "shadow-md",
+          "border border-gray-100",
+          "mr-3 last:mr-1",
+          "snap-center",
+          "touch-manipulation",
+          "transition-transform duration-200",
+          "cursor-pointer",
+          stepColors[index].gradient
+        )}
+      >
+        {/* Step Number - more compact */}
+        <div className="flex items-center mb-2">
+          <div className={cn(
+            "w-6 h-6", // Reduced from w-7 h-7
+            stepColors[index].numBg, 
+            stepColors[index].numText, 
+            "rounded-full",
+            "flex items-center justify-center", 
+            "text-xs font-medium", // Reduced from text-sm
+            "shadow-sm",
+            "mr-2"
+          )}>
+            {index + 1}
+            
+            {/* Completed checkmark */}
+            {completedSteps.includes(index) && (
+              <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
+                <Check className="w-3 h-3 text-green-500" />
+              </div>
+            )}
           </div>
           
-          {/* Horizontal scroll container */}
-          <div ref={scrollContainerRef} className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2 px-1" onScroll={handleScroll} style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}>
-            {steps.map((step, index) => <motion.div key={index} initial={{
-            opacity: 0,
-            y: 10
-          }} whileInView={{
-            opacity: 1,
-            y: 0,
-            transition: {
-              type: "spring",
-              duration: 0.5,
-              delay: index * 0.1
-            }
-          }} whileTap={{
-            scale: 0.98
-          }} viewport={{
-            once: true,
-            margin: "-10px"
-          }} className={cn("relative", "flex-shrink-0 w-[240px] min-h-[130px]", "p-4", "rounded-xl", "shadow-md", "border border-gray-100", "mr-3 last:mr-1", "snap-center", "touch-manipulation", "transition-transform duration-200", "cursor-pointer", stepColors[index].gradient)}>
-                {/* Step Number */}
-                <div className="flex items-center mb-3">
-                  <div className={cn("w-7 h-7", stepColors[index].numBg, stepColors[index].numText, "rounded-full", "flex items-center justify-center", "text-sm font-medium", "shadow-sm", "mr-2")}>
-                    {index + 1}
-                    
-                    {/* Completed checkmark */}
-                    {completedSteps.includes(index) && <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
-                        <Check className="w-3 h-3 text-green-500" />
-                      </div>}
-                  </div>
-                  
-                  {/* Title */}
-                  <h4 className="text-sm font-semibold text-gray-900 flex-1">
-                    {step.title}
-                  </h4>
-                  
-                  {/* Icon */}
-                  <div className={cn("ml-1", stepColors[index].iconText, stepColors[index].iconBg, "rounded-full p-1")}>
-                    {step.icon}
-                  </div>
-                </div>
-                
-                {/* Description */}
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  {step.description}
-                </p>
-              </motion.div>)}
-          </div>
-
-          {/* Scroll indicators */}
-          <div className="flex justify-center mt-2 space-x-1">
-            {steps.map((_, index) => <div key={index} className={cn("h-1 rounded-full transition-all duration-300", index === Math.floor(scrollPosition / (maxScroll / steps.length)) ? `w-6 ${stepColors[index].numBg}` : "w-2 bg-gray-300")} />)}
+          {/* Title */}
+          <h4 className="text-sm font-semibold text-gray-900 flex-1">
+            {step.title}
+          </h4>
+          
+          {/* Icon - smaller */}
+          <div className={cn(
+            "ml-1", 
+            stepColors[index].iconText, 
+            stepColors[index].iconBg, 
+            "rounded-full p-0.5"
+          )}>
+            {React.cloneElement(step.icon, { className: "w-4 h-4" })}
           </div>
         </div>
+        
+        {/* Description - more compact */}
+        <p className="text-xs text-gray-600 leading-tight">
+          {step.description}
+        </p>
+      </motion.div>
+    ))}
+  </div>
+
+  {/* Scroll indicators - moved closer to cards, reduced margin */}
+  <div className="flex justify-center mt-1 space-x-1 mb-1">
+    {steps.map((_, index) => (
+      <div 
+        key={index} 
+        className={cn(
+          "h-1 rounded-full transition-all duration-300", 
+          index === Math.floor(scrollPosition / (maxScroll / steps.length)) 
+            ? `w-6 ${stepColors[index].numBg}` 
+            : "w-2 bg-gray-300"
+        )} 
+      />
+    ))}
+  </div>
+</div>
 
         {/* Alternative Mobile 2x2 Grid Layout */}
         <div className="md:hidden mt-6 hidden">
