@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 interface Creator {
@@ -86,10 +85,7 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
           )}
         </>
       )}
-      <div 
-        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" 
-        aria-hidden="true"
-      />
+      {/* Removing this gradient overlay since it's now in CreatorInfo */}
     </div>
   );
 };
