@@ -49,29 +49,23 @@ export interface Step {
   number: string;
 }
 
-// Create the icon elements as functions to avoid JSX syntax in .ts file
-const createSearchIcon = () => React.createElement(Search, { className: "w-5 h-5" });
-const createUsersIcon = () => React.createElement(Users, { className: "w-5 h-5" });
-const createCalendarIcon = () => React.createElement(Calendar, { className: "w-5 h-5" });
-const createFileCheckIcon = () => React.createElement(FileCheck, { className: "w-5 h-5" });
-
 export const stepsData: Step[] = [{
-  icon: createSearchIcon(),
+  icon: <Search className="w-5 h-5" />,
   title: "Search & Filter",
   description: "Find your perfect creator match based on your specific needs and requirements",
   number: "01"
 }, {
-  icon: createUsersIcon(),
+  icon: <Users className="w-5 h-5" />,
   title: "Review & Compare",
   description: "Browse portfolios and reviews to find the perfect match for your project",
   number: "02"
 }, {
-  icon: createCalendarIcon(),
+  icon: <Calendar className="w-5 h-5" />,
   title: "Book & Pay",
   description: "Schedule securely through our platform with protected payments",
   number: "03"
 }, {
-  icon: createFileCheckIcon(),
+  icon: <FileCheck className="w-5 h-5" />,
   title: "Get Content",
   description: "Receive and approve your deliverables through our streamlined process",
   number: "04"
