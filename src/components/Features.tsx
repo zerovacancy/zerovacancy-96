@@ -3,17 +3,18 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Camera, Image, Video, Instagram, UserCheck, Clock, CreditCard, Award } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { motion } from "framer-motion";
 
-// Define a more consistent color palette for icons
+// Define a more vibrant color palette for icons
 const iconColors = {
-  Camera: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  Image: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  Video: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  Instagram: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  UserCheck: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  Clock: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  CreditCard: { bg: "bg-indigo-100", text: "text-indigo-600" },
-  Award: { bg: "bg-indigo-100", text: "text-indigo-600" },
+  Camera: { bg: "bg-indigo-100", text: "text-indigo-700" },
+  Image: { bg: "bg-blue-100", text: "text-blue-700" },
+  Video: { bg: "bg-violet-100", text: "text-violet-700" },
+  Instagram: { bg: "bg-pink-100", text: "text-pink-700" },
+  UserCheck: { bg: "bg-emerald-100", text: "text-emerald-700" },
+  Clock: { bg: "bg-amber-100", text: "text-amber-700" },
+  CreditCard: { bg: "bg-cyan-100", text: "text-cyan-700" },
+  Award: { bg: "bg-rose-100", text: "text-rose-700" },
 };
 
 const features = [{
@@ -52,10 +53,10 @@ const features = [{
 
 export function FeaturesSectionWithHoverEffects() {
   return (
-    <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
+    <section className="py-10 sm:py-14 lg:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8 sm:mb-10">
-          <h2 className="section-title mb-3 sm:mb-4 font-space tracking-tight">
+        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
+          <h2 className="section-title mb-4 sm:mb-5 font-space tracking-tight">
             Professional Content Creation Services
           </h2>
           <p className="section-subtitle max-w-2xl mx-auto">
@@ -63,7 +64,7 @@ export function FeaturesSectionWithHoverEffects() {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           {features.map((feature, index) => (
             <Feature
               key={index}
@@ -96,61 +97,68 @@ const Feature = ({ title, description, Icon }: FeatureProps) => {
   
   // Get the color scheme for this icon
   const iconName = Icon.name || Icon.displayName || "";
-  const colorScheme = iconColors[iconName as keyof typeof iconColors] || { bg: "bg-indigo-100", text: "text-indigo-600" };
+  const colorScheme = iconColors[iconName as keyof typeof iconColors] || { bg: "bg-indigo-100", text: "text-indigo-700" };
   
   return (
-    <button
+    <motion.button
       className={cn(
-        "relative w-full text-left group",
-        "rounded-xl transition-all duration-200",
+        "relative w-full text-left group h-full flex flex-col",
+        "rounded-xl transition-all duration-300",
         "bg-white/90 hover:bg-white",
         "border border-gray-200/80 hover:border-gray-300",
-        "p-4 sm:p-5",
+        "p-5 sm:p-6",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
-        !isMobile && "hover:shadow-md hover:-translate-y-0.5"
+        !isMobile && "hover:shadow-lg hover:-translate-y-1"
       )}
       onClick={handleClick}
       aria-expanded={isMobile ? isExpanded : undefined}
+      whileHover={!isMobile ? { scale: 1.02 } : undefined}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
-      <div className="flex flex-col items-start gap-3">
-        {/* Standardized icon container with consistent sizing and styling */}
-        <div className={cn(
-          "flex items-center justify-center",
-          "w-12 h-12", // Increased size for better visibility on desktop
-          "rounded-xl", // More pronounced rounded corners
-          "transition-all duration-200",
-          colorScheme.bg,
-          "group-hover:shadow-sm",
-          "border border-indigo-200/30" // Subtle border for more dimension
-        )}>
+      <div className="flex flex-col items-start gap-4 h-full">
+        {/* Icon container with enhanced styling */}
+        <motion.div 
+          className={cn(
+            "flex items-center justify-center",
+            "w-14 h-14", // Increased size for better visibility
+            "rounded-xl", // More pronounced rounded corners
+            "transition-all duration-300",
+            colorScheme.bg,
+            "group-hover:shadow-md",
+            "border border-opacity-30",
+            `border-${colorScheme.text.split('-')[1]}-200`,
+          )}
+          whileHover={{ scale: 1.1, rotate: 5 }}
+        >
           <Icon className={cn(
-            "w-6 h-6", // Consistent icon size
+            "w-7 h-7", // Larger icon size
             colorScheme.text,
-            "transition-all duration-200",
+            "transition-all duration-300",
             "group-hover:scale-110",
             isMobile && isExpanded && "transform rotate-90"
           )} />
-        </div>
+        </motion.div>
         
-        <div className="text-left w-full">
+        <div className="text-left w-full flex-grow flex flex-col">
           <h3 className={cn(
-            "text-base font-semibold leading-6 font-space mb-1.5",
-            "text-gray-900 group-hover:text-indigo-600", // Matching hover color to icon theme
-            "transition-colors duration-200"
+            "text-lg font-bold leading-6 font-space mb-2.5",
+            "text-gray-900 group-hover:text-indigo-700", // Enhanced hover color
+            "transition-colors duration-300"
           )}>
             {title}
           </h3>
           <div className={cn(
-            "overflow-hidden transition-[max-height,opacity] duration-200",
-            isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-32 opacity-100"
+            "overflow-hidden transition-[max-height,opacity] duration-300",
+            isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-40 opacity-100",
+            "flex-grow"
           )}>
-            <p className="text-sm text-gray-600 font-anek group-hover:text-gray-700">
+            <p className="text-sm text-gray-600 font-anek group-hover:text-gray-800">
               {description}
             </p>
           </div>
         </div>
       </div>
-    </button>
+    </motion.button>
   );
 };
 
