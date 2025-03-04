@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { PreviewSearchSection } from '../search/PreviewSearchSection';
 
 export const SearchConnection: React.FC = () => {
   // Create a flowing animation for the connecting line
@@ -20,7 +21,7 @@ export const SearchConnection: React.FC = () => {
       }}
       viewport={{ once: true }}
       className="mt-16 sm:mt-24 relative"
-      aria-label="Search functionality transition"
+      aria-label="Search functionality"
     >
       {/* Enhanced connecting visual element from steps to search with animation */}
       <div className="absolute left-0 right-0 top-[-40px] flex justify-center">
@@ -32,6 +33,8 @@ export const SearchConnection: React.FC = () => {
           className="w-[3px] bg-gradient-to-b from-emerald-500 to-indigo-500/50 rounded-full" 
         />
       </div>
+      
+      <PreviewSearchSection />
     </motion.div>
   );
 };
