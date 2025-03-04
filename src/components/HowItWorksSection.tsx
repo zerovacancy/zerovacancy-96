@@ -230,7 +230,7 @@ const HowItWorksSection = () => {
         </div>
         
         {/* Mobile horizontal scroll layout - IMPROVED */}
-        <div className="md:hidden w-full relative mb-0">
+        <div className="md:hidden w-full relative mb-4">
           {/* Scroll navigation buttons */}
           <div className="flex justify-between absolute -left-1 -right-1 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none">
             <button onClick={handleScrollLeft} className={cn("w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto", scrollPosition <= 10 ? "opacity-40" : "opacity-80")} disabled={scrollPosition <= 10}>
@@ -276,8 +276,8 @@ const HowItWorksSection = () => {
                 }} 
                 className={cn(
                   "relative",
-                  "flex-shrink-0 w-[240px] min-h-[120px]", // Reduced min-height
-                  "p-3", // Reduced padding from p-4
+                  "flex-shrink-0 w-[240px] min-h-[140px]", // Increased min-height to prevent text cutoff
+                  "p-4 pb-5", // Increased padding, especially at bottom
                   "rounded-xl",
                   "shadow-md",
                   "border border-gray-100",
@@ -335,8 +335,8 @@ const HowItWorksSection = () => {
             ))}
           </div>
 
-          {/* Scroll indicators - moved closer to cards, reduced margin */}
-          <div className="flex justify-center mt-1 space-x-1 mb-1">
+          {/* Scroll indicators - moved further from cards to prevent overlap */}
+          <div className="flex justify-center mt-4 space-x-1 mb-1">
             {steps.map((_, index) => (
               <div 
                 key={index} 
