@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { BadgeCheck } from 'lucide-react';
 
 export interface StepColor {
   iconBg: string;
@@ -69,12 +70,13 @@ export const StepItem: React.FC<StepProps> = ({
         "border border-gray-100",
         "active:scale-[0.98]",
         "touch-manipulation",
-        "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]"
+        "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]",
+        "flex flex-col items-center"
       )}
     >
-      <div className="flex flex-col items-center justify-start h-full relative">
+      <div className="flex flex-col items-center justify-start h-full relative w-full">
         {/* Step Number with connecting line */}
-        <div className="absolute -left-[3.25rem] top-0 h-full" aria-hidden="true">
+        <div className="absolute -left-[3.25rem] top-0 h-full hidden lg:block" aria-hidden="true">
           <motion.span 
             className={cn(
               "absolute -top-2 left-0",
@@ -104,7 +106,11 @@ export const StepItem: React.FC<StepProps> = ({
               once: true
             }}
           >
-            {number}
+            {isCompleted ? (
+              <BadgeCheck className="w-4 h-4" />
+            ) : (
+              number
+            )}
           </motion.span>
           
           {/* Vertical connecting line for all steps with shorter length */}
@@ -137,7 +143,9 @@ export const StepItem: React.FC<StepProps> = ({
             stepColor.iconText,
             "transition-all duration-300",
             "rounded-xl p-4",
-            "group-hover:saturate-150"
+            "group-hover:saturate-150",
+            "relative",
+            "overflow-hidden"
           )} 
           whileHover={{
             scale: 1.1
@@ -146,7 +154,9 @@ export const StepItem: React.FC<StepProps> = ({
             scale: 0.95
           }}
         >
-          {React.cloneElement(icon as React.ReactElement, { className: "w-7 h-7" })}
+          {/* Subtle background animation */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0,transparent_100%)] opacity-0 group-hover:opacity-70 transition-opacity duration-700"></div>
+          {React.cloneElement(icon as React.ReactElement, { className: "w-7 h-7 relative z-10" })}
         </motion.div>
         
         <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 text-center line-clamp-1">
@@ -155,6 +165,11 @@ export const StepItem: React.FC<StepProps> = ({
         <p className="text-sm text-gray-600 leading-relaxed text-center">
           {description}
         </p>
+        
+        {/* Subtle glow effect on hover - desktop only */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
+          <div className={`absolute inset-0 ${stepColor.glowColor} blur-xl opacity-30 scale-90 rounded-xl`}></div>
+        </div>
       </div>
     </motion.div>
   );

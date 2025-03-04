@@ -1,11 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
 import { AuroraBackground } from './ui/aurora-background';
-import { Camera, Video, Tv2, Share2, Grid3x3 } from 'lucide-react';
+import { Camera, Video, Tv2, Share2, Grid3x3, Map, Filter, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const specialtyIcons = [
   { name: 'Photography', icon: <Camera className="h-6 w-6 text-indigo-500/80" /> },
@@ -16,6 +17,27 @@ const specialtyIcons = [
 ];
 
 const PreviewSearch = () => {
+  const [activeFilterIndex, setActiveFilterIndex] = useState(0);
+  const [showMapView, setShowMapView] = useState(false);
+  const isMobile = useIsMobile();
+  
+  // Animation variants for staggered children
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+  
+  const item = {
+    hidden: { opacity: 0, y: 10 },
+    show: { opacity: 1, y: 0 }
+  };
+  
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 relative overflow-visible z-10">
       <div className="mx-auto">
@@ -62,32 +84,62 @@ const PreviewSearch = () => {
               </p>
             </div>
             
+            {/* View toggle - Map/List (desktop only) */}
+            <div className="hidden md:flex justify-end px-8 mb-2">
+              <div className="bg-gray-100 rounded-lg p-1 flex items-center">
+                <button 
+                  onClick={() => setShowMapView(false)}
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                    !showMapView ? "bg-white text-gray-900 shadow-sm" : "text-gray-600 hover:text-gray-900"
+                  )}
+                >
+                  <Filter className="w-3.5 h-3.5" />
+                  <span>List View</span>
+                </button>
+                <button 
+                  onClick={() => setShowMapView(true)}
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                    showMapView ? "bg-white text-gray-900 shadow-sm" : "text-gray-600 hover:text-gray-900"
+                  )}
+                >
+                  <Map className="w-3.5 h-3.5" />
+                  <span>Map View</span>
+                </button>
+              </div>
+            </div>
+            
             {/* Specialty icons row */}
-            <div className="flex justify-center gap-6 sm:gap-12 pb-6 px-4 flex-wrap">
+            <motion.div 
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="flex justify-center gap-6 sm:gap-12 pb-6 px-4 flex-wrap"
+            >
               {specialtyIcons.map((specialty, index) => (
                 <motion.div
                   key={specialty.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ 
-                    opacity: 1, 
-                    y: 0,
-                    transition: {
-                      duration: 0.5,
-                      delay: index * 0.1,
-                    }
-                  }}
-                  viewport={{ once: true }}
+                  variants={item}
                   className="flex flex-col items-center gap-2 group cursor-pointer"
+                  onClick={() => setActiveFilterIndex(index)}
                 >
-                  <div className="p-3 rounded-full bg-white shadow-sm border border-gray-100 
-                    group-hover:shadow-md group-hover:border-indigo-100 transition-all duration-300
-                    group-hover:scale-110">
+                  <div className={cn(
+                    "p-3 rounded-full bg-white shadow-sm border border-gray-100",
+                    "group-hover:shadow-md group-hover:border-indigo-100 transition-all duration-300",
+                    "group-hover:scale-110",
+                    index === activeFilterIndex ? "ring-2 ring-indigo-200 border-indigo-300" : ""
+                  )}>
                     {specialty.icon}
                   </div>
-                  <span className="text-xs font-medium text-gray-600 group-hover:text-gray-900">{specialty.name}</span>
+                  <span className={cn(
+                    "text-xs font-medium",
+                    index === activeFilterIndex ? "text-gray-900" : "text-gray-600 group-hover:text-gray-900"
+                  )}>{specialty.name}</span>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
             
             {/* Search bar - part of the unified section */}
             <div className="w-full px-4 py-4 sm:px-8 sm:py-6 border-t border-gray-100 bg-white/70 backdrop-blur-sm">
@@ -96,6 +148,18 @@ const PreviewSearch = () => {
           
             {/* Creators list - part of the unified section */}
             <div className="w-full px-4 py-6 sm:px-8 sm:py-8 bg-white">
+              <div className="hidden sm:flex justify-between items-center mb-6">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-700">20+ professionals available</span>
+                  <div className="h-4 w-[1px] bg-gray-300"></div>
+                  <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full flex items-center gap-1">
+                    <Shield className="w-3 h-3" /> Verified
+                  </span>
+                </div>
+                <div className="text-sm text-gray-700">
+                  <span className="font-medium">Pro Tip:</span> Compare multiple creators to find your perfect match
+                </div>
+              </div>
               <CreatorsList 
                 creators={[
                   {
