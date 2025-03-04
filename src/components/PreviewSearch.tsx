@@ -6,7 +6,7 @@ import { AuroraBackground } from './ui/aurora-background';
 
 const PreviewSearch = () => {
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8">
+    <div className="w-full px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16">
       <div className="mx-auto">
         <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 bg-white">
           <AuroraBackground className="min-h-0 w-full" showRadialGradient={false}>

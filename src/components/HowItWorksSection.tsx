@@ -3,6 +3,7 @@ import { Search, Users, FileCheck, Calendar, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import PreviewSearch from './PreviewSearch';
 
 // Define colorful backgrounds for each step with enhanced styling options
 const stepColors = [{
@@ -263,6 +264,11 @@ const HowItWorksSection = () => {
               </p>
             </div>
           </motion.div>)}
+      </div>
+      
+      {/* Add PreviewSearch component below the steps */}
+      <div className="mt-16 sm:mt-24">
+        <PreviewSearch />
       </div>
     </div>
   );

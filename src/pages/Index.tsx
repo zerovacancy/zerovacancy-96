@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
-import PreviewSearch from '../components/PreviewSearch';
 import CallToActionSection from '../components/CallToActionSection';
 import Footer from '../components/Footer';
 import HowItWorksSection from '../components/HowItWorksSection';
@@ -87,7 +86,7 @@ const Index = () => {
         </div>
 
         <div className="space-y-0 w-full">
-          {/* How It Works Section */}
+          {/* How It Works Section - now includes PreviewSearch */}
           <section id="how-it-works" className="relative py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full bg-white">
             <Waves 
               lineColor="rgba(147, 112, 219, 0.2)" 
@@ -106,15 +105,8 @@ const Index = () => {
             </div>
           </section>
           
-          {/* Featured Creators Section */}
-          <div className="bg-white py-10 sm:py-16 lg:py-20 border-b border-gray-100 w-full">
-            <div className="max-w-7xl mx-auto">
-              <div id="search" className="relative overflow-hidden w-full">
-                <PreviewSearch />
-              </div>
-            </div>
-          </div>
-
+          {/* Remove the Featured Creators Section as it's now part of HowItWorksSection */}
+          
           {/* Professional Content Creation Services */}
           <div className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100 w-full">
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
