@@ -4,7 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Refined color scheme for steps - more subtle and consistent with the website
+// Refined color scheme for steps - more solid backgrounds to prevent transparency issues
 const stepColors = [{
   iconBg: "bg-violet-50",
   iconText: "text-violet-600",
@@ -14,7 +14,8 @@ const stepColors = [{
   borderColor: "border-violet-100",
   glowColor: "shadow-violet-500/10",
   tintBg: "bg-violet-50/5",
-  gradient: "bg-gradient-to-br from-white to-violet-50/70"
+  cardBg: "bg-white", // Solid white background for cards
+  gradient: "bg-white" // No gradient, just white
 }, {
   iconBg: "bg-blue-50",
   iconText: "text-blue-600",
@@ -24,7 +25,8 @@ const stepColors = [{
   borderColor: "border-blue-100",
   glowColor: "shadow-blue-500/10",
   tintBg: "bg-blue-50/5",
-  gradient: "bg-gradient-to-br from-white to-blue-50/70"
+  cardBg: "bg-white",
+  gradient: "bg-white"
 }, {
   iconBg: "bg-amber-50",
   iconText: "text-amber-600",
@@ -34,7 +36,8 @@ const stepColors = [{
   borderColor: "border-amber-100",
   glowColor: "shadow-amber-500/10",
   tintBg: "bg-amber-50/5",
-  gradient: "bg-gradient-to-br from-white to-amber-50/70"
+  cardBg: "bg-white",
+  gradient: "bg-white"
 }, {
   iconBg: "bg-emerald-50",
   iconText: "text-emerald-600",
@@ -44,10 +47,11 @@ const stepColors = [{
   borderColor: "border-emerald-100",
   glowColor: "shadow-emerald-500/10",
   tintBg: "bg-emerald-50/5",
-  gradient: "bg-gradient-to-br from-white to-emerald-50/70"
+  cardBg: "bg-white",
+  gradient: "bg-white"
 }];
 
-// Component for desktop connecting lines between steps
+// Component for desktop connecting lines between steps - adjusted for new background
 const ConnectingLines = () => {
   return (
     <div className="absolute top-16 left-0 w-full z-0 hidden lg:block pointer-events-none">
@@ -212,8 +216,26 @@ const HowItWorksSection = () => {
   }];
 
   return (
-    <section className="relative overflow-hidden py-8 sm:py-10 lg:py-14 px-2 sm:px-4 lg:px-6 bg-white">
-      <div className="max-w-6xl mx-auto py-0 px-px bg-white">
+    <section className="relative overflow-hidden py-8 sm:py-10 lg:py-14 px-2 sm:px-4 lg:px-6 bg-gradient-to-b from-gray-50 to-purple-50/20">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-5">
+          <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-purple-900" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#smallGrid)" />
+          </svg>
+        </div>
+        
+        {/* Subtle gradient overlays */}
+        <div className="absolute top-0 right-0 w-full h-96 bg-gradient-to-b from-purple-100/10 to-transparent transform -rotate-12 translate-x-1/4 translate-y-[-40%] rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-full h-96 bg-gradient-to-t from-blue-100/10 to-transparent transform rotate-12 translate-x-[-30%] translate-y-[30%] rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="max-w-6xl mx-auto py-0 px-px relative z-10">
         <div className="text-center mb-6 sm:mb-10">
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-2 sm:mb-3 text-gray-900">
             How It Works
@@ -251,7 +273,7 @@ const HowItWorksSection = () => {
                 }} 
                 className={cn(
                   "relative",
-                  stepColors[index].gradient,
+                  "bg-white", // Solid white background
                   "p-3",
                   "rounded-lg",
                   "shadow-sm",
@@ -353,7 +375,7 @@ const HowItWorksSection = () => {
                 }} 
                 className={cn(
                   "relative h-full", 
-                  stepColors[index].gradient, 
+                  "bg-white", // Solid white background instead of gradient
                   "min-h-[200px]",
                   "px-5 py-6", 
                   "rounded-lg", 
