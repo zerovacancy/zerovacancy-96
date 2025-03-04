@@ -1,11 +1,14 @@
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef, memo } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+// Memoize individual card to prevent unnecessary re-renders
+const MemoizedCreatorCard = memo(CreatorCard);
 
 interface Creator {
   name: string;
@@ -37,18 +40,23 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const [loadedImageUrls, setLoadedImageUrls] = useState<Set<string>>(new Set());
+  const listRef = useRef<HTMLDivElement>(null);
+  const [visibleItems, setVisibleItems] = useState<number[]>([]);
   
+  // Initialize embla carousel with better performance settings 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
     loop: false,
     dragFree: false,
     skipSnaps: true,
+    // Improve touch device performance
+    inViewThreshold: 0.7
   });
 
-  const [prevBtnEnabled, setPrevBtnEnabled] = React.useState(false);
-  const [nextBtnEnabled, setNextBtnEnabled] = React.useState(true);
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
@@ -60,13 +68,48 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
+  // Setup intersection observer for virtualization - only render items in view
+  useEffect(() => {
+    if (!listRef.current || isMobile) return;
+    
+    // Initialize with first few items visible
+    setVisibleItems([0, 1, 2, 3, 4, 5]);
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = Number(entry.target.getAttribute('data-index'));
+          
+          if (entry.isIntersecting) {
+            setVisibleItems(prev => {
+              if (!prev.includes(id)) {
+                return [...prev, id];
+              }
+              return prev;
+            });
+          }
+        });
+      },
+      { rootMargin: '300px' }
+    );
+    
+    // Observe placeholder elements for each creator
+    listRef.current.querySelectorAll('.creator-placeholder').forEach(el => {
+      observer.observe(el);
+    });
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMobile, creators.length]);
+
   useEffect(() => {
     if (!emblaApi) return;
     onSelect();
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
     
-    // Force a reInit after mount
+    // Optimize reflows by adding short delay after mount
     const timer = setTimeout(() => {
       emblaApi.reInit();
     }, 100);
@@ -78,16 +121,17 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     };
   }, [emblaApi, onSelect]);
   
-  const handleImageLoad = (imageSrc: string) => {
+  const handleImageLoad = useCallback((imageSrc: string) => {
     setLoadedImageUrls(prev => {
       const updated = new Set(prev);
       updated.add(imageSrc);
       return updated;
     });
+    
     if (onImageLoad) {
       onImageLoad(imageSrc);
     }
-  };
+  }, [onImageLoad]);
   
   const sortOptions = [
     { label: 'Rating', value: 'rating' },
@@ -121,7 +165,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
                   key={creator.name} 
                   className="min-w-[90%] w-[90%] pl-2 pr-2"
                 >
-                  <CreatorCard
+                  <MemoizedCreatorCard
                     creator={creator}
                     onImageLoad={handleImageLoad}
                     loadedImages={loadedImageUrls}
@@ -132,36 +176,34 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             </div>
           </div>
 
-          {/* Navigation Arrows */}
-          <button
-            onClick={scrollPrev}
-            className={cn(
-              "absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity",
-              !prevBtnEnabled && "opacity-0 pointer-events-none"
-            )}
-            aria-label="Previous creator"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={scrollNext}
-            className={cn(
-              "absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity",
-              !nextBtnEnabled && "opacity-0 pointer-events-none"
-            )}
-            aria-label="Next creator"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+          {/* Navigation Arrows - only render when needed */}
+          {prevBtnEnabled && (
+            <button
+              onClick={scrollPrev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity"
+              aria-label="Previous creator"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+          )}
+          {nextBtnEnabled && (
+            <button
+              onClick={scrollNext}
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity"
+              aria-label="Next creator"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          )}
 
-          {/* Dots Indicator */}
+          {/* Dots Indicator - using transforms instead of opacity for better performance */}
           <div className="flex justify-center gap-1.5 mt-4">
             {creators.map((_, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-colors",
-                  index === selectedIndex ? "bg-primary" : "bg-gray-300"
+                  "w-2 h-2 rounded-full transition-transform",
+                  index === selectedIndex ? "bg-primary scale-125" : "bg-gray-300"
                 )}
                 onClick={() => emblaApi?.scrollTo(index)}
                 aria-label={`Go to creator ${index + 1}`}
@@ -170,18 +212,28 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
-          {creators.map((creator) => (
-            <CreatorCard
+        <div ref={listRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+          {creators.map((creator, index) => (
+            <div 
               key={creator.name}
-              creator={creator}
-              onImageLoad={handleImageLoad}
-              loadedImages={loadedImageUrls}
-              imageRef={imageRef}
-            />
+              className="creator-placeholder"
+              data-index={index}
+            >
+              {visibleItems.includes(index) && (
+                <MemoizedCreatorCard
+                  creator={creator}
+                  onImageLoad={handleImageLoad}
+                  loadedImages={loadedImageUrls}
+                  imageRef={imageRef}
+                />
+              )}
+            </div>
           ))}
         </div>
       )}
     </div>
   );
 };
+
+// Use memo to prevent unnecessary re-renders of the entire list
+export default memo(CreatorsList);
