@@ -88,7 +88,7 @@ const Index = () => {
         </div>
 
         <div className="space-y-0 w-full">
-          {/* How It Works Section - now includes PreviewSearch */}
+          {/* How It Works Section - no longer includes PreviewSearch */}
           <section id="how-it-works" className="relative py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full bg-white">
             <Waves 
               lineColor="rgba(147, 112, 219, 0.2)" 
@@ -107,8 +107,8 @@ const Index = () => {
             </div>
           </section>
           
-          {/* Search Section - Added as its own standalone section */}
-          <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-gray-50 border-t border-b border-gray-100 w-full">
+          {/* Search Section - As its own completely separate section */}
+          <section id="find-creators" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-gray-50 border-t border-b border-gray-100 w-full">
             <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
             <Spotlight className="from-purple-500/20 via-indigo-500/20 to-blue-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">

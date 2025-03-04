@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { SectionHeader } from './how-it-works/SectionHeader';
 import { StepsSection } from './how-it-works/StepsSection';
-import { SearchConnection } from './how-it-works/SearchConnection';
 
 const HowItWorksSection = () => {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -30,9 +29,6 @@ const HowItWorksSection = () => {
         
         {/* Steps Section */}
         <StepsSection completedSteps={completedSteps} />
-        
-        {/* SearchConnection as a separate section */}
-        <SearchConnection />
       </div>
     </section>
   );
