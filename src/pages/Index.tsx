@@ -14,6 +14,7 @@ import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
+import PreviewSearch from '@/components/PreviewSearch';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -86,7 +87,7 @@ const Index = () => {
         </div>
 
         <div className="space-y-0 w-full">
-          {/* How It Works Section - now includes PreviewSearch */}
+          {/* How It Works Section - without PreviewSearch */}
           <section id="how-it-works" className="relative py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full bg-white">
             <Waves 
               lineColor="rgba(147, 112, 219, 0.2)" 
@@ -105,7 +106,22 @@ const Index = () => {
             </div>
           </section>
           
-          {/* Remove the Featured Creators Section as it's now part of HowItWorksSection */}
+          {/* Preview Search Section - as its own standalone section */}
+          <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-gradient-to-b from-white to-purple-50/30 border-b border-gray-100 w-full">
+            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-25"></div>
+            <Spotlight className="from-purple-500/20 via-indigo-500/20 to-blue-500/20" size={350} />
+            <div className="relative z-10 max-w-7xl mx-auto">
+              <div className="text-center mb-8 sm:mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 mb-4">
+                  Find Your Perfect Match
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Our platform connects you with talented creators who can showcase your property perfectly
+                </p>
+              </div>
+              <PreviewSearch />
+            </div>
+          </section>
           
           {/* Professional Content Creation Services */}
           <div className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100 w-full">
