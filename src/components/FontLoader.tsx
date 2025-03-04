@@ -20,11 +20,14 @@ const FontLoader: React.FC = () => {
         rel="stylesheet"
         media="print"
         onLoad={() => {
-          if (document.getElementById('playfair-font')) {
-            document.getElementById('playfair-font')!.media = 'all';
+          const fontElement = document.getElementById('playfair-font');
+          if (fontElement && fontElement instanceof HTMLLinkElement) {
+            fontElement.media = 'all';
           } else {
             const link = document.querySelector('link[href*="Playfair+Display"]');
-            if (link) (link as HTMLLinkElement).media = 'all';
+            if (link && link instanceof HTMLLinkElement) {
+              link.media = 'all';
+            }
           }
         }}
         id="playfair-font"
