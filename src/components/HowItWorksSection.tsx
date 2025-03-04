@@ -4,47 +4,47 @@ import { motion, useAnimation } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Define colorful backgrounds for each step with enhanced styling options
+// Refined color scheme for steps - more subtle and consistent with the website
 const stepColors = [{
-  iconBg: "bg-violet-100",
+  iconBg: "bg-violet-50",
   iconText: "text-violet-600",
   numBg: "bg-violet-600",
   numText: "text-white",
-  lineColor: "from-violet-600/70 to-blue-500/50",
-  borderColor: "border-violet-600",
-  glowColor: "shadow-violet-500/20",
-  tintBg: "bg-violet-50/10",
-  gradient: "bg-gradient-to-br from-violet-50 to-violet-100"
+  lineColor: "from-violet-500/50 to-blue-500/30",
+  borderColor: "border-violet-100",
+  glowColor: "shadow-violet-500/10",
+  tintBg: "bg-violet-50/5",
+  gradient: "bg-gradient-to-br from-white to-violet-50/70"
 }, {
-  iconBg: "bg-blue-100",
-  iconText: "text-blue-500",
-  numBg: "bg-blue-500",
+  iconBg: "bg-blue-50",
+  iconText: "text-blue-600",
+  numBg: "bg-blue-600",
   numText: "text-white",
-  lineColor: "from-blue-500/70 to-amber-600/50",
-  borderColor: "border-blue-500",
-  glowColor: "shadow-blue-500/20",
-  tintBg: "bg-blue-50/10",
-  gradient: "bg-gradient-to-br from-blue-50 to-blue-100"
+  lineColor: "from-blue-500/50 to-amber-500/30",
+  borderColor: "border-blue-100",
+  glowColor: "shadow-blue-500/10",
+  tintBg: "bg-blue-50/5",
+  gradient: "bg-gradient-to-br from-white to-blue-50/70"
 }, {
-  iconBg: "bg-amber-100",
+  iconBg: "bg-amber-50",
   iconText: "text-amber-600",
   numBg: "bg-amber-600",
   numText: "text-white",
-  lineColor: "from-amber-600/70 to-emerald-600/50",
-  borderColor: "border-amber-600",
-  glowColor: "shadow-amber-500/20",
-  tintBg: "bg-amber-50/10",
-  gradient: "bg-gradient-to-br from-amber-50 to-amber-100"
+  lineColor: "from-amber-500/50 to-emerald-500/30",
+  borderColor: "border-amber-100",
+  glowColor: "shadow-amber-500/10",
+  tintBg: "bg-amber-50/5",
+  gradient: "bg-gradient-to-br from-white to-amber-50/70"
 }, {
-  iconBg: "bg-emerald-100",
+  iconBg: "bg-emerald-50",
   iconText: "text-emerald-600",
   numBg: "bg-emerald-600",
   numText: "text-white",
-  lineColor: "from-emerald-600/50 to-emerald-600/10",
-  borderColor: "border-emerald-600",
-  glowColor: "shadow-emerald-500/20",
-  tintBg: "bg-emerald-50/10",
-  gradient: "bg-gradient-to-br from-emerald-50 to-emerald-100"
+  lineColor: "from-emerald-500/30 to-emerald-500/10",
+  borderColor: "border-emerald-100",
+  glowColor: "shadow-emerald-500/10",
+  tintBg: "bg-emerald-50/5",
+  gradient: "bg-gradient-to-br from-white to-emerald-50/70"
 }];
 
 // Component for desktop connecting lines between steps
@@ -53,7 +53,7 @@ const ConnectingLines = () => {
     <div className="absolute top-16 left-0 w-full z-0 hidden lg:block pointer-events-none">
       {/* First connector line - violet to blue */}
       <motion.div 
-        className="absolute top-8 left-[23%] w-[18%] h-0.5 bg-gradient-to-r from-violet-500 to-blue-500" 
+        className="absolute top-8 left-[23%] w-[18%] h-0.5 bg-gradient-to-r from-violet-500/60 to-blue-500/60" 
         initial={{
           scaleX: 0,
           transformOrigin: "left"
@@ -92,7 +92,7 @@ const ConnectingLines = () => {
       
       {/* Second connector line - blue to amber */}
       <motion.div 
-        className="absolute top-8 left-[48%] w-[18%] h-0.5 bg-gradient-to-r from-blue-500 to-amber-500" 
+        className="absolute top-8 left-[48%] w-[18%] h-0.5 bg-gradient-to-r from-blue-500/60 to-amber-500/60" 
         initial={{
           scaleX: 0,
           transformOrigin: "left"
@@ -131,7 +131,7 @@ const ConnectingLines = () => {
       
       {/* Third connector line - amber to emerald */}
       <motion.div 
-        className="absolute top-8 left-[73%] w-[18%] h-0.5 bg-gradient-to-r from-amber-500 to-emerald-500" 
+        className="absolute top-8 left-[73%] w-[18%] h-0.5 bg-gradient-to-r from-amber-500/60 to-emerald-500/60" 
         initial={{
           scaleX: 0,
           transformOrigin: "left"
@@ -212,13 +212,13 @@ const HowItWorksSection = () => {
   }];
 
   return (
-    <section className="relative overflow-hidden py-6 sm:py-12 px-4 sm:px-6 lg:px-[28px] bg-white">
-      <div className="max-w-7xl mx-auto py-0 px-px bg-white">
-        <div className="text-center mb-4 sm:mb-14">
-          <h3 className="text-xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-2 sm:mb-4">
+    <section className="relative overflow-hidden py-8 sm:py-10 lg:py-14 px-2 sm:px-4 lg:px-6 bg-white">
+      <div className="max-w-6xl mx-auto py-0 px-px bg-white">
+        <div className="text-center mb-6 sm:mb-10">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-2 sm:mb-3 text-gray-900">
             How It Works
           </h3>
-          <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
             Your journey to amazing content in four simple steps
           </p>
         </div>
@@ -252,13 +252,13 @@ const HowItWorksSection = () => {
                 className={cn(
                   "relative",
                   stepColors[index].gradient,
-                  "p-3.5",
-                  "rounded-xl",
-                  "shadow-md",
+                  "p-3",
+                  "rounded-lg",
+                  "shadow-sm",
                   "border border-gray-100",
                   "flex flex-col",
                   "h-full",
-                  "min-h-[145px]",
+                  "min-h-[140px]",
                   "touch-manipulation",
                   "transition-transform duration-200",
                   "cursor-pointer"
@@ -267,21 +267,21 @@ const HowItWorksSection = () => {
                 {/* Circle Number Badge */}
                 <div className="absolute -top-2 -left-1">
                   <div className={cn(
-                    "w-7 h-7",
+                    "w-6 h-6",
                     stepColors[index].numBg,
                     stepColors[index].numText,
                     "rounded-full",
                     "flex items-center justify-center",
                     "text-xs font-medium",
                     "shadow-sm",
-                    "ring-2 ring-white"
+                    "ring-1 ring-white"
                   )}>
                     {index + 1}
                     
                     {/* Completed checkmark */}
                     {completedSteps.includes(index) && (
                       <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
-                        <Check className="w-3 h-3 text-green-500" />
+                        <Check className="w-2.5 h-2.5 text-green-500" />
                       </div>
                     )}
                   </div>
@@ -289,21 +289,23 @@ const HowItWorksSection = () => {
                 
                 {/* Icon and Title in row */}
                 <div className="flex items-center justify-between mt-1 mb-2">
-                  <h4 className="text-sm font-semibold text-gray-900 pr-1">
+                  <h4 className="text-xs sm:text-sm font-semibold text-gray-900 pr-1">
                     {step.title}
                   </h4>
                   
                   <div className={cn(
                     stepColors[index].iconText,
                     stepColors[index].iconBg,
-                    "rounded-full p-1.5"
+                    "rounded-full p-1"
                   )}>
-                    {step.icon}
+                    {React.cloneElement(step.icon, {
+                      className: "w-4 h-4"
+                    })}
                   </div>
                 </div>
                 
                 {/* Description */}
-                <p className="text-xs text-gray-600 leading-relaxed mt-auto">
+                <p className="text-xs leading-tight text-gray-600 mt-auto">
                   {step.description}
                 </p>
               </motion.div>
@@ -317,13 +319,13 @@ const HowItWorksSection = () => {
           <ConnectingLines />
           
           {/* Grid container */}
-          <div className="grid w-full grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10 relative">
+          <div className="grid w-full grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 relative">
             {steps.map((step, index) => (
               <motion.div 
                 key={index} 
                 initial={{
                   opacity: 0,
-                  y: 30
+                  y: 20
                 }} 
                 whileInView={{
                   opacity: 1,
@@ -336,8 +338,8 @@ const HowItWorksSection = () => {
                   }
                 }} 
                 whileHover={{
-                  scale: 1.03,
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)",
+                  scale: 1.02,
+                  boxShadow: "0 8px 20px -5px rgba(0, 0, 0, 0.08), 0 6px 8px -5px rgba(0, 0, 0, 0.03)",
                   transition: {
                     duration: 0.3
                   }
@@ -352,31 +354,30 @@ const HowItWorksSection = () => {
                 className={cn(
                   "relative h-full", 
                   stepColors[index].gradient, 
-                  "min-h-[220px]",
-                  // Standardized card height
-                  "px-6 py-8", 
-                  "rounded-xl", 
+                  "min-h-[200px]",
+                  "px-5 py-6", 
+                  "rounded-lg", 
                   "transition-all duration-300", 
                   "group cursor-pointer", 
                   "border border-gray-100", 
                   "active:scale-[0.98]", 
                   "touch-manipulation", 
-                  "shadow-md hover:shadow-xl", 
+                  "shadow-sm hover:shadow-md", 
                   "flex flex-col items-center justify-start"
                 )} 
                 aria-label={`Step ${index + 1}: ${step.title}`}
               >
                 {/* Step Number badge */}
-                <div className={cn("absolute -top-3 left-6", "z-10")}>
+                <div className={cn("absolute -top-3 left-5", "z-10")}>
                   <motion.span 
                     className={cn(
                       "inline-flex items-center justify-center", 
-                      "w-8 h-8", 
+                      "w-7 h-7", 
                       stepColors[index].numBg, 
                       stepColors[index].numText, 
                       "rounded-full", 
-                      "text-sm font-medium", 
-                      "ring-4 ring-white", 
+                      "text-xs font-medium", 
+                      "ring-2 ring-white", 
                       "shadow-sm"
                     )} 
                     initial={{
@@ -401,7 +402,7 @@ const HowItWorksSection = () => {
                     {/* Completed checkmark */}
                     {completedSteps.includes(index) && (
                       <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
-                        <Check className="w-3 h-3 text-green-500" />
+                        <Check className="w-2.5 h-2.5 text-green-500" />
                       </div>
                     )}
                   </motion.span>
@@ -410,14 +411,14 @@ const HowItWorksSection = () => {
                 {/* Icon with enhanced colorful background and animations */}
                 <motion.div 
                   className={cn(
-                    "mb-5", 
+                    "mb-4", 
                     stepColors[index].iconBg, 
                     stepColors[index].iconText, 
                     "transition-all duration-300", 
-                    "rounded-xl p-4", 
-                    "group-hover:saturate-150", 
-                    "group-hover:scale-110", 
-                    "shadow-sm group-hover:shadow-md"
+                    "rounded-lg p-3", 
+                    "group-hover:saturate-110", 
+                    "group-hover:scale-105", 
+                    "shadow-sm group-hover:shadow-sm"
                   )} 
                   initial={{
                     rotateY: 0
@@ -430,13 +431,13 @@ const HowItWorksSection = () => {
                   }}
                 >
                   {React.cloneElement(step.icon, {
-                    className: "w-7 h-7"
+                    className: "w-6 h-6"
                   })}
                 </motion.div>
                 
                 {/* Title with motion */}
                 <motion.h4 
-                  className="text-base sm:text-lg font-semibold text-gray-900 mb-3 text-center line-clamp-1" 
+                  className="text-sm sm:text-base font-semibold text-gray-900 mb-2 text-center line-clamp-1" 
                   initial={{
                     opacity: 0.8
                   }} 
@@ -455,7 +456,7 @@ const HowItWorksSection = () => {
                 
                 {/* Description with staggered animation */}
                 <motion.p 
-                  className="text-sm text-gray-600 leading-relaxed text-center" 
+                  className="text-xs sm:text-sm text-gray-600 leading-relaxed text-center" 
                   initial={{
                     opacity: 0.6
                   }} 
@@ -474,7 +475,7 @@ const HowItWorksSection = () => {
                 
                 {/* Subtle visual indicator of clickability */}
                 <div className={cn(
-                  "absolute bottom-3 right-3 w-6 h-6", 
+                  "absolute bottom-3 right-3 w-5 h-5", 
                   "flex items-center justify-center", 
                   "rounded-full", 
                   "opacity-0 group-hover:opacity-70", 
