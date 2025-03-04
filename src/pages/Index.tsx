@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -93,7 +94,6 @@ const Index = () => {
 
           {/* Pricing Section */}
           <div id="pricing" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-white border-b border-gray-100 w-full">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#f3f3f3_1px,transparent_1px),linear-gradient(to_bottom,#f3f3f3_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
             <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <Pricing />
