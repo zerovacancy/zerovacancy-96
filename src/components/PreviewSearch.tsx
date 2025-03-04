@@ -107,15 +107,6 @@ const PreviewSearch = () => {
                   imageRef={() => {}}
                 />
               </div>
-              
-              {/* Mobile-friendly action footer */}
-              {isMobile && (
-                <div className="w-full sticky bottom-0 bg-white border-t border-gray-100 p-3 flex justify-center shadow-sm">
-                  <button className="w-full max-w-xs py-2.5 px-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg text-sm shadow-sm hover:shadow-md transition-all transform active:scale-[0.98]">
-                    Find Creators Near Me
-                  </button>
-                </div>
-              )}
             </div>
           </AuroraBackground>
         </motion.div>
