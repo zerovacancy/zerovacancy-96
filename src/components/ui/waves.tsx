@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useRef, useEffect, useState, memo } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 type WavesProps = {
@@ -16,8 +16,7 @@ type WavesProps = {
   waveSpeedY?: number;
 };
 
-// Memoize the component to prevent unnecessary re-renders
-export const Waves = memo(({
+export function Waves({
   className,
   lineColor = 'rgba(0, 0, 0, 0.1)',
   backgroundColor = '#ffffff',
@@ -27,30 +26,11 @@ export const Waves = memo(({
   waveAmpY = 15,
   waveSpeedX = 0.012,
   waveSpeedY = 0.01,
-}: WavesProps) => {
+}: WavesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isReducedMotion, setIsReducedMotion] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
-  const timeRef = useRef<number>(0);
   
-  // Check for reduced motion preference
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setIsReducedMotion(mediaQuery.matches);
-    
-    const handleMotionPreferenceChange = (e: MediaQueryListEvent) => {
-      setIsReducedMotion(e.matches);
-    };
-    
-    mediaQuery.addEventListener('change', handleMotionPreferenceChange);
-    return () => {
-      mediaQuery.removeEventListener('change', handleMotionPreferenceChange);
-    };
-  }, []);
-  
-  // Use optimized intersection observer
   useEffect(() => {
     if (!containerRef.current) return;
     
@@ -60,64 +40,47 @@ export const Waves = memo(({
           setIsVisible(entry.isIntersecting);
         });
       },
-      { threshold: 0.1, rootMargin: '200px' }
+      { threshold: 0.1 }
     );
     
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
   
-  // Optimize canvas drawing with requestAnimationFrame
   useEffect(() => {
-    if (!canvasRef.current || !isVisible || isReducedMotion) return;
+    if (!canvasRef.current || !isVisible) return;
     
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d', { alpha: false }); // Optimize with alpha: false
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
-    // Resize handling with debounce for better performance
-    let resizeTimeout: ReturnType<typeof setTimeout>;
+    let animationFrameId: number;
+    let time = 0;
+    
     const resizeCanvas = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (!canvas.parentElement) return;
-        // Use devicePixelRatio for better rendering on high-DPI displays
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = canvas.parentElement.offsetWidth * dpr;
-        canvas.height = canvas.parentElement.offsetHeight * dpr;
-        canvas.style.width = `${canvas.parentElement.offsetWidth}px`;
-        canvas.style.height = `${canvas.parentElement.offsetHeight}px`;
-        ctx.scale(dpr, dpr);
-      }, 250);
+      if (!canvas.parentElement) return;
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
     };
     
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas, { passive: true });
+    window.addEventListener('resize', resizeCanvas);
     
-    // Optimized drawing function
-    const drawWave = (timestamp: number) => {
-      if (!ctx || !canvas || !isVisible) return;
+    const drawWave = () => {
+      if (!ctx || !canvas) return;
       
-      // Calculate delta time for smooth animation
-      timeRef.current += 0.01;
-      
-      ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1));
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = backgroundColor;
-      ctx.fillRect(0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1));
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = 1;
       
-      // Draw horizontal waves with optimized calculation
-      for (let y = yGap; y < canvas.height / (window.devicePixelRatio || 1); y += yGap) {
+      // Draw horizontal waves
+      for (let y = yGap; y < canvas.height; y += yGap) {
         ctx.beginPath();
-        
-        // Optimize by using fewer points on smaller screens
-        const step = window.innerWidth > 768 ? 1 : 2;
-        const width = canvas.width / (window.devicePixelRatio || 1);
-        
-        for (let x = 0; x < width; x += step) {
-          const angle = (x * waveSpeedX) + timeRef.current;
+        for (let x = 0; x < canvas.width; x += 1) {
+          const angle = (x * waveSpeedX) + time;
           const yOffset = Math.sin(angle) * waveAmpY;
           
           if (x === 0) {
@@ -129,16 +92,11 @@ export const Waves = memo(({
         ctx.stroke();
       }
       
-      // Draw vertical waves with optimized calculation
-      for (let x = xGap; x < canvas.width / (window.devicePixelRatio || 1); x += xGap) {
+      // Draw vertical waves
+      for (let x = xGap; x < canvas.width; x += xGap) {
         ctx.beginPath();
-        
-        // Optimize by using fewer points on smaller screens
-        const step = window.innerWidth > 768 ? 1 : 2;
-        const height = canvas.height / (window.devicePixelRatio || 1);
-        
-        for (let y = 0; y < height; y += step) {
-          const angle = (y * waveSpeedY) + timeRef.current;
+        for (let y = 0; y < canvas.height; y += 1) {
+          const angle = (y * waveSpeedY) + time;
           const xOffset = Math.sin(angle) * waveAmpX;
           
           if (y === 0) {
@@ -150,19 +108,18 @@ export const Waves = memo(({
         ctx.stroke();
       }
       
-      if (isVisible && !isReducedMotion) {
-        animationRef.current = requestAnimationFrame(drawWave);
+      time += 0.01;
+      
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(drawWave);
       }
     };
     
-    animationRef.current = requestAnimationFrame(drawWave);
+    drawWave();
     
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-      clearTimeout(resizeTimeout);
+      cancelAnimationFrame(animationFrameId);
     };
   }, [
     lineColor,
@@ -174,17 +131,7 @@ export const Waves = memo(({
     waveSpeedX,
     waveSpeedY,
     isVisible,
-    isReducedMotion,
   ]);
-  
-  // If reduced motion is preferred, render a static version
-  if (isReducedMotion) {
-    return (
-      <div ref={containerRef} className={cn('absolute inset-0 overflow-hidden', className)}>
-        <div className="absolute inset-0" style={{ backgroundColor, opacity: 0.1 }} />
-      </div>
-    );
-  }
   
   return (
     <div ref={containerRef} className={cn('absolute inset-0 overflow-hidden', className)}>
@@ -193,11 +140,8 @@ export const Waves = memo(({
           ref={canvasRef} 
           className="absolute inset-0 w-full h-full"
           aria-hidden="true"
-          style={{ transform: 'translateZ(0)' }} // Force GPU acceleration
         />
       )}
     </div>
   );
-});
-
-Waves.displayName = 'Waves';
+}

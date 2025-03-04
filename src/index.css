@@ -33,7 +33,6 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: auto;
     position: relative;
-    text-rendering: optimizeSpeed;
   }
 
   * {
@@ -46,15 +45,6 @@
     max-width: 100vw;
     overflow-x: hidden;
     overflow-y: auto;
-    /* Improve scrolling performance */
-    -webkit-overflow-scrolling: touch;
-    /* Add content-visibility for better rendering performance */
-    content-visibility: auto;
-  }
-
-  /* Optimize fonts for performance */
-  h1, h2, h3, h4, h5, h6 {
-    text-wrap: balance;
   }
 
   h1 {
@@ -83,30 +73,6 @@
 
   p {
     @apply text-base leading-relaxed font-normal;
-    text-wrap: pretty;
-  }
-
-  /* Add content-visibility for better performance on larger blocks */
-  section, article, aside, footer {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 500px;
-  }
-
-  /* Optimize images and videos */
-  img, video {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Add reduced motion support */
-  @media (prefers-reduced-motion: reduce) {
-    *, ::before, ::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
   }
 }
 
@@ -195,24 +161,8 @@
   .touch-manipulation {
     touch-action: manipulation;
   }
-  /* GPU acceleration utility */
-  .gpu-accelerated {
-    transform: translateZ(0);
-  }
-  /* Layer promotion for animations */
-  .promote-layer {
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-  /* Content visibility utilities */
-  .auto-visibility {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 500px;
-  }
 }
 
-/* Optimize animations with more efficient keyframes */
 @keyframes shimmer {
   100% {
     transform: translateX(200%);
@@ -237,15 +187,5 @@
   }
   100% {
     background-position: 0 0;
-  }
-}
-
-/* Border beam animation optimized for performance */
-@keyframes border-beam {
-  0% {
-    offset-distance: 0%;
-  }
-  100% {
-    offset-distance: 100%;
   }
 }
