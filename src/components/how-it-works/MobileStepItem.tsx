@@ -3,28 +3,29 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { StepColor } from './StepItem';
+import { Step } from './stepsUtils';
 
 interface MobileStepItemProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
+  step: Step;
   index: number;
-  stepColor: StepColor;
-  isCompleted?: boolean;
+  isActive: boolean;
+  isCompleted: boolean;
+  onClick: () => void;
 }
 
 export const MobileStepItem: React.FC<MobileStepItemProps> = ({
-  icon,
-  title,
-  description,
+  step,
   index,
-  stepColor,
-  isCompleted = false,
+  isActive,
+  isCompleted,
+  onClick,
 }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{
+        opacity: 0,
+        y: 20
+      }} 
       whileInView={{
         opacity: 1,
         y: 0,
@@ -33,24 +34,42 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
           duration: 0.6,
           delay: index * 0.15
         }
+      }} 
+      animate={{
+        scale: isActive ? 1.03 : 1,
+        boxShadow: isActive 
+          ? "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)" 
+          : "0 2px 4px rgba(0,0,0,0.05), 0 2px 2px rgba(0,0,0,0.05)",
+        borderColor: isActive ? "rgb(124, 58, 237)" : "",
+        transition: {
+          type: "spring",
+          stiffness: 300,
+          damping: 20
+        }
       }}
       whileTap={{
         scale: 1.02,
-        transition: { duration: 0.2 }
-      }}
-      viewport={{ once: true, margin: "-30px" }}
+        transition: {
+          duration: 0.2
+        }
+      }} 
+      viewport={{
+        once: true,
+        margin: "-30px"
+      }} 
+      onClick={onClick}
       className={cn(
-        "relative bg-white",
-        "w-full max-w-[327px] min-h-[100px]", // Reduced height
-        "p-4", // Reduced to 16px padding
-        "rounded-lg",
-        "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]",
-        "border border-gray-100",
-        stepColor.borderColor,
-        "border-l-[3px]", // 3px left border
-        "touch-manipulation",
-        "mx-auto",
-        "transition-transform duration-200",
+        "relative bg-white", 
+        "w-full max-w-[327px] min-h-[100px]",
+        "p-4",
+        "rounded-lg", 
+        "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]", 
+        "border border-gray-100", 
+        (step.iconText ? "" : "border-l-[3px]"),
+        "touch-manipulation", 
+        "mx-auto", 
+        "transition-transform duration-200", 
+        isActive ? "border-violet-500 bg-violet-50/20" : "",
         "cursor-pointer"
       )}
     >
@@ -58,14 +77,19 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
         {/* Left side: Number circle with integrated icon */}
         <div className="relative mr-3">
           <div className={cn(
-            "w-8 h-8", // Slightly smaller (32px)
-            stepColor.numBg,
-            stepColor.numText,
-            "rounded-full",
-            "flex items-center justify-center",
-            "text-sm font-medium",
-            "shadow-sm",
-            "relative",
+            "w-8 h-8",
+            // Fixed styling: Use the correct color based on step index
+            index === 0 ? "bg-violet-600" : 
+            index === 1 ? "bg-blue-500" : 
+            index === 2 ? "bg-amber-600" : 
+            index === 3 ? "bg-emerald-600" : 
+            "bg-gray-500", 
+            "text-white", 
+            "rounded-full", 
+            "flex items-center justify-center", 
+            "text-sm font-medium", 
+            "shadow-sm", 
+            "relative", 
             "mt-[2px]" // Align with first line of title
           )}>
             <span className="flex items-center justify-center w-full h-full">
@@ -86,19 +110,19 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
           {/* Title with icon next to it */}
           <div className="flex items-center">
             <h4 className="text-[16px] font-semibold text-gray-900">
-              {title}
+              {step.title}
             </h4>
             <div className={cn(
-              "ml-2", // 8px spacing
-              stepColor.iconText
+              "ml-2",
+              step.iconText || "text-gray-500"
             )}>
-              {icon}
+              {step.icon}
             </div>
           </div>
           
           {/* Description with reduced spacing */}
           <p className="text-[14px] text-gray-600 leading-[1.4] mt-1">
-            {description}
+            {step.description}
           </p>
         </div>
       </div>
