@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Search, Users, FileCheck, Calendar, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Waves } from '@/components/ui/waves';
 
 // Define colorful backgrounds for each step with enhanced styling options
 const stepColors = [{
@@ -78,8 +78,22 @@ const HowItWorksSection = () => {
     number: "04"
   }];
   
-  return <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50/5">
-      <div className="max-w-7xl mx-auto">
+  return (
+    <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[#f8f9ff]">
+      {/* Position the waves background directly inside the section */}
+      <Waves 
+        lineColor="rgba(147, 112, 219, 0.2)" 
+        backgroundColor="#f8f9ff"
+        waveSpeedX={0.01}
+        waveSpeedY={0.008}
+        waveAmpX={25}
+        waveAmpY={12}
+        xGap={15}
+        yGap={30}
+        className="absolute inset-0 z-0 opacity-70"
+      />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-6 sm:mb-14">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3 sm:mb-4">
             How It Works
@@ -266,7 +280,8 @@ const HowItWorksSection = () => {
             </motion.div>)}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default HowItWorksSection;
