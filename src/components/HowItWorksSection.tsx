@@ -229,34 +229,15 @@ const HowItWorksSection = () => {
           </p>
         </div>
         
-        {/* Mobile horizontal scroll layout - IMPROVED */}
-        <div className="md:hidden w-full relative mb-4">
-          {/* Scroll navigation buttons */}
-          <div className="flex justify-between absolute -left-1 -right-1 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none">
-            <button onClick={handleScrollLeft} className={cn("w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto", scrollPosition <= 10 ? "opacity-40" : "opacity-80")} disabled={scrollPosition <= 10}>
-              <ChevronLeft className="w-5 h-5 text-gray-700" />
-            </button>
-            <button onClick={handleScrollRight} className={cn("w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center pointer-events-auto", scrollPosition >= maxScroll - 10 ? "opacity-40" : "opacity-80")} disabled={scrollPosition >= maxScroll - 10}>
-              <ChevronRight className="w-5 h-5 text-gray-700" />
-            </button>
-          </div>
-          
-          {/* Horizontal scroll container - improved with more compact styling */}
-          <div 
-            ref={scrollContainerRef} 
-            className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-0 px-1" 
-            onScroll={handleScroll} 
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
-          >
+        {/* Mobile 2x2 Grid Layout */}
+        <div className="md:hidden w-full mb-6">
+          <div className="grid grid-cols-2 gap-3">
             {steps.map((step, index) => (
               <motion.div 
                 key={index} 
                 initial={{
                   opacity: 0,
-                  y: 10
+                  y: 15
                 }} 
                 whileInView={{
                   opacity: 1,
@@ -276,30 +257,30 @@ const HowItWorksSection = () => {
                 }} 
                 className={cn(
                   "relative",
-                  "flex-shrink-0 w-[240px] min-h-[140px]", // Increased min-height to prevent text cutoff
-                  "p-4 pb-5", // Increased padding, especially at bottom
+                  stepColors[index].gradient,
+                  "p-3.5",
                   "rounded-xl",
                   "shadow-md",
                   "border border-gray-100",
-                  "mr-3 last:mr-1",
-                  "snap-center",
+                  "flex flex-col",
+                  "h-full",
+                  "min-h-[145px]",
                   "touch-manipulation",
                   "transition-transform duration-200",
-                  "cursor-pointer",
-                  stepColors[index].gradient
+                  "cursor-pointer"
                 )}
               >
-                {/* Step Number - more compact */}
-                <div className="flex items-center mb-2">
+                {/* Circle Number Badge */}
+                <div className="absolute -top-2 -left-1">
                   <div className={cn(
-                    "w-6 h-6", // Reduced from w-7 h-7
-                    stepColors[index].numBg, 
-                    stepColors[index].numText, 
+                    "w-7 h-7",
+                    stepColors[index].numBg,
+                    stepColors[index].numText,
                     "rounded-full",
-                    "flex items-center justify-center", 
-                    "text-xs font-medium", // Reduced from text-sm
+                    "flex items-center justify-center",
+                    "text-xs font-medium",
                     "shadow-sm",
-                    "mr-2"
+                    "ring-2 ring-white"
                   )}>
                     {index + 1}
                     
@@ -310,49 +291,33 @@ const HowItWorksSection = () => {
                       </div>
                     )}
                   </div>
-                  
-                  {/* Title */}
-                  <h4 className="text-sm font-semibold text-gray-900 flex-1">
+                </div>
+                
+                {/* Icon and Title in row */}
+                <div className="flex items-center justify-between mt-1 mb-2">
+                  <h4 className="text-sm font-semibold text-gray-900 pr-1">
                     {step.title}
                   </h4>
                   
-                  {/* Icon - smaller */}
                   <div className={cn(
-                    "ml-1", 
-                    stepColors[index].iconText, 
-                    stepColors[index].iconBg, 
-                    "rounded-full p-0.5"
+                    stepColors[index].iconText,
+                    stepColors[index].iconBg,
+                    "rounded-full p-1.5"
                   )}>
-                    {React.cloneElement(step.icon, { className: "w-4 h-4" })}
+                    {step.icon}
                   </div>
                 </div>
                 
-                {/* Description - more compact */}
-                <p className="text-xs text-gray-600 leading-tight">
+                {/* Description */}
+                <p className="text-xs text-gray-600 leading-relaxed mt-auto">
                   {step.description}
                 </p>
               </motion.div>
             ))}
           </div>
-
-          {/* Scroll indicators - moved further from cards to prevent overlap */}
-          <div className="flex justify-center mt-4 space-x-1 mb-1">
-            {steps.map((_, index) => (
-              <div 
-                key={index} 
-                className={cn(
-                  "h-1 rounded-full transition-all duration-300", 
-                  index === Math.floor(scrollPosition / (maxScroll / steps.length)) 
-                    ? `w-6 ${stepColors[index].numBg}` 
-                    : "w-2 bg-gray-300"
-                )} 
-              />
-            ))}
-          </div>
         </div>
 
-        {/* Alternative Mobile 2x2 Grid Layout */}
-        <div className="md:hidden mt-6 hidden">
+        {/* Removed old grid layout that was hidden */}
           <div className="grid grid-cols-2 gap-3">
             {steps.map((step, index) => <motion.div key={index} initial={{
             opacity: 0,
