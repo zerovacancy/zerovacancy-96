@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Search, Users, FileCheck, Calendar, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -79,11 +80,11 @@ const HowItWorksSection = () => {
   }];
   
   return (
-    <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[#f8f9ff]">
+    <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white">
       {/* Position the waves background directly inside the section */}
       <Waves 
         lineColor="rgba(147, 112, 219, 0.2)" 
-        backgroundColor="#f8f9ff"
+        backgroundColor="#ffffff"
         waveSpeedX={0.01}
         waveSpeedY={0.008}
         waveAmpX={25}

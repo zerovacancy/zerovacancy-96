@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -91,7 +92,7 @@ const Index = () => {
 
         <div className="space-y-0 w-full">
           {/* How It Works Section */}
-          <div id="how-it-works" className="relative bg-[#f8f9ff] py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full">
+          <div id="how-it-works" className="relative bg-white py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full">
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <HowItWorksSection />
           </div>
