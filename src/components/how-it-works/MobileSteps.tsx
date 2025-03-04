@@ -1,7 +1,7 @@
 
-import React from 'react';
+import React, { useRef, useState, TouchEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Step, StepStyle } from './stepsUtils';
 
@@ -18,8 +18,82 @@ export const MobileSteps: React.FC<MobileStepsProps> = ({
   activeStep,
   onStepClick 
 }) => {
+  // For swipe gesture
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  
+  // Required minimum swipe distance in pixels
+  const minSwipeDistance = 50;
+  
+  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+  
+  const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe && activeStep !== null && activeStep < steps.length - 1) {
+      // Swiped left, go to next step
+      onStepClick(activeStep + 1);
+    } else if (isRightSwipe && activeStep !== null && activeStep > 0) {
+      // Swiped right, go to previous step
+      onStepClick(activeStep - 1);
+    }
+    
+    // Reset values
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+  
   return (
-    <div className="md:hidden space-y-[14px] relative">
+    <div 
+      className="md:hidden space-y-[14px] relative"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Navigation indicator when active step is selected */}
+      {activeStep !== null && (
+        <div className="flex justify-between items-center px-2 mb-2 text-gray-500 text-sm">
+          <button 
+            onClick={() => activeStep > 0 ? onStepClick(activeStep - 1) : null}
+            className={cn(
+              "flex items-center p-1 rounded-full",
+              activeStep > 0 ? "text-violet-600 hover:bg-violet-50" : "text-gray-300 cursor-not-allowed"
+            )}
+            disabled={activeStep <= 0}
+          >
+            <ChevronLeft size={16} />
+            <span className="sr-only">Previous</span>
+          </button>
+          
+          <span className="text-xs">
+            Step {activeStep + 1} of {steps.length}
+          </span>
+          
+          <button 
+            onClick={() => activeStep < steps.length - 1 ? onStepClick(activeStep + 1) : null}
+            className={cn(
+              "flex items-center p-1 rounded-full",
+              activeStep < steps.length - 1 ? "text-violet-600 hover:bg-violet-50" : "text-gray-300 cursor-not-allowed"
+            )}
+            disabled={activeStep >= steps.length - 1}
+          >
+            <ChevronRight size={16} />
+            <span className="sr-only">Next</span>
+          </button>
+        </div>
+      )}
+      
       {/* Connecting gradient line */}
       <div className="absolute left-[8px] top-0 bottom-0 w-[3px] bg-gradient-to-b from-violet-500 via-blue-500 via-amber-500 to-emerald-500 opacity-60"></div>
       
@@ -128,6 +202,17 @@ export const MobileSteps: React.FC<MobileStepsProps> = ({
           </div>
         </motion.div>
       ))}
+      
+      {/* Swipe instruction overlay - only shown when a step is active */}
+      {activeStep !== null && (
+        <div className="text-center py-2 text-xs text-gray-500 flex items-center justify-center opacity-60">
+          <span className="mr-1">Swipe</span>
+          <ChevronLeft size={12} className="mx-1" />
+          <span className="mx-1">or</span>
+          <ChevronRight size={12} className="mx-1" />
+          <span className="ml-1">to navigate steps</span>
+        </div>
+      )}
     </div>
   );
 };
