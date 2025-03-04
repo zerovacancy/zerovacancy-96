@@ -126,9 +126,10 @@ export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedStep
                 transition: { duration: 0.6 }
               }}
             >
-              {React.cloneElement(step.icon, {
+              {/* Fix for the icon - ensure it's a ReactElement */}
+              {React.isValidElement(step.icon) ? React.cloneElement(step.icon, {
                 className: "w-7 h-7"
-              })}
+              }) : <div className="w-7 h-7" />}
             </motion.div>
             
             {/* Title with motion */}

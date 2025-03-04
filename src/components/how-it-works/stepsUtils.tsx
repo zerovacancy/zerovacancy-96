@@ -50,22 +50,26 @@ export const stepsData = [{
   icon: <Search className="w-5 h-5" />,
   title: "Search & Filter",
   description: "Find your perfect creator match based on your specific needs and requirements",
-  number: "01"
+  number: "01",
+  iconText: "text-violet-600"
 }, {
   icon: <Users className="w-5 h-5" />,
   title: "Review & Compare",
   description: "Browse portfolios and reviews to find the perfect match for your project",
-  number: "02"
+  number: "02",
+  iconText: "text-blue-500"
 }, {
   icon: <Calendar className="w-5 h-5" />,
   title: "Book & Pay",
   description: "Schedule securely through our platform with protected payments",
-  number: "03"
+  number: "03",
+  iconText: "text-amber-600"
 }, {
   icon: <FileCheck className="w-5 h-5" />,
   title: "Get Content",
   description: "Receive and approve your deliverables through our streamlined process",
-  number: "04"
+  number: "04",
+  iconText: "text-emerald-600"
 }];
 
 export interface StepStyle {
@@ -85,4 +89,5 @@ export interface Step {
   title: string;
   description: string;
   number: string;
+  iconText?: string; // Added this missing property
 }

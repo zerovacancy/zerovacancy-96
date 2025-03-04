@@ -49,7 +49,7 @@ export const MobileSteps: React.FC<MobileStepsProps> = ({ steps, completedSteps 
             "rounded-lg", 
             "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]", 
             "border border-gray-100", 
-            step.iconText ? "" : "border-l-[3px]",
+            (step.iconText ? "" : "border-l-[3px]"),
             "touch-manipulation", 
             "mx-auto", 
             "transition-transform duration-200", 
@@ -61,7 +61,8 @@ export const MobileSteps: React.FC<MobileStepsProps> = ({ steps, completedSteps 
             <div className="relative mr-3">
               <div className={cn(
                 "w-8 h-8",
-                `bg-${step.iconText?.split('-')[1]}-500` || "bg-gray-500", 
+                // Safely use iconText if available, otherwise use a default
+                step.iconText ? step.iconText.split('-')[1] ? `bg-${step.iconText.split('-')[1]}-500` : "bg-gray-500" : "bg-gray-500", 
                 "text-white", 
                 "rounded-full", 
                 "flex items-center justify-center", 
