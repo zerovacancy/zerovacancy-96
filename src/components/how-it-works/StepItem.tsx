@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { BadgeCheck } from 'lucide-react';
+import { BadgeCheck, Sparkles } from 'lucide-react';
 
 export interface StepColor {
   iconBg: string;
@@ -33,7 +33,10 @@ export const StepItem: React.FC<StepProps> = ({
   index,
   stepColor,
   isCompleted = false,
+  ...rest
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -48,6 +51,7 @@ export const StepItem: React.FC<StepProps> = ({
       }}
       whileHover={{
         scale: 1.02,
+        boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
         transition: {
           duration: 0.2
         }
@@ -61,21 +65,37 @@ export const StepItem: React.FC<StepProps> = ({
       }}
       className={cn(
         "relative bg-white",
-        "min-h-[180px] sm:min-h-[200px]",
+        "min-h-[220px]", // Standardized card height
         "px-6 py-8",
         "rounded-xl",
         "shadow-[0_4px_12px_rgba(0,0,0,0.08)]",
-        "transition-all duration-200",
+        "transition-all duration-300",
         "group",
         "border border-gray-100",
         "active:scale-[0.98]",
         "touch-manipulation",
-        "hover:shadow-[0_6px_16px_rgba(0,0,0,0.12)]",
-        "flex flex-col items-center"
+        "hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)]",
+        "flex flex-col items-center",
+        isHovered ? `ring-1 ${stepColor.borderColor}` : "",
       )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      role="listitem"
+      {...rest}
     >
       <div className="flex flex-col items-center justify-start h-full relative w-full">
-        {/* Step Number with connecting line */}
+        {/* Glow effect background */}
+        <motion.div 
+          className={cn(
+            "absolute inset-0 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-700",
+            stepColor.tintBg
+          )}
+          animate={{ 
+            opacity: isHovered ? 0.08 : 0 
+          }}
+        />
+        
+        {/* Step Number with pulsing effect */}
         <div className="absolute -left-[3.25rem] top-0 h-full hidden lg:block" aria-hidden="true">
           <motion.span 
             className={cn(
@@ -101,7 +121,15 @@ export const StepItem: React.FC<StepProps> = ({
                 delay: index * 0.2 + 0.3,
                 duration: 0.5
               }
-            }} 
+            }}
+            animate={isHovered ? {
+              scale: [1, 1.1, 1],
+              transition: {
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop"
+              }
+            } : {}}
             viewport={{
               once: true
             }}
@@ -135,7 +163,7 @@ export const StepItem: React.FC<StepProps> = ({
           />
         </div>
         
-        {/* Icon with enhanced colorful background */}
+        {/* Icon with enhanced colorful background and animation */}
         <motion.div 
           className={cn(
             "mb-5",
@@ -148,14 +176,43 @@ export const StepItem: React.FC<StepProps> = ({
             "overflow-hidden"
           )} 
           whileHover={{
-            scale: 1.1
+            scale: 1.1,
+            rotate: [0, 5, 0, -5, 0],
+            transition: {
+              rotate: {
+                duration: 0.5,
+                ease: "easeInOut"
+              }
+            }
           }} 
           whileTap={{
             scale: 0.95
           }}
         >
-          {/* Subtle background animation */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0,transparent_100%)] opacity-0 group-hover:opacity-70 transition-opacity duration-700"></div>
+          {/* Enhanced background animation */}
+          <motion.div 
+            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0,transparent_100%)]" 
+            animate={{
+              opacity: isHovered ? 0.7 : 0,
+              scale: isHovered ? 1.2 : 1
+            }}
+            transition={{
+              duration: 0.7
+            }}
+          />
+          
+          {/* Sparkle effect on hover */}
+          {isHovered && (
+            <motion.div 
+              className="absolute top-0 right-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Sparkles size={12} className="text-white/80" />
+            </motion.div>
+          )}
+          
           {React.cloneElement(icon as React.ReactElement, { className: "w-7 h-7 relative z-10" })}
         </motion.div>
         
@@ -166,7 +223,7 @@ export const StepItem: React.FC<StepProps> = ({
           {description}
         </p>
         
-        {/* Subtle glow effect on hover - desktop only */}
+        {/* Enhanced glow effect on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-700">
           <div className={`absolute inset-0 ${stepColor.glowColor} blur-xl opacity-30 scale-90 rounded-xl`}></div>
         </div>
