@@ -15,7 +15,7 @@ interface CreatorInfoProps {
 
 export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
   return (
-    <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-white select-text">
+    <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-white select-text z-10">
       <div className="flex items-center gap-2 sm:gap-2.5">
         <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
         {/* Verification badge - white circle and checkmark */}
