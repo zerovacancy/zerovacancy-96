@@ -156,8 +156,12 @@ export const MobileSteps: React.FC<MobileStepsProps> = ({
             <div className="relative mr-3">
               <div className={cn(
                 "w-8 h-8",
-                // Safely use iconText if available, otherwise use a default
-                step.iconText ? step.iconText.split('-')[1] ? `bg-${step.iconText.split('-')[1]}-500` : "bg-gray-500" : "bg-gray-500", 
+                // Fixed styling: Use the correct color based on step index
+                index === 0 ? "bg-violet-600" : 
+                index === 1 ? "bg-blue-500" : 
+                index === 2 ? "bg-amber-600" : 
+                index === 3 ? "bg-emerald-600" : 
+                "bg-gray-500", 
                 "text-white", 
                 "rounded-full", 
                 "flex items-center justify-center", 
