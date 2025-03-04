@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
@@ -13,57 +14,82 @@ import { useIsMobile } from '@/hooks/use-mobile';
 // Create a component for displaying creator specialties with iconography
 const CreatorSpecialties = () => {
   const isMobile = useIsMobile();
-  const specialties = [{
-    icon: <Camera className="h-5 w-5" />,
-    label: "Photography"
-  }, {
-    icon: <Grid3x3 className="h-5 w-5" />,
-    label: "3D Tours"
-  }, {
-    icon: <Share2 className="h-5 w-5" />,
-    label: "Drone Footage"
-  }, {
-    icon: <Video className="h-5 w-5" />,
-    label: "Video Tours"
-  }, {
-    icon: <Laptop className="h-5 w-5" />,
-    label: "Virtual Staging"
-  }, {
-    icon: <Compass className="h-5 w-5" />,
-    label: "Floor Plans"
-  }];
-  return <div className={cn("w-full py-2 sm:py-4 px-2", isMobile ? "overflow-x-auto scrollbar-hide flex flex-nowrap px-4 pb-4 gap-2 snap-x snap-mandatory" : "flex flex-wrap justify-center gap-3 sm:gap-4")}>
-      {specialties.map((specialty, index) => <div key={index} className={cn("flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-sm rounded-full shadow-sm", "border border-purple-100 text-xs sm:text-sm text-gray-700 font-medium", "hover:bg-purple-50/90 hover:border-purple-200 transition-all duration-200", isMobile && "snap-center flex-shrink-0")}>
+  const specialties = [
+    { icon: <Camera className="h-5 w-5" />, label: "Photography" },
+    { icon: <Grid3x3 className="h-5 w-5" />, label: "3D Tours" },
+    { icon: <Share2 className="h-5 w-5" />, label: "Drone Footage" },
+    { icon: <Video className="h-5 w-5" />, label: "Video Tours" },
+    { icon: <Laptop className="h-5 w-5" />, label: "Virtual Staging" },
+    { icon: <Compass className="h-5 w-5" />, label: "Floor Plans" },
+  ];
+  
+  return (
+    <div className={cn(
+      "w-full py-2 sm:py-4 px-2",
+      isMobile ? 
+        "overflow-x-auto scrollbar-hide flex flex-nowrap px-4 pb-4 gap-2 snap-x snap-mandatory" : 
+        "flex flex-wrap justify-center gap-3 sm:gap-4"
+    )}>
+      {specialties.map((specialty, index) => (
+        <div 
+          key={index}
+          className={cn(
+            "flex items-center gap-1.5 px-3 py-1.5 bg-white/80 backdrop-blur-sm rounded-full shadow-sm",
+            "border border-purple-100 text-xs sm:text-sm text-gray-700 font-medium",
+            "hover:bg-purple-50/90 hover:border-purple-200 transition-all duration-200",
+            isMobile && "snap-center flex-shrink-0"
+          )}
+        >
           <span className="text-purple-500">{specialty.icon}</span>
           <span>{specialty.label}</span>
-        </div>)}
-    </div>;
+        </div>
+      ))}
+    </div>
+  );
 };
+
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
-  return <div className="w-full px-4 sm:px-6 lg:px-8">
+
+  return (
+    <div className="w-full px-4 sm:px-6 lg:px-8">
       <div className="mx-auto relative group">
         <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-purple-800/40 via-indigo-700/40 to-purple-900/40 opacity-75 blur-sm group-hover:opacity-100 transition duration-500"></div>
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} whileInView={{
-        opacity: 1,
-        y: 0,
-        transition: {
-          duration: 0.7,
-          ease: [0.22, 1, 0.36, 1]
-        }
-      }} viewport={{
-        once: true,
-        margin: "-50px"
-      }} className="relative rounded-xl overflow-hidden shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ 
+            opacity: 1, 
+            y: 0,
+            transition: {
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1]
+            }
+          }}
+          viewport={{ once: true, margin: "-50px" }}
+          className="relative rounded-xl overflow-hidden shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white"
+        >
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-xl">
-            <BorderBeam colorFrom="#9370DB" colorTo="#C19EF9" duration={20} borderWidth={1.5} />
-            <GlowingEffect variant="default" blur={8} glow={true} inactiveZone={0.6} spread={15} borderWidth={1} className="opacity-20" />
+            <BorderBeam 
+              colorFrom="#9370DB" 
+              colorTo="#C19EF9" 
+              duration={20}
+              borderWidth={1.5}
+            />
+            <GlowingEffect 
+              variant="default" 
+              blur={8} 
+              glow={true} 
+              inactiveZone={0.6}
+              spread={15}
+              borderWidth={1}
+              className="opacity-20"
+            />
             <AnimatedGrid className="opacity-5" />
           </div>
-          <AuroraBackground className="min-h-0 w-full" showRadialGradient={false}>
+          <AuroraBackground 
+            className="min-h-0 w-full" 
+            showRadialGradient={false}
+          >
             <div className="flex flex-col w-full relative z-10">
               {/* Title and subtitle moved to inside the component */}
               <div className="text-center pt-6 pb-2 px-4">
@@ -76,7 +102,9 @@ const PreviewSearch = () => {
               </div>
               
               {/* Creator specialties with iconography */}
-              
+              <div className="w-full pt-2 pb-2 px-4">
+                <CreatorSpecialties />
+              </div>
               
               {/* Search bar section */}
               <div className="w-full px-4 py-4 sm:px-6 sm:py-5">
@@ -85,39 +113,48 @@ const PreviewSearch = () => {
             
               {/* Creators list section */}
               <div className="w-full px-4 py-5 sm:px-6 sm:py-6 bg-gradient-to-b from-transparent to-purple-50/30">
-                <CreatorsList creators={[{
-                name: "Emily Johnson",
-                services: ["Photography", "Virtual Staging"],
-                price: 150,
-                rating: 4.9,
-                reviews: 127,
-                location: "New York, NY",
-                image: "/newemilyprofile.jpg",
-                workExamples: ["/1-d2e3f802.jpg"]
-              }, {
-                name: "Jane Cooper",
-                services: ["Video Tours", "Drone Footage"],
-                price: 200,
-                rating: 4.8,
-                reviews: 98,
-                location: "Los Angeles, CA",
-                image: "/janeprofile.png",
-                workExamples: ["/janesub.jpg", "/janesub2.png", "/janesub3.webp"]
-              }, {
-                name: "Michael Brown",
-                services: ["3D Tours", "Floor Plans"],
-                price: 175,
-                rating: 4.7,
-                reviews: 82,
-                location: "Chicago, IL",
-                image: "/emily profile.jpeg",
-                workExamples: ["/1-d2e3f802.jpg"]
-              }]} sortBy="rating" onSort={() => {}} onImageLoad={() => {}} loadedImages={new Set()} imageRef={() => {}} />
+                <CreatorsList 
+                  creators={[{
+                    name: "Emily Johnson",
+                    services: ["Photography", "Virtual Staging"],
+                    price: 150,
+                    rating: 4.9,
+                    reviews: 127,
+                    location: "New York, NY",
+                    image: "/newemilyprofile.jpg",
+                    workExamples: ["/1-d2e3f802.jpg"]
+                  }, {
+                    name: "Jane Cooper",
+                    services: ["Video Tours", "Drone Footage"],
+                    price: 200,
+                    rating: 4.8,
+                    reviews: 98,
+                    location: "Los Angeles, CA",
+                    image: "/janeprofile.png",
+                    workExamples: ["/janesub.jpg", "/janesub2.png", "/janesub3.webp"]
+                  }, {
+                    name: "Michael Brown",
+                    services: ["3D Tours", "Floor Plans"],
+                    price: 175,
+                    rating: 4.7,
+                    reviews: 82,
+                    location: "Chicago, IL",
+                    image: "/emily profile.jpeg",
+                    workExamples: ["/1-d2e3f802.jpg"]
+                  }]} 
+                  sortBy="rating" 
+                  onSort={() => {}} 
+                  onImageLoad={() => {}} 
+                  loadedImages={new Set()} 
+                  imageRef={() => {}} 
+                />
               </div>
             </div>
           </AuroraBackground>
         </motion.div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PreviewSearch;
