@@ -3,14 +3,14 @@ import React from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
 import { AuroraBackground } from './ui/aurora-background';
-import { Camera, Video, Tv2, Share2 } from 'lucide-react';
+import { Camera, Video, Tv2, Share2, Grid3x3 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const specialtyIcons = [
   { name: 'Photography', icon: <Camera className="h-6 w-6 text-indigo-500/80" /> },
-  { name: '3D Tours', icon: <Video className="h-6 w-6 text-violet-500/80" /> },
-  { name: 'Video Tours', icon: <Tv2 className="h-6 w-6 text-blue-500/80" /> },
+  { name: '3D Tours', icon: <Grid3x3 className="h-6 w-6 text-violet-500/80" /> },
+  { name: 'Video Tours', icon: <Video className="h-6 w-6 text-blue-500/80" /> },
   { name: 'Aerial Footage', icon: <Share2 className="h-6 w-6 text-amber-500/80" /> },
   { name: 'Social Media', icon: <Share2 className="h-6 w-6 text-pink-500/80" /> },
 ];
