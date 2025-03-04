@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -100,6 +99,7 @@ const Index = () => {
               xGap={15}
               yGap={30}
               className="opacity-70"
+              static={true}
             />
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
