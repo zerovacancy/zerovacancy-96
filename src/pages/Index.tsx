@@ -87,20 +87,8 @@ const Index = () => {
         </div>
 
         <div className="space-y-0 w-full">
-          {/* How It Works Section - no longer includes PreviewSearch */}
+          {/* How It Works Section - no longer includes Waves */}
           <section id="how-it-works" className="relative py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full bg-white">
-            <Waves 
-              lineColor="rgba(147, 112, 219, 0.2)" 
-              backgroundColor="#ffffff"
-              waveSpeedX={0.01}
-              waveSpeedY={0.008}
-              waveAmpX={25}
-              waveAmpY={12}
-              xGap={15}
-              yGap={30}
-              className="opacity-70"
-              static={true}
-            />
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
               <HowItWorksSection />
