@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StepColor } from './StepItem';
@@ -12,8 +12,6 @@ interface MobileStepItemProps {
   index: number;
   stepColor: StepColor;
   isCompleted?: boolean;
-  isExpanded?: boolean;
-  onToggle?: () => void;
 }
 
 export const MobileStepItem: React.FC<MobileStepItemProps> = ({
@@ -23,8 +21,6 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
   index,
   stepColor,
   isCompleted = false,
-  isExpanded = false,
-  onToggle
 }) => {
   return (
     <motion.div 
@@ -38,13 +34,15 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
           delay: index * 0.15
         }
       }}
-      whileTap={{ scale: 0.98, transition: { duration: 0.2 } }}
+      whileTap={{
+        scale: 1.02,
+        transition: { duration: 0.2 }
+      }}
       viewport={{ once: true, margin: "-30px" }}
-      onClick={onToggle}
       className={cn(
         "relative bg-white",
-        "w-full max-w-[327px] min-h-[60px]", // Reduced min-height for collapsed state
-        "p-4", // Reduced padding
+        "w-full max-w-[327px] min-h-[100px]", // Reduced height
+        "p-4", // Reduced to 16px padding
         "rounded-lg",
         "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]",
         "border border-gray-100",
@@ -52,16 +50,13 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
         "border-l-[3px]", // 3px left border
         "touch-manipulation",
         "mx-auto",
-        "transition-all duration-200",
-        "cursor-pointer",
-        "active:bg-gray-50"
+        "transition-transform duration-200",
+        "cursor-pointer"
       )}
-      aria-expanded={isExpanded}
-      role="button"
     >
       <div className="flex items-start">
         {/* Left side: Number circle with integrated icon */}
-        <div className="relative mr-3 flex-shrink-0">
+        <div className="relative mr-3">
           <div className={cn(
             "w-8 h-8", // Slightly smaller (32px)
             stepColor.numBg,
@@ -71,9 +66,7 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
             "text-sm font-medium",
             "shadow-sm",
             "relative",
-            "mt-[2px]", // Align with first line of title
-            "touch-none", // Prevent touch events on the number
-            isExpanded ? "animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]" : ""
+            "mt-[2px]" // Align with first line of title
           )}>
             <span className="flex items-center justify-center w-full h-full">
               {index + 1}
@@ -89,10 +82,10 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
         </div>
         
         {/* Content */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1">
           {/* Title with icon next to it */}
           <div className="flex items-center">
-            <h4 className="text-[16px] font-semibold text-gray-900 truncate">
+            <h4 className="text-[16px] font-semibold text-gray-900">
               {title}
             </h4>
             <div className={cn(
@@ -103,20 +96,10 @@ export const MobileStepItem: React.FC<MobileStepItemProps> = ({
             </div>
           </div>
           
-          {/* Description with animation */}
-          <AnimatePresence>
-            {isExpanded && description && (
-              <motion.p 
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
-                className="text-[14px] text-gray-600 leading-[1.4] mt-2 overflow-hidden"
-              >
-                {description}
-              </motion.p>
-            )}
-          </AnimatePresence>
+          {/* Description with reduced spacing */}
+          <p className="text-[14px] text-gray-600 leading-[1.4] mt-1">
+            {description}
+          </p>
         </div>
       </div>
     </motion.div>

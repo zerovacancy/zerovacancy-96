@@ -16,6 +16,4 @@ export interface CreatorCardProps {
   onImageLoad?: (imageSrc: string) => void;
   loadedImages: Set<string>;
   imageRef: (node: HTMLImageElement | null) => void;
-  isSaved?: boolean;
-  onSave?: () => void;
 }

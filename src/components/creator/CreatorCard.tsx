@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
-import { ArrowRight, Heart } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Dialog } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -13,20 +13,12 @@ import { CreatorInfo } from './CreatorInfo';
 import { CreatorMedia } from './CreatorMedia';
 import { CreatorTags, getDefaultTags } from './CreatorTags';
 import type { CreatorCardProps } from './types';
-import { motion } from 'framer-motion';
 
-interface EnhancedCreatorCardProps extends CreatorCardProps {
-  isSaved?: boolean;
-  onSave?: () => void;
-}
-
-export const CreatorCard: React.FC<EnhancedCreatorCardProps> = ({ 
+export const CreatorCard: React.FC<CreatorCardProps> = ({ 
   creator, 
   onImageLoad, 
   loadedImages, 
-  imageRef,
-  isSaved = false,
-  onSave
+  imageRef 
 }) => {
   const isMobile = useIsMobile();
   const [showEmailDialog, setShowEmailDialog] = useState(false);
@@ -58,28 +50,6 @@ export const CreatorCard: React.FC<EnhancedCreatorCardProps> = ({
             From ${creator.price}
           </span>
         </div>
-        
-        {/* Save button - new */}
-        <div className="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5 z-20">
-          <motion.button 
-            className={cn(
-              "p-1.5 sm:p-2 rounded-full",
-              "flex items-center justify-center",
-              "bg-white shadow-sm border border-white/40",
-              "transition-all duration-200",
-              "group-hover:scale-105",
-              "active:scale-95"
-            )}
-            whileTap={{ scale: 0.9 }}
-            onClick={onSave}
-            aria-label={isSaved ? "Remove from saved" : "Save for later"}
-          >
-            <Heart className={cn(
-              "h-4 w-4 sm:h-5 sm:w-5",
-              isSaved ? "fill-red-500 text-red-500" : "text-gray-400"
-            )} />
-          </motion.button>
-        </div>
 
         <div className="relative">
           {/* Media and info overlay */}
@@ -96,7 +66,7 @@ export const CreatorCard: React.FC<EnhancedCreatorCardProps> = ({
           {/* Tags and rating section */}
           <div className="p-3.5 sm:p-4">
             {/* Tags section */}
-            <div className="mb-3.5 overflow-x-auto scrollbar-hide">
+            <div className="mb-3.5">
               <CreatorTags tags={tags} />
             </div>
             
