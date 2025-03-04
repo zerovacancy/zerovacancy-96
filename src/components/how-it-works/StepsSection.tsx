@@ -1,10 +1,8 @@
-
 import React from 'react';
 import { Search, Users, FileCheck, Calendar, Check, ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { SearchConnection } from './SearchConnection';
 
 // Define colorful backgrounds for each step with enhanced styling options
 const stepColors = [{
@@ -440,9 +438,6 @@ export const StepsSection: React.FC<StepsSectionProps> = ({ completedSteps }) =>
       
       {/* Desktop grid layout */}
       <DesktopSteps steps={stepsData} completedSteps={completedSteps} />
-      
-      {/* Creator Search section */}
-      <SearchConnection />
     </div>
   );
 };
