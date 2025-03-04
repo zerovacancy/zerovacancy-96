@@ -10,14 +10,14 @@ export const ContentTypeSelect = () => {
   return (
     <div className="w-full sm:w-[40%] relative group">
       <Camera className={cn(
-        "w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2",
+        "w-4 h-4 text-indigo-500/70 absolute left-4 top-1/2 -translate-y-1/2",
         "transition-all duration-200",
-        "group-hover:text-indigo-500"
+        "group-hover:text-indigo-600"
       )} />
       <ChevronDown className={cn(
-        "w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2",
+        "w-3.5 h-3.5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2",
         "transition-all duration-200",
-        "group-hover:text-gray-400"
+        "group-hover:text-gray-500"
       )} />
       <select
         className={cn(
@@ -26,7 +26,7 @@ export const ContentTypeSelect = () => {
           "transition-colors duration-200",
           "focus:outline-none focus:ring-2 focus:ring-indigo-500/30",
           "group-hover:bg-gray-50/80",
-          "font-medium",
+          "font-medium rounded-l-lg",
           "border-0"
         )}
       >
