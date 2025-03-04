@@ -15,11 +15,9 @@ import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
 import PreviewSearch from '@/components/PreviewSearch';
-
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
-  
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     setShowGlowDialog(!hasVisited);
@@ -27,24 +25,13 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
-  
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
-  
-  return (
-    <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
+  return <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       <Header />
-      {showBanner && (
-        <div className="relative">
-          <Banner 
-            variant="purple" 
-            size="lg" 
-            action={
-              <Button 
-                variant="secondary" 
-                size="sm" 
-                className="
+      {showBanner && <div className="relative">
+          <Banner variant="purple" size="lg" action={<Button variant="secondary" size="sm" className="
                   flex text-xs sm:text-sm items-center 
                   whitespace-nowrap px-3 py-2 sm:px-5 sm:py-2.5
                   bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold
@@ -54,18 +41,10 @@ const Index = () => {
                   min-w-[8rem] sm:min-w-[9rem]
                   touch-manipulation
                   shadow-[0_2px_10px_rgba(0,0,0,0.15)]
-                " 
-                onClick={handleTryNowClick}
-              >
+                " onClick={handleTryNowClick}>
                 Get Early Access
-              </Button>
-            } 
-            layout="complex" 
-            isClosable 
-            onClose={() => setShowBanner(false)} 
-            className="animate-in fade-in slide-in-from-top duration-500 relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0"
-          >
-            <div className="flex items-center justify-center gap-3 sm:gap-4 relative z-10">
+              </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)} className="animate-in fade-in slide-in-from-top duration-500 relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0">
+            <div className="flex items-center justify-left gap-3 sm:gap-4 relative z-10">
               <Star className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-300 animate-pulse" />
               <AnimatedShinyText className="
                   text-sm sm:text-base font-bold inline-block
@@ -76,8 +55,7 @@ const Index = () => {
               </AnimatedShinyText>
             </div>
           </Banner>
-        </div>
-      )}
+        </div>}
 
       <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
         {/* Hero Section */}
@@ -135,8 +113,6 @@ const Index = () => {
       </main>
       <BottomNav />
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
