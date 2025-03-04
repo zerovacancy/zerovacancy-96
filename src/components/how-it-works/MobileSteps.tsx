@@ -8,9 +8,16 @@ import { Step, StepStyle } from './stepsUtils';
 interface MobileStepsProps {
   steps: Step[];
   completedSteps: number[];
+  activeStep: number | null;
+  onStepClick: (index: number) => void;
 }
 
-export const MobileSteps: React.FC<MobileStepsProps> = ({ steps, completedSteps }) => {
+export const MobileSteps: React.FC<MobileStepsProps> = ({ 
+  steps, 
+  completedSteps, 
+  activeStep,
+  onStepClick 
+}) => {
   return (
     <div className="md:hidden space-y-[14px] relative">
       {/* Connecting gradient line */}
@@ -32,6 +39,18 @@ export const MobileSteps: React.FC<MobileStepsProps> = ({ steps, completedSteps 
               delay: index * 0.15
             }
           }} 
+          animate={{
+            scale: activeStep === index ? 1.03 : 1,
+            boxShadow: activeStep === index 
+              ? "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)" 
+              : "0 2px 4px rgba(0,0,0,0.05), 0 2px 2px rgba(0,0,0,0.05)",
+            borderColor: activeStep === index ? "rgb(124, 58, 237)" : "",
+            transition: {
+              type: "spring",
+              stiffness: 300,
+              damping: 20
+            }
+          }}
           whileTap={{
             scale: 1.02,
             transition: {
@@ -42,6 +61,7 @@ export const MobileSteps: React.FC<MobileStepsProps> = ({ steps, completedSteps 
             once: true,
             margin: "-30px"
           }} 
+          onClick={() => onStepClick(index)}
           className={cn(
             "relative bg-white", 
             "w-full max-w-[327px] min-h-[100px]",
@@ -53,6 +73,7 @@ export const MobileSteps: React.FC<MobileStepsProps> = ({ steps, completedSteps 
             "touch-manipulation", 
             "mx-auto", 
             "transition-transform duration-200", 
+            activeStep === index ? "border-violet-500 bg-violet-50/20" : "",
             "cursor-pointer"
           )}
         >

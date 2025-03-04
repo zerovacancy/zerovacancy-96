@@ -10,9 +10,17 @@ interface DesktopStepsProps {
   steps: Step[];
   completedSteps: number[];
   stepColors: StepStyle[];
+  activeStep: number | null;
+  onStepClick: (index: number) => void;
 }
 
-export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedSteps, stepColors }) => {
+export const DesktopSteps: React.FC<DesktopStepsProps> = ({ 
+  steps, 
+  completedSteps, 
+  stepColors,
+  activeStep,
+  onStepClick
+}) => {
   return (
     <div className="hidden md:block w-full mx-auto relative">
       {/* Connecting lines between steps */}
@@ -37,6 +45,19 @@ export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedStep
                 stiffness: 50
               }
             }}
+            animate={{
+              scale: activeStep === index ? 1.05 : 1,
+              boxShadow: activeStep === index 
+                ? "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" 
+                : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+              borderWidth: activeStep === index ? "2px" : "1px",
+              borderColor: activeStep === index ? stepColors[index].borderColor.replace("border-", "") : "rgb(243, 244, 246)",
+              transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 20
+              }
+            }}
             whileHover={{
               scale: 1.03,
               boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)",
@@ -51,6 +72,7 @@ export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedStep
               once: true,
               margin: "-50px"
             }}
+            onClick={() => onStepClick(index)}
             className={cn(
               "relative h-full",
               stepColors[index].gradient,
@@ -60,6 +82,7 @@ export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedStep
               "transition-all duration-300",
               "group cursor-pointer",
               "border border-gray-100",
+              activeStep === index ? `${stepColors[index].borderColor} ${stepColors[index].tintBg} shadow-lg` : "",
               "active:scale-[0.98]",
               "touch-manipulation",
               "shadow-md hover:shadow-xl",
@@ -95,6 +118,14 @@ export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedStep
                     duration: 0.5
                   }
                 }}
+                animate={{
+                  scale: activeStep === index ? 1.1 : 1,
+                  transition: {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }
+                }}
                 viewport={{ once: true }}
               >
                 {step.number}
@@ -125,11 +156,20 @@ export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedStep
                 rotateY: 180,
                 transition: { duration: 0.6 }
               }}
+              animate={{
+                scale: activeStep === index ? 1.15 : 1,
+                rotate: activeStep === index ? [0, 5, 0, -5, 0] : 0,
+                transition: {
+                  scale: { type: "spring", stiffness: 300, damping: 20 },
+                  rotate: { 
+                    repeat: activeStep === index ? 1 : 0, 
+                    duration: 0.5, 
+                    ease: "easeInOut" 
+                  }
+                }
+              }}
             >
-              {/* Fix for the icon - ensure it's a ReactElement */}
-              {React.isValidElement(step.icon) ? React.cloneElement(step.icon, {
-                className: "w-7 h-7"
-              }) : <div className="w-7 h-7" />}
+              {React.isValidElement(step.icon) ? step.icon : <div className="w-7 h-7" />}
             </motion.div>
             
             {/* Title with motion */}
@@ -139,6 +179,10 @@ export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedStep
               whileInView={{ 
                 opacity: 1,
                 transition: { delay: index * 0.1 + 0.5 }
+              }}
+              animate={{
+                scale: activeStep === index ? 1.05 : 1,
+                transition: { duration: 0.3 }
               }}
               viewport={{ once: true }}
             >
@@ -164,6 +208,7 @@ export const DesktopSteps: React.FC<DesktopStepsProps> = ({ steps, completedStep
               "flex items-center justify-center",
               "rounded-full",
               "opacity-0 group-hover:opacity-70",
+              activeStep === index ? "opacity-90" : "",
               "transition-opacity duration-300",
               stepColors[index].numBg
             )}>
