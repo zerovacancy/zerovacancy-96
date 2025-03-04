@@ -29,7 +29,7 @@ export function Waves({
 }: WavesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -134,7 +134,7 @@ export function Waves({
   ]);
   
   return (
-    <div ref={containerRef} className={cn('absolute inset-0 overflow-hidden', className)}>
+    <section ref={containerRef} className={cn('absolute inset-0 overflow-hidden', className)}>
       {isVisible && (
         <canvas 
           ref={canvasRef} 
@@ -142,6 +142,6 @@ export function Waves({
           aria-hidden="true"
         />
       )}
-    </div>
+    </section>
   );
 }
