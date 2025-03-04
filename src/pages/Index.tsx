@@ -15,9 +15,11 @@ import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
+
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
+  
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     setShowGlowDialog(!hasVisited);
@@ -25,13 +27,24 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
+  
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
-  return <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
+  
+  return (
+    <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       <Header />
-      {showBanner && <div className="relative">
-          <Banner variant="purple" size="lg" action={<Button variant="secondary" size="sm" className="
+      {showBanner && (
+        <div className="relative">
+          <Banner 
+            variant="purple" 
+            size="lg" 
+            action={
+              <Button 
+                variant="secondary" 
+                size="sm" 
+                className="
                   flex text-xs sm:text-sm items-center 
                   whitespace-nowrap px-3 py-2 sm:px-5 sm:py-2.5
                   bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold
@@ -41,9 +54,17 @@ const Index = () => {
                   min-w-[8rem] sm:min-w-[9rem]
                   touch-manipulation
                   shadow-[0_2px_10px_rgba(0,0,0,0.15)]
-                " onClick={handleTryNowClick}>
+                " 
+                onClick={handleTryNowClick}
+              >
                 Get Early Access
-              </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)} className="animate-in fade-in slide-in-from-top duration-500 relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0">
+              </Button>
+            } 
+            layout="complex" 
+            isClosable 
+            onClose={() => setShowBanner(false)} 
+            className="animate-in fade-in slide-in-from-top duration-500 relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0"
+          >
             <div className="flex items-center justify-center gap-3 sm:gap-4 relative z-10">
               <Star className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-300 animate-pulse" />
               <AnimatedShinyText className="
@@ -55,7 +76,8 @@ const Index = () => {
               </AnimatedShinyText>
             </div>
           </Banner>
-        </div>}
+        </div>
+      )}
 
       <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
         {/* Hero Section */}
@@ -66,13 +88,23 @@ const Index = () => {
 
         <div className="space-y-0 w-full">
           {/* How It Works Section */}
-          <div id="how-it-works" className="relative py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full bg-transparent">
-            <Waves lineColor="rgba(147, 112, 219, 0.2)" backgroundColor="#f8f9ff" waveSpeedX={0.01} waveSpeedY={0.008} waveAmpX={25} waveAmpY={12} xGap={15} yGap={30} className="opacity-70" />
+          <section id="how-it-works" className="relative py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full bg-white">
+            <Waves 
+              lineColor="rgba(147, 112, 219, 0.2)" 
+              backgroundColor="#ffffff"
+              waveSpeedX={0.01}
+              waveSpeedY={0.008}
+              waveAmpX={25}
+              waveAmpY={12}
+              xGap={15}
+              yGap={30}
+              className="opacity-70"
+            />
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
               <HowItWorksSection />
             </div>
-          </div>
+          </section>
           
           {/* Featured Creators Section */}
           <div className="bg-white py-10 sm:py-16 lg:py-20 border-b border-gray-100 w-full">
@@ -114,6 +146,8 @@ const Index = () => {
       </main>
       <BottomNav />
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
