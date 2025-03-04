@@ -9,7 +9,6 @@ import { AnimatedGrid } from './ui/animated-grid';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { CreatorSpecialties } from './search/CreatorSpecialties';
 
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
@@ -63,11 +62,6 @@ const PreviewSearch = () => {
                 <p className="text-gray-600 max-w-2xl mx-auto mb-3 sm:mb-4 md:mb-6 text-sm sm:text-base leading-relaxed">
                   Connect with skilled professionals who can showcase your property in its best light
                 </p>
-              </div>
-              
-              {/* Creator specialties - improved spacing */}
-              <div className="w-full pt-1 pb-2 px-3 sm:px-4">
-                <CreatorSpecialties />
               </div>
               
               {/* Search bar section - enhanced for touch */}
