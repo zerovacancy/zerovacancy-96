@@ -6,49 +6,8 @@ import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { SectionHeader } from './how-it-works/SectionHeader';
 import { SearchConnection } from './how-it-works/SearchConnection';
-
-// Define colorful backgrounds for each step with enhanced styling options
-const stepColors = [{
-  iconBg: "bg-violet-100",
-  iconText: "text-violet-600",
-  numBg: "bg-violet-600",
-  numText: "text-white",
-  lineColor: "from-violet-600/70 to-blue-500/50",
-  borderColor: "border-violet-600",
-  glowColor: "shadow-violet-500/20",
-  tintBg: "bg-violet-50/10",
-  gradient: "bg-gradient-to-br from-violet-50 to-violet-100"
-}, {
-  iconBg: "bg-blue-100",
-  iconText: "text-blue-500",
-  numBg: "bg-blue-500",
-  numText: "text-white",
-  lineColor: "from-blue-500/70 to-amber-600/50",
-  borderColor: "border-blue-500",
-  glowColor: "shadow-blue-500/20",
-  tintBg: "bg-blue-50/10",
-  gradient: "bg-gradient-to-br from-blue-50 to-blue-100"
-}, {
-  iconBg: "bg-amber-100",
-  iconText: "text-amber-600",
-  numBg: "bg-amber-600",
-  numText: "text-white",
-  lineColor: "from-amber-600/70 to-emerald-600/50",
-  borderColor: "border-amber-600",
-  glowColor: "shadow-amber-500/20",
-  tintBg: "bg-amber-50/10",
-  gradient: "bg-gradient-to-br from-amber-50 to-amber-100"
-}, {
-  iconBg: "bg-emerald-100",
-  iconText: "text-emerald-600",
-  numBg: "bg-emerald-600",
-  numText: "text-white",
-  lineColor: "from-emerald-600/50 to-emerald-600/10",
-  borderColor: "border-emerald-600",
-  glowColor: "shadow-emerald-500/20",
-  tintBg: "bg-emerald-50/10",
-  gradient: "bg-gradient-to-br from-emerald-50 to-emerald-100"
-}];
+import { MobileCarousel } from './how-it-works/MobileCarousel';
+import { stepsData, stepColors } from './how-it-works/stepsData';
 
 // New component for desktop connecting lines between steps
 const ConnectingLines = () => {
@@ -134,131 +93,6 @@ const ConnectingLines = () => {
           <ArrowRight className="h-4 w-4" />
         </motion.div>
       </motion.div>
-    </div>
-  );
-};
-
-// Define steps data 
-const stepsData = [{
-  icon: <Search className="w-5 h-5" />,
-  title: "Search & Filter",
-  description: "Find your perfect creator match based on your specific needs and requirements",
-  number: "01"
-}, {
-  icon: <Users className="w-5 h-5" />,
-  title: "Review & Compare",
-  description: "Browse portfolios and reviews to find the perfect match for your project",
-  number: "02"
-}, {
-  icon: <Calendar className="w-5 h-5" />,
-  title: "Book & Pay",
-  description: "Schedule securely through our platform with protected payments",
-  number: "03"
-}, {
-  icon: <FileCheck className="w-5 h-5" />,
-  title: "Get Content",
-  description: "Receive and approve your deliverables through our streamlined process",
-  number: "04"
-}];
-
-// Mobile Steps component
-const MobileSteps = ({ steps, completedSteps }) => {
-  return (
-    <div className="md:hidden space-y-[14px] relative">
-      {/* Connecting gradient line */}
-      <div className="absolute left-[8px] top-0 bottom-0 w-[3px] bg-gradient-to-b from-violet-500 via-blue-500 via-amber-500 to-emerald-500 opacity-60"></div>
-      
-      {steps.map((step, index) => (
-        <motion.div 
-          key={index} 
-          initial={{
-            opacity: 0,
-            y: 20
-          }} 
-          whileInView={{
-            opacity: 1,
-            y: 0,
-            transition: {
-              type: "spring",
-              duration: 0.6,
-              delay: index * 0.15
-            }
-          }} 
-          whileTap={{
-            scale: 1.02,
-            transition: {
-              duration: 0.2
-            }
-          }} 
-          viewport={{
-            once: true,
-            margin: "-30px"
-          }} 
-          className={cn(
-            "relative bg-white", 
-            "w-full max-w-[327px] min-h-[100px]",
-            "p-4",
-            "rounded-lg", 
-            "shadow-[0_2px_4px_rgba(0,0,0,0.05),0_2px_2px_rgba(0,0,0,0.05)]", 
-            "border border-gray-100", 
-            stepColors[index].borderColor, 
-            "border-l-[3px]",
-            "touch-manipulation", 
-            "mx-auto", 
-            "transition-transform duration-200", 
-            "cursor-pointer"
-          )}
-        >
-          <div className="flex items-start">
-            {/* Left side: Number circle with integrated icon */}
-            <div className="relative mr-3">
-              <div className={cn(
-                "w-8 h-8",
-                stepColors[index].numBg, 
-                stepColors[index].numText, 
-                "rounded-full", 
-                "flex items-center justify-center", 
-                "text-sm font-medium", 
-                "shadow-sm", 
-                "relative", 
-                "mt-[2px]" // Align with first line of title
-              )}>
-                <span className="flex items-center justify-center w-full h-full">
-                  {index + 1}
-                </span>
-                
-                {/* Completed checkmark */}
-                {completedSteps.includes(index) && (
-                  <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
-                    <Check className="w-3 h-3 text-green-500" />
-                  </div>
-                )}
-              </div>
-            </div>
-            
-            {/* Content */}
-            <div className="flex-1">
-              {/* Title with icon next to it */}
-              <div className="flex items-center">
-                <h4 className="text-[16px] font-semibold text-gray-900">
-                  {step.title}
-                </h4>
-                <div className={cn(
-                  "ml-2",
-                  stepColors[index].iconText
-                )}>
-                  {step.icon}
-                </div>
-              </div>
-              
-              {/* Description with reduced spacing */}
-              <p className="text-[14px] text-gray-600 leading-[1.4] mt-1">
-                {step.description}
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      ))}
     </div>
   );
 };
@@ -436,8 +270,26 @@ const HowItWorksSection = () => {
     const savedProgress = localStorage.getItem('howItWorksProgress');
     if (savedProgress) {
       setCompletedSteps(JSON.parse(savedProgress));
+    } else {
+      // For demo purposes, let's assume the user has completed the first step
+      setCompletedSteps([0]);
+      localStorage.setItem('howItWorksProgress', JSON.stringify([0]));
     }
   }, []);
+
+  // Scroll to search section
+  const handleSkipToSearch = () => {
+    const searchSection = document.querySelector('#search-section');
+    if (searchSection) {
+      searchSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If search section not found, scroll to the bottom of the how it works section
+      const searchConnection = document.querySelector('.search-connection');
+      if (searchConnection) {
+        searchConnection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
   
   return (
     <section className="relative overflow-hidden py-8 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50/5">
@@ -448,14 +300,22 @@ const HowItWorksSection = () => {
           description="Your journey to amazing content in four simple steps"
         />
         
-        {/* Mobile vertical layout */}
-        <MobileSteps steps={stepsData} completedSteps={completedSteps} />
+        {/* Mobile carousel layout - new component */}
+        <div className="md:hidden">
+          <MobileCarousel 
+            steps={stepsData} 
+            completedSteps={completedSteps}
+            onSkipToSearch={handleSkipToSearch}
+          />
+        </div>
         
         {/* Desktop grid layout */}
         <DesktopSteps steps={stepsData} completedSteps={completedSteps} />
         
         {/* Creator Search section */}
-        <SearchConnection />
+        <div className="search-connection">
+          <SearchConnection />
+        </div>
       </div>
     </section>
   );
