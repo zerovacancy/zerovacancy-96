@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -14,6 +15,7 @@ import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
+import PreviewSearch from '@/components/PreviewSearch';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -105,7 +107,14 @@ const Index = () => {
             </div>
           </section>
           
-          {/* Remove the Featured Creators Section as it's now part of HowItWorksSection */}
+          {/* Search Section - Added as its own standalone section */}
+          <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-gray-50 border-t border-b border-gray-100 w-full">
+            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
+            <Spotlight className="from-purple-500/20 via-indigo-500/20 to-blue-500/20" size={350} />
+            <div className="relative z-10 max-w-7xl mx-auto">
+              <PreviewSearch />
+            </div>
+          </section>
           
           {/* Professional Content Creation Services */}
           <div className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100 w-full">
