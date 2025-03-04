@@ -16,10 +16,18 @@ const FontLoader: React.FC = () => {
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
       />
       <link 
-        rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet"
         media="print"
-        onLoad="this.media='all'"
+        onLoad={() => {
+          if (document.getElementById('playfair-font')) {
+            document.getElementById('playfair-font')!.media = 'all';
+          } else {
+            const link = document.querySelector('link[href*="Playfair+Display"]');
+            if (link) (link as HTMLLinkElement).media = 'all';
+          }
+        }}
+        id="playfair-font"
       />
       <noscript>
         <link
