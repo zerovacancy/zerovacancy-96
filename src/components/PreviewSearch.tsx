@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
@@ -14,9 +13,9 @@ const PreviewSearch = () => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+    <div className="w-full px-2 sm:px-3 md:px-6 lg:px-8">
       <div className="mx-auto relative group">
-        <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-purple-800/40 via-indigo-700/40 to-purple-900/40 opacity-75 blur-sm group-hover:opacity-100 transition duration-500"></div>
+        <div className="absolute -inset-0.5 sm:-inset-0.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-purple-800/30 via-indigo-700/30 to-purple-900/30 opacity-60 sm:opacity-75 blur-[2px] sm:blur-sm group-hover:opacity-100 transition duration-500"></div>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ 
@@ -28,49 +27,45 @@ const PreviewSearch = () => {
             }
           }}
           viewport={{ once: true, margin: "-50px" }}
-          className="relative rounded-xl overflow-hidden shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white"
+          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_6px_20px_-10px_rgba(120,80,200,0.2)] sm:shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white"
         >
-          {/* Background effects - reduced intensity on mobile */}
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-xl">
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg sm:rounded-xl">
             <BorderBeam 
               colorFrom="#9370DB" 
               colorTo="#C19EF9" 
-              duration={isMobile ? 25 : 20}
-              borderWidth={isMobile ? 1 : 1.5}
+              duration={isMobile ? 30 : 20}
+              borderWidth={isMobile ? 0.5 : 1.5}
             />
             <GlowingEffect 
               variant="default" 
-              blur={isMobile ? 5 : 8} 
-              glow={true} 
-              inactiveZone={0.6}
-              spread={isMobile ? 10 : 15}
-              borderWidth={1}
-              className={isMobile ? "opacity-15" : "opacity-20"}
+              blur={isMobile ? 3 : 8} 
+              glow={!isMobile} 
+              inactiveZone={isMobile ? 0.7 : 0.6}
+              spread={isMobile ? 8 : 15}
+              borderWidth={isMobile ? 0.5 : 1}
+              className={isMobile ? "opacity-10" : "opacity-20"}
             />
-            <AnimatedGrid className={isMobile ? "opacity-3" : "opacity-5"} />
+            <AnimatedGrid className={isMobile ? "opacity-2" : "opacity-5"} />
           </div>
           <AuroraBackground 
             className="min-h-0 w-full" 
             showRadialGradient={!isMobile}
           >
             <div className="flex flex-col w-full relative z-10">
-              {/* Improved title and subtitle spacing */}
-              <div className="text-center pt-5 sm:pt-6 pb-1 sm:pb-2 px-3 sm:px-4">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2 md:mb-3 text-gray-900 leading-tight">
+              <div className="text-center pt-3 sm:pt-5 md:pt-6 pb-0.5 sm:pb-1 md:pb-2 px-2 sm:px-3 md:px-4">
+                <h2 className="text-lg sm:text-xl md:text-3xl font-bold tracking-tight mb-1 sm:mb-1.5 md:mb-3 text-gray-900 leading-tight">
                   Find Your Perfect Creator
                 </h2>
-                <p className="text-gray-600 max-w-2xl mx-auto mb-3 sm:mb-4 md:mb-6 text-sm sm:text-base leading-relaxed">
+                <p className="text-gray-600 max-w-2xl mx-auto mb-2 sm:mb-3 md:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
                   Connect with skilled professionals who can showcase your property in its best light
                 </p>
               </div>
               
-              {/* Search bar section - enhanced for touch */}
-              <div className="w-full px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5">
+              <div className="w-full px-2 sm:px-3 md:px-6 py-2 sm:py-3 md:py-5">
                 <SearchBar onLocationSelect={() => {}} />
               </div>
             
-              {/* Creators list section - better mobile layout */}
-              <div className="w-full px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-6 bg-gradient-to-b from-transparent to-purple-50/30">
+              <div className="w-full px-2 sm:px-3 md:px-6 py-3 sm:py-4 md:py-6 bg-gradient-to-b from-transparent to-purple-50/20 sm:to-purple-50/30">
                 <CreatorsList 
                   creators={[{
                     name: "Emily Johnson",
