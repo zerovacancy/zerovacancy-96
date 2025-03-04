@@ -111,7 +111,6 @@ const PreviewSearch = () => {
                   onImageLoad={() => {}} 
                   loadedImages={new Set()}
                   imageRef={() => {}}
-                  isMobile={isMobile} // Pass isMobile to optimize creator card display
                 />
               </div>
               
