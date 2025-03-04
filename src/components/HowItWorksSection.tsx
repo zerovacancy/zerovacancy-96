@@ -143,9 +143,6 @@ const HowItWorksSection = () => {
   const isMobile = useIsMobile();
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const controls = useAnimation();
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [maxScroll, setMaxScroll] = useState(0);
 
   // Simulate completed steps (in a real app, this would come from user progress data)
   useEffect(() => {
@@ -158,43 +155,7 @@ const HowItWorksSection = () => {
   useEffect(() => {
     // Animate elements when they come into view
     controls.start("visible");
-
-    // Calculate max scroll width for horizontal scroll
-    if (scrollContainerRef.current) {
-      const scrollWidth = scrollContainerRef.current.scrollWidth;
-      const clientWidth = scrollContainerRef.current.clientWidth;
-      setMaxScroll(scrollWidth - clientWidth);
-    }
   }, [controls]);
-
-  // Scroll handlers for mobile horizontal scroll
-  const handleScrollLeft = () => {
-    if (scrollContainerRef.current) {
-      const newPosition = Math.max(0, scrollPosition - 200);
-      scrollContainerRef.current.scrollTo({
-        left: newPosition,
-        behavior: 'smooth'
-      });
-      setScrollPosition(newPosition);
-    }
-  };
-
-  const handleScrollRight = () => {
-    if (scrollContainerRef.current) {
-      const newPosition = Math.min(maxScroll, scrollPosition + 200);
-      scrollContainerRef.current.scrollTo({
-        left: newPosition,
-        behavior: 'smooth'
-      });
-      setScrollPosition(newPosition);
-    }
-  };
-
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      setScrollPosition(scrollContainerRef.current.scrollLeft);
-    }
-  };
 
   const steps = [{
     icon: <Search className="w-5 h-5" />,
@@ -218,7 +179,8 @@ const HowItWorksSection = () => {
     number: "04"
   }];
 
-  return <section className="relative overflow-hidden py-6 sm:py-12 px-4 sm:px-6 lg:px-[28px] bg-white">
+  return (
+    <section className="relative overflow-hidden py-6 sm:py-12 px-4 sm:px-6 lg:px-[28px] bg-white">
       <div className="max-w-7xl mx-auto py-0 px-px bg-white">
         <div className="text-center mb-4 sm:mb-14">
           <h3 className="text-xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-2 sm:mb-4">
@@ -314,49 +276,6 @@ const HowItWorksSection = () => {
                 </p>
               </motion.div>
             ))}
-          </div>
-        </div>
-
-        {/* Removed old grid layout that was hidden */}
-          <div className="grid grid-cols-2 gap-3">
-            {steps.map((step, index) => <motion.div key={index} initial={{
-            opacity: 0,
-            y: 15
-          }} whileInView={{
-            opacity: 1,
-            y: 0,
-            transition: {
-              type: "spring",
-              duration: 0.5,
-              delay: index * 0.1
-            }
-          }} whileTap={{
-            scale: 0.98
-          }} viewport={{
-            once: true,
-            margin: "-10px"
-          }} className={cn("relative", stepColors[index].gradient, "p-3", "rounded-lg", "shadow-sm", "border border-gray-100", "flex flex-col", "min-h-[140px]", "touch-manipulation", "transition-transform duration-200", "cursor-pointer")}>
-                {/* Number & Icon */}
-                <div className="flex items-center justify-between mb-2">
-                  <div className={cn("w-6 h-6", stepColors[index].numBg, stepColors[index].numText, "rounded-full", "flex items-center justify-center", "text-xs font-medium", "shadow-sm")}>
-                    {index + 1}
-                  </div>
-                  
-                  <div className={cn(stepColors[index].iconText)}>
-                    {step.icon}
-                  </div>
-                </div>
-                
-                {/* Title */}
-                <h4 className="text-sm font-semibold text-gray-900 mb-1">
-                  {step.title}
-                </h4>
-                
-                {/* Description */}
-                <p className="text-xs text-gray-600 leading-tight flex-1">
-                  {step.description}
-                </p>
-              </motion.div>)}
           </div>
         </div>
         
@@ -468,7 +387,8 @@ const HowItWorksSection = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default HowItWorksSection;
