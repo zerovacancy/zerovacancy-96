@@ -1,0 +1,38 @@
+
+@layer components {
+  /* Consistent heading styles */
+  .heading-1 {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-brand-purple-dark font-jakarta;
+  }
+
+  .heading-2 {
+    @apply text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-brand-purple-dark font-jakarta;
+  }
+
+  .heading-3 {
+    @apply text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight text-brand-purple-medium font-jakarta;
+  }
+
+  /* Consistent paragraph styles */
+  .paragraph-base {
+    @apply text-sm sm:text-base text-brand-text-primary font-inter;
+  }
+
+  .paragraph-large {
+    @apply text-base sm:text-lg text-brand-text-primary font-inter;
+  }
+
+  .paragraph-small {
+    @apply text-xs sm:text-sm text-brand-text-primary font-inter;
+  }
+
+  /* Section spacing */
+  .section-spacing {
+    @apply mb-8 sm:mb-10 lg:mb-12;
+  }
+
+  /* Consistent centered text container */
+  .centered-text-container {
+    @apply text-center max-w-2xl mx-auto;
+  }
+}

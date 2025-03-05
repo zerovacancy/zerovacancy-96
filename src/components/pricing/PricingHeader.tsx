@@ -9,18 +9,20 @@ interface PricingHeaderProps {
 export const PricingHeader = ({ title, subtitle }: PricingHeaderProps) => {
   return (
     <motion.div 
-      className="text-center mb-10 sm:mb-16"
+      className="text-center mb-8 sm:mb-10 lg:mb-12"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-brand-purple-dark font-jakarta">
+      <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-3 sm:mb-4 text-brand-purple-dark font-jakarta">
         {title}
       </h2>
-      <p className="text-base sm:text-lg text-brand-text-primary max-w-2xl mx-auto font-inter">
+      <p className="text-sm sm:text-base text-brand-text-primary max-w-2xl mx-auto font-inter">
         {subtitle}
       </p>
     </motion.div>
   );
 };
+
+export default PricingHeader;

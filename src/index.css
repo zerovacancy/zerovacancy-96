@@ -4,6 +4,7 @@
 
 /* Typography styles */
 @import './styles/typography.css';
+@import './styles/typography-mixins.css';
 
 /* Component styles */
 @import './styles/components.css';
