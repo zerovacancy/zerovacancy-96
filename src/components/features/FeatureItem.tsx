@@ -14,6 +14,7 @@ interface FeatureItemProps {
 
 export const FeatureItem = ({ title, description, icon, index }: FeatureItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const isMobile = useIsMobile();
   
   const handleClick = () => {
@@ -32,16 +33,18 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
     <motion.button
       className={cn(
         "relative w-full text-left group h-full flex flex-col",
-        "rounded-lg transition-all duration-300",
-        "bg-white hover:bg-white",
+        "rounded-xl transition-all duration-300",
+        "bg-white hover:bg-white/90",
         "border border-gray-200/60 hover:border-gray-300/80",
-        "p-4 sm:p-5",
+        "p-4 sm:p-5 lg:p-6",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
-        !isMobile && "hover:shadow-md hover:-translate-y-0.5"
+        !isMobile && "hover:shadow-lg hover:-translate-y-1"
       )}
       onClick={handleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       aria-expanded={isMobile ? isExpanded : undefined}
-      whileHover={!isMobile ? { scale: 1.01 } : undefined}
+      whileHover={!isMobile ? { scale: 1.03 } : undefined}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ 
         opacity: 1, 
@@ -54,33 +57,36 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
       viewport={{ once: true, margin: "-50px" }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
-      <div className="flex flex-col items-start gap-3 h-full">
+      <div className="flex flex-col items-start gap-3 sm:gap-4 h-full">
         {/* Icon container with refined styling */}
         <motion.div 
           className={cn(
             "flex items-center justify-center",
-            "w-12 h-12",
-            "rounded-lg",
+            "w-12 h-12 sm:w-14 sm:h-14",
+            "rounded-xl",
             "transition-all duration-300",
             colorScheme.bg,
-            "group-hover:shadow-sm",
+            "group-hover:shadow-md",
             "border border-opacity-10",
             `border-${colorScheme.text.split('-')[1]}-100`,
           )}
-          whileHover={{ scale: 1.05 }}
+          animate={{
+            scale: isHovered ? 1.05 : 1,
+            transition: { duration: 0.3 }
+          }}
         >
           <Icon className={cn(
-            "w-6 h-6",
+            "w-6 h-6 sm:w-7 sm:h-7",
             colorScheme.text,
             "transition-all duration-300",
-            "group-hover:scale-105",
+            "group-hover:scale-110",
             isMobile && isExpanded && "transform rotate-90"
           )} />
         </motion.div>
         
         <div className="text-left w-full flex-grow flex flex-col">
           <h3 className={cn(
-            "text-base font-semibold leading-tight font-space mb-2",
+            "text-base sm:text-lg font-semibold leading-tight font-space mb-2 sm:mb-3",
             "text-gray-900 group-hover:text-indigo-600",
             "transition-colors duration-300"
           )}>
@@ -91,7 +97,7 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
             isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-40 opacity-100",
             "flex-grow"
           )}>
-            <p className="text-xs sm:text-sm text-gray-600 font-anek group-hover:text-gray-700">
+            <p className="text-xs sm:text-sm text-gray-600 font-anek group-hover:text-gray-700 leading-relaxed">
               {description}
             </p>
           </div>
