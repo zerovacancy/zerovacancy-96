@@ -1,11 +1,9 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  /* Improve rendering performance */
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
 }
 
 .logo {
@@ -44,7 +42,6 @@
   color: #888;
 }
 
-/* Enhanced Scrollbar utilities */
 /* Hide scrollbar for Chrome, Safari and Opera */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -56,73 +53,13 @@
   scrollbar-width: none;  /* Firefox */
 }
 
-/* iOS momentum scrolling for overflow elements */
-.momentum-scroll {
-  -webkit-overflow-scrolling: touch;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  will-change: scroll-position;
-}
-
-/* Fix for iOS rubber banding effect */
-.overscroll-none {
-  overscroll-behavior: none;
-}
-
-/* Optimize animations */
+/* Animations optimization utilities */
 .will-change-transform {
   will-change: transform;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
-/* Fix for sticky elements on iOS */
-.sticky-fix {
-  position: -webkit-sticky;
-  position: sticky;
-  transform: translate3d(0, 0, 0);
-}
-
-/* Performance optimized smooth scrolling container */
-.smooth-scroll {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-  will-change: scroll-position;
-  transform: translate3d(0, 0, 0);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-/* Optimize touch actions for mobile */
-.touch-optimize {
-  touch-action: pan-y;
-  -webkit-tap-highlight-color: transparent;
 }
 
 /* Layer promotion for frequently animated elements */
 .promote-layer {
-  transform: translate3d(0, 0, 0);
+  transform: translateZ(0);
   backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-perspective: 1000;
-}
-
-/* New utility for smoother scrolling container */
-.scroll-container-optimized {
-  -webkit-overflow-scrolling: touch;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  will-change: scroll-position;
-  transform: translate3d(0, 0, 0);
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* Minimize layout shifts during scroll */
-.content-visibility-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 300px;
 }
