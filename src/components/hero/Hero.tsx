@@ -89,7 +89,7 @@ export function Hero() {
                 "text-sm sm:text-base lg:text-lg", 
                 "leading-[1.5]", 
                 "tracking-wide", 
-                "text-gray-700", 
+                "text-[#45455A]", 
                 "text-center", 
                 "max-w-[550px]", 
                 "mx-auto", 
