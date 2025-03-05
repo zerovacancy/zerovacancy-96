@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { ShimmerButton } from "../ui/shimmer-button";
 import { PricingService } from "@/services/PricingService";
+import { cn } from "@/lib/utils";
 
 interface PricingActionButtonProps {
   isLoading: boolean;
@@ -24,6 +25,14 @@ export const PricingActionButton = ({
 }: PricingActionButtonProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
+
+  const getButtonText = () => {
+    if (isProcessing) return 'Processing...';
+    if (title === "Basic") return `Start with ${title}`;
+    if (title === "Professional") return `Choose ${title}`;
+    if (title === "Premium") return `Upgrade to ${title}`;
+    return cta;
+  };
 
   const handleSubscription = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -87,12 +96,15 @@ export const PricingActionButton = ({
 
   return (
     <ShimmerButton 
-      className="w-full h-12 text-base mb-6 font-medium"
+      className={cn(
+        "w-full h-12 text-base mb-6 font-medium group transition-all duration-300",
+        "hover:scale-[1.02] active:scale-[0.98]"
+      )}
       onClick={handleSubscription} 
       disabled={isProcessing}
     >
-      <span>{isProcessing ? 'Processing...' : cta}</span>
-      <ArrowRight className="w-5 h-5 ml-2 text-white/90" />
+      <span>{getButtonText()}</span>
+      <ArrowRight className="w-5 h-5 ml-2 text-white/90 group-hover:translate-x-1 transition-transform duration-300" />
     </ShimmerButton>
   );
 };

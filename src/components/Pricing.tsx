@@ -40,6 +40,7 @@ export function Pricing() {
       price: 139,
       interval: "month",
       description: "Perfect for single-family homes and small properties",
+      valueProposition: "Recommended for residential listings",
       features: [
         "Professional photography (up to 25 photos)",
         "Basic photo editing",
@@ -56,6 +57,7 @@ export function Pricing() {
       price: 499,
       interval: "month",
       description: "Ideal for luxury homes and medium-sized properties",
+      valueProposition: "Best value for serious agents",
       features: [
         "Everything in Basic, plus:",
         "Up to 40 professional photos",
@@ -76,6 +78,7 @@ export function Pricing() {
       price: 799,
       interval: "month",
       description: "Best for luxury estates and commercial properties",
+      valueProposition: "Premium service for exclusive listings",
       features: [
         "Everything in Professional, plus:",
         "Unlimited professional photos",
@@ -107,7 +110,10 @@ export function Pricing() {
         />
         
         <div className="mt-12 text-center">
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-500 flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
             All plans include a 7-day money-back guarantee. No questions asked.
           </p>
         </div>

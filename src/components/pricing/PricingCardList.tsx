@@ -25,7 +25,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
         >
           {card.highlighted ? (
             <div className="relative group h-full">
-              <div className="absolute -inset-[2px] rounded-3xl bg-gradient-to-r from-violet-500 via-cyan-500 to-emerald-500 opacity-70 blur-lg group-hover:opacity-100 group-hover:blur-xl transition-all duration-500" />
+              <div className="absolute -inset-[3px] rounded-3xl bg-gradient-to-r from-violet-500 via-cyan-500 to-emerald-500 opacity-75 blur-lg group-hover:opacity-100 group-hover:blur-xl transition-all duration-500"></div>
               <PricingCard 
                 {...card}
                 subscription={subscription}

@@ -18,19 +18,22 @@ export const PricingFeaturesToggle = ({
   return (
     <button 
       className={cn(
-        "text-sm font-medium flex items-center justify-center gap-1.5 group/btn transition-all duration-300 w-full py-2 rounded-lg mb-3",
-        colorBg
+        "text-sm font-medium flex items-center justify-center gap-1.5 group/btn transition-all duration-300 w-full py-3 rounded-lg mb-4",
+        colorBg,
+        "hover:brightness-95"
       )}
       onClick={() => setIsExpanded(!isExpanded)}
+      aria-expanded={isExpanded}
+      aria-controls="features-list"
     >
       <span className={colorAccent}>
-        {isExpanded ? "Hide Features" : "View Features"}
+        {isExpanded ? "Hide Features" : "View All Features"}
       </span>
       <IconChevronDown 
         className={cn(
           "w-4 h-4 transition-transform duration-300", 
           colorAccent,
-          isExpanded ? "rotate-180" : "group-hover/btn:translate-y-0.5"
+          isExpanded ? "rotate-180" : "animate-bounce-subtle"
         )} 
       />
     </button>

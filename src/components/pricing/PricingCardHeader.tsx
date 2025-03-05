@@ -7,6 +7,7 @@ interface PricingCardHeaderProps {
   colorAccent: string;
   isCurrentPlan: boolean;
   isSubscriptionActive: boolean;
+  valueProposition?: string;
 }
 
 export const PricingCardHeader = ({ 
@@ -16,7 +17,8 @@ export const PricingCardHeader = ({
   description, 
   colorAccent,
   isCurrentPlan,
-  isSubscriptionActive
+  isSubscriptionActive,
+  valueProposition
 }: PricingCardHeaderProps) => {
   return (
     <>
@@ -32,13 +34,26 @@ export const PricingCardHeader = ({
       </div>
       
       <div className="flex items-baseline relative z-10 mb-1">
-        <span className="text-5xl font-extrabold tracking-tight text-slate-900">${price}</span>
+        <span className="text-sm font-medium text-slate-500 mr-1">$</span>
+        <span className="text-5xl font-extrabold tracking-tight text-slate-900">{price}</span>
         <span className="ml-2 text-sm font-medium text-slate-500">/{interval}</span>
       </div>
+      
+      {/* Annual price option with savings */}
+      <div className="text-xs text-slate-500 mb-3">
+        <span className="font-medium">${Math.round(price * 10)}</span>/year (save $
+        {Math.round(price * 12 - price * 10)})
+      </div>
 
-      <p className="text-sm text-slate-600 mb-6 relative z-10">
+      <p className="text-sm text-slate-600 mb-3 relative z-10">
         {description}
       </p>
+      
+      {valueProposition && (
+        <p className={`text-sm font-medium mb-6 ${colorAccent}`}>
+          <span className="inline-block mr-1">✦</span> {valueProposition}
+        </p>
+      )}
     </>
   );
 };

@@ -22,6 +22,7 @@ export interface PricingCardProps {
   defaultExpanded?: boolean;
   color?: ColorVariant;
   showPopularTag?: boolean;
+  valueProposition?: string;
 }
 
 export const PricingCard = ({
@@ -36,7 +37,8 @@ export const PricingCard = ({
   isLoading = false,
   defaultExpanded = false,
   color = "blue",
-  showPopularTag = false
+  showPopularTag = false,
+  valueProposition
 }: PricingCardProps) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const isMobile = useIsMobile();
@@ -46,6 +48,13 @@ export const PricingCard = ({
   const isSubscriptionActive = subscription?.status === 'active' || subscription?.status === 'trialing';
   
   const colorStyles = colorVariants[color];
+  
+  // Determine card background pattern based on tier
+  const cardPattern = title === "Basic" 
+    ? "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIvPjxwYXRoIGQ9Ik0wIDBoMXYxaC0xeiIgZmlsbD0icmdiYSgwLDAsMCwwLjAyKSIgZmlsbC1vcGFjaXR5PSIuMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTkgMTkpIi8+PC9nPjwvc3ZnPg==')]"
+    : title === "Professional" 
+      ? "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIvPjxwYXRoIGQ9Ik0yMCAwTDAgMjBoMjB6TTIwIDQwTDQwIDIwSDIweiIgZmlsbD0icmdiYSgxMDAsIDUwLCAyNTUsIDAuMDIpIiBmaWxsLW9wYWNpdHk9Ii4yIi8+PC9nPjwvc3ZnPg==')]"
+      : "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTIiIGhlaWdodD0iNTIiIHZpZXdCb3g9IjAgMCA1MiA1MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNTJ2NTJoLTUyeiIvPjxwYXRoIGQ9Ik0yNiAwdjI2aDI2djI2aC01MnYtNTJ6IiBmaWxsPSJyZ2JhKDAsIDEwMCwgMTAwLCAwLjAyKSIgZmlsbC1vcGFjaXR5PSIuMiIvPjwvZz48L3N2Zz4=')]";
 
   return (
     <div 
@@ -53,9 +62,10 @@ export const PricingCard = ({
         "relative rounded-3xl p-6 sm:p-8 shadow-xl transition-all duration-300 h-full flex flex-col",
         "border bg-white/90 backdrop-blur-sm",
         colorStyles.border,
+        cardPattern,
         highlighted ? 
-          `shadow-2xl ${colorStyles.shadow} hover:scale-101 ring-1 ring-white/70` : 
-          "shadow-lg hover:shadow-xl hover:scale-101",
+          `shadow-2xl ${colorStyles.shadow} hover:scale-105 ring-1 ring-white/70 transform duration-300` : 
+          "shadow-lg hover:shadow-xl hover:translate-y-[-8px] transform duration-300",
       )}
       onMouseEnter={() => !isMobile && setIsExpanded(true)} 
       onMouseLeave={() => !isMobile && !defaultExpanded && setIsExpanded(false)}
@@ -73,7 +83,32 @@ export const PricingCard = ({
         colorAccent={colorStyles.accent}
         isCurrentPlan={isCurrentPlan}
         isSubscriptionActive={isSubscriptionActive}
+        valueProposition={valueProposition}
       />
+
+      {/* Show 2-3 key features even when collapsed */}
+      {!isExpanded && features.length > 0 && (
+        <div className="mb-6">
+          <div className={cn("h-px w-full mb-4", colorStyles.bg)} />
+          <ul className="space-y-2">
+            {features.slice(0, 2).map((feature, index) => (
+              <li key={`preview-${feature}`} className="flex items-center text-sm text-brand-text-primary">
+                <span className={cn("w-5 h-5 flex-shrink-0 mr-3", colorStyles.icon)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span>{feature}</span>
+              </li>
+            ))}
+            {features.length > 2 && (
+              <li className="text-sm text-brand-text-light italic pl-8">
+                +{features.length - 2} more features
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
 
       {/* CTA Button - Always visible */}
       <PricingActionButton 
@@ -104,7 +139,16 @@ export const PricingCard = ({
         <PricingFeaturesList 
           features={features}
           colorAccent={colorStyles.icon}
+          tierColor={color}
         />
+        
+        {/* Money-back guarantee badge */}
+        <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          7-day money-back guarantee
+        </div>
       </div>
     </div>
   );
