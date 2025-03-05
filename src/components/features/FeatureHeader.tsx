@@ -8,7 +8,7 @@ export const FeatureHeader = ({
   description
 }: FeatureHeaderProps) => {
   return <div className="text-center mb-8 sm:mb-10 lg:mb-12">
-      <motion.h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 font-jakarta tracking-tight text-brand-purple-dark" initial={{
+      <motion.h2 initial={{
       opacity: 0,
       y: 20
     }} whileInView={{
@@ -20,7 +20,7 @@ export const FeatureHeader = ({
     }} viewport={{
       once: true,
       margin: "-100px"
-    }}>
+    }} className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
         {title}
       </motion.h2>
       <motion.p initial={{
