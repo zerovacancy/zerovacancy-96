@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -20,12 +19,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  optimizeDeps: {
-    include: ['react-toastify']
-  },
-  build: {
-    rollupOptions: {
-      external: [],  // Empty array instead of specifying react-toastify
-    }
-  }
 }));

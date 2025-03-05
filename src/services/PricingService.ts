@@ -16,22 +16,19 @@ export class PricingService {
   public static async fetchSubscription() {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        return null;
+      if (user) {
+        const { data: subs, error } = await supabase
+          .from('customer_subscriptions')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false })
+          .limit(1);
+          
+        if (error) throw error;
+        if (subs && subs.length > 0) {
+          return subs[0];
+        }
       }
-      
-      const { data: subs, error } = await supabase
-        .from('customer_subscriptions')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .limit(1);
-        
-      if (error) throw error;
-      if (subs && subs.length > 0) {
-        return subs[0];
-      }
-      
       return null;
     } catch (error) {
       console.error('Error fetching subscription:', error);
