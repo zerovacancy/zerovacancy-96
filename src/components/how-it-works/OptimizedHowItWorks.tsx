@@ -5,7 +5,6 @@ import SectionHeaderSimple from './SectionHeaderSimple';
 import MobileStepsGridSimple from './MobileStepsGridSimple';
 import DesktopStepsGridSimple from './DesktopStepsGridSimple';
 import BackgroundElementsSimple from './BackgroundElementsSimple';
-import { cn } from '@/lib/utils';
 
 const OptimizedHowItWorks: React.FC = () => {
   const isMobile = useIsMobile();
@@ -20,26 +19,21 @@ const OptimizedHowItWorks: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-10 sm:py-12 lg:py-16 px-3 sm:px-4 lg:px-6 bg-gradient-to-b from-gray-50 to-purple-50/20">
+    <section className="relative overflow-hidden py-8 sm:py-10 lg:py-14 px-2 sm:px-4 lg:px-6 bg-gradient-to-b from-gray-50 to-purple-50/20">
       {/* Background elements */}
       <BackgroundElementsSimple />
       
-      <div className={cn(
-        "max-w-6xl mx-auto relative z-10",
-        "py-4 sm:py-6"
-      )}>
+      <div className="max-w-6xl mx-auto py-0 px-px relative z-10">
         <SectionHeaderSimple 
           title="How It Works" 
           subtitle="Your journey to amazing content in four simple steps"
         />
         
-        {/* Mobile 2x2 Grid Layout with improved spacing */}
-        <div className="mt-6 sm:mt-8 lg:mt-10">
-          <MobileStepsGridSimple completedSteps={completedSteps} />
-          
-          {/* Desktop grid layout with connecting lines */}
-          <DesktopStepsGridSimple completedSteps={completedSteps} />
-        </div>
+        {/* Mobile 2x2 Grid Layout */}
+        <MobileStepsGridSimple completedSteps={completedSteps} />
+        
+        {/* Desktop grid layout with connecting lines */}
+        <DesktopStepsGridSimple completedSteps={completedSteps} />
       </div>
     </section>
   );
