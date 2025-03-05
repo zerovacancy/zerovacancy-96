@@ -8,11 +8,9 @@ import ConnectSuccess from './pages/ConnectSuccess';
 import ConnectRefresh from './pages/ConnectRefresh';
 import Auth from './pages/Auth';
 import PaymentConfirmation from './pages/PaymentConfirmation';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/clerk-react";
-import { BottomNav } from './components/navigation/BottomNav';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const clerkPubKey = "clerk.pub_2Z33J359oxBlDMYRwJmbbqj9czE"
@@ -50,9 +48,9 @@ function AppContent() {
             <Route path="/connect/refresh" element={<ConnectRefresh />} />
             <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
           </Routes>
+          <Toaster />
         </ThemeProvider>
       </ClerkProvider>
-      <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );
 }
