@@ -15,10 +15,13 @@ import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
 import PreviewSearch from '@/components/PreviewSearch';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
+  const isMobile = useIsMobile();
+  
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     setShowGlowDialog(!hasVisited);
@@ -26,32 +29,32 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
+  
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
+  
   return <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       <Header />
       {showBanner && <div className="relative">
-          <Banner variant="purple" size="lg" action={<Button variant="secondary" size="sm" className="
-                  flex text-xs sm:text-sm items-center 
-                  whitespace-nowrap px-3 py-2 sm:px-5 sm:py-2.5
-                  bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold
-                  border-2 border-amber-300
-                  transition-all duration-200
-                  min-h-[2.25rem] sm:min-h-[2.5rem]
-                  min-w-[8rem] sm:min-w-[9rem]
-                  touch-manipulation
-                  shadow-[0_2px_10px_rgba(0,0,0,0.15)]
-                " onClick={handleTryNowClick}>
-                Get Early Access
+          <Banner variant="purple" size="lg" action={<Button variant="secondary" size="sm" className={cn(
+                  "flex text-xs sm:text-sm items-center whitespace-nowrap",
+                  isMobile ? "px-2 py-1.5 min-w-[7rem] min-h-[2rem]" : "px-3 py-2 sm:px-5 sm:py-2.5 min-w-[8rem] sm:min-w-[9rem] min-h-[2.25rem] sm:min-h-[2.5rem]",
+                  "bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold",
+                  "border-2 border-amber-300",
+                  "transition-all duration-200",
+                  "touch-manipulation",
+                  "shadow-[0_2px_10px_rgba(0,0,0,0.15)]",
+                )} onClick={handleTryNowClick}>
+                {isMobile ? "Try Now" : "Get Early Access"}
               </Button>} layout="complex" isClosable onClose={() => setShowBanner(false)} className="animate-in fade-in slide-in-from-top duration-500 relative overflow-hidden min-h-[3.25rem] sm:min-h-[3.5rem] my-0 py-0">
             <div className="flex items-center justify-left gap-3 sm:gap-4 relative z-10">
               <Star className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-300 animate-pulse" />
-              <AnimatedShinyText className="
-                  text-sm sm:text-base font-bold inline-block
-                  text-white relative z-10 rounded
-                  px-1 tracking-wide
-                " shimmerWidth={200}>
+              <AnimatedShinyText className={cn(
+                  "text-sm sm:text-base font-bold inline-block",
+                  "text-white relative z-10 rounded",
+                  "px-1 tracking-wide"
+                )} shimmerWidth={200}>
                 Join the AI-powered revolution in property management!
               </AnimatedShinyText>
             </div>
