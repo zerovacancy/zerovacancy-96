@@ -1,4 +1,5 @@
 
+// src/components/hero/Hero.tsx
 import React, { useEffect, useState, useRef } from "react";
 import { useInView } from "framer-motion";
 import { AuroraBackground } from "@/components/ui/aurora-background";
@@ -33,12 +34,12 @@ export function Hero() {
           ref={sectionRef}
           className={cn(
             "flex items-center justify-center flex-col", 
-            "px-4 sm:px-6", 
-            "py-[24px] sm:py-[40px]", 
-            "my-[16px] sm:my-[24px]", 
+            "px-4 sm:px-6 lg:px-8", 
+            "py-[32px] sm:py-[48px] md:py-[64px]", 
+            "my-[16px] sm:my-[24px] md:my-[32px]", 
             "min-h-fit sm:min-h-[50vh]", 
             "relative z-10", 
-            "gap-3 sm:gap-4",
+            "gap-3 sm:gap-4 md:gap-6",
             "touch-manipulation",
             isInView ? "animate-fade-in" : "opacity-0"
           )} 
@@ -53,7 +54,7 @@ export function Hero() {
               <span 
                 className={cn(
                   "text-primary inline font-light", 
-                  "text-3xl sm:text-4xl lg:text-5xl", 
+                  "text-3xl sm:text-4xl lg:text-5xl xl:text-6xl", 
                   "tracking-[-0.02em]", 
                   "text-brand-purple-dark", 
                   "block sm:inline-block mb-1 sm:mb-0 font-jakarta"
@@ -65,7 +66,7 @@ export function Hero() {
               <div 
                 role="text" 
                 aria-label={`Property Content that ${TITLES[titleIndex]}`} 
-                className="relative flex w-full justify-center h-[1.4em] sm:h-[1.5em] md:h-[1.4em] lg:h-[1.2em] overflow-hidden mt-1 sm:mt-2"
+                className="relative flex w-full justify-center h-[1.5em] sm:h-[1.5em] md:h-[1.4em] lg:h-[1.3em] overflow-hidden mt-2 sm:mt-3"
               >
                 {TITLES.map((title, index) => (
                   <span 
@@ -73,7 +74,7 @@ export function Hero() {
                     className={cn(
                       "absolute font-jakarta tracking-[-0.02em] text-transparent", 
                       "bg-clip-text bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700 transition-all duration-500", 
-                      "text-4xl sm:text-5xl lg:text-6xl",
+                      "text-4xl sm:text-5xl lg:text-6xl xl:text-7xl",
                       "font-bold",
                       titleIndex === index ? "opacity-100 transform-none" : "opacity-0 translate-y-8"
                     )} 
@@ -87,16 +88,16 @@ export function Hero() {
             <div 
               className={cn(
                 "text-sm sm:text-base lg:text-lg", 
-                "leading-[1.5]", 
+                "leading-[1.6]", 
                 "tracking-wide", 
                 "text-brand-text-primary", 
                 "text-center", 
-                "max-w-[550px]", 
+                "max-w-[600px]", 
                 "mx-auto", 
-                "px-2 sm:px-4", 
+                "px-2 sm:px-4 md:px-6", 
                 "[word-spacing:0.12em] sm:[word-spacing:0.16em]", 
                 "relative z-10", 
-                "mt-1 mb-0",
+                "mt-4 mb-0",
                 "font-inter"
               )}
             >
@@ -107,8 +108,8 @@ export function Hero() {
           <div 
             className={cn(
               "w-full", 
-              "mt-5 sm:mt-6", 
-              "px-3 sm:px-4",
+              "mt-6 sm:mt-8 md:mt-10", 
+              "px-3 sm:px-4 md:px-6 lg:px-8",
               isInView ? "animate-fade-in delay-200" : "opacity-0" 
             )}
           >
@@ -117,6 +118,10 @@ export function Hero() {
         </section>
       </AuroraBackground>
     </div>
+  );
+}
+
+export default Hero;
   );
 }
 
