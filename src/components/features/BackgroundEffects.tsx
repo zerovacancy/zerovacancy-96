@@ -16,6 +16,7 @@ interface BackgroundEffectsProps {
   spotlightClassName?: string;
   pattern?: 'dots' | 'grid' | 'none';
   baseColor?: string;
+  animationSpeed?: 'slow' | 'medium' | 'fast';
 }
 
 export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({ 
@@ -26,11 +27,12 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
     second: "bg-indigo-200",
     third: "bg-violet-200"
   },
-  blobOpacity = 0.3,
+  blobOpacity = 0.15, // Decreased opacity for subtlety
   withSpotlight = true,
-  spotlightClassName = "from-purple-500/20 via-violet-500/20 to-blue-500/20",
+  spotlightClassName = "from-purple-500/10 via-violet-500/10 to-blue-500/10", // Decreased opacity
   pattern = "none",
-  baseColor = "bg-white"
+  baseColor = "bg-white",
+  animationSpeed = 'slow'
 }) => {
   return (
     <GradientBlobBackground 
@@ -41,6 +43,8 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       spotlightClassName={spotlightClassName}
       pattern={pattern}
       baseColor={baseColor}
+      blobSize="large" // Larger blobs create more subtle transitions
+      animationSpeed={animationSpeed}
     >
       {children}
     </GradientBlobBackground>

@@ -19,6 +19,7 @@ interface GradientBlobBackgroundProps {
   blobOpacity?: number;
   blobSize?: 'small' | 'medium' | 'large';
   baseColor?: string;
+  animationSpeed?: 'slow' | 'medium' | 'fast';
 }
 
 export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
@@ -36,7 +37,8 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
   },
   blobOpacity = 0.3,
   blobSize = 'medium',
-  baseColor = 'bg-gray-50'
+  baseColor = 'bg-gray-50',
+  animationSpeed = 'medium'
 }) => {
   // Determine blob sizes based on the blobSize prop
   const getBlobSizeClass = (position: 'first' | 'second' | 'third') => {
@@ -52,13 +54,24 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
         third: 'w-96 h-96'
       },
       large: {
-        first: 'w-[30rem] h-[30rem]',
-        second: 'w-[28rem] h-[28rem]',
-        third: 'w-[32rem] h-[32rem]'
+        first: 'w-[40rem] h-[40rem]',
+        second: 'w-[38rem] h-[38rem]',
+        third: 'w-[42rem] h-[42rem]'
       }
     };
     
     return sizes[blobSize][position];
+  };
+
+  // Animation duration based on speed
+  const getAnimationDuration = (base: number) => {
+    const multipliers = {
+      fast: 0.7,
+      medium: 1,
+      slow: 1.8
+    };
+    
+    return `${base * multipliers[animationSpeed]}s`;
   };
 
   return (
@@ -81,16 +94,25 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
         </div>
       )}
       
-      {/* Gradient blobs */}
-      <div className={cn(
-        `absolute top-0 -left-40 ${getBlobSizeClass('first')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100} animate-blob`
-      )}></div>
-      <div className={cn(
-        `absolute top-0 -right-40 ${getBlobSizeClass('second')} ${blobColors.second} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100} animate-blob animation-delay-2000`
-      )}></div>
-      <div className={cn(
-        `absolute bottom-40 left-20 ${getBlobSizeClass('third')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100} animate-blob animation-delay-4000`
-      )}></div>
+      {/* Gradient blobs with custom animation duration */}
+      <div 
+        className={cn(
+          `absolute -top-20 -left-40 ${getBlobSizeClass('first')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
+        )}
+        style={{ animation: `blob ${getAnimationDuration(35)} infinite` }}
+      ></div>
+      <div 
+        className={cn(
+          `absolute -top-10 -right-40 ${getBlobSizeClass('second')} ${blobColors.second} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
+        )}
+        style={{ animation: `blob ${getAnimationDuration(40)} infinite`, animationDelay: `${getAnimationDuration(5)}` }}
+      ></div>
+      <div 
+        className={cn(
+          `absolute -bottom-20 left-20 ${getBlobSizeClass('third')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
+        )}
+        style={{ animation: `blob ${getAnimationDuration(30)} infinite`, animationDelay: `${getAnimationDuration(10)}` }}
+      ></div>
       
       {/* Spotlight effect */}
       {withSpotlight && (

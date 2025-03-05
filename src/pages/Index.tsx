@@ -59,15 +59,17 @@ const Index = () => {
       <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
         <BackgroundEffects 
           blobColors={{
-            first: "bg-purple-200",
-            second: "bg-indigo-200",
-            third: "bg-violet-200"
+            first: "bg-purple-100",
+            second: "bg-indigo-100",
+            third: "bg-violet-100"
           }}
+          blobOpacity={0.15}
           withSpotlight={true}
-          spotlightClassName="from-purple-500/20 via-violet-500/20 to-blue-500/20"
+          spotlightClassName="from-purple-500/10 via-violet-500/10 to-blue-500/10"
           baseColor="bg-white"
           pattern="none"
           className="py-0"
+          animationSpeed="slow"
         >
           <div className="space-y-0 w-full">
             {/* Hero Section */}
