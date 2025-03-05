@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, Clock } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 
@@ -25,17 +25,21 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
   };
 
   const hourlyRate = getHourlyRate(name);
+  
+  // Format rating to always show one decimal place
+  const formattedRating = rating.toFixed(1);
 
   return (
     <div className="flex items-center justify-between w-full">
       <div className="flex items-center">
-        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1.5" />
-        <span className="text-sm font-medium text-brand-text-primary">{rating}</span>
-        <span className="text-xs text-brand-text-secondary ml-1">({reviews} reviews)</span>
+        <Star className="w-4.5 h-4.5 fill-yellow-400 text-yellow-400 mr-1.5" />
+        <span className="text-sm font-bold text-brand-text-primary">{formattedRating}</span>
+        <span className="text-xs text-indigo-600 ml-1.5 font-medium">({reviews} reviews)</span>
       </div>
       {hourlyRate && (
-        <div className="text-xs text-brand-text-secondary">
-          Starting at <span className="text-brand-purple-medium font-semibold">${hourlyRate}/hr</span>
+        <div className="text-xs font-medium text-brand-text-secondary flex items-center">
+          <Clock className="w-3.5 h-3.5 mr-1 text-gray-500" aria-hidden="true" />
+          <span>Starting at <span className="text-brand-purple-medium font-bold">${hourlyRate}/hr</span></span>
         </div>
       )}
     </div>

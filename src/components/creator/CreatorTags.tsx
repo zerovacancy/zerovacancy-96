@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { Tag } from 'lucide-react';
 
 interface CreatorTagsProps {
   tags: string[];
@@ -24,18 +25,23 @@ export const getDefaultTags = (name: string, services: string[]) => {
 
 export const getTagStyle = (tag: string) => {
   if (['#RealEstate', '#Aerial', '#IndoorDroneTour'].includes(tag)) {
-    return "bg-[#E5DEFF] text-[#4E387C] hover:bg-[#D6BCFA] hover:text-[#3730A3] border border-[#4F46E5]/10";
+    return "bg-[#E5DEFF] text-[#4E387C] hover:bg-[#D6BCFA] hover:text-[#3730A3] border border-[#4F46E5]/20";
   }
   if (['#Interior', '#Design', '#Staging'].includes(tag)) {
-    return "bg-[#F2FCE2] text-[#4E387C] hover:bg-[#DCF5DC] hover:text-[#2E6A31] border border-[#3B823E]/10";
+    return "bg-[#F2FCE2] text-[#3B823E] hover:bg-[#DCF5DC] hover:text-[#2E6A31] border border-[#3B823E]/20";
   }
   if (['#POV', '#TikTok', '#ComeTourWithMe'].includes(tag)) {
-    return "bg-[#FDE1D3] text-[#4E387C] hover:bg-[#FECDA7] hover:text-[#9D5B3F] border border-[#C4704F]/10";
+    return "bg-[#FDE1D3] text-[#C4704F] hover:bg-[#FECDA7] hover:text-[#9D5B3F] border border-[#C4704F]/20";
   }
   if (['#3DTours', '#FloorPlans', '#Interactive'].includes(tag)) {
-    return "bg-[#E0F2FE] text-[#4E387C] hover:bg-[#BAE6FD] hover:text-[#0284C7] border border-[#0EA5E9]/10";
+    return "bg-[#E0F2FE] text-[#0284C7] hover:bg-[#BAE6FD] hover:text-[#0284C7] border border-[#0EA5E9]/20";
   }
-  return "bg-[#F3F4F6] text-[#4E387C] hover:bg-gray-200 hover:text-gray-800 border border-gray-200";
+  return "bg-[#F3F4F6] text-[#4B5563] hover:bg-gray-200 hover:text-gray-800 border border-gray-300/50";
+};
+
+// Helper function to determine if a tag should have an icon
+const shouldHaveIcon = (tag: string): boolean => {
+  return ['#POV', '#RealEstate', '#3DTours', '#Staging'].includes(tag);
 };
 
 export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
@@ -52,11 +58,15 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
             className={cn(
               "text-[10px] sm:text-xs px-2.5 py-1.5 rounded-full",
               "transition-all duration-200 whitespace-nowrap",
-              "hover:scale-105 cursor-pointer",
+              "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md",
+              "flex items-center gap-1",
               getTagStyle(tag)
             )}
             role="listitem"
           >
+            {shouldHaveIcon(tag) && (
+              <Tag className="w-2.5 h-2.5" aria-hidden="true" />
+            )}
             {tag}
           </span>
         ))}

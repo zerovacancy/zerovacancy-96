@@ -1,4 +1,3 @@
-
 import React, { useCallback, useEffect, useState } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
@@ -97,7 +96,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   ];
 
   return (
-    <div className="w-full space-y-2 sm:space-y-6">
+    <div className="w-full space-y-4 sm:space-y-6">
       {/* Sort menu div - completely removed for now */}
       {false && (
         <div className={cn(
@@ -119,7 +118,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
               {creators.map((creator, index) => (
                 <div 
                   key={creator.name} 
-                  className="min-w-[90%] w-[90%] pl-2 pr-2"
+                  className="min-w-[90%] w-[90%] pl-2 pr-2 h-full"
                 >
                   <CreatorCard
                     creator={creator}
@@ -132,11 +131,12 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             </div>
           </div>
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows with enhanced styling */}
           <button
             onClick={scrollPrev}
             className={cn(
-              "absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity",
+              "absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/40 text-white backdrop-blur-sm transition-all",
+              "hover:bg-black/60 active:scale-95 duration-200",
               !prevBtnEnabled && "opacity-0 pointer-events-none"
             )}
             aria-label="Previous creator"
@@ -146,7 +146,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           <button
             onClick={scrollNext}
             className={cn(
-              "absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/30 text-white backdrop-blur-sm transition-opacity",
+              "absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/40 text-white backdrop-blur-sm transition-all",
+              "hover:bg-black/60 active:scale-95 duration-200",
               !nextBtnEnabled && "opacity-0 pointer-events-none"
             )}
             aria-label="Next creator"
@@ -154,14 +155,16 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          {/* Dots Indicator */}
+          {/* Enhanced Dots Indicator */}
           <div className="flex justify-center gap-1.5 mt-4">
             {creators.map((_, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-colors",
-                  index === selectedIndex ? "bg-primary" : "bg-gray-300"
+                  "w-2 h-2 rounded-full transition-all duration-200",
+                  index === selectedIndex 
+                    ? "bg-indigo-600 w-3 h-3" // Larger dot for selected
+                    : "bg-gray-300 hover:bg-gray-400"
                 )}
                 onClick={() => emblaApi?.scrollTo(index)}
                 aria-label={`Go to creator ${index + 1}`}

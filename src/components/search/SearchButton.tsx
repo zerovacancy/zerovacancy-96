@@ -8,14 +8,14 @@ export const SearchButton = () => {
     <div className="hidden sm:block sm:w-[20%]">
       <button 
         className={cn(
-          "w-full h-12",
+          "w-full h-12 sm:h-13", // Slightly larger
           "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white",
           "shadow-md hover:shadow-lg transition-all duration-300",
           "text-sm rounded-r-lg",
-          "flex items-center justify-center gap-2",
+          "flex items-center justify-center gap-2.5", // Increased gap
           "font-medium",
           "relative overflow-hidden",
-          "group"
+          "group hover:scale-[1.01]" // Subtle scale on hover
         )}
       >
         {/* Enhanced animated background glow effect on hover */}

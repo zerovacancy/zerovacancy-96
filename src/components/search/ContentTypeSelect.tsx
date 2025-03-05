@@ -16,8 +16,9 @@ export const ContentTypeSelect = () => {
       )} />
       <ChevronDown className={cn(
         "w-3.5 h-3.5 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2",
-        "transition-all duration-200",
-        "group-hover:text-gray-500"
+        "transition-all duration-300",
+        "group-hover:text-gray-600 group-hover:transform group-hover:translate-y-[1px]",
+        "animate-pulse-subtle" // Add subtle animation
       )} />
       <select
         className={cn(
@@ -27,7 +28,8 @@ export const ContentTypeSelect = () => {
           "focus:outline-none focus:ring-2 focus:ring-indigo-500/30",
           "group-hover:bg-gray-50/80",
           "font-medium rounded-l-lg",
-          "border-0"
+          "border-0",
+          "placeholder:text-gray-500" // Increased contrast for placeholder
         )}
       >
         <option value="">Select content type</option>

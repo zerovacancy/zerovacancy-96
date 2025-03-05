@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
@@ -57,7 +58,7 @@ const PreviewSearch = () => {
             }
           }}
           viewport={{ once: true, margin: "-50px" }}
-          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_6px_20px_-10px_rgba(120,80,200,0.2)] sm:shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white/90 will-change-transform"
+          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_8px_25px_-10px_rgba(120,80,200,0.3)] sm:shadow-[0_15px_45px_-12px_rgba(120,80,200,0.35)] border border-zinc-200/70 bg-white/95 will-change-transform"
         >
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg sm:rounded-xl">
             <BorderBeam 
@@ -73,38 +74,39 @@ const PreviewSearch = () => {
               inactiveZone={isMobile ? 0.7 : 0.6}
               spread={isMobile ? 8 : 15}
               borderWidth={isMobile ? 0.5 : 1}
-              className={isMobile ? "opacity-10" : "opacity-20"}
+              className={isMobile ? "opacity-15" : "opacity-25"}
             />
-            <AnimatedGrid className={isMobile ? "opacity-2" : "opacity-5"} />
+            <AnimatedGrid className={isMobile ? "opacity-3" : "opacity-7"} />
           </div>
           <GradientBlobBackground 
             className="min-h-0 w-full" 
-            baseColor="bg-white/90"
+            baseColor="bg-white/95"
             pattern="none"
             blobColors={{
               first: "bg-purple-200",
               second: "bg-indigo-200",
               third: "bg-blue-200"
             }}
-            blobOpacity={0.2}
+            blobOpacity={0.25}
             withSpotlight={!isMobile}
-            spotlightClassName="from-purple-500/10 via-indigo-500/10 to-blue-500/10"
+            spotlightClassName="from-purple-500/15 via-indigo-500/15 to-blue-500/15"
           >
             <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
-              <div className="text-left pt-6 sm:pt-8 pb-4 sm:pb-5 px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 font-jakarta tracking-tight">
+              <div className="text-left pt-7 sm:pt-9 pb-5 sm:pb-6 px-4 sm:px-6 lg:px-8">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
                   Find Your Perfect Creator
                 </h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-4 rounded-full"></div>
                 <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl">
                   Connect with professionals who showcase your property perfectly
                 </p>
               </div>
             
-              <div className="w-full px-2 sm:px-3 md:px-6 py-2 sm:py-3 md:py-5">
+              <div className="w-full px-3 sm:px-4 md:px-7 py-3 sm:py-4 md:py-6">
                 <SearchBar onLocationSelect={() => {}} />
               </div>
             
-              <div className="w-full px-2 sm:px-3 md:px-6 py-3 sm:py-4 md:py-6 bg-gradient-to-b from-transparent to-purple-50/20 sm:to-purple-50/30">
+              <div className="w-full px-3 sm:px-4 md:px-7 py-4 sm:py-5 md:py-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40">
                 <CreatorsList 
                   creators={[{
                     name: "Emily Johnson",
