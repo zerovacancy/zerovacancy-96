@@ -63,11 +63,11 @@ const PreviewSearch = () => {
           >
             <div className="flex flex-col w-full relative z-10">
               <div className="text-left pt-6 sm:pt-8 pb-4 sm:pb-5 px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 font-jakarta tracking-tight">
                   Find Your Perfect Creator
                 </h2>
-                <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-2xl">
-                  Connect with skilled professionals who can showcase your property in its best light
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl">
+                  Connect with professionals who showcase your property perfectly
                 </p>
               </div>
             
