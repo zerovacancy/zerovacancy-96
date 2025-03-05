@@ -1,5 +1,5 @@
 
-import { ReactNode } from 'react';
+import { ReactNode, CSSProperties } from 'react';
 
 export interface Step {
   icon: ReactNode;
@@ -9,4 +9,9 @@ export interface Step {
   iconClass: string;
   numberClass: string;
   borderClass: string;
+  gradientClass?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
+  gradientDirection?: string;
+  gradientStyle?: CSSProperties;
 }

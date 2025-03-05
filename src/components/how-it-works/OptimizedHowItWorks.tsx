@@ -8,6 +8,7 @@ import DesktopStepsGridSimple from './DesktopStepsGridSimple';
 const OptimizedHowItWorks: React.FC = () => {
   const isMobile = useIsMobile();
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [activeStep, setActiveStep] = useState<number>(0);
 
   // Load saved progress
   useEffect(() => {
@@ -17,8 +18,13 @@ const OptimizedHowItWorks: React.FC = () => {
     }
   }, []);
 
+  // Handle step interaction
+  const handleStepInteraction = (index: number) => {
+    setActiveStep(index);
+  };
+
   return (
-    <div className="py-8 sm:py-10 lg:py-14 px-2 sm:px-4 lg:px-6">
+    <div className="py-10 sm:py-12 lg:py-16 px-3 sm:px-5 lg:px-8 bg-gradient-to-b from-white via-purple-50/10 to-white">
       <div className="max-w-6xl mx-auto py-0 px-px relative z-10">
         <SectionHeaderSimple 
           title="How It Works" 
@@ -26,10 +32,18 @@ const OptimizedHowItWorks: React.FC = () => {
         />
         
         {/* Mobile 2x2 Grid Layout */}
-        <MobileStepsGridSimple completedSteps={completedSteps} />
+        <MobileStepsGridSimple 
+          completedSteps={completedSteps} 
+          activeStep={activeStep}
+          onStepInteraction={handleStepInteraction}
+        />
         
         {/* Desktop grid layout with connecting lines */}
-        <DesktopStepsGridSimple completedSteps={completedSteps} />
+        <DesktopStepsGridSimple 
+          completedSteps={completedSteps} 
+          activeStep={activeStep}
+          onStepInteraction={handleStepInteraction}
+        />
       </div>
     </div>
   );
