@@ -1,29 +1,18 @@
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useInView } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist-cta";
+import { TextRotate } from "../ui/text-rotate";
 
-// Animation titles using CSS instead of heavy Framer Motion instances
+// Animation titles using the new TextRotate component
 const TITLES = ["Converts", "Engages", "Drives Leads"];
 
 export function Hero() {
-  const [titleIndex, setTitleIndex] = useState(0);
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
-  
-  useEffect(() => {
-    if (!isInView) return;
-    
-    const timeout = isMobile ? 2500 : 2000;
-    const timeoutId = setTimeout(() => {
-      setTitleIndex((prev) => (prev === TITLES.length - 1 ? 0 : prev + 1));
-    }, timeout);
-    
-    return () => clearTimeout(timeoutId);
-  }, [titleIndex, isMobile, isInView]);
   
   return (
     <section 
@@ -61,23 +50,27 @@ export function Hero() {
           
           <div 
             role="text" 
-            aria-label={`Property Content that ${TITLES[titleIndex]}`} 
+            aria-label="Property Content animation"
             className="relative flex w-full justify-center h-[1.4em] sm:h-[1.5em] md:h-[1.4em] lg:h-[1.2em] overflow-hidden mt-1 sm:mt-2"
           >
-            {TITLES.map((title, index) => (
-              <span 
-                key={index} 
-                className={cn(
-                  "absolute font-jakarta tracking-[-0.02em] text-transparent", 
-                  "bg-clip-text bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700 transition-all duration-500", 
-                  "text-4xl sm:text-5xl lg:text-6xl",
-                  "font-bold",
-                  titleIndex === index ? "opacity-100 transform-none" : "opacity-0 translate-y-8"
-                )} 
-              >
-                {title}
-              </span>
-            ))}
+            <TextRotate
+              texts={TITLES}
+              mainClassName="flex justify-center items-center"
+              staggerFrom="last"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "-120%", opacity: 0 }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden"
+              elementLevelClassName={cn(
+                "text-4xl sm:text-5xl lg:text-6xl",
+                "font-bold font-jakarta tracking-[-0.02em]",
+                "bg-clip-text text-transparent", 
+                "bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700"
+              )}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              rotationInterval={2000}
+            />
           </div>
         </h1>
 
