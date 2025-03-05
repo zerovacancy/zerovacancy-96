@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/hero/Hero';
@@ -12,7 +11,7 @@ import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { OptimizedSpotlight } from '@/components/ui/optimized-spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
-import { FeaturesSectionWithHoverEffects } from '@/components/Features';
+import { FeaturesSectionWithHoverEffects } from '@/components/features/Features';
 import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
 import PreviewSearch from '@/components/PreviewSearch';
