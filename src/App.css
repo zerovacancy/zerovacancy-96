@@ -4,6 +4,9 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  /* Improve rendering performance */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .logo {
@@ -42,7 +45,7 @@
   color: #888;
 }
 
-/* Scrollbar utilities */
+/* Enhanced Scrollbar utilities */
 /* Hide scrollbar for Chrome, Safari and Opera */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -57,6 +60,8 @@
 /* iOS momentum scrolling for overflow elements */
 .momentum-scroll {
   -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
 }
 
 /* Fix for iOS rubber banding effect */
@@ -67,10 +72,35 @@
 /* Optimize animations */
 .will-change-transform {
   will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Fix for sticky elements on iOS */
 .sticky-fix {
   position: -webkit-sticky;
   position: sticky;
+  transform: translateZ(0);
+}
+
+/* Performance optimized smooth scrolling container */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  will-change: scroll-position;
+  transform: translateZ(0);
+}
+
+/* Optimize touch actions for mobile */
+.touch-optimize {
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Layer promotion for frequently animated elements */
+.promote-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }

@@ -1,6 +1,6 @@
 
 'use client';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 
 type OptimizedSpotlightProps = {
@@ -17,6 +17,8 @@ export function OptimizedSpotlight({
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [parentElement, setParentElement] = useState<HTMLElement | null>(null);
+  const frameRef = useRef<number | null>(null);
+  const positionRef = useRef({ x: 0, y: 0 });
 
   // Performance optimization: Only set up intersection observer once on mount
   useEffect(() => {
@@ -27,46 +29,72 @@ export function OptimizedSpotlight({
         parent.style.overflow = 'hidden';
         setParentElement(parent);
         
+        // Use IntersectionObserver for performance
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               setIsVisible(entry.isIntersecting);
             });
           },
-          { threshold: 0.1 }
+          { 
+            threshold: 0.1,
+            rootMargin: '100px' // Preload just before visible
+          }
         );
         
         observer.observe(parent);
-        return () => observer.disconnect();
+        return () => {
+          observer.disconnect();
+          if (frameRef.current) {
+            cancelAnimationFrame(frameRef.current);
+          }
+        };
       }
     }
   }, []);
+
+  // Optimized mouse movement handler with throttling via requestAnimationFrame
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    positionRef.current = {
+      x: e.clientX,
+      y: e.clientY
+    };
+    
+    // Only schedule animation frame if not already pending
+    if (!frameRef.current && parentElement) {
+      frameRef.current = requestAnimationFrame(() => {
+        const { left, top } = parentElement.getBoundingClientRect();
+        setPosition({
+          x: positionRef.current.x - left - size / 2,
+          y: positionRef.current.y - top - size / 2
+        });
+        frameRef.current = null;
+      });
+    }
+  }, [parentElement, size]);
 
   // Only set up event listeners if the element is visible
   useEffect(() => {
     if (!parentElement || !isVisible) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      // Use requestAnimationFrame for smoother performance
-      requestAnimationFrame(() => {
-        const { left, top } = parentElement.getBoundingClientRect();
-        setPosition({
-          x: e.clientX - left - size / 2,
-          y: e.clientY - top - size / 2
-        });
-      });
-    };
+    const handleEnter = () => setIsHovered(true);
+    const handleLeave = () => setIsHovered(false);
 
-    parentElement.addEventListener('mousemove', handleMouseMove);
-    parentElement.addEventListener('mouseenter', () => setIsHovered(true));
-    parentElement.addEventListener('mouseleave', () => setIsHovered(false));
+    // Use passive event listeners for better performance
+    parentElement.addEventListener('mousemove', handleMouseMove, { passive: true });
+    parentElement.addEventListener('mouseenter', handleEnter, { passive: true });
+    parentElement.addEventListener('mouseleave', handleLeave, { passive: true });
 
     return () => {
       parentElement.removeEventListener('mousemove', handleMouseMove);
-      parentElement.removeEventListener('mouseenter', () => setIsHovered(true));
-      parentElement.removeEventListener('mouseleave', () => setIsHovered(false));
+      parentElement.removeEventListener('mouseenter', handleEnter);
+      parentElement.removeEventListener('mouseleave', handleLeave);
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
     };
-  }, [parentElement, isVisible, size]);
+  }, [parentElement, isVisible, handleMouseMove]);
 
   // Don't render anything if not visible in viewport
   if (!isVisible) return null;
@@ -86,7 +114,11 @@ export function OptimizedSpotlight({
         left: position.x,
         top: position.y,
         transform: 'translateZ(0)', // Force hardware acceleration
-        willChange: 'transform, opacity' // Hint to the browser about what will animate
+        willChange: 'transform, opacity', // Hint to the browser about what will animate
+        backfaceVisibility: 'hidden',
+        perspective: '1000px',
+        WebkitFontSmoothing: 'antialiased',
+        WebkitBackfaceVisibility: 'hidden',
       }}
     />
   );

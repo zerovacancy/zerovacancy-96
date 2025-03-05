@@ -30,6 +30,10 @@
     height: 100%;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Improve iOS scroll snapping */
+    scroll-snap-type: y proximity;
+    /* Force hardware acceleration */
+    transform: translateZ(0);
   }
 
   body {
@@ -38,14 +42,23 @@
     position: relative;
     overflow-x: hidden;
     overflow-y: scroll;
+    /* Optimize mobile scrolling */
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
+    /* Prevent overscroll behavior */
+    overscroll-behavior: none;
     /* Prevent content shifting when scrollbar appears */
     width: 100%;
     /* Improve smooth scroll performance */
     will-change: scroll-position;
     /* Prevent iOS Safari pull-to-refresh */
     touch-action: pan-y;
+    /* Force GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    /* Optimize rendering */
+    text-rendering: optimizeSpeed;
+    image-rendering: optimizeQuality;
   }
 
   * {

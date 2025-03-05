@@ -16,15 +16,45 @@ export const AnimatedGrid = memo(({
   const lastPosition = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number>(0);
   const [isVisible, setIsVisible] = useState(false);
+  const isActiveRef = useRef(false);
+  const currentAngleRef = useRef(0);
   
   // Only load after initial render to improve page load performance
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 1000); // Reduced from 30s to 1s for better UX
+    }, 1000); // Keep at 1s for better UX
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
   }, []);
+
+  // Set up intersection observer for better performance
+  useEffect(() => {
+    if (!containerRef.current || !isVisible) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const isIntersecting = entries[0].isIntersecting;
+        if (!isIntersecting && isActiveRef.current) {
+          // Element no longer visible, disable animations
+          if (containerRef.current) {
+            containerRef.current.style.setProperty("--active", "0");
+            isActiveRef.current = false;
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    observer.observe(containerRef.current);
+    
+    return () => observer.disconnect();
+  }, [isVisible]);
 
   const handleMove = useCallback(
     (e?: MouseEvent | { x: number; y: number }) => {
@@ -55,7 +85,10 @@ export const AnimatedGrid = memo(({
         const inactiveRadius = 0.5 * Math.min(width, height) * 0.7;
 
         if (distanceFromCenter < inactiveRadius) {
-          element.style.setProperty("--active", "0");
+          if (isActiveRef.current) {
+            element.style.setProperty("--active", "0");
+            isActiveRef.current = false;
+          }
           return;
         }
 
@@ -65,25 +98,33 @@ export const AnimatedGrid = memo(({
           mouseY > top - 100 &&
           mouseY < top + height + 100;
 
-        element.style.setProperty("--active", isActive ? "1" : "0");
+        if (isActive !== isActiveRef.current) {
+          element.style.setProperty("--active", isActive ? "1" : "0");
+          isActiveRef.current = isActive;
+        }
 
         if (!isActive) return;
 
-        const currentAngle =
-          parseFloat(element.style.getPropertyValue("--start")) || 0;
+        const currentAngle = currentAngleRef.current;
         let targetAngle =
           (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) / Math.PI + 90;
 
         const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
         const newAngle = currentAngle + angleDiff;
 
-        animate(currentAngle, newAngle, {
-          duration: 1,
-          ease: [0.16, 1, 0.3, 1],
-          onUpdate: (value) => {
-            element.style.setProperty("--start", String(value));
-          },
-        });
+        // Only animate if the angle change is significant
+        if (Math.abs(angleDiff) > 1) {
+          animate(currentAngle, newAngle, {
+            duration: 1,
+            ease: [0.16, 1, 0.3, 1],
+            onUpdate: (value) => {
+              if (element) {
+                element.style.setProperty("--start", String(value));
+                currentAngleRef.current = value;
+              }
+            },
+          });
+        }
       });
     },
     [isVisible]
@@ -95,8 +136,9 @@ export const AnimatedGrid = memo(({
     // Optimize event listeners with passive flag
     const handleScroll = () => {
       // Skip animation during scroll for better performance
-      if (containerRef.current) {
+      if (containerRef.current && isActiveRef.current) {
         containerRef.current.style.setProperty("--active", "0");
+        isActiveRef.current = false;
       }
     };
     
@@ -120,7 +162,7 @@ export const AnimatedGrid = memo(({
   if (!isVisible) return null;
 
   return (
-    <div className={cn("relative will-change-transform", className)}>
+    <div className={cn("relative will-change-transform promote-layer", className)}>
       <div
         ref={containerRef}
         style={{
@@ -141,9 +183,12 @@ export const AnimatedGrid = memo(({
               #4c7894 calc(75% / var(--repeating-conic-gradient-times)),
               #dd7bbb calc(100% / var(--repeating-conic-gradient-times))
             )`,
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+          WebkitFontSmoothing: 'antialiased',
         } as React.CSSProperties}
         className={cn(
-          "pointer-events-auto absolute inset-0 rounded-[inherit]"
+          "pointer-events-auto absolute inset-0 rounded-[inherit] promote-layer"
         )}
       >
         <div
@@ -156,8 +201,13 @@ export const AnimatedGrid = memo(({
             "after:opacity-[var(--active)] after:transition-opacity after:duration-300",
             "after:[mask-clip:padding-box,border-box]",
             "after:[mask-composite:intersect]",
-            "after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*1deg))]"
+            "after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*1deg))]",
+            "promote-layer"
           )}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+          }}
         />
       </div>
     </div>
