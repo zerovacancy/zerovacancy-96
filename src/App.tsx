@@ -16,8 +16,8 @@ const ConnectOnboarding = lazy(() => import('./pages/ConnectOnboarding'));
 
 // Simple loading component to show during lazy loading
 const PageLoader = () => (
-  <div className="min-h-screen flex flex-col items-center justify-center p-4">
-    <div className="w-20 h-20 relative">
+  <div className="fixed inset-0 flex items-center justify-center bg-background">
+    <div className="w-16 h-16 relative">
       <div className="w-full h-full rounded-full border-4 border-gray-200"></div>
       <div className="w-full h-full rounded-full border-4 border-blue-600 animate-spin absolute top-0 left-0 border-t-transparent"></div>
     </div>
@@ -28,7 +28,7 @@ function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Router>
-        <div className="min-h-screen flex flex-col w-full overflow-x-hidden overflow-y-auto touch-manipulation">
+        <main className="relative">
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -40,7 +40,7 @@ function App() {
               <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
             </Routes>
           </Suspense>
-        </div>
+        </main>
         <Toaster />
       </Router>
     </ErrorBoundary>

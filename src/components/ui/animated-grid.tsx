@@ -16,14 +16,13 @@ export const AnimatedGrid = memo(({
   const lastPosition = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number>(0);
   const [isVisible, setIsVisible] = useState(false);
-
+  
+  // Only load after initial render to improve page load performance
   useEffect(() => {
-    // Set timeout for 30 seconds
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 30000);
+    }, 1000); // Reduced from 30s to 1s for better UX
 
-    // Cleanup timeout if component unmounts
     return () => clearTimeout(timer);
   }, []);
 
@@ -35,6 +34,7 @@ export const AnimatedGrid = memo(({
         cancelAnimationFrame(animationFrameRef.current);
       }
 
+      // Use requestAnimationFrame for smoother performance
       animationFrameRef.current = requestAnimationFrame(() => {
         const element = containerRef.current;
         if (!element) return;
@@ -92,9 +92,17 @@ export const AnimatedGrid = memo(({
   useEffect(() => {
     if (!isVisible) return;
 
-    const handleScroll = () => handleMove();
+    // Optimize event listeners with passive flag
+    const handleScroll = () => {
+      // Skip animation during scroll for better performance
+      if (containerRef.current) {
+        containerRef.current.style.setProperty("--active", "0");
+      }
+    };
+    
     const handlePointerMove = (e: PointerEvent) => handleMove(e);
 
+    // Use passive: true for better scroll performance
     window.addEventListener("scroll", handleScroll, { passive: true });
     document.body.addEventListener("pointermove", handlePointerMove, {
       passive: true,
@@ -112,7 +120,7 @@ export const AnimatedGrid = memo(({
   if (!isVisible) return null;
 
   return (
-    <div className={cn("relative w-full h-full overflow-hidden", className)}>
+    <div className={cn("relative will-change-transform", className)}>
       <div
         ref={containerRef}
         style={{

@@ -53,3 +53,24 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* iOS momentum scrolling for overflow elements */
+.momentum-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for iOS rubber banding effect */
+.overscroll-none {
+  overscroll-behavior: none;
+}
+
+/* Optimize animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Fix for sticky elements on iOS */
+.sticky-fix {
+  position: -webkit-sticky;
+  position: sticky;
+}
