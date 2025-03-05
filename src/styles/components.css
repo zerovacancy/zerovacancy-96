@@ -1,0 +1,36 @@
+
+@tailwind components;
+
+@layer components {
+  .hero-button {
+    @apply inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-medium transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .hero-button-primary {
+    @apply hero-button bg-primary text-primary-foreground hover:brightness-110;
+  }
+
+  .hero-button-secondary {
+    @apply hero-button bg-secondary text-secondary-foreground hover:bg-secondary/90;
+  }
+
+  .nav-link {
+    @apply text-base font-medium transition-colors hover:text-foreground;
+  }
+
+  .fade-up {
+    @apply animate-fade-up;
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32;
+  }
+
+  .search-input {
+    @apply w-full bg-transparent border-none focus:outline-none placeholder:text-muted-foreground/70;
+  }
+
+  .search-group {
+    @apply flex items-center gap-2 p-3 sm:p-4 bg-secondary rounded-lg transition-all duration-200 focus-within:bg-background focus-within:shadow-sm;
+  }
+}
