@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/hero/Hero';
@@ -35,11 +34,9 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
-
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
-
   return <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       <Header />
       {showBanner && <div className="relative">
@@ -73,7 +70,7 @@ const Index = () => {
           
           {/* Search Section - As its own completely separate section */}
           <section id="find-creators" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-gray-50 border-t border-b border-gray-100 w-full">
-            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30 py-px"></div>
             <OptimizedSpotlight className="from-purple-500/20 via-indigo-500/20 to-blue-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <PreviewSearch />
@@ -103,5 +100,4 @@ const Index = () => {
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
     </div>;
 };
-
 export default Index;
