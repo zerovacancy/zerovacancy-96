@@ -80,7 +80,7 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
         
         <div className="text-left w-full flex-grow flex flex-col">
           <h3 className={cn(
-            "text-base font-semibold leading-tight font-space mb-2",
+            "text-base font-semibold leading-tight font-fraunces mb-2",
             "text-gray-900 group-hover:text-indigo-600",
             "transition-colors duration-300"
           )}>
@@ -91,7 +91,7 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
             isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-40 opacity-100",
             "flex-grow"
           )}>
-            <p className="text-xs sm:text-sm text-gray-600 font-anek group-hover:text-gray-700">
+            <p className="text-xs sm:text-sm text-gray-600 font-inter group-hover:text-gray-700">
               {description}
             </p>
           </div>
