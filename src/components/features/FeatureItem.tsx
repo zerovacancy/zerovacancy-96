@@ -34,7 +34,7 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
         "relative w-full text-left group h-full flex flex-col",
         "rounded-lg transition-all duration-300",
         "bg-white hover:bg-white",
-        "border border-gray-200/60 hover:border-gray-300/80",
+        "border-2 border-gray-200/70 hover:border-gray-300/90",  // Changed from border to border-2 and adjusted opacity
         "p-4 sm:p-5",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
         !isMobile && "hover:shadow-md hover:-translate-y-0.5"
@@ -64,8 +64,8 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
             "transition-all duration-300",
             colorScheme.bg,
             "group-hover:shadow-sm",
-            "border border-opacity-10",
-            `border-${colorScheme.text.split('-')[1]}-100`,
+            "border-2 border-opacity-20",  // Changed from border to border-2 and adjusted opacity
+            `border-${colorScheme.text.split('-')[1]}-200`,  // Increased color intensity
           )}
           whileHover={{ scale: 1.05 }}
         >
