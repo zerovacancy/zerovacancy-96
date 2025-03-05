@@ -37,7 +37,7 @@ export function Pricing() {
   const pricingCards = [
     {
       title: "Basic",
-      price: 299,
+      price: 139,
       interval: "month",
       description: "Perfect for single-family homes and small properties",
       features: [

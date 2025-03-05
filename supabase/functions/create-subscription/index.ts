@@ -52,7 +52,7 @@ serve(async (req) => {
     let priceAmount = 0;
     switch (packageName.toLowerCase()) {
       case "basic":
-        priceAmount = 29900; // $299.00
+        priceAmount = 13900; // $139.00
         break;
       case "professional":
         priceAmount = 49900; // $499.00
