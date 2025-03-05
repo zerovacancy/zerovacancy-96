@@ -22,6 +22,8 @@ const config = {
       fontFamily: {
         'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
         'space': ['Space Grotesk', 'sans-serif'],
+        // Custom fonts can be added here when uploaded
+        'custom': ['CustomFont', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
