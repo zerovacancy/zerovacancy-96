@@ -4,26 +4,26 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { iconColors, featureIcons } from "./feature-colors";
+import { ChevronRight } from "lucide-react";
 
 interface FeatureItemProps {
   title: string;
   description: string;
   icon: string;
   index: number;
+  isPopular?: boolean;
 }
 
-export const FeatureItem = ({ title, description, icon, index }: FeatureItemProps) => {
+export const FeatureItem = ({ title, description, icon, index, isPopular = false }: FeatureItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
   
   const handleClick = () => {
-    if (isMobile) {
-      setIsExpanded(!isExpanded);
-    }
+    setIsExpanded(!isExpanded);
   };
   
   // Get the color scheme for this icon
-  const colorScheme = iconColors[icon as keyof typeof iconColors] || { bg: "bg-indigo-50", text: "text-indigo-600" };
+  const colorScheme = iconColors[icon as keyof typeof iconColors] || { bg: "bg-indigo-50", text: "text-indigo-600", gradient: "from-indigo-500 to-blue-500" };
   
   // Get the icon component
   const Icon = featureIcons[icon as keyof typeof featureIcons];
@@ -32,16 +32,16 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
     <motion.button
       className={cn(
         "relative w-full text-left group h-full flex flex-col",
-        "rounded-lg transition-all duration-300",
-        "bg-white hover:bg-white",
-        "border-2 border-gray-200/70 hover:border-gray-300/90",  // Changed from border to border-2 and adjusted opacity
-        "p-4 sm:p-5",
+        "rounded-xl sm:rounded-2xl transition-all duration-300",
+        "bg-white hover:bg-white/95",
+        "border border-gray-100",  
+        "p-5 sm:p-6",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
-        !isMobile && "hover:shadow-md hover:-translate-y-0.5"
+        "hover:shadow-[0_8px_30px_rgb(0,0,0,0.05)] hover:-translate-y-1"
       )}
       onClick={handleClick}
-      aria-expanded={isMobile ? isExpanded : undefined}
-      whileHover={!isMobile ? { scale: 1.01 } : undefined}
+      aria-expanded={isExpanded}
+      whileHover={{ scale: 1.01 }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ 
         opacity: 1, 
@@ -54,46 +54,63 @@ export const FeatureItem = ({ title, description, icon, index }: FeatureItemProp
       viewport={{ once: true, margin: "-50px" }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
-      <div className="flex flex-col items-start gap-3 h-full">
+      {isPopular && (
+        <span className="absolute -top-2 -right-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+          Popular
+        </span>
+      )}
+      
+      <div className="flex flex-col items-start gap-4 h-full">
         {/* Icon container with refined styling */}
         <motion.div 
           className={cn(
             "flex items-center justify-center",
-            "w-12 h-12",
-            "rounded-lg",
+            "w-14 h-14",
+            "rounded-xl",
             "transition-all duration-300",
-            colorScheme.bg,
+            "bg-gradient-to-br",
+            colorScheme.gradient,
+            "opacity-95",
             "group-hover:shadow-sm",
-            "border-2 border-opacity-20",  // Changed from border to border-2 and adjusted opacity
-            `border-${colorScheme.text.split('-')[1]}-200`,  // Increased color intensity
+            "border border-opacity-20",
+            `border-${colorScheme.text.split('-')[1]}-100`,
           )}
           whileHover={{ scale: 1.05 }}
         >
           <Icon className={cn(
-            "w-6 h-6",
-            colorScheme.text,
+            "w-7 h-7",
+            "text-white",
             "transition-all duration-300",
-            "group-hover:scale-105",
-            isMobile && isExpanded && "transform rotate-90"
+            "group-hover:scale-110",
           )} />
         </motion.div>
         
         <div className="text-left w-full flex-grow flex flex-col">
           <h3 className={cn(
-            "text-base font-semibold leading-tight font-space mb-2",
+            "text-base sm:text-lg font-bold leading-tight font-space mb-2",
             "text-gray-900 group-hover:text-indigo-600",
             "transition-colors duration-300"
           )}>
             {title}
           </h3>
+          
           <div className={cn(
-            "overflow-hidden transition-[max-height,opacity] duration-300",
-            isMobile && !isExpanded ? "max-h-0 opacity-0" : "max-h-40 opacity-100",
-            "flex-grow"
+            "w-10 h-0.5 mb-3 bg-gradient-to-r",
+            colorScheme.gradient,
+            "rounded-full transition-all duration-300 transform origin-left",
+            "group-hover:w-16"
+          )} />
+          
+          <p className="text-xs sm:text-sm text-gray-600 font-anek line-height-[1.6] group-hover:text-gray-700">
+            {isExpanded ? description : description.length > 85 ? `${description.substring(0, 85)}...` : description}
+          </p>
+          
+          <div className={cn(
+            "mt-3 text-xs font-medium flex items-center gap-1.5", 
+            colorScheme.text,
+            "opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           )}>
-            <p className="text-xs sm:text-sm text-gray-600 font-anek group-hover:text-gray-700">
-              {description}
-            </p>
+            Learn more <ChevronRight className="w-3 h-3" />
           </div>
         </div>
       </div>

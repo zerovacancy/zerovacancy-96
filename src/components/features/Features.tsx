@@ -6,14 +6,14 @@ import { BackgroundEffects } from "./BackgroundEffects";
 
 export function FeaturesSectionWithHoverEffects() {
   return (
-    <section className="relative py-8 sm:py-12 lg:py-16 px-2 sm:px-4 lg:px-6 overflow-hidden">
+    <section className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         <FeatureHeader 
           title="Professional Content Creation Services"
-          description="Everything you need to showcase your properties with stunning visuals and engaging content"
+          description="Everything you need to showcase your properties with stunning visuals and engaging content that attracts the right buyers."
         />
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-7">
           {features.map((feature, index) => (
             <FeatureItem
               key={index}
@@ -21,6 +21,7 @@ export function FeaturesSectionWithHoverEffects() {
               description={feature.description}
               icon={feature.icon}
               index={index}
+              isPopular={feature.isPopular}
             />
           ))}
         </div>

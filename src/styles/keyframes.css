@@ -1,3 +1,4 @@
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -69,6 +70,25 @@
   50% {
     opacity: 0.9;
     transform: scale(1.01);
+  }
+}
+
+@keyframes expandWidth {
+  from { width: 30%; }
+  to { width: 100%; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
   }
 }
 
