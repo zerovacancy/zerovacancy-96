@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, BrowserRouter } from 'react-router-dom';
 import Index from './pages/Index';
 import Account from './pages/Account';
 import ConnectOnboarding from './pages/ConnectOnboarding';
@@ -9,17 +10,14 @@ import Auth from './pages/Auth';
 import PaymentConfirmation from './pages/PaymentConfirmation';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ThemeProvider } from "@/components/theme-provider"
-import {
-  useClerk,
-  ClerkProvider,
-} from "@clerk/clerk-react";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ClerkProvider } from "@clerk/clerk-react";
 import { BottomNav } from './components/navigation/BottomNav';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const clerkPubKey = "clerk.pub_2Z33J359oxBlDMYRwJmbbqj9czE"
 
-function App() {
+function AppContent() {
   const [isMounted, setIsMounted] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -56,6 +54,14 @@ function App() {
       </ClerkProvider>
       <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
