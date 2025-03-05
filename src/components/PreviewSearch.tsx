@@ -53,15 +53,6 @@ const PreviewSearch = () => {
             showRadialGradient={!isMobile}
           >
             <div className="flex flex-col w-full relative z-10">
-              <div className="pt-3 sm:pt-5 md:pt-6 pb-0.5 sm:pb-1 md:pb-2 px-2 sm:px-3 md:px-4">
-                <h2 className="text-lg sm:text-xl md:text-3xl font-bold tracking-tight mb-1 sm:mb-1.5 md:mb-3 text-gray-900 leading-tight">
-                  Find Your Perfect Creator
-                </h2>
-                <p className="text-gray-600 max-w-2xl mx-auto mb-2 sm:mb-3 md:mb-6 text-xs sm:text-sm md:text-base leading-relaxed">
-                  Connect with skilled professionals who can showcase your property in its best light
-                </p>
-              </div>
-              
               <div className="w-full px-2 sm:px-3 md:px-6 py-2 sm:py-3 md:py-5">
                 <SearchBar onLocationSelect={() => {}} />
               </div>
