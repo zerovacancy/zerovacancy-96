@@ -1,15 +1,25 @@
 
-"use client";
-
 import React from 'react';
 import { ShimmerButton } from './ui/shimmer-button';
-import { AuroraBackground } from './ui/aurora-background';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 
 const CallToActionSection = () => {
   return (
-    <AuroraBackground showRadialGradient={false} className="py-10 sm:py-12 lg:py-20">
+    <GradientBlobBackground
+      className="py-10 sm:py-12 lg:py-20"
+      baseColor="bg-white"
+      pattern="none"
+      blobColors={{
+        first: "bg-purple-200",
+        second: "bg-pink-200",
+        third: "bg-red-200"
+      }}
+      blobOpacity={0.25}
+      withSpotlight={true}
+      spotlightClassName="from-purple-500/20 via-pink-500/20 to-red-500/20"
+    >
       <div className="mx-auto max-w-4xl text-center relative z-10 px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-brand-purple-dark">
           Elevate Your Real Estate Marketing Today
@@ -27,7 +37,7 @@ const CallToActionSection = () => {
           </ShimmerButton>
         </div>
       </div>
-    </AuroraBackground>
+    </GradientBlobBackground>
   );
 };
 

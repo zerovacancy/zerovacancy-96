@@ -2,13 +2,13 @@
 import React from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
-import { AuroraBackground } from './ui/aurora-background';
 import { BorderBeam } from './ui/border-beam';
 import { GlowingEffect } from './ui/glowing-effect';
 import { AnimatedGrid } from './ui/animated-grid';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
@@ -48,9 +48,18 @@ const PreviewSearch = () => {
             />
             <AnimatedGrid className={isMobile ? "opacity-2" : "opacity-5"} />
           </div>
-          <AuroraBackground 
+          <GradientBlobBackground 
             className="min-h-0 w-full" 
-            showRadialGradient={!isMobile}
+            baseColor="bg-white"
+            pattern="none"
+            blobColors={{
+              first: "bg-purple-200",
+              second: "bg-indigo-200",
+              third: "bg-blue-200"
+            }}
+            blobOpacity={0.3}
+            withSpotlight={!isMobile}
+            spotlightClassName="from-purple-500/10 via-indigo-500/10 to-blue-500/10"
           >
             <div className="flex flex-col w-full relative z-10">
               <div className="w-full px-2 sm:px-3 md:px-6 py-2 sm:py-3 md:py-5">
@@ -95,7 +104,7 @@ const PreviewSearch = () => {
                 />
               </div>
             </div>
-          </AuroraBackground>
+          </GradientBlobBackground>
         </motion.div>
       </div>
     </div>
