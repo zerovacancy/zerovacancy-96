@@ -26,15 +26,6 @@
     --color-5: 198 93% 60%;
   }
 
-  /* Font faces can be added here when font files are uploaded */
-  @font-face {
-    font-family: 'CustomFont';
-    src: url('/fonts/customfont.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
   html, body {
     @apply h-full;
     -webkit-overflow-scrolling: touch;
