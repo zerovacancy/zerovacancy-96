@@ -52,13 +52,7 @@ export function Pricing() {
   }, [toast]);
 
   return (
-    <section id="pricing" className="py-12 sm:py-20 lg:py-24 relative overflow-hidden bg-gradient-to-b from-slate-50 to-slate-100">
-      {/* Background decor elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-[30%] -left-[10%] w-[50%] h-[80%] bg-gradient-to-br from-purple-200/20 to-cyan-200/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-[40%] -right-[10%] w-[60%] h-[80%] bg-gradient-to-tr from-emerald-200/20 to-blue-200/20 rounded-full blur-3xl" />
-      </div>
-      
+    <section id="pricing" className="py-12 sm:py-20 lg:py-24 relative overflow-hidden bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           className="text-center mb-10 sm:mb-16"
