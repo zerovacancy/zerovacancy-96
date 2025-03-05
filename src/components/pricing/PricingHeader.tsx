@@ -21,7 +21,7 @@ export const PricingHeader = ({
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
         {title}
       </h2>
-      <p className="text-sm sm:text-base text-brand-text-primary max-w-2xl mx-auto font-inter">
+      <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-600 font-inter">
         {subtitle}
       </p>
     </motion.div>;
