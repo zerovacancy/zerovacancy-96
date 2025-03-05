@@ -31,4 +31,5 @@ export function FeaturesSectionWithHoverEffects() {
   );
 }
 
+// Export both named and default export for backward compatibility
 export default FeaturesSectionWithHoverEffects;
