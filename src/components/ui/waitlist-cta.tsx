@@ -127,11 +127,6 @@ export function WaitlistCTA({ className }: { className?: string }) {
                 Join Waitlist Now
               </span>
               <ArrowRight className="h-5 w-5 flex-shrink-0 inline-block transition-transform group-hover:translate-x-0.5" /> {/* Slightly larger icon */}
-              
-              {/* Limited spots badge - small pill - repositioned to not overlap text */}
-              <span className="absolute -top-2 -right-2 text-[8px] bg-white text-purple-700 px-1.5 py-0.5 rounded-full font-bold border border-purple-200 shadow-sm hidden sm:inline-block">
-                Limited spots
-              </span>
             </>
           )}
         </Button>
