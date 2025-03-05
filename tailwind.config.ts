@@ -20,10 +20,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
         'space': ['Space Grotesk', 'sans-serif'],
-        'inter': ['Inter', 'sans-serif'],
-        'fraunces': ['Fraunces', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
