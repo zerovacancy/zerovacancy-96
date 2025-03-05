@@ -7,7 +7,7 @@ const CallToActionSection = () => {
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
         Elevate Your Real Estate Marketing Today
       </h2>
-      <p className="text-sm sm:text-base text-brand-text-primary max-w-2xl mx-auto mb-8 sm:mb-10">
+      <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-600 font-inter">
         Join thousands of property managers and content creators who trust Luxe Content Connect for their marketing needs
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
