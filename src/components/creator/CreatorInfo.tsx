@@ -21,7 +21,7 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
       
       <div className="relative z-10">
         <div className="flex items-center gap-2 sm:gap-2.5">
-          <h3 className="font-semibold text-lg sm:text-xl">{creator.name}</h3>
+          <h3 className="font-semibold text-lg sm:text-xl text-white">{creator.name}</h3>
           {/* Verification badge - white circle and checkmark */}
           <BadgeCheck 
             className={cn(

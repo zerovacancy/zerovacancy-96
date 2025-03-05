@@ -55,7 +55,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               "px-2.5 sm:px-3 py-1.5",
               "text-xs sm:text-sm font-medium",
               "bg-white shadow-sm border border-white/40",
-              "text-gray-900 rounded-full",
+              "text-[#212121] rounded-full", // Updated with price text color
               "transition-all duration-200",
               "group-hover:scale-105"
             )}>
@@ -106,4 +106,3 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
     </article>
   );
 };
-
