@@ -27,18 +27,18 @@
   }
 
   html, body {
-    @apply h-full;
+    @apply h-full font-inter;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: auto;
     position: relative;
   }
 
   * {
-    @apply border-border font-sans;
+    @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground antialiased min-h-screen font-sans font-normal;
+    @apply bg-background text-foreground antialiased min-h-screen font-inter font-normal;
     overscroll-behavior-y: auto;
     max-width: 100vw;
     overflow-x: hidden;

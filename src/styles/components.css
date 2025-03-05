@@ -3,7 +3,7 @@
 
 @layer components {
   .hero-button {
-    @apply inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-medium transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-medium transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 font-space;
   }
 
   .hero-button-primary {
@@ -15,7 +15,7 @@
   }
 
   .nav-link {
-    @apply text-base font-medium transition-colors hover:text-foreground;
+    @apply text-base font-medium transition-colors hover:text-foreground font-space;
   }
 
   .fade-up {
@@ -27,7 +27,7 @@
   }
 
   .search-input {
-    @apply w-full bg-transparent border-none focus:outline-none placeholder:text-muted-foreground/70;
+    @apply w-full bg-transparent border-none focus:outline-none placeholder:text-muted-foreground/70 font-inter;
   }
 
   .search-group {

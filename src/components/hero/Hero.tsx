@@ -49,14 +49,14 @@ export function Hero() {
               isInView ? "animate-fade-in delay-100" : "opacity-0"
             )}
           >
-            <h1 className="tracking-tight leading-[1.1] text-center font-bold">
+            <h1 className="tracking-tight leading-[1.1] text-center font-bold font-jakarta">
               <span 
                 className={cn(
                   "text-primary inline font-light", 
                   "text-3xl sm:text-4xl lg:text-5xl", 
                   "tracking-[-0.02em]", 
                   "bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black", 
-                  "block sm:inline-block mb-1 sm:mb-0"
+                  "block sm:inline-block mb-1 sm:mb-0 font-jakarta"
                 )}
               >
                 Property Content that
@@ -71,9 +71,10 @@ export function Hero() {
                   <span 
                     key={index} 
                     className={cn(
-                      "absolute font-playfair tracking-[-0.02em] bg-clip-text text-transparent", 
+                      "absolute font-jakarta tracking-[-0.02em] bg-clip-text text-transparent", 
                       "bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700 transition-all duration-500", 
                       "text-4xl sm:text-5xl lg:text-6xl",
+                      "font-bold",
                       titleIndex === index ? "opacity-100 transform-none" : "opacity-0 translate-y-8"
                     )} 
                   >
@@ -95,7 +96,8 @@ export function Hero() {
                 "px-2 sm:px-4", 
                 "[word-spacing:0.12em] sm:[word-spacing:0.16em]", 
                 "relative z-10", 
-                "mt-1 mb-0"
+                "mt-1 mb-0",
+                "font-inter"
               )}
             >
               Connect with expert content creators for your next project. Our AI-powered platform matches you with the perfect professional for your needs and budget.
