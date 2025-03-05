@@ -34,7 +34,7 @@ function AppContent() {
 
   return (
     <div className="App">
-      <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)}>
+      <ClerkProvider publishableKey={clerkPubKey}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
