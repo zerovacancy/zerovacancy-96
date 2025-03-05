@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
@@ -52,7 +53,7 @@ const PreviewSearch = () => {
             showRadialGradient={!isMobile}
           >
             <div className="flex flex-col w-full relative z-10">
-              <div className="text-center pt-3 sm:pt-5 md:pt-6 pb-0.5 sm:pb-1 md:pb-2 px-2 sm:px-3 md:px-4">
+              <div className="pt-3 sm:pt-5 md:pt-6 pb-0.5 sm:pb-1 md:pb-2 px-2 sm:px-3 md:px-4">
                 <h2 className="text-lg sm:text-xl md:text-3xl font-bold tracking-tight mb-1 sm:mb-1.5 md:mb-3 text-gray-900 leading-tight">
                   Find Your Perfect Creator
                 </h2>
