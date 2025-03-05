@@ -10,7 +10,7 @@ export const FeatureHeader = ({ title, description }: FeatureHeaderProps) => {
   return (
     <div className="text-center mb-8 sm:mb-10 lg:mb-12">
       <motion.h2 
-        className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 font-jakarta tracking-tight text-[#1F1F33]"
+        className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 font-jakarta tracking-tight text-brand-purple-dark"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -19,7 +19,7 @@ export const FeatureHeader = ({ title, description }: FeatureHeaderProps) => {
         {title}
       </motion.h2>
       <motion.p 
-        className="text-sm sm:text-base text-[#45455A] max-w-2xl mx-auto font-inter"
+        className="text-sm sm:text-base text-brand-text-primary max-w-2xl mx-auto font-inter"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}

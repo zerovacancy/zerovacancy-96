@@ -9,7 +9,7 @@ interface PricingFeaturesListProps {
 
 export const PricingFeaturesList = ({ features, colorAccent }: PricingFeaturesListProps) => {
   return (
-    <ul className="space-y-3 text-sm text-[#45455A]">
+    <ul className="space-y-3 text-sm text-brand-text-primary">
       {features.map((feature, index) => (
         <li key={feature} className="flex">
           <span className={cn("w-5 h-5 flex-shrink-0 mr-3", colorAccent)}>

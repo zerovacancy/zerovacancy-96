@@ -55,7 +55,7 @@ export function Hero() {
                   "text-primary inline font-light", 
                   "text-3xl sm:text-4xl lg:text-5xl", 
                   "tracking-[-0.02em]", 
-                  "text-[#2D1A66]", 
+                  "text-brand-purple-dark", 
                   "block sm:inline-block mb-1 sm:mb-0 font-jakarta"
                 )}
               >
@@ -89,7 +89,7 @@ export function Hero() {
                 "text-sm sm:text-base lg:text-lg", 
                 "leading-[1.5]", 
                 "tracking-wide", 
-                "text-[#45455A]", 
+                "text-brand-text-primary", 
                 "text-center", 
                 "max-w-[550px]", 
                 "mx-auto", 

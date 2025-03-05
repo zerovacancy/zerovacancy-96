@@ -30,12 +30,12 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
     <div className="flex items-center justify-between w-full">
       <div className="flex items-center">
         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1.5" />
-        <span className="text-sm font-medium text-metrics">{rating}</span>
-        <span className="text-xs text-caption ml-1">({reviews} reviews)</span>
+        <span className="text-sm font-medium text-brand-text-primary">{rating}</span>
+        <span className="text-xs text-brand-text-secondary ml-1">({reviews} reviews)</span>
       </div>
       {hourlyRate && (
-        <div className="text-xs text-caption">
-          Starting at <span className="text-price">${hourlyRate}/hr</span>
+        <div className="text-xs text-brand-text-secondary">
+          Starting at <span className="text-brand-purple-medium font-semibold">${hourlyRate}/hr</span>
         </div>
       )}
     </div>

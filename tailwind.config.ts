@@ -47,6 +47,13 @@ const config = {
           DEFAULT: "#F1F0FB",
           foreground: "#666666",
         },
+        // Brand color palette
+        'brand-purple-dark': '#2D1A66',
+        'brand-purple': '#6033E0',
+        'brand-text-primary': '#45455A',
+        'brand-text-secondary': '#5A5A72',
+        'brand-purple-medium': '#3B2C80',
+        'brand-text-light': '#6E6E87',
       },
       borderRadius: {
         lg: "var(--radius)",

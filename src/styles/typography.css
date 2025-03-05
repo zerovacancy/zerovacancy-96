@@ -3,99 +3,99 @@
 
 @layer base {
   h1 {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight font-jakarta text-[#2D1A66];
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight font-jakarta text-brand-purple-dark;
   }
 
   h2 {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight font-jakarta text-[#2D1A66];
+    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight font-jakarta text-brand-purple-dark;
   }
 
   h3 {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight font-jakarta text-[#3B2C80];
+    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight font-jakarta text-brand-purple-medium;
   }
 
   h4 {
-    @apply text-xl sm:text-2xl font-medium font-jakarta text-[#3B2C80];
+    @apply text-xl sm:text-2xl font-medium font-jakarta text-brand-purple-medium;
   }
 
   h5 {
-    @apply text-lg sm:text-xl font-medium font-jakarta text-[#2B2B42];
+    @apply text-lg sm:text-xl font-medium font-jakarta text-brand-purple-medium;
   }
 
   h6 {
-    @apply text-base sm:text-lg font-medium font-jakarta text-[#2B2B42];
+    @apply text-base sm:text-lg font-medium font-jakarta text-brand-purple-medium;
   }
 
   p {
-    @apply text-base leading-relaxed font-normal font-inter text-[#45455A];
+    @apply text-base leading-relaxed font-normal font-inter text-brand-text-primary;
   }
 
   a {
-    @apply text-[#5829D9] hover:text-[#7B4DFF] transition-colors duration-200;
+    @apply text-brand-purple hover:text-opacity-80 transition-colors duration-200;
   }
 
   strong, b {
-    @apply font-semibold text-[#3B2C80];
+    @apply font-semibold text-brand-purple-medium;
   }
 
   small {
-    @apply text-sm text-[#6E6E87];
+    @apply text-sm text-brand-text-light;
   }
 }
 
 @layer components {
   .section-title {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-center tracking-tight font-jakarta text-[#1F1F33];
+    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-center tracking-tight font-jakarta text-brand-purple-dark;
   }
 
   .section-subtitle {
-    @apply text-base sm:text-lg text-[#5A5A72] font-normal font-inter;
+    @apply text-base sm:text-lg text-brand-text-secondary font-normal font-inter;
   }
 
   .text-display {
-    @apply text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight font-jakarta text-[#2D1A66];
+    @apply text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight font-jakarta text-brand-purple-dark;
   }
 
   .text-heading {
-    @apply text-2xl sm:text-3xl font-semibold tracking-tight font-jakarta text-[#3B2C80];
+    @apply text-2xl sm:text-3xl font-semibold tracking-tight font-jakarta text-brand-purple-medium;
   }
 
   .text-title {
-    @apply text-xl font-medium font-jakarta text-[#2B2B42];
+    @apply text-xl font-medium font-jakarta text-brand-purple-medium;
   }
 
   .text-body {
-    @apply text-base font-normal leading-relaxed font-inter text-[#45455A];
+    @apply text-base font-normal leading-relaxed font-inter text-brand-text-primary;
   }
 
   .text-caption {
-    @apply text-sm font-normal text-[#5A5A72] font-inter;
+    @apply text-sm font-normal text-brand-text-secondary font-inter;
   }
 
   .text-small {
-    @apply text-xs font-medium font-space text-[#6E6E87];
+    @apply text-xs font-medium font-space text-brand-text-light;
   }
 
   /* Interactive text styles */
   .text-link {
-    @apply text-[#5829D9] hover:text-[#7B4DFF] transition-colors duration-200;
+    @apply text-brand-purple hover:text-opacity-80 transition-colors duration-200;
   }
 
   /* Special text elements */
   .text-price {
-    @apply text-[#212121] font-semibold;
+    @apply text-brand-purple-medium font-semibold;
   }
   
   .text-metrics {
-    @apply text-[#3D3D3D];
+    @apply text-brand-text-primary;
   }
   
   .text-tag {
-    @apply text-[#4E387C];
+    @apply text-brand-purple-medium;
   }
   
   /* Highlighted text within headers */
   .text-highlight {
-    @apply text-[#6033E0];
+    @apply text-brand-purple;
   }
 }
