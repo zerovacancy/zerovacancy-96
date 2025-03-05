@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/hero/Hero';
@@ -86,8 +87,7 @@ const Index = () => {
                 third: "bg-teal-200"
               }}
               blobOpacity={0.25}
-              pattern="grid"
-              dotOpacity={0.3}
+              pattern="none"
               baseColor="bg-white"
             >
               <div className="relative z-10">
@@ -105,8 +105,8 @@ const Index = () => {
                 second: "bg-indigo-200",
                 third: "bg-blue-200"
               }}
-              pattern="dots"
-              baseColor="bg-gray-50"
+              pattern="none"
+              baseColor="bg-white"
             >
               <div className="max-w-7xl mx-auto relative z-10">
                 <div className="text-center mb-8 sm:mb-10 px-4 sm:px-6 lg:px-8">
@@ -136,7 +136,7 @@ const Index = () => {
                 second: "bg-teal-200",
                 third: "bg-cyan-200"
               }}
-              pattern="dots"
+              pattern="none"
               dotOpacity={0.3}
               blobOpacity={0.2}
               baseColor="bg-white"
