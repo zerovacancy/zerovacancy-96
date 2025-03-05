@@ -1,31 +1,61 @@
-
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Index from './pages/Index';
-import PaymentConfirmation from './pages/PaymentConfirmation';
-import Terms from './pages/Terms';
 import Account from './pages/Account';
+import ConnectOnboarding from './pages/ConnectOnboarding';
 import ConnectSuccess from './pages/ConnectSuccess';
 import ConnectRefresh from './pages/ConnectRefresh';
-import ConnectOnboarding from './pages/ConnectOnboarding';
-import FontLoader from './components/FontLoader';
+import Auth from './pages/Auth';
+import PaymentConfirmation from './pages/PaymentConfirmation';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ThemeProvider } from "@/components/theme-provider"
+import {
+  useClerk,
+  ClerkProvider,
+} from "@clerk/clerk-react";
+import { BottomNav } from './components/navigation/BottomNav';
+import { useIsMobile } from '@/hooks/use-mobile';
+
+const clerkPubKey = "clerk.pub_2Z33J359oxBlDMYRwJmbbqj9czE"
 
 function App() {
+  const [isMounted, setIsMounted] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Prevent layout shift
+  if (!isMounted) {
+    return null
+  }
+
   return (
-    <Router>
-      <FontLoader />
-      <div className="min-h-screen flex flex-col w-full overflow-x-hidden overflow-y-auto touch-manipulation">
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/connect/success" element={<ConnectSuccess />} />
-          <Route path="/connect/refresh" element={<ConnectRefresh />} />
-          <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <ClerkProvider publishableKey={clerkPubKey} navigate={(to) => navigate(to)}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
+            <Route path="/connect/success" element={<ConnectSuccess />} />
+            <Route path="/connect/refresh" element={<ConnectRefresh />} />
+            <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
+          </Routes>
+        </ThemeProvider>
+      </ClerkProvider>
+      <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+    </div>
   );
 }
 

@@ -4,34 +4,59 @@ import { useToast } from "@/hooks/use-toast";
 import { PricingHeader } from "./pricing/PricingHeader";
 import { PricingCardList } from "./pricing/PricingCardList";
 import { PricingService } from "@/services/PricingService";
+import { supabase } from "@/integrations/supabase/client";
 
 export function Pricing() {
   const [subscription, setSubscription] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
   const { toast } = useToast();
+
+  // Check authentication state
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+    };
+    
+    checkUser();
+    
+    // Listen for auth state changes
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     const fetchSubscription = async () => {
       setIsLoading(true);
-      try {
-        const subscription = await PricingService.fetchSubscription();
-        if (subscription) {
-          setSubscription(subscription);
+      
+      // Only fetch subscription if user is logged in
+      if (user) {
+        try {
+          const subscription = await PricingService.fetchSubscription();
+          if (subscription) {
+            setSubscription(subscription);
+          }
+        } catch (error) {
+          console.error('Error fetching subscription:', error);
+          toast({
+            title: "Error",
+            description: "Failed to fetch subscription information",
+            variant: "destructive"
+          });
         }
-      } catch (error) {
-        console.error('Error fetching subscription:', error);
-        toast({
-          title: "Error",
-          description: "Failed to fetch subscription information",
-          variant: "destructive"
-        });
-      } finally {
-        setIsLoading(false);
       }
+      
+      setIsLoading(false);
     };
     
     fetchSubscription();
-  }, [toast]);
+  }, [toast, user]);
 
   const pricingCards = [
     {
