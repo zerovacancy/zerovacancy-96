@@ -67,7 +67,7 @@ const Index = () => {
 
         <div className="space-y-0 w-full">
           {/* How It Works Section - no longer includes Waves */}
-          <section id="how-it-works" className="relative py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full bg-white">
+          <section id="how-it-works" className="relative py-8 sm:py-16 lg:py-20 overflow-hidden border-t border-b border-gray-100 w-full">
             <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
               <HowItWorksSection />
