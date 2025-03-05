@@ -1,5 +1,12 @@
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
 
-createRoot(document.getElementById("root")!).render(<App />);
+import { createRoot } from 'react-dom/client';
+import { ErrorBoundary } from 'react-error-boundary';
+import App from './App.tsx';
+import './index.css';
+import ErrorFallback from './components/ErrorFallback.tsx';
+
+createRoot(document.getElementById("root")!).render(
+  <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <App />
+  </ErrorBoundary>
+);
