@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     rollupOptions: {
-      external: ['react-toastify'],
+      external: [],  // Empty array instead of specifying react-toastify
     }
   }
 }));

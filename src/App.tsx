@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ErrorBoundary } from 'react';
 import { Routes, Route, useNavigate, useLocation, BrowserRouter } from 'react-router-dom';
 import Index from './pages/Index';
 import Account from './pages/Account';
@@ -12,14 +12,17 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ErrorFallback } from '@/components/ErrorFallback';
 
-const clerkPubKey = "clerk.pub_2Z33J359oxBlDMYRwJmbbqj9czE"
+// Using an environment variable or a valid key is recommended
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || "pk_test_cmVndWxhci1jYXQtMjEuY2xlcmsuYWNjb3VudHMuZGV2JA"; // Using a test key for now
 
 function AppContent() {
   const [isMounted, setIsMounted] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const [authError, setAuthError] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -32,25 +35,33 @@ function AppContent() {
 
   return (
     <div className="App">
-      <ClerkProvider publishableKey={clerkPubKey}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        {authError ? (
+          // Fallback UI when Clerk fails
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
-            <Route path="/connect/success" element={<ConnectSuccess />} />
-            <Route path="/connect/refresh" element={<ConnectRefresh />} />
-            <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
+            <Route path="*" element={<Index />} />
           </Routes>
-          <Toaster />
-        </ThemeProvider>
-      </ClerkProvider>
+        ) : (
+          <ClerkProvider publishableKey={clerkPubKey} 
+                         onError={() => setAuthError(true)}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
+              <Route path="/connect/success" element={<ConnectSuccess />} />
+              <Route path="/connect/refresh" element={<ConnectRefresh />} />
+              <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
+            </Routes>
+          </ClerkProvider>
+        )}
+        <Toaster />
+      </ThemeProvider>
     </div>
   );
 }
@@ -58,7 +69,11 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <React.Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <AppContent />
+        </ErrorBoundary>
+      </React.Suspense>
     </BrowserRouter>
   );
 }
