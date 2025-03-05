@@ -88,13 +88,8 @@ const Index = () => {
             <FeaturesSectionWithHoverEffects />
           </section>
 
-          {/* Pricing Section */}
-          <div id="pricing" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-white border-b border-gray-100 w-full">
-            <Spotlight className="from-indigo-500/20 via-purple-500/20 to-pink-500/20" size={350} />
-            <div className="relative z-10 max-w-7xl mx-auto">
-              <Pricing />
-            </div>
-          </div>
+          {/* Pricing Section - Removed the wrapping div */}
+          <Pricing />
 
           {/* Final CTA Section */}
           <div className="relative py-14 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7] w-full">
