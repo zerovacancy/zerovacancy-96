@@ -85,14 +85,6 @@ const Index = () => {
             {/* Search Section */}
             <section id="find-creators" className="relative w-full">
               <div className="max-w-7xl mx-auto relative z-10 py-10 sm:py-16 lg:py-20">
-                <div className="text-center mb-8 sm:mb-10 px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
-                    Find Your Perfect Creator
-                  </h2>
-                  <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-600 font-inter">
-                    Connect with skilled professionals who can showcase your property in its best light
-                  </p>
-                </div>
                 <PreviewSearch />
               </div>
             </section>

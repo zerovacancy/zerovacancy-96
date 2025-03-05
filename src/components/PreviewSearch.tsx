@@ -62,6 +62,15 @@ const PreviewSearch = () => {
             spotlightClassName="from-purple-500/10 via-indigo-500/10 to-blue-500/10"
           >
             <div className="flex flex-col w-full relative z-10">
+              <div className="text-left pt-6 sm:pt-8 pb-4 sm:pb-5 px-4 sm:px-6 lg:px-8">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
+                  Find Your Perfect Creator
+                </h2>
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-2xl">
+                  Connect with skilled professionals who can showcase your property in its best light
+                </p>
+              </div>
+            
               <div className="w-full px-2 sm:px-3 md:px-6 py-2 sm:py-3 md:py-5">
                 <SearchBar onLocationSelect={() => {}} />
               </div>
