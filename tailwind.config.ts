@@ -94,6 +94,20 @@ const config = {
         "border-beam": {
           "0%": { "--offset-distance": "0%" },
           "100%": { "--offset-distance": "100%" }
+        },
+        "blob": {
+          "0%": {
+            transform: "translate(0px, 0px) scale(1)",
+          },
+          "33%": {
+            transform: "translate(30px, -50px) scale(1.1)",
+          },
+          "66%": {
+            transform: "translate(-20px, 20px) scale(0.9)",
+          },
+          "100%": {
+            transform: "translate(0px, 0px) scale(1)",
+          },
         }
       },
       animation: {
@@ -101,14 +115,28 @@ const config = {
         "fade-in": "fade-in 0.3s ease-out",
         "shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
-        "border-beam": "border-beam var(--duration) infinite linear"
+        "border-beam": "border-beam var(--duration) infinite linear",
+        "blob": "blob 25s infinite"
       },
       backgroundImage: {
         'gradient-conic': 'conic-gradient(var(--conic-position), var(--tw-gradient-stops))',
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function({ addUtilities }: { addUtilities: Function }) {
+      const newUtilities = {
+        '.animation-delay-2000': {
+          'animation-delay': '2s',
+        },
+        '.animation-delay-4000': {
+          'animation-delay': '4s',
+        },
+      };
+      addUtilities(newUtilities);
+    },
+  ],
 } satisfies Config;
 
 export default config;

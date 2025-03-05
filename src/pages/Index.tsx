@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/hero/Hero';
@@ -17,6 +18,7 @@ import { Waves } from '@/components/ui/waves';
 import PreviewSearch from '@/components/PreviewSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
+import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 
 /**
  * Main landing page component with performance optimizations
@@ -68,13 +70,21 @@ const Index = () => {
             </div>
           </section>
           
-          {/* Search Section - As its own completely separate section */}
-          <section id="find-creators" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-gray-50 border-t border-b border-gray-100 w-full">
-            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30 py-px"></div>
-            <OptimizedSpotlight className="from-purple-500/20 via-indigo-500/20 to-blue-500/20" size={350} />
-            <div className="relative z-10 max-w-7xl mx-auto">
-              <PreviewSearch />
-            </div>
+          {/* Search Section - With new GradientBlobBackground */}
+          <section id="find-creators" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden w-full border-t border-b border-gray-100">
+            <GradientBlobBackground className="min-h-[600px] md:min-h-[700px] py-10">
+              <div className="max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-8 sm:mb-10 px-4 sm:px-6 lg:px-8">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
+                    Find Your Perfect Creator
+                  </h2>
+                  <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-600 font-inter">
+                    Connect with skilled professionals who can showcase your property in its best light
+                  </p>
+                </div>
+                <PreviewSearch />
+              </div>
+            </GradientBlobBackground>
           </section>
           
           {/* Professional Content Creation Services */}
