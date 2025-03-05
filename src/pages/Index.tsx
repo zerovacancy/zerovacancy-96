@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/hero/Hero';
@@ -35,10 +36,13 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
+  
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
-  return <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
+  
+  return (
+    <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       <Header />
       {showBanner && <div className="relative">
           <Banner variant="purple" size="lg" action={<Button variant="secondary" size="sm" className={cn("flex text-xs sm:text-sm items-center whitespace-nowrap", isMobile ? "px-2 py-1.5 min-w-[7rem] min-h-[2rem]" : "px-3 py-2 sm:px-5 sm:py-2.5 min-w-[8rem] sm:min-w-[9rem] min-h-[2.25rem] sm:min-h-[2.5rem]", "bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold", "border-2 border-amber-300", "transition-all duration-200", "touch-manipulation", "shadow-[0_2px_10px_rgba(0,0,0,0.15)]")} onClick={handleTryNowClick}>
@@ -55,23 +59,56 @@ const Index = () => {
 
       <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
         {/* Hero Section */}
-        <div className="relative overflow-hidden">
-          <OptimizedSpotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
+        <GradientBlobBackground 
+          className="py-0 sm:py-0"
+          withSpotlight={true}
+          spotlightClassName="from-purple-500/20 via-violet-500/20 to-blue-500/20"
+          blobColors={{
+            first: "bg-purple-200",
+            second: "bg-indigo-200",
+            third: "bg-violet-200"
+          }}
+          baseColor="bg-white"
+          pattern="none"
+        >
           <Hero />
-        </div>
+        </GradientBlobBackground>
 
         <div className="space-y-0 w-full">
-          {/* How It Works Section - Using optimized component */}
-          <section id="how-it-works" className="relative overflow-hidden border-t border-b border-gray-100 w-full">
-            <OptimizedSpotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
-            <div className="relative z-10">
-              <OptimizedHowItWorks />
-            </div>
+          {/* How It Works Section */}
+          <section id="how-it-works" className="relative w-full">
+            <GradientBlobBackground
+              className="py-0 sm:py-0 border-t border-b border-gray-100"
+              withSpotlight={true}
+              spotlightClassName="from-blue-500/20 via-cyan-500/20 to-teal-500/20"
+              blobColors={{
+                first: "bg-blue-200",
+                second: "bg-cyan-200",
+                third: "bg-teal-200"
+              }}
+              blobOpacity={0.25}
+              pattern="grid"
+              dotOpacity={0.3}
+              baseColor="bg-white"
+            >
+              <div className="relative z-10">
+                <OptimizedHowItWorks />
+              </div>
+            </GradientBlobBackground>
           </section>
           
-          {/* Search Section - With new GradientBlobBackground */}
-          <section id="find-creators" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden w-full border-t border-b border-gray-100">
-            <GradientBlobBackground className="min-h-[600px] md:min-h-[700px] py-10">
+          {/* Search Section */}
+          <section id="find-creators" className="relative w-full border-t border-b border-gray-100">
+            <GradientBlobBackground
+              className="min-h-[600px] md:min-h-[700px] py-10 sm:py-16 lg:py-20"
+              blobColors={{
+                first: "bg-purple-200",
+                second: "bg-indigo-200",
+                third: "bg-blue-200"
+              }}
+              pattern="dots"
+              baseColor="bg-gray-50"
+            >
               <div className="max-w-7xl mx-auto relative z-10">
                 <div className="text-center mb-8 sm:mb-10 px-4 sm:px-6 lg:px-8">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
@@ -87,19 +124,60 @@ const Index = () => {
           </section>
           
           {/* Professional Content Creation Services */}
-          <section className="py-10 sm:py-16 lg:py-20 border-t border-b border-gray-100 w-full bg-white">
-            <FeaturesSectionWithHoverEffects />
+          <section className="w-full border-t border-b border-gray-100">
+            <GradientBlobBackground
+              className="py-10 sm:py-16 lg:py-20"
+              blobColors={{
+                first: "bg-indigo-200",
+                second: "bg-purple-200",
+                third: "bg-pink-200"
+              }}
+              pattern="grid"
+              dotOpacity={0.2}
+              blobOpacity={0.2}
+              baseColor="bg-white"
+            >
+              <FeaturesSectionWithHoverEffects />
+            </GradientBlobBackground>
           </section>
 
           {/* Pricing Section */}
-          <Pricing />
+          <section className="w-full border-t border-b border-gray-100">
+            <GradientBlobBackground
+              className="py-12 sm:py-20 lg:py-24"
+              blobColors={{
+                first: "bg-emerald-200",
+                second: "bg-teal-200",
+                third: "bg-cyan-200"
+              }}
+              pattern="dots"
+              dotOpacity={0.3}
+              blobOpacity={0.2}
+              baseColor="bg-white"
+            >
+              <Pricing />
+            </GradientBlobBackground>
+          </section>
 
           {/* Final CTA Section */}
-          <div className="relative py-14 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7] w-full">
-            <OptimizedSpotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
-            <div className="relative z-10 max-w-7xl mx-auto">
-              <CallToActionSection />
-            </div>
+          <div className="relative w-full">
+            <GradientBlobBackground
+              className="py-14 sm:py-20 lg:py-24"
+              withSpotlight={true}
+              spotlightClassName="from-purple-500/20 via-pink-500/20 to-red-500/20"
+              blobColors={{
+                first: "bg-purple-200",
+                second: "bg-pink-200",
+                third: "bg-red-200"
+              }}
+              blobOpacity={0.25}
+              pattern="none"
+              baseColor="bg-gradient-to-b from-white to-[#F6F6F7]"
+            >
+              <div className="relative z-10 max-w-7xl mx-auto">
+                <CallToActionSection />
+              </div>
+            </GradientBlobBackground>
           </div>
         </div>
 
@@ -107,6 +185,7 @@ const Index = () => {
       </main>
       <BottomNav />
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
-    </div>;
+    </div>
+  );
 };
 export default Index;

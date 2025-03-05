@@ -115,6 +115,17 @@ const config = {
           "100%": {
             transform: "translate(0px, 0px) scale(1)",
           },
+        },
+        "float": {
+          "0%": {
+            transform: "translateY(0px)",
+          },
+          "50%": {
+            transform: "translateY(-20px)",
+          },
+          "100%": {
+            transform: "translateY(0px)",
+          }
         }
       },
       animation: {
@@ -123,7 +134,8 @@ const config = {
         "shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
         "border-beam": "border-beam var(--duration) infinite linear",
-        "blob": "blob 25s infinite"
+        "blob": "blob 25s infinite",
+        "float": "float 6s ease-in-out infinite"
       },
       backgroundImage: {
         'gradient-conic': 'conic-gradient(var(--conic-position), var(--tw-gradient-stops))',
@@ -137,8 +149,14 @@ const config = {
         '.animation-delay-2000': {
           'animation-delay': '2s',
         },
+        '.animation-delay-3000': {
+          'animation-delay': '3s',
+        },
         '.animation-delay-4000': {
           'animation-delay': '4s',
+        },
+        '.animation-delay-5000': {
+          'animation-delay': '5s',
         },
       };
       addUtilities(newUtilities);
