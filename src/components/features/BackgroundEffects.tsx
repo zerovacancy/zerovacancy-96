@@ -17,7 +17,8 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({ className,
         third: 'bg-blue-200'
       }}
       blobOpacity={0.3}
-      pattern="dots"
+      pattern="none"
+      baseColor="bg-white"
     >
       {children}
     </GradientBlobBackground>
