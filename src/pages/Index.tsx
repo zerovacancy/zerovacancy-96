@@ -16,6 +16,7 @@ import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
 import PreviewSearch from '@/components/PreviewSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
 
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
