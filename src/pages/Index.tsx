@@ -1,15 +1,16 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import { Hero } from '../components/Hero';
+import { Hero } from '../components/hero/Hero';
 import CallToActionSection from '../components/CallToActionSection';
 import Footer from '../components/Footer';
-import HowItWorksSection from '../components/HowItWorksSection';
+import OptimizedHowItWorks from '../components/how-it-works/OptimizedHowItWorks';
 import { BottomNav } from '../components/navigation/BottomNav';
 import { Banner } from '@/components/ui/banner';
 import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
-import { Spotlight } from '@/components/ui/spotlight';
+import { OptimizedSpotlight } from '@/components/ui/optimized-spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
@@ -17,10 +18,16 @@ import { Waves } from '@/components/ui/waves';
 import PreviewSearch from '@/components/PreviewSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
+
+/**
+ * Main landing page component with performance optimizations
+ */
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
   const isMobile = useIsMobile();
+
+  // Initialize local storage and dialog state
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
     setShowGlowDialog(!hasVisited);
@@ -28,9 +35,11 @@ const Index = () => {
       localStorage.setItem('hasVisited', 'true');
     }
   }, []);
+
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
+
   return <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       <Header />
       {showBanner && <div className="relative">
@@ -49,39 +58,39 @@ const Index = () => {
       <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
         {/* Hero Section */}
         <div className="relative overflow-hidden">
-          <Spotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
+          <OptimizedSpotlight className="from-purple-500/20 via-violet-500/20 to-blue-500/20" size={400} />
           <Hero />
         </div>
 
         <div className="space-y-0 w-full">
-          {/* How It Works Section - no longer includes Waves */}
-          <section id="how-it-works" className="relative py-8 sm:py-16 overflow-hidden border-t border-b border-gray-100 w-full lg:py-[78px]">
-            <Spotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
+          {/* How It Works Section - Using optimized component */}
+          <section id="how-it-works" className="relative overflow-hidden border-t border-b border-gray-100 w-full">
+            <OptimizedSpotlight className="from-blue-500/20 via-cyan-500/20 to-teal-500/20" size={350} />
             <div className="relative z-10">
-              <HowItWorksSection />
+              <OptimizedHowItWorks />
             </div>
           </section>
           
           {/* Search Section - As its own completely separate section */}
           <section id="find-creators" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-gray-50 border-t border-b border-gray-100 w-full">
             <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
-            <Spotlight className="from-purple-500/20 via-indigo-500/20 to-blue-500/20" size={350} />
+            <OptimizedSpotlight className="from-purple-500/20 via-indigo-500/20 to-blue-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <PreviewSearch />
             </div>
           </section>
           
-          {/* Professional Content Creation Services - removed background div */}
+          {/* Professional Content Creation Services */}
           <section className="py-10 sm:py-16 lg:py-20 border-t border-b border-gray-100 w-full bg-white">
             <FeaturesSectionWithHoverEffects />
           </section>
 
-          {/* Pricing Section - Removed the wrapping div */}
+          {/* Pricing Section */}
           <Pricing />
 
           {/* Final CTA Section */}
           <div className="relative py-14 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-white to-[#F6F6F7] w-full">
-            <Spotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
+            <OptimizedSpotlight className="from-purple-500/20 via-pink-500/20 to-red-500/20" size={350} />
             <div className="relative z-10 max-w-7xl mx-auto">
               <CallToActionSection />
             </div>
@@ -94,4 +103,5 @@ const Index = () => {
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
     </div>;
 };
+
 export default Index;
