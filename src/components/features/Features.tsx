@@ -7,8 +7,6 @@ import { BackgroundEffects } from "./BackgroundEffects";
 export function FeaturesSectionWithHoverEffects() {
   return (
     <section className="relative py-8 sm:py-12 lg:py-16 px-2 sm:px-4 lg:px-6 overflow-hidden">
-      <BackgroundEffects className="absolute inset-0" />
-
       <div className="max-w-6xl mx-auto relative z-10">
         <FeatureHeader 
           title="Professional Content Creation Services"

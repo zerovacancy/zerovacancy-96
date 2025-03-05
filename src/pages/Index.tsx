@@ -58,9 +58,8 @@ const Index = () => {
         </div>}
 
       <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
-        {/* Hero Section */}
         <GradientBlobBackground 
-          className="py-0 sm:py-0"
+          className="py-0"
           withSpotlight={true}
           spotlightClassName="from-purple-500/20 via-violet-500/20 to-blue-500/20"
           blobColors={{
@@ -71,44 +70,20 @@ const Index = () => {
           baseColor="bg-white"
           pattern="none"
         >
-          <Hero />
-        </GradientBlobBackground>
-
-        <div className="space-y-0 w-full">
-          {/* How It Works Section */}
-          <section id="how-it-works" className="relative w-full">
-            <GradientBlobBackground
-              className="py-0 sm:py-0 border-t border-b border-gray-100"
-              withSpotlight={true}
-              spotlightClassName="from-blue-500/20 via-cyan-500/20 to-teal-500/20"
-              blobColors={{
-                first: "bg-blue-200",
-                second: "bg-cyan-200",
-                third: "bg-teal-200"
-              }}
-              blobOpacity={0.25}
-              pattern="none"
-              baseColor="bg-white"
-            >
+          <div className="space-y-0 w-full">
+            {/* Hero Section */}
+            <Hero />
+            
+            {/* How It Works Section */}
+            <section id="how-it-works" className="relative w-full">
               <div className="relative z-10">
                 <OptimizedHowItWorks />
               </div>
-            </GradientBlobBackground>
-          </section>
-          
-          {/* Search Section */}
-          <section id="find-creators" className="relative w-full border-t border-b border-gray-100">
-            <GradientBlobBackground
-              className="min-h-[600px] md:min-h-[700px] py-10 sm:py-16 lg:py-20"
-              blobColors={{
-                first: "bg-purple-200",
-                second: "bg-indigo-200",
-                third: "bg-blue-200"
-              }}
-              pattern="none"
-              baseColor="bg-white"
-            >
-              <div className="max-w-7xl mx-auto relative z-10">
+            </section>
+            
+            {/* Search Section */}
+            <section id="find-creators" className="relative w-full">
+              <div className="max-w-7xl mx-auto relative z-10 py-10 sm:py-16 lg:py-20">
                 <div className="text-center mb-8 sm:mb-10 px-4 sm:px-6 lg:px-8">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
                     Find Your Perfect Creator
@@ -119,55 +94,28 @@ const Index = () => {
                 </div>
                 <PreviewSearch />
               </div>
-            </GradientBlobBackground>
-          </section>
-          
-          {/* Professional Content Creation Services */}
-          <section className="w-full border-t border-b border-gray-100">
-            <FeaturesSectionWithHoverEffects />
-          </section>
+            </section>
+            
+            {/* Professional Content Creation Services */}
+            <section className="w-full">
+              <FeaturesSectionWithHoverEffects />
+            </section>
 
-          {/* Pricing Section */}
-          <section className="w-full border-t border-b border-gray-100">
-            <GradientBlobBackground
-              className="py-12 sm:py-20 lg:py-24"
-              blobColors={{
-                first: "bg-emerald-200",
-                second: "bg-teal-200",
-                third: "bg-cyan-200"
-              }}
-              pattern="none"
-              dotOpacity={0.3}
-              blobOpacity={0.2}
-              baseColor="bg-white"
-            >
+            {/* Pricing Section */}
+            <section className="w-full">
               <Pricing />
-            </GradientBlobBackground>
-          </section>
+            </section>
 
-          {/* Final CTA Section */}
-          <div className="relative w-full">
-            <GradientBlobBackground
-              className="py-14 sm:py-20 lg:py-24"
-              withSpotlight={true}
-              spotlightClassName="from-purple-500/20 via-pink-500/20 to-red-500/20"
-              blobColors={{
-                first: "bg-purple-200",
-                second: "bg-pink-200",
-                third: "bg-red-200"
-              }}
-              blobOpacity={0.25}
-              pattern="none"
-              baseColor="bg-gradient-to-b from-white to-[#F6F6F7]"
-            >
-              <div className="relative z-10 max-w-7xl mx-auto">
+            {/* Final CTA Section */}
+            <div className="relative w-full">
+              <div className="relative z-10 max-w-7xl mx-auto py-14 sm:py-20 lg:py-24">
                 <CallToActionSection />
               </div>
-            </GradientBlobBackground>
+            </div>
           </div>
-        </div>
-
-        <Footer />
+          
+          <Footer />
+        </GradientBlobBackground>
       </main>
       <BottomNav />
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />

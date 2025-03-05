@@ -3,41 +3,26 @@ import React from 'react';
 import { ShimmerButton } from './ui/shimmer-button';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 
 const CallToActionSection = () => {
   return (
-    <GradientBlobBackground
-      className="py-10 sm:py-12 lg:py-20"
-      baseColor="bg-white"
-      pattern="none"
-      blobColors={{
-        first: "bg-purple-200",
-        second: "bg-pink-200",
-        third: "bg-red-200"
-      }}
-      blobOpacity={0.25}
-      withSpotlight={true}
-      spotlightClassName="from-purple-500/20 via-pink-500/20 to-red-500/20"
-    >
-      <div className="mx-auto max-w-4xl text-center relative z-10 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-brand-purple-dark">
-          Elevate Your Real Estate Marketing Today
-        </h2>
-        <p className="text-brand-text-primary max-w-2xl mx-auto mb-8 sm:mb-10 text-sm sm:text-base lg:text-lg">
-          Join thousands of property managers and content creators who trust Luxe Content Connect for their marketing needs
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <ShimmerButton variant="primary" className="w-full sm:w-auto min-w-[180px]">
-            <span>Join Waitlist</span>
-            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
-          </ShimmerButton>
-          <ShimmerButton variant="tertiary" className="w-full sm:w-auto min-w-[160px]">
-            <span>Learn More</span>
-          </ShimmerButton>
-        </div>
+    <div className="mx-auto max-w-4xl text-center relative z-10 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-brand-purple-dark">
+        Elevate Your Real Estate Marketing Today
+      </h2>
+      <p className="text-brand-text-primary max-w-2xl mx-auto mb-8 sm:mb-10 text-sm sm:text-base lg:text-lg">
+        Join thousands of property managers and content creators who trust Luxe Content Connect for their marketing needs
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <ShimmerButton variant="primary" className="w-full sm:w-auto min-w-[180px]">
+          <span>Join Waitlist</span>
+          <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
+        </ShimmerButton>
+        <ShimmerButton variant="tertiary" className="w-full sm:w-auto min-w-[160px]">
+          <span>Learn More</span>
+        </ShimmerButton>
       </div>
-    </GradientBlobBackground>
+    </div>
   );
 };
 
