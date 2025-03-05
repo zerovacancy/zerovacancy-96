@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconChevronDown } from "@tabler/icons-react";
@@ -7,11 +6,7 @@ import { ArrowRight, Check, Sparkles } from 'lucide-react';
 import { ShimmerButton } from "../ui/shimmer-button";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { loadStripe } from "@stripe/stripe-js";
-
-// Initialize Stripe
-const stripePromise = loadStripe('pk_live_51QtulpAIAL4hcfkS0KfdqCUoUQtz3eDphv2xibo0oIyQGTmtFnSWgTMGghDsj4J5Ff6htMYmGi2iWZmKDDvgJQM700gD6Qtd7Z');
+import { PricingService } from "@/services/PricingService";
 
 export const colorVariants = {
   blue: {
@@ -92,91 +87,29 @@ export const PricingCard = ({
     setIsProcessing(true);
     
     try {
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
-      if (userError || !user) {
-        toast({
-          title: "Authentication required",
-          description: "Please sign in to continue with your subscription",
-          variant: "destructive"
-        });
-        setIsProcessing(false);
-        return;
-      }
-
       // If user already has an active subscription
       if (isSubscriptionActive && !isCurrentPlan) {
         // This is a plan change
-        const response = await supabase.functions.invoke('create-subscription', {
-          body: {
-            packageName: title,
-            userId: user.id,
-            isUpgrade: true,
-            currentSubscriptionId: subscription?.stripe_subscription_id
-          }
-        });
-        
-        if (response.error) {
-          throw new Error(response.error.message || 'Failed to update subscription');
-        }
-        
-        const { clientSecret, subscriptionId } = response.data;
+        const { clientSecret } = await PricingService.createOrUpdateSubscription(
+          title, 
+          true, 
+          subscription?.stripe_subscription_id
+        );
         
         if (!clientSecret) {
           throw new Error('Failed to create subscription update');
         }
 
-        // Load Stripe
-        const stripe = await stripePromise;
-        if (!stripe) throw new Error('Stripe failed to initialize');
-
-        // Confirm payment with setup intent for subscription update
-        const { error: stripeError } = await stripe.confirmPayment({
-          elements: undefined,
-          clientSecret,
-          confirmParams: {
-            return_url: `${window.location.origin}/payment-confirmation`
-          }
-        });
-        
-        if (stripeError) {
-          throw new Error(stripeError.message || 'Payment confirmation failed');
-        }
+        await PricingService.processPayment(clientSecret);
       } else {
         // Create new subscription
-        const response = await supabase.functions.invoke('create-subscription', {
-          body: {
-            packageName: title,
-            userId: user.id
-          }
-        });
-        
-        if (response.error) {
-          throw new Error(response.error.message || 'Failed to create subscription');
-        }
-        
-        const { clientSecret } = response.data;
+        const { clientSecret } = await PricingService.createOrUpdateSubscription(title);
         
         if (!clientSecret) {
           throw new Error('Failed to create subscription');
         }
 
-        // Load Stripe
-        const stripe = await stripePromise;
-        if (!stripe) throw new Error('Stripe failed to initialize');
-
-        // Confirm payment
-        const { error: stripeError } = await stripe.confirmPayment({
-          elements: undefined,
-          clientSecret,
-          confirmParams: {
-            return_url: `${window.location.origin}/payment-confirmation`
-          }
-        });
-        
-        if (stripeError) {
-          throw new Error(stripeError.message || 'Payment confirmation failed');
-        }
+        await PricingService.processPayment(clientSecret);
       }
     } catch (error) {
       console.error('Subscription error:', error);

@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { PricingHeader } from "./pricing/PricingHeader";
 import { PricingCardList } from "./pricing/PricingCardList";
+import { PricingService } from "@/services/PricingService";
 
 export function Pricing() {
   const [subscription, setSubscription] = useState<any>(null);
@@ -15,19 +14,9 @@ export function Pricing() {
     const fetchSubscription = async () => {
       setIsLoading(true);
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          const { data: subs, error } = await supabase
-            .from('customer_subscriptions')
-            .select('*')
-            .eq('user_id', user.id)
-            .order('created_at', { ascending: false })
-            .limit(1);
-            
-          if (error) throw error;
-          if (subs && subs.length > 0) {
-            setSubscription(subs[0]);
-          }
+        const subscription = await PricingService.fetchSubscription();
+        if (subscription) {
+          setSubscription(subscription);
         }
       } catch (error) {
         console.error('Error fetching subscription:', error);
