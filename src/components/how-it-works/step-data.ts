@@ -6,7 +6,7 @@ import React from 'react';
 // Define step data to avoid repetition
 export const steps: Step[] = [
   {
-    icon: <Search className="w-5 h-5" />,
+    icon: React.createElement(Search, { className: "w-5 h-5" }),
     title: "Search & Filter",
     description: "Find your perfect creator match based on your specific needs and requirements",
     number: "01",
@@ -15,7 +15,7 @@ export const steps: Step[] = [
     borderClass: "border-violet-100"
   },
   {
-    icon: <Users className="w-5 h-5" />,
+    icon: React.createElement(Users, { className: "w-5 h-5" }),
     title: "Review & Compare",
     description: "Browse portfolios and reviews to find the perfect match for your project",
     number: "02",
@@ -24,7 +24,7 @@ export const steps: Step[] = [
     borderClass: "border-blue-100"
   },
   {
-    icon: <Calendar className="w-5 h-5" />,
+    icon: React.createElement(Calendar, { className: "w-5 h-5" }),
     title: "Book & Pay",
     description: "Schedule securely through our platform with protected payments",
     number: "03",
@@ -33,7 +33,7 @@ export const steps: Step[] = [
     borderClass: "border-amber-100"
   },
   {
-    icon: <FileCheck className="w-5 h-5" />,
+    icon: React.createElement(FileCheck, { className: "w-5 h-5" }),
     title: "Get Content",
     description: "Receive and approve your deliverables through our streamlined process",
     number: "04",
