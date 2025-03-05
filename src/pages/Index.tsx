@@ -10,7 +10,6 @@ import { Banner } from '@/components/ui/banner';
 import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import { GlowDialog } from '@/components/ui/glow-dialog';
-import { OptimizedSpotlight } from '@/components/ui/optimized-spotlight';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/features/Features';
 import Pricing from '@/components/Pricing';
@@ -18,7 +17,7 @@ import { Waves } from '@/components/ui/waves';
 import PreviewSearch from '@/components/PreviewSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
-import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
+import { BackgroundEffects } from '@/components/features/BackgroundEffects';
 
 /**
  * Main landing page component with performance optimizations
@@ -58,17 +57,17 @@ const Index = () => {
         </div>}
 
       <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
-        <GradientBlobBackground 
-          className="py-0"
-          withSpotlight={true}
-          spotlightClassName="from-purple-500/20 via-violet-500/20 to-blue-500/20"
+        <BackgroundEffects 
           blobColors={{
             first: "bg-purple-200",
             second: "bg-indigo-200",
             third: "bg-violet-200"
           }}
+          withSpotlight={true}
+          spotlightClassName="from-purple-500/20 via-violet-500/20 to-blue-500/20"
           baseColor="bg-white"
           pattern="none"
+          className="py-0"
         >
           <div className="space-y-0 w-full">
             {/* Hero Section */}
@@ -115,7 +114,7 @@ const Index = () => {
           </div>
           
           <Footer />
-        </GradientBlobBackground>
+        </BackgroundEffects>
       </main>
       <BottomNav />
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
