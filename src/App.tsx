@@ -28,7 +28,7 @@ function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Router>
-        <main className="relative">
+        <main className="relative scroll-container-optimized">
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />

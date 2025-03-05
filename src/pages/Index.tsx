@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/hero/Hero';
 import CallToActionSection from '../components/CallToActionSection';
@@ -26,6 +25,7 @@ const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
   const isMobile = useIsMobile();
+  const sectionsRef = useRef<(HTMLElement | null)[]>([]);
 
   // Initialize local storage and dialog state
   useEffect(() => {
@@ -36,12 +36,47 @@ const Index = () => {
     }
   }, []);
   
+  // Use Intersection Observer to optimize rendering of sections
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    
+    sectionsRef.current.forEach((section, index) => {
+      if (!section) return;
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('content-visible');
+              // Don't disconnect - keep monitoring for scroll in/out
+            } else {
+              entry.target.classList.remove('content-visible');
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '100px' }
+      );
+      
+      observer.observe(section);
+      observers.push(observer);
+    });
+    
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+  
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
   };
   
+  // Helper function to add section refs
+  const addSectionRef = (index: number) => (el: HTMLElement | null) => {
+    sectionsRef.current[index] = el;
+  };
+  
   return (
-    <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
+    <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden scroll-container-optimized overscroll-none">
       <Header />
       {showBanner && <div className="relative">
           <Banner variant="purple" size="lg" action={<Button variant="secondary" size="sm" className={cn("flex text-xs sm:text-sm items-center whitespace-nowrap", isMobile ? "px-2 py-1.5 min-w-[7rem] min-h-[2rem]" : "px-3 py-2 sm:px-5 sm:py-2.5 min-w-[8rem] sm:min-w-[9rem] min-h-[2.25rem] sm:min-h-[2.5rem]", "bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold", "border-2 border-amber-300", "transition-all duration-200", "touch-manipulation", "shadow-[0_2px_10px_rgba(0,0,0,0.15)]")} onClick={handleTryNowClick}>
@@ -56,7 +91,7 @@ const Index = () => {
           </Banner>
         </div>}
 
-      <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden">
+      <main className="flex-1 pb-16 sm:pb-0 w-full overflow-x-hidden optimize-scroll">
         <BackgroundEffects 
           blobColors={{
             first: "bg-purple-100",
@@ -71,36 +106,38 @@ const Index = () => {
           className="py-0"
           animationSpeed="slow"
         >
-          <div className="space-y-0 w-full">
+          <div className="space-y-0 w-full will-change-transform">
             {/* Hero Section */}
-            <Hero />
+            <section ref={addSectionRef(0)} className="content-visible w-full">
+              <Hero />
+            </section>
             
             {/* How It Works Section */}
-            <section id="how-it-works" className="relative w-full">
+            <section ref={addSectionRef(1)} id="how-it-works" className="relative w-full content-hidden">
               <div className="relative z-10">
                 <OptimizedHowItWorks />
               </div>
             </section>
             
             {/* Search Section */}
-            <section id="find-creators" className="relative w-full">
+            <section ref={addSectionRef(2)} id="find-creators" className="relative w-full content-hidden">
               <div className="max-w-7xl mx-auto relative z-10 py-10 sm:py-16 lg:py-20">
                 <PreviewSearch />
               </div>
             </section>
             
             {/* Professional Content Creation Services */}
-            <section className="w-full">
+            <section ref={addSectionRef(3)} className="w-full content-hidden">
               <FeaturesSectionWithHoverEffects />
             </section>
 
             {/* Pricing Section */}
-            <section className="w-full">
+            <section ref={addSectionRef(4)} className="w-full content-hidden">
               <Pricing />
             </section>
 
             {/* Final CTA Section */}
-            <div className="relative w-full">
+            <div ref={addSectionRef(5)} className="relative w-full content-hidden">
               <div className="relative z-10 max-w-7xl mx-auto py-14 sm:py-20 lg:py-24">
                 <CallToActionSection />
               </div>

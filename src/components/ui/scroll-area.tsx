@@ -14,12 +14,16 @@ const ScrollArea = React.forwardRef<
     {...props}
   >
     <ScrollAreaPrimitive.Viewport 
-      className="h-full w-full rounded-[inherit] promote-layer" 
+      className="h-full w-full rounded-[inherit] promote-layer scroll-container-optimized" 
       style={{
-        transform: 'translateZ(0)',
+        transform: 'translate3d(0, 0, 0)',
         backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
         WebkitOverflowScrolling: 'touch',
-        overscrollBehavior: 'contain'
+        overscrollBehavior: 'contain',
+        WebkitTransformStyle: 'preserve-3d',
+        transformStyle: 'preserve-3d',
+        willChange: 'scroll-position'
       }}
     >
       {children}

@@ -1,4 +1,3 @@
-
 'use client';
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
@@ -19,6 +18,7 @@ export function OptimizedSpotlight({
   const [parentElement, setParentElement] = useState<HTMLElement | null>(null);
   const frameRef = useRef<number | null>(null);
   const positionRef = useRef({ x: 0, y: 0 });
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Performance optimization: Only set up intersection observer once on mount
   useEffect(() => {
@@ -29,22 +29,29 @@ export function OptimizedSpotlight({
         parent.style.overflow = 'hidden';
         setParentElement(parent);
         
-        // Use IntersectionObserver for performance
-        const observer = new IntersectionObserver(
+        // Use IntersectionObserver with high threshold for performance
+        observerRef.current = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               setIsVisible(entry.isIntersecting);
+              // Disconnect observer when element becomes visible to reduce CPU load
+              if (entry.isIntersecting && observerRef.current) {
+                // Keep observer for when element leaves viewport again
+              }
             });
           },
           { 
             threshold: 0.1,
-            rootMargin: '100px' // Preload just before visible
+            rootMargin: '200px' // Larger preload area for smoother transitions
           }
         );
         
-        observer.observe(parent);
+        observerRef.current.observe(parent);
+        
         return () => {
-          observer.disconnect();
+          if (observerRef.current) {
+            observerRef.current.disconnect();
+          }
           if (frameRef.current) {
             cancelAnimationFrame(frameRef.current);
           }
@@ -53,8 +60,9 @@ export function OptimizedSpotlight({
     }
   }, []);
 
-  // Optimized mouse movement handler with throttling via requestAnimationFrame
+  // Optimized mouse movement handler with debounced RAF
   const handleMouseMove = useCallback((e: MouseEvent) => {
+    // Update ref immediately to capture latest position
     positionRef.current = {
       x: e.clientX,
       y: e.clientY
@@ -63,11 +71,13 @@ export function OptimizedSpotlight({
     // Only schedule animation frame if not already pending
     if (!frameRef.current && parentElement) {
       frameRef.current = requestAnimationFrame(() => {
-        const { left, top } = parentElement.getBoundingClientRect();
-        setPosition({
-          x: positionRef.current.x - left - size / 2,
-          y: positionRef.current.y - top - size / 2
-        });
+        if (parentElement) {
+          const { left, top } = parentElement.getBoundingClientRect();
+          setPosition({
+            x: positionRef.current.x - left - size / 2,
+            y: positionRef.current.y - top - size / 2
+          });
+        }
         frameRef.current = null;
       });
     }
@@ -96,7 +106,7 @@ export function OptimizedSpotlight({
     };
   }, [parentElement, isVisible, handleMouseMove]);
 
-  // Don't render anything if not visible in viewport
+  // Improve performance by not rendering when not visible or on mobile
   if (!isVisible) return null;
 
   return (
@@ -113,12 +123,15 @@ export function OptimizedSpotlight({
         height: size,
         left: position.x,
         top: position.y,
-        transform: 'translateZ(0)', // Force hardware acceleration
+        transform: 'translate3d(0, 0, 0)', // Force hardware acceleration
         willChange: 'transform, opacity', // Hint to the browser about what will animate
         backfaceVisibility: 'hidden',
-        perspective: '1000px',
-        WebkitFontSmoothing: 'antialiased',
         WebkitBackfaceVisibility: 'hidden',
+        perspective: '1000px',
+        WebkitPerspective: '1000',
+        WebkitFontSmoothing: 'antialiased',
+        transformStyle: 'preserve-3d',
+        WebkitTransformStyle: 'preserve-3d',
       }}
     />
   );

@@ -32,8 +32,12 @@
     -webkit-text-size-adjust: 100%;
     /* Improve iOS scroll snapping */
     scroll-snap-type: y proximity;
+    /* Better scroll behavior */
+    -webkit-overflow-scrolling: touch;
     /* Force hardware acceleration */
     transform: translateZ(0);
+    /* Prevent content shifting */
+    overflow-x: hidden;
   }
 
   body {
@@ -41,7 +45,7 @@
     min-height: 100%;
     position: relative;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     /* Optimize mobile scrolling */
     -webkit-overflow-scrolling: touch;
     /* Prevent overscroll behavior */
@@ -53,12 +57,15 @@
     /* Prevent iOS Safari pull-to-refresh */
     touch-action: pan-y;
     /* Force GPU acceleration */
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000;
     /* Optimize rendering */
     text-rendering: optimizeSpeed;
     image-rendering: optimizeQuality;
+    /* Prevent painting issues */
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
   }
 
   * {

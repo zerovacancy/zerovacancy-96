@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
 import { BorderBeam } from './ui/border-beam';
@@ -12,9 +11,39 @@ import { GradientBlobBackground } from '@/components/ui/gradient-blob-background
 
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Use IntersectionObserver to only animate when in view
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.target === containerRef.current) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('content-visible');
+            } else {
+              // Keep animations paused when not in view to improve performance
+              entry.target.classList.remove('content-visible');
+            }
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+    
+    observer.observe(containerRef.current);
+    
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
 
   return (
-    <div className="w-full px-2 sm:px-3 md:px-6 lg:px-8">
+    <div className="w-full px-2 sm:px-3 md:px-6 lg:px-8 content-visibility-auto" ref={containerRef}>
       <div className="mx-auto relative group">
         <div className="absolute -inset-0.5 sm:-inset-0.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-purple-800/30 via-indigo-700/30 to-purple-900/30 opacity-60 sm:opacity-75 blur-[2px] sm:blur-sm group-hover:opacity-100 transition duration-500"></div>
         <motion.div 
@@ -28,7 +57,7 @@ const PreviewSearch = () => {
             }
           }}
           viewport={{ once: true, margin: "-50px" }}
-          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_6px_20px_-10px_rgba(120,80,200,0.2)] sm:shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white/90"
+          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_6px_20px_-10px_rgba(120,80,200,0.2)] sm:shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white/90 will-change-transform"
         >
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg sm:rounded-xl">
             <BorderBeam 
@@ -61,7 +90,7 @@ const PreviewSearch = () => {
             withSpotlight={!isMobile}
             spotlightClassName="from-purple-500/10 via-indigo-500/10 to-blue-500/10"
           >
-            <div className="flex flex-col w-full relative z-10">
+            <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
               <div className="text-left pt-6 sm:pt-8 pb-4 sm:pb-5 px-4 sm:px-6 lg:px-8">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 font-jakarta tracking-tight">
                   Find Your Perfect Creator
