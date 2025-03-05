@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { useInView } from "framer-motion";
-import { AuroraBackground } from "@/components/ui/aurora-background";
+import { GradientBlobBackground } from "@/components/ui/gradient-blob-background";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist-cta";
@@ -28,7 +28,19 @@ export function Hero() {
   
   return (
     <div className="w-full relative">
-      <AuroraBackground className="w-full py-0" showRadialGradient={false}>
+      <GradientBlobBackground 
+        className="w-full py-0"
+        withSpotlight={true}
+        spotlightClassName="from-purple-500/20 via-indigo-500/20 to-blue-500/20"
+        blobColors={{
+          first: "bg-purple-200",
+          second: "bg-indigo-200",
+          third: "bg-blue-200"
+        }}
+        blobOpacity={0.3}
+        pattern="none"
+        baseColor="bg-white"
+      >
         <section 
           ref={sectionRef}
           className={cn(
@@ -115,7 +127,7 @@ export function Hero() {
             <WaitlistCTA className="mb-4" />
           </div>
         </section>
-      </AuroraBackground>
+      </GradientBlobBackground>
     </div>
   );
 }
