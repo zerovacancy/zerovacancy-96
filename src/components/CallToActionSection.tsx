@@ -1,16 +1,17 @@
+
 import React from 'react';
 import { ShimmerButton } from './ui/shimmer-button';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 const CallToActionSection = () => {
   return <div className="mx-auto max-w-4xl text-center relative z-10 px-4 sm:px-6 lg:px-8">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-5 font-jakarta tracking-tight">
         Elevate Your Real Estate Marketing Today
       </h2>
-      <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-600 font-inter">
+      <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-600 font-inter mb-6 sm:mb-8">
         Join thousands of property managers and content creators who trust Luxe Content Connect for their marketing needs
       </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-2">
         <ShimmerButton variant="primary" className="w-full sm:w-auto min-w-[180px]">
           <span>Join Waitlist</span>
           <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/90" />
