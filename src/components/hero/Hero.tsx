@@ -55,7 +55,7 @@ export function Hero() {
                   "text-primary inline font-light", 
                   "text-3xl sm:text-4xl lg:text-5xl", 
                   "tracking-[-0.02em]", 
-                  "bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-black", 
+                  "text-[#2D1A66]", 
                   "block sm:inline-block mb-1 sm:mb-0 font-jakarta"
                 )}
               >
@@ -71,8 +71,8 @@ export function Hero() {
                   <span 
                     key={index} 
                     className={cn(
-                      "absolute font-jakarta tracking-[-0.02em] bg-clip-text text-transparent", 
-                      "bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700 transition-all duration-500", 
+                      "absolute font-jakarta tracking-[-0.02em] text-transparent", 
+                      "bg-clip-text bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-700 transition-all duration-500", 
                       "text-4xl sm:text-5xl lg:text-6xl",
                       "font-bold",
                       titleIndex === index ? "opacity-100 transform-none" : "opacity-0 translate-y-8"
