@@ -4,7 +4,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import SectionHeaderSimple from './SectionHeaderSimple';
 import MobileStepsGridSimple from './MobileStepsGridSimple';
 import DesktopStepsGridSimple from './DesktopStepsGridSimple';
-import BackgroundElementsSimple from './BackgroundElementsSimple';
+import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 
 const OptimizedHowItWorks: React.FC = () => {
   const isMobile = useIsMobile();
@@ -19,10 +19,17 @@ const OptimizedHowItWorks: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-8 sm:py-10 lg:py-14 px-2 sm:px-4 lg:px-6 bg-gradient-to-b from-gray-50 to-purple-50/20">
-      {/* Background elements */}
-      <BackgroundElementsSimple />
-      
+    <GradientBlobBackground 
+      className="py-8 sm:py-10 lg:py-14 px-2 sm:px-4 lg:px-6"
+      baseColor="bg-gradient-to-b from-gray-50 to-purple-50/20"
+      pattern="dots"
+      blobColors={{
+        first: 'bg-blue-200',
+        second: 'bg-indigo-200',
+        third: 'bg-purple-200'
+      }}
+      blobOpacity={0.3}
+    >      
       <div className="max-w-6xl mx-auto py-0 px-px relative z-10">
         <SectionHeaderSimple 
           title="How It Works" 
@@ -35,7 +42,7 @@ const OptimizedHowItWorks: React.FC = () => {
         {/* Desktop grid layout with connecting lines */}
         <DesktopStepsGridSimple completedSteps={completedSteps} />
       </div>
-    </section>
+    </GradientBlobBackground>
   );
 };
 
