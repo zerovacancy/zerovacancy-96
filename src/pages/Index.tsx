@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/Hero';
@@ -16,6 +15,7 @@ import { FeaturesSectionWithHoverEffects } from '@/components/Features';
 import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
 import PreviewSearch from '@/components/PreviewSearch';
+
 const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
@@ -83,14 +83,10 @@ const Index = () => {
             </div>
           </section>
           
-          {/* Professional Content Creation Services */}
-          <div className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-[#F1F0FB] border-t border-b border-gray-100 w-full">
-            <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
-            <Spotlight className="from-emerald-500/20 via-teal-500/20 to-cyan-500/20" size={350} />
-            <div className="relative z-10 max-w-7xl mx-auto">
-              <FeaturesSectionWithHoverEffects />
-            </div>
-          </div>
+          {/* Professional Content Creation Services - removed background div */}
+          <section className="py-10 sm:py-16 lg:py-20 border-t border-b border-gray-100 w-full bg-white">
+            <FeaturesSectionWithHoverEffects />
+          </section>
 
           {/* Pricing Section */}
           <div id="pricing" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden bg-white border-b border-gray-100 w-full">
@@ -115,4 +111,5 @@ const Index = () => {
       <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
     </div>;
 };
+
 export default Index;

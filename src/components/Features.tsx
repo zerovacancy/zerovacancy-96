@@ -52,29 +52,27 @@ const features = [{
 
 export function FeaturesSectionWithHoverEffects() {
   return (
-    <section className="py-8 sm:py-12 lg:py-16 px-2 sm:px-4 lg:px-6 bg-gradient-to-b from-white to-gray-50/50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8 sm:mb-10 lg:mb-12">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 font-space tracking-tight text-gray-900">
-            Professional Content Creation Services
-          </h2>
-          <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-            Everything you need to showcase your properties with stunning visuals and engaging content
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
-          {features.map((feature, index) => (
-            <Feature
-              key={index}
-              title={feature.title}
-              description={feature.description}
-              Icon={feature.icon}
-            />
-          ))}
-        </div>
+    <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 font-space tracking-tight text-gray-900">
+          Professional Content Creation Services
+        </h2>
+        <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+          Everything you need to showcase your properties with stunning visuals and engaging content
+        </p>
       </div>
-    </section>
+      
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+        {features.map((feature, index) => (
+          <Feature
+            key={index}
+            title={feature.title}
+            description={feature.description}
+            Icon={feature.icon}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
