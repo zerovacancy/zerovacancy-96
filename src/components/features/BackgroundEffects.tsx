@@ -2,7 +2,12 @@
 import React from 'react';
 import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 
-export const BackgroundEffects: React.FC<{ className?: string }> = ({ className, children }) => {
+interface BackgroundEffectsProps {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({ className, children }) => {
   return (
     <GradientBlobBackground
       className={className}
