@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Search, Users, FileCheck, Calendar, Check, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -109,10 +108,10 @@ const OptimizedHowItWorks = () => {
       
       <div className="max-w-6xl mx-auto py-0 px-px relative z-10">
         <div className="text-center mb-6 sm:mb-10">
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-2 sm:mb-3 text-gray-900">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-2 sm:mb-3 text-brand-purple-dark">
             How It Works
-          </h3>
-          <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+          </h2>
+          <p className="text-sm sm:text-base text-brand-text-primary max-w-2xl mx-auto">
             Your journey to amazing content in four simple steps
           </p>
         </div>
