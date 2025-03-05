@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/hero/Hero';
@@ -125,20 +124,7 @@ const Index = () => {
           
           {/* Professional Content Creation Services */}
           <section className="w-full border-t border-b border-gray-100">
-            <GradientBlobBackground
-              className="py-10 sm:py-16 lg:py-20"
-              blobColors={{
-                first: "bg-indigo-200",
-                second: "bg-purple-200",
-                third: "bg-pink-200"
-              }}
-              pattern="grid"
-              dotOpacity={0.2}
-              blobOpacity={0.2}
-              baseColor="bg-white"
-            >
-              <FeaturesSectionWithHoverEffects />
-            </GradientBlobBackground>
+            <FeaturesSectionWithHoverEffects />
           </section>
 
           {/* Pricing Section */}
