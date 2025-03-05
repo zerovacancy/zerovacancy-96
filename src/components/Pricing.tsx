@@ -1,9 +1,11 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { PricingHeader } from "./pricing/PricingHeader";
 import { PricingCardList } from "./pricing/PricingCardList";
 import { PricingService } from "@/services/PricingService";
+import { GradientBlobBackground } from "@/components/ui/gradient-blob-background";
 
 export function Pricing() {
   const [subscription, setSubscription] = useState<any>(null);
@@ -92,7 +94,17 @@ export function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-12 sm:py-20 lg:py-24 relative overflow-hidden bg-white">
+    <GradientBlobBackground 
+      className="py-12 sm:py-20 lg:py-24 overflow-hidden"
+      baseColor="bg-white"
+      pattern="none"
+      blobColors={{
+        first: "bg-blue-200",
+        second: "bg-indigo-200",
+        third: "bg-purple-200"
+      }}
+      blobOpacity={0.3}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <PricingHeader 
           title="Simple, transparent pricing"
@@ -111,7 +123,7 @@ export function Pricing() {
           </p>
         </div>
       </div>
-    </section>
+    </GradientBlobBackground>
   );
 }
 
