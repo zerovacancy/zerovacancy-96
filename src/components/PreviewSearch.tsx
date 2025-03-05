@@ -28,7 +28,7 @@ const PreviewSearch = () => {
             }
           }}
           viewport={{ once: true, margin: "-50px" }}
-          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_6px_20px_-10px_rgba(120,80,200,0.2)] sm:shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white"
+          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_6px_20px_-10px_rgba(120,80,200,0.2)] sm:shadow-[0_10px_40px_-12px_rgba(120,80,200,0.25)] border border-zinc-200/60 bg-white/90"
         >
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg sm:rounded-xl">
             <BorderBeam 
@@ -50,14 +50,14 @@ const PreviewSearch = () => {
           </div>
           <GradientBlobBackground 
             className="min-h-0 w-full" 
-            baseColor="bg-white"
+            baseColor="bg-white/90"
             pattern="none"
             blobColors={{
               first: "bg-purple-200",
               second: "bg-indigo-200",
               third: "bg-blue-200"
             }}
-            blobOpacity={0.3}
+            blobOpacity={0.2}
             withSpotlight={!isMobile}
             spotlightClassName="from-purple-500/10 via-indigo-500/10 to-blue-500/10"
           >

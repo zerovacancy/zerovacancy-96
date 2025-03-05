@@ -65,8 +65,8 @@ const Index = () => {
           }}
           blobOpacity={0.15}
           withSpotlight={true}
-          spotlightClassName="from-purple-500/10 via-violet-500/10 to-blue-500/10"
-          baseColor="bg-white"
+          spotlightClassName="from-purple-500/5 via-violet-500/5 to-blue-500/5"
+          baseColor="bg-white/80" 
           pattern="none"
           className="py-0"
           animationSpeed="slow"

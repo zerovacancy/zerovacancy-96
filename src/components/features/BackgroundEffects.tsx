@@ -23,15 +23,15 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
   className, 
   children,
   blobColors = {
-    first: "bg-purple-200",
-    second: "bg-indigo-200",
-    third: "bg-violet-200"
+    first: "bg-purple-100",
+    second: "bg-indigo-100",
+    third: "bg-violet-100"
   },
-  blobOpacity = 0.15, // Decreased opacity for subtlety
+  blobOpacity = 0.12, // Even more subtle opacity
   withSpotlight = true,
-  spotlightClassName = "from-purple-500/10 via-violet-500/10 to-blue-500/10", // Decreased opacity
+  spotlightClassName = "from-purple-500/5 via-violet-500/5 to-blue-500/5", // Very subtle spotlight
   pattern = "none",
-  baseColor = "bg-white",
+  baseColor = "bg-white/80", // Slightly transparent white to allow blobs to show through
   animationSpeed = 'slow'
 }) => {
   return (
