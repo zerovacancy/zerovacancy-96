@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
@@ -87,8 +86,9 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
     <div 
       className={cn(
         "relative will-change-transform", 
-        "aspect-[4/3] overflow-hidden",
-        "flex items-center justify-center"
+        "overflow-hidden",
+        "flex items-center justify-center",
+        "h-full w-full" // Fill container
       )} 
       ref={mediaRef}
     >
