@@ -104,7 +104,7 @@ const PreviewSearch = () => {
                 <SearchBar onLocationSelect={() => {}} />
               </div>
             
-              <div className="w-full px-2 sm:px-4 md:px-7 py-2 sm:py-5 md:py-7 pb-10 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40">
+              <div className="w-full px-2 sm:px-4 md:px-7 py-2 sm:py-5 md:py-7 pb-16 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40">
                 <CreatorsList 
                   creators={[{
                     name: "Emily Johnson",

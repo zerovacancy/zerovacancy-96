@@ -1,3 +1,4 @@
+
 import React, { useCallback, useEffect, useState } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
@@ -5,6 +6,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ScrollArea } from '../ui/scroll-area';
 
 interface Creator {
   name: string;
@@ -37,20 +39,28 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   const isMobile = useIsMobile();
   const [loadedImageUrls, setLoadedImageUrls] = useState<Set<string>>(new Set());
   
+  // Use looser containScroll option and enable dragFree for smoother mobile experience
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
-    containScroll: 'trimSnaps',
+    containScroll: 'keepSnaps', // Changed from 'trimSnaps' to prevent skipping cards
     loop: false,
-    dragFree: false,
-    skipSnaps: true,
+    dragFree: true, // Changed to true for smoother scrolling
+    skipSnaps: false, // Disable skip snaps to fix arrow navigation
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = React.useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = React.useState(true);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollPrev = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollPrev();
+  }, [emblaApi]);
+  
+  const scrollNext = useCallback(() => {
+    if (!emblaApi) return;
+    emblaApi.scrollNext();
+  }, [emblaApi]);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -65,10 +75,10 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
     
-    // Force a reInit after mount
+    // Force a reInit after mount with increased delay
     const timer = setTimeout(() => {
       emblaApi.reInit();
-    }, 100);
+    }, 300); // Increased from 100ms to 300ms for more reliable initialization
     
     return () => {
       clearTimeout(timer);
@@ -113,12 +123,12 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
       {isMobile ? (
         <div className="w-full relative">
-          <div className="w-full overflow-hidden" ref={emblaRef}>
+          <div className="w-full overflow-hidden pb-14" ref={emblaRef}>
             <div className="flex">
               {creators.map((creator, index) => (
                 <div 
                   key={creator.name} 
-                  className="min-w-[90%] w-[90%] pl-2 pr-2 h-full"
+                  className="min-w-[85%] w-[85%] pl-2 pr-2 h-full"
                 >
                   <CreatorCard
                     creator={creator}
@@ -135,8 +145,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           <button
             onClick={scrollPrev}
             className={cn(
-              "absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/40 text-white backdrop-blur-sm transition-all",
-              "hover:bg-black/60 active:scale-95 duration-200",
+              "absolute left-1 top-1/2 -translate-y-1/2 z-10 rounded-full p-2.5 bg-black/40 text-white backdrop-blur-sm transition-all",
+              "hover:bg-black/60 active:scale-95 duration-200 touch-manipulation",
               !prevBtnEnabled && "opacity-0 pointer-events-none"
             )}
             aria-label="Previous creator"
@@ -146,8 +156,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           <button
             onClick={scrollNext}
             className={cn(
-              "absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 bg-black/40 text-white backdrop-blur-sm transition-all",
-              "hover:bg-black/60 active:scale-95 duration-200",
+              "absolute right-1 top-1/2 -translate-y-1/2 z-10 rounded-full p-2.5 bg-black/40 text-white backdrop-blur-sm transition-all",
+              "hover:bg-black/60 active:scale-95 duration-200 touch-manipulation",
               !nextBtnEnabled && "opacity-0 pointer-events-none"
             )}
             aria-label="Next creator"
@@ -155,15 +165,15 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          {/* Enhanced Dots Indicator */}
-          <div className="flex justify-center gap-1.5 mt-4">
+          {/* Enhanced Dots Indicator - moved further down */}
+          <div className="flex justify-center gap-1.5 mt-2 absolute bottom-0 left-0 right-0">
             {creators.map((_, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-200",
+                  "w-2.5 h-2.5 rounded-full transition-all duration-200 touch-manipulation",
                   index === selectedIndex 
-                    ? "bg-indigo-600 w-3 h-3" // Larger dot for selected
+                    ? "bg-indigo-600 w-3.5 h-3.5" // Larger dot for selected
                     : "bg-gray-300 hover:bg-gray-400"
                 )}
                 onClick={() => emblaApi?.scrollTo(index)}
