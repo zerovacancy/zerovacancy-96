@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PricingHeader from "./pricing/PricingHeader";
 import { useSubscription } from "@/hooks/use-subscription";
 import { PricingInteraction, PricingPlanProps } from "./pricing/PricingInteraction";
+import { cn } from "@/lib/utils";
 
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(true);
