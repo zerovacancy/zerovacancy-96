@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -100,16 +99,15 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
 
   return (
     <>
-      {/* Pricing Toggle - Desktop Style */}
-      <div className={cn(
-        "flex justify-center",
-        isMobile ? "mt-4" : "mt-8 mb-10"
-      )}>
-        <PricingToggle 
-          isYearly={isYearly} 
-          setIsYearly={setIsYearly}
-        />
-      </div>
+      {/* Pricing Toggle - Desktop Only */}
+      {!isMobile && (
+        <div className="flex justify-center mt-8 mb-10">
+          <PricingToggle 
+            isYearly={isYearly} 
+            setIsYearly={setIsYearly}
+          />
+        </div>
+      )}
       
       {/* Pricing Cards */}
       <div className="mt-6 sm:mt-8">
