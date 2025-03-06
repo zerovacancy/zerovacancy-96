@@ -10,12 +10,15 @@ const CallToActionSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-white via-purple-50/40 to-white -z-10 opacity-80"></div>
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5MzNFRkYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2NGgtMXYtNHptMi0yaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS03LTJoMXYxaC0xdi0xem0tMi0yaDF2MWgtMXYtMXptMi0yaDF2MWgtMXYtMXptMiAxMGgxdjFoLTF2LTF6Ii8+PC9nPjwvZz48L3N2Zz4=')] -z-10 opacity-40"></div>
       
-      <div className="flex items-center justify-center mb-4 sm:mb-5">
+      <div className="flex items-center justify-center mb-4 sm:mb-6">
         <TrendingUp className="w-6 h-6 text-brand-purple mr-2 animate-float-subtle" />
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 font-jakarta tracking-tight inline-flex items-center">
           Elevate Your Real Estate Marketing <span className="bg-gradient-to-r from-brand-purple-dark to-brand-purple ml-2 bg-clip-text text-transparent font-extrabold">Today</span>
         </h2>
       </div>
+      
+      {/* Decorative element under the heading */}
+      <div className="w-20 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mx-auto mb-6 animate-pulse-subtle" />
       
       <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-600 font-inter mb-7 sm:mb-9 leading-relaxed">
         Join thousands of property managers and content creators who trust Luxe Content Connect for their marketing needs

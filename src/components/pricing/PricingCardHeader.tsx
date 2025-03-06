@@ -45,12 +45,12 @@ export const PricingCardHeader = ({
         {Math.round(price * 12 - price * 10)})
       </div>
 
-      <p className="text-sm text-slate-600 mb-3 relative z-10">
+      <p className="text-sm text-slate-600 mb-3 relative z-10 font-inter leading-relaxed">
         {description}
       </p>
       
       {valueProposition && (
-        <p className={`text-sm font-medium mb-6 ${colorAccent}`}>
+        <p className={`text-sm font-medium mb-6 ${colorAccent} font-inter`}>
           <span className="inline-block mr-1">✦</span> {valueProposition}
         </p>
       )}
