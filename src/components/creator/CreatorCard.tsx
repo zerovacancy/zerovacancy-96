@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { ArrowRight } from 'lucide-react';
@@ -21,7 +22,6 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const [showEmailDialog, setShowEmailDialog] = useState(false);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
   
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
   
@@ -48,7 +48,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
           </div>
 
-          {/* Price tag - Simplified for mobile with single $ */}
+          {/* Price tag - Fixed for mobile */}
           <div className="absolute top-3 sm:top-3.5 right-3 sm:right-3.5 z-20">
             <span className={cn(
               isMobile ? "px-2 py-1 text-xs" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm",
@@ -64,10 +64,11 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
 
           <div className="relative">
-            {/* Media container with adjusted aspect ratio for mobile */}
+            {/* Media container with proper aspect ratio for mobile */}
             <div className="relative">
               <div className={cn(
-                isMobile ? "aspect-[5/3]" : "aspect-[4/3]" // Increased visibility for image on mobile
+                isMobile ? "aspect-[5/3] overflow-hidden" : "aspect-[4/3]",
+                "overflow-hidden"
               )}>
                 <CreatorMedia 
                   creator={creator}

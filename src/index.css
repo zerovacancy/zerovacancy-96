@@ -1,23 +1,14 @@
 
-/* Base styles and CSS variables */
 @import './styles/base.css';
+@import './styles/typography.css';
+@import './styles/typography-mixins.css';
+@import './styles/components.css';
+@import './styles/animations.css';
+@import './styles/keyframes.css';
 
 /* Tailwind layers */
 @tailwind components;
 @tailwind utilities;
-
-/* Typography styles */
-@import './styles/typography.css';
-@import './styles/typography-mixins.css';
-
-/* Component styles */
-@import './styles/components.css';
-
-/* Animation utilities */
-@import './styles/animations.css';
-
-/* Animation keyframes */
-@import './styles/keyframes.css';
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

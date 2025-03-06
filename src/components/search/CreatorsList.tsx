@@ -1,12 +1,11 @@
-
 import React, { useRef } from 'react';
-import { CreatorCard } from '../creator/CreatorCard'; // Fixed import path
+import { CreatorCard } from '../creator/CreatorCard';
 import { ChevronDown, Filter, ArrowUpDown } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { motion } from 'framer-motion';
-import { Creator } from '../creator/types'; // Fixed import path
+import { Creator } from '../creator/types';
 
 interface CreatorsListProps {
   creators: Creator[];
