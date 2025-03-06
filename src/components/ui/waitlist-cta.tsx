@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -202,11 +201,9 @@ export function WaitlistCTA({
               isMobile ? "text-xs" : "text-sm font-medium"
             )}>
               <span className="font-bold text-indigo-700">2,165+</span> people joined
-            </div>
-            <span className="text-gray-400 mx-1.5">•</span>
-            <span className="text-gray-800 font-medium">
+              <span className="text-gray-400 mx-1.5">•</span>
               Queue: <span className="text-indigo-700 font-bold">{isMobile ? "1-2 days" : "2-3 weeks"}</span>
-            </span>
+            </div>
           </div>
         </div>
       </div>
