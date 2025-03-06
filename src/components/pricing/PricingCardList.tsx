@@ -103,7 +103,7 @@ export const PricingCardList = ({
 
   return (
     <div className="relative">
-      {/* Mobile pagination indicators */}
+      {/* Mobile pagination indicators with improved styling */}
       {isMobile && (
         <div className="flex justify-center mb-4 space-x-2">
           {cards.map((_, index) => (
@@ -122,13 +122,13 @@ export const PricingCardList = ({
         </div>
       )}
       
-      {/* Mobile navigation buttons */}
+      {/* Mobile navigation buttons with improved styling */}
       {isMobile && (
         <div className="absolute z-10 inset-y-0 left-0 right-0 flex items-center justify-between pointer-events-none">
           {activeIndex > 0 && (
             <button
               onClick={() => handleNavigation('prev')}
-              className="w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-md ml-1 pointer-events-auto"
+              className="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-md ml-1 pointer-events-auto touch-manipulation"
             >
               <ChevronLeft className="h-5 w-5 text-slate-700" />
             </button>
@@ -137,7 +137,7 @@ export const PricingCardList = ({
           {activeIndex < cards.length - 1 && (
             <button
               onClick={() => handleNavigation('next')}
-              className="w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-md mr-1 pointer-events-auto"
+              className="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-md mr-1 pointer-events-auto touch-manipulation"
             >
               <ChevronRight className="h-5 w-5 text-slate-700" />
             </button>
@@ -145,7 +145,7 @@ export const PricingCardList = ({
         </div>
       )}
       
-      {/* Cards container */}
+      {/* Cards container with improved styling */}
       <div
         ref={containerRef}
         className={cn(
@@ -180,7 +180,7 @@ export const PricingCardList = ({
         ))}
       </div>
       
-      {/* Mobile swipe instruction */}
+      {/* Mobile swipe instruction with improved visibility */}
       {isMobile && (
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
@@ -188,7 +188,7 @@ export const PricingCardList = ({
           transition={{ delay: 0.5 }}
           className="text-center mt-4"
         >
-          <div className="inline-flex items-center bg-slate-50 text-slate-500 text-xs px-3 py-1.5 rounded-full shadow-sm font-inter">
+          <div className="inline-flex items-center bg-slate-50/80 backdrop-blur-sm text-slate-500 text-xs px-3 py-1.5 rounded-full shadow-sm font-inter animate-pulse-subtle">
             <ChevronLeft className="h-3 w-3 mr-1.5 opacity-70" />
             <span>Swipe to compare plans</span>
             <ChevronRight className="h-3 w-3 ml-1.5 opacity-70" />

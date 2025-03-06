@@ -29,7 +29,7 @@ export const PricingToggle = ({
   return (
     <div className="flex flex-col items-center">
       <div className={cn(
-        "relative p-1 bg-slate-100 rounded-full flex items-center shadow-inner",
+        "relative p-1 bg-slate-100/70 rounded-full flex items-center shadow-inner backdrop-blur-sm border border-slate-200/50",
         isMobile ? "w-full max-w-xs" : "w-80"
       )}>
         {/* Monthly option */}
@@ -75,7 +75,7 @@ export const PricingToggle = ({
         />
       </div>
       
-      {/* Enhanced discount badge with brand colors */}
+      {/* Enhanced discount badge with brand colors and animation */}
       <AnimatePresence>
         {isYearly && yearlyDiscount && (
           <motion.div
@@ -85,7 +85,8 @@ export const PricingToggle = ({
             className={cn(
               "mt-2 py-1 px-3 bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white",
               "text-xs font-medium font-inter rounded-full shadow-md flex items-center gap-1",
-              animateChange ? "animate-pulse" : ""
+              animateChange ? "animate-pulse" : "",
+              "backdrop-blur-sm"
             )}
           >
             <Sparkles className="h-3 w-3" />

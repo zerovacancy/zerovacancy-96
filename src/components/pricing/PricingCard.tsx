@@ -55,25 +55,31 @@ export const PricingCard = ({
       transition={{ duration: 0.5, delay: title === "Professional" ? 0 : title === "Basic" ? 0.1 : 0.2 }}
       className={cn(
         "relative rounded-xl flex flex-col h-full",
-        "border bg-white/95 backdrop-blur-sm",
+        "border bg-white/90 backdrop-blur-sm",
         highlighted ? "border-2 shadow-xl" : "border shadow-md",
-        highlighted ? colorStyles.border : "border-slate-200",
+        highlighted ? colorStyles.border : "border-slate-200/70",
         isMobile ? "p-4" : "p-6",
+        "transition-all duration-200 hover:shadow-lg",
+        highlighted && "hover:-translate-y-1"
       )}
     >
-      {/* Popular tag */}
+      {/* Popular tag with animated effect */}
       {showPopularTag && (
         <div className="absolute -top-4 inset-x-0 flex justify-center">
           <div className={cn(
             "py-1 px-4 rounded-full text-white text-xs font-medium shadow-md font-inter",
-            "bg-gradient-to-r from-brand-purple-medium to-brand-purple"
+            "bg-gradient-to-r from-brand-purple-medium to-brand-purple",
+            "animate-pulse-subtle"
           )}>
-            Most Popular
+            <span className="flex items-center gap-1">
+              <Sparkles className="h-3 w-3" />
+              Most Popular
+            </span>
           </div>
         </div>
       )}
       
-      {/* Header section */}
+      {/* Header section with improved typography */}
       <div className="mb-4">
         <h3 className={cn(
           "text-xl font-bold font-jakarta",
@@ -97,12 +103,12 @@ export const PricingCard = ({
         )}
       </div>
       
-      {/* Action button */}
+      {/* Action button with gradient and improved hover effect */}
       <button
         onClick={handleAction}
         className={cn(
           "mt-2 w-full px-4 py-2 rounded-lg text-white font-medium font-inter",
-          "transition-all duration-200",
+          "transition-all duration-300",
           isCurrentPlan ? "bg-green-500 cursor-default" : `bg-gradient-to-r ${colorStyles.highlight}`,
           !isCurrentPlan && "hover:shadow-md hover:translate-y-[-2px]"
         )}
@@ -110,7 +116,7 @@ export const PricingCard = ({
         {isCurrentPlan ? "Current Plan" : cta}
       </button>
       
-      {/* Features preview */}
+      {/* Features preview with improved styling */}
       <div className="mt-6 space-y-3 flex-grow">
         <div className="flex justify-between items-center">
           <h4 className="text-sm font-medium text-slate-700 font-inter">
@@ -118,7 +124,7 @@ export const PricingCard = ({
           </h4>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-xs text-slate-500 flex items-center focus:outline-none font-inter"
+            className="text-xs text-slate-500 flex items-center focus:outline-none font-inter hover:text-brand-purple transition-colors"
           >
             {isExpanded ? "Less" : "See all"}
             <ChevronDown className={cn(
@@ -160,7 +166,7 @@ export const PricingCard = ({
         )}
       </div>
       
-      {/* Guarantee badge - Only for paid plans */}
+      {/* Guarantee badge with improved design - Only for paid plans */}
       {price > 0 && (
         <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center font-inter">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
