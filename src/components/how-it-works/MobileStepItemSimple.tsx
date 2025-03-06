@@ -33,6 +33,12 @@ const MobileStepItemSimple: React.FC<MobileStepItemSimpleProps> = ({
     return color + '08'; // Add 08 for ~3% opacity
   };
 
+  // Get glow shadow color based on the step's theme
+  const getGlowColor = () => {
+    const color = step.gradientFrom || '#8B5CF6';
+    return color + '40'; // Add 40 for ~25% opacity
+  };
+
   return (
     <div 
       onClick={onClick}
@@ -51,13 +57,20 @@ const MobileStepItemSimple: React.FC<MobileStepItemSimpleProps> = ({
         borderStyle: 'solid',
         borderRadius: '10px',
         backgroundColor: getBackgroundTint(),
-        boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+        boxShadow: isActive 
+          ? `0 0 15px ${getGlowColor()}, 0 0 5px ${getGlowColor()}` 
+          : '0 2px 8px rgba(0,0,0,0.05)',
+        transition: 'all 0.3s ease-in-out',
       }}
       onMouseOver={(e) => {
-        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+        e.currentTarget.style.boxShadow = isActive 
+          ? `0 0 20px ${getGlowColor()}, 0 0 8px ${getGlowColor()}` 
+          : '0 4px 12px rgba(0,0,0,0.08)';
       }}
       onMouseOut={(e) => {
-        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+        e.currentTarget.style.boxShadow = isActive 
+          ? `0 0 15px ${getGlowColor()}, 0 0 5px ${getGlowColor()}` 
+          : '0 2px 8px rgba(0,0,0,0.05)';
       }}
     >
       {/* Circle Number Badge with gradient */}
