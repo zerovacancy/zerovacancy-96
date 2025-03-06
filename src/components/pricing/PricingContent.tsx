@@ -37,7 +37,7 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
     }
   ];
 
-  // Pricing cards data with enhanced details for better conversion
+  // Pricing cards data with enhanced details for better conversion and categorized features
   const pricingCards = [
     {
       title: "Basic",
@@ -45,6 +45,7 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       interval: isYearly ? "mo" : "mo",
       description: PLAN_DESCRIPTIONS.basic,
       features: [
+        "**Access & Discovery**", 
         "Browse & Discover Content Creators - Explore available photographers, videographers, and media professionals.",
         "Limited Access to Creator Profiles - View portfolios to assess style and quality.",
         "Preview Marketplace Features - Get familiar with the platform before upgrading."
@@ -60,10 +61,11 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       interval: isYearly ? "mo" : "mo",
       description: PLAN_DESCRIPTIONS.professional,
       features: [
-        "Submit Requests for Proposals (RFPs)", 
+        "**Submit Requests for Proposals (RFPs)**", 
         "Connect directly with top-tier creators to get competitive offers.",
         "Browse & Hire Premium Creators - Access vetted professionals for high-quality photography and video.",
         "1 Revision Included Per Project - Ensure content meets your expectations.",
+        "**Content Optimization**",
         "Social Media Optimized Content - Get media tailored for Instagram, Facebook, LinkedIn, and more.",
         "SEO-Optimized Content - Improve your property's visibility in search results.",
         "Geo-Targeted Content - Target potential renters/buyers in specific locations for better engagement."
@@ -81,13 +83,16 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       interval: isYearly ? "mo" : "mo",
       description: PLAN_DESCRIPTIONS.premium,
       features: [
+        "**Premium Requests & Access**",
         "Submit Requests for Proposals (RFPs) Instantly - Connect with elite creators faster.",
         "Browse & Hire Premium Creators - Work with top-rated professionals for stunning visuals.",
         "3 Revisions Included Per Project - Get the perfect content without extra costs.",
+        "**Advanced Content Optimization**",
         "Social Media Optimized Content - High-performing visuals and videos for social platforms.",
         "SEO-Optimized Content - Rank higher in searches and attract more organic traffic.",
         "Geo-Targeted Content - Precision targeting ensures your content reaches the right audience.",
         "Marketing Channel Optimization - Content fine-tuned for maximum performance on email, listings, ads & more.",
+        "**Premium Benefits**",
         "7-Day Money-Back Guarantee - Try risk-free, ensuring total satisfaction.",
         "Performance Insights Dashboard - Track engagement and effectiveness of your marketing assets."
       ],
@@ -102,7 +107,7 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
     <>
       {/* Pricing Toggle - Desktop Only */}
       {!isMobile && (
-        <div className="flex justify-center mt-8 mb-10">
+        <div className="flex justify-center mt-10 mb-12">
           <PricingToggle 
             isYearly={isYearly} 
             setIsYearly={setIsYearly}
@@ -110,8 +115,8 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
         </div>
       )}
       
-      {/* Pricing Cards */}
-      <div className="mt-6 sm:mt-8">
+      {/* Pricing Cards with increased vertical spacing */}
+      <div className="mt-8 sm:mt-10">
         {isMobile ? (
           <div className="flex justify-center">
             <PricingInteraction 

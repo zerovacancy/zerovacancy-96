@@ -172,13 +172,13 @@ export const PricingCardList = ({
         </div>
       )}
       
-      {/* Cards container with improved styling */}
+      {/* Cards container with improved spacing for desktop */}
       <div
         ref={containerRef}
         className={cn(
           isMobile
             ? "flex overflow-x-hidden snap-x snap-mandatory scrollbar-hide"
-            : "grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8",
+            : "grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10",
           "transition-opacity duration-500"
         )}
         style={{ 
@@ -194,7 +194,7 @@ export const PricingCardList = ({
                 ? "min-w-full flex-shrink-0 snap-center px-4"
                 : "",
               !isMobile && card.highlighted 
-                ? "md:transform md:scale-105 md:z-10"
+                ? "md:transform md:scale-105 md:z-10 md:shadow-xl"
                 : ""
             )}
           >
