@@ -60,6 +60,15 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Adding brand-specific colors
+        brand: {
+          'purple-dark': '#1A1F2C',     // Dark Purple
+          'purple-medium': '#6E59A5',   // Medium Purple 
+          'purple': '#8B5CF6',          // Primary Purple
+          'text-primary': '#4B5563',    // Primary text color
+          'text-secondary': '#6B7280',  // Secondary text color
+          'text-light': '#9CA3AF',      // Light text color
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
