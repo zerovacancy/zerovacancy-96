@@ -92,7 +92,7 @@ export function Hero() {
             "px-2 sm:px-4", 
             "[word-spacing:0.12em] sm:[word-spacing:0.16em]", 
             "relative z-10", 
-            "mt-8 sm:mt-10 mb-0", // Increased top margin to add more space between the rotating text and paragraph
+            "mt-12 sm:mt-16 mb-0", // Significantly increased top margin to create more space between the rotating text and paragraph
             "font-inter"
           )}
         >
