@@ -42,58 +42,57 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       title: "Basic",
       price: 0,
       interval: isYearly ? "mo" : "mo",
-      description: "Perfect for individuals just getting started with property listings.",
+      description: PLAN_DESCRIPTIONS.basic,
       features: [
-        "Basic photo editing",
-        "Property website",
-        "Digital delivery within 72 hours",
-        "Up to 10 photos"
+        "Browse & Discover Content Creators - Explore available photographers, videographers, and media professionals.",
+        "Limited Access to Creator Profiles - View portfolios to assess style and quality.",
+        "Preview Marketplace Features - Get familiar with the platform before upgrading."
       ],
       cta: "Start for Free",
       color: "blue" as ColorVariant,
-      valueProposition: VALUE_PROPOSITIONS.basic
+      valueProposition: VALUE_PROPOSITIONS.basic,
+      footerText: PLAN_CTAS.basic
     },
     {
       title: "Professional",
       price: isYearly ? PRICING.starterAnnual : PRICING.starterMonthly,
       interval: isYearly ? "mo" : "mo",
-      description: "Our most popular plan for real estate agents and brokers.",
+      description: PLAN_DESCRIPTIONS.professional,
       features: [
-        "Professional photography (up to 25 photos)",
-        "Enhanced photo editing",
-        "Custom property website",
-        "Digital delivery within 48 hours",
-        "1 photographer, 1 hour session",
-        "High-resolution images for print",
-        "Basic virtual staging",
-        "Social media optimization"
+        "Submit Requests for Proposals (RFPs) - Connect directly with top-tier creators to get competitive offers.",
+        "Browse & Hire Premium Creators - Access vetted professionals for high-quality photography and video.",
+        "1 Revision Included Per Project - Ensure content meets your expectations.",
+        "Social Media Optimized Content - Get media tailored for Instagram, Facebook, LinkedIn, and more.",
+        "SEO-Optimized Content - Improve your property's visibility in search results.",
+        "Geo-Targeted Content - Target potential renters/buyers in specific locations for better engagement."
       ],
       cta: "Choose Professional",
       highlighted: true,
       color: "purple" as ColorVariant,
       showPopularTag: true,
-      valueProposition: VALUE_PROPOSITIONS.professional
+      valueProposition: VALUE_PROPOSITIONS.professional,
+      footerText: PLAN_CTAS.professional
     },
     {
       title: "Premium",
       price: isYearly ? PRICING.proAnnual : PRICING.proMonthly,
       interval: isYearly ? "mo" : "mo",
-      description: "Complete solution for luxury properties and demanding clients.",
+      description: PLAN_DESCRIPTIONS.premium,
       features: [
-        "plus:Everything in Professional, plus:",
-        "Up to 40 professional photos",
-        "Drone aerial photography",
-        "3D virtual tour technology",
-        "Advanced photo editing & retouching",
-        "Social media optimized image pack",
-        "Unlimited revisions",
-        "Express 24-hour delivery",
-        "2 photographer team",
-        "7-day money-back guarantee"
+        "Submit Requests for Proposals (RFPs) Instantly - Connect with elite creators faster.",
+        "Browse & Hire Premium Creators - Work with top-rated professionals for stunning visuals.",
+        "3 Revisions Included Per Project - Get the perfect content without extra costs.",
+        "Social Media Optimized Content - High-performing visuals and videos for social platforms.",
+        "SEO-Optimized Content - Rank higher in searches and attract more organic traffic.",
+        "Geo-Targeted Content - Precision targeting ensures your content reaches the right audience.",
+        "Marketing Channel Optimization - Content fine-tuned for maximum performance on email, listings, ads & more.",
+        "7-Day Money-Back Guarantee - Try risk-free, ensuring total satisfaction.",
+        "Performance Insights Dashboard - Track engagement and effectiveness of your marketing assets."
       ],
       cta: "Upgrade to Premium",
       color: "emerald" as ColorVariant,
-      valueProposition: VALUE_PROPOSITIONS.premium
+      valueProposition: VALUE_PROPOSITIONS.premium,
+      footerText: PLAN_CTAS.premium
     }
   ];
 
