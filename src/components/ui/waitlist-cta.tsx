@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -171,7 +172,8 @@ export function WaitlistCTA({
           "bg-gradient-to-r from-indigo-50 to-purple-50",
           "border border-indigo-100/80",
           "rounded-full shadow-sm",
-          "animate-fade-in"
+          "animate-fade-in",
+          isMobile && "text-xs" // Ensure text size is consistent on mobile
         )}>
           <div className="flex -space-x-1 items-center">
             <div className={cn(
@@ -194,16 +196,16 @@ export function WaitlistCTA({
             )}>AS</div>
           </div>
           
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <Users className="h-4 w-4 text-indigo-600" />
-            <div className={cn(
-              "text-gray-800", 
-              isMobile ? "text-xs" : "text-sm font-medium"
-            )}>
-              <span className="font-bold text-indigo-700">2,165+</span> people joined
-              <span className="text-gray-400 mx-1.5">•</span>
-              Queue: <span className="text-indigo-700 font-bold">{isMobile ? "1-2 days" : "2-3 weeks"}</span>
-            </div>
+          <div className={cn(
+            "flex items-center whitespace-nowrap", // Added whitespace-nowrap to prevent line breaks
+            isMobile && "text-xs" // Consistent text size on mobile
+          )}>
+            <Users className="h-4 w-4 text-indigo-600 mr-1.5" />
+            <span className="font-bold text-indigo-700">2,165+</span>
+            <span className="text-gray-800"> people joined</span>
+            <span className="text-gray-400 mx-1.5">•</span>
+            <span className="text-gray-800">Queue: </span>
+            <span className="text-indigo-700 font-bold">{isMobile ? "1-2 days" : "2-3 weeks"}</span>
           </div>
         </div>
       </div>
