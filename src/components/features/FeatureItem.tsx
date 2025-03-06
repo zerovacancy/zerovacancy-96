@@ -28,6 +28,9 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
   // Get the icon component
   const Icon = featureIcons[icon as keyof typeof featureIcons];
   
+  // Extract the main color for border from the text color class
+  const borderColorBase = colorScheme.text.split('-')[1];
+  
   // Set a consistent character limit for descriptions
   const shortDescLimit = 85;
   const isLongDesc = description.length > shortDescLimit;
@@ -38,14 +41,25 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
         "relative w-full text-left group h-full flex flex-col",
         "rounded-xl sm:rounded-2xl transition-all duration-300",
         "bg-white hover:bg-white/95",
-        `border border-gray-100 hover:border-${colorScheme.text.split('-')[1]}-200`,  
+        // Enhanced border - more visible with color matching the icon theme
+        `border border-${borderColorBase}-200/40`,
+        // Increased border radius
+        "rounded-xl sm:rounded-xl",
+        // Enhanced shadow and hover effects
+        "shadow-sm hover:shadow-md",
+        // Left border accent
+        `before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:rounded-l-xl before:bg-gradient-to-b ${colorScheme.gradient} before:opacity-0 group-hover:before:opacity-100 before:transition-opacity`,
         "p-5 sm:p-6",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
-        "hover:shadow-[0_10px_30px_rgb(0,0,0,0.07)] hover:-translate-y-1.5"
+        // Enhanced hover transition
+        "hover:-translate-y-1.5 hover:border-transparent transition-all duration-300"
       )}
       onClick={handleClick}
       aria-expanded={isExpanded}
-      whileHover={{ scale: 1.01 }}
+      whileHover={{ 
+        scale: 1.01,
+        boxShadow: "0 8px 20px rgba(0,0,0,0.08)"
+      }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ 
         opacity: 1, 
@@ -57,6 +71,18 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
       }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      style={{
+        // Very subtle background tint matching the card's theme color
+        backgroundColor: `rgba(${borderColorBase === 'indigo' ? '237, 242, 255' : 
+                                 borderColorBase === 'blue' ? '235, 245, 255' : 
+                                 borderColorBase === 'violet' ? '243, 240, 255' : 
+                                 borderColorBase === 'pink' ? '253, 242, 248' : 
+                                 borderColorBase === 'emerald' ? '236, 253, 245' : 
+                                 borderColorBase === 'amber' ? '255, 251, 235' : 
+                                 borderColorBase === 'cyan' ? '236, 254, 255' : 
+                                 borderColorBase === 'rose' ? '255, 241, 242' : 
+                                 '255, 255, 255'}, 0.97)`
+      }}
     >
       {isPopular && (
         <span className="absolute -top-2 -right-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm animate-float-subtle shadow-glow">
@@ -75,7 +101,7 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
             "bg-gradient-to-br",
             colorScheme.gradient,
             "opacity-95",
-            "group-hover:shadow-sm",
+            "group-hover:shadow-md",
             "border border-opacity-20",
             `border-${colorScheme.text.split('-')[1]}-100`,
           )}
