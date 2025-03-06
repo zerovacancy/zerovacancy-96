@@ -1,137 +1,65 @@
 
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { PricingInteraction } from "./PricingInteraction";
-import { PricingCardList } from "./PricingCardList";
-import { PricingToggle } from "./PricingToggle";
-import { ColorVariant } from "./PricingCardColors";
-import { PRICING, SAVINGS, FEATURES, VALUE_PROPOSITIONS, PLAN_DESCRIPTIONS, PLAN_CTAS } from "./pricingData";
+// Pricing data for all plan options
 
-interface PricingContentProps {
-  subscription: any;
-  isLoading: boolean;
-}
+// Monthly and annual pricing values
+export const PRICING = {
+  starterMonthly: 99,
+  starterAnnual: 99,
+  proMonthly: 399,
+  proAnnual: 399
+};
 
-export const PricingContent = ({ subscription, isLoading }: PricingContentProps) => {
-  const [isYearly, setIsYearly] = useState(true);
-  const isMobile = useIsMobile();
+// Calculate savings
+export const SAVINGS = {
+  starter: Math.round(PRICING.starterMonthly * 12 - PRICING.starterAnnual * 12),
+  pro: Math.round(PRICING.proMonthly * 12 - PRICING.proAnnual * 12)
+};
 
-  // Plans data for the interaction component
-  const pricingPlans = [
-    {
-      title: "Basic",
-      price: 0,
-      features: FEATURES.free
-    },
-    {
-      title: "Professional",
-      price: isYearly ? PRICING.starterAnnual : PRICING.starterMonthly,
-      showPopular: true,
-      features: FEATURES.starter
-    },
-    {
-      title: "Premium",
-      price: isYearly ? PRICING.proAnnual : PRICING.proMonthly,
-      features: FEATURES.pro
-    }
-  ];
+// Features for each plan with improved organization and wording
+export const FEATURES = {
+  free: [
+    { text: "Browse & Discover Content Creators", primary: true },
+    { text: "Limited Access to Creator Profiles", primary: true },
+    { text: "Preview Marketplace Features", primary: true }
+  ],
+  starter: [
+    { text: "Submit Requests for Proposals (RFPs)", primary: true },
+    { text: "Browse & Hire Premium Creators", primary: true },
+    { text: "1 Revision Included Per Project", primary: true },
+    { text: "Social Media Optimized Content", primary: true },
+    { text: "SEO-Optimized Content", primary: true },
+    { text: "Geo-Targeted Content", primary: true }
+  ],
+  pro: [
+    { text: "Submit Requests for Proposals (RFPs) Instantly", primary: true },
+    { text: "Browse & Hire Premium Creators", primary: true },
+    { text: "3 Revisions Included Per Project", primary: true },
+    { text: "Social Media Optimized Content", primary: true },
+    { text: "SEO-Optimized Content", primary: true },
+    { text: "Geo-Targeted Content", primary: true },
+    { text: "Marketing Channel Optimization", primary: true },
+    { text: "7-Day Money-Back Guarantee", primary: true },
+    { text: "Performance Insights Dashboard", primary: true }
+  ]
+};
 
-  // Pricing cards data with enhanced details for better conversion
-  const pricingCards = [
-    {
-      title: "Basic",
-      price: 0,
-      interval: isYearly ? "mo" : "mo",
-      description: PLAN_DESCRIPTIONS.basic,
-      features: [
-        "Browse & Discover Content Creators - Explore available photographers, videographers, and media professionals.",
-        "Limited Access to Creator Profiles - View portfolios to assess style and quality.",
-        "Preview Marketplace Features - Get familiar with the platform before upgrading."
-      ],
-      cta: "Start for Free",
-      color: "blue" as ColorVariant,
-      valueProposition: VALUE_PROPOSITIONS.basic,
-      footerText: PLAN_CTAS.basic
-    },
-    {
-      title: "Professional",
-      price: isYearly ? PRICING.starterAnnual : PRICING.starterMonthly,
-      interval: isYearly ? "mo" : "mo",
-      description: PLAN_DESCRIPTIONS.professional,
-      features: [
-        "Submit Requests for Proposals (RFPs) - Connect directly with top-tier creators to get competitive offers.",
-        "Browse & Hire Premium Creators - Access vetted professionals for high-quality photography and video.",
-        "1 Revision Included Per Project - Ensure content meets your expectations.",
-        "Social Media Optimized Content - Get media tailored for Instagram, Facebook, LinkedIn, and more.",
-        "SEO-Optimized Content - Improve your property's visibility in search results.",
-        "Geo-Targeted Content - Target potential renters/buyers in specific locations for better engagement."
-      ],
-      cta: "Choose Professional",
-      highlighted: true,
-      color: "purple" as ColorVariant,
-      showPopularTag: true,
-      valueProposition: VALUE_PROPOSITIONS.professional,
-      footerText: PLAN_CTAS.professional
-    },
-    {
-      title: "Premium",
-      price: isYearly ? PRICING.proAnnual : PRICING.proMonthly,
-      interval: isYearly ? "mo" : "mo",
-      description: PLAN_DESCRIPTIONS.premium,
-      features: [
-        "Submit Requests for Proposals (RFPs) Instantly - Connect with elite creators faster.",
-        "Browse & Hire Premium Creators - Work with top-rated professionals for stunning visuals.",
-        "3 Revisions Included Per Project - Get the perfect content without extra costs.",
-        "Social Media Optimized Content - High-performing visuals and videos for social platforms.",
-        "SEO-Optimized Content - Rank higher in searches and attract more organic traffic.",
-        "Geo-Targeted Content - Precision targeting ensures your content reaches the right audience.",
-        "Marketing Channel Optimization - Content fine-tuned for maximum performance on email, listings, ads & more.",
-        "7-Day Money-Back Guarantee - Try risk-free, ensuring total satisfaction.",
-        "Performance Insights Dashboard - Track engagement and effectiveness of your marketing assets."
-      ],
-      cta: "Upgrade to Premium",
-      color: "emerald" as ColorVariant,
-      valueProposition: VALUE_PROPOSITIONS.premium,
-      footerText: PLAN_CTAS.premium
-    }
-  ];
+// Value propositions for each plan
+export const VALUE_PROPOSITIONS = {
+  basic: "Perfect for property owners/managers who want to browse content creators before committing.",
+  professional: "Designed for real estate professionals who need high-quality visuals and content that performs.",
+  premium: "For luxury property managers and high-volume real estate professionals who demand the best."
+};
 
-  return (
-    <>
-      {/* Pricing Toggle - Desktop Only */}
-      {!isMobile && (
-        <div className="flex justify-center mt-8 mb-10">
-          <PricingToggle 
-            isYearly={isYearly} 
-            setIsYearly={setIsYearly}
-          />
-        </div>
-      )}
-      
-      {/* Pricing Cards */}
-      <div className="mt-6 sm:mt-8">
-        {isMobile ? (
-          <div className="flex justify-center">
-            <PricingInteraction 
-              starterMonth={PRICING.starterMonthly}
-              starterAnnual={PRICING.starterAnnual}
-              proMonth={PRICING.proMonthly}
-              proAnnual={PRICING.proAnnual}
-              plans={pricingPlans}
-            />
-          </div>
-        ) : (
-          <PricingCardList 
-            cards={pricingCards.map(card => ({
-              ...card,
-              interval: isYearly ? "mo, billed annually" : "mo"
-            }))} 
-            subscription={subscription}
-            isLoading={isLoading}
-          />
-        )}
-      </div>
-    </>
-  );
+// Plan descriptions
+export const PLAN_DESCRIPTIONS = {
+  basic: "Explore the Marketplace & Get Started",
+  professional: "Elevate Your Marketing with Optimized Content",
+  premium: "The Ultimate Content Solution for Maximum Visibility & Conversions"
+};
+
+// Plan CTAs
+export const PLAN_CTAS = {
+  basic: "Upgrade to unlock project requests and premium content!",
+  professional: "Upgrade to Premium for more revisions, deeper insights, and content that works across all marketing channels.",
+  premium: "Dominate your market with cutting-edge content and data-driven insights!"
 };
