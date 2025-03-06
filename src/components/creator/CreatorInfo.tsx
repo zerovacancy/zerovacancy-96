@@ -29,11 +29,11 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
       
       <div className={cn(
         "relative z-10",
-        isMobile ? "px-4 py-3" : "" // Extra padding on mobile for better readability
+        isMobile ? "px-4 py-3 pb-5" : "" // Extra padding on mobile for better readability
       )}>
         <div className="flex items-center gap-2 sm:gap-2.5">
           <h3 className={cn(
-            "font-bold text-white",
+            "font-bold text-white drop-shadow-md", // Added drop shadow for better contrast
             isMobile ? "text-xl" : "text-lg sm:text-xl" // Larger text on mobile
           )}>
             {creator.name}
@@ -42,12 +42,12 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
           <BadgeCheck 
             className={cn(
               isMobile ? "w-5 h-5" : "w-4.5 h-4.5 sm:w-5 sm:h-5",
-              "text-white/90",
+              "text-white drop-shadow-sm", // Added drop shadow for better visibility
               "transition-all duration-300",
               isMobile 
-                ? "bg-indigo-500/70 rounded-full p-0.5" // More visible on mobile
-                : "bg-indigo-500/30 rounded-full p-0.5",
-              "group-hover:bg-indigo-500/50" // Subtle hover effect
+                ? "bg-indigo-500/90 rounded-full p-0.5" // More visible on mobile
+                : "bg-indigo-500/70 rounded-full p-0.5",
+              "group-hover:bg-indigo-500/90" // Enhanced hover effect
             )}
             aria-label="Verified Creator"
           />
@@ -60,13 +60,13 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
         )}>
           <MapPin 
             className={cn(
-              "text-white/90 flex-shrink-0",
+              "text-white/90 flex-shrink-0 drop-shadow-sm", // Added drop shadow
               isMobile ? "w-4 h-4" : "w-3.5 h-3.5" // Larger icon on mobile
             )}
             aria-hidden="true"
           />
           <span className={cn(
-            "text-white/90 font-medium",
+            "text-white/90 font-medium drop-shadow-sm", // Added drop shadow
             isMobile ? "text-sm" : "text-xs sm:text-sm" // Larger text on mobile
           )}>
             {creator.location}
@@ -80,13 +80,13 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
         )}>
           <Image
             className={cn(
-              "text-white/85 flex-shrink-0",
+              "text-white/90 flex-shrink-0 drop-shadow-sm", // Added drop shadow
               isMobile ? "w-4 h-4" : "w-3.5 h-3.5" // Larger icon on mobile
             )}
             aria-hidden="true"
           />
           <p className={cn(
-            "text-white/85",
+            "text-white/90 drop-shadow-sm", // Added drop shadow
             isMobile ? "text-sm" : "text-xs sm:text-sm" // Larger text on mobile
           )}>
             {creator.services.join(" • ")}

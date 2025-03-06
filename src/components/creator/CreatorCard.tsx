@@ -55,7 +55,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             <span className={cn(
               isMobile ? "px-3.5 py-2 text-sm" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm", // Larger on mobile
               "font-semibold",
-              "bg-white/90 shadow-md border border-white/40",
+              "bg-white/95 shadow-md border border-white/40", // Improved contrast
               "text-[#212121] rounded-full",
               "shadow-[0_3px_8px_rgba(0,0,0,0.12)]",
               "transition-all duration-200",
@@ -89,7 +89,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             )}>
               {/* Tags section with improved spacing for mobile */}
               <div className={cn(
-                isMobile ? "mb-6" : "mb-4",  // More space before rating
+                isMobile ? "mb-7" : "mb-4",  // MORE space before rating on mobile
               )}>
                 <CreatorTags tags={tags} />
               </div>
@@ -97,14 +97,19 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               {/* Rating section with subtle divider and enhanced spacing */}
               <div className={cn(
                 "bg-gray-50/80 rounded-lg px-4 py-3.5 shadow-sm",
-                isMobile && "border-t border-gray-100 pb-5" // Added border top as divider on mobile
+                isMobile && "border border-gray-100 pb-5" // Added border for better definition on mobile
               )}>
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
               
+              {/* Divider line for better section separation on mobile */}
+              {isMobile && (
+                <div className="w-full h-px bg-gray-200 my-6"></div>
+              )}
+              
               {/* CTA button section with enhanced hover animation and more spacing */}
               <div className={cn(
-                isMobile ? "mt-7" : "mt-5", // Much more space before button on mobile
+                isMobile ? "mt-8" : "mt-5", // Even more space before button on mobile
               )}>
                 <div className="flex justify-center">
                   <ShimmerButton 

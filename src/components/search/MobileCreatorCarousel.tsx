@@ -78,21 +78,21 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
     <div className="w-full relative">
       {/* Swipe instruction for first-time users */}
       {isFirstVisit && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 bg-black/60 text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 backdrop-blur-sm animate-pulse-subtle">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 bg-black/70 text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 backdrop-blur-sm animate-pulse-subtle shadow-md">
           <Grip className="w-4 h-4" />
           <span>Swipe to explore</span>
         </div>
       )}
     
-      {/* Increased top and bottom padding for better spacing */}
-      <div className="w-full overflow-hidden pt-8 pb-12" ref={emblaRef}>
-        <div className="flex gap-5"> {/* Using flex gap for spacing between slides */}
+      {/* Enhanced top and bottom padding for better spacing */}
+      <div className="w-full overflow-hidden pt-8 pb-14" ref={emblaRef}>
+        <div className="flex gap-6"> {/* Increased gap between slides */}
           {creators.map((creator, index) => (
             <div 
               key={creator.name} 
-              className="min-w-[85%] w-[85%] pl-4 pr-4 h-full" // Increased horizontal padding
+              className="min-w-[85%] w-[85%] pl-4 pr-5 h-full" // Improved horizontal padding
             >
-              <div className="h-[calc(100%+30px)]"> {/* Further increased card height */}
+              <div className="h-[calc(100%+30px)]"> {/* Consistent card height */}
                 <CreatorCard
                   creator={creator}
                   onImageLoad={onImageLoad}
@@ -105,13 +105,13 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         </div>
       </div>
 
-      {/* Navigation Arrows repositioned */}
+      {/* Navigation Arrows repositioned with improved styling */}
       <button
         onClick={scrollPrev}
         className={cn(
-          "absolute left-1 top-[45%] -translate-y-1/2 z-10 rounded-full p-3 bg-black/50 text-white backdrop-blur-sm transition-all", // Larger button
-          "hover:bg-black/70 active:scale-95 duration-200 touch-manipulation",
-          "shadow-lg", // Added shadow
+          "absolute left-1 top-[45%] -translate-y-1/2 z-10 rounded-full p-3 bg-black/60 text-white backdrop-blur-sm transition-all", // Larger button with better contrast
+          "hover:bg-black/80 active:scale-95 duration-200 touch-manipulation",
+          "shadow-lg", // Enhanced shadow
           !prevBtnEnabled && "opacity-0 pointer-events-none"
         )}
         aria-label="Previous creator"
@@ -121,9 +121,9 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
       <button
         onClick={scrollNext}
         className={cn(
-          "absolute right-1 top-[45%] -translate-y-1/2 z-10 rounded-full p-3 bg-black/50 text-white backdrop-blur-sm transition-all", // Larger button
-          "hover:bg-black/70 active:scale-95 duration-200 touch-manipulation",
-          "shadow-lg", // Added shadow
+          "absolute right-1 top-[45%] -translate-y-1/2 z-10 rounded-full p-3 bg-black/60 text-white backdrop-blur-sm transition-all", // Larger button with better contrast
+          "hover:bg-black/80 active:scale-95 duration-200 touch-manipulation",
+          "shadow-lg", // Enhanced shadow
           !nextBtnEnabled && "opacity-0 pointer-events-none"
         )}
         aria-label="Next creator"
@@ -132,12 +132,12 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
       </button>
 
       {/* Enhanced Dots Indicator - larger and more visible */}
-      <div className="flex justify-center gap-2 absolute bottom-0 left-0 right-0">
+      <div className="flex justify-center gap-2 absolute bottom-0 left-0 right-0 mb-2">
         {creators.map((_, index) => (
           <button
             key={index}
             className={cn(
-              "transition-all duration-200 touch-manipulation rounded-full",
+              "transition-all duration-200 touch-manipulation rounded-full shadow-sm",
               index === selectedIndex 
                 ? "bg-indigo-600 w-4 h-4" // Larger active dot
                 : "bg-gray-300 hover:bg-gray-400 w-3 h-3" // Larger inactive dot

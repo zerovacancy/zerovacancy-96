@@ -58,12 +58,12 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
       role="list"
       aria-label="Creator specialties"
     >
-      <div className="flex flex-wrap gap-2.5 sm:gap-2.5">
+      <div className="flex flex-wrap gap-3 sm:gap-2.5">
         {visibleTags.map((tag, index) => (
           <span
             key={index}
             className={cn(
-              isMobile ? "text-sm px-3.5 py-2.5" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Much larger tags on mobile
+              isMobile ? "text-sm px-3.5 py-2.5 mb-0.5" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Added mb-0.5 for better spacing on mobile
               "rounded-full",
               "transition-all duration-200 whitespace-nowrap",
               "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md",

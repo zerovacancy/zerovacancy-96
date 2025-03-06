@@ -34,7 +34,7 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
     <div className={cn(
       "flex w-full",
       // On mobile, stack vertically with proper spacing
-      isMobile ? "flex-col items-start gap-3.5" : "items-center justify-between"
+      isMobile ? "flex-col items-start gap-4" : "items-center justify-between"
     )}>
       <div className="flex items-center">
         <Star className={cn(
@@ -63,7 +63,8 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
       {hourlyRate && (
         <div className={cn(
           "font-medium text-brand-text-secondary flex items-center",
-          isMobile ? "text-sm" : "text-xs" // Larger text on mobile
+          isMobile ? "text-sm" : "text-xs", // Larger text on mobile
+          "py-1.5" // Added vertical padding for better spacing
         )}>
           <Clock className={cn(
             "mr-1.5 text-gray-500",
