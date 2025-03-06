@@ -19,18 +19,47 @@ const DesktopStepItemSimple: React.FC<DesktopStepItemSimpleProps> = ({
   isActive,
   onClick
 }) => {
+  // Get the border color by extracting from gradient (for non-active state)
+  const getBorderColor = () => {
+    // Extract the primary color from gradient for border
+    const color = step.gradientFrom || '#8B5CF6';
+    return color + '33'; // Add 33 for ~20% opacity
+  };
+
+  // Get the subtle background tint based on the step's theme color
+  const getBackgroundTint = () => {
+    // Extract the primary color and make it extremely subtle (3% opacity)
+    const color = step.gradientFrom || '#8B5CF6';
+    return color + '08'; // Add 08 for ~3% opacity
+  };
+
   return (
     <div 
       onClick={onClick}
       className={cn(
-        "relative h-full bg-white min-h-[180px] px-6 py-7 rounded-2xl",
+        "relative h-full min-h-[180px] px-6 py-7 rounded-xl",
         "transition-all duration-300 group cursor-pointer",
         "border active:scale-[0.98]",
         "touch-manipulation",
-        isActive ? `${step.borderClass} shadow-md` : "border-gray-100 shadow-sm hover:shadow-md",
+        "shadow-sm hover:shadow-md",
         "flex flex-col items-center justify-start animate-fade-in",
         `animation-delay-${index * 200}`
       )}
+      style={{
+        // Dynamic styling for each card
+        borderColor: isActive ? step.gradientFrom : getBorderColor(),
+        borderWidth: isActive ? '2px' : '1px',
+        borderLeftWidth: isActive ? '3px' : '1px',
+        borderRadius: '12px',
+        backgroundColor: getBackgroundTint(),
+        boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+      }}
+      onMouseOver={(e) => {
+        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+      }}
+      onMouseOut={(e) => {
+        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+      }}
       aria-label={`Step ${index + 1}: ${step.title}`}
     >
       {/* Step Number badge with gradient */}

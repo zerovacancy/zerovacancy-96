@@ -19,17 +19,46 @@ const MobileStepItemSimple: React.FC<MobileStepItemSimpleProps> = ({
   isActive,
   onClick
 }) => {
+  // Get the border color by extracting from gradient (for non-active state)
+  const getBorderColor = () => {
+    // Extract the primary color from gradient for border
+    const color = step.gradientFrom || '#8B5CF6';
+    return color + '33'; // Add 33 for ~20% opacity
+  };
+
+  // Get the subtle background tint based on the step's theme color
+  const getBackgroundTint = () => {
+    // Extract the primary color and make it extremely subtle (3% opacity)
+    const color = step.gradientFrom || '#8B5CF6';
+    return color + '08'; // Add 08 for ~3% opacity
+  };
+
   return (
     <div 
       onClick={onClick}
       className={cn(
-        "relative bg-white p-3.5 rounded-2xl border transition-all",
+        "relative p-3.5 transition-all",
         "flex flex-col h-full min-h-[120px] touch-manipulation",
-        "duration-200 cursor-pointer animate-fade-in shadow-sm hover:shadow-md",
+        "duration-200 cursor-pointer animate-fade-in",
         `animation-delay-${index * 100}`,
-        isActive ? `${step.borderClass} shadow-md` : "border-gray-100",
         "active:scale-[0.98]"
       )}
+      style={{
+        // Dynamic styling for each card
+        borderColor: isActive ? step.gradientFrom : getBorderColor(),
+        borderWidth: isActive ? '2px' : '1px',
+        borderLeftWidth: isActive ? '3px' : '1px',
+        borderStyle: 'solid',
+        borderRadius: '12px',
+        backgroundColor: getBackgroundTint(),
+        boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+      }}
+      onMouseOver={(e) => {
+        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+      }}
+      onMouseOut={(e) => {
+        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+      }}
     >
       {/* Circle Number Badge with gradient */}
       <div className="absolute -top-2 -left-1">
