@@ -2,6 +2,10 @@
 /* Base styles and CSS variables */
 @import './styles/base.css';
 
+/* Tailwind layers */
+@tailwind components;
+@tailwind utilities;
+
 /* Typography styles */
 @import './styles/typography.css';
 @import './styles/typography-mixins.css';
