@@ -1,5 +1,5 @@
 
-import { Check, Camera, Drone, Video, Users, Clock, Award } from 'lucide-react';
+import { Check, Camera, Plane, Video, Users, Clock, Award } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { ColorVariant } from './PricingCardColors';
 
@@ -13,7 +13,7 @@ export const PricingFeaturesList = ({ features, colorAccent, tierColor = "blue" 
   // Map specific feature keywords to their respective icons
   const getIcon = (feature: string) => {
     if (feature.toLowerCase().includes('photo')) return <Camera size={18} />;
-    if (feature.toLowerCase().includes('drone')) return <Drone size={18} />;
+    if (feature.toLowerCase().includes('drone') || feature.toLowerCase().includes('aerial')) return <Plane size={18} />;
     if (feature.toLowerCase().includes('video')) return <Video size={18} />;
     if (feature.toLowerCase().includes('social')) return <Users size={18} />;
     if (feature.toLowerCase().includes('turnaround') || feature.toLowerCase().includes('delivery')) return <Clock size={18} />;
