@@ -1,29 +1,25 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { ChevronDown, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { colorVariants, ColorVariant } from "./PricingCardColors";
-import { PricingPopularTag } from "./PricingPopularTag";
-import { PricingCardHeader } from "./PricingCardHeader";
-import { PricingActionButton } from "./PricingActionButton";
-import { PricingFeaturesToggle } from "./PricingFeaturesToggle";
-import { PricingFeaturesList } from "./PricingFeaturesList";
+import { motion } from "framer-motion";
 
-export interface PricingCardProps {
+interface PricingCardProps {
   title: string;
   price: number;
   interval: string;
   description: string;
   features: string[];
   cta: string;
-  highlighted?: boolean;
-  subscription?: any;
-  isLoading?: boolean;
-  defaultExpanded?: boolean;
   color?: ColorVariant;
+  highlighted?: boolean;
   showPopularTag?: boolean;
   valueProposition?: string;
-  mobileBorder?: boolean;
+  subscription?: any;
+  isLoading?: boolean;
+  isCurrentPlan?: boolean;
 }
 
 export const PricingCard = ({
@@ -33,152 +29,146 @@ export const PricingCard = ({
   description,
   features,
   cta,
-  highlighted = false,
-  subscription,
-  isLoading = false,
-  defaultExpanded = false,
   color = "blue",
+  highlighted = false,
   showPopularTag = false,
   valueProposition,
-  mobileBorder = false
+  subscription,
+  isLoading = false,
+  isCurrentPlan = false
 }: PricingCardProps) => {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
-  
-  useEffect(() => {
-    setIsExpanded(defaultExpanded);
-  }, [defaultExpanded]);
-  
-  const planId = `price_${title.toLowerCase()}`;
-  const isCurrentPlan = subscription?.plan_id === planId;
-  const isSubscriptionActive = subscription?.status === 'active' || subscription?.status === 'trialing';
-  
   const colorStyles = colorVariants[color];
   
-  const isProfessional = title === "Professional";
-  const isBasic = title === "Basic";
-  const isPremium = title === "Premium";
+  // Handle subscription action
+  const handleAction = () => {
+    console.log(`Subscription action for ${title}`);
+    // Add subscription logic here
+  };
 
   return (
-    <div 
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: title === "Professional" ? 0 : title === "Basic" ? 0.1 : 0.2 }}
       className={cn(
-        "relative rounded-xl shadow-sm transition-all duration-300 h-full flex flex-col",
+        "relative rounded-2xl flex flex-col h-full",
         "border bg-white/95 backdrop-blur-sm",
-        isMobile ? "p-3 mx-0.5" : "p-6 sm:p-8", // Reduced padding on mobile, added slight horizontal margin
-        colorStyles.border,
-        isProfessional && highlighted ? 
-          "border-2 border-violet-400" : "",
-        highlighted ? 
-          `shadow-lg ${colorStyles.shadow}` : 
-          "shadow-md",
-        // Add distinct background colors for each tier on mobile
-        isMobile && isProfessional ? "bg-violet-50/90" : 
-        isMobile && isBasic ? "bg-blue-50/90" : 
-        isMobile && isPremium ? "bg-emerald-50/90" : "",
-        // Optimized height for mobile
-        isMobile ? "max-h-[480px]" : ""
+        highlighted ? "border-2 shadow-xl" : "border shadow-md",
+        highlighted ? colorStyles.border : "border-slate-200",
+        isMobile ? "p-4" : "p-6",
       )}
     >
+      {/* Popular tag */}
       {showPopularTag && (
-        <PricingPopularTag 
-          colorClass={`${colorStyles.highlight}`} 
-          reducedWeight={isMobile}
-          position={isMobile ? 'top-right' : 'top-right'}
-        />
-      )}
-      
-      <PricingCardHeader 
-        title={title}
-        price={price}
-        interval={interval}
-        description={description}
-        colorAccent={colorStyles.accent}
-        isCurrentPlan={isCurrentPlan}
-        isSubscriptionActive={isSubscriptionActive}
-        valueProposition={valueProposition}
-        isMobile={isMobile}
-      />
-
-      {/* Preview of key features */}
-      {!isExpanded && features.length > 0 && (
-        <div className={cn("mb-2", isMobile ? "mt-1" : "")}>
-          <div className={cn("h-px w-full mb-2", colorStyles.bg)} />
-          <div className={isMobile ? "flex flex-wrap" : ""}>
-            {features.slice(0, isMobile ? 3 : 2).map((feature, index) => (
-              <div key={`preview-${feature}`} className={cn(
-                "flex items-center text-brand-text-primary",
-                isMobile ? "w-1/2 mb-1.5 pr-2 text-xs" : "mb-2"
-              )}>
-                <span className={cn("flex-shrink-0 mr-1.5", colorStyles.icon, isMobile ? "w-3 h-3" : "w-3.5 h-3.5")}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={isMobile ? "w-3 h-3" : "w-3.5 h-3.5"}>
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
-                <span className={cn("truncate", isMobile ? "text-[11px]" : "text-xs")}>{feature}</span>
-              </div>
-            ))}
+        <div className="absolute -top-4 inset-x-0 flex justify-center">
+          <div className={cn(
+            "py-1 px-4 rounded-full text-white text-xs font-medium shadow-md",
+            "bg-gradient-to-r from-violet-500 to-purple-500"
+          )}>
+            Most Popular
           </div>
-          {features.length > 3 && (
-            <div className={cn("text-gray-400 italic mt-0.5", isMobile ? "text-[10px]" : "text-xs")}>
-              +{features.length - 3} more features
-            </div>
-          )}
         </div>
       )}
-
-      {/* CTA Button */}
-      <PricingActionButton 
-        isLoading={isLoading}
-        isCurrentPlan={isCurrentPlan}
-        isSubscriptionActive={isSubscriptionActive}
-        title={title}
-        cta={cta}
-        subscription={subscription}
-        isMobile={isMobile}
-        colorTheme={color}
-      />
-
-      {/* Features toggle */}
-      <PricingFeaturesToggle 
-        isExpanded={isExpanded}
-        setIsExpanded={setIsExpanded}
-        colorBg={colorStyles.bg}
-        colorAccent={colorStyles.accent}
-        isMobile={isMobile}
-      />
       
-      {/* Features list (scrollable on mobile) */}
-      <div 
+      {/* Header section */}
+      <div className="mb-4">
+        <h3 className={cn(
+          "text-xl font-bold",
+          colorStyles.accent
+        )}>
+          {title}
+        </h3>
+        <div className="mt-2 flex items-baseline">
+          <span className="text-4xl font-bold tracking-tight">${price}</span>
+          <span className="ml-1 text-sm text-slate-500">/{interval}</span>
+        </div>
+        <p className="mt-2 text-sm text-slate-600">{description}</p>
+        
+        {valueProposition && (
+          <p className={cn(
+            "mt-2 text-xs font-medium",
+            colorStyles.accent
+          )}>
+            {valueProposition}
+          </p>
+        )}
+      </div>
+      
+      {/* Action button */}
+      <button
+        onClick={handleAction}
         className={cn(
-          "transition-all duration-300 relative z-10",
-          isExpanded ? 
-            "opacity-100" : 
-            "max-h-0 opacity-0 overflow-hidden",
-          // Make scrollable on mobile with optimized height
-          isMobile && isExpanded ? "max-h-[220px] overflow-y-auto pr-1 touch-manipulation" : ""
+          "mt-2 w-full px-4 py-2 rounded-lg text-white font-medium",
+          "transition-all duration-200",
+          isCurrentPlan ? "bg-green-500 cursor-default" : `bg-gradient-to-r ${colorStyles.highlight}`,
+          !isCurrentPlan && "hover:shadow-md hover:translate-y-[-2px]"
         )}
       >
-        <div className={cn("h-px w-full mb-2", colorStyles.bg)} />
+        {isCurrentPlan ? "Current Plan" : cta}
+      </button>
+      
+      {/* Features preview */}
+      <div className="mt-6 space-y-3 flex-grow">
+        <div className="flex justify-between items-center">
+          <h4 className="text-sm font-medium text-slate-700">
+            {isExpanded ? "What's included:" : "Top features:"}
+          </h4>
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-xs text-slate-500 flex items-center focus:outline-none"
+          >
+            {isExpanded ? "Less" : "See all"}
+            <ChevronDown className={cn(
+              "ml-1 h-3 w-3 transition-transform",
+              isExpanded && "rotate-180"
+            )} />
+          </button>
+        </div>
         
-        <PricingFeaturesList 
-          features={features}
-          colorAccent={colorStyles.icon}
-          tierColor={color}
-          isMobile={isMobile}
-          useColumns={isMobile}
-        />
+        <div className="space-y-2">
+          {(isExpanded ? features : features.slice(0, 4)).map((feature, index) => (
+            <div 
+              key={index}
+              className={cn(
+                "flex items-start",
+                feature.includes("plus:") && "font-medium"
+              )}
+            >
+              <span className={cn(
+                "mr-2 rounded-full p-0.5 flex-shrink-0 mt-0.5",
+                colorStyles.bg
+              )}>
+                <Check className={cn(
+                  "h-3 w-3",
+                  colorStyles.accent
+                )} />
+              </span>
+              <span className="text-sm text-slate-700">
+                {feature.replace("plus:", "")}
+              </span>
+            </div>
+          ))}
+        </div>
         
-        {/* Guarantee badge */}
-        <div className={cn(
-          "mt-2 pt-2 border-t border-slate-100 text-slate-500 flex items-center",
-          isMobile ? "text-[9px]" : "text-[10px]"
-        )}>
-          <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "10" : "11"} height={isMobile ? "10" : "11"} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        {!isExpanded && features.length > 4 && (
+          <p className="text-xs text-slate-500">
+            +{features.length - 4} more features
+          </p>
+        )}
+      </div>
+      
+      {/* Guarantee badge - Only for paid plans */}
+      {price > 0 && (
+        <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
           7-day money-back guarantee
         </div>
-      </div>
-    </div>
+      )}
+    </motion.div>
   );
 };
