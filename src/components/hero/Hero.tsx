@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist-cta";
 import { TextRotate } from "../ui/text-rotate";
 
-const TITLES = ["Converts", "Engages", "Drives Leads"];
+const TITLES = ["Converts", "Captivates", "Drives Leads"];
 
 export function Hero() {
   const isMobile = useIsMobile();
