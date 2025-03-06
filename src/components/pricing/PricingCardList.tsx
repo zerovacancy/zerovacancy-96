@@ -101,8 +101,34 @@ export const PricingCardList = ({
     };
   }, [isMobile, activeIndex]);
 
+  // Add global CTA button for mobile view
+  const renderMobileCTA = () => {
+    if (!isMobile) return null;
+    
+    const currentCard = cards[activeIndex];
+    
+    return (
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mt-6"
+      >
+        <button className={cn(
+          "w-full py-3.5 rounded-xl font-bold text-gray-900",
+          "bg-gradient-to-r from-amber-400 to-amber-300",
+          "border-2 border-amber-300",
+          "shadow-[0_2px_10px_rgba(0,0,0,0.15)]",
+          "transition-all duration-200 touch-manipulation",
+          "hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0",
+        )}>
+          Get Started with {currentCard.title}
+        </button>
+      </motion.div>
+    );
+  };
+
   return (
-    <div className="relative">
+    <div className="relative animate-in fade-in">
       {/* Mobile pagination indicators with improved styling */}
       {isMobile && (
         <div className="flex justify-center mb-4 space-x-2">
@@ -128,7 +154,7 @@ export const PricingCardList = ({
           {activeIndex > 0 && (
             <button
               onClick={() => handleNavigation('prev')}
-              className="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-md ml-1 pointer-events-auto touch-manipulation"
+              className="w-9 h-9 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.1)] ml-1 pointer-events-auto touch-manipulation"
             >
               <ChevronLeft className="h-5 w-5 text-slate-700" />
             </button>
@@ -137,7 +163,7 @@ export const PricingCardList = ({
           {activeIndex < cards.length - 1 && (
             <button
               onClick={() => handleNavigation('next')}
-              className="w-8 h-8 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-md mr-1 pointer-events-auto touch-manipulation"
+              className="w-9 h-9 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.1)] mr-1 pointer-events-auto touch-manipulation"
             >
               <ChevronRight className="h-5 w-5 text-slate-700" />
             </button>
@@ -195,6 +221,9 @@ export const PricingCardList = ({
           </div>
         </motion.div>
       )}
+      
+      {/* Global CTA button for mobile */}
+      {renderMobileCTA()}
     </div>
   );
 };

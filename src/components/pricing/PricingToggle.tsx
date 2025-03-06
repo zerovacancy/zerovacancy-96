@@ -29,7 +29,7 @@ export const PricingToggle = ({
   return (
     <div className="flex flex-col items-center">
       <div className={cn(
-        "relative p-1 bg-slate-100/70 rounded-full flex items-center shadow-inner backdrop-blur-sm border border-slate-200/50",
+        "relative p-1 bg-white/70 backdrop-blur-sm rounded-full flex items-center shadow-sm border border-slate-100/50",
         isMobile ? "w-full max-w-xs" : "w-80"
       )}>
         {/* Monthly option */}
@@ -59,7 +59,7 @@ export const PricingToggle = ({
         {/* Active slider with improved animation */}
         <motion.div
           className={cn(
-            "absolute left-0 h-full top-0 rounded-full bg-white shadow-sm",
+            "absolute left-0 h-full top-0 rounded-full bg-white shadow-[0_2px_6px_rgba(0,0,0,0.08)]",
             animateChange && isYearly ? "ring-2 ring-brand-purple/30 ring-offset-1" : ""
           )}
           initial={false}
@@ -84,12 +84,12 @@ export const PricingToggle = ({
             exit={{ opacity: 0, y: -5 }}
             className={cn(
               "mt-2 py-1 px-3 bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white",
-              "text-xs font-medium font-inter rounded-full shadow-md flex items-center gap-1",
+              "text-xs font-medium font-inter rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.12)]",
               animateChange ? "animate-pulse" : "",
               "backdrop-blur-sm"
             )}
           >
-            <Sparkles className="h-3 w-3" />
+            <Sparkles className="h-3 w-3 inline mr-1" />
             {yearlyDiscount}
           </motion.div>
         )}

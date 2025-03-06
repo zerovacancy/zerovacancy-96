@@ -54,12 +54,13 @@ export const PricingCard = ({
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: title === "Professional" ? 0 : title === "Basic" ? 0.1 : 0.2 }}
       className={cn(
-        "relative rounded-xl flex flex-col h-full",
+        "relative rounded-2xl flex flex-col h-full",
         "border bg-white/90 backdrop-blur-sm",
-        highlighted ? "border-2 shadow-xl" : "border shadow-md",
+        highlighted ? "border-2 shadow-xl" : "border border-slate-200/70",
         highlighted ? colorStyles.border : "border-slate-200/70",
-        isMobile ? "p-4" : "p-6",
-        "transition-all duration-200 hover:shadow-lg",
+        isMobile ? "p-5" : "p-6",
+        "transition-all duration-300 hover:shadow-lg",
+        "shadow-[0_2px_10px_rgba(0,0,0,0.08)]",
         highlighted && "hover:-translate-y-1"
       )}
     >
@@ -67,7 +68,7 @@ export const PricingCard = ({
       {showPopularTag && (
         <div className="absolute -top-4 inset-x-0 flex justify-center">
           <div className={cn(
-            "py-1 px-4 rounded-full text-white text-xs font-medium shadow-md font-inter",
+            "py-1 px-4 rounded-full text-white text-xs font-medium shadow-[0_2px_10px_rgba(0,0,0,0.15)]",
             "bg-gradient-to-r from-brand-purple-medium to-brand-purple",
             "animate-pulse-subtle"
           )}>
@@ -107,10 +108,10 @@ export const PricingCard = ({
       <button
         onClick={handleAction}
         className={cn(
-          "mt-2 w-full px-4 py-2 rounded-lg text-white font-medium font-inter",
+          "mt-2 w-full px-4 py-3 rounded-xl text-white font-medium font-inter",
           "transition-all duration-300",
           isCurrentPlan ? "bg-green-500 cursor-default" : `bg-gradient-to-r ${colorStyles.highlight}`,
-          !isCurrentPlan && "hover:shadow-md hover:translate-y-[-2px]"
+          !isCurrentPlan && "hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 active:translate-y-0"
         )}
       >
         {isCurrentPlan ? "Current Plan" : cta}
@@ -124,7 +125,7 @@ export const PricingCard = ({
           </h4>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-xs text-slate-500 flex items-center focus:outline-none font-inter hover:text-brand-purple transition-colors"
+            className="text-xs text-slate-500 flex items-center focus:outline-none font-inter hover:text-brand-purple transition-colors touch-manipulation"
           >
             {isExpanded ? "Less" : "See all"}
             <ChevronDown className={cn(
@@ -134,7 +135,7 @@ export const PricingCard = ({
           </button>
         </div>
         
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           {(isExpanded ? features : features.slice(0, 4)).map((feature, index) => (
             <div 
               key={index}

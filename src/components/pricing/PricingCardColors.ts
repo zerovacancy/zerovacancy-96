@@ -29,6 +29,16 @@ export const colorVariants = {
     border: "border-emerald-100/70",
     button: "bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600",
     icon: "text-emerald-600",
+  },
+  amber: {
+    highlight: "from-amber-400 to-amber-300",
+    muted: "from-amber-100/80 to-yellow-100/80",
+    accent: "text-amber-600", 
+    bg: "bg-amber-50/70",
+    shadow: "shadow-amber-200/50",
+    border: "border-amber-100/70",
+    button: "bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-600 hover:to-amber-500",
+    icon: "text-amber-500",
   }
 };
 
