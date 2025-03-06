@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { iconColors, featureIcons } from "./feature-colors";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Sparkles } from "lucide-react";
 
 interface FeatureItemProps {
   title: string;
@@ -28,6 +27,10 @@ export const FeatureItem = ({
   
   const handleClick = () => {
     setIsExpanded(!isExpanded);
+    // Add haptic feedback if supported
+    if (window.navigator.vibrate) {
+      window.navigator.vibrate(30);
+    }
   };
   
   // Get the color scheme for this icon
@@ -36,11 +39,8 @@ export const FeatureItem = ({
   // Get the icon component
   const Icon = featureIcons[icon as keyof typeof featureIcons];
   
-  // Extract the main color for border from the text color class
-  const borderColorBase = colorScheme.text.split('-')[1];
-  
   // Set a consistent character limit for descriptions
-  const shortDescLimit = isMobile ? 60 : 85;
+  const shortDescLimit = isMobile ? 65 : 85;
   const isLongDesc = description.length > shortDescLimit;
   
   return (
@@ -49,27 +49,28 @@ export const FeatureItem = ({
         "relative w-full text-left group h-full flex flex-col",
         "rounded-xl sm:rounded-2xl transition-all duration-300",
         "bg-white hover:bg-white/95",
-        // Enhanced border - more visible with color matching the icon theme
-        `border border-${borderColorBase}-200/40`,
+        // Enhanced border and shadow styling
+        "border-2 border-slate-100/80",
+        "shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.15)]",
         // Increased border radius
         "rounded-xl sm:rounded-xl",
-        // Enhanced shadow and hover effects
-        "shadow-sm hover:shadow-md",
-        // Left border accent
-        `before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:rounded-l-xl before:bg-gradient-to-b ${colorScheme.gradient} before:opacity-0 group-hover:before:opacity-100 before:transition-opacity`,
+        // Left border accent with animation
+        "before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[3px] before:rounded-l-xl before:bg-gradient-to-b",
+        colorScheme.gradient,
+        "before:opacity-0 group-hover:before:opacity-100 before:transition-opacity",
         "p-4 sm:p-5 lg:p-6",
-        "focus:outline-none focus:ring-2 focus:ring-primary/20",
-        // Enhanced hover transition - less pronounced on mobile for better performance
-        isMobile ? "active:translate-y-0" : "hover:-translate-y-1.5 hover:border-transparent",
+        "focus:outline-none focus:ring-2 focus:ring-brand-purple/20",
+        // Enhanced hover transition
+        isMobile ? "active:translate-y-0" : "hover:-translate-y-1 hover:border-transparent",
         "transition-all duration-300",
         // For partially visible card
-        isPartiallyVisible && "opacity-80 shadow-none"
+        isPartiallyVisible && "opacity-90"
       )}
       onClick={handleClick}
       aria-expanded={isExpanded}
       whileHover={isMobile ? {} : { 
         scale: 1.01,
-        boxShadow: "0 8px 20px rgba(0,0,0,0.08)"
+        transition: { duration: 0.2 }
       }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ 
@@ -77,31 +78,29 @@ export const FeatureItem = ({
         y: 0,
         transition: {
           duration: 0.4,
-          delay: index * 0.05 + 0.1
+          delay: index * 0.05
         }
       }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{
-        // Very subtle background tint matching the card's theme color
-        backgroundColor: `rgba(${borderColorBase === 'indigo' ? '237, 242, 255' : 
-                                 borderColorBase === 'blue' ? '235, 245, 255' : 
-                                 borderColorBase === 'violet' ? '243, 240, 255' : 
-                                 borderColorBase === 'pink' ? '253, 242, 248' : 
-                                 borderColorBase === 'emerald' ? '236, 253, 245' : 
-                                 borderColorBase === 'amber' ? '255, 251, 235' : 
-                                 borderColorBase === 'cyan' ? '236, 254, 255' : 
-                                 borderColorBase === 'rose' ? '255, 241, 242' : 
-                                 '255, 255, 255'}, 0.97)`,
-        // For partially visible card
         clipPath: isPartiallyVisible ? "polygon(0 0, 100% 0, 100% 65%, 0 65%)" : "none",
         pointerEvents: isPartiallyVisible ? "none" : "auto"
       }}
     >
       {isPopular && (
-        <span className="absolute -top-2 -right-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm animate-float-subtle shadow-glow">
-          Popular
-        </span>
+        <motion.div 
+          className="absolute -top-2 -right-2 z-10"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
+            <span className="flex items-center gap-1">
+              <Sparkles className="w-3 h-3" />
+              Popular
+            </span>
+          </div>
+        </motion.div>
       )}
       
       <div className="flex flex-col items-start gap-3 sm:gap-4 h-full">
@@ -114,7 +113,7 @@ export const FeatureItem = ({
             "transition-all duration-300",
             "bg-gradient-to-br",
             colorScheme.gradient,
-            "opacity-95",
+            "opacity-95 group-hover:opacity-100",
             "group-hover:shadow-md",
             "border border-opacity-20",
             `border-${colorScheme.text.split('-')[1]}-100`,
@@ -133,7 +132,7 @@ export const FeatureItem = ({
         <div className="text-left w-full flex-grow flex flex-col">
           <h3 className={cn(
             "text-base sm:text-lg font-bold leading-tight font-space mb-2",
-            "text-gray-900 group-hover:text-indigo-600",
+            "text-gray-900 group-hover:text-brand-purple",
             "transition-colors duration-300"
           )}>
             {title}
@@ -146,26 +145,15 @@ export const FeatureItem = ({
             "group-hover:w-16"
           )} />
           
-          <p className="text-xs sm:text-sm text-gray-600 font-anek line-height-[1.6] group-hover:text-gray-700">
+          <p className="text-sm text-gray-600 font-anek leading-relaxed group-hover:text-gray-700">
             {isExpanded || !isLongDesc ? 
               description : 
               (<>
-                {`${description.substring(0, shortDescLimit)}`}
-                <span className="text-indigo-500"> ...</span>
+                {`${description.substring(0, shortDescLimit)}...`}
+                <span className="text-brand-purple ml-1">read more</span>
               </>)
             }
           </p>
-          
-          <div className={cn(
-            "mt-2 sm:mt-3 text-xs font-medium flex items-center gap-1.5", 
-            colorScheme.text,
-            "opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          )}>
-            {isExpanded ? "Show less" : "Learn more"} <ChevronRight className={cn(
-              "w-3 h-3 transition-transform duration-300",
-              isExpanded ? "rotate-90" : ""
-            )} />
-          </div>
         </div>
       </div>
     </motion.button>
