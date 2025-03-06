@@ -44,31 +44,32 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
       <div className="mb-4 sm:mb-6">
         <div className="flex items-center justify-between mb-3 sm:mb-4">
           <h3 className={cn(
-            "font-semibold text-gray-900",
-            isMobile ? "text-sm" : "text-base"
+            "font-bold text-gray-900 bg-gradient-to-r from-indigo-700 to-purple-600 bg-clip-text text-transparent",
+            isMobile ? "text-base" : "text-lg"
           )}>
             Top creators in your area
           </h3>
           
-          {/* More compact sort dropdown */}
+          {/* More elegant sort dropdown */}
           <Select value={sortBy} onValueChange={onSort}>
             <SelectTrigger className={cn(
-              "border-gray-200 text-gray-800",
-              isMobile ? "h-8 text-xs pl-2 pr-2 w-[110px]" : "h-9 text-sm w-[130px]" // Smaller on mobile
+              "border-gray-200 hover:border-indigo-300 text-gray-700 hover:text-indigo-700 transition-colors",
+              "bg-white hover:bg-indigo-50/50 shadow-sm",
+              isMobile ? "h-8 text-xs pl-2 pr-2 w-[120px]" : "h-9 text-sm w-[140px]"
             )}>
               <span className="flex items-center">
                 <ArrowUpDown className={cn(
-                  "mr-1.5 flex-shrink-0 text-gray-500",
-                  isMobile ? "w-3 h-3" : "w-3.5 h-3.5" // Smaller icon on mobile
+                  "mr-1.5 flex-shrink-0 text-indigo-500",
+                  isMobile ? "w-3 h-3" : "w-3.5 h-3.5"
                 )} />
                 <SelectValue placeholder="Sort by" />
               </span>
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="rating">Highest Rated</SelectItem>
-              <SelectItem value="price-low">Price: Low to High</SelectItem>
-              <SelectItem value="price-high">Price: High to Low</SelectItem>
-              <SelectItem value="reviews">Most Reviews</SelectItem>
+            <SelectContent className="border-indigo-100">
+              <SelectItem value="rating" className="hover:text-indigo-700 hover:bg-indigo-50/50">Highest Rated</SelectItem>
+              <SelectItem value="price-low" className="hover:text-indigo-700 hover:bg-indigo-50/50">Price: Low to High</SelectItem>
+              <SelectItem value="price-high" className="hover:text-indigo-700 hover:bg-indigo-50/50">Price: High to Low</SelectItem>
+              <SelectItem value="reviews" className="hover:text-indigo-700 hover:bg-indigo-50/50">Most Reviews</SelectItem>
             </SelectContent>
           </Select>
         </div>
