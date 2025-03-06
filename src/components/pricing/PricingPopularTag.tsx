@@ -3,11 +3,23 @@ import { Sparkles } from 'lucide-react';
 
 interface PricingPopularTagProps {
   colorClass: string;
+  position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 }
 
-export const PricingPopularTag = ({ colorClass }: PricingPopularTagProps) => {
+export const PricingPopularTag = ({ 
+  colorClass,
+  position = 'top-right' 
+}: PricingPopularTagProps) => {
+  // Map position values to specific CSS classes
+  const positionClasses = {
+    'top-right': 'absolute -top-3 right-5',
+    'top-left': 'absolute -top-3 left-5',
+    'bottom-right': 'absolute -bottom-3 right-5',
+    'bottom-left': 'absolute -bottom-3 left-5',
+  };
+
   return (
-    <div className="absolute -top-4 right-8 z-10">
+    <div className={positionClasses[position] + " z-10"}>
       <div className={`
         px-4 py-1.5 
         rounded-full 
@@ -21,8 +33,10 @@ export const PricingPopularTag = ({ colorClass }: PricingPopularTagProps) => {
         after:rounded-full after:animate-shimmer-slide after:z-0
         overflow-hidden
         relative
+        animate-float-subtle
+        shadow-glow
       `}>
-        <Sparkles className="w-3.5 h-3.5 relative z-10" />
+        <Sparkles className="w-3.5 h-3.5 relative z-10 animate-sparkle" />
         <span className="relative z-10">Most Popular</span>
       </div>
     </div>
