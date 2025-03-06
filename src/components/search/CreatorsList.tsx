@@ -97,10 +97,33 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           </motion.button>
         </div>}
       
-     {/* Desktop "Show more" button - only visible if there are results and not on mobile */}
-{!isMobile && creators.length > 0 && <div className="mt-6 text-center">
+   {/* Desktop "Show more" button - only visible on desktop */}
+{!isMobile && creators.length > 0 && (
+  <div className="mt-6 text-center">
     <button className={cn("inline-flex items-center justify-center px-4 py-2 rounded-full", "bg-white text-indigo-600 font-medium border border-indigo-200", "shadow-sm hover:bg-indigo-50 transition-colors", "text-sm")}>
-        Show more creators
-        <ChevronDown className="ml-1 w-4 h-4" />
+      Show more creators
+      <ChevronDown className="ml-1 w-4 h-4" />
     </button>
-</div>}
+  </div>
+)}
+
+{/* Mobile "Show more" button - matches the Join Waitlist styling */}
+{isMobile && creators.length > 0 && (
+  <div className="mt-4 mb-6 text-center">
+    <button 
+      className={cn(
+        "inline-flex items-center justify-center px-6 py-3",  
+        "rounded-full",                                      
+        "bg-gradient-to-r from-gray-50 to-indigo-50/30",     
+        "text-indigo-600/80 font-medium",                    
+        "border border-indigo-100/50",                       
+        "shadow-sm",                                          
+        "hover:shadow-md hover:bg-indigo-50/50 transition-all duration-200",
+        "text-sm w-[85%] mx-auto"                             
+      )}
+    >
+      Show {creators.length - 3} more creators
+      <ChevronDown className="ml-1.5 w-3.5 h-3.5 text-indigo-500/70" />
+    </button>
+  </div>
+)}
