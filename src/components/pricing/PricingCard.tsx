@@ -23,6 +23,7 @@ export interface PricingCardProps {
   color?: ColorVariant;
   showPopularTag?: boolean;
   valueProposition?: string;
+  mobileBorder?: boolean;
 }
 
 export const PricingCard = ({
@@ -38,7 +39,8 @@ export const PricingCard = ({
   defaultExpanded = false,
   color = "blue",
   showPopularTag = false,
-  valueProposition
+  valueProposition,
+  mobileBorder = false
 }: PricingCardProps) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const isMobile = useIsMobile();
@@ -58,19 +60,27 @@ export const PricingCard = ({
 
   // Enhanced styling for professional pricing plan
   const isProfessional = title === "Professional";
+  const isBasic = title === "Basic";
 
   return (
     <div 
       className={cn(
-        "relative rounded-3xl p-6 sm:p-8 shadow-xl transition-all duration-300 h-full flex flex-col",
+        "relative rounded-3xl shadow-xl transition-all duration-300 h-full flex flex-col",
         "border bg-white/90 backdrop-blur-sm",
+        isMobile ? "p-5" : "p-6 sm:p-8", // Reduced padding on mobile
         colorStyles.border,
         cardPattern,
         isProfessional && highlighted ? 
           "border-2 border-violet-400 ring-2 ring-violet-300/50" : "",
         highlighted ? 
-          `shadow-2xl ${colorStyles.shadow} hover:scale-105 ring-1 ring-white/70 transform duration-300` : 
-          "shadow-lg hover:shadow-xl hover:translate-y-[-8px] transform duration-300",
+          `shadow-2xl ${colorStyles.shadow} hover:scale-[1.01] ring-1 ring-white/70 transform duration-300` : 
+          "shadow-lg hover:shadow-xl hover:translate-y-[-4px] transform duration-300",
+        // Add a thin border to Basic tier on mobile
+        isMobile && isBasic && mobileBorder ? "border border-blue-100" : "",
+        // Add subtle background colors for each tier on mobile
+        isMobile && isProfessional ? "bg-violet-50/80" : 
+        isMobile && isBasic ? "bg-blue-50/80" : 
+        isMobile ? "bg-emerald-50/80" : "",
       )}
       onMouseEnter={() => !isMobile && setIsExpanded(true)} 
       onMouseLeave={() => !isMobile && !defaultExpanded && setIsExpanded(false)}
@@ -80,9 +90,12 @@ export const PricingCard = ({
         <div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-violet-400/70 opacity-70 bg-gradient-to-br from-violet-100/10 to-violet-300/10"></div>
       )}
       
-      {/* Popular tag for highlighted plans */}
+      {/* Popular tag for highlighted plans - Reduced visual weight */}
       {showPopularTag && (
-        <PricingPopularTag colorClass={`${colorStyles.highlight}`} />
+        <PricingPopularTag 
+          colorClass={`${colorStyles.highlight}`} 
+          reducedWeight={isMobile}
+        />
       )}
       
       <PricingCardHeader 
@@ -94,12 +107,13 @@ export const PricingCard = ({
         isCurrentPlan={isCurrentPlan}
         isSubscriptionActive={isSubscriptionActive}
         valueProposition={valueProposition}
+        isMobile={isMobile}
       />
 
       {/* Show 2-3 key features even when collapsed */}
       {!isExpanded && features.length > 0 && (
-        <div className="mb-6">
-          <div className={cn("h-px w-full mb-4", colorStyles.bg)} />
+        <div className={cn("mb-4", isMobile ? "mb-3" : "mb-6")}>
+          <div className={cn("h-px w-full mb-3", isMobile ? "mb-3" : "mb-4", colorStyles.bg)} />
           <ul className="space-y-2">
             {features.slice(0, 2).map((feature, index) => (
               <li key={`preview-${feature}`} className="flex items-center text-sm text-brand-text-primary">
@@ -112,7 +126,7 @@ export const PricingCard = ({
               </li>
             ))}
             {features.length > 2 && (
-              <li className="text-sm text-brand-text-light italic pl-8">
+              <li className="text-sm text-brand-text-light italic pl-8 text-gray-400">
                 +{features.length - 2} more features
               </li>
             )}
@@ -120,7 +134,7 @@ export const PricingCard = ({
         </div>
       )}
 
-      {/* CTA Button - Always visible */}
+      {/* CTA Button - Always visible with standardized sizing */}
       <PricingActionButton 
         isLoading={isLoading}
         isCurrentPlan={isCurrentPlan}
@@ -128,6 +142,8 @@ export const PricingCard = ({
         title={title}
         cta={cta}
         subscription={subscription}
+        isMobile={isMobile}
+        colorTheme={color}
       />
 
       {/* Features toggle - only on mobile */}
@@ -144,16 +160,17 @@ export const PricingCard = ({
           isExpanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <div className={cn("h-px w-full mb-4", colorStyles.bg)} />
+        <div className={cn("h-px w-full mb-3", isMobile ? "mb-3" : "mb-4", colorStyles.bg)} />
         
         <PricingFeaturesList 
           features={features}
           colorAccent={colorStyles.icon}
           tierColor={color}
+          isMobile={isMobile}
         />
         
         {/* Money-back guarantee badge */}
-        <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center">
+        <div className="mt-3 pt-2 border-t border-slate-100 text-xs text-slate-500 flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           </svg>

@@ -7,11 +7,22 @@ interface PricingFeaturesListProps {
   features: string[];
   colorAccent: string;
   tierColor?: ColorVariant;
+  isMobile?: boolean;
 }
 
-export const PricingFeaturesList = ({ features, colorAccent, tierColor = "blue" }: PricingFeaturesListProps) => {
-  // Map specific feature keywords to their respective icons
+export const PricingFeaturesList = ({ 
+  features, 
+  colorAccent, 
+  tierColor = "blue",
+  isMobile = false 
+}: PricingFeaturesListProps) => {
+  // On mobile, we use consistent check icons for all features
   const getIcon = (feature: string) => {
+    if (isMobile) {
+      return <Check size={18} />;
+    }
+    
+    // On desktop, we can use varied icons
     const lowerFeature = feature.toLowerCase();
     if (lowerFeature.includes('photo')) return <Camera size={18} className="animate-subtle-bounce" />;
     if (lowerFeature.includes('drone') || lowerFeature.includes('aerial')) return <Plane size={18} />;
@@ -23,12 +34,16 @@ export const PricingFeaturesList = ({ features, colorAccent, tierColor = "blue" 
   };
 
   return (
-    <ul className="space-y-4 text-sm text-brand-text-primary">
+    <ul className={cn(
+      "text-sm text-brand-text-primary",
+      isMobile ? "space-y-2.5" : "space-y-4"
+    )}>
       {features.map((feature, index) => (
         <li key={feature} className="flex items-start group">
           <span className={cn(
-            "w-5 h-5 flex-shrink-0 mr-3 mt-0.5 transition-transform duration-300 group-hover:scale-110", 
-            colorAccent
+            "flex-shrink-0 mr-3 mt-0.5 transition-transform duration-300 group-hover:scale-110", 
+            colorAccent,
+            isMobile ? "w-4 h-4" : "w-5 h-5"
           )}>
             {getIcon(feature)}
           </span>

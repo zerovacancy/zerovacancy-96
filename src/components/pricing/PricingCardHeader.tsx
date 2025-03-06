@@ -1,4 +1,6 @@
 
+import { cn } from "@/lib/utils";
+
 interface PricingCardHeaderProps {
   title: string;
   price: number;
@@ -8,6 +10,7 @@ interface PricingCardHeaderProps {
   isCurrentPlan: boolean;
   isSubscriptionActive: boolean;
   valueProposition?: string;
+  isMobile?: boolean;
 }
 
 export const PricingCardHeader = ({ 
@@ -18,11 +21,15 @@ export const PricingCardHeader = ({
   colorAccent,
   isCurrentPlan,
   isSubscriptionActive,
-  valueProposition
+  valueProposition,
+  isMobile = false
 }: PricingCardHeaderProps) => {
   return (
     <>
-      <div className="flex items-center justify-between mb-6 relative z-10">
+      <div className={cn(
+        "flex items-center justify-between relative z-10",
+        isMobile ? "mb-4" : "mb-6"
+      )}>
         <h3 className={`text-xl font-bold ${colorAccent}`}>
           {title}
         </h3>
@@ -33,24 +40,45 @@ export const PricingCardHeader = ({
         )}
       </div>
       
-      <div className="flex items-baseline relative z-10 mb-1">
-        <span className="text-sm font-medium text-slate-500 mr-1">$</span>
-        <span className="text-5xl font-extrabold tracking-tight text-slate-900">{price}</span>
-        <span className="ml-2 text-sm font-medium text-slate-500">/{interval}</span>
+      <div className={cn(
+        "flex items-baseline relative z-10 mb-1", 
+        isMobile ? "mb-0.5" : "mb-1"
+      )}>
+        <span className={cn(
+          "font-medium text-slate-500 mr-1",
+          isMobile ? "text-sm" : "text-sm"
+        )}>$</span>
+        <span className={cn(
+          "font-extrabold tracking-tight text-slate-900",
+          isMobile ? "text-4xl" : "text-5xl"
+        )}>{price}</span>
+        <span className={cn(
+          "text-sm font-medium text-slate-500",
+          isMobile ? "ml-1.5 text-xs" : "ml-2 text-sm"
+        )}>/{interval}</span>
       </div>
       
-      {/* Annual price option with savings */}
-      <div className="text-xs text-slate-500 mb-3">
+      {/* Annual price option with savings - Made smaller and lighter */}
+      <div className={cn(
+        "text-slate-500 mb-3",
+        isMobile ? "text-xs" : "text-xs" 
+      )}>
         <span className="font-medium">${Math.round(price * 10)}</span>/year (save $
         {Math.round(price * 12 - price * 10)})
       </div>
 
-      <p className="text-sm text-slate-600 mb-3 relative z-10 font-inter leading-relaxed">
+      <p className={cn(
+        "text-slate-600 relative z-10 font-inter leading-relaxed",
+        isMobile ? "text-sm mb-2" : "text-sm mb-3"
+      )}>
         {description}
       </p>
       
       {valueProposition && (
-        <p className={`text-sm font-medium mb-6 ${colorAccent} font-inter`}>
+        <p className={cn(
+          `font-medium ${colorAccent} font-inter`,
+          isMobile ? "text-xs mb-4" : "text-sm mb-6"
+        )}>
           <span className="inline-block mr-1">✦</span> {valueProposition}
         </p>
       )}

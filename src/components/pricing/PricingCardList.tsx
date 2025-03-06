@@ -14,7 +14,12 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
   const isMobile = useIsMobile();
   
   return (
-    <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3 sm:grid-cols-2">
+    <div className={cn(
+      "grid gap-6 md:gap-8",
+      isMobile 
+        ? "grid-cols-1 px-1.5" 
+        : "lg:grid-cols-3 sm:grid-cols-2"
+    )}>
       {cards.map((card, index) => (
         <motion.div
           key={card.title}
@@ -22,7 +27,10 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-          className={card.highlighted ? "lg:scale-105 lg:-translate-y-2 z-10" : ""}
+          className={cn(
+            isMobile ? "w-full mb-3" : "",
+            card.highlighted && !isMobile ? "lg:scale-105 lg:-translate-y-2 z-10" : ""
+          )}
         >
           {card.highlighted ? (
             <ShineBorder 
@@ -36,7 +44,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
                 {...card}
                 subscription={subscription}
                 isLoading={isLoading}
-                defaultExpanded={card.highlighted || (isMobile && card.defaultExpanded)}
+                defaultExpanded={isMobile ? false : card.highlighted}
               />
             </ShineBorder>
           ) : (
@@ -44,7 +52,8 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
               {...card}
               subscription={subscription}
               isLoading={isLoading}
-              defaultExpanded={!isMobile ? false : card.defaultExpanded}
+              defaultExpanded={false}
+              mobileBorder={true}
             />
           )}
         </motion.div>
@@ -52,3 +61,5 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
     </div>
   );
 };
+
+import { cn } from "@/lib/utils";

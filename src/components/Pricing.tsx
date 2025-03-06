@@ -5,11 +5,14 @@ import { useToast } from "@/hooks/use-toast";
 import { PricingHeader } from "./pricing/PricingHeader";
 import { PricingCardList } from "./pricing/PricingCardList";
 import { PricingService } from "@/services/PricingService";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 export function Pricing() {
   const [subscription, setSubscription] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const fetchSubscription = async () => {
@@ -49,7 +52,7 @@ export function Pricing() {
         "Limited revisions"
       ],
       cta: "Get Started",
-      defaultExpanded: true,
+      defaultExpanded: !isMobile,
       color: "blue" as const
     },
     {
@@ -69,7 +72,7 @@ export function Pricing() {
       ],
       cta: "Go Professional",
       highlighted: true,
-      defaultExpanded: true,
+      defaultExpanded: !isMobile,
       color: "purple" as const,
       showPopularTag: true
     },
@@ -90,14 +93,21 @@ export function Pricing() {
         "Rush delivery available"
       ],
       cta: "Go Premium",
-      defaultExpanded: true,
+      defaultExpanded: !isMobile,
       color: "emerald" as const
     }
   ];
 
   return (
-    <div className="py-12 sm:py-20 lg:py-24 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className={cn(
+      "overflow-hidden",
+      isMobile ? "py-8" : "py-12 sm:py-20 lg:py-24", 
+      isMobile ? "bg-gray-50/70" : ""  // Add subtle background on mobile
+    )}>
+      <div className={cn(
+        "mx-auto max-w-7xl relative z-10",
+        isMobile ? "px-3" : "px-4 sm:px-6 lg:px-8"
+      )}>
         <PricingHeader 
           title="Simple, transparent pricing"
           subtitle="Choose the perfect plan for your property marketing needs with no hidden fees"
@@ -109,7 +119,10 @@ export function Pricing() {
           isLoading={isLoading}
         />
         
-        <div className="mt-12 text-center">
+        <div className={cn(
+          "text-center",
+          isMobile ? "mt-8" : "mt-12"
+        )}>
           <p className="text-sm text-slate-500 flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
