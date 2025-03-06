@@ -97,12 +97,10 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           </motion.button>
         </div>}
       
-      {/* Desktop "Show more" button - only visible if there are results and not on mobile */}
-      {!isMobile && creators.length > 0 && <div className="mt-6 text-center">
-          <button className={cn("inline-flex items-center justify-center px-4 py-2 rounded-full", "bg-white text-indigo-600 font-medium border border-indigo-200", "shadow-sm hover:bg-indigo-50 transition-colors", "text-sm")}>
-            Show more creators
-            <ChevronDown className="ml-1 w-4 h-4" />
-          </button>
-        </div>}
-    </div>;
-};
+     {/* Desktop "Show more" button - only visible if there are results and not on mobile */}
+{!isMobile && creators.length > 0 && <div className="mt-6 text-center">
+    <button className={cn("inline-flex items-center justify-center px-4 py-2 rounded-full", "bg-white text-indigo-600 font-medium border border-indigo-200", "shadow-sm hover:bg-indigo-50 transition-colors", "text-sm")}>
+        Show more creators
+        <ChevronDown className="ml-1 w-4 h-4" />
+    </button>
+</div>}
