@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Creator } from '../creator/types';
+
 interface CreatorsListProps {
   creators: Creator[];
   sortBy: string;
@@ -14,6 +15,7 @@ interface CreatorsListProps {
   loadedImages: Set<string>;
   imageRef: (el: HTMLImageElement | null) => void;
 }
+
 export const CreatorsList: React.FC<CreatorsListProps> = ({
   creators,
   sortBy,
@@ -31,6 +33,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
   // Filter tags with improved styling
   const filterTags = ["All Services", "Photography", "Video Tours", "Drone Footage", "3D Tours", "Floor Plans", "Virtual Staging"];
+  
   return (
     <div className="relative">
       {/* Filters section with horizontal scrolling on mobile */}
@@ -78,40 +81,45 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
       
       {/* Mobile expand/collapse button - only visible if there are more than 1 creator */}
       {isMobile && creators.length > 1 && (
-        <div className="mt-6 text-center my-[25px]">
+        <div className="mt-4 mb-6 text-center">
           <motion.button 
             className={cn(
-              "inline-flex items-center justify-center px-5 py-2.5 rounded-full", 
-              "bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700", 
-              "text-white font-semibold shadow-md shadow-indigo-200/50", 
-              "hover:shadow-lg hover:shadow-indigo-300/50 hover:-translate-y-0.5", 
-              "transform active:scale-[0.98] transition-all duration-200", 
-              "text-sm relative overflow-hidden",
-              "group"
-            )} 
-            onClick={() => setShowAllCreators(!showAllCreators)} 
+              "inline-flex items-center justify-center px-6 py-3",
+              "rounded-full",
+              "bg-gradient-to-r from-gray-50 to-indigo-50/30",
+              "text-indigo-600/80 font-medium",
+              "border border-indigo-100/50",
+              "shadow-sm",
+              "hover:shadow-md hover:bg-indigo-50/50 transition-all duration-200",
+              "text-sm w-[85%] mx-auto",
+              "relative overflow-hidden group"
+            )}
+            onClick={() => setShowAllCreators(!showAllCreators)}
             initial={{
               opacity: 0,
               y: 10
-            }} 
+            }}
             animate={{
               opacity: 1,
               y: 0
-            }} 
+            }}
             transition={{
               duration: 0.3
-            }} 
+            }}
             whileTap={{
               scale: 0.98
             }}
           >
             <span className="relative z-10 flex items-center">
               {showAllCreators ? "Show less creators" : `Show ${creators.length - 1} more creators`}
-              {showAllCreators ? <ChevronUp className="ml-1.5 w-4 h-4" /> : <ChevronDown className="ml-1.5 w-4 h-4" />}
+              {showAllCreators 
+                ? <ChevronUp className="ml-1.5 w-3.5 h-3.5 text-indigo-500/70" /> 
+                : <ChevronDown className="ml-1.5 w-3.5 h-3.5 text-indigo-500/70" />
+              }
             </span>
             
             {/* Subtle shimmer effect */}
-            <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-indigo-100/20 to-transparent" />
           </motion.button>
         </div>
       )}
