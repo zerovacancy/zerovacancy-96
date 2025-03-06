@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { ArrowRight } from 'lucide-react';
@@ -49,7 +48,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
           </div>
 
-          {/* Price tag with fixed dollar sign - removed the DollarSign component and used a text $ */}
+          {/* Price tag - Simplified for mobile with single $ */}
           <div className="absolute top-3 sm:top-3.5 right-3 sm:right-3.5 z-20">
             <span className={cn(
               isMobile ? "px-2 py-1 text-xs" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm",
@@ -58,53 +57,55 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               "text-[#212121] rounded-full",
               "shadow-[0_3px_8px_rgba(0,0,0,0.12)]",
               "transition-all duration-200",
-              "group-hover:scale-105 group-hover:shadow-[0_4px_10px_rgba(0,0,0,0.18)]",
-              "flex items-center gap-1.5"
+              "group-hover:scale-105 group-hover:shadow-[0_4px_10px_rgba(0,0,0,0.18)]"
             )}>
-              <span className="text-gray-700">$</span>
-              <span>From ${creator.price}</span>
+              From ${creator.price}
             </span>
           </div>
 
           <div className="relative">
-            {/* Media container with no top padding to avoid white gap */}
+            {/* Media container with adjusted aspect ratio for mobile */}
             <div className="relative">
-              <CreatorMedia 
-                creator={creator}
-                onImageLoad={onImageLoad}
-                onVideoLoad={() => onImageLoad?.(creator.image)}
-              />
+              <div className={cn(
+                isMobile ? "aspect-[5/3]" : "aspect-[4/3]" // Increased visibility for image on mobile
+              )}>
+                <CreatorMedia 
+                  creator={creator}
+                  onImageLoad={onImageLoad}
+                  onVideoLoad={() => onImageLoad?.(creator.image)}
+                />
+              </div>
               
               <CreatorInfo creator={creator} />
             </div>
             
-            {/* Tags and rating section */}
+            {/* Tags and rating section - More compact for mobile */}
             <div className={cn(
-              isMobile ? "p-5 sm:p-5" : "p-4 sm:p-5",
+              isMobile ? "p-4" : "p-4 sm:p-5",
               "flex flex-col"
             )}>
-              {/* Tags section */}
+              {/* Tags section - Reduced margin for mobile */}
               <div className={cn(
-                isMobile ? "mb-3" : "mb-4",
+                isMobile ? "mb-2" : "mb-4",
               )}>
                 <CreatorTags tags={tags} />
               </div>
               
-              {/* Rating section with subtle background */}
-              <div className="bg-gray-50/80 rounded-lg px-3 py-2.5 shadow-sm">
+              {/* Rating section with more compact layout for mobile */}
+              <div className="bg-gray-50/80 rounded-lg px-3 py-2 shadow-sm">
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
               
-              {/* CTA button section */}
+              {/* CTA button section with adjusted spacing for mobile */}
               <div className={cn(
-                isMobile ? "mt-4" : "mt-5",
+                isMobile ? "mt-3" : "mt-5",
               )}>
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
                   aria-label={`Join waitlist to work with ${creator.name}`}
                   className={cn(
                     "w-full text-sm px-4 hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200 group-hover:animate-pulse-subtle",
-                    isMobile ? "h-12" : "h-10 sm:h-11", // Larger tap target on mobile
+                    isMobile ? "h-10" : "h-10 sm:h-11", // Adjusted height for mobile
                   )}
                 >
                   <span>Join Waitlist</span>
