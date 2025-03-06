@@ -39,9 +39,27 @@ export const FeatureItem = ({
   // Extract the main color for border from the text color class
   const borderColorBase = colorScheme.text.split('-')[1];
   
-  // Set a consistent character limit for descriptions
+  // Set a consistent character limit for descriptions - ensure truncation at sentence breaks
   const shortDescLimit = isMobile ? 60 : 85;
   const isLongDesc = description.length > shortDescLimit;
+  
+  // Find the last period, comma, or space before the limit to truncate at a logical break
+  const findLogicalBreak = (text: string, limit: number) => {
+    if (text.length <= limit) return text.length;
+    
+    const substring = text.substring(0, limit);
+    const lastPeriod = substring.lastIndexOf('.');
+    const lastComma = substring.lastIndexOf(',');
+    const lastSpace = substring.lastIndexOf(' ');
+    
+    if (lastPeriod > limit - 15) return lastPeriod + 1;
+    if (lastComma > limit - 12) return lastComma + 1;
+    if (lastSpace > limit - 10) return lastSpace;
+    
+    return limit;
+  };
+  
+  const truncationPoint = findLogicalBreak(description, shortDescLimit);
   
   return (
     <motion.button
@@ -51,12 +69,13 @@ export const FeatureItem = ({
         "bg-white hover:bg-white/95",
         // Enhanced border - more visible with color matching the icon theme
         `border border-${borderColorBase}-200/40`,
-        // Increased border radius
+        // Consistent border radius
         "rounded-xl sm:rounded-xl",
-        // Enhanced shadow and hover effects
+        // Consistent shadow
         "shadow-sm hover:shadow-md",
         // Left border accent
         `before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:rounded-l-xl before:bg-gradient-to-b ${colorScheme.gradient} before:opacity-0 group-hover:before:opacity-100 before:transition-opacity`,
+        // Consistent padding
         "p-4 sm:p-5 lg:p-6",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
         // Enhanced hover transition - less pronounced on mobile for better performance
@@ -98,6 +117,7 @@ export const FeatureItem = ({
         pointerEvents: isPartiallyVisible ? "none" : "auto"
       }}
     >
+      {/* Standardized Popular Tag - consistent positioning for all cards */}
       {isPopular && (
         <div className="absolute -top-3 inset-x-0 flex justify-center z-10">
           <div className="py-1 px-2.5 flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-xs font-medium shadow-md">
@@ -108,7 +128,7 @@ export const FeatureItem = ({
       )}
       
       <div className="flex flex-col items-start gap-3 sm:gap-4 h-full">
-        {/* Icon container with refined styling */}
+        {/* Icon container with consistent styling */}
         <motion.div 
           className={cn(
             "flex items-center justify-center",
@@ -134,9 +154,10 @@ export const FeatureItem = ({
         </motion.div>
         
         <div className="text-left w-full flex-grow flex flex-col">
+          {/* Standardized title style - all black for consistent hierarchy */}
           <h3 className={cn(
             "text-base sm:text-lg font-bold leading-tight font-space mb-2",
-            "text-gray-900 group-hover:text-indigo-600",
+            "text-gray-900",
             "transition-colors duration-300"
           )}>
             {title}
@@ -149,20 +170,22 @@ export const FeatureItem = ({
             "group-hover:w-16"
           )} />
           
+          {/* Standardized description truncation */}
           <p className="text-xs sm:text-sm text-gray-600 font-anek line-height-[1.6] group-hover:text-gray-700">
             {isExpanded || !isLongDesc ? 
               description : 
               (<>
-                {`${description.substring(0, shortDescLimit)}`}
+                {`${description.substring(0, truncationPoint).trim()}`}
                 <span className="text-indigo-500"> ...</span>
               </>)
             }
           </p>
           
+          {/* Learn more link - consistently visible for all cards */}
           <div className={cn(
             "mt-2 sm:mt-3 text-xs font-medium flex items-center gap-1.5", 
             colorScheme.text,
-            "opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            "transition-opacity duration-300"
           )}>
             {isExpanded ? "Show less" : "Learn more"} <ChevronRight className={cn(
               "w-3 h-3 transition-transform duration-300",

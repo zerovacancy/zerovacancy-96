@@ -16,7 +16,7 @@ export const MobileViewButton = ({
 }: MobileViewButtonProps) => {
   return (
     <motion.div 
-      className="mt-10 sm:mt-12 flex justify-center md:hidden"
+      className="mt-12 sm:mt-14 flex justify-center md:hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -26,7 +26,8 @@ export const MobileViewButton = ({
       {isMobile && showAllCards ? (
         <Button 
           variant="outline" 
-          className="group border-indigo-200 hover:border-indigo-400 hover:bg-indigo-50/50 text-indigo-600"
+          size="lg"
+          className="group border-indigo-300 hover:border-indigo-500 hover:bg-indigo-50/70 text-indigo-600 font-medium px-6"
           onClick={toggleShowAllCards}
         >
           Show less
@@ -34,8 +35,9 @@ export const MobileViewButton = ({
         </Button>
       ) : (
         <Button 
-          variant="outline" 
-          className="group border-indigo-200 hover:border-indigo-400 hover:bg-indigo-50/50 text-indigo-600"
+          variant="default"
+          size="lg" 
+          className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium px-6 shadow-md"
         >
           View all services
           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
