@@ -10,7 +10,7 @@ interface PricingCardProps {
   title: string;
   price: number;
   interval: string;
-  description: string;
+  description: string; // We'll keep this in the props but not display it
   features: string[];
   cta: string;
   color?: ColorVariant;
@@ -27,7 +27,7 @@ export const PricingCard = ({
   title,
   price,
   interval,
-  description,
+  description, // Keeping in props for backward compatibility
   features,
   cta,
   color = "blue",
@@ -100,7 +100,7 @@ export const PricingCard = ({
             <span className="text-4xl font-bold tracking-tight font-jakarta text-brand-purple-dark">Free</span>
           )}
         </div>
-        <p className="mt-2 text-sm text-slate-600 font-inter">{description}</p>
+        {/* Removed the description paragraph that was here */}
         
         {valueProposition && (
           <p className={cn(
@@ -194,3 +194,4 @@ export const PricingCard = ({
     </motion.div>
   );
 };
+
