@@ -42,41 +42,60 @@ const PreviewSearch = () => {
   }, []);
 
   return (
-    <div className="w-full px-1 sm:px-3 md:px-6 lg:px-8 content-visibility-auto" ref={containerRef}>
+    <div className="w-full px-3 sm:px-3 md:px-6 lg:px-8 content-visibility-auto" ref={containerRef}>
       <div className="mx-auto relative group">
-        {/* Refined gradient background with adjusted opacity and blur */}
-        <div className="absolute -inset-0.5 sm:-inset-0.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-purple-800/30 via-indigo-700/30 to-purple-900/30 opacity-60 sm:opacity-75 blur-[2px] sm:blur-sm group-hover:opacity-100 transition duration-500"></div>
+        {/* Simplified gradient background for mobile */}
+        <div className={cn(
+          "absolute -inset-0.5 sm:-inset-0.5 rounded-lg sm:rounded-xl bg-gradient-to-r",
+          isMobile 
+            ? "from-purple-800/20 to-indigo-700/20 opacity-50 blur-[1px]" 
+            : "from-purple-800/30 via-indigo-700/30 to-purple-900/30 opacity-60 sm:opacity-75 blur-[2px] sm:blur-sm group-hover:opacity-100"
+        )}></div>
+        
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ 
             opacity: 1, 
             y: 0,
             transition: {
-              duration: 0.7,
+              duration: isMobile ? 0.5 : 0.7,  // Faster animation on mobile
               ease: [0.22, 1, 0.36, 1]
             }
           }}
           viewport={{ once: true, margin: "-50px" }}
-          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_8px_25px_-10px_rgba(120,80,200,0.3)] sm:shadow-[0_15px_45px_-12px_rgba(120,80,200,0.35)] border border-zinc-200/70 bg-white/95 will-change-transform"
+          className={cn(
+            "relative rounded-lg sm:rounded-xl overflow-hidden border bg-white/95 will-change-transform",
+            isMobile 
+              ? "shadow-md border-zinc-200/80" 
+              : "shadow-[0_8px_25px_-10px_rgba(120,80,200,0.3)] sm:shadow-[0_15px_45px_-12px_rgba(120,80,200,0.35)] border-zinc-200/70"
+          )}
         >
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg sm:rounded-xl">
-            <BorderBeam 
-              colorFrom="#9370DB" 
-              colorTo="#C19EF9" 
-              duration={isMobile ? 30 : 20}
-              borderWidth={isMobile ? 0.5 : 1.5}
-            />
+            {/* Conditional rendering of heavy effects for mobile */}
+            {!isMobile && (
+              <BorderBeam 
+                colorFrom="#9370DB" 
+                colorTo="#C19EF9" 
+                duration={20}
+                borderWidth={1.5}
+              />
+            )}
+            
+            {/* Simplified glowing effect for mobile */}
             <GlowingEffect 
               variant="default" 
-              blur={isMobile ? 3 : 8} 
+              blur={isMobile ? 2 : 8} 
               glow={!isMobile} 
-              inactiveZone={isMobile ? 0.7 : 0.6}
-              spread={isMobile ? 8 : 15}
+              inactiveZone={isMobile ? 0.8 : 0.6}
+              spread={isMobile ? 5 : 15}
               borderWidth={isMobile ? 0.5 : 1}
-              className={isMobile ? "opacity-15" : "opacity-25"}
+              className={isMobile ? "opacity-10" : "opacity-25"}
             />
-            <AnimatedGrid className={isMobile ? "opacity-3" : "opacity-7"} />
+            
+            {/* Conditionally render AnimatedGrid based on device */}
+            {!isMobile && <AnimatedGrid className="opacity-7" />}
           </div>
+          
           <GradientBlobBackground 
             className="min-h-0 w-full" 
             baseColor="bg-white/95"
@@ -86,40 +105,48 @@ const PreviewSearch = () => {
               second: "bg-indigo-200",
               third: "bg-blue-200"
             }}
-            blobOpacity={0.25}
+            blobOpacity={isMobile ? 0.15 : 0.25}
             withSpotlight={!isMobile}
             spotlightClassName="from-purple-500/15 via-indigo-500/15 to-blue-500/15"
           >
             <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
-              {/* Header section with improved spacing for mobile */}
+              {/* Header section with optimized mobile spacing */}
               <div className={cn(
-                "text-left pb-1 sm:pb-6 px-4 sm:px-6 lg:px-8",
-                isMobile ? "pt-4" : "pt-4 sm:pt-9"
+                "text-left px-4 sm:px-6 lg:px-8",
+                isMobile ? "pt-5 pb-3" : "pt-4 sm:pt-9 pb-1 sm:pb-6"
               )}>
-                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1.5 sm:mb-4 font-jakarta tracking-tight">
+                <h2 className={cn(
+                  "font-bold text-gray-900 font-jakarta tracking-tight",
+                  isMobile ? "text-2xl mb-2" : "text-xl sm:text-3xl md:text-4xl mb-1.5 sm:mb-4"
+                )}>
                   Find Your Perfect Creator
                 </h2>
+                
                 {/* Better spacing around the underline */}
-                <div className="w-16 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-1.5 sm:mb-3 rounded-full"></div>
-                <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl mt-1">
+                <div className="w-12 sm:w-16 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 rounded-full mb-2 sm:mb-3"></div>
+                
+                <p className={cn(
+                  "text-gray-600 font-inter max-w-xl",
+                  isMobile ? "text-sm leading-snug" : "text-sm sm:text-base md:text-lg mt-1"
+                )}>
                   Connect with professionals who showcase your property perfectly
                 </p>
               </div>
             
-              {/* SearchBar with improved spacing */}
+              {/* SearchBar with mobile-optimized spacing */}
               <div className={cn(
                 "w-full px-3 sm:px-4 md:px-7",
-                isMobile ? "py-1" : "py-1 sm:py-4 md:py-6" // Reduced padding for mobile
+                isMobile ? "py-2" : "py-1 sm:py-4 md:py-6"
               )}>
                 <SearchBar onLocationSelect={() => {}} />
               </div>
             
-              {/* Completely removed separator on mobile */}
-            
-              {/* CreatorsList with reduced spacing between filters and results */}
+              {/* CreatorsList with mobile optimizations */}
               <div className={cn(
-                "w-full px-3 sm:px-4 md:px-7 pb-6 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40",
-                isMobile ? "-mt-2" : "py-1 sm:py-5 md:py-7" // Added negative margin for mobile
+                "w-full px-3 sm:px-4 md:px-7 bg-gradient-to-b from-transparent",
+                isMobile 
+                  ? "to-purple-50/20 py-3 pb-5" 
+                  : "to-purple-50/30 sm:to-purple-50/40 py-1 sm:py-5 md:py-7 pb-6 sm:pb-7"
               )}>
                 <CreatorsList 
                   creators={[{
