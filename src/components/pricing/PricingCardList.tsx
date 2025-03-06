@@ -30,7 +30,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
               borderWidth={1.5} 
               duration={10} 
               color={["#9333ea", "#4f46e5", "#7e22ce"]} 
-              className="w-full h-full p-0 bg-transparent min-w-0"
+              className="w-full h-full min-w-0"
             >
               <PricingCard 
                 {...card}
