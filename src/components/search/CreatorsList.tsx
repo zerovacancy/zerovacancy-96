@@ -85,7 +85,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           <motion.button 
             className={cn(
               "inline-flex items-center justify-center px-6 py-3",
-              "rounded-full",
+              "rounded-lg", // Changed from rounded-full to rounded-lg
               "bg-gradient-to-r from-gray-50 to-indigo-50/30",
               "text-indigo-600/80 font-medium",
               "border border-indigo-100/50",
