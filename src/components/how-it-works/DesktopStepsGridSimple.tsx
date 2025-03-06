@@ -1,7 +1,6 @@
 
 import React from 'react';
 import DesktopStepItemSimple from './DesktopStepItemSimple';
-import ConnectingLinesSimple from './ConnectingLinesSimple';
 import { steps } from './step-data';
 
 interface DesktopStepsGridSimpleProps {
@@ -37,10 +36,7 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
         ))}
       </div>
       
-      {/* Connecting lines positioned as a separate layer */}
-      <div className="relative h-0">
-        <ConnectingLinesSimple />
-      </div>
+      {/* Removed the connecting lines section */}
     </div>
   );
 };
