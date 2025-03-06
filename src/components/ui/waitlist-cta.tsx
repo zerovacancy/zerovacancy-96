@@ -5,14 +5,13 @@ import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Loader2, Mail, Sparkles } from "lucide-react"; 
+import { ArrowRight, Loader2, Mail } from "lucide-react"; 
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export function WaitlistCTA({ className }: { className?: string }) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const isMobile = useIsMobile();
 
@@ -50,31 +49,17 @@ export function WaitlistCTA({ className }: { className?: string }) {
           "relative",
           isMobile ? "w-full" : "w-[320px]"
         )}>
-          {/* Enhanced input field with focus state */}
-          <div className={cn(
-            "absolute left-3 top-1/2 transform -translate-y-1/2",
-            "text-transparent bg-clip-text",
-            isFocused 
-              ? "bg-gradient-to-r from-indigo-600 to-purple-600" 
-              : "bg-gradient-to-r from-indigo-400 to-purple-400",
-            "transition-all duration-300"
-          )}>
+          {/* Added mail icon with gradient color */}
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
             <Mail className="h-4 w-4" />
           </div>
-          
-          {/* Glow effect when focused */}
-          {isFocused && (
-            <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-indigo-400 to-purple-500 opacity-20 blur-sm"></div>
-          )}
           
           <Input
             ref={inputRef}
             type="email"
             placeholder="Enter your email"
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
             className={cn(
-              "border relative z-10",
+              "border",
               isMobile ? [
                 "h-[46px]", // Reduced height
                 "bg-white", 
@@ -83,16 +68,14 @@ export function WaitlistCTA({ className }: { className?: string }) {
                 "text-base",
                 "placeholder:text-gray-400",
                 "rounded-xl", // Increased border radius to 12px
-                "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]", // Added subtle inner shadow
-                isFocused && "ring-2 ring-indigo-300 border-transparent" // Focus effect for mobile
+                "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]" // Added subtle inner shadow
               ] : [
                 "h-11 border-gray-200 bg-white",
                 "focus:ring-2 focus:ring-primary/50 focus:border-transparent",
                 "pl-10 pr-4 py-2", // Added left padding for icon
                 "text-base placeholder:text-gray-400",
                 "rounded-xl", // Increased border radius to 12px
-                "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]", // Added subtle inner shadow
-                isFocused && "ring-2 ring-indigo-300 border-transparent" // Focus effect for desktop
+                "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]" // Added subtle inner shadow
               ]
             )}
             value={email}
@@ -112,8 +95,6 @@ export function WaitlistCTA({ className }: { className?: string }) {
             "transition-all duration-300",
             "relative overflow-hidden", // For pulsing animation
             "group", // For hover effects
-            // Enhanced with glow and shadow
-            "after:absolute after:inset-0 after:bg-gradient-to-r after:from-purple-500/20 after:to-blue-500/20 after:opacity-0 after:animate-pulse after:pointer-events-none group-hover:after:opacity-100", // Subtle pulsing effect on hover
             isMobile ? [
               "w-full", 
               "rounded-xl", // Increased border radius
@@ -128,6 +109,7 @@ export function WaitlistCTA({ className }: { className?: string }) {
               "bg-gradient-to-r from-[#6A3DE8] to-[#4361EE]", // Custom gradient
               "hover:from-[#5A2DD8] hover:to-[#3351DE]", // Darker gradient on hover
               "text-white font-medium",
+              "after:absolute after:inset-0 after:bg-gradient-to-r after:from-purple-500/20 after:to-blue-500/20 after:opacity-0 after:animate-pulse after:pointer-events-none group-hover:after:opacity-100" // Subtle pulsing effect on hover
             ]
           )}
           style={{ gap: '8px' }} // Increased gap between text and icon
@@ -144,16 +126,9 @@ export function WaitlistCTA({ className }: { className?: string }) {
               )}>
                 Join Waitlist Now
               </span>
-              <span className="relative">
-                {/* Decorative sparkle icon */}
-                <Sparkles className="absolute -top-3 -right-3 h-3 w-3 text-yellow-300 animate-pulse-subtle" />
-                <ArrowRight className="h-5 w-5 flex-shrink-0 inline-block transition-transform group-hover:translate-x-0.5" /> {/* Slightly larger icon */}
-              </span>
+              <ArrowRight className="h-5 w-5 flex-shrink-0 inline-block transition-transform group-hover:translate-x-0.5" /> {/* Slightly larger icon */}
             </>
           )}
-          
-          {/* Button glow effect */}
-          <span className="absolute -inset-px rounded-xl bg-gradient-to-r from-indigo-200 to-purple-300 opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-30"></span>
         </Button>
       </form>
       
