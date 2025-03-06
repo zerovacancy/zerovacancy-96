@@ -22,7 +22,7 @@ export function PricingInteraction({
   proAnnual,
   plans
 }: PricingInteractionProps) {
-  const [period, setPeriod] = useState(0);
+  const [period, setPeriod] = useState(0);  // 0: monthly, 1: annual
   const [expandedFeatures, setExpandedFeatures] = useState<{[key: number]: boolean}>({});
   const [showSwipeHint, setShowSwipeHint] = useState(true);
   const [animatePriceChange, setAnimatePriceChange] = useState(false);

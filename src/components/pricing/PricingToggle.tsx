@@ -73,8 +73,6 @@ export const PricingToggle = ({
           style={{ width: "50%" }}
         />
       </div>
-      
-      {/* Removing the yearly discount badge */}
     </div>
   );
 };

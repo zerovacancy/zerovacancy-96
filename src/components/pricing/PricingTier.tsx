@@ -47,7 +47,7 @@ export const PricingTier: React.FC<PricingTierProps> = ({
       <motion.div
         className={cn(
           "w-full flex flex-col p-5 rounded-xl",
-          "relative overflow-visible", // Changed from overflow-hidden to overflow-visible
+          "relative overflow-visible",
           "border-2 border-brand-purple bg-white shadow-md"
         )}
         whileTap={{ scale: 0.98 }}
@@ -93,16 +93,7 @@ export const PricingTier: React.FC<PricingTierProps> = ({
                 </span>
               </div>
               
-              {/* Savings calculation with improved display */}
-              {period === 1 && index > 0 && calculateSavings && (
-                <motion.p 
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-xs font-medium mt-1 py-0.5 px-2 bg-green-50 text-green-600 rounded-full inline-block font-inter"
-                >
-                  Save ${calculateSavings(index)} per year
-                </motion.p>
-              )}
+              {/* Removed savings calculation */}
             </div>
           </div>
         </div>
