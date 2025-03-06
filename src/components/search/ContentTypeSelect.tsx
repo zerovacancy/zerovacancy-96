@@ -22,7 +22,7 @@ export const ContentTypeSelect = () => {
       )} />
       <select
         className={cn(
-          "w-full h-10 sm:h-12 pl-11 pr-10 appearance-none",
+          "w-full h-12 sm:h-12 pl-11 pr-10 appearance-none", // Increased height for mobile
           "bg-white text-sm text-gray-700",
           "transition-colors duration-200",
           "focus:outline-none focus:ring-2 focus:ring-indigo-500/30",

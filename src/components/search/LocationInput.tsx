@@ -111,7 +111,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({ value, onLocationS
   return (
     <div className="w-full sm:w-[40%] relative group">
       <MapPin className={cn(
-        "w-4 h-4 text-gray-400 absolute left-3 sm:left-4 top-1/2 -translate-y-1/2",
+        "w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2",
         "transition-all duration-200",
         "group-hover:text-indigo-500"
       )} />
@@ -122,7 +122,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({ value, onLocationS
         onChange={handleLocationChange}
         onKeyDown={handleKeyDown}
         className={cn(
-          "w-full h-11 sm:h-12 pl-9 sm:pl-11 pr-8 sm:pr-10",
+          "w-full h-12 sm:h-12 pl-11 pr-10", // Increased height and padding
           "bg-white text-sm text-gray-700",
           "transition-colors duration-200",
           "focus:outline-none focus:ring-2 focus:ring-indigo-500/30 group-hover:bg-gray-50/80",
@@ -142,7 +142,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({ value, onLocationS
           className={cn(
             "absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600",
             "transition-all duration-200",
-            "rounded-full p-1 hover:bg-gray-100"
+            "rounded-full p-1.5 hover:bg-gray-100" // Increased padding for touch
           )}
           aria-label="Clear location"
         >

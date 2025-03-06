@@ -14,12 +14,12 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
 }) => {
   return (
     <>
-      <div className="flex items-center justify-between px-0.5">
+      <div className="flex items-center justify-between px-0.5 pt-1.5">
         <button
           onClick={onToggleFilters}
           className="
             inline-flex items-center gap-1.5 
-            px-2 py-1 -ml-2
+            px-3 py-1.5 -ml-1
             text-sm font-medium
             text-gray-700 hover:text-gray-900 
             hover:bg-gray-50 rounded-md
@@ -35,7 +35,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
       </div>
 
       <div className={cn(
-        "grid grid-cols-1 sm:grid-cols-2 gap-3 transition-all duration-300",
+        "grid grid-cols-1 sm:grid-cols-2 gap-3 transition-all duration-300 mt-1",
         showMoreFilters ? "opacity-100 h-auto" : "opacity-0 h-0 overflow-hidden"
       )}>
         {/* Budget Filter */}
@@ -44,7 +44,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
           <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2" />
           <select
             className={cn(
-              "w-full h-10 px-11 rounded-lg appearance-none",
+              "w-full h-11 px-11 rounded-lg appearance-none", // Increased height
               "border border-gray-200 bg-white",
               "text-sm text-gray-700",
               "transition-colors duration-200",
@@ -66,7 +66,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
           <ChevronDown className="w-3.5 h-3.5 text-gray-300 absolute right-4 top-1/2 -translate-y-1/2" />
           <select
             className={cn(
-              "w-full h-10 px-11 rounded-lg appearance-none",
+              "w-full h-11 px-11 rounded-lg appearance-none", // Increased height
               "border border-gray-200 bg-white",
               "text-sm text-gray-700",
               "transition-colors duration-200",

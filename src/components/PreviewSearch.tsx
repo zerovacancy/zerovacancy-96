@@ -91,32 +91,40 @@ const PreviewSearch = () => {
             spotlightClassName="from-purple-500/15 via-indigo-500/15 to-blue-500/15"
           >
             <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
-              {/* Header section with optimized padding on mobile */}
+              {/* Header section with improved spacing for mobile */}
               <div className={cn(
-                "text-left pb-2 sm:pb-6 px-3 sm:px-6 lg:px-8",
-                isMobile ? "pt-3" : "pt-4 sm:pt-9"
+                "text-left pb-3 sm:pb-6 px-4 sm:px-6 lg:px-8",
+                isMobile ? "pt-5" : "pt-4 sm:pt-9"
               )}>
-                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1.5 sm:mb-4 font-jakarta tracking-tight">
+                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2.5 sm:mb-4 font-jakarta tracking-tight">
                   Find Your Perfect Creator
                 </h2>
-                <div className="w-14 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-2 sm:mb-3 rounded-full"></div>
-                <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl">
+                {/* Better spacing around the underline */}
+                <div className="w-16 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-3 sm:mb-3 rounded-full"></div>
+                <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl mt-1">
                   Connect with professionals who showcase your property perfectly
                 </p>
               </div>
             
-              {/* SearchBar with reduced vertical padding on mobile */}
+              {/* SearchBar with improved spacing */}
               <div className={cn(
-                "w-full px-2 sm:px-4 md:px-7",
-                isMobile ? "py-0.5" : "py-1 sm:py-4 md:py-6"
+                "w-full px-3 sm:px-4 md:px-7",
+                isMobile ? "py-3" : "py-1 sm:py-4 md:py-6"
               )}>
                 <SearchBar onLocationSelect={() => {}} />
               </div>
             
-              {/* CreatorsList with optimized spacing for mobile */}
+              {/* Visual separator between search and results */}
+              {isMobile && (
+                <div className="w-full px-4">
+                  <div className="h-px bg-gradient-to-r from-transparent via-purple-200/80 to-transparent"></div>
+                </div>
+              )}
+            
+              {/* CreatorsList with improved spacing between search and results */}
               <div className={cn(
-                "w-full px-2 sm:px-4 md:px-7 pb-6 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40",
-                isMobile ? "pt-0 pb-4" : "py-1 sm:py-5 md:py-7"
+                "w-full px-3 sm:px-4 md:px-7 pb-6 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40",
+                isMobile ? "pt-4" : "py-1 sm:py-5 md:py-7"
               )}>
                 <CreatorsList 
                   creators={[{
