@@ -15,8 +15,8 @@ const MobileStepsGridSimple: React.FC<MobileStepsGridSimpleProps> = ({
   onStepInteraction 
 }) => {
   return (
-    <div className="md:hidden w-full mb-6">
-      <div className="grid grid-cols-2 gap-4">
+    <div className="md:hidden w-full mb-4">
+      <div className="grid grid-cols-2 gap-3 px-1">
         {steps.map((step, index) => (
           <MobileStepItemSimple
             key={index}

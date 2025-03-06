@@ -37,8 +37,8 @@ const MobileStepItemSimple: React.FC<MobileStepItemSimpleProps> = ({
     <div 
       onClick={onClick}
       className={cn(
-        "relative p-2.5 sm:p-3.5 transition-all",
-        "flex flex-col h-full min-h-[100px] sm:min-h-[120px] touch-manipulation",
+        "relative p-2 sm:p-3.5 transition-all",
+        "flex flex-col h-full min-h-[90px] sm:min-h-[120px] touch-manipulation",
         "duration-200 cursor-pointer animate-fade-in",
         `animation-delay-${index * 100}`,
         "active:scale-[0.98]"
@@ -49,7 +49,7 @@ const MobileStepItemSimple: React.FC<MobileStepItemSimpleProps> = ({
         borderWidth: isActive ? '2px' : '1px',
         borderLeftWidth: isActive ? '3px' : '1px',
         borderStyle: 'solid',
-        borderRadius: '12px',
+        borderRadius: '10px',
         backgroundColor: getBackgroundTint(),
         boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
       }}
@@ -79,7 +79,7 @@ const MobileStepItemSimple: React.FC<MobileStepItemSimpleProps> = ({
       </div>
       
       {/* Icon and Title in row */}
-      <div className="flex items-center justify-between mt-2 mb-2">
+      <div className="flex items-center justify-between mt-1.5 mb-1.5">
         <h4 className="text-xs sm:text-sm font-bold text-gray-900 pr-1 line-clamp-2">
           {step.title}
         </h4>
