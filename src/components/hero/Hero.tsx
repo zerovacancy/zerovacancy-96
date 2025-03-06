@@ -86,7 +86,7 @@ export function Hero() {
                 <div 
                   role="text" 
                   aria-label="Property Content animation"
-                  className="relative flex w-full justify-center h-[3.5em] sm:h-[2.5em] md:h-[2.25em] lg:h-[2.25em] overflow-visible mt-2 sm:mt-2"
+                  className="relative flex w-full justify-center h-[4em] sm:h-[3em] md:h-[2.75em] lg:h-[2.75em] overflow-visible mt-2 sm:mt-2"
                 >
                   <TextRotate
                     texts={TITLES}
