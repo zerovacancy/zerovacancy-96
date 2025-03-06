@@ -43,7 +43,7 @@ export function WaitlistCTA({ className }: { className?: string }) {
     )}>
       <form onSubmit={handleSubmit} className={cn(
         "flex w-full",
-        isMobile ? "flex-col space-y-4" : "flex-row items-center justify-center gap-4" // Increased gap to 16px (4 units)
+        isMobile ? "flex-col space-y-3" : "flex-row items-center justify-center gap-4" // Reduced space-y for mobile
       )}>
         <div className={cn(
           "relative",
@@ -61,21 +61,21 @@ export function WaitlistCTA({ className }: { className?: string }) {
             className={cn(
               "border",
               isMobile ? [
-                "h-[46px]", // Reduced height
+                "h-[42px]", // Reduced height further by ~10%
                 "bg-white", 
                 "border-gray-100",
-                "pl-10 pr-4 py-3", // Added left padding for icon
-                "text-base",
+                "pl-10 pr-3 py-2", // Reduced horizontal padding
+                "text-sm", // Smaller text
                 "placeholder:text-gray-400",
-                "rounded-xl", // Increased border radius to 12px
-                "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]" // Added subtle inner shadow
+                "rounded-xl", // Kept border radius
+                "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]" // Kept subtle inner shadow
               ] : [
                 "h-11 border-gray-200 bg-white",
                 "focus:ring-2 focus:ring-primary/50 focus:border-transparent",
-                "pl-10 pr-4 py-2", // Added left padding for icon
+                "pl-10 pr-4 py-2",
                 "text-base placeholder:text-gray-400",
-                "rounded-xl", // Increased border radius to 12px
-                "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]" // Added subtle inner shadow
+                "rounded-xl",
+                "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]"
               ]
             )}
             value={email}
@@ -91,28 +91,28 @@ export function WaitlistCTA({ className }: { className?: string }) {
           className={cn(
             "flex items-center justify-center",
             "whitespace-nowrap",
-            "shadow-lg hover:shadow-xl", // Enhanced shadow for "pop" effect
+            "shadow-lg hover:shadow-xl", // Kept enhanced shadow for "pop" effect
             "transition-all duration-300",
             "relative overflow-hidden", // For pulsing animation
             "group", // For hover effects
             isMobile ? [
               "w-full", 
-              "rounded-xl", // Increased border radius
-              "h-[46px]", // Reduced height
-              "bg-gradient-to-r from-[#6A3DE8] to-[#4361EE]", // Custom gradient
+              "rounded-xl", // Kept border radius
+              "h-[42px]", // Reduced height to match input
+              "bg-gradient-to-r from-[#6A3DE8] to-[#4361EE]", // Kept custom gradient
               "text-white",
               "font-medium",
-              "px-6"
+              "px-4" // Reduced horizontal padding
             ] : [
               "h-11",
-              "rounded-xl w-[190px] px-5", // Increased border radius
-              "bg-gradient-to-r from-[#6A3DE8] to-[#4361EE]", // Custom gradient
-              "hover:from-[#5A2DD8] hover:to-[#3351DE]", // Darker gradient on hover
+              "rounded-xl w-[190px] px-5",
+              "bg-gradient-to-r from-[#6A3DE8] to-[#4361EE]",
+              "hover:from-[#5A2DD8] hover:to-[#3351DE]",
               "text-white font-medium",
-              "after:absolute after:inset-0 after:bg-gradient-to-r after:from-purple-500/20 after:to-blue-500/20 after:opacity-0 after:animate-pulse after:pointer-events-none group-hover:after:opacity-100" // Subtle pulsing effect on hover
+              "after:absolute after:inset-0 after:bg-gradient-to-r after:from-purple-500/20 after:to-blue-500/20 after:opacity-0 after:animate-pulse after:pointer-events-none group-hover:after:opacity-100"
             ]
           )}
-          style={{ gap: '8px' }} // Increased gap between text and icon
+          style={{ gap: '6px' }} // Reduced gap between text and icon
           disabled={isLoading}
         >
           {isLoading ? (
@@ -122,30 +122,39 @@ export function WaitlistCTA({ className }: { className?: string }) {
               <span className={cn(
                 "flex-shrink-0",
                 "leading-none",
-                isMobile ? "text-base" : "text-sm"
+                isMobile ? "text-sm" : "text-sm" // Smaller text on mobile
               )}>
                 Join Waitlist Now
               </span>
-              <ArrowRight className="h-5 w-5 flex-shrink-0 inline-block transition-transform group-hover:translate-x-0.5" /> {/* Slightly larger icon */}
+              <ArrowRight className="h-4 w-4 flex-shrink-0 inline-block transition-transform group-hover:translate-x-0.5" /> {/* Slightly smaller icon */}
             </>
           )}
         </Button>
       </form>
       
-      <div className="flex items-center justify-center mt-6"> {/* Increased margin top to 24px (6 units) */}
-        <div className="flex -space-x-1 mr-4 items-center"> {/* Increased spacing */}
-          {/* Gradient background avatars with increased size */}
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex items-center justify-center text-[8px] text-white font-bold border-2 border-white shadow-sm">JT</div>
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex items-center justify-center text-[8px] text-white font-bold border-2 border-white shadow-sm">MI</div>
+      <div className="flex items-center justify-center mt-3 sm:mt-6"> {/* Reduced margin top on mobile */}
+        <div className="flex -space-x-1 mr-3 sm:mr-4 items-center"> {/* Reduced spacing */}
+          {/* Slightly smaller avatars on mobile */}
+          <div className={cn(
+            "rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex items-center justify-center text-[8px] text-white font-bold border-2 border-white shadow-sm",
+            isMobile ? "w-6 h-6" : "w-7 h-7"
+          )}>JT</div>
+          <div className={cn(
+            "rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex items-center justify-center text-[8px] text-white font-bold border-2 border-white shadow-sm",
+            isMobile ? "w-6 h-6" : "w-7 h-7"
+          )}>MI</div>
           {!isMobile && (
             <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex items-center justify-center text-[8px] text-white font-bold border-2 border-white shadow-sm">AS</div>
           )}
         </div>
         
-        <div className="text-xs text-gray-600 flex items-center whitespace-nowrap">
+        <div className={cn(
+          "text-gray-600 flex items-center whitespace-nowrap",
+          isMobile ? "text-[10px]" : "text-xs" // Even smaller text on mobile
+        )}>
           {/* Bolded the number of people who joined with increased weight */}
           <span><strong className="font-semibold text-gray-800">2,165+</strong> <span className="font-medium">people joined</span></span>
-          <span className="mx-2.5">•</span> {/* Increased spacing */}
+          <span className="mx-1.5 sm:mx-2.5">•</span> {/* Reduced spacing on mobile */}
           <span className="text-gray-600">Queue: {isMobile ? "1-2 days" : "2-3 weeks"}</span>
         </div>
       </div>
