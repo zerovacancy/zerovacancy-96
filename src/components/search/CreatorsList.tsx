@@ -57,13 +57,13 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
               "bg-white hover:bg-indigo-50/50 shadow-sm",
               isMobile ? "h-8 text-xs pl-2 pr-2 w-[120px]" : "h-9 text-sm w-[140px]"
             )}>
-              <span className="flex items-center">
+              <div className="flex items-center justify-center gap-1">
                 <ArrowUpDown className={cn(
-                  "mr-1.5 flex-shrink-0 text-indigo-500",
+                  "flex-shrink-0 text-indigo-500",
                   isMobile ? "w-3 h-3" : "w-3.5 h-3.5"
                 )} />
-                <SelectValue placeholder="Sort by" />
-              </span>
+                <SelectValue placeholder="Sort by" className="inline-flex items-center" />
+              </div>
             </SelectTrigger>
             <SelectContent className="border-indigo-100">
               <SelectItem value="rating" className="hover:text-indigo-700 hover:bg-indigo-50/50">Highest Rated</SelectItem>
