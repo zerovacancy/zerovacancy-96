@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { ChevronDown, Filter, ChevronUp } from 'lucide-react';
@@ -30,7 +31,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
   // Filter tags with improved styling
   const filterTags = ["All Services", "Photography", "Video Tours", "Drone Footage", "3D Tours", "Floor Plans", "Virtual Staging"];
-  return <div className="relative">
+  return (
+    <div className="relative">
       {/* Filters section with horizontal scrolling on mobile */}
       <div className="mb-4 sm:mb-6">
         {/* Horizontally scrollable filter tags for mobile */}
@@ -75,18 +77,34 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
       </div>
       
       {/* Mobile expand/collapse button - only visible if there are more than 1 creator */}
-      {isMobile && creators.length > 1 && <div className="mt-6 text-center my-[25px]">
-          <motion.button className={cn("inline-flex items-center justify-center px-5 py-2.5 rounded-full", "bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700", "text-white font-semibold shadow-md shadow-indigo-200/50", "hover:shadow-lg hover:shadow-indigo-300/50 hover:-translate-y-0.5", "transform active:scale-[0.98] transition-all duration-200", "text-sm relative overflow-hidden")} onClick={() => setShowAllCreators(!showAllCreators)} initial={{
-        opacity: 0,
-        y: 10
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.3
-      }} whileTap={{
-        scale: 0.98
-      }}>
+      {isMobile && creators.length > 1 && (
+        <div className="mt-6 text-center my-[25px]">
+          <motion.button 
+            className={cn(
+              "inline-flex items-center justify-center px-5 py-2.5 rounded-full", 
+              "bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700", 
+              "text-white font-semibold shadow-md shadow-indigo-200/50", 
+              "hover:shadow-lg hover:shadow-indigo-300/50 hover:-translate-y-0.5", 
+              "transform active:scale-[0.98] transition-all duration-200", 
+              "text-sm relative overflow-hidden",
+              "group"
+            )} 
+            onClick={() => setShowAllCreators(!showAllCreators)} 
+            initial={{
+              opacity: 0,
+              y: 10
+            }} 
+            animate={{
+              opacity: 1,
+              y: 0
+            }} 
+            transition={{
+              duration: 0.3
+            }} 
+            whileTap={{
+              scale: 0.98
+            }}
+          >
             <span className="relative z-10 flex items-center">
               {showAllCreators ? "Show less creators" : `Show ${creators.length - 1} more creators`}
               {showAllCreators ? <ChevronUp className="ml-1.5 w-4 h-4" /> : <ChevronDown className="ml-1.5 w-4 h-4" />}
@@ -95,35 +113,32 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             {/* Subtle shimmer effect */}
             <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           </motion.button>
-        </div>}
-      
-   {/* Desktop "Show more" button - only visible on desktop */}
-{!isMobile && creators.length > 0 && (
-  <div className="mt-6 text-center">
-    <button className={cn("inline-flex items-center justify-center px-4 py-2 rounded-full", "bg-white text-indigo-600 font-medium border border-indigo-200", "shadow-sm hover:bg-indigo-50 transition-colors", "text-sm")}>
-      Show more creators
-      <ChevronDown className="ml-1 w-4 h-4" />
-    </button>
-  </div>
-)}
-
-{/* Mobile "Show more" button - matches the Join Waitlist styling */}
-{isMobile && creators.length > 0 && (
-  <div className="mt-4 mb-6 text-center">
-    <button 
-      className={cn(
-        "inline-flex items-center justify-center px-6 py-3",  
-        "rounded-full",                                      
-        "bg-gradient-to-r from-gray-50 to-indigo-50/30",     
-        "text-indigo-600/80 font-medium",                    
-        "border border-indigo-100/50",                       
-        "shadow-sm",                                          
-        "hover:shadow-md hover:bg-indigo-50/50 transition-all duration-200",
-        "text-sm w-[85%] mx-auto"                             
+        </div>
       )}
-    >
-      Show {creators.length - 3} more creators
-      <ChevronDown className="ml-1.5 w-3.5 h-3.5 text-indigo-500/70" />
-    </button>
-  </div>
-)}
+      
+      {/* Desktop "Show more" button - only visible on desktop */}
+      {!isMobile && creators.length > 0 && (
+        <div className="mt-6 text-center">
+          <button 
+            className={cn(
+              "inline-flex items-center justify-center px-5 py-2.5 rounded-full", 
+              "relative overflow-hidden group",
+              "text-white font-semibold shadow-md shadow-indigo-200/50", 
+              "hover:shadow-lg hover:shadow-indigo-300/50 hover:-translate-y-0.5", 
+              "transform active:scale-[0.98] transition-all duration-200",
+              "bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700"
+            )}
+          >
+            <span className="relative z-10 flex items-center">
+              Show more creators
+              <ChevronDown className="ml-1.5 w-4 h-4" />
+            </span>
+            
+            {/* Adding the shimmer effect to match other CTAs */}
+            <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
