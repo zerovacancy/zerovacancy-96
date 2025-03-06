@@ -1,138 +1,106 @@
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useToast } from "@/hooks/use-toast";
-import { PricingHeader } from "./pricing/PricingHeader";
-import { PricingCardList } from "./pricing/PricingCardList";
-import { PricingService } from "@/services/PricingService";
+import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
+import PricingHeader from "./pricing/PricingHeader";
+import { PricingCardList } from "./pricing/PricingCardList";
+import { PricingCardProps } from "./pricing/PricingCard";
+import { useSubscription } from "@/hooks/use-subscription";
 
-export function Pricing() {
-  const [subscription, setSubscription] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const { toast } = useToast();
+const Pricing = () => {
+  const [isYearly, setIsYearly] = useState(true);
+  const { subscription, isLoading } = useSubscription();
   const isMobile = useIsMobile();
 
-  useEffect(() => {
-    const fetchSubscription = async () => {
-      setIsLoading(true);
-      try {
-        const subscription = await PricingService.fetchSubscription();
-        if (subscription) {
-          setSubscription(subscription);
-        }
-      } catch (error) {
-        console.error('Error fetching subscription:', error);
-        toast({
-          title: "Error",
-          description: "Failed to fetch subscription information",
-          variant: "destructive"
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    fetchSubscription();
-  }, [toast]);
-
-  const pricingCards = [
+  // Pricing tiers data
+  const pricingCards: Omit<PricingCardProps, 'subscription' | 'isLoading'>[] = [
     {
       title: "Basic",
-      price: 139,
+      price: isYearly ? 139 : 159,
       interval: "month",
       description: "Perfect for single-family homes and small properties",
-      valueProposition: "Recommended for residential listings",
       features: [
         "Professional photography (up to 25 photos)",
         "Basic photo editing",
-        "24-hour turnaround",
-        "Digital delivery",
-        "Limited revisions"
+        "Property website",
+        "Digital delivery within 48 hours",
+        "1 photographer, 1 hour session",
+        "High-resolution images",
+        "Basic virtual staging"
       ],
-      cta: "Get Started",
-      defaultExpanded: !isMobile,
-      color: "blue" as const
+      cta: "Start with Basic",
+      color: "blue",
+      valueProposition: "Recommended for residential listings"
     },
     {
       title: "Professional",
-      price: 499,
+      price: isYearly ? 499 : 559,
       interval: "month",
       description: "Ideal for luxury homes and medium-sized properties",
-      valueProposition: "Best value for serious agents",
       features: [
-        "Everything in Basic, plus:",
+        "Everything in Basic,",
         "Up to 40 professional photos",
         "Drone aerial photography",
         "Virtual tour",
         "Advanced photo editing",
         "Social media optimized images",
-        "Unlimited revisions"
+        "Unlimited revisions",
+        "7-day money-back guarantee"
       ],
-      cta: "Go Professional",
+      cta: "Choose Professional",
       highlighted: true,
-      defaultExpanded: !isMobile,
-      color: "purple" as const,
-      showPopularTag: true
+      showPopularTag: true,
+      color: "purple",
+      valueProposition: "Best value for serious agents"
     },
     {
       title: "Premium",
-      price: 799,
+      price: isYearly ? 799 : 899,
       interval: "month",
       description: "Best for luxury estates and commercial properties",
-      valueProposition: "Premium service for exclusive listings",
       features: [
         "Everything in Professional, plus:",
         "Unlimited professional photos",
-        "4K video tour",
-        "3D virtual walkthrough",
-        "Premium photo editing",
-        "Marketing materials",
-        "Dedicated support",
-        "Rush delivery available"
+        "Cinematic property video",
+        "Twilight photography",
+        "Premium brochures (digital & print)",
+        "Priority 24-hour turnaround",
+        "Multiple photographers",
+        "Commercial licensing",
+        "Premium virtual staging"
       ],
-      cta: "Go Premium",
-      defaultExpanded: !isMobile,
-      color: "emerald" as const
+      cta: "Upgrade to Premium",
+      color: "emerald",
+      valueProposition: "Premium service for exclusive listings"
     }
   ];
 
   return (
-    <div className={cn(
-      "overflow-hidden",
-      isMobile ? "py-8" : "py-12 sm:py-20 lg:py-24", 
-      isMobile ? "bg-gray-50/70" : ""  // Add subtle background on mobile
-    )}>
-      <div className={cn(
-        "mx-auto max-w-7xl relative z-10",
-        isMobile ? "px-3" : "px-4 sm:px-6 lg:px-8"
-      )}>
+    <div className="w-full py-12 sm:py-16 lg:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PricingHeader 
-          title="Simple, transparent pricing"
-          subtitle="Choose the perfect plan for your property marketing needs with no hidden fees"
+          title="Simple, Transparent Pricing" 
+          subtitle="Choose the perfect plan for your real estate photography needs. No hidden fees."
         />
         
-        <PricingCardList 
-          cards={pricingCards}
-          subscription={subscription}
-          isLoading={isLoading}
-        />
+        {/* Mobile-optimized pricing cards */}
+        <div className={isMobile ? "mt-4" : "mt-8"}>
+          <PricingCardList
+            cards={pricingCards}
+            subscription={subscription}
+            isLoading={isLoading}
+          />
+        </div>
         
-        <div className={cn(
-          "text-center",
-          isMobile ? "mt-8" : "mt-12"
-        )}>
-          <p className="text-sm text-slate-500 flex items-center justify-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-            All plans include a 7-day money-back guarantee. No questions asked.
+        {/* Additional notes for clients */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-gray-500 max-w-2xl mx-auto">
+            All plans include high-resolution images, dedicated support, and a property website.
+            Custom plans available for agencies and teams.
           </p>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Pricing;
