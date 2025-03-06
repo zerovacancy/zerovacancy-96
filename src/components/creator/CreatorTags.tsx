@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Tag } from 'lucide-react';
@@ -50,16 +49,20 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
   
   return (
     <div 
-      className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+      className={cn(
+        "overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']",
+        // Add horizontal scrolling hint for mobile
+        isMobile ? "after:content-[''] after:absolute after:right-0 after:top-0 after:h-full after:w-6 after:bg-gradient-to-l after:from-white after:to-transparent after:pointer-events-none" : ""
+      )}
       role="list"
       aria-label="Creator specialties"
     >
-      <div className="flex flex-nowrap gap-2 sm:gap-2.5">
+      <div className="flex flex-nowrap gap-1.5 sm:gap-2.5">
         {tags.map((tag, index) => (
           <span
             key={index}
             className={cn(
-              isMobile ? "text-xs px-3 py-1.75" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Larger tap targets on mobile
+              isMobile ? "text-[10px] px-2 py-1" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Smaller tags on mobile
               "rounded-full",
               "transition-all duration-200 whitespace-nowrap",
               "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md",
@@ -68,7 +71,10 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
             )}
             role="listitem"
           >
-            {shouldHaveIcon(tag) && (
+            {shouldHaveIcon(tag) && isMobile && (
+              <Tag className="w-2 h-2" aria-hidden="true" />
+            )}
+            {shouldHaveIcon(tag) && !isMobile && (
               <Tag className="w-2.5 h-2.5" aria-hidden="true" />
             )}
             {tag}
