@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PricingHeader from "./pricing/PricingHeader";
@@ -6,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { PricingCardList } from "./pricing/PricingCardList";
 import { PricingToggle } from "./pricing/PricingToggle";
 import { ColorVariant } from "./pricing/PricingCardColors";
+import { PricingInteraction } from "./pricing/PricingInteraction";
 
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(true);
@@ -21,6 +23,58 @@ const Pricing = () => {
   // Calculate savings
   const starterSavings = Math.round(starterMonthly * 12 - starterAnnual * 12);
   const proSavings = Math.round(proMonthly * 12 - proAnnual * 12);
+
+  // Features for each plan
+  const freePlanFeatures = [
+    { text: "Basic photo editing" },
+    { text: "Property website" },
+    { text: "Digital delivery within 72 hours" },
+    { text: "Up to 10 photos" }
+  ];
+
+  const starterPlanFeatures = [
+    { text: "Professional photography (up to 25 photos)" },
+    { text: "Basic photo editing" },
+    { text: "Property website" },
+    { text: "Digital delivery within 48 hours" },
+    { text: "1 photographer, 1 hour session" },
+    { text: "High-resolution images" },
+    { text: "Basic virtual staging" },
+    { text: "Social media optimization" }
+  ];
+
+  const proPlanFeatures = [
+    { text: "Everything in Professional, plus:" },
+    { text: "Up to 40 professional photos" },
+    { text: "Drone aerial photography" },
+    { text: "3D virtual tour" },
+    { text: "Advanced photo editing" },
+    { text: "Social media optimized images" },
+    { text: "Unlimited revisions" },
+    { text: "24-hour delivery" },
+    { text: "2 photographer team" },
+    { text: "7-day money-back guarantee" }
+  ];
+
+  // Plans data for the interaction component
+  const pricingPlans = [
+    {
+      title: "Basic",
+      price: 0,
+      features: freePlanFeatures
+    },
+    {
+      title: "Professional",
+      price: isYearly ? starterAnnual : starterMonthly,
+      showPopular: true,
+      features: starterPlanFeatures
+    },
+    {
+      title: "Premium",
+      price: isYearly ? proAnnual : proMonthly,
+      features: proPlanFeatures
+    }
+  ];
 
   // Pricing cards data with enhanced details for better conversion
   const pricingCards = [
@@ -113,14 +167,26 @@ const Pricing = () => {
         
         {/* Pricing Cards */}
         <div className="mt-6 sm:mt-8">
-          <PricingCardList 
-            cards={pricingCards.map(card => ({
-              ...card,
-              interval: isYearly ? "mo, billed annually" : "mo"
-            }))} 
-            subscription={subscription}
-            isLoading={isLoading}
-          />
+          {isMobile ? (
+            <div className="flex justify-center">
+              <PricingInteraction 
+                starterMonth={starterMonthly}
+                starterAnnual={starterAnnual}
+                proMonth={proMonthly}
+                proAnnual={proAnnual}
+                plans={pricingPlans}
+              />
+            </div>
+          ) : (
+            <PricingCardList 
+              cards={pricingCards.map(card => ({
+                ...card,
+                interval: isYearly ? "mo, billed annually" : "mo"
+              }))} 
+              subscription={subscription}
+              isLoading={isLoading}
+            />
+          )}
         </div>
         
         {/* Enhanced notes section */}

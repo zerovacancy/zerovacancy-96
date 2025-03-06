@@ -2,7 +2,7 @@
 import NumberFlow from '@number-flow/react';
 import React from "react";
 import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export interface PricingFeature {
