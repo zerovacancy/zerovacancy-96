@@ -205,9 +205,9 @@ export function PricingInteraction({
               whileTap={{ scale: 0.98 }}
               layout
             >
-              {/* Popular tag positioned above title and centered */}
+              {/* Popular tag positioned above title with more space and centered */}
               {plan.showPopular && (
-                <div className="absolute top-0 left-0 right-0 -mt-3 flex justify-center">
+                <div className="absolute top-0 left-0 right-0 -mt-3.5 flex justify-center">
                   <div className="py-1 px-2.5 flex items-center gap-1 rounded-lg bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-sm shadow-md">
                     <Sparkles className="h-3 w-3" />
                     <span className="font-medium font-inter">Popular</span>
@@ -274,7 +274,7 @@ export function PricingInteraction({
                 </div>
               </div>
               
-              {/* Features section */}
+              {/* Features section - Always show features for active card */}
               {active === index && (
                 <div className="mt-4">
                   <div className="flex justify-between items-center mb-2">
