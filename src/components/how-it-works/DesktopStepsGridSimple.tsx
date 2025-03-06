@@ -17,10 +17,7 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
   onStepInteraction
 }) => {
   return (
-    <div className="hidden md:block w-full mx-auto relative">
-      {/* Connecting lines between steps */}
-      <ConnectingLinesSimple />
-      
+    <div className="hidden md:block w-full mx-auto relative pt-8">
       {/* Grid container */}
       <div className="grid w-full grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7 relative">
         {steps.map((step, index) => (
@@ -44,6 +41,9 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
           </div>
         ))}
       </div>
+      
+      {/* Connecting lines between steps - now positioned after the grid for proper z-index layering */}
+      <ConnectingLinesSimple />
     </div>
   );
 };
