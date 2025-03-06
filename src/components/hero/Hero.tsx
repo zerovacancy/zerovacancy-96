@@ -53,7 +53,7 @@ export function Hero() {
           <div 
             role="text" 
             aria-label="Property Content animation"
-            className="relative flex w-full justify-center h-[2.5em] sm:h-[1.5em] md:h-[1.4em] lg:h-[1.3em] overflow-hidden mt-2 sm:mt-3"
+            className="relative flex w-full justify-center h-[3em] sm:h-[2em] md:h-[1.8em] lg:h-[1.8em] overflow-visible mt-2 sm:mt-3"
           >
             <TextRotate
               texts={TITLES}
@@ -63,7 +63,7 @@ export function Hero() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: "-100%", opacity: 0 }}
               staggerDuration={0.02}
-              splitLevelClassName="overflow-hidden"
+              splitLevelClassName="overflow-visible"
               elementLevelClassName={cn(
                 "text-4xl sm:text-5xl lg:text-7xl",
                 "font-bold font-jakarta tracking-[-0.02em]",
