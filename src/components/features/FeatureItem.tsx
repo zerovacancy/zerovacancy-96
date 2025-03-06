@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { iconColors, featureIcons } from "./feature-colors";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Sparkles } from "lucide-react";
 
 interface FeatureItemProps {
   title: string;
@@ -99,9 +99,12 @@ export const FeatureItem = ({
       }}
     >
       {isPopular && (
-        <span className="absolute -top-2 -right-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm animate-float-subtle shadow-glow">
-          Popular
-        </span>
+        <div className="absolute -top-3 inset-x-0 flex justify-center z-10">
+          <div className="py-1 px-2.5 flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-xs font-medium shadow-md">
+            <Sparkles className="h-3 w-3" />
+            <span className="font-medium">Popular</span>
+          </div>
+        </div>
       )}
       
       <div className="flex flex-col items-start gap-3 sm:gap-4 h-full">
