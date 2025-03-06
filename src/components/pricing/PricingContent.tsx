@@ -59,7 +59,8 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       interval: isYearly ? "mo" : "mo",
       description: PLAN_DESCRIPTIONS.professional,
       features: [
-        "Submit Requests for Proposals (RFPs) - Connect directly with top-tier creators to get competitive offers.",
+        "**Submit Requests for Proposals (RFPs)**" 
+        "Connect directly with top-tier creators to get competitive offers.",
         "Browse & Hire Premium Creators - Access vetted professionals for high-quality photography and video.",
         "1 Revision Included Per Project - Ensure content meets your expectations.",
         "Social Media Optimized Content - Get media tailored for Instagram, Facebook, LinkedIn, and more.",
