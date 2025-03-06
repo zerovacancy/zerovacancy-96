@@ -38,12 +38,12 @@ export const FeaturesGrid = ({
           icon={feature.icon}
           index={index}
           isPopular={feature.isPopular}
-          isPartiallyVisible={isMobile && !showAllCards && index === 2}
+          isPartiallyVisible={false} // Changed to show full video production card
         />
       ))}
       
       {/* Partial card overlay with View More button (mobile only) */}
-      {isMobile && (
+      {isMobile && !showAllCards && (
         <MobilePartialOverlay 
           showAllCards={showAllCards} 
           toggleShowAllCards={toggleShowAllCards} 

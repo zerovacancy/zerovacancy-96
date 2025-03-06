@@ -17,7 +17,7 @@ export function FeaturesSectionWithHoverEffects() {
     setShowAllCards(prev => !prev);
   };
   
-  // On mobile, initially show only first 2.5 cards
+  // On mobile, show only first 3 cards (including Video Production)
   const visibleFeatures = isMobile && !showAllCards 
     ? features.slice(0, 3) 
     : features;
@@ -38,9 +38,9 @@ export function FeaturesSectionWithHoverEffects() {
           toggleShowAllCards={toggleShowAllCards}
         />
         
-        {/* View all services button (desktop and expanded mobile) */}
+        {/* View all services button (desktop and mobile) - positioned differently on mobile */}
         <AnimatePresence>
-          {((!isMobile) || (isMobile && showAllCards)) && (
+          {(!isMobile || (isMobile && !showAllCards)) && (
             <MobileViewButton
               showAllCards={showAllCards}
               toggleShowAllCards={toggleShowAllCards}

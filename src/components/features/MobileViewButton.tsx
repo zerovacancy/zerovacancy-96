@@ -16,7 +16,7 @@ export const MobileViewButton = ({
 }: MobileViewButtonProps) => {
   return (
     <motion.div 
-      className="mt-12 sm:mt-14 flex justify-center md:hidden"
+      className={`${isMobile ? 'mt-6' : 'mt-12 sm:mt-14'} flex justify-center ${isMobile && !showAllCards ? 'md:hidden' : ''}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -38,6 +38,7 @@ export const MobileViewButton = ({
           variant="default"
           size="lg" 
           className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium px-6 shadow-md"
+          onClick={isMobile ? toggleShowAllCards : undefined}
         >
           View all services
           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
