@@ -87,8 +87,8 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
     <div 
       className={cn(
         "relative will-change-transform", 
-        // Fixed aspect ratio with proper height to prevent cutoff
-        isMobile ? "aspect-[4/3] mt-0.5" : "aspect-[4/3]"
+        // Taller aspect ratio on mobile
+        isMobile ? "aspect-[3/2.5]" : "aspect-[4/3]"
       )} 
       ref={mediaRef}
     >

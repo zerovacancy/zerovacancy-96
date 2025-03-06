@@ -37,7 +37,8 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           "bg-white border border-gray-200/80",
           "shadow-[0_2px_8px_rgba(0,0,0,0.05)]",
           "hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)]",
-          "rounded-xl relative"
+          "rounded-xl relative",
+          isMobile && "shadow-[0_8px_16px_rgba(0,0,0,0.08)]" // Enhanced shadow for mobile
         )}>
           {/* Card content - Border beam and glowing effect */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-xl">
@@ -50,9 +51,9 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
 
           {/* Price tag with enhanced styling and consistent positioning */}
-          <div className="absolute top-3 sm:top-3.5 right-3 sm:right-3.5 z-20">
+          <div className="absolute top-4 sm:top-3.5 right-4 sm:right-3.5 z-20">
             <span className={cn(
-              isMobile ? "px-2.5 py-1.5 text-xs" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm",
+              isMobile ? "px-3.5 py-2 text-sm" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm", // Larger on mobile
               "font-semibold",
               "bg-white/90 shadow-md border border-white/40",
               "text-[#212121] rounded-full",
@@ -61,7 +62,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               "group-hover:scale-105 group-hover:shadow-[0_4px_10px_rgba(0,0,0,0.18)]",
               "flex items-center gap-1.5"
             )}>
-              <DollarSign className="w-3 h-3 text-indigo-600" aria-hidden="true" />
+              <DollarSign className="w-3.5 h-3.5 text-indigo-600" aria-hidden="true" />
               <span>From ${creator.price}</span>
             </span>
           </div>
@@ -70,7 +71,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             {/* Media and info overlay - Added extra spacing at top for mobile */}
             <div className={cn(
               "relative",
-              isMobile && "pt-3" // Increased padding at top for mobile
+              isMobile && "pt-4" // Increased padding at top for mobile
             )}>
               <CreatorMedia 
                 creator={creator}
@@ -83,32 +84,37 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             
             {/* Tags and rating section with improved spacing */}
             <div className={cn(
-              isMobile ? "p-6" : "p-4 sm:p-5",
+              isMobile ? "p-6 pb-8" : "p-4 sm:p-5", // Much more padding for mobile
               "flex flex-col"
             )}>
               {/* Tags section with improved spacing for mobile */}
               <div className={cn(
-                isMobile ? "mb-4" : "mb-4",
+                isMobile ? "mb-6" : "mb-4",  // More space before rating
               )}>
                 <CreatorTags tags={tags} />
               </div>
               
-              {/* Rating section with subtle background for better readability */}
-              <div className="bg-gray-50/80 rounded-lg px-3 py-3 shadow-sm">
+              {/* Rating section with subtle divider and enhanced spacing */}
+              <div className={cn(
+                "bg-gray-50/80 rounded-lg px-4 py-3.5 shadow-sm",
+                isMobile && "border-t border-gray-100 pb-5" // Added border top as divider on mobile
+              )}>
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
               
-              {/* CTA button section with enhanced hover animation */}
+              {/* CTA button section with enhanced hover animation and more spacing */}
               <div className={cn(
-                isMobile ? "mt-5" : "mt-5",
+                isMobile ? "mt-7" : "mt-5", // Much more space before button on mobile
               )}>
                 <div className="flex justify-center">
                   <ShimmerButton 
                     onClick={() => setShowEmailDialog(true)}
                     aria-label={`Join waitlist to work with ${creator.name}`}
                     className={cn(
-                      "w-[90%] text-sm px-4 hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200 group-hover:animate-pulse-subtle",
-                      isMobile ? "h-12" : "h-10 sm:h-11", // Larger tap target on mobile
+                      "w-[90%] text-sm px-4 transition-all duration-200 group-hover:animate-pulse-subtle",
+                      "hover:scale-[1.03] active:scale-[0.98]",
+                      "hover:shadow-lg", // Enhanced hover effect
+                      isMobile ? "h-14 text-base" : "h-10 sm:h-11", // Much larger tap target on mobile
                     )}
                   >
                     <span>Join Waitlist</span>

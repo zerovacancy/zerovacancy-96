@@ -48,18 +48,22 @@ const shouldHaveIcon = (tag: string): boolean => {
 export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
   const isMobile = useIsMobile();
   
+  // For mobile, limit visible tags to first 3
+  const visibleTags = isMobile ? tags.slice(0, 3) : tags;
+  const hasMoreTags = isMobile && tags.length > 3;
+  
   return (
     <div 
       className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
       role="list"
       aria-label="Creator specialties"
     >
-      <div className="flex flex-nowrap gap-2.5 sm:gap-2.5">
-        {tags.map((tag, index) => (
+      <div className="flex flex-wrap gap-2.5 sm:gap-2.5">
+        {visibleTags.map((tag, index) => (
           <span
             key={index}
             className={cn(
-              isMobile ? "text-xs px-3.5 py-2" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Larger tags on mobile
+              isMobile ? "text-sm px-3.5 py-2.5" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Much larger tags on mobile
               "rounded-full",
               "transition-all duration-200 whitespace-nowrap",
               "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md",
@@ -69,11 +73,29 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
             role="listitem"
           >
             {shouldHaveIcon(tag) && (
-              <Tag className="w-3 h-3" aria-hidden="true" />
+              <Tag className={cn(
+                isMobile ? "w-3.5 h-3.5" : "w-3 h-3" // Larger icon on mobile
+              )} aria-hidden="true" />
             )}
             {tag}
           </span>
         ))}
+        
+        {/* Indicator for more tags */}
+        {hasMoreTags && (
+          <span
+            className={cn(
+              "text-sm px-3.5 py-2.5", // Match other tag styles
+              "rounded-full",
+              "transition-all duration-200 whitespace-nowrap",
+              "hover:scale-105 cursor-pointer",
+              "flex items-center gap-1.5",
+              "bg-gray-100 text-gray-500 hover:bg-gray-200"
+            )}
+          >
+            +{tags.length - 3} more
+          </span>
+        )}
       </div>
     </div>
   );
