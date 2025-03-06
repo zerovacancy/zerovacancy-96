@@ -139,7 +139,7 @@ export function BeamsBackground({
       repeat: Number.POSITIVE_INFINITY
     }} style={{
       backdropFilter: "blur(50px)"
-    }} className="absolute inset-0 bg-transparent" />
+    }} className="absolute inset-0 bg-[#e6e3ff]/15" />
 
             <div className="relative z-10 w-full">
                 {children}
