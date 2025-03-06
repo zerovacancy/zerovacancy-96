@@ -86,11 +86,11 @@ export function Hero() {
                 <div 
                   role="text" 
                   aria-label="Property Content animation"
-                  className="relative flex w-full justify-center h-[4em] sm:h-[3em] md:h-[2.75em] lg:h-[2.75em] overflow-visible mt-2 sm:mt-2"
+                  className="relative flex w-full justify-center h-[4.5em] sm:h-[3.5em] md:h-[3em] lg:h-[3em] overflow-visible mt-2 sm:mt-2"
                 >
                   <TextRotate
                     texts={TITLES}
-                    mainClassName="flex justify-center items-center"
+                    mainClassName="flex justify-center items-center overflow-visible"
                     staggerFrom="last"
                     initial={{ y: "100%", opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -101,7 +101,8 @@ export function Hero() {
                       "text-4xl sm:text-5xl lg:text-7xl",
                       "font-bold font-jakarta tracking-[-0.02em]",
                       "bg-clip-text text-transparent", 
-                      "bg-gradient-to-r from-[#4A2DD9] via-[#8A2BE2] to-[#4169E1]"
+                      "bg-gradient-to-r from-[#4A2DD9] via-[#8A2BE2] to-[#4169E1]",
+                      "overflow-visible"
                     )}
                     transition={{ 
                       type: "spring", 

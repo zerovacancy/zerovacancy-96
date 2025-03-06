@@ -87,7 +87,7 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
             ).map((wordObj, wordIndex, array) => (
               <span
                 key={wordIndex}
-                className={cn("inline-flex", splitLevelClassName)}
+                className={cn("inline-flex overflow-visible", splitLevelClassName)}
               >
                 {wordObj.characters.map((char, charIndex) => (
                   <motion.span
@@ -99,7 +99,7 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
                       ...transition,
                       delay: calculateStaggerDelay(wordIndex, charIndex, array),
                     }}
-                    className={cn("inline-block", elementLevelClassName)}
+                    className={cn("inline-block overflow-visible", elementLevelClassName)}
                   >
                     {char}
                   </motion.span>
