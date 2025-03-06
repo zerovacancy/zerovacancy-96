@@ -75,9 +75,9 @@ export const PricingToggle = ({
         />
       </div>
       
-      {/* Enhanced discount badge with brand colors and animation */}
+      {/* Enhanced discount badge with brand colors and animation - HIDDEN ON MOBILE */}
       <AnimatePresence>
-        {isYearly && yearlyDiscount && (
+        {isYearly && yearlyDiscount && !isMobile && (
           <motion.div
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
