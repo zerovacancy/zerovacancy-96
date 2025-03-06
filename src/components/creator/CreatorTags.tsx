@@ -54,22 +54,22 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
       role="list"
       aria-label="Creator specialties"
     >
-      <div className="flex flex-nowrap gap-2 sm:gap-2.5">
+      <div className="flex flex-nowrap gap-2.5 sm:gap-2.5">
         {tags.map((tag, index) => (
           <span
             key={index}
             className={cn(
-              isMobile ? "text-xs px-3 py-1.75" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Larger tap targets on mobile
+              isMobile ? "text-xs px-3.5 py-2" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Larger tags on mobile
               "rounded-full",
               "transition-all duration-200 whitespace-nowrap",
               "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md",
-              "flex items-center gap-1",
+              "flex items-center gap-1.5",
               getTagStyle(tag)
             )}
             role="listitem"
           >
             {shouldHaveIcon(tag) && (
-              <Tag className="w-2.5 h-2.5" aria-hidden="true" />
+              <Tag className="w-3 h-3" aria-hidden="true" />
             )}
             {tag}
           </span>

@@ -52,7 +52,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           {/* Price tag with enhanced styling and consistent positioning */}
           <div className="absolute top-3 sm:top-3.5 right-3 sm:right-3.5 z-20">
             <span className={cn(
-              isMobile ? "px-2 py-1 text-xs" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm",
+              isMobile ? "px-2.5 py-1.5 text-xs" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm",
               "font-semibold",
               "bg-white/90 shadow-md border border-white/40",
               "text-[#212121] rounded-full",
@@ -70,7 +70,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             {/* Media and info overlay - Added extra spacing at top for mobile */}
             <div className={cn(
               "relative",
-              isMobile && "pt-1" // Small padding at top for mobile
+              isMobile && "pt-3" // Increased padding at top for mobile
             )}>
               <CreatorMedia 
                 creator={creator}
@@ -83,36 +83,38 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             
             {/* Tags and rating section with improved spacing */}
             <div className={cn(
-              isMobile ? "p-5 sm:p-5" : "p-4 sm:p-5",
+              isMobile ? "p-6" : "p-4 sm:p-5",
               "flex flex-col"
             )}>
               {/* Tags section with improved spacing for mobile */}
               <div className={cn(
-                isMobile ? "mb-3" : "mb-4",
+                isMobile ? "mb-4" : "mb-4",
               )}>
                 <CreatorTags tags={tags} />
               </div>
               
               {/* Rating section with subtle background for better readability */}
-              <div className="bg-gray-50/80 rounded-lg px-3 py-2.5 shadow-sm">
+              <div className="bg-gray-50/80 rounded-lg px-3 py-3 shadow-sm">
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
               
               {/* CTA button section with enhanced hover animation */}
               <div className={cn(
-                isMobile ? "mt-4" : "mt-5",
+                isMobile ? "mt-5" : "mt-5",
               )}>
-                <ShimmerButton 
-                  onClick={() => setShowEmailDialog(true)}
-                  aria-label={`Join waitlist to work with ${creator.name}`}
-                  className={cn(
-                    "w-full text-sm px-4 hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200 group-hover:animate-pulse-subtle",
-                    isMobile ? "h-12" : "h-10 sm:h-11", // Larger tap target on mobile
-                  )}
-                >
-                  <span>Join Waitlist</span>
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
-                </ShimmerButton>
+                <div className="flex justify-center">
+                  <ShimmerButton 
+                    onClick={() => setShowEmailDialog(true)}
+                    aria-label={`Join waitlist to work with ${creator.name}`}
+                    className={cn(
+                      "w-[90%] text-sm px-4 hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200 group-hover:animate-pulse-subtle",
+                      isMobile ? "h-12" : "h-10 sm:h-11", // Larger tap target on mobile
+                    )}
+                  >
+                    <span>Join Waitlist</span>
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+                  </ShimmerButton>
+                </div>
               </div>
             </div>
           </div>

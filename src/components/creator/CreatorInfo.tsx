@@ -50,7 +50,7 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
         {/* Location display with improved spacing for mobile */}
         <div className={cn(
           "flex items-center gap-1.5",
-          isMobile ? "mt-3 sm:mt-3" : "mt-2.5 sm:mt-3" // More spacing on mobile
+          isMobile ? "mt-4 sm:mt-3" : "mt-2.5 sm:mt-3" // More spacing on mobile
         )}>
           <MapPin 
             className="w-3.5 h-3.5 text-white/90 flex-shrink-0" 
@@ -60,7 +60,7 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
         </div>
         
         {/* Services display with improved spacing */}
-        <div className="flex items-center gap-1.5 mt-2 sm:mt-2.5">
+        <div className="flex items-center gap-1.5 mt-3 sm:mt-2.5">
           <Image
             className="w-3.5 h-3.5 text-white/85 flex-shrink-0"
             aria-hidden="true"

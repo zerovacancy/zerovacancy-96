@@ -85,19 +85,21 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
       )}
     
       {/* Increased top padding to prevent image cutoff */}
-      <div className="w-full overflow-hidden pt-4 pb-8" ref={emblaRef}>
+      <div className="w-full overflow-hidden pt-6 pb-8" ref={emblaRef}>
         <div className="flex">
           {creators.map((creator, index) => (
             <div 
               key={creator.name} 
               className="min-w-[85%] w-[85%] pl-2 pr-2 h-full"
             >
-              <CreatorCard
-                creator={creator}
-                onImageLoad={onImageLoad}
-                loadedImages={loadedImages}
-                imageRef={imageRef}
-              />
+              <div className="h-[calc(100%+20px)]"> {/* Increased card height */}
+                <CreatorCard
+                  creator={creator}
+                  onImageLoad={onImageLoad}
+                  loadedImages={loadedImages}
+                  imageRef={imageRef}
+                />
+              </div>
             </div>
           ))}
         </div>
