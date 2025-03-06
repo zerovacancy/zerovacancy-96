@@ -17,6 +17,7 @@ interface PricingCardProps {
   highlighted?: boolean;
   showPopularTag?: boolean;
   valueProposition?: string;
+  footerText?: string; // Add this line
   subscription?: any;
   isLoading?: boolean;
   isCurrentPlan?: boolean;
@@ -166,6 +167,13 @@ export const PricingCard = ({
           </p>
         )}
       </div>
+
+      {/* Footer text for CTA */}
+{footerText && (
+  <div className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 font-inter">
+    {footerText}
+  </div>
+)}
       
       {/* Guarantee badge with improved design - Only for paid plans */}
       {price > 0 && (
