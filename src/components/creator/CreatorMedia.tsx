@@ -87,8 +87,8 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
     <div 
       className={cn(
         "relative will-change-transform", 
-        // Fixed aspect ratio without padding to prevent the white gap
-        "aspect-[4/3]"
+        "aspect-[4/3] overflow-hidden",
+        "flex items-center justify-center"
       )} 
       ref={mediaRef}
     >

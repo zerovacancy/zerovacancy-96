@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
-import { ArrowRight, DollarSign } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Dialog } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -49,7 +49,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
           </div>
 
-          {/* Price tag with fixed dollar sign */}
+          {/* Price tag with fixed dollar sign - removed the DollarSign component and used a text $ */}
           <div className="absolute top-3 sm:top-3.5 right-3 sm:right-3.5 z-20">
             <span className={cn(
               isMobile ? "px-2 py-1 text-xs" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm",
@@ -61,7 +61,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               "group-hover:scale-105 group-hover:shadow-[0_4px_10px_rgba(0,0,0,0.18)]",
               "flex items-center gap-1.5"
             )}>
-              <DollarSign className="w-3 h-3 text-indigo-600" aria-hidden="true" />
+              <span className="text-gray-700">$</span>
               <span>From ${creator.price}</span>
             </span>
           </div>

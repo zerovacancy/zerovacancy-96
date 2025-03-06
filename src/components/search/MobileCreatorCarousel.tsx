@@ -85,12 +85,13 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
       )}
     
       {/* Removed top padding completely to fix image cutoff */}
-      <div className="w-full overflow-hidden pb-8" ref={emblaRef}>
-        <div className="flex">
+      <div className="w-full overflow-hidden pb-8 embla-container" ref={emblaRef}>
+        <div className="flex embla-slide-container">
           {creators.map((creator, index) => (
             <div 
               key={creator.name} 
-              className="min-w-[85%] w-[85%] pl-2 pr-2 h-full"
+              className="min-w-[85%] w-[85%] pl-2 pr-2 h-full embla-slide"
+              style={{ touchAction: 'pan-y' }}
             >
               <CreatorCard
                 creator={creator}
