@@ -106,9 +106,9 @@
     min-height: 36px;
   }
   
-  /* Add extra space for the fixed bottom navigation */
+  /* We're removing the extra padding for the fixed bottom navigation */
   body {
-    padding-bottom: 4rem;
+    padding-bottom: 1rem;
   }
 }
 

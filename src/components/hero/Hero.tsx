@@ -53,7 +53,7 @@ export function Hero() {
           <div 
             role="text" 
             aria-label="Property Content animation"
-            className="relative flex w-full justify-center h-[1.5em] sm:h-[1.5em] md:h-[1.4em] lg:h-[1.3em] overflow-hidden mt-2 sm:mt-3"
+            className="relative flex w-full justify-center h-[2.5em] sm:h-[1.5em] md:h-[1.4em] lg:h-[1.3em] overflow-hidden mt-2 sm:mt-3"
           >
             <TextRotate
               texts={TITLES}
@@ -61,14 +61,14 @@ export function Hero() {
               staggerFrom="last"
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: "-120%", opacity: 0 }}
+              exit={{ y: "-100%", opacity: 0 }}
               staggerDuration={0.02}
               splitLevelClassName="overflow-hidden"
               elementLevelClassName={cn(
                 "text-4xl sm:text-5xl lg:text-7xl",
                 "font-bold font-jakarta tracking-[-0.02em]",
                 "bg-clip-text text-transparent", 
-                "bg-gradient-to-r from-[#4A2DD9] via-[#8A2BE2] to-[#4169E1]" // Updated gradient to match specified colors
+                "bg-gradient-to-r from-[#4A2DD9] via-[#8A2BE2] to-[#4169E1]"
               )}
               transition={{ 
                 type: "spring", 
