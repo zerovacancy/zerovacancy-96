@@ -129,7 +129,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
         <div className="mt-6 text-center">
           <button 
             className={cn(
-              "inline-flex items-center justify-center px-5 py-2.5 rounded-full", 
+              "inline-flex items-center justify-center px-5 py-2.5 rounded-lg", // Changed from rounded-full to rounded-lg
               "relative overflow-hidden group",
               "text-white font-semibold shadow-md shadow-indigo-200/50", 
               "hover:shadow-lg hover:shadow-indigo-300/50 hover:-translate-y-0.5", 
