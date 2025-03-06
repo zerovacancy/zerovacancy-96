@@ -8,6 +8,7 @@ interface PricingFeaturesToggleProps {
   colorBg: string;
   colorAccent: string;
   isMobile?: boolean;
+  minimal?: boolean;
 }
 
 export const PricingFeaturesToggle = ({
@@ -15,8 +16,36 @@ export const PricingFeaturesToggle = ({
   setIsExpanded,
   colorBg,
   colorAccent,
-  isMobile = false
+  isMobile = false,
+  minimal = false
 }: PricingFeaturesToggleProps) => {
+  if (minimal) {
+    return (
+      <button 
+        className={cn(
+          "text-xs flex items-center justify-center gap-1.5 transition-all duration-300 w-full rounded-lg",
+          "text-gray-600 hover:text-gray-800",
+          // Optimize for mobile touch target
+          isMobile ? "py-1 text-[11px] touch-manipulation" : "py-1.5"
+        )}
+        onClick={() => setIsExpanded(!isExpanded)}
+        aria-expanded={isExpanded}
+        aria-controls="features-list"
+      >
+        <span>
+          {isExpanded ? "Hide Features" : "View Features"}
+        </span>
+        <ChevronDown 
+          className={cn(
+            "transition-transform duration-300", 
+            isExpanded ? "rotate-180" : "",
+            isMobile ? "w-3 h-3" : "w-3.5 h-3.5"
+          )} 
+        />
+      </button>
+    );
+  }
+
   return (
     <button 
       className={cn(

@@ -28,7 +28,7 @@ export const PricingCardHeader = ({
     <>
       <div className={cn(
         "flex items-center justify-between relative z-10",
-        isMobile ? "mb-1" : "mb-6"
+        isMobile ? "mb-1" : "mb-3"
       )}>
         <h3 className={cn(
           `font-bold ${colorAccent}`,
@@ -47,7 +47,7 @@ export const PricingCardHeader = ({
         <span className="text-sm font-medium text-slate-500 mr-1">$</span>
         <span className={cn(
           "font-extrabold tracking-tight text-slate-900",
-          isMobile ? "text-3xl" : "text-5xl"
+          isMobile ? "text-3xl" : "text-4xl"
         )}>{price}</span>
         <span className={cn(
           "font-medium text-slate-500",
@@ -73,7 +73,7 @@ export const PricingCardHeader = ({
       {valueProposition && (
         <p className={cn(
           `font-medium ${colorAccent}`,
-          isMobile ? "text-[10px] mb-1.5 line-clamp-1" : "text-sm mb-6"
+          isMobile ? "text-[10px] mb-1.5 line-clamp-1" : "text-sm mb-4"
         )}>
           <span className="inline-block mr-1">✦</span> {valueProposition}
         </p>

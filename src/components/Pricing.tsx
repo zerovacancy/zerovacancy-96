@@ -2,75 +2,59 @@
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PricingHeader from "./pricing/PricingHeader";
-import { PricingCardList } from "./pricing/PricingCardList";
-import { PricingCardProps } from "./pricing/PricingCard";
 import { useSubscription } from "@/hooks/use-subscription";
+import { PricingInteraction, PricingPlanProps } from "./pricing/PricingInteraction";
 
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(true);
   const { subscription, isLoading } = useSubscription();
   const isMobile = useIsMobile();
 
-  // Pricing tiers data
-  const pricingCards: Omit<PricingCardProps, 'subscription' | 'isLoading'>[] = [
+  // Monthly and annual pricing values
+  const starterMonthly = 139;
+  const starterAnnual = 99;
+  const proMonthly = 499;
+  const proAnnual = 399;
+
+  // Pricing plans data
+  const pricingPlans: PricingPlanProps[] = [
     {
-      title: "Basic",
-      price: isYearly ? 139 : 159,
-      interval: "month",
-      description: "Perfect for single-family homes and small properties",
+      title: "Free",
+      price: 0,
       features: [
-        "Professional photography (up to 25 photos)",
-        "Basic photo editing",
-        "Property website",
-        "Digital delivery within 48 hours",
-        "1 photographer, 1 hour session",
-        "High-resolution images",
-        "Basic virtual staging"
-      ],
-      cta: "Start with Basic",
-      color: "blue",
-      valueProposition: "Recommended for residential listings"
+        { text: "Basic photo editing" },
+        { text: "Property website" },
+        { text: "Digital delivery within 72 hours" },
+        { text: "Up to 10 photos" }
+      ]
     },
     {
-      title: "Professional",
-      price: isYearly ? 499 : 559,
-      interval: "month",
-      description: "Ideal for luxury homes and medium-sized properties",
+      title: "Starter",
+      price: isYearly ? starterAnnual : starterMonthly,
+      showPopular: true,
       features: [
-        "Everything in Basic,",
-        "Up to 40 professional photos",
-        "Drone aerial photography",
-        "Virtual tour",
-        "Advanced photo editing",
-        "Social media optimized images",
-        "Unlimited revisions",
-        "7-day money-back guarantee"
-      ],
-      cta: "Choose Professional",
-      highlighted: true,
-      showPopularTag: true,
-      color: "purple",
-      valueProposition: "Best value for serious agents"
+        { text: "Professional photography (up to 25 photos)" },
+        { text: "Basic photo editing" },
+        { text: "Property website" },
+        { text: "Digital delivery within 48 hours" },
+        { text: "1 photographer, 1 hour session" },
+        { text: "High-resolution images" },
+        { text: "Basic virtual staging" }
+      ]
     },
     {
-      title: "Premium",
-      price: isYearly ? 799 : 899,
-      interval: "month",
-      description: "Best for luxury estates and commercial properties",
+      title: "Pro",
+      price: isYearly ? proAnnual : proMonthly,
       features: [
-        "Everything in Professional, plus:",
-        "Unlimited professional photos",
-        "Cinematic property video",
-        "Twilight photography",
-        "Premium brochures (digital & print)",
-        "Priority 24-hour turnaround",
-        "Multiple photographers",
-        "Commercial licensing",
-        "Premium virtual staging"
-      ],
-      cta: "Upgrade to Premium",
-      color: "emerald",
-      valueProposition: "Premium service for exclusive listings"
+        { text: "Everything in Starter, plus:" },
+        { text: "Up to 40 professional photos" },
+        { text: "Drone aerial photography" },
+        { text: "Virtual tour" },
+        { text: "Advanced photo editing" },
+        { text: "Social media optimized images" },
+        { text: "Unlimited revisions" },
+        { text: "7-day money-back guarantee" }
+      ]
     }
   ];
 
@@ -82,12 +66,16 @@ const Pricing = () => {
           subtitle="Choose the perfect plan for your real estate photography needs. No hidden fees."
         />
         
-        {/* Mobile-optimized pricing cards */}
-        <div className={isMobile ? "mt-4" : "mt-8"}>
-          <PricingCardList
-            cards={pricingCards}
-            subscription={subscription}
-            isLoading={isLoading}
+        <div className={cn(
+          "flex justify-center",
+          isMobile ? "mt-4" : "mt-8"
+        )}>
+          <PricingInteraction
+            starterMonth={starterMonthly}
+            starterAnnual={starterAnnual}
+            proMonth={proMonthly}
+            proAnnual={proAnnual}
+            plans={pricingPlans}
           />
         </div>
         
