@@ -50,7 +50,7 @@ const OptimizedHowItWorks: React.FC = () => {
   return (
     <div 
       id="how-it-works-section" 
-      className="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-10 bg-gradient-to-b from-white via-indigo-50/30 to-gray-50"
+      className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-10 bg-gradient-to-b from-indigo-50/40 via-purple-50/30 to-gray-50/80 border-t border-b border-gray-100"
     >
       <div className={`max-w-6xl mx-auto relative transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
         <div className="text-center mb-6 sm:mb-12 lg:mb-16">
@@ -60,7 +60,7 @@ const OptimizedHowItWorks: React.FC = () => {
           />
         </div>
         
-        {/* Mobile 2x2 Grid Layout */}
+        {/* Mobile steps layout */}
         <MobileStepsGridSimple 
           completedSteps={completedSteps} 
           activeStep={activeStep}
@@ -73,6 +73,9 @@ const OptimizedHowItWorks: React.FC = () => {
           activeStep={activeStep}
           onStepInteraction={handleStepInteraction}
         />
+        
+        {/* Section divider for better visual separation */}
+        <div className="w-full h-px bg-gray-200/70 my-8 md:my-12 opacity-70"></div>
       </div>
     </div>
   );
