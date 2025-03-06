@@ -4,6 +4,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import SectionHeaderSimple from './SectionHeaderSimple';
 import MobileStepsGridSimple from './MobileStepsGridSimple';
 import DesktopStepsGridSimple from './DesktopStepsGridSimple';
+import { BackgroundEffects } from '@/components/features/BackgroundEffects';
 
 const OptimizedHowItWorks: React.FC = () => {
   const isMobile = useIsMobile();
@@ -48,9 +49,20 @@ const OptimizedHowItWorks: React.FC = () => {
   };
 
   return (
-    <div 
-      id="how-it-works-section" 
-      className="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-10 bg-gradient-to-b from-white via-indigo-50/30 to-gray-50"
+    <BackgroundEffects 
+      id="how-it-works-section"
+      className="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-10"
+      blobColors={{
+        first: "bg-amber-100",
+        second: "bg-orange-100",
+        third: "bg-rose-100"
+      }}
+      blobOpacity={0.12}
+      withSpotlight={true}
+      spotlightClassName="from-amber-500/5 via-orange-500/5 to-rose-500/5"
+      pattern="dots"
+      baseColor="bg-white/80"
+      animationSpeed="slow"
     >
       <div className={`max-w-6xl mx-auto relative transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
         <div className="text-center mb-6 sm:mb-12 lg:mb-16">
@@ -74,7 +86,7 @@ const OptimizedHowItWorks: React.FC = () => {
           onStepInteraction={handleStepInteraction}
         />
       </div>
-    </div>
+    </BackgroundEffects>
   );
 };
 

@@ -20,6 +20,7 @@ interface GradientBlobBackgroundProps {
   blobSize?: 'small' | 'medium' | 'large';
   baseColor?: string;
   animationSpeed?: 'slow' | 'medium' | 'fast';
+  id?: string;
 }
 
 export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
@@ -38,7 +39,8 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
   blobOpacity = 0.15,
   blobSize = 'medium',
   baseColor = 'bg-white/80',
-  animationSpeed = 'medium'
+  animationSpeed = 'medium',
+  id
 }) => {
   // Determine blob sizes based on the blobSize prop
   const getBlobSizeClass = (position: 'first' | 'second' | 'third') => {
@@ -75,7 +77,7 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
   };
 
   return (
-    <div className={cn(`relative w-full overflow-hidden ${baseColor}`, className)}>
+    <div id={id} className={cn(`relative w-full overflow-hidden ${baseColor}`, className)}>
       {/* Pattern background */}
       {pattern === 'dots' && (
         <div className={`absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-${dotOpacity * 100}`}></div>
@@ -140,4 +142,3 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
     </div>
   );
 };
-

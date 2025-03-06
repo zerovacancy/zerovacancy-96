@@ -17,6 +17,7 @@ interface BackgroundEffectsProps {
   pattern?: 'dots' | 'grid' | 'none';
   baseColor?: string;
   animationSpeed?: 'slow' | 'medium' | 'fast';
+  id?: string;
 }
 
 export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({ 
@@ -32,10 +33,12 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
   spotlightClassName = "from-purple-500/5 via-violet-500/5 to-blue-500/5", // Very subtle spotlight
   pattern = "none",
   baseColor = "bg-white/80", // Slightly transparent white to allow blobs to show through
-  animationSpeed = 'slow'
+  animationSpeed = 'slow',
+  id
 }) => {
   return (
     <GradientBlobBackground 
+      id={id}
       className={cn("overflow-visible", className)}
       blobColors={blobColors}
       blobOpacity={blobOpacity}
