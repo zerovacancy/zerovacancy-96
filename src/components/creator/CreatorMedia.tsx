@@ -87,8 +87,8 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
     <div 
       className={cn(
         "relative will-change-transform", 
-        // Fixed aspect ratio with proper height to prevent cutoff
-        "aspect-[4/3] pt-2"  // Added top padding to prevent image cutoff
+        // Fixed aspect ratio without padding to prevent the white gap
+        "aspect-[4/3]"
       )} 
       ref={mediaRef}
     >

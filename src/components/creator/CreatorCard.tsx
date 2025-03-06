@@ -49,7 +49,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
           </div>
 
-          {/* Price tag with enhanced styling and consistent positioning */}
+          {/* Price tag with fixed dollar sign */}
           <div className="absolute top-3 sm:top-3.5 right-3 sm:right-3.5 z-20">
             <span className={cn(
               isMobile ? "px-2 py-1 text-xs" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm",
@@ -67,11 +67,8 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
 
           <div className="relative">
-            {/* Media and info overlay - Added extra spacing at top for mobile */}
-            <div className={cn(
-              "relative",
-              isMobile && "pt-1" // Small padding at top for mobile
-            )}>
+            {/* Media container with no top padding to avoid white gap */}
+            <div className="relative">
               <CreatorMedia 
                 creator={creator}
                 onImageLoad={onImageLoad}
@@ -81,24 +78,24 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <CreatorInfo creator={creator} />
             </div>
             
-            {/* Tags and rating section with improved spacing */}
+            {/* Tags and rating section */}
             <div className={cn(
               isMobile ? "p-5 sm:p-5" : "p-4 sm:p-5",
               "flex flex-col"
             )}>
-              {/* Tags section with improved spacing for mobile */}
+              {/* Tags section */}
               <div className={cn(
                 isMobile ? "mb-3" : "mb-4",
               )}>
                 <CreatorTags tags={tags} />
               </div>
               
-              {/* Rating section with subtle background for better readability */}
+              {/* Rating section with subtle background */}
               <div className="bg-gray-50/80 rounded-lg px-3 py-2.5 shadow-sm">
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
               
-              {/* CTA button section with enhanced hover animation */}
+              {/* CTA button section */}
               <div className={cn(
                 isMobile ? "mt-4" : "mt-5",
               )}>

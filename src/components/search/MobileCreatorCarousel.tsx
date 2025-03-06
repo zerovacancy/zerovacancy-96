@@ -84,8 +84,8 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         </div>
       )}
     
-      {/* Increased top padding to prevent image cutoff */}
-      <div className="w-full overflow-hidden pt-1 pb-8" ref={emblaRef}> {/* Reduced top padding */}
+      {/* Removed top padding completely to fix image cutoff */}
+      <div className="w-full overflow-hidden pb-8" ref={emblaRef}>
         <div className="flex">
           {creators.map((creator, index) => (
             <div 
@@ -103,7 +103,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         </div>
       </div>
 
-      {/* Navigation Arrows repositioned */}
+      {/* Navigation Arrows */}
       <button
         onClick={scrollPrev}
         className={cn(
@@ -127,7 +127,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* Enhanced Dots Indicator - moved closer to cards */}
+      {/* Dots Indicator */}
       <div className="flex justify-center gap-1.5 absolute bottom-0 left-0 right-0">
         {creators.map((_, index) => (
           <button
