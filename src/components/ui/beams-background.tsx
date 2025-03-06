@@ -7,6 +7,7 @@ interface AnimatedGradientBackgroundProps {
     className?: string;
     children?: React.ReactNode;
     intensity?: "subtle" | "medium" | "strong";
+    id?: string; // Add the id property to the interface
 }
 
 interface Beam {
@@ -42,6 +43,7 @@ export function BeamsBackground({
     className,
     children,
     intensity = "medium",
+    id, // Add the id parameter to the component props
 }: AnimatedGradientBackgroundProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const beamsRef = useRef<Beam[]>([]);
@@ -168,6 +170,7 @@ export function BeamsBackground({
 
     return (
         <div
+            id={id} // Pass the id to the container div
             className={cn(
                 "relative overflow-hidden bg-white",
                 className
