@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -59,7 +60,7 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       interval: isYearly ? "mo" : "mo",
       description: PLAN_DESCRIPTIONS.professional,
       features: [
-        "**Submit Requests for Proposals (RFPs)**" 
+        "**Submit Requests for Proposals (RFPs)**", 
         "Connect directly with top-tier creators to get competitive offers.",
         "Browse & Hire Premium Creators - Access vetted professionals for high-quality photography and video.",
         "1 Revision Included Per Project - Ensure content meets your expectations.",
