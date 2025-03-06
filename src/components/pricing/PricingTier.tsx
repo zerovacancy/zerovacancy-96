@@ -47,7 +47,7 @@ export const PricingTier: React.FC<PricingTierProps> = ({
       <motion.div
         className={cn(
           "w-full flex flex-col p-5 rounded-xl",
-          "relative overflow-hidden",
+          "relative overflow-visible", // Changed from overflow-hidden to overflow-visible
           "border-2 border-brand-purple bg-white shadow-md"
         )}
         whileTap={{ scale: 0.98 }}
@@ -55,7 +55,7 @@ export const PricingTier: React.FC<PricingTierProps> = ({
       >
         {/* Popular tag positioned above title */}
         {plan.showPopular && (
-          <div className="absolute top-0 left-0 right-0 mt-[-12px] flex justify-center">
+          <div className="absolute top-0 left-0 right-0 mt-[-12px] flex justify-center z-10">
             <div className="py-1 px-2.5 flex items-center gap-1 rounded-lg bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-sm shadow-md">
               <Sparkles className="h-3 w-3" />
               <span className="font-medium font-inter">Popular</span>
