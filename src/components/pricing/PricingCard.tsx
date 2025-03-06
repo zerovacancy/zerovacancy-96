@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { colorVariants, ColorVariant } from "./PricingCardColors";
@@ -45,6 +45,11 @@ export const PricingCard = ({
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const isMobile = useIsMobile();
   
+  // Update expanded state if defaultExpanded prop changes
+  useEffect(() => {
+    setIsExpanded(defaultExpanded);
+  }, [defaultExpanded]);
+  
   const planId = `price_${title.toLowerCase()}`;
   const isCurrentPlan = subscription?.plan_id === planId;
   const isSubscriptionActive = subscription?.status === 'active' || subscription?.status === 'trialing';
@@ -82,8 +87,6 @@ export const PricingCard = ({
         isMobile && isBasic ? "bg-blue-50/80" : 
         isMobile ? "bg-emerald-50/80" : "",
       )}
-      onMouseEnter={() => !isMobile && setIsExpanded(true)} 
-      onMouseLeave={() => !isMobile && !defaultExpanded && setIsExpanded(false)}
     >
       {/* Professional card decorated edge */}
       {isProfessional && highlighted && (
