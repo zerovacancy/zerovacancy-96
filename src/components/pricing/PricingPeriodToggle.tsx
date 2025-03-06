@@ -33,7 +33,7 @@ export const PricingPeriodToggle: React.FC<PricingPeriodToggleProps> = ({
           )}
           onClick={() => handleChangePeriod(1)}
         >
-          Yearly
+          Annual
         </button>
         <motion.div
           className="p-1.5 flex items-center justify-center absolute inset-0 w-1/2 z-10"
