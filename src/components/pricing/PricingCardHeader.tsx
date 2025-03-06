@@ -28,9 +28,12 @@ export const PricingCardHeader = ({
     <>
       <div className={cn(
         "flex items-center justify-between relative z-10",
-        isMobile ? "mb-1.5" : "mb-6"
+        isMobile ? "mb-1" : "mb-6"
       )}>
-        <h3 className={`text-xl font-bold ${colorAccent}`}>
+        <h3 className={cn(
+          `font-bold ${colorAccent}`,
+          isMobile ? "text-lg" : "text-xl"
+        )}>
           {title}
         </h3>
         {isCurrentPlan && isSubscriptionActive && (
@@ -53,13 +56,16 @@ export const PricingCardHeader = ({
       </div>
       
       {/* Annual price with savings - more compact */}
-      <div className="text-xs text-slate-500 mb-1.5">
+      <div className={cn(
+        "text-slate-500 mb-1.5", 
+        isMobile ? "text-[10px]" : "text-xs"
+      )}>
         ${Math.round(price * 10)}/year (save ${Math.round(price * 12 - price * 10)})
       </div>
 
       <p className={cn(
         "text-slate-600 relative z-10 leading-tight",
-        isMobile ? "text-xs mb-1.5 line-clamp-2" : "text-sm mb-3"
+        isMobile ? "text-[11px] mb-1.5 line-clamp-2" : "text-sm mb-3"
       )}>
         {description}
       </p>
@@ -67,7 +73,7 @@ export const PricingCardHeader = ({
       {valueProposition && (
         <p className={cn(
           `font-medium ${colorAccent}`,
-          isMobile ? "text-xs mb-2 line-clamp-1" : "text-sm mb-6"
+          isMobile ? "text-[10px] mb-1.5 line-clamp-1" : "text-sm mb-6"
         )}>
           <span className="inline-block mr-1">✦</span> {valueProposition}
         </p>

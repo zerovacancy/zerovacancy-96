@@ -1,5 +1,5 @@
 
-1import { useState } from "react";
+import { useState } from "react";
 import { ArrowRight } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { ColorVariant } from './PricingCardColors';
@@ -96,13 +96,15 @@ export const PricingActionButton = ({
     <button 
       className={cn(
         "w-full font-medium transition-all duration-300 rounded-lg",
-        "bg-gradient-to-r shadow-md",
+        "bg-gradient-to-r shadow-md touch-manipulation",
         isMobile ? "h-9 text-sm mb-2" : "h-12 text-base mb-6",
         colorTheme === "blue" ? "from-blue-500 to-blue-600" :
         colorTheme === "purple" ? "from-violet-500 to-violet-600" :
         "from-emerald-500 to-emerald-600",
         "text-white",
-        getColorClasses()
+        getColorClasses(),
+        // Add a subtle pulse animation for the highlighted plan on mobile
+        isMobile && colorTheme === "purple" ? "animate-subtle-bounce" : ""
       )}
       onClick={handleSubscription}
       disabled={isProcessing}

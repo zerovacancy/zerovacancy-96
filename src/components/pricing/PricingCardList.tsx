@@ -35,6 +35,47 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
       });
     }
   }, [activeIndex, isMobile]);
+  
+  // Handle touch events for swiping
+  useEffect(() => {
+    if (!isMobile || !containerRef.current) return;
+    
+    let startX: number;
+    let currentX: number;
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+    };
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      currentX = e.touches[0].clientX;
+    };
+    
+    const handleTouchEnd = () => {
+      const diff = startX - currentX;
+      // Threshold to determine swipe (40px)
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          // Swipe left
+          handleSwipe('left');
+        } else {
+          // Swipe right
+          handleSwipe('right');
+        }
+      }
+    };
+    
+    const container = containerRef.current;
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+    container.addEventListener('touchend', handleTouchEnd, { passive: true });
+    
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+      container.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile, handleSwipe]);
 
   return (
     <div className="relative">
@@ -91,7 +132,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
         ref={containerRef}
         className={cn(
           isMobile 
-            ? "flex overflow-x-hidden snap-x snap-mandatory scrollbar-hide" 
+            ? "flex overflow-x-hidden snap-x snap-mandatory scrollbar-hide scroll-container-optimized" 
             : "grid gap-6 md:gap-8 lg:grid-cols-3 sm:grid-cols-2"
         )}
         style={isMobile ? { scrollbarWidth: 'none', msOverflowStyle: 'none' } : undefined}
@@ -101,7 +142,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
             key={card.title}
             className={cn(
               isMobile 
-                ? "min-w-full flex-shrink-0 snap-center px-1.5" 
+                ? "min-w-full flex-shrink-0 snap-center px-1" 
                 : "",
               card.highlighted && !isMobile ? "lg:scale-105 lg:-translate-y-2 z-10" : ""
             )}
@@ -117,12 +158,12 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
         ))}
       </div>
       
-      {/* Mobile swipe instruction */}
+      {/* Mobile swipe instruction - more prominent */}
       {isMobile && (
-        <div className="text-center text-[10px] text-gray-500 mt-2 flex items-center justify-center">
-          <ChevronLeft className="h-3 w-3 mr-0.5 opacity-70" />
+        <div className="text-center text-gray-500 mt-3 flex items-center justify-center bg-gray-50 rounded-full py-1.5 mx-auto w-auto px-4 shadow-sm text-xs">
+          <ChevronLeft className="h-3 w-3 mr-1 opacity-70" />
           <span>Swipe to compare plans</span>
-          <ChevronRight className="h-3 w-3 ml-0.5 opacity-70" />
+          <ChevronRight className="h-3 w-3 ml-1 opacity-70" />
         </div>
       )}
     </div>
