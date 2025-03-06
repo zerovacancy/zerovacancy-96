@@ -108,7 +108,6 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
         <PricingToggle 
           isYearly={isYearly} 
           setIsYearly={setIsYearly}
-          yearlyDiscount={isYearly ? "Save up to 30%" : ""}
         />
       </div>
       

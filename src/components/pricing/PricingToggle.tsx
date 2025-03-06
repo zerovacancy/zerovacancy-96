@@ -12,8 +12,7 @@ interface PricingToggleProps {
 
 export const PricingToggle = ({
   isYearly,
-  setIsYearly,
-  yearlyDiscount
+  setIsYearly
 }: PricingToggleProps) => {
   const isMobile = useIsMobile();
   const [animateChange, setAnimateChange] = useState(false);
