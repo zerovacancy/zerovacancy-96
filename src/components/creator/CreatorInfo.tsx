@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { MapPin, Image, BadgeCheck } from 'lucide-react';
@@ -32,14 +31,20 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
         isMobile ? "pl-1" : "" // Extra left padding on mobile for better alignment
       )}>
         <div className="flex items-center gap-2 sm:gap-2.5">
-          <h3 className="font-bold text-lg sm:text-xl text-white">{creator.name}</h3>
-          {/* More visible verification badge on mobile */}
+          <h3 className={cn(
+            "font-bold text-white",
+            isMobile ? "text-base" : "text-lg sm:text-xl" // Smaller text size on mobile
+          )}>
+            {creator.name}
+          </h3>
+          {/* Smaller verification badge on mobile */}
           <BadgeCheck 
             className={cn(
-              "w-4.5 h-4.5 sm:w-5 sm:h-5 text-white/90",
+              isMobile ? "w-4 h-4" : "w-4.5 h-4.5 sm:w-5 sm:h-5",
+              "text-white/90",
               "transition-all duration-300",
               isMobile 
-                ? "bg-indigo-500/60 rounded-full p-0.5" // More visible on mobile
+                ? "bg-indigo-500/30 rounded-full p-0.5" // More subtle on mobile
                 : "bg-indigo-500/30 rounded-full p-0.5",
               "group-hover:bg-indigo-500/50" // Subtle hover effect
             )}
@@ -47,28 +52,40 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
           />
         </div>
         
-        {/* Location display with improved spacing for mobile */}
-        <div className={cn(
-          "flex items-center gap-1.5",
-          isMobile ? "mt-3 sm:mt-3" : "mt-2.5 sm:mt-3" // More spacing on mobile
-        )}>
-          <MapPin 
-            className="w-3.5 h-3.5 text-white/90 flex-shrink-0" 
-            aria-hidden="true"
-          />
-          <span className="text-xs sm:text-sm text-white/90 font-medium">{creator.location}</span>
-        </div>
-        
-        {/* Services display with improved spacing */}
-        <div className="flex items-center gap-1.5 mt-2 sm:mt-2.5">
-          <Image
-            className="w-3.5 h-3.5 text-white/85 flex-shrink-0"
-            aria-hidden="true"
-          />
-          <p className="text-xs sm:text-sm text-white/85">
-            {creator.services.join(" • ")}
-          </p>
-        </div>
+        {/* Combined location and services for mobile */}
+        {isMobile ? (
+          <div className="flex items-center gap-2 mt-1.5">
+            <MapPin 
+              className="w-3 h-3 text-white/90 flex-shrink-0" 
+              aria-hidden="true"
+            />
+            <span className="text-xs text-white/90 truncate max-w-[calc(100%-20px)]">
+              {creator.location} • {creator.services.join(", ")}
+            </span>
+          </div>
+        ) : (
+          <>
+            {/* Location display for desktop */}
+            <div className="flex items-center gap-1.5 mt-2.5 sm:mt-3">
+              <MapPin 
+                className="w-3.5 h-3.5 text-white/90 flex-shrink-0" 
+                aria-hidden="true"
+              />
+              <span className="text-xs sm:text-sm text-white/90 font-medium">{creator.location}</span>
+            </div>
+            
+            {/* Services display for desktop */}
+            <div className="flex items-center gap-1.5 mt-2 sm:mt-2.5">
+              <Image
+                className="w-3.5 h-3.5 text-white/85 flex-shrink-0"
+                aria-hidden="true"
+              />
+              <p className="text-xs sm:text-sm text-white/85">
+                {creator.services.join(" • ")}
+              </p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
