@@ -1,4 +1,3 @@
-
 import React, { useRef } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { ChevronDown, Filter, ArrowUpDown } from 'lucide-react';
@@ -43,19 +42,18 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     <div className="relative">
       {/* Filters section with horizontal scrolling on mobile */}
       <div className="mb-4 sm:mb-6">
-        {/* Title - Now directly in the parent container without the flex div */}
         <h3 className={cn(
-          "font-bold text-gray-900 bg-gradient-to-r from-indigo-700 to-purple-600 bg-clip-text text-transparent mb-3 sm:mb-4 float-left",
+          "font-bold text-gray-900 bg-gradient-to-r from-indigo-700 to-purple-600 bg-clip-text text-transparent mb-3 sm:mb-4",
           isMobile ? "text-base" : "text-lg"
         )}>
           Top creators in your area
         </h3>
         
-        {/* More elegant sort dropdown - Now floating right */}
+        {/* More elegant sort dropdown */}
         <Select value={sortBy} onValueChange={onSort}>
           <SelectTrigger className={cn(
             "border-gray-200 hover:border-indigo-300 text-gray-700 hover:text-indigo-700 transition-colors",
-            "bg-white hover:bg-indigo-50/50 shadow-sm float-right",
+            "bg-white hover:bg-indigo-50/50 shadow-sm",
             isMobile ? "h-8 text-xs pl-2 pr-2 w-[120px]" : "h-9 text-sm w-[140px]"
           )}>
             <div className="flex items-center justify-center gap-1">
@@ -73,9 +71,6 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             <SelectItem value="reviews" className="hover:text-indigo-700 hover:bg-indigo-50/50">Most Reviews</SelectItem>
           </SelectContent>
         </Select>
-        
-        {/* Clear float for proper layout */}
-        <div className="clear-both"></div>
         
         {/* Horizontally scrollable filter tags for mobile */}
         <div 
