@@ -92,7 +92,8 @@ export function Hero() {
             "px-2 sm:px-4", 
             "[word-spacing:0.12em] sm:[word-spacing:0.16em]", 
             "relative z-10", 
-            "mt-12 sm:mt-16 mb-0", // Maintaining the increased top margin
+            // Reduced top margin on mobile by 40%
+            "mt-7 sm:mt-16 mb-0", 
             "font-inter"
           )}
         >
@@ -103,7 +104,8 @@ export function Hero() {
       <div 
         className={cn(
           "w-full", 
-          "mt-6 sm:mt-8",
+          // Reduced top margin on mobile by 30%
+          "mt-4 sm:mt-8",
           "px-3 sm:px-4",
           isInView ? "animate-fade-in delay-200" : "opacity-0" 
         )}
