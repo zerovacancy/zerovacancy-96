@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export interface PricingFeature {
   text: string;
+  primary?: boolean;
 }
 
 export interface PricingPlanProps {
@@ -108,7 +109,7 @@ export function PricingInteraction({
 
   return (
     <div className={cn(
-      "border-2 rounded-[32px] p-4 shadow-lg w-full flex flex-col items-center gap-3 bg-white",
+      "border-2 rounded-[22px] p-4 shadow-lg w-full flex flex-col items-center gap-3 bg-white",
       "relative overflow-hidden",
       isMobile ? "max-w-[95%] mx-auto" : "max-w-sm"
     )}>
@@ -120,8 +121,8 @@ export function PricingInteraction({
         <div className="rounded-full relative w-full bg-slate-100 p-1.5 flex items-center shadow-inner">
           <button
             className={cn(
-              "font-semibold rounded-full w-full p-2 text-slate-800 z-20 touch-manipulation transition-colors",
-              period === 0 ? "text-slate-900" : "text-slate-600"
+              "font-medium font-inter rounded-full w-full p-2 z-20 touch-manipulation transition-colors",
+              period === 0 ? "text-brand-purple-dark" : "text-slate-600"
             )}
             onClick={() => handleChangePeriod(0)}
           >
@@ -129,8 +130,8 @@ export function PricingInteraction({
           </button>
           <button
             className={cn(
-              "font-semibold rounded-full w-full p-2 text-slate-800 z-20 touch-manipulation transition-colors",
-              period === 1 ? "text-slate-900" : "text-slate-600"
+              "font-medium font-inter rounded-full w-full p-2 z-20 touch-manipulation transition-colors",
+              period === 1 ? "text-brand-purple-dark" : "text-slate-600"
             )}
             onClick={() => handleChangePeriod(1)}
           >
@@ -159,7 +160,7 @@ export function PricingInteraction({
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-gradient-to-r from-purple-500 to-violet-600 text-white text-xs font-medium px-3 py-1 rounded-full shadow-md"
+              className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-xs font-medium font-inter px-3 py-1 rounded-full shadow-md"
             >
               Save up to 30% annually
             </motion.div>
@@ -174,7 +175,7 @@ export function PricingInteraction({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="text-xs text-gray-500 flex items-center gap-1 mb-1 bg-slate-50 px-3 py-1.5 rounded-full shadow-sm animate-pulse-subtle"
+            className="text-xs text-gray-500 flex items-center gap-1 mb-1 bg-slate-50 px-3 py-1.5 rounded-full shadow-sm animate-pulse-subtle font-inter"
           >
             <ChevronLeft className="w-3 h-3" />
             <span>Swipe to compare plans</span>
@@ -221,10 +222,11 @@ export function PricingInteraction({
           <div key={index} className="w-full">
             <motion.div
               className={cn(
-                "w-full flex justify-between cursor-pointer p-5 rounded-2xl transition-all",
+                "w-full flex justify-between cursor-pointer p-5 rounded-xl transition-all",
+                "relative overflow-hidden", // Add overflow hidden to contain content
                 active === index 
-                  ? "border-2 border-black bg-white shadow-lg" 
-                  : "border border-gray-300 bg-gray-50"
+                  ? "border-2 border-brand-purple bg-white shadow-lg" 
+                  : "border border-gray-200 bg-gray-50"
               )}
               onClick={() => handleChangePlan(index)}
               whileTap={{ scale: 0.98 }}
@@ -232,37 +234,37 @@ export function PricingInteraction({
             >
               <div className="flex flex-col items-start">
                 <div className="flex items-center gap-2 mb-1">
-                  <p className="font-semibold text-xl flex items-center gap-2 text-gray-950">
+                  <p className="font-semibold text-xl flex items-center gap-2 text-gray-950 font-jakarta">
                     {plan.title}
                   </p>
                   
                   {/* Enhanced Popular tag */}
                   {plan.showPopular && (
-                    <div className="py-1 px-2.5 flex items-center gap-1 rounded-lg bg-gradient-to-r from-violet-500 to-purple-600 text-white text-sm shadow-md">
+                    <div className="py-1 px-2.5 flex items-center gap-1 rounded-lg bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-sm shadow-md">
                       <Sparkles className="h-3 w-3" />
-                      <span className="font-medium">Popular</span>
+                      <span className="font-medium font-inter">Popular</span>
                     </div>
                   )}
                 </div>
                 
                 {/* Value proposition text */}
-                <p className="text-xs text-slate-600 mb-2">
+                <p className="text-xs text-slate-600 mb-2 font-inter">
                   {VALUE_PROPOSITIONS[index]}
                 </p>
                 
-                <div className="text-slate-500 text-md">
+                <div className="text-slate-500 text-md font-inter">
                   <div className="flex items-baseline gap-1">
                     <span className={cn(
-                      "text-black font-bold text-2xl flex items-center",
+                      "text-brand-purple-dark font-bold text-2xl flex items-center font-jakarta",
                       animatePriceChange && "animate-pulse-subtle"
                     )}>
                       ${" "}
                       <NumberFlow
-                        className="text-black font-bold text-2xl"
+                        className="text-brand-purple-dark font-bold text-2xl font-jakarta"
                         value={planPrices[index]}
                       />
                     </span>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 font-inter">
                       /{period === 0 ? "month" : "month, billed yearly"}
                     </span>
                   </div>
@@ -272,7 +274,7 @@ export function PricingInteraction({
                     <motion.p 
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-xs font-medium mt-1 py-0.5 px-2 bg-green-50 text-green-600 rounded-full inline-block"
+                      className="text-xs font-medium mt-1 py-0.5 px-2 bg-green-50 text-green-600 rounded-full inline-block font-inter"
                     >
                       Save ${calculateSavings(index)} per year
                     </motion.p>
@@ -283,7 +285,7 @@ export function PricingInteraction({
                 className={cn(
                   "border-2 size-6 rounded-full mt-0.5 p-1 flex items-center justify-center transition-colors",
                   active === index 
-                    ? "border-black bg-black" 
+                    ? "border-brand-purple bg-brand-purple" 
                     : "border-slate-300"
                 )}
               >
@@ -315,22 +317,23 @@ export function PricingInteraction({
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: featureIndex * 0.05 }}
                           className={cn(
-                            "text-sm flex items-start gap-2",
-                            isMobile ? "text-xs" : "text-sm"
+                            "text-sm flex items-start gap-2 font-inter",
+                            isMobile ? "text-xs" : "text-sm",
+                            feature.primary ? "text-gray-800 font-medium" : "text-gray-600"
                           )}
                         >
                           <span className={cn(
                             "w-5 h-5 mt-0.5 flex-shrink-0 rounded-full flex items-center justify-center",
                             index === 0 ? "bg-blue-100" : 
-                            index === 1 ? "bg-purple-100" : "bg-emerald-100"
+                            index === 1 ? "bg-brand-purple/20" : "bg-emerald-100"
                           )}>
                             <Check className={cn(
                               "w-3 h-3",
                               index === 0 ? "text-blue-600" : 
-                              index === 1 ? "text-purple-600" : "text-emerald-600"
+                              index === 1 ? "text-brand-purple" : "text-emerald-600"
                             )} />
                           </span>
-                          <span className="flex-1 text-gray-700">{feature.text}</span>
+                          <span className="flex-1">{feature.text}</span>
                         </motion.li>
                       ))}
                     </ul>
@@ -347,7 +350,7 @@ export function PricingInteraction({
                   toggleFeatures(index);
                 }}
                 className={cn(
-                  "w-full flex items-center justify-center text-xs py-2 mt-1.5 transition-colors rounded-lg",
+                  "w-full flex items-center justify-center text-xs py-2 mt-1.5 transition-colors rounded-lg font-inter",
                   "touch-manipulation active:bg-slate-50",
                   expandedFeatures[index] 
                     ? "text-gray-700 bg-slate-100" 
@@ -375,7 +378,7 @@ export function PricingInteraction({
               className={cn(
                 "transition-all touch-manipulation",
                 active === index 
-                  ? "h-1.5 w-6 bg-black rounded-full" 
+                  ? "h-1.5 w-6 bg-brand-purple rounded-full" 
                   : "h-1.5 w-1.5 bg-gray-300 rounded-full"
               )}
               aria-label={`Go to plan ${index + 1}`}
@@ -388,7 +391,7 @@ export function PricingInteraction({
       <motion.button 
         whileTap={{ scale: 0.98 }}
         className={cn(
-          "rounded-full bg-gradient-to-r from-violet-600 to-purple-700 text-lg text-white w-full p-3 mt-3",
+          "rounded-full bg-gradient-to-r from-brand-purple-medium to-brand-purple text-lg text-white w-full p-3 mt-3 font-medium font-inter",
           "active:scale-95 transition-all duration-300 touch-manipulation",
           "shadow-lg hover:shadow-xl"
         )}
@@ -398,8 +401,8 @@ export function PricingInteraction({
       
       {/* Plan comparison summary */}
       <div className="w-full mt-2 pb-1">
-        <p className="text-center text-xs text-gray-500">
-          Not sure which plan? <span className="text-purple-600 font-medium">Compare all features</span>
+        <p className="text-center text-xs text-gray-500 font-inter">
+          Not sure which plan? <span className="text-brand-purple font-medium">Compare all features</span>
         </p>
       </div>
     </div>

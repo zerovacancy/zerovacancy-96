@@ -36,9 +36,9 @@ export const PricingToggle = ({
         <button
           onClick={() => setIsYearly(false)}
           className={cn(
-            "relative z-20 w-1/2 py-2 rounded-full text-sm font-medium transition-colors",
+            "relative z-20 w-1/2 py-2 rounded-full text-sm font-medium font-inter transition-colors",
             "touch-manipulation focus:outline-none active:scale-95", 
-            isYearly ? "text-slate-600" : "text-slate-900"
+            isYearly ? "text-slate-600" : "text-brand-purple-dark"
           )}
         >
           Monthly
@@ -48,9 +48,9 @@ export const PricingToggle = ({
         <button
           onClick={() => setIsYearly(true)}
           className={cn(
-            "relative z-20 w-1/2 py-2 rounded-full text-sm font-medium transition-colors",
+            "relative z-20 w-1/2 py-2 rounded-full text-sm font-medium font-inter transition-colors",
             "touch-manipulation focus:outline-none active:scale-95",
-            isYearly ? "text-slate-900" : "text-slate-600"
+            isYearly ? "text-brand-purple-dark" : "text-slate-600"
           )}
         >
           Annual
@@ -60,7 +60,7 @@ export const PricingToggle = ({
         <motion.div
           className={cn(
             "absolute left-0 h-full top-0 rounded-full bg-white shadow-sm",
-            animateChange && isYearly ? "ring-2 ring-violet-300 ring-offset-1" : ""
+            animateChange && isYearly ? "ring-2 ring-brand-purple/30 ring-offset-1" : ""
           )}
           initial={false}
           animate={{
@@ -75,7 +75,7 @@ export const PricingToggle = ({
         />
       </div>
       
-      {/* Enhanced discount badge */}
+      {/* Enhanced discount badge with brand colors */}
       <AnimatePresence>
         {isYearly && yearlyDiscount && (
           <motion.div
@@ -83,8 +83,8 @@ export const PricingToggle = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
             className={cn(
-              "mt-2 py-1 px-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white",
-              "text-xs font-medium rounded-full shadow-sm flex items-center gap-1",
+              "mt-2 py-1 px-3 bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white",
+              "text-xs font-medium font-inter rounded-full shadow-md flex items-center gap-1",
               animateChange ? "animate-pulse" : ""
             )}
           >

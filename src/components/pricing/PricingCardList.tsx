@@ -113,7 +113,7 @@ export const PricingCardList = ({
               className={cn(
                 "transition-all duration-300",
                 index === activeIndex 
-                  ? "w-6 h-2 bg-violet-500 rounded-full" 
+                  ? "w-6 h-2 bg-brand-purple rounded-full" 
                   : "w-2 h-2 bg-slate-300 rounded-full"
               )}
               aria-label={`View ${cards[index].title} plan`}
@@ -188,7 +188,7 @@ export const PricingCardList = ({
           transition={{ delay: 0.5 }}
           className="text-center mt-4"
         >
-          <div className="inline-flex items-center bg-slate-50 text-slate-500 text-xs px-3 py-1.5 rounded-full shadow-sm">
+          <div className="inline-flex items-center bg-slate-50 text-slate-500 text-xs px-3 py-1.5 rounded-full shadow-sm font-inter">
             <ChevronLeft className="h-3 w-3 mr-1.5 opacity-70" />
             <span>Swipe to compare plans</span>
             <ChevronRight className="h-3 w-3 ml-1.5 opacity-70" />
