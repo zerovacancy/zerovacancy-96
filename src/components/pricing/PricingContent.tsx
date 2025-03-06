@@ -5,7 +5,7 @@ import { PricingInteraction } from "./PricingInteraction";
 import { PricingCardList } from "./PricingCardList";
 import { PricingToggle } from "./PricingToggle";
 import { ColorVariant } from "./PricingCardColors";
-import { PRICING, SAVINGS, FEATURES, VALUE_PROPOSITIONS } from "./pricingData";
+import { PRICING, SAVINGS, FEATURES, VALUE_PROPOSITIONS, PLAN_DESCRIPTIONS, PLAN_CTAS } from "./pricingData";
 
 interface PricingContentProps {
   subscription: any;
