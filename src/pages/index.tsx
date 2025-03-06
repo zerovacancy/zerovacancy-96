@@ -13,7 +13,7 @@ import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { FeaturesSectionWithHoverEffects } from '@/components/features/Features';
 import Pricing from '@/components/Pricing';
 import { Waves } from '@/components/ui/waves';
-import PreviewSearch from '@/components/PreviewSearch';
+import PreviewSearch from '@/components/preview-search';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { BackgroundEffects } from '@/components/features/BackgroundEffects';
