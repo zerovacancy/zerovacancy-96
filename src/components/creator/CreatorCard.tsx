@@ -49,17 +49,17 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
           </div>
 
-          {/* Price tag with enhanced styling */}
-          <div className="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 z-20">
+          {/* Price tag with enhanced styling and consistent positioning */}
+          <div className="absolute top-3 sm:top-3.5 right-3 sm:right-3.5 z-20">
             <span className={cn(
               "px-2.5 sm:px-3 py-1.5",
-              "text-xs sm:text-sm font-semibold", // More prominent
-              "bg-white shadow-sm border border-white/40",
+              "text-xs sm:text-sm font-semibold",
+              "bg-white shadow-md border border-white/40", // Added slightly stronger shadow
               "text-[#212121] rounded-full",
-              "shadow-[0_2px_6px_rgba(0,0,0,0.1)]", // Added subtle shadow
+              "shadow-[0_3px_8px_rgba(0,0,0,0.12)]", // Enhanced shadow for better contrast
               "transition-all duration-200",
-              "group-hover:scale-105 group-hover:shadow-[0_3px_8px_rgba(0,0,0,0.15)]", // Enhanced hover effect
-              "flex items-center gap-1" // Added gap for icon
+              "group-hover:scale-105 group-hover:shadow-[0_4px_10px_rgba(0,0,0,0.18)]", // Enhanced hover effect
+              "flex items-center gap-1.5" // Increased gap slightly
             )}>
               <DollarSign className="w-3 h-3 text-indigo-600" aria-hidden="true" />
               <span>From ${creator.price}</span>
@@ -78,27 +78,27 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <CreatorInfo creator={creator} />
             </div>
             
-            {/* Tags and rating section */}
-            <div className="p-3.5 sm:p-4.5">
-              {/* Tags section */}
-              <div className="mb-3.5">
+            {/* Tags and rating section with improved spacing */}
+            <div className="p-4 sm:p-5">
+              {/* Tags section with slightly more space */}
+              <div className="mb-4">
                 <CreatorTags tags={tags} />
               </div>
               
-              {/* Rating section */}
-              <div>
+              {/* Rating section with subtle background for better readability */}
+              <div className="bg-gray-50/80 rounded-lg px-3 py-2.5 shadow-sm">
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
               
-              {/* CTA button section with pulse animation on hover */}
-              <div className="mt-4.5">
+              {/* CTA button section with enhanced hover animation */}
+              <div className="mt-5">
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
                   aria-label={`Join waitlist to work with ${creator.name}`}
                   className="w-full h-10 sm:h-11 text-sm px-4 hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200 group-hover:animate-pulse-subtle"
                 >
                   <span>Join Waitlist</span>
-                  <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-0.5 transition-transform duration-200" aria-hidden="true" />
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
                 </ShimmerButton>
               </div>
             </div>
