@@ -84,7 +84,8 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         </div>
       )}
     
-      <div className="w-full overflow-hidden pb-14" ref={emblaRef}>
+      {/* Reduced bottom padding to minimize excess whitespace */}
+      <div className="w-full overflow-hidden pb-8" ref={emblaRef}>
         <div className="flex">
           {creators.map((creator, index) => (
             <div 
@@ -102,11 +103,11 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         </div>
       </div>
 
-      {/* Navigation Arrows with enhanced styling */}
+      {/* Navigation Arrows repositioned to be more centered */}
       <button
         onClick={scrollPrev}
         className={cn(
-          "absolute left-1 top-1/2 -translate-y-1/2 z-10 rounded-full p-2.5 bg-black/40 text-white backdrop-blur-sm transition-all",
+          "absolute left-1 top-[45%] -translate-y-1/2 z-10 rounded-full p-2.5 bg-black/40 text-white backdrop-blur-sm transition-all",
           "hover:bg-black/60 active:scale-95 duration-200 touch-manipulation",
           !prevBtnEnabled && "opacity-0 pointer-events-none"
         )}
@@ -117,7 +118,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
       <button
         onClick={scrollNext}
         className={cn(
-          "absolute right-1 top-1/2 -translate-y-1/2 z-10 rounded-full p-2.5 bg-black/40 text-white backdrop-blur-sm transition-all",
+          "absolute right-1 top-[45%] -translate-y-1/2 z-10 rounded-full p-2.5 bg-black/40 text-white backdrop-blur-sm transition-all",
           "hover:bg-black/60 active:scale-95 duration-200 touch-manipulation",
           !nextBtnEnabled && "opacity-0 pointer-events-none"
         )}
@@ -126,16 +127,16 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* Enhanced Dots Indicator - made more prominent for mobile */}
-      <div className="flex justify-center gap-2 mt-3 absolute bottom-1 left-0 right-0">
+      {/* Enhanced Dots Indicator - moved closer to cards, smaller and more compact */}
+      <div className="flex justify-center gap-1.5 absolute bottom-0 left-0 right-0">
         {creators.map((_, index) => (
           <button
             key={index}
             className={cn(
               "transition-all duration-200 touch-manipulation rounded-full",
               index === selectedIndex 
-                ? "bg-indigo-600 w-4 h-4" // Larger dot for selected
-                : "bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5"
+                ? "bg-indigo-600 w-3 h-3" // Smaller selected dot
+                : "bg-gray-300 hover:bg-gray-400 w-2 h-2" // Smaller unselected dot
             )}
             onClick={() => emblaApi?.scrollTo(index)}
             aria-label={`Go to creator ${index + 1}`}

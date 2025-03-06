@@ -19,8 +19,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
   const isMobile = useIsMobile();
 
   return (
-    <div className="w-full space-y-3">
-      <div className="flex flex-col gap-3">
+    <div className="w-full space-y-2 sm:space-y-3"> {/* Reduced vertical spacing */}
+      <div className="flex flex-col gap-2 sm:gap-3"> {/* Reduced gap between elements */}
         <div className={cn(
           "relative flex flex-col sm:flex-row w-full rounded-lg sm:rounded-xl overflow-hidden",
           "sm:shadow-[0_3px_16px_rgba(0,0,0,0.08)]",
@@ -38,7 +38,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
         <div className="sm:hidden">
           <Button 
             className={cn(
-              "w-full h-11",
+              "w-full h-10", // Reduced height
               "bg-primary hover:bg-primary/90 text-white",
               "shadow-sm hover:shadow-md transition-all duration-200",
               "text-sm rounded-lg",
@@ -49,6 +49,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
           </Button>
         </div>
 
+        {/* Adjusted filter section with reduced spacing */}
         <SearchFilters
           showMoreFilters={showMoreFilters}
           onToggleFilters={() => setShowMoreFilters(!showMoreFilters)}
