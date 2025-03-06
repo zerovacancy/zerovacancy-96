@@ -1,3 +1,4 @@
+
 @tailwind utilities;
 
 @layer utilities {
@@ -84,6 +85,10 @@
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
   }
 
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
   @keyframes shimmer {
     0% {
       transform: translateX(-100%);
@@ -99,6 +104,18 @@
     }
     50% {
       transform: translateY(-5px);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-10px) rotate(2deg);
+    }
+    66% {
+      transform: translateY(5px) rotate(-2deg);
     }
   }
 

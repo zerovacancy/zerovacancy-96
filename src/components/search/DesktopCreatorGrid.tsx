@@ -17,15 +17,20 @@ export const DesktopCreatorGrid: React.FC<DesktopCreatorGridProps> = ({
   imageRef,
 }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
       {creators.map((creator) => (
-        <div key={creator.name} className="h-full flex">
-          <CreatorCard
-            creator={creator}
-            onImageLoad={onImageLoad}
-            loadedImages={loadedImages}
-            imageRef={imageRef}
-          />
+        <div 
+          key={creator.name} 
+          className="h-full flex group"
+        >
+          <div className="w-full relative transform transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-xl rounded-xl overflow-hidden">
+            <CreatorCard
+              creator={creator}
+              onImageLoad={onImageLoad}
+              loadedImages={loadedImages}
+              imageRef={imageRef}
+            />
+          </div>
         </div>
       ))}
     </div>
