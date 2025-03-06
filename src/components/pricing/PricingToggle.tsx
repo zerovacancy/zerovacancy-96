@@ -1,7 +1,9 @@
+
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Sparkles } from "lucide-react";
 
 interface PricingToggleProps {
   isYearly: boolean;
@@ -27,7 +29,7 @@ export const PricingToggle = ({
   return (
     <div className="flex flex-col items-center">
       <div className={cn(
-        "relative p-1 bg-slate-100 rounded-full flex items-center",
+        "relative p-1 bg-slate-100 rounded-full flex items-center shadow-inner",
         isMobile ? "w-full max-w-xs" : "w-80"
       )}>
         {/* Monthly option */}
@@ -35,7 +37,7 @@ export const PricingToggle = ({
           onClick={() => setIsYearly(false)}
           className={cn(
             "relative z-20 w-1/2 py-2 rounded-full text-sm font-medium transition-colors",
-            "touch-manipulation focus:outline-none", 
+            "touch-manipulation focus:outline-none active:scale-95", 
             isYearly ? "text-slate-600" : "text-slate-900"
           )}
         >
@@ -47,14 +49,14 @@ export const PricingToggle = ({
           onClick={() => setIsYearly(true)}
           className={cn(
             "relative z-20 w-1/2 py-2 rounded-full text-sm font-medium transition-colors",
-            "touch-manipulation focus:outline-none",
+            "touch-manipulation focus:outline-none active:scale-95",
             isYearly ? "text-slate-900" : "text-slate-600"
           )}
         >
           Annual
         </button>
         
-        {/* Active slider */}
+        {/* Active slider with improved animation */}
         <motion.div
           className={cn(
             "absolute left-0 h-full top-0 rounded-full bg-white shadow-sm",
@@ -73,21 +75,24 @@ export const PricingToggle = ({
         />
       </div>
       
-      {/* Discount badge */}
-      {isYearly && yearlyDiscount && (
-        <motion.div
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          className={cn(
-            "mt-2 py-1 px-3 bg-gradient-to-r from-violet-500 to-purple-500 text-white",
-            "text-xs font-medium rounded-full shadow-sm",
-            animateChange ? "animate-bounce-once" : ""
-          )}
-        >
-          {yearlyDiscount}
-        </motion.div>
-      )}
+      {/* Enhanced discount badge */}
+      <AnimatePresence>
+        {isYearly && yearlyDiscount && (
+          <motion.div
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -5 }}
+            className={cn(
+              "mt-2 py-1 px-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white",
+              "text-xs font-medium rounded-full shadow-sm flex items-center gap-1",
+              animateChange ? "animate-pulse" : ""
+            )}
+          >
+            <Sparkles className="h-3 w-3" />
+            {yearlyDiscount}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

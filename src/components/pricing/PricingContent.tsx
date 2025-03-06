@@ -6,7 +6,7 @@ import { PricingInteraction } from "./PricingInteraction";
 import { PricingCardList } from "./PricingCardList";
 import { PricingToggle } from "./PricingToggle";
 import { ColorVariant } from "./PricingCardColors";
-import { PRICING, SAVINGS, FEATURES } from "./pricingData";
+import { PRICING, SAVINGS, FEATURES, VALUE_PROPOSITIONS } from "./pricingData";
 
 interface PricingContentProps {
   subscription: any;
@@ -52,7 +52,7 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       ],
       cta: "Start for Free",
       color: "blue" as ColorVariant,
-      valueProposition: "Start showcasing properties today"
+      valueProposition: VALUE_PROPOSITIONS.basic
     },
     {
       title: "Professional",
@@ -61,11 +61,11 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       description: "Our most popular plan for real estate agents and brokers.",
       features: [
         "Professional photography (up to 25 photos)",
-        "Basic photo editing",
-        "Property website",
+        "Enhanced photo editing",
+        "Custom property website",
         "Digital delivery within 48 hours",
         "1 photographer, 1 hour session",
-        "High-resolution images",
+        "High-resolution images for print",
         "Basic virtual staging",
         "Social media optimization"
       ],
@@ -73,7 +73,7 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
       highlighted: true,
       color: "purple" as ColorVariant,
       showPopularTag: true,
-      valueProposition: `Save $${SAVINGS.starter}/year with annual billing`
+      valueProposition: VALUE_PROPOSITIONS.professional
     },
     {
       title: "Premium",
@@ -84,17 +84,17 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
         "plus:Everything in Professional, plus:",
         "Up to 40 professional photos",
         "Drone aerial photography",
-        "3D virtual tour",
-        "Advanced photo editing",
-        "Social media optimized images",
+        "3D virtual tour technology",
+        "Advanced photo editing & retouching",
+        "Social media optimized image pack",
         "Unlimited revisions",
-        "24-hour delivery",
+        "Express 24-hour delivery",
         "2 photographer team",
         "7-day money-back guarantee"
       ],
       cta: "Upgrade to Premium",
       color: "emerald" as ColorVariant,
-      valueProposition: `Save $${SAVINGS.pro}/year with annual billing`
+      valueProposition: VALUE_PROPOSITIONS.premium
     }
   ];
 
