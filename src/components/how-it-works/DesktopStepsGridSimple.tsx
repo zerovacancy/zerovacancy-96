@@ -21,7 +21,7 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
       {/* Grid container */}
       <div className="grid w-full grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7 relative">
         {steps.map((step, index) => (
-          <div key={index} className="relative">
+          <div key={index} className="relative z-10">
             <DesktopStepItemSimple
               step={step}
               index={index}
@@ -32,7 +32,7 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
             
             {/* Flow arrows between steps - only show between items, not after the last one */}
             {index < steps.length - 1 && (index + 1) % 4 !== 0 && (
-              <div className="absolute top-1/2 -right-4 transform -translate-y-1/2 hidden lg:block">
+              <div className="absolute top-1/2 -right-4 transform -translate-y-1/2 hidden lg:block z-20">
                 <div className={`p-1.5 rounded-full ${step.iconClass} opacity-70`}>
                   <ArrowRight className="w-3 h-3 text-white" />
                 </div>
@@ -42,8 +42,10 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
         ))}
       </div>
       
-      {/* Connecting lines between steps - now positioned after the grid for proper z-index layering */}
-      <ConnectingLinesSimple />
+      {/* Connecting lines positioned as a separate layer */}
+      <div className="relative h-0">
+        <ConnectingLinesSimple />
+      </div>
     </div>
   );
 };

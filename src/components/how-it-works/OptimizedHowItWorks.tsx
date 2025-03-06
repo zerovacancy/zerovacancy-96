@@ -25,11 +25,13 @@ const OptimizedHowItWorks: React.FC = () => {
 
   return (
     <div className="py-10 sm:py-12 lg:py-16 px-3 sm:px-5 lg:px-8 bg-gradient-to-b from-white via-purple-50/10 to-white">
-      <div className="max-w-6xl mx-auto relative z-10">
-        <SectionHeaderSimple 
-          title="How It Works" 
-          subtitle="Your journey to amazing content in four simple steps"
-        />
+      <div className="max-w-6xl mx-auto relative">
+        <div className="text-center mb-10">
+          <SectionHeaderSimple 
+            title="How It Works" 
+            subtitle="Your journey to amazing content in four simple steps"
+          />
+        </div>
         
         {/* Mobile 2x2 Grid Layout */}
         <MobileStepsGridSimple 

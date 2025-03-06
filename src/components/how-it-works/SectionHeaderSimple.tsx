@@ -11,7 +11,7 @@ const SectionHeaderSimple: React.FC<SectionHeaderSimpleProps> = ({
   subtitle
 }) => {
   return (
-    <div className="text-center mb-12 sm:mb-14">
+    <div className="text-center w-full">
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 font-jakarta tracking-tight text-center">
         {title}
       </h2>
