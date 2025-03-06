@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { SearchBar } from './search/SearchBar';
 import { CreatorsList } from './search/CreatorsList';
 import { BorderBeam } from './ui/border-beam';
 import { GlowingEffect } from './ui/glowing-effect';
 import { AnimatedGrid } from './ui/animated-grid';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
@@ -12,6 +12,8 @@ import { GradientBlobBackground } from '@/components/ui/gradient-blob-background
 const PreviewSearch = () => {
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -20,6 +22,7 @@ const PreviewSearch = () => {
       (entries) => {
         entries.forEach(entry => {
           if (entry.target === containerRef.current) {
+            setIsVisible(entry.isIntersecting);
             if (entry.isIntersecting) {
               entry.target.classList.add('content-visible');
             } else {
@@ -28,7 +31,7 @@ const PreviewSearch = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '100px' }
+      { threshold: 0.1, rootMargin: '150px' }
     );
     
     observer.observe(containerRef.current);
@@ -40,11 +43,56 @@ const PreviewSearch = () => {
     };
   }, []);
 
+  const handleImageLoad = (imagePath: string) => {
+    setLoadedImages(prev => new Set([...prev, imagePath]));
+  };
+
+  const creatorData = [
+    {
+      name: "Emily Johnson",
+      services: ["Photography", "Virtual Staging"],
+      price: 150,
+      rating: 4.9,
+      reviews: 127,
+      location: "New York, NY",
+      image: "/newemilyprofile.jpg",
+      workExamples: ["/1-d2e3f802.jpg"]
+    }, 
+    {
+      name: "Jane Cooper",
+      services: ["Video Tours", "Drone Footage"],
+      price: 200,
+      rating: 4.8,
+      reviews: 98,
+      location: "Los Angeles, CA",
+      image: "/janeprofile.png",
+      workExamples: ["/janesub.jpg", "/janesub2.png", "/janesub3.webp"]
+    }, 
+    {
+      name: "Michael Brown",
+      services: ["3D Tours", "Floor Plans"],
+      price: 175,
+      rating: 4.7,
+      reviews: 82,
+      location: "Chicago, IL",
+      image: "/emily profile.jpeg",
+      workExamples: ["/1-d2e3f802.jpg"]
+    }
+  ];
+
   return (
-    <div className="w-full px-1 sm:px-3 md:px-6 lg:px-8 content-visibility-auto" ref={containerRef}>
-      <div className="mx-auto relative group">
-        {/* Refined gradient background with adjusted opacity and blur */}
-        <div className="absolute -inset-0.5 sm:-inset-0.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-purple-800/30 via-indigo-700/30 to-purple-900/30 opacity-60 sm:opacity-75 blur-[2px] sm:blur-sm group-hover:opacity-100 transition duration-500"></div>
+    <div 
+      className="w-full px-2 sm:px-4 md:px-6 lg:px-8 xl:px-10 content-visibility-auto py-4 sm:py-6 md:py-8" 
+      ref={containerRef}
+    >
+      <div className="mx-auto relative group max-w-7xl">
+        {/* Enhanced gradient background with more subtle effects */}
+        <div className={cn(
+          "absolute -inset-0.5 sm:-inset-1 rounded-xl sm:rounded-2xl bg-gradient-to-r from-purple-800/25 via-indigo-700/30 to-purple-900/25 blur-[2px] sm:blur-sm transition-all duration-500",
+          isVisible ? "opacity-70 sm:opacity-80" : "opacity-0",
+          "group-hover:opacity-90 group-hover:blur-md"
+        )}></div>
+
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ 
@@ -56,26 +104,27 @@ const PreviewSearch = () => {
             }
           }}
           viewport={{ once: true, margin: "-50px" }}
-          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-[0_8px_25px_-10px_rgba(120,80,200,0.3)] sm:shadow-[0_15px_45px_-12px_rgba(120,80,200,0.35)] border border-zinc-200/70 bg-white/95 will-change-transform"
+          className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-lg sm:shadow-xl border border-zinc-200/70 bg-white/95 will-change-transform backdrop-blur-sm"
         >
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-lg sm:rounded-xl">
             <BorderBeam 
               colorFrom="#9370DB" 
               colorTo="#C19EF9" 
-              duration={isMobile ? 30 : 20}
-              borderWidth={isMobile ? 0.5 : 1.5}
+              duration={isMobile ? 25 : 18}
+              borderWidth={isMobile ? 0.8 : 1.5}
             />
             <GlowingEffect 
               variant="default" 
-              blur={isMobile ? 3 : 8} 
+              blur={isMobile ? 4 : 8} 
               glow={!isMobile} 
-              inactiveZone={isMobile ? 0.7 : 0.6}
-              spread={isMobile ? 8 : 15}
-              borderWidth={isMobile ? 0.5 : 1}
-              className={isMobile ? "opacity-15" : "opacity-25"}
+              inactiveZone={isMobile ? 0.65 : 0.55}
+              spread={isMobile ? 10 : 18}
+              borderWidth={isMobile ? 0.6 : 1.2}
+              className={isMobile ? "opacity-20" : "opacity-30"}
             />
-            <AnimatedGrid className={isMobile ? "opacity-3" : "opacity-7"} />
+            <AnimatedGrid className={isMobile ? "opacity-4" : "opacity-8"} />
           </div>
+
           <GradientBlobBackground 
             className="min-h-0 w-full" 
             baseColor="bg-white/95"
@@ -85,76 +134,87 @@ const PreviewSearch = () => {
               second: "bg-indigo-200",
               third: "bg-blue-200"
             }}
-            blobOpacity={0.25}
+            blobOpacity={isMobile ? 0.2 : 0.3}
             withSpotlight={!isMobile}
             spotlightClassName="from-purple-500/15 via-indigo-500/15 to-blue-500/15"
           >
             <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
-              {/* Header section with improved spacing for mobile */}
+              {/* Header section - Improved spacing and responsiveness */}
               <div className={cn(
-                "text-left pb-1 sm:pb-6 px-4 sm:px-6 lg:px-8",
-                isMobile ? "pt-4" : "pt-4 sm:pt-9"
+                "text-left pb-2 sm:pb-6 px-4 sm:px-8 lg:px-10",
+                isMobile ? "pt-5" : "pt-6 sm:pt-9 md:pt-10"
               )}>
-                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1.5 sm:mb-4 font-jakarta tracking-tight">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 font-jakarta tracking-tight"
+                >
                   Find Your Perfect Creator
-                </h2>
-                {/* Better spacing around the underline */}
-                <div className="w-16 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-1.5 sm:mb-3 rounded-full"></div>
-                <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl mt-1">
+                </motion.h2>
+                
+                {/* Animated underline */}
+                <motion.div 
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{ width: isMobile ? "3rem" : "4rem", opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="h-1 sm:h-1.5 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-2 sm:mb-3 rounded-full"
+                ></motion.div>
+                
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl mt-1.5 sm:mt-2"
+                >
                   Connect with professionals who showcase your property perfectly
-                </p>
+                </motion.p>
               </div>
             
-              {/* SearchBar with improved spacing */}
+              {/* SearchBar - Improved container styling */}
               <div className={cn(
-                "w-full px-3 sm:px-4 md:px-7",
-                isMobile ? "py-1" : "py-1 sm:py-4 md:py-6" // Reduced padding for mobile
+                "w-full px-3 sm:px-6 md:px-8 lg:px-10",
+                isMobile ? "py-2" : "py-3 sm:py-4 md:py-6"
               )}>
-                <SearchBar onLocationSelect={() => {}} />
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                  <SearchBar onLocationSelect={() => {}} />
+                </motion.div>
               </div>
+              
+              {/* Subtle separator for visual distinction - only on desktop */}
+              {!isMobile && (
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-purple-200/50 to-transparent mx-auto max-w-[90%]"></div>
+              )}
             
-              {/* Completely removed separator on mobile */}
-            
-              {/* CreatorsList with reduced spacing between filters and results */}
+              {/* CreatorsList - Enhanced background gradient and animations */}
               <div className={cn(
-                "w-full px-3 sm:px-4 md:px-7 pb-6 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40",
-                isMobile ? "-mt-2" : "py-1 sm:py-5 md:py-7" // Added negative margin for mobile
+                "w-full px-3 sm:px-6 md:px-8 lg:px-10 pb-6 sm:pb-8 md:pb-10",
+                "bg-gradient-to-b from-transparent via-purple-50/20 to-purple-50/40",
+                isMobile ? "pt-2" : "pt-4 sm:pt-6 md:pt-8"
               )}>
-                <CreatorsList 
-                  creators={[{
-                    name: "Emily Johnson",
-                    services: ["Photography", "Virtual Staging"],
-                    price: 150,
-                    rating: 4.9,
-                    reviews: 127,
-                    location: "New York, NY",
-                    image: "/newemilyprofile.jpg",
-                    workExamples: ["/1-d2e3f802.jpg"]
-                  }, {
-                    name: "Jane Cooper",
-                    services: ["Video Tours", "Drone Footage"],
-                    price: 200,
-                    rating: 4.8,
-                    reviews: 98,
-                    location: "Los Angeles, CA",
-                    image: "/janeprofile.png",
-                    workExamples: ["/janesub.jpg", "/janesub2.png", "/janesub3.webp"]
-                  }, {
-                    name: "Michael Brown",
-                    services: ["3D Tours", "Floor Plans"],
-                    price: 175,
-                    rating: 4.7,
-                    reviews: 82,
-                    location: "Chicago, IL",
-                    image: "/emily profile.jpeg",
-                    workExamples: ["/1-d2e3f802.jpg"]
-                  }]} 
-                  sortBy="rating" 
-                  onSort={() => {}} 
-                  onImageLoad={() => {}} 
-                  loadedImages={new Set()}
-                  imageRef={() => {}}
-                />
+                <AnimatePresence>
+                  {isVisible && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.7, delay: 0.7 }}
+                    >
+                      <CreatorsList 
+                        creators={creatorData} 
+                        sortBy="rating" 
+                        onSort={() => {}} 
+                        onImageLoad={handleImageLoad} 
+                        loadedImages={loadedImages}
+                        imageRef={(el) => el}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           </GradientBlobBackground>
