@@ -84,12 +84,12 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             
             {/* Tags and rating section with improved spacing */}
             <div className={cn(
-              isMobile ? "p-6 pb-8" : "p-4 sm:p-5", // Much more padding for mobile
+              isMobile ? "p-6 pt-5 pb-7" : "p-4 sm:p-5", // Much more padding for mobile
               "flex flex-col flex-grow" // Added flex-grow to ensure even spacing
             )}>
               {/* Tags section with improved spacing for mobile */}
               <div className={cn(
-                isMobile ? "mb-7" : "mb-4",  // MORE space before rating on mobile
+                isMobile ? "mb-6" : "mb-4",  // MORE space before rating on mobile
               )}>
                 <CreatorTags tags={tags} />
               </div>
@@ -97,7 +97,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               {/* Rating section with subtle divider and enhanced spacing */}
               <div className={cn(
                 "bg-gray-50/80 rounded-lg px-4 py-3.5 shadow-sm",
-                isMobile && "border border-gray-100 pb-5" // Added border for better definition on mobile
+                isMobile && "border border-gray-100 pt-4 pb-4" // Added border for better definition on mobile
               )}>
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
@@ -110,17 +110,17 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               {/* CTA button section with enhanced hover animation and more spacing */}
               <div className={cn(
                 "mt-auto pt-4", // Use mt-auto to push to bottom of flex container
-                isMobile ? "mt-8" : "mt-5", // Even more space before button on mobile
+                isMobile ? "mt-2" : "mt-5", // Even more space before button on mobile
               )}>
                 <div className="flex justify-center">
                   <ShimmerButton 
                     onClick={() => setShowEmailDialog(true)}
                     aria-label={`Join waitlist to work with ${creator.name}`}
                     className={cn(
-                      "w-full sm:w-[90%] text-sm px-4 transition-all duration-200 group-hover:animate-pulse-subtle",
+                      "w-full sm:w-[90%] transition-all duration-200 group-hover:animate-pulse-subtle",
                       "hover:scale-[1.03] active:scale-[0.98]",
                       "hover:shadow-lg", // Enhanced hover effect
-                      isMobile ? "h-14 text-base" : "h-10 sm:h-11", // Much larger tap target on mobile
+                      isMobile ? "h-14 text-base px-4" : "h-10 sm:h-11 text-sm px-4", // Much larger tap target on mobile
                     )}
                   >
                     <span>Join Waitlist</span>

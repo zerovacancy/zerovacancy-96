@@ -23,7 +23,7 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
       <div className={cn(
         "absolute inset-0 pointer-events-none",
         isMobile 
-          ? "bg-gradient-to-t from-black/95 via-black/80 to-black/20" // Stronger, taller gradient for mobile
+          ? "bg-gradient-to-t from-black/95 via-black/80 to-black/10" // Stronger, taller gradient for mobile
           : "bg-gradient-to-t from-black/90 via-black/60 to-transparent"
       )}></div>
       
@@ -31,7 +31,7 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
         "relative z-10",
         isMobile ? "px-4 py-3 pb-5" : "px-3 py-2" // Adjusted padding for better responsive behavior
       )}>
-        <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+        <div className="flex items-center gap-2 sm:gap-2.5 mb-1.5">
           <h3 className={cn(
             "font-bold text-white drop-shadow-md", // Added drop shadow for better contrast
             isMobile ? "text-xl" : "text-base sm:text-lg", // Adjusted size for better scaling
@@ -58,7 +58,7 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
         {/* Location display with improved spacing for mobile */}
         <div className={cn(
           "flex items-center gap-1.5 flex-wrap",
-          isMobile ? "mt-5 mb-1" : "mt-2 sm:mt-3" // Adjusted spacing for responsive behavior
+          isMobile ? "mt-4 mb-1.5" : "mt-2 sm:mt-3" // Adjusted spacing for responsive behavior
         )}>
           <MapPin 
             className={cn(
@@ -78,7 +78,7 @@ export const CreatorInfo: React.FC<CreatorInfoProps> = ({ creator }) => {
         {/* Services display with improved spacing and wrapping */}
         <div className={cn(
           "flex items-start gap-1.5 flex-wrap", // Changed to items-start for better alignment with wrapped content
-          isMobile ? "mt-4" : "mt-2 sm:mt-2.5" // More spacing on mobile
+          isMobile ? "mt-3" : "mt-2 sm:mt-2.5" // More spacing on mobile
         )}>
           <Image
             className={cn(

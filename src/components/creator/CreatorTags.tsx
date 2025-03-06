@@ -63,7 +63,7 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
           <span
             key={index}
             className={cn(
-              isMobile ? "text-sm px-3.5 py-2.5 mb-1.5" : "text-xs px-2.5 py-1.5 mb-1", // Added bottom margin for wrapping
+              isMobile ? "text-sm px-3 py-2 mb-1.5" : "text-xs px-2.5 py-1.5 mb-1", // Added bottom margin for wrapping
               "rounded-full",
               "transition-all duration-200",
               "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md",
@@ -88,7 +88,7 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
         {hasMoreTags && (
           <span
             className={cn(
-              "text-sm px-3.5 py-2.5 mb-1.5", // Match other tag styles
+              "text-sm px-3 py-2 mb-1.5", // Match other tag styles
               "rounded-full",
               "transition-all duration-200",
               "hover:scale-105 cursor-pointer",

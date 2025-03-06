@@ -97,22 +97,58 @@
   
   /* Improve padding for mobile content */
   .mobile-content-container {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
   
   /* Improve touch targets for mobile */
   button, a, input, select, textarea {
-    min-height: 36px;
+    min-height: 44px;
   }
   
-  /* We're removing the extra padding for the fixed bottom navigation */
-  body {
-    padding-bottom: 1rem;
+  /* Better card spacing on mobile */
+  .mobile-card-padding {
+    padding: 1.25rem !important;
+  }
+  
+  /* Better vertical spacing between card sections */
+  .mobile-section-spacing > * + * {
+    margin-top: 1.25rem !important;
+  }
+  
+  /* Clear visual separation for mobile content blocks */
+  .mobile-content-block {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    background-color: rgba(255, 255, 255, 0.8);
   }
 }
 
 /* Enhanced active states for touch devices */
 .touch-manipulation {
   touch-action: manipulation;
+}
+
+/* Subtle pulse animation for interactive elements */
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
+
+/* Improved tap feedback for mobile */
+@media (max-width: 768px) {
+  .mobile-tap-feedback:active {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(0.98);
+  }
 }
