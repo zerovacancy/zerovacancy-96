@@ -1,7 +1,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface PricingPeriodToggleProps {
   period: number;
@@ -50,20 +50,6 @@ export const PricingPeriodToggle: React.FC<PricingPeriodToggleProps> = ({
           <div className="bg-white shadow-sm rounded-full w-full h-full"></div>
         </motion.div>
       </div>
-      
-      {/* Yearly discount badge */}
-      <AnimatePresence>
-        {period === 1 && (
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-xs font-medium font-inter px-3 py-1 rounded-full shadow-md"
-          >
-            Save up to 30% annually
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };

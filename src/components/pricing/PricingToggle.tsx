@@ -1,9 +1,8 @@
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Sparkles } from "lucide-react";
 
 interface PricingToggleProps {
   isYearly: boolean;
@@ -75,25 +74,7 @@ export const PricingToggle = ({
         />
       </div>
       
-      {/* Enhanced discount badge with brand colors and animation - HIDDEN ON MOBILE */}
-      <AnimatePresence>
-        {isYearly && yearlyDiscount && !isMobile && (
-          <motion.div
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -5 }}
-            className={cn(
-              "mt-2 py-1 px-3 bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white",
-              "text-xs font-medium font-inter rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.12)]",
-              animateChange ? "animate-pulse" : "",
-              "backdrop-blur-sm"
-            )}
-          >
-            <Sparkles className="h-3 w-3 inline mr-1" />
-            {yearlyDiscount}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Removing the yearly discount badge */}
     </div>
   );
 };
