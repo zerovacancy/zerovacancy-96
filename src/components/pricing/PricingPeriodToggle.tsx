@@ -17,11 +17,11 @@ export const PricingPeriodToggle: React.FC<PricingPeriodToggleProps> = ({
   return (
     <div className="relative w-full z-10">
       {/* Toggle container with just two options */}
-      <div className="rounded-full relative w-full bg-slate-100 p-1.5 flex items-center shadow-inner">
+      <div className="pricing-toggle-container">
         {/* Monthly option */}
         <button
           className={cn(
-            "font-medium font-inter rounded-full w-full p-2 z-20 touch-manipulation transition-colors",
+            "pricing-toggle-button",
             period === 0 ? "text-brand-purple-dark" : "text-slate-600"
           )}
           onClick={() => handleChangePeriod(0)}
@@ -32,7 +32,7 @@ export const PricingPeriodToggle: React.FC<PricingPeriodToggleProps> = ({
         {/* Annual option */}
         <button
           className={cn(
-            "font-medium font-inter rounded-full w-full p-2 z-20 touch-manipulation transition-colors",
+            "pricing-toggle-button",
             period === 1 ? "text-brand-purple-dark" : "text-slate-600"
           )}
           onClick={() => handleChangePeriod(1)}
@@ -42,7 +42,10 @@ export const PricingPeriodToggle: React.FC<PricingPeriodToggleProps> = ({
         
         {/* Slider background */}
         <motion.div
-          className="p-1.5 flex items-center justify-center absolute inset-0 w-1/2 z-10"
+          className={cn(
+            "pricing-toggle-slider",
+            period === 0 ? "monthly" : "annual"
+          )}
           initial={false}
           animate={{
             x: `${period * 100}%`,
@@ -52,9 +55,7 @@ export const PricingPeriodToggle: React.FC<PricingPeriodToggleProps> = ({
             stiffness: 300,
             damping: 30
           }}
-        >
-          <div className="bg-white shadow-sm rounded-full w-full h-full"></div>
-        </motion.div>
+        />
       </div>
     </div>
   );
