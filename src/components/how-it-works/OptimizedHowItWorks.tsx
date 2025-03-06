@@ -4,6 +4,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import SectionHeaderSimple from './SectionHeaderSimple';
 import MobileStepsGridSimple from './MobileStepsGridSimple';
 import DesktopStepsGridSimple from './DesktopStepsGridSimple';
+import BeamsBackground from '@/components/ui/beams-background';
 
 const OptimizedHowItWorks: React.FC = () => {
   const isMobile = useIsMobile();
@@ -48,11 +49,12 @@ const OptimizedHowItWorks: React.FC = () => {
   };
 
   return (
-    <div 
-      id="how-it-works-section" 
-      className="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-10 bg-gradient-to-b from-white via-indigo-50/30 to-gray-50"
+    <BeamsBackground 
+      id="how-it-works-section"
+      className="py-8 sm:py-16 lg:py-20"
+      intensity="subtle"
     >
-      <div className={`max-w-6xl mx-auto relative transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+      <div className={`max-w-6xl mx-auto relative px-4 sm:px-6 lg:px-10 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
         <div className="text-center mb-6 sm:mb-12 lg:mb-16">
           <SectionHeaderSimple 
             title="How It Works" 
@@ -74,7 +76,7 @@ const OptimizedHowItWorks: React.FC = () => {
           onStepInteraction={handleStepInteraction}
         />
       </div>
-    </div>
+    </BeamsBackground>
   );
 };
 
