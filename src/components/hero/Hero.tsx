@@ -26,8 +26,8 @@ export function Hero() {
         "relative z-10", 
         "gap-4 sm:gap-6",
         "touch-manipulation",
-        // Added subtle gradient background
-        "bg-gradient-to-b from-white via-purple-50/30 to-white",
+        // Enhanced gradient background with softer purple to blue transition
+        "bg-gradient-to-b from-purple-50 via-indigo-50/60 to-blue-50/30",
         isInView ? "animate-fade-in" : "opacity-0"
       )} 
     >
@@ -92,7 +92,7 @@ export function Hero() {
             "px-2 sm:px-4", 
             "[word-spacing:0.12em] sm:[word-spacing:0.16em]", 
             "relative z-10", 
-            "mt-12 sm:mt-16 mb-0", // Significantly increased top margin to create more space between the rotating text and paragraph
+            "mt-12 sm:mt-16 mb-0", // Maintaining the increased top margin
             "font-inter"
           )}
         >
@@ -111,9 +111,9 @@ export function Hero() {
         <WaitlistCTA className="mb-4" />
       </div>
       
-      {/* Enhanced decorative element with gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-[150px] pointer-events-none opacity-40 overflow-hidden">
-        <div className="absolute bottom-0 left-0 right-0 h-[80px] bg-gradient-to-t from-purple-100/40 via-indigo-50/20 to-transparent" />
+      {/* Enhanced decorative element with more pronounced gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-[180px] pointer-events-none opacity-50 overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-indigo-100/60 via-purple-50/40 to-transparent" />
       </div>
     </section>
   );
