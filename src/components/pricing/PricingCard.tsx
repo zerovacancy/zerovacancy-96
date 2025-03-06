@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { ChevronDown, Check } from "lucide-react";
+import { ChevronDown, Check, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { colorVariants, ColorVariant } from "./PricingCardColors";
