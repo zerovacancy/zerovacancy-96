@@ -121,22 +121,30 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
         <div className="mt-6 text-center">
           <motion.button 
             className={cn(
-              "inline-flex items-center justify-center px-4 py-2 rounded-full",
-              "bg-white text-indigo-600 font-medium border border-indigo-200",
-              "shadow-sm hover:bg-indigo-50 transition-colors",
-              "text-xs"
+              "inline-flex items-center justify-center px-5 py-2.5 rounded-full",
+              "bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700",
+              "text-white font-semibold shadow-md shadow-indigo-200/50",
+              "hover:shadow-lg hover:shadow-indigo-300/50 hover:-translate-y-0.5",
+              "transform active:scale-[0.98] transition-all duration-200",
+              "text-sm relative overflow-hidden"
             )}
             onClick={() => setShowAllCreators(!showAllCreators)}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
+            whileTap={{ scale: 0.98 }}
           >
-            {showAllCreators ? "Show less creators" : `Show ${creators.length - 1} more creators`}
-            {showAllCreators ? (
-              <ChevronUp className="ml-1 w-3.5 h-3.5" />
-            ) : (
-              <ChevronDown className="ml-1 w-3.5 h-3.5" />
-            )}
+            <span className="relative z-10 flex items-center">
+              {showAllCreators ? "Show less creators" : `Show ${creators.length - 1} more creators`}
+              {showAllCreators ? (
+                <ChevronUp className="ml-1.5 w-4 h-4" />
+              ) : (
+                <ChevronDown className="ml-1.5 w-4 h-4" />
+              )}
+            </span>
+            
+            {/* Subtle shimmer effect */}
+            <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           </motion.button>
         </div>
       )}
