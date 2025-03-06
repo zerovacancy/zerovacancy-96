@@ -1,3 +1,4 @@
+
 import React, { useRef } from "react";
 import { useInView } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -18,15 +19,15 @@ export function Hero() {
       className={cn(
         "flex items-center justify-center flex-col", 
         "px-4 sm:px-6", 
-        // Reduced padding on desktop, kept mobile padding
-        isMobile ? "py-[24px]" : "py-[32px]",
+        // Further reduced padding on desktop, kept mobile padding
+        isMobile ? "py-[24px]" : "py-[16px]", // Reduced from py-[32px]
         // Adjusted margins for desktop
-        isMobile ? "my-[16px]" : "my-[24px]",
-        // Optimized min-height for desktop
-        "min-h-fit sm:min-h-[45vh]",
+        isMobile ? "my-[16px]" : "my-[12px]", // Reduced from my-[24px]
+        // Reduced min-height for desktop by ~20%
+        "min-h-fit sm:min-h-[36vh]", // Reduced from 45vh
         "relative z-10", 
-        // Adjusted gap for better spacing
-        isMobile ? "gap-3" : "gap-4",
+        // Reduced gap for tighter spacing
+        isMobile ? "gap-3" : "gap-2", // Reduced from gap-4
         "touch-manipulation",
         "bg-gradient-to-b from-purple-50 via-indigo-50/60 to-blue-50/30",
         isInView ? "animate-fade-in" : "opacity-0"
@@ -34,17 +35,17 @@ export function Hero() {
     >
       <div 
         className={cn(
-          // Optimized gap for desktop content
+          // Tightened gap for desktop content
           "flex flex-col max-w-6xl mx-auto w-full px-[3px]",
-          isMobile ? "gap-3" : "gap-4",
+          isMobile ? "gap-3" : "gap-2", // Reduced from gap-4
           isInView ? "animate-fade-in delay-100" : "opacity-0"
         )}
       >
         <div className="relative">
           <h1 className={cn(
             "tracking-tight leading-[1.1] text-center font-bold font-jakarta",
-            // Adjusted bottom margin for desktop
-            isMobile ? "mb-3" : "mb-4"
+            // Reduced bottom margin for desktop
+            isMobile ? "mb-3" : "mb-2" // Reduced from mb-4
           )}>
             {isMobile ? (
               <span className="flex flex-col items-center">
@@ -77,7 +78,7 @@ export function Hero() {
                     "text-3xl sm:text-5xl lg:text-6xl",
                     "tracking-[-0.02em]", 
                     "text-brand-purple-dark", 
-                    "block sm:inline-block mb-2 sm:mb-0 font-jakarta"
+                    "block sm:inline-block mb-1 sm:mb-0 font-jakarta" // Reduced from mb-2
                   )}
                 >
                   Property Content that
@@ -86,7 +87,7 @@ export function Hero() {
                 <div 
                   role="text" 
                   aria-label="Property Content animation"
-                  className="relative flex w-full justify-center h-[4.5em] sm:h-[3.5em] md:h-[3em] lg:h-[3em] overflow-visible mt-2 sm:mt-2"
+                  className="relative flex w-full justify-center h-[4.5em] sm:h-[3em] md:h-[2.5em] lg:h-[2.5em] overflow-visible mt-1 sm:mt-1" // Reduced heights and margins
                 >
                   <TextRotate
                     texts={TITLES}
@@ -134,7 +135,7 @@ export function Hero() {
             "[word-spacing:0.12em] sm:[word-spacing:0.16em]", 
             "relative z-10", 
             // Reduced top margin significantly for desktop
-            isMobile ? "mt-2" : "mt-8",
+            isMobile ? "mt-2" : "mt-3", // Reduced from mt-8
             "mb-0", 
             "font-inter"
           )}
@@ -146,17 +147,17 @@ export function Hero() {
       <div 
         className={cn(
           "w-full", 
-          // Optimized top margin for desktop
-          isMobile ? "mt-2" : "mt-6",
+          // Reduced top margin for desktop
+          isMobile ? "mt-2" : "mt-3", // Reduced from mt-6
           "px-3 sm:px-4",
           isInView ? "animate-fade-in delay-200" : "opacity-0" 
         )}
       >
-        <WaitlistCTA className="mb-2 sm:mb-4" />
+        <WaitlistCTA className="mb-2 sm:mb-3" /> {/* Reduced bottom margin */}
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-[150px] sm:h-[180px] pointer-events-none opacity-50 overflow-hidden">
-        <div className="absolute bottom-0 left-0 right-0 h-[100px] sm:h-[120px] bg-gradient-to-t from-indigo-100/60 via-purple-50/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-[150px] sm:h-[140px] pointer-events-none opacity-50 overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 h-[100px] sm:h-[100px] bg-gradient-to-t from-indigo-100/60 via-purple-50/40 to-transparent" />
       </div>
     </section>
   );
