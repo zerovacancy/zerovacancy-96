@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { PricingCard, PricingCardProps } from "./PricingCard";
+import { ShineBorder } from "@/components/ui/shine-border";
 
 interface PricingCardListProps {
   cards: Omit<PricingCardProps, 'subscription' | 'isLoading'>[];
@@ -24,15 +25,20 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
           className={card.highlighted ? "lg:scale-105 lg:-translate-y-2 z-10" : ""}
         >
           {card.highlighted ? (
-            <div className="relative group h-full">
-              <div className="absolute -inset-[3px] rounded-3xl bg-gradient-to-r from-violet-500 via-cyan-500 to-emerald-500 opacity-75 blur-lg group-hover:opacity-100 group-hover:blur-xl transition-all duration-500"></div>
+            <ShineBorder 
+              borderRadius={24} 
+              borderWidth={1.5} 
+              duration={10} 
+              color={["#9333ea", "#4f46e5", "#7e22ce"]} 
+              className="w-full h-full p-0 bg-transparent min-w-0"
+            >
               <PricingCard 
                 {...card}
                 subscription={subscription}
                 isLoading={isLoading}
                 defaultExpanded={card.highlighted || (isMobile && card.defaultExpanded)}
               />
-            </div>
+            </ShineBorder>
           ) : (
             <PricingCard 
               {...card}

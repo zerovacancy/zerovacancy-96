@@ -1,3 +1,4 @@
+
 @tailwind utilities;
 
 @layer utilities {
@@ -70,6 +71,14 @@
   
   .animate-sparkle {
     animation: sparkle 3s ease-in-out infinite;
+  }
+  
+  .animate-shine {
+    animation: shine var(--duration, 14s) ease-in-out infinite;
+  }
+  
+  .bg-shine-size {
+    background-size: 300% 300%;
   }
   
   .shadow-glow {
