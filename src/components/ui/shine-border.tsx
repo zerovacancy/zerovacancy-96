@@ -2,6 +2,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 type TColorProp = string | string[]
 
@@ -32,6 +33,12 @@ export function ShineBorder({
   className,
   children,
 }: ShineBorderProps) {
+  const isMobile = useIsMobile();
+  
+  // Optimize animation parameters for mobile
+  const optimizedDuration = isMobile ? duration * 1.5 : duration;
+  const optimizedBorderWidth = isMobile ? Math.max(0.5, borderWidth * 0.8) : borderWidth;
+  
   return (
     <div
       style={
@@ -47,9 +54,9 @@ export function ShineBorder({
       <div
         style={
           {
-            "--border-width": `${borderWidth}px`,
+            "--border-width": `${optimizedBorderWidth}px`,
             "--border-radius": `${borderRadius}px`,
-            "--duration": `${duration}s`,
+            "--duration": `${optimizedDuration}s`,
             "--mask-linear-gradient": `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
             "--background-radial-gradient": `radial-gradient(transparent,transparent, ${color instanceof Array ? color.join(",") : color},transparent,transparent)`,
           } as React.CSSProperties

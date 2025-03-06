@@ -63,3 +63,35 @@
   transform: translateZ(0);
   backface-visibility: hidden;
 }
+
+/* Mobile touch optimizations */
+@media (max-width: 768px) {
+  /* Mobile optimization: Disable hover effects on mobile for better performance */
+  .hover-effects-disabled {
+    pointer-events: none;
+  }
+  
+  /* Increase touch target sizes */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Optimize scrolling */
+  .scroll-container-optimized {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    scroll-behavior: smooth;
+  }
+  
+  /* Reduce animation complexity */
+  .reduce-animation {
+    animation-duration: 0.5s !important;
+    transition-duration: 0.3s !important;
+  }
+}
+
+/* Enhanced active states for touch devices */
+.touch-manipulation {
+  touch-action: manipulation;
+}

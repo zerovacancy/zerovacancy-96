@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Search, MessageSquare, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface NavItemProps {
   icon: 'home' | 'search' | 'message' | 'user';
@@ -40,8 +41,12 @@ const NavItem = ({ icon, label, to = '/' }: NavItemProps) => {
 };
 
 export const BottomNav = () => {
+  const isMobile = useIsMobile();
+  
+  if (!isMobile) return null;
+  
   return (
-    <nav className="hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
       <div className="flex items-center justify-around max-w-md mx-auto h-16">
         <NavItem icon="home" label="Home" to="/" />
         <NavItem icon="search" label="Discover" to="/search" />

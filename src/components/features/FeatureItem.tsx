@@ -32,7 +32,7 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
   const borderColorBase = colorScheme.text.split('-')[1];
   
   // Set a consistent character limit for descriptions
-  const shortDescLimit = 85;
+  const shortDescLimit = isMobile ? 60 : 85;
   const isLongDesc = description.length > shortDescLimit;
   
   return (
@@ -49,14 +49,15 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
         "shadow-sm hover:shadow-md",
         // Left border accent
         `before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:rounded-l-xl before:bg-gradient-to-b ${colorScheme.gradient} before:opacity-0 group-hover:before:opacity-100 before:transition-opacity`,
-        "p-5 sm:p-6",
+        "p-4 sm:p-5 lg:p-6",
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
-        // Enhanced hover transition
-        "hover:-translate-y-1.5 hover:border-transparent transition-all duration-300"
+        // Enhanced hover transition - less pronounced on mobile for better performance
+        isMobile ? "active:translate-y-0" : "hover:-translate-y-1.5 hover:border-transparent",
+        "transition-all duration-300"
       )}
       onClick={handleClick}
       aria-expanded={isExpanded}
-      whileHover={{ 
+      whileHover={isMobile ? {} : { 
         scale: 1.01,
         boxShadow: "0 8px 20px rgba(0,0,0,0.08)"
       }}
@@ -90,12 +91,12 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
         </span>
       )}
       
-      <div className="flex flex-col items-start gap-4 h-full">
+      <div className="flex flex-col items-start gap-3 sm:gap-4 h-full">
         {/* Icon container with refined styling */}
         <motion.div 
           className={cn(
             "flex items-center justify-center",
-            "w-14 h-14",
+            "w-12 h-12 sm:w-14 sm:h-14",
             "rounded-xl",
             "transition-all duration-300",
             "bg-gradient-to-br",
@@ -108,7 +109,7 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
           whileHover={{ scale: 1.05, rotate: 5 }}
         >
           <Icon className={cn(
-            "w-7 h-7",
+            "w-6 h-6 sm:w-7 sm:h-7",
             "text-white",
             "transition-all duration-300",
             "group-hover:scale-110",
@@ -126,7 +127,7 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
           </h3>
           
           <div className={cn(
-            "w-10 h-0.5 mb-3 bg-gradient-to-r",
+            "w-10 h-0.5 mb-2 sm:mb-3 bg-gradient-to-r",
             colorScheme.gradient,
             "rounded-full transition-all duration-300 transform origin-left",
             "group-hover:w-16"
@@ -143,7 +144,7 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
           </p>
           
           <div className={cn(
-            "mt-3 text-xs font-medium flex items-center gap-1.5", 
+            "mt-2 sm:mt-3 text-xs font-medium flex items-center gap-1.5", 
             colorScheme.text,
             "opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           )}>
