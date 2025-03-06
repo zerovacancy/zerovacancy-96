@@ -56,6 +56,9 @@ export const PricingCard = ({
       ? "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIvPjxwYXRoIGQ9Ik0yMCAwTDAgMjBoMjB6TTIwIDQwTDQwIDIwSDIweiIgZmlsbD0icmdiYSgxMDAsIDUwLCAyNTUsIDAuMDIpIiBmaWxsLW9wYWNpdHk9Ii4yIi8+PC9nPjwvc3ZnPg==')]"
       : "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTIiIGhlaWdodD0iNTIiIHZpZXdCb3g9IjAgMCA1MiA1MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNTJ2NTJoLTUyeiIvPjxwYXRoIGQ9Ik0yNiAwdjI2aDI2djI2aC01MnYtNTJ6IiBmaWxsPSJyZ2JhKDAsIDEwMCwgMTAwLCAwLjAyKSIgZmlsbC1vcGFjaXR5PSIuMiIvPjwvZz48L3N2Zz4=')]";
 
+  // Enhanced styling for professional pricing plan
+  const isProfessional = title === "Professional";
+
   return (
     <div 
       className={cn(
@@ -63,6 +66,8 @@ export const PricingCard = ({
         "border bg-white/90 backdrop-blur-sm",
         colorStyles.border,
         cardPattern,
+        isProfessional && highlighted ? 
+          "border-2 border-violet-400 ring-2 ring-violet-300/50" : "",
         highlighted ? 
           `shadow-2xl ${colorStyles.shadow} hover:scale-105 ring-1 ring-white/70 transform duration-300` : 
           "shadow-lg hover:shadow-xl hover:translate-y-[-8px] transform duration-300",
@@ -70,6 +75,11 @@ export const PricingCard = ({
       onMouseEnter={() => !isMobile && setIsExpanded(true)} 
       onMouseLeave={() => !isMobile && !defaultExpanded && setIsExpanded(false)}
     >
+      {/* Professional card decorated edge */}
+      {isProfessional && highlighted && (
+        <div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-violet-400/70 opacity-70 bg-gradient-to-br from-violet-100/10 to-violet-300/10"></div>
+      )}
+      
       {/* Popular tag for highlighted plans */}
       {showPopularTag && (
         <PricingPopularTag colorClass={`${colorStyles.highlight}`} />
