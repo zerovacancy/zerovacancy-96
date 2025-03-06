@@ -11,7 +11,6 @@ interface CreatorRatingProps {
 }
 
 export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, name }) => {
-  const isMobile = useIsMobile();
   const getHourlyRate = (name?: string) => {
     switch (name) {
       case 'Emily Johnson':
@@ -31,50 +30,16 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({ rating, reviews, n
   const formattedRating = rating.toFixed(1);
 
   return (
-    <div className={cn(
-      "flex w-full",
-      // On mobile, stack vertically with proper spacing
-      isMobile ? "flex-col items-start gap-3" : "flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-2 sm:gap-0"
-    )}>
+    <div className="flex items-center justify-between w-full">
       <div className="flex items-center">
-        <Star className={cn(
-          "fill-yellow-400 text-yellow-400 mr-1.5",
-          isMobile ? "w-5 h-5" : "w-4 h-4 sm:w-5 sm:h-5", // Responsive star size
-          "flex-shrink-0" // Prevent from shrinking
-        )} aria-hidden="true" />
-        <span className={cn(
-          "font-bold text-brand-text-primary",
-          isMobile ? "text-base" : "text-sm" // Larger text on mobile
-        )}>
-          {formattedRating}
-        </span>
-        <span className={cn(
-          "text-indigo-600 ml-2 font-medium",
-          isMobile ? "text-sm" : "text-xs" // Larger text on mobile
-        )}>
-          ({reviews} reviews)
-        </span>
+        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1.5" aria-hidden="true" />
+        <span className="text-sm font-bold text-brand-text-primary">{formattedRating}</span>
+        <span className="text-xs text-indigo-600 ml-1.5 font-medium">({reviews} reviews)</span>
       </div>
-      
-      {/* Divider - visible on mobile */}
-      {isMobile && hourlyRate && (
-        <div className="w-full h-px bg-gray-200 my-1"></div>
-      )}
-      
       {hourlyRate && (
-        <div className={cn(
-          "font-medium text-brand-text-secondary flex items-center",
-          isMobile ? "text-sm" : "text-xs", // Larger text on mobile
-          "py-1" // Added vertical padding for better spacing
-        )}>
-          <Clock className={cn(
-            "mr-1.5 text-gray-500",
-            isMobile ? "w-4 h-4" : "w-3.5 h-3.5", // Larger icon on mobile
-            "flex-shrink-0" // Prevent from shrinking
-          )} aria-hidden="true" />
-          <span className="whitespace-nowrap">
-            Starting at <span className="text-brand-purple-medium font-bold">${hourlyRate}/hr</span>
-          </span>
+        <div className="text-xs font-medium text-brand-text-secondary flex items-center">
+          <Clock className="w-3 h-3 mr-1 text-gray-500" aria-hidden="true" />
+          <span>Starting at <span className="text-brand-purple-medium font-bold">${hourlyRate}/hr</span></span>
         </div>
       )}
     </div>

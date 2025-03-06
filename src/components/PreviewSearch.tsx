@@ -94,7 +94,7 @@ const PreviewSearch = () => {
               {/* Header section with optimized padding on mobile */}
               <div className={cn(
                 "text-left pb-2 sm:pb-6 px-3 sm:px-6 lg:px-8",
-                isMobile ? "pt-7" : "pt-4 sm:pt-9" // More top padding on mobile
+                isMobile ? "pt-3" : "pt-4 sm:pt-9"
               )}>
                 <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1.5 sm:mb-4 font-jakarta tracking-tight">
                   Find Your Perfect Creator
@@ -105,18 +105,18 @@ const PreviewSearch = () => {
                 </p>
               </div>
             
-              {/* SearchBar with adjusted padding on mobile */}
+              {/* SearchBar with reduced vertical padding on mobile */}
               <div className={cn(
                 "w-full px-2 sm:px-4 md:px-7",
-                isMobile ? "py-4 pb-6" : "py-1 sm:py-4 md:py-6" // More padding on mobile
+                isMobile ? "py-0.5" : "py-1 sm:py-4 md:py-6"
               )}>
                 <SearchBar onLocationSelect={() => {}} />
               </div>
             
-              {/* CreatorsList with expanded spacing for mobile */}
+              {/* CreatorsList with optimized spacing for mobile */}
               <div className={cn(
-                "w-full px-2 sm:px-4 md:px-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40",
-                isMobile ? "pt-4 pb-10" : "py-1 sm:py-5 md:py-7" // More bottom padding on mobile
+                "w-full px-2 sm:px-4 md:px-7 pb-6 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40",
+                isMobile ? "pt-0 pb-4" : "py-1 sm:py-5 md:py-7"
               )}>
                 <CreatorsList 
                   creators={[{
