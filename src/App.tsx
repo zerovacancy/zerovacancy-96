@@ -6,7 +6,7 @@ import ErrorFallback from './components/ErrorFallback';
 import { Toaster } from '@/components/ui/toaster';
 
 // Lazy load pages for improved performance
-const Index = lazy(() => import('./pages/Index'));
+const Index = lazy(() => import('./pages/index'));
 const PaymentConfirmation = lazy(() => import('./pages/PaymentConfirmation'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Account = lazy(() => import('./pages/Account'));
