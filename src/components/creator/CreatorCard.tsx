@@ -27,11 +27,11 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
   const tags = creator.tags || getDefaultTags(creator.name, creator.services);
   
   return (
-    <article className="group select-text h-full">
-      <div className="relative h-full">
+    <article className="group select-text h-full w-full">
+      <div className="relative h-full w-full">
         <div className="absolute -inset-0.5 sm:-inset-0.5 rounded-xl bg-gradient-to-r from-purple-800/30 via-indigo-700/30 to-purple-900/30 opacity-60 sm:opacity-75 blur-[2px] sm:blur-sm group-hover:opacity-100 transition duration-500"></div>
         <Card className={cn(
-          "overflow-hidden h-full",
+          "overflow-hidden h-full w-full flex flex-col",
           "will-change-transform transition-all duration-300",
           "hover:translate-y-[-4px] hover:scale-[1.02]",
           "bg-white border border-gray-200/80",
@@ -67,8 +67,8 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             </span>
           </div>
 
-          <div className="relative">
-            {/* Media and info overlay - Added extra spacing at top for mobile */}
+          <div className="relative flex flex-col h-full">
+            {/* Media and info overlay */}
             <div className={cn(
               "relative",
               isMobile && "pt-4" // Increased padding at top for mobile
@@ -85,7 +85,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             {/* Tags and rating section with improved spacing */}
             <div className={cn(
               isMobile ? "p-6 pb-8" : "p-4 sm:p-5", // Much more padding for mobile
-              "flex flex-col"
+              "flex flex-col flex-grow" // Added flex-grow to ensure even spacing
             )}>
               {/* Tags section with improved spacing for mobile */}
               <div className={cn(
@@ -109,6 +109,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               
               {/* CTA button section with enhanced hover animation and more spacing */}
               <div className={cn(
+                "mt-auto pt-4", // Use mt-auto to push to bottom of flex container
                 isMobile ? "mt-8" : "mt-5", // Even more space before button on mobile
               )}>
                 <div className="flex justify-center">
@@ -116,7 +117,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                     onClick={() => setShowEmailDialog(true)}
                     aria-label={`Join waitlist to work with ${creator.name}`}
                     className={cn(
-                      "w-[90%] text-sm px-4 transition-all duration-200 group-hover:animate-pulse-subtle",
+                      "w-full sm:w-[90%] text-sm px-4 transition-all duration-200 group-hover:animate-pulse-subtle",
                       "hover:scale-[1.03] active:scale-[0.98]",
                       "hover:shadow-lg", // Enhanced hover effect
                       isMobile ? "h-14 text-base" : "h-10 sm:h-11", // Much larger tap target on mobile
