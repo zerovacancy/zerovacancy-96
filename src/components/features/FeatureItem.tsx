@@ -12,9 +12,17 @@ interface FeatureItemProps {
   icon: string;
   index: number;
   isPopular?: boolean;
+  isPartiallyVisible?: boolean;
 }
 
-export const FeatureItem = ({ title, description, icon, index, isPopular = false }: FeatureItemProps) => {
+export const FeatureItem = ({ 
+  title, 
+  description, 
+  icon, 
+  index, 
+  isPopular = false,
+  isPartiallyVisible = false
+}: FeatureItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
   
@@ -53,7 +61,9 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
         "focus:outline-none focus:ring-2 focus:ring-primary/20",
         // Enhanced hover transition - less pronounced on mobile for better performance
         isMobile ? "active:translate-y-0" : "hover:-translate-y-1.5 hover:border-transparent",
-        "transition-all duration-300"
+        "transition-all duration-300",
+        // For partially visible card
+        isPartiallyVisible && "opacity-80 shadow-none"
       )}
       onClick={handleClick}
       aria-expanded={isExpanded}
@@ -82,7 +92,10 @@ export const FeatureItem = ({ title, description, icon, index, isPopular = false
                                  borderColorBase === 'amber' ? '255, 251, 235' : 
                                  borderColorBase === 'cyan' ? '236, 254, 255' : 
                                  borderColorBase === 'rose' ? '255, 241, 242' : 
-                                 '255, 255, 255'}, 0.97)`
+                                 '255, 255, 255'}, 0.97)`,
+        // For partially visible card
+        clipPath: isPartiallyVisible ? "polygon(0 0, 100% 0, 100% 65%, 0 65%)" : "none",
+        pointerEvents: isPartiallyVisible ? "none" : "auto"
       }}
     >
       {isPopular && (
