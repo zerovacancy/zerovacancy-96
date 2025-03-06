@@ -18,6 +18,7 @@ interface PricingCardListProps {
     highlighted?: boolean;
     showPopularTag?: boolean;
     valueProposition?: string;
+    footerText?: string;
   }>;
   subscription: any;
   isLoading: boolean;
@@ -201,6 +202,7 @@ export const PricingCardList = ({
               {...card}
               isLoading={isLoading}
               isCurrentPlan={subscription?.plan === card.title}
+              footerText={card.footerText}
             />
           </div>
         ))}
