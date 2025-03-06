@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
 
 interface Creator {
   name: string;
@@ -83,11 +84,14 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
   };
   
   return (
-    <div className={cn(
-      "relative will-change-transform", 
-      // Fixed, consistent height on mobile
-      isMobile ? "aspect-[4/3]" : "aspect-[4/3]"
-    )} ref={mediaRef}>
+    <div 
+      className={cn(
+        "relative will-change-transform", 
+        // Fixed aspect ratio with proper height to prevent cutoff
+        isMobile ? "aspect-[4/3] mt-0.5" : "aspect-[4/3]"
+      )} 
+      ref={mediaRef}
+    >
       {isVisible && ((media.type === 'image') || (media.type === 'video' && imageError)) ? (
         <img 
           src={media.type === 'image' ? media.src : (media as any).fallback}
@@ -129,10 +133,6 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
         // Placeholder when not yet visible
         <div className="w-full h-full bg-gray-100"></div>
       )}
-      {/* Removing this gradient overlay since it's now in CreatorInfo */}
     </div>
   );
 };
-
-// Add import for cn utility at the top
-import { cn } from '@/lib/utils';

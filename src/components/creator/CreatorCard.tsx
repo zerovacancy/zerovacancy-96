@@ -33,10 +33,10 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
         <Card className={cn(
           "overflow-hidden h-full",
           "will-change-transform transition-all duration-300",
-          "hover:translate-y-[-4px] hover:scale-[1.02]", // Enhanced hover effect
+          "hover:translate-y-[-4px] hover:scale-[1.02]",
           "bg-white border border-gray-200/80",
           "shadow-[0_2px_8px_rgba(0,0,0,0.05)]",
-          "hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)]", // Increased shadow on hover
+          "hover:shadow-[0_12px_24px_rgba(0,0,0,0.12)]",
           "rounded-xl relative"
         )}>
           {/* Card content - Border beam and glowing effect */}
@@ -49,17 +49,17 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
             />
           </div>
 
-          {/* Price tag with enhanced styling and consistent positioning - MOBILE IMPROVEMENTS: Reduced visual weight */}
+          {/* Price tag with enhanced styling and consistent positioning */}
           <div className="absolute top-3 sm:top-3.5 right-3 sm:right-3.5 z-20">
             <span className={cn(
               isMobile ? "px-2 py-1 text-xs" : "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm",
               "font-semibold",
-              "bg-white/90 shadow-md border border-white/40", // Semi-transparent for mobile
+              "bg-white/90 shadow-md border border-white/40",
               "text-[#212121] rounded-full",
-              "shadow-[0_3px_8px_rgba(0,0,0,0.12)]", // Enhanced shadow for better contrast
+              "shadow-[0_3px_8px_rgba(0,0,0,0.12)]",
               "transition-all duration-200",
-              "group-hover:scale-105 group-hover:shadow-[0_4px_10px_rgba(0,0,0,0.18)]", // Enhanced hover effect
-              "flex items-center gap-1.5" // Increased gap slightly
+              "group-hover:scale-105 group-hover:shadow-[0_4px_10px_rgba(0,0,0,0.18)]",
+              "flex items-center gap-1.5"
             )}>
               <DollarSign className="w-3 h-3 text-indigo-600" aria-hidden="true" />
               <span>From ${creator.price}</span>
@@ -67,8 +67,11 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           </div>
 
           <div className="relative">
-            {/* Media and info overlay */}
-            <div className="relative">
+            {/* Media and info overlay - Added extra spacing at top for mobile */}
+            <div className={cn(
+              "relative",
+              isMobile && "pt-1" // Small padding at top for mobile
+            )}>
               <CreatorMedia 
                 creator={creator}
                 onImageLoad={onImageLoad}
@@ -78,14 +81,14 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               <CreatorInfo creator={creator} />
             </div>
             
-            {/* Tags and rating section with improved spacing - MOBILE IMPROVEMENTS */}
+            {/* Tags and rating section with improved spacing */}
             <div className={cn(
-              isMobile ? "p-5 sm:p-5" : "p-4 sm:p-5", // Increased horizontal padding on mobile
+              isMobile ? "p-5 sm:p-5" : "p-4 sm:p-5",
               "flex flex-col"
             )}>
               {/* Tags section with improved spacing for mobile */}
               <div className={cn(
-                isMobile ? "mb-3" : "mb-4", // Reduced vertical spacing on mobile for more compact design
+                isMobile ? "mb-3" : "mb-4",
               )}>
                 <CreatorTags tags={tags} />
               </div>
@@ -95,9 +98,9 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
                 <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
               </div>
               
-              {/* CTA button section with enhanced hover animation and mobile improvements */}
+              {/* CTA button section with enhanced hover animation */}
               <div className={cn(
-                isMobile ? "mt-4" : "mt-5", // Slightly less spacing on mobile
+                isMobile ? "mt-4" : "mt-5",
               )}>
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}

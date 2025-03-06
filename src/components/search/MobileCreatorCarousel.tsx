@@ -21,13 +21,13 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
 }) => {
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   
-  // Use looser containScroll option and enable dragFree for smoother mobile experience
+  // Optimized carousel settings for mobile
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
-    containScroll: 'keepSnaps', // Changed from 'trimSnaps' to prevent skipping cards
+    containScroll: 'keepSnaps',
     loop: false,
-    dragFree: true, // Changed to true for smoother scrolling
-    skipSnaps: false, // Disable skip snaps to fix arrow navigation
+    dragFree: true,
+    skipSnaps: false,
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -57,7 +57,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
     
-    // Force a reInit after mount with increased delay
+    // Force a reInit after mount with increased delay for more reliable rendering
     const timer = setTimeout(() => {
       emblaApi.reInit();
       
@@ -65,7 +65,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
       setTimeout(() => {
         setIsFirstVisit(false);
       }, 5000);
-    }, 300); // Increased from 100ms to 300ms for more reliable initialization
+    }, 500); // Increased delay for more reliable initialization
     
     return () => {
       clearTimeout(timer);
@@ -84,8 +84,8 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         </div>
       )}
     
-      {/* Reduced bottom padding to minimize excess whitespace */}
-      <div className="w-full overflow-hidden pb-8" ref={emblaRef}>
+      {/* Increased top padding to prevent image cutoff */}
+      <div className="w-full overflow-hidden pt-4 pb-8" ref={emblaRef}>
         <div className="flex">
           {creators.map((creator, index) => (
             <div 
@@ -103,7 +103,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         </div>
       </div>
 
-      {/* Navigation Arrows repositioned to be more centered */}
+      {/* Navigation Arrows repositioned */}
       <button
         onClick={scrollPrev}
         className={cn(
@@ -127,7 +127,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* Enhanced Dots Indicator - moved closer to cards, smaller and more compact */}
+      {/* Enhanced Dots Indicator - moved closer to cards */}
       <div className="flex justify-center gap-1.5 absolute bottom-0 left-0 right-0">
         {creators.map((_, index) => (
           <button
@@ -135,8 +135,8 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
             className={cn(
               "transition-all duration-200 touch-manipulation rounded-full",
               index === selectedIndex 
-                ? "bg-indigo-600 w-3 h-3" // Smaller selected dot
-                : "bg-gray-300 hover:bg-gray-400 w-2 h-2" // Smaller unselected dot
+                ? "bg-indigo-600 w-3 h-3" 
+                : "bg-gray-300 hover:bg-gray-400 w-2 h-2"
             )}
             onClick={() => emblaApi?.scrollTo(index)}
             aria-label={`Go to creator ${index + 1}`}
