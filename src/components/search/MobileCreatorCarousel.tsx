@@ -28,8 +28,8 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
     loop: false,
     dragFree: true,
     skipSnaps: false,
-    // Add more spacing between slides
-    spacing: 20
+    // Use inlineGap instead of spacing for the gap between slides
+    inlineGap: 20
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
