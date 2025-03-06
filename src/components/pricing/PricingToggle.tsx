@@ -25,40 +25,44 @@ export const PricingToggle = ({
 
   return (
     <div className="flex flex-col items-center">
-      {/* Toggle container */}
+      {/* Toggle container with enhanced styling */}
       <div className={cn(
         "pricing-toggle-container",
+        "border border-gray-200 shadow-sm",
         isMobile ? "max-w-xs" : "w-80"
       )}>
-        {/* Monthly option */}
+        {/* Monthly option with hover effects */}
         <button
           onClick={() => setIsYearly(false)}
           className={cn(
             "pricing-toggle-button",
-            "touch-manipulation focus:outline-none", 
+            "touch-manipulation focus:outline-none transition-colors duration-200", 
+            "hover:bg-gray-50",
             isYearly ? "text-slate-600" : "text-brand-purple-dark"
           )}
         >
           Monthly
         </button>
         
-        {/* Annual option */}
+        {/* Annual option with hover effects */}
         <button
           onClick={() => setIsYearly(true)}
           className={cn(
             "pricing-toggle-button",
-            "touch-manipulation focus:outline-none",
+            "touch-manipulation focus:outline-none transition-colors duration-200",
+            "hover:bg-gray-50",
             isYearly ? "text-brand-purple-dark" : "text-slate-600"
           )}
         >
           Annual
         </button>
         
-        {/* Active slider */}
+        {/* Active slider with enhanced styling */}
         <motion.div
           className={cn(
             "pricing-toggle-slider",
             isYearly ? "annual" : "monthly",
+            "shadow-md",
             animateChange && isYearly ? "ring-2 ring-brand-purple/30 ring-offset-1" : ""
           )}
           initial={false}
