@@ -46,7 +46,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
   ];
 
   return (
-    <div className="w-full space-y-1 sm:space-y-6"> {/* Reduced space on mobile */}
+    <div className="w-full space-y-0 sm:space-y-6"> {/* Removed spacing entirely for mobile */}
       {/* Sort menu div - completely removed for now */}
       {false && (
         <div className={cn(

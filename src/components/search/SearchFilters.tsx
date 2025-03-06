@@ -14,7 +14,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
 }) => {
   return (
     <>
-      <div className="flex items-center justify-between px-0.5 pt-0"> {/* Removed padding top */}
+      <div className="flex items-center justify-between px-0.5 py-0.5"> {/* Added small vertical padding */}
         <button
           onClick={onToggleFilters}
           className="

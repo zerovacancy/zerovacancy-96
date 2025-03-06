@@ -19,8 +19,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
   const isMobile = useIsMobile();
 
   return (
-    <div className="w-full space-y-3 sm:space-y-3"> {/* Reduced spacing between sections */}
-      <div className="flex flex-col gap-2 sm:gap-3"> {/* Reduced gap for mobile */}
+    <div className="w-full space-y-2 sm:space-y-3"> {/* Reduced spacing even further */}
+      <div className="flex flex-col gap-1.5 sm:gap-3"> {/* Reduced gap for mobile */}
         <div className={cn(
           "relative flex flex-col sm:flex-row w-full rounded-lg sm:rounded-xl overflow-hidden",
           "sm:shadow-[0_3px_16px_rgba(0,0,0,0.08)]",
@@ -44,7 +44,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
           <SearchButton />
         </div>
 
-        {/* Mobile Search Button - Full width with proper padding */}
+        {/* Mobile Search Button - Fixed alignment of icon and text */}
         <div className="sm:hidden mt-1 mb-1"> {/* Reduced margins */}
           <Button 
             className={cn(
@@ -55,13 +55,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value = '', onLocationSele
               "flex items-center justify-center gap-2"
             )}
           >
-            <Search className="w-5 h-5" />
-            <span>Search Creators</span>
+            <div className="flex items-center justify-center">
+              <Search className="w-5 h-5 mr-2" />
+              <span>Search Creators</span>
+            </div>
           </Button>
         </div>
 
         {/* Advanced filter section with improved spacing */}
-        <div className="pt-0"> {/* Removed padding top */}
+        <div className="pt-0 mt-0"> {/* Removed padding top and margin */}
           <SearchFilters
             showMoreFilters={showMoreFilters}
             onToggleFilters={() => setShowMoreFilters(!showMoreFilters)}
