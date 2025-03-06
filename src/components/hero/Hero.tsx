@@ -1,4 +1,3 @@
-
 import React, { useRef } from "react";
 import { useInView } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -6,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist-cta";
 import { TextRotate } from "../ui/text-rotate";
 
-// Animation titles using the TextRotate component
 const TITLES = ["Converts", "Engages", "Drives Leads"];
 
 export function Hero() {
@@ -20,41 +18,39 @@ export function Hero() {
       className={cn(
         "flex items-center justify-center flex-col", 
         "px-4 sm:px-6", 
-        // Reduced vertical padding on mobile by ~25%
-        "py-[24px] sm:py-[48px]",
-        // Reduced vertical margins on mobile by ~30%
-        "my-[16px] sm:my-[32px]",
-        "min-h-fit sm:min-h-[55vh]",
+        // Reduced padding on desktop, kept mobile padding
+        isMobile ? "py-[24px]" : "py-[32px]",
+        // Adjusted margins for desktop
+        isMobile ? "my-[16px]" : "my-[24px]",
+        // Optimized min-height for desktop
+        "min-h-fit sm:min-h-[45vh]",
         "relative z-10", 
-        // Reduced gap on mobile by ~30%
-        "gap-3 sm:gap-6",
+        // Adjusted gap for better spacing
+        isMobile ? "gap-3" : "gap-4",
         "touch-manipulation",
-        // Enhanced gradient background with softer purple to blue transition
         "bg-gradient-to-b from-purple-50 via-indigo-50/60 to-blue-50/30",
         isInView ? "animate-fade-in" : "opacity-0"
       )} 
     >
       <div 
         className={cn(
-          // Reduced gap on mobile by ~30%
-          "flex gap-3 sm:gap-6 flex-col max-w-6xl mx-auto w-full px-[3px]",
+          // Optimized gap for desktop content
+          "flex flex-col max-w-6xl mx-auto w-full px-[3px]",
+          isMobile ? "gap-3" : "gap-4",
           isInView ? "animate-fade-in delay-100" : "opacity-0"
         )}
       >
         <div className="relative">
-          {/* Mobile-optimized heading structure with combined headline */}
           <h1 className={cn(
             "tracking-tight leading-[1.1] text-center font-bold font-jakarta",
-            // Reduced vertical spacing
-            isMobile ? "mb-3" : "mb-6"
+            // Adjusted bottom margin for desktop
+            isMobile ? "mb-3" : "mb-4"
           )}>
             {isMobile ? (
-              // Mobile: Combined headline with inline "Drives Leads" for space efficiency
               <span className="flex flex-col items-center">
                 <span 
                   className={cn(
                     "text-primary inline-block font-medium",
-                    // Smaller text on mobile
                     "text-2xl sm:text-5xl lg:text-6xl",
                     "tracking-[-0.02em]", 
                     "text-brand-purple-dark mb-1"
@@ -74,7 +70,6 @@ export function Hero() {
                 </span>
               </span>
             ) : (
-              // Desktop: Original implementation with TextRotate
               <>
                 <span 
                   className={cn(
@@ -91,7 +86,7 @@ export function Hero() {
                 <div 
                   role="text" 
                   aria-label="Property Content animation"
-                  className="relative flex w-full justify-center h-[3em] sm:h-[2em] md:h-[1.8em] lg:h-[1.8em] overflow-visible mt-2 sm:mt-3"
+                  className="relative flex w-full justify-center h-[3em] sm:h-[2em] md:h-[1.8em] lg:h-[1.8em] overflow-visible mt-2 sm:mt-2"
                 >
                   <TextRotate
                     texts={TITLES}
@@ -120,7 +115,6 @@ export function Hero() {
             )}
           </h1>
           
-          {/* Added subtle text shadow for improved contrast without needing extra space */}
           {isMobile && (
             <div className="absolute -inset-2 top-auto bg-gradient-to-b from-purple-50/30 to-transparent -z-10 rounded-xl blur-xl"></div>
           )}
@@ -128,9 +122,7 @@ export function Hero() {
 
         <div 
           className={cn(
-            // Slightly smaller font on mobile
-            "text-xs sm:text-base lg:text-lg", 
-            // Tighter line height on mobile
+            isMobile ? "text-xs" : "text-base lg:text-lg", 
             isMobile ? "leading-[1.4]" : "leading-[1.5]", 
             "tracking-normal",
             "text-brand-text-primary", 
@@ -140,8 +132,9 @@ export function Hero() {
             "px-2 sm:px-4", 
             "[word-spacing:0.12em] sm:[word-spacing:0.16em]", 
             "relative z-10", 
-            // Significantly reduced top margin on mobile
-            "mt-2 sm:mt-16 mb-0", 
+            // Reduced top margin significantly for desktop
+            isMobile ? "mt-2" : "mt-8",
+            "mb-0", 
             "font-inter"
           )}
         >
@@ -152,8 +145,8 @@ export function Hero() {
       <div 
         className={cn(
           "w-full", 
-          // Reduced top margin on mobile by 50%
-          "mt-2 sm:mt-8",
+          // Optimized top margin for desktop
+          isMobile ? "mt-2" : "mt-6",
           "px-3 sm:px-4",
           isInView ? "animate-fade-in delay-200" : "opacity-0" 
         )}
@@ -161,7 +154,6 @@ export function Hero() {
         <WaitlistCTA className="mb-2 sm:mb-4" />
       </div>
       
-      {/* Enhanced decorative element with more pronounced gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-[150px] sm:h-[180px] pointer-events-none opacity-50 overflow-hidden">
         <div className="absolute bottom-0 left-0 right-0 h-[100px] sm:h-[120px] bg-gradient-to-t from-indigo-100/60 via-purple-50/40 to-transparent" />
       </div>
