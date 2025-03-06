@@ -1,4 +1,3 @@
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -104,4 +103,7 @@
   }
 }
 
-/* Add more keyframes as needed */
+@keyframes growWidth {
+  from { width: 0; opacity: 0; }
+  to { width: 100%; opacity: 1; }
+}

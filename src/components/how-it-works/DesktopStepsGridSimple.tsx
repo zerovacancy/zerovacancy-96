@@ -18,9 +18,14 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
   return (
     <div className="hidden md:block w-full mx-auto relative pt-8">
       {/* Grid container */}
-      <div className="grid w-full grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7 relative">
+      <div className="grid w-full grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-8 relative">
         {steps.map((step, index) => (
-          <div key={index} className="relative z-10">
+          <div 
+            key={index} 
+            className={`relative z-10 transition-all duration-500 ${
+              index === activeStep ? 'scale-[1.02]' : 'scale-100'
+            }`}
+          >
             <DesktopStepItemSimple
               step={step}
               index={index}

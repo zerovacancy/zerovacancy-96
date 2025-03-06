@@ -23,42 +23,52 @@ const DesktopStepItemSimple: React.FC<DesktopStepItemSimpleProps> = ({
   const getBorderColor = () => {
     // Extract the primary color from gradient for border
     const color = step.gradientFrom || '#8B5CF6';
-    return color + '33'; // Add 33 for ~20% opacity
+    return isActive ? color : color + '33'; // Full opacity for active, 20% for inactive
   };
 
   // Get the subtle background tint based on the step's theme color
   const getBackgroundTint = () => {
     // Extract the primary color and make it extremely subtle (3% opacity)
     const color = step.gradientFrom || '#8B5CF6';
-    return color + '08'; // Add 08 for ~3% opacity
+    return color + (isActive ? '12' : '08'); // 7% opacity for active, 3% for inactive
   };
 
   return (
     <div 
       onClick={onClick}
       className={cn(
-        "relative h-full min-h-[180px] px-6 py-7 rounded-xl",
+        "relative h-full min-h-[190px] px-6 py-7 rounded-xl",
         "transition-all duration-300 group cursor-pointer",
-        "border active:scale-[0.98]",
+        "border hover:border-opacity-100 active:scale-[0.98]",
         "touch-manipulation",
         "shadow-sm hover:shadow-md",
         "flex flex-col items-center justify-start animate-fade-in",
-        `animation-delay-${index * 200}`
+        `animation-delay-${index * 200}`,
+        isActive && "ring-1 ring-offset-2",
+        isActive ? `ring-${step.gradientFrom?.replace('#', '')}` : ""
       )}
       style={{
         // Dynamic styling for each card
-        borderColor: isActive ? step.gradientFrom : getBorderColor(),
+        borderColor: getBorderColor(),
         borderWidth: isActive ? '2px' : '1px',
         borderLeftWidth: isActive ? '3px' : '1px',
         borderRadius: '12px',
         backgroundColor: getBackgroundTint(),
-        boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+        boxShadow: isActive ? '0 4px 12px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0.05)',
+        transform: isActive ? 'translateY(-5px)' : 'translateY(0)',
       }}
       onMouseOver={(e) => {
-        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+        e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.1)';
+        e.currentTarget.style.transform = 'translateY(-5px)';
       }}
       onMouseOut={(e) => {
-        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+        if (!isActive) {
+          e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+          e.currentTarget.style.transform = 'translateY(0)';
+        } else {
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+          e.currentTarget.style.transform = 'translateY(-5px)';
+        }
       }}
       aria-label={`Step ${index + 1}: ${step.title}`}
     >
@@ -67,7 +77,7 @@ const DesktopStepItemSimple: React.FC<DesktopStepItemSimpleProps> = ({
         <span 
           className={cn(
             "inline-flex items-center justify-center",
-            "w-7 h-7 rounded-full text-xs font-medium",
+            "w-8 h-8 rounded-full text-xs font-bold",
             "ring-2 ring-white shadow-sm animate-scale-in",
             `animation-delay-${index * 200 + 300}`,
             step.gradientClass || step.numberClass
@@ -87,21 +97,22 @@ const DesktopStepItemSimple: React.FC<DesktopStepItemSimpleProps> = ({
       {/* Icon with gradient background */}
       <div 
         className={cn(
-          "mb-5 rounded-lg p-3.5 transition-all duration-300",
+          "mb-5 rounded-lg p-4 transition-all duration-300",
           "group-hover:scale-105 shadow-sm",
+          isActive ? "animate-pulse-subtle" : "",
           step.gradientClass || step.iconClass
         )}
         style={step.gradientStyle}
       >
         {React.cloneElement(step.icon as React.ReactElement, {
-          className: "w-6 h-6"
+          className: "w-7 h-7"
         })}
       </div>
       
       {/* Title */}
       <h4 
         className={cn(
-          "text-sm sm:text-base font-bold text-gray-900 mb-3 text-center line-clamp-1",
+          "text-base sm:text-lg font-bold text-gray-900 mb-3 text-center",
           "animate-fade-in",
           `animation-delay-${index * 100 + 500}`
         )}
@@ -113,26 +124,26 @@ const DesktopStepItemSimple: React.FC<DesktopStepItemSimpleProps> = ({
       <p 
         className={cn(
           "text-xs sm:text-sm text-gray-600 leading-relaxed text-center",
-          "animate-fade-in line-clamp-2",
+          "animate-fade-in",
           `animation-delay-${index * 100 + 700}`
         )}
       >
         {step.description}
       </p>
       
-      {/* Subtle visual indicator of clickability */}
+      {/* Learn More indicator */}
       <div className={cn(
-        "absolute bottom-3 right-3 w-5 h-5",
-        "flex items-center justify-center rounded-full",
-        "opacity-0 group-hover:opacity-70 transition-opacity duration-300",
-        step.gradientClass || step.numberClass
+        "mt-auto pt-3 text-xs font-medium",
+        "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+        "text-blue-600 flex items-center gap-1"
       )}>
-        <ArrowRight className="w-3 h-3 text-white" />
+        <span>Learn more</span>
+        <ArrowRight className="w-3 h-3" />
       </div>
       
       {/* Active indicator */}
       {isActive && (
-        <div className="absolute bottom-2 right-2 w-2 h-2 rounded-full animate-pulse" style={{
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-10 h-1 rounded-full animate-pulse" style={{
           background: `linear-gradient(${step.gradientDirection || '45deg'}, ${step.gradientFrom || '#8B5CF6'}, ${step.gradientTo || '#6366F1'})`
         }}></div>
       )}
