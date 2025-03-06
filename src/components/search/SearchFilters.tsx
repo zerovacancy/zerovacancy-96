@@ -14,7 +14,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
 }) => {
   return (
     <>
-      <div className="flex items-center justify-between px-0.5 pt-1.5">
+      <div className="flex items-center justify-between px-0.5 pt-0"> {/* Removed padding top */}
         <button
           onClick={onToggleFilters}
           className="
@@ -24,6 +24,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
             text-gray-700 hover:text-gray-900 
             hover:bg-gray-50 rounded-md
             transition-colors duration-200
+            border border-transparent hover:border-gray-200/70
           "
         >
           Advanced Filters

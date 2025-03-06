@@ -93,14 +93,14 @@ const PreviewSearch = () => {
             <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
               {/* Header section with improved spacing for mobile */}
               <div className={cn(
-                "text-left pb-3 sm:pb-6 px-4 sm:px-6 lg:px-8",
-                isMobile ? "pt-5" : "pt-4 sm:pt-9"
+                "text-left pb-1 sm:pb-6 px-4 sm:px-6 lg:px-8",
+                isMobile ? "pt-4" : "pt-4 sm:pt-9"
               )}>
-                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2.5 sm:mb-4 font-jakarta tracking-tight">
+                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-1.5 sm:mb-4 font-jakarta tracking-tight">
                   Find Your Perfect Creator
                 </h2>
                 {/* Better spacing around the underline */}
-                <div className="w-16 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-3 sm:mb-3 rounded-full"></div>
+                <div className="w-16 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-2 sm:mb-3 rounded-full"></div>
                 <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl mt-1">
                   Connect with professionals who showcase your property perfectly
                 </p>
@@ -109,22 +109,22 @@ const PreviewSearch = () => {
               {/* SearchBar with improved spacing */}
               <div className={cn(
                 "w-full px-3 sm:px-4 md:px-7",
-                isMobile ? "py-3" : "py-1 sm:py-4 md:py-6"
+                isMobile ? "py-2" : "py-1 sm:py-4 md:py-6"
               )}>
                 <SearchBar onLocationSelect={() => {}} />
               </div>
             
-              {/* Visual separator between search and results */}
+              {/* Visual separator between search and results - more subtle for mobile */}
               {isMobile && (
-                <div className="w-full px-4">
-                  <div className="h-px bg-gradient-to-r from-transparent via-purple-200/80 to-transparent"></div>
+                <div className="w-full px-4 mt-0.5 mb-1">
+                  <div className="h-px bg-gradient-to-r from-transparent via-purple-200/50 to-transparent"></div>
                 </div>
               )}
             
-              {/* CreatorsList with improved spacing between search and results */}
+              {/* CreatorsList with reduced spacing between filters and results */}
               <div className={cn(
                 "w-full px-3 sm:px-4 md:px-7 pb-6 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40",
-                isMobile ? "pt-4" : "py-1 sm:py-5 md:py-7"
+                isMobile ? "pt-0.5" : "py-1 sm:py-5 md:py-7"
               )}>
                 <CreatorsList 
                   creators={[{
