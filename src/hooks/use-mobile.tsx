@@ -17,20 +17,18 @@ export function useIsMobile() {
     // Check on mount
     checkMobile()
     
-    // Set up event listener
+    // Set up event listener using matchMedia for better performance
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
-    const onChange = () => {
-      checkMobile()
-    }
     
     // Use the appropriate event listener based on browser support
+    const onChange = () => checkMobile()
     mql.addEventListener("change", onChange)
     
     // Cleanup
     return () => mql.removeEventListener("change", onChange)
   }, [])
 
-  // Use !! to ensure boolean return
+  // Return boolean value (use !! to ensure boolean)
   return !!isMobile
 }
 
@@ -66,8 +64,8 @@ export function useIsMobileOrTablet() {
 
 export function useViewportSize() {
   const [size, setSize] = React.useState<{ width: number; height: number }>({
-    width: 0,
-    height: 0
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0
   })
   
   React.useEffect(() => {
@@ -78,12 +76,19 @@ export function useViewportSize() {
       })
     }
     
+    // Throttle the resize event to improve performance
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+    const throttledResize = () => {
+      if (timeoutId) clearTimeout(timeoutId)
+      timeoutId = setTimeout(updateSize, 100)
+    }
+    
     // Initialize on mount
     updateSize()
     
-    window.addEventListener('resize', updateSize)
+    window.addEventListener('resize', throttledResize)
     
-    return () => window.removeEventListener('resize', updateSize)
+    return () => window.removeEventListener('resize', throttledResize)
   }, [])
   
   return size

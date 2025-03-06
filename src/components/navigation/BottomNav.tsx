@@ -26,7 +26,7 @@ const NavItem = ({ icon, label, to = '/' }: NavItemProps) => {
     <Link
       to={to}
       className={cn(
-        "flex flex-col items-center gap-1 py-2 px-3 sm:px-4",
+        "flex flex-col items-center gap-0.5 py-1.5 px-2 sm:px-4",
         "touch-manipulation select-none active:scale-95",
         "transition-all duration-200",
         isActive 
@@ -35,7 +35,7 @@ const NavItem = ({ icon, label, to = '/' }: NavItemProps) => {
       )}
     >
       <IconComponent className="w-5 h-5 sm:w-[22px] sm:h-[22px]" />
-      <span className="text-[11px] sm:text-xs font-medium">{label}</span>
+      <span className="text-[10px] sm:text-xs font-medium">{label}</span>
     </Link>
   );
 };
@@ -47,7 +47,7 @@ export const BottomNav = () => {
   
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg">
-      <div className="flex items-center justify-around max-w-md mx-auto h-16">
+      <div className="flex items-center justify-around w-full mx-auto h-14">
         <NavItem icon="home" label="Home" to="/" />
         <NavItem icon="search" label="Discover" to="/search" />
         <NavItem icon="message" label="Messages" to="/messages" />

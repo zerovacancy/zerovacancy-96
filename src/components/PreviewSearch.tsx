@@ -14,7 +14,6 @@ const PreviewSearch = () => {
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Use IntersectionObserver to only animate when in view
   useEffect(() => {
     if (!containerRef.current) return;
     
@@ -25,7 +24,6 @@ const PreviewSearch = () => {
             if (entry.isIntersecting) {
               entry.target.classList.add('content-visible');
             } else {
-              // Keep animations paused when not in view to improve performance
               entry.target.classList.remove('content-visible');
             }
           }
@@ -44,7 +42,7 @@ const PreviewSearch = () => {
   }, []);
 
   return (
-    <div className="w-full px-2 sm:px-3 md:px-6 lg:px-8 content-visibility-auto" ref={containerRef}>
+    <div className="w-full px-1 sm:px-3 md:px-6 lg:px-8 content-visibility-auto" ref={containerRef}>
       <div className="mx-auto relative group">
         <div className="absolute -inset-0.5 sm:-inset-0.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-purple-800/30 via-indigo-700/30 to-purple-900/30 opacity-60 sm:opacity-75 blur-[2px] sm:blur-sm group-hover:opacity-100 transition duration-500"></div>
         <motion.div 
@@ -92,21 +90,21 @@ const PreviewSearch = () => {
             spotlightClassName="from-purple-500/15 via-indigo-500/15 to-blue-500/15"
           >
             <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
-              <div className="text-left pt-7 sm:pt-9 pb-5 sm:pb-6 px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 font-jakarta tracking-tight">
+              <div className="text-left pt-5 sm:pt-9 pb-3 sm:pb-6 px-3 sm:px-6 lg:px-8">
+                <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 font-jakarta tracking-tight">
                   Find Your Perfect Creator
                 </h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-4 rounded-full"></div>
+                <div className="w-14 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-3 rounded-full"></div>
                 <p className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl">
                   Connect with professionals who showcase your property perfectly
                 </p>
               </div>
             
-              <div className="w-full px-3 sm:px-4 md:px-7 py-3 sm:py-4 md:py-6">
+              <div className="w-full px-2 sm:px-4 md:px-7 py-2 sm:py-4 md:py-6">
                 <SearchBar onLocationSelect={() => {}} />
               </div>
             
-              <div className="w-full px-3 sm:px-4 md:px-7 py-4 sm:py-5 md:py-7 pb-10 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40">
+              <div className="w-full px-2 sm:px-4 md:px-7 py-2 sm:py-5 md:py-7 pb-10 sm:pb-7 bg-gradient-to-b from-transparent to-purple-50/30 sm:to-purple-50/40">
                 <CreatorsList 
                   creators={[{
                     name: "Emily Johnson",

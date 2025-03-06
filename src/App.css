@@ -1,9 +1,14 @@
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 0.75rem;
+  }
 }
 
 .logo {
@@ -88,6 +93,22 @@
   .reduce-animation {
     animation-duration: 0.5s !important;
     transition-duration: 0.3s !important;
+  }
+  
+  /* Improve padding for mobile content */
+  .mobile-content-container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  /* Improve touch targets for mobile */
+  button, a, input, select, textarea {
+    min-height: 36px;
+  }
+  
+  /* Add extra space for the fixed bottom navigation */
+  body {
+    padding-bottom: 4rem;
   }
 }
 

@@ -38,16 +38,18 @@ export function ShineBorder({
   // Optimize animation parameters for mobile
   const optimizedDuration = isMobile ? duration * 1.5 : duration;
   const optimizedBorderWidth = isMobile ? Math.max(0.5, borderWidth * 0.8) : borderWidth;
+  const optimizedBorderRadius = isMobile ? Math.max(6, borderRadius * 0.9) : borderRadius;
   
   return (
     <div
       style={
         {
-          "--border-radius": `${borderRadius}px`,
+          "--border-radius": `${optimizedBorderRadius}px`,
         } as React.CSSProperties
       }
       className={cn(
         "min-h-[60px] w-fit min-w-[300px] place-items-center rounded-[--border-radius] p-0 bg-transparent",
+        isMobile && "min-w-full",
         className,
       )}
     >
@@ -55,7 +57,7 @@ export function ShineBorder({
         style={
           {
             "--border-width": `${optimizedBorderWidth}px`,
-            "--border-radius": `${borderRadius}px`,
+            "--border-radius": `${optimizedBorderRadius}px`,
             "--duration": `${optimizedDuration}s`,
             "--mask-linear-gradient": `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
             "--background-radial-gradient": `radial-gradient(transparent,transparent, ${color instanceof Array ? color.join(",") : color},transparent,transparent)`,
