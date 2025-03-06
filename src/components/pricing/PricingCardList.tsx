@@ -18,7 +18,6 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
   const [activeIndex, setActiveIndex] = useState(1); // Default to Professional tier
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Handle swipe gesture for mobile
   const handleSwipe = (direction: 'left' | 'right') => {
     if (direction === 'left' && activeIndex < cards.length - 1) {
       setActiveIndex(activeIndex + 1);
@@ -27,7 +26,6 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
     }
   };
 
-  // Scroll to active card when it changes on mobile
   useEffect(() => {
     if (isMobile && containerRef.current) {
       const scrollAmount = activeIndex * containerRef.current.offsetWidth;
@@ -40,19 +38,22 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
 
   return (
     <div className="relative">
-      {/* Mobile pagination indicators */}
+      {/* Enhanced mobile pagination indicators */}
       {isMobile && (
-        <div className="flex justify-center items-center mb-5 space-x-4">
+        <div className="flex justify-center items-center mb-4 space-x-2">
           {cards.map((card, index) => (
             <button
               key={`indicator-${card.title}`}
               className={cn(
-                "w-8 h-1.5 rounded-full transition-all",
+                "transition-all duration-300",
+                activeIndex === index ? 
+                  "w-8 h-2 rounded-full" : 
+                  "w-2 h-2 rounded-full bg-opacity-40",
                 activeIndex === index ? 
                   index === 0 ? "bg-blue-500" : 
                   index === 1 ? "bg-violet-500" : 
                   "bg-emerald-500" : 
-                "bg-gray-200"
+                "bg-gray-300"
               )}
               onClick={() => setActiveIndex(index)}
               aria-label={`View ${card.title} plan`}
@@ -61,25 +62,25 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
         </div>
       )}
 
-      {/* Mobile navigation arrows - positioned closer to center for easier access */}
+      {/* Improved mobile navigation arrows */}
       {isMobile && (
         <>
           {activeIndex > 0 && (
             <button 
-              className="absolute left-1 top-1/2 -translate-y-1/2 z-20 bg-white/90 rounded-full p-2.5 shadow-lg"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 rounded-full p-2 shadow-md"
               onClick={() => handleSwipe('right')}
               aria-label="Previous plan"
             >
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
+              <ChevronLeft className="w-4 h-4 text-gray-600" />
             </button>
           )}
           {activeIndex < cards.length - 1 && (
             <button 
-              className="absolute right-1 top-1/2 -translate-y-1/2 z-20 bg-white/90 rounded-full p-2.5 shadow-lg"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/90 rounded-full p-2 shadow-md"
               onClick={() => handleSwipe('left')}
               aria-label="Next plan"
             >
-              <ChevronRight className="w-5 h-5 text-gray-600" />
+              <ChevronRight className="w-4 h-4 text-gray-600" />
             </button>
           )}
         </>
@@ -90,60 +91,38 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
         ref={containerRef}
         className={cn(
           isMobile 
-            ? "flex overflow-x-hidden snap-x snap-mandatory scrollbar-hide pb-2" 
+            ? "flex overflow-x-hidden snap-x snap-mandatory scrollbar-hide" 
             : "grid gap-6 md:gap-8 lg:grid-cols-3 sm:grid-cols-2"
         )}
         style={isMobile ? { scrollbarWidth: 'none', msOverflowStyle: 'none' } : undefined}
       >
         {cards.map((card, index) => (
-          <motion.div
+          <div
             key={card.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
             className={cn(
               isMobile 
-                ? "min-w-full flex-shrink-0 snap-center px-2" 
+                ? "min-w-full flex-shrink-0 snap-center px-1.5" 
                 : "",
               card.highlighted && !isMobile ? "lg:scale-105 lg:-translate-y-2 z-10" : ""
             )}
           >
-            {card.highlighted ? (
-              <ShineBorder 
-                borderRadius={24} 
-                borderWidth={1.5} 
-                duration={10} 
-                color={["#9333ea", "#4f46e5", "#7e22ce"]} 
-                className="w-full h-full min-w-0"
-              >
-                <PricingCard 
-                  {...card}
-                  subscription={subscription}
-                  isLoading={isLoading}
-                  defaultExpanded={isMobile ? index === activeIndex : card.highlighted}
-                  mobileBorder={true}
-                />
-              </ShineBorder>
-            ) : (
-              <PricingCard 
-                {...card}
-                subscription={subscription}
-                isLoading={isLoading}
-                defaultExpanded={isMobile ? index === activeIndex : false}
-                mobileBorder={true}
-              />
-            )}
-          </motion.div>
+            <PricingCard 
+              {...card}
+              subscription={subscription}
+              isLoading={isLoading}
+              defaultExpanded={isMobile ? index === activeIndex : card.highlighted}
+              mobileBorder={true}
+            />
+          </div>
         ))}
       </div>
       
       {/* Mobile swipe instruction */}
       {isMobile && (
-        <div className="text-center text-xs text-gray-500 mt-4 flex items-center justify-center">
-          <ChevronLeft className="h-3.5 w-3.5 mr-1 opacity-70" />
+        <div className="text-center text-[10px] text-gray-500 mt-2 flex items-center justify-center">
+          <ChevronLeft className="h-3 w-3 mr-0.5 opacity-70" />
           <span>Swipe to compare plans</span>
-          <ChevronRight className="h-3.5 w-3.5 ml-1 opacity-70" />
+          <ChevronRight className="h-3 w-3 ml-0.5 opacity-70" />
         </div>
       )}
     </div>
