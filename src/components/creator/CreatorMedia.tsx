@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Creator {
   name: string;
@@ -34,6 +35,7 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
   onImageLoad,
   onVideoLoad
 }) => {
+  const isMobile = useIsMobile();
   const [imageError, setImageError] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -81,7 +83,11 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
   };
   
   return (
-    <div className="relative aspect-[4/3] will-change-transform" ref={mediaRef}>
+    <div className={cn(
+      "relative will-change-transform", 
+      // Fixed, consistent height on mobile
+      isMobile ? "aspect-[4/3]" : "aspect-[4/3]"
+    )} ref={mediaRef}>
       {isVisible && ((media.type === 'image') || (media.type === 'video' && imageError)) ? (
         <img 
           src={media.type === 'image' ? media.src : (media as any).fallback}
@@ -127,3 +133,6 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
     </div>
   );
 };
+
+// Add import for cn utility at the top
+import { cn } from '@/lib/utils';

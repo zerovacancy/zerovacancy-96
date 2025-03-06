@@ -1,10 +1,9 @@
-
 import React, { useCallback, useEffect, useState } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { SortMenu } from '../sorting/SortMenu';
 import { useIsMobile } from '@/hooks/use-mobile';
 import useEmblaCarousel from 'embla-carousel-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Grip } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '../ui/scroll-area';
 
@@ -38,6 +37,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const [loadedImageUrls, setLoadedImageUrls] = useState<Set<string>>(new Set());
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
   
   // Use looser containScroll option and enable dragFree for smoother mobile experience
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -78,6 +78,11 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
     // Force a reInit after mount with increased delay
     const timer = setTimeout(() => {
       emblaApi.reInit();
+      
+      // Hide first-time swipe hint after 5 seconds
+      setTimeout(() => {
+        setIsFirstVisit(false);
+      }, 5000);
     }, 300); // Increased from 100ms to 300ms for more reliable initialization
     
     return () => {
@@ -123,6 +128,14 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
 
       {isMobile ? (
         <div className="w-full relative">
+          {/* Swipe instruction for first-time users */}
+          {isFirstVisit && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 bg-black/60 text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 backdrop-blur-sm animate-pulse-subtle">
+              <Grip className="w-4 h-4" />
+              <span>Swipe to explore</span>
+            </div>
+          )}
+        
           <div className="w-full overflow-hidden pb-14" ref={emblaRef}>
             <div className="flex">
               {creators.map((creator, index) => (
@@ -165,16 +178,16 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          {/* Enhanced Dots Indicator - moved further down */}
-          <div className="flex justify-center gap-1.5 mt-2 absolute bottom-0 left-0 right-0">
+          {/* Enhanced Dots Indicator - made more prominent for mobile */}
+          <div className="flex justify-center gap-2 mt-3 absolute bottom-1 left-0 right-0">
             {creators.map((_, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-2.5 h-2.5 rounded-full transition-all duration-200 touch-manipulation",
+                  "transition-all duration-200 touch-manipulation rounded-full",
                   index === selectedIndex 
-                    ? "bg-indigo-600 w-3.5 h-3.5" // Larger dot for selected
-                    : "bg-gray-300 hover:bg-gray-400"
+                    ? "bg-indigo-600 w-4 h-4" // Larger dot for selected
+                    : "bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5"
                 )}
                 onClick={() => emblaApi?.scrollTo(index)}
                 aria-label={`Go to creator ${index + 1}`}
@@ -183,6 +196,7 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           </div>
         </div>
       ) : (
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
           {creators.map((creator) => (
             <CreatorCard

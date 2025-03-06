@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Tag } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface CreatorTagsProps {
   tags: string[];
@@ -45,6 +46,8 @@ const shouldHaveIcon = (tag: string): boolean => {
 };
 
 export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
+  const isMobile = useIsMobile();
+  
   return (
     <div 
       className="overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
@@ -56,7 +59,8 @@ export const CreatorTags: React.FC<CreatorTagsProps> = ({ tags }) => {
           <span
             key={index}
             className={cn(
-              "text-[10px] sm:text-xs px-2.5 py-1.5 rounded-full",
+              isMobile ? "text-xs px-3 py-1.75" : "text-[10px] sm:text-xs px-2.5 py-1.5", // Larger tap targets on mobile
+              "rounded-full",
               "transition-all duration-200 whitespace-nowrap",
               "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md",
               "flex items-center gap-1",
