@@ -82,7 +82,7 @@ const PreviewSearch = () => {
 
   return (
     <div 
-      className="w-full px-2 sm:px-4 md:px-6 lg:px-8 xl:px-10 content-visibility-auto py-4 sm:py-6 md:py-8" 
+      className="w-full px-2 sm:px-4 md:px-6 lg:px-8 xl:px-10 content-visibility-auto py-3 sm:py-6 md:py-8" 
       ref={containerRef}
     >
       <div className="mx-auto relative group max-w-7xl">
@@ -139,42 +139,51 @@ const PreviewSearch = () => {
             spotlightClassName="from-purple-500/15 via-indigo-500/15 to-blue-500/15"
           >
             <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
-              {/* Header section - Improved spacing and responsiveness */}
+              {/* Header section - More compact for mobile */}
               <div className={cn(
                 "text-left pb-2 sm:pb-6 px-4 sm:px-8 lg:px-10",
-                isMobile ? "pt-5" : "pt-6 sm:pt-9 md:pt-10"
+                isMobile ? "pt-4" : "pt-6 sm:pt-9 md:pt-10"
               )}>
                 <motion.h2 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 font-jakarta tracking-tight"
+                  className={cn(
+                    "font-bold text-gray-900 mb-2 sm:mb-4 font-jakarta tracking-tight",
+                    isMobile ? "text-xl" : "text-2xl sm:text-3xl md:text-4xl" // Smaller on mobile
+                  )}
                 >
                   Find Your Perfect Creator
                 </motion.h2>
                 
-                {/* Animated underline */}
+                {/* Animated underline - Smaller on mobile */}
                 <motion.div 
                   initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: isMobile ? "3rem" : "4rem", opacity: 1 }}
+                  animate={{ width: isMobile ? "2.5rem" : "4rem", opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="h-1 sm:h-1.5 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 mb-2 sm:mb-3 rounded-full"
+                  className={cn(
+                    "bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 rounded-full",
+                    isMobile ? "h-0.5 mb-1.5" : "h-1 sm:h-1.5 mb-2 sm:mb-3" // Thinner on mobile
+                  )}
                 ></motion.div>
                 
                 <motion.p 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  className="text-sm sm:text-base md:text-lg text-gray-600 font-inter max-w-xl mt-1.5 sm:mt-2"
+                  className={cn(
+                    "text-gray-600 font-inter max-w-xl mt-1.5 sm:mt-2",
+                    isMobile ? "text-xs" : "text-sm sm:text-base md:text-lg" // Smaller on mobile
+                  )}
                 >
                   Connect with professionals who showcase your property perfectly
                 </motion.p>
               </div>
             
-              {/* SearchBar - Improved container styling */}
+              {/* SearchBar - More compact container for mobile */}
               <div className={cn(
                 "w-full px-3 sm:px-6 md:px-8 lg:px-10",
-                isMobile ? "py-2" : "py-3 sm:py-4 md:py-6"
+                isMobile ? "py-1.5" : "py-3 sm:py-4 md:py-6"
               )}>
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -185,16 +194,16 @@ const PreviewSearch = () => {
                 </motion.div>
               </div>
               
-              {/* Subtle separator for visual distinction - only on desktop */}
+              {/* Subtle separator - Hidden on mobile */}
               {!isMobile && (
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-purple-200/50 to-transparent mx-auto max-w-[90%]"></div>
               )}
             
-              {/* CreatorsList - Enhanced background gradient and animations */}
+              {/* CreatorsList - More compact padding for mobile */}
               <div className={cn(
-                "w-full px-3 sm:px-6 md:px-8 lg:px-10 pb-6 sm:pb-8 md:pb-10",
+                "w-full px-3 sm:px-6 md:px-8 lg:px-10",
                 "bg-gradient-to-b from-transparent via-purple-50/20 to-purple-50/40",
-                isMobile ? "pt-2" : "pt-4 sm:pt-6 md:pt-8"
+                isMobile ? "pb-4 pt-2" : "pb-6 sm:pb-8 md:pb-10 pt-4 sm:pt-6 md:pt-8"
               )}>
                 <AnimatePresence>
                   {isVisible && (
