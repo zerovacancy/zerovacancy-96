@@ -27,9 +27,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
     containScroll: 'keepSnaps',
     loop: false,
     dragFree: true,
-    skipSnaps: false,
-    // Use inlineGap instead of spacing for the gap between slides
-    inlineGap: 20
+    skipSnaps: false
   });
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -88,7 +86,7 @@ export const MobileCreatorCarousel: React.FC<MobileCreatorCarouselProps> = ({
     
       {/* Increased top and bottom padding for better spacing */}
       <div className="w-full overflow-hidden pt-8 pb-12" ref={emblaRef}>
-        <div className="flex">
+        <div className="flex gap-5"> {/* Using flex gap for spacing between slides */}
           {creators.map((creator, index) => (
             <div 
               key={creator.name} 
