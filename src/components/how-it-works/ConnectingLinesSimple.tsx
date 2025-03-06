@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { steps } from './step-data';
 
@@ -17,18 +16,7 @@ const ConnectingLinesSimple: React.FC = () => {
               "left-[73%] w-[18%] bg-gradient-to-r from-blue-500/60 to-emerald-500/60 animate-grow-x animation-delay-600"
             )}
             style={{ top: '45px' }} // Fixed position aligned with the center of cards
-          >
-            <div 
-              className={cn(
-                "absolute -right-3 -top-[7px]",
-                index === 0 ? "text-blue-500 animate-fade-in animation-delay-900" : 
-                index === 1 ? "text-amber-500 animate-fade-in animation-delay-1200" :
-                "text-emerald-500 animate-fade-in animation-delay-1500"
-              )}
-            >
-              <ArrowRight className="h-4 w-4" />
-            </div>
-          </div>
+          />
         </div>
       ))}
     </div>

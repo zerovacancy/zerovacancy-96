@@ -3,7 +3,6 @@ import React from 'react';
 import DesktopStepItemSimple from './DesktopStepItemSimple';
 import ConnectingLinesSimple from './ConnectingLinesSimple';
 import { steps } from './step-data';
-import { ArrowRight } from 'lucide-react';
 
 interface DesktopStepsGridSimpleProps {
   completedSteps: number[];
@@ -29,15 +28,6 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
               isActive={activeStep === index}
               onClick={() => onStepInteraction(index)}
             />
-            
-            {/* Flow arrows between steps - only show between items, not after the last one */}
-            {index < steps.length - 1 && (index + 1) % 4 !== 0 && (
-              <div className="absolute top-1/2 -right-4 transform -translate-y-1/2 hidden lg:block z-20">
-                <div className={`p-1.5 rounded-full ${step.iconClass} opacity-70`}>
-                  <ArrowRight className="w-3 h-3 text-white" />
-                </div>
-              </div>
-            )}
           </div>
         ))}
       </div>
