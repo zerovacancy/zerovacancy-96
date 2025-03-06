@@ -18,7 +18,7 @@ export const PricingFeaturesToggle = ({
   return (
     <button 
       className={cn(
-        "text-sm font-medium flex items-center justify-center gap-1.5 group/btn transition-all duration-300 w-full py-3 rounded-lg mb-4",
+        "text-sm font-medium flex items-center justify-center gap-1.5 group/btn transition-all duration-300 w-full py-2.5 rounded-lg mb-3",
         colorBg,
         "hover:brightness-95"
       )}

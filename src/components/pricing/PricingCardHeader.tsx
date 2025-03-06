@@ -28,7 +28,7 @@ export const PricingCardHeader = ({
     <>
       <div className={cn(
         "flex items-center justify-between relative z-10",
-        isMobile ? "mb-4" : "mb-6"
+        isMobile ? "mb-3" : "mb-6"
       )}>
         <h3 className={`text-xl font-bold ${colorAccent}`}>
           {title}
@@ -60,7 +60,7 @@ export const PricingCardHeader = ({
       
       {/* Annual price option with savings - Made smaller and lighter */}
       <div className={cn(
-        "text-slate-500 mb-3",
+        "text-slate-500 mb-2",
         isMobile ? "text-xs" : "text-xs" 
       )}>
         <span className="font-medium">${Math.round(price * 10)}</span>/year (save $
@@ -68,16 +68,16 @@ export const PricingCardHeader = ({
       </div>
 
       <p className={cn(
-        "text-slate-600 relative z-10 font-inter leading-relaxed",
-        isMobile ? "text-sm mb-2" : "text-sm mb-3"
+        "text-slate-600 relative z-10 leading-relaxed",
+        isMobile ? "text-sm mb-2 line-clamp-2" : "text-sm mb-3"
       )}>
         {description}
       </p>
       
       {valueProposition && (
         <p className={cn(
-          `font-medium ${colorAccent} font-inter`,
-          isMobile ? "text-xs mb-4" : "text-sm mb-6"
+          `font-medium ${colorAccent}`,
+          isMobile ? "text-xs mb-3 line-clamp-1" : "text-sm mb-6"
         )}>
           <span className="inline-block mr-1">✦</span> {valueProposition}
         </p>

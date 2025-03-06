@@ -30,9 +30,9 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
   // Scroll to active card when it changes on mobile
   useEffect(() => {
     if (isMobile && containerRef.current) {
-      const cardWidth = containerRef.current.offsetWidth;
+      const scrollAmount = activeIndex * containerRef.current.offsetWidth;
       containerRef.current.scrollTo({
-        left: activeIndex * cardWidth,
+        left: scrollAmount,
         behavior: 'smooth'
       });
     }
@@ -42,7 +42,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
     <div className="relative">
       {/* Mobile pagination indicators */}
       {isMobile && (
-        <div className="flex justify-center items-center mb-4 space-x-4">
+        <div className="flex justify-center items-center mb-5 space-x-4">
           {cards.map((card, index) => (
             <button
               key={`indicator-${card.title}`}
@@ -61,12 +61,12 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
         </div>
       )}
 
-      {/* Mobile navigation arrows */}
+      {/* Mobile navigation arrows - positioned closer to center for easier access */}
       {isMobile && (
         <>
           {activeIndex > 0 && (
             <button 
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 rounded-full p-2 shadow-md transform -translate-x-1/2"
+              className="absolute left-1 top-1/2 -translate-y-1/2 z-20 bg-white/90 rounded-full p-2.5 shadow-lg"
               onClick={() => handleSwipe('right')}
               aria-label="Previous plan"
             >
@@ -75,7 +75,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
           )}
           {activeIndex < cards.length - 1 && (
             <button 
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 rounded-full p-2 shadow-md transform translate-x-1/2"
+              className="absolute right-1 top-1/2 -translate-y-1/2 z-20 bg-white/90 rounded-full p-2.5 shadow-lg"
               onClick={() => handleSwipe('left')}
               aria-label="Next plan"
             >
@@ -90,7 +90,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
         ref={containerRef}
         className={cn(
           isMobile 
-            ? "flex overflow-x-auto snap-x snap-mandatory scrollbar-hide px-1 pb-1 -mx-1" 
+            ? "flex overflow-x-hidden snap-x snap-mandatory scrollbar-hide pb-2" 
             : "grid gap-6 md:gap-8 lg:grid-cols-3 sm:grid-cols-2"
         )}
         style={isMobile ? { scrollbarWidth: 'none', msOverflowStyle: 'none' } : undefined}
@@ -104,7 +104,7 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
             transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
             className={cn(
               isMobile 
-                ? "min-w-full flex-shrink-0 snap-center" 
+                ? "min-w-full flex-shrink-0 snap-center px-2" 
                 : "",
               card.highlighted && !isMobile ? "lg:scale-105 lg:-translate-y-2 z-10" : ""
             )}
@@ -140,13 +140,12 @@ export const PricingCardList = ({ cards, subscription, isLoading }: PricingCardL
       
       {/* Mobile swipe instruction */}
       {isMobile && (
-        <div className="text-center text-sm text-gray-500 mt-3 flex items-center justify-center">
-          <ChevronLeft className="h-4 w-4 mr-1 opacity-70" />
+        <div className="text-center text-xs text-gray-500 mt-4 flex items-center justify-center">
+          <ChevronLeft className="h-3.5 w-3.5 mr-1 opacity-70" />
           <span>Swipe to compare plans</span>
-          <ChevronRight className="h-4 w-4 ml-1 opacity-70" />
+          <ChevronRight className="h-3.5 w-3.5 ml-1 opacity-70" />
         </div>
       )}
     </div>
   );
 };
-

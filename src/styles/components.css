@@ -30,6 +30,21 @@
   .shadow-glow {
     box-shadow: 0 0 15px rgba(137, 87, 255, 0.15);
   }
+  
+  /* Line clamping for mobile pricing content */
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   @keyframes subtle-bounce {
     0%, 100% { transform: translateY(0); }

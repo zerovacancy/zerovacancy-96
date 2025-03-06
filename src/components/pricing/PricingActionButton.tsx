@@ -100,9 +100,9 @@ export const PricingActionButton = ({
     return (
       <div className={cn(
         "flex justify-center",
-        isMobile ? "mb-4" : "mb-6"
+        isMobile ? "mb-3" : "mb-6"
       )}>
-        <div className="animate-pulse h-12 w-full bg-gray-200 rounded-lg"></div>
+        <div className="animate-pulse h-10 w-full bg-gray-200 rounded-lg"></div>
       </div>
     );
   }
@@ -111,8 +111,8 @@ export const PricingActionButton = ({
     return (
       <button 
         className={cn(
-          "w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg text-sm font-medium shadow-sm",
-          isMobile ? "mb-4" : "mb-6"
+          "w-full py-2.5 px-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg text-sm font-medium shadow-sm",
+          isMobile ? "mb-3" : "mb-6"
         )}
         disabled
       >
@@ -126,7 +126,7 @@ export const PricingActionButton = ({
       className={cn(
         "w-full font-medium group transition-all duration-300",
         "hover:scale-[1.02] active:scale-[0.98]",
-        isMobile ? "h-11 text-sm mb-4" : "h-12 text-base mb-6",
+        isMobile ? "h-10 text-sm mb-3" : "h-12 text-base mb-6",
         getColorClasses()
       )}
       onClick={handleSubscription} 

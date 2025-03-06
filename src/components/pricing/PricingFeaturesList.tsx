@@ -19,7 +19,7 @@ export const PricingFeaturesList = ({
   // On mobile, we use consistent check icons for all features
   const getIcon = (feature: string) => {
     if (isMobile) {
-      return <Check size={18} />;
+      return <Check size={16} />; // Smaller icons on mobile
     }
     
     // On desktop, we can use varied icons
@@ -35,13 +35,13 @@ export const PricingFeaturesList = ({
 
   return (
     <ul className={cn(
-      "text-sm text-brand-text-primary",
-      isMobile ? "space-y-2.5" : "space-y-4"
+      "text-brand-text-primary",
+      isMobile ? "space-y-2 text-xs" : "space-y-4 text-sm"
     )}>
       {features.map((feature, index) => (
         <li key={feature} className="flex items-start group">
           <span className={cn(
-            "flex-shrink-0 mr-3 mt-0.5 transition-transform duration-300 group-hover:scale-110", 
+            "flex-shrink-0 mr-2.5 mt-0.5 transition-transform duration-300 group-hover:scale-110", 
             colorAccent,
             isMobile ? "w-4 h-4" : "w-5 h-5"
           )}>
