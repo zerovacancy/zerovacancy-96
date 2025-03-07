@@ -2,6 +2,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.7.1'
 import { corsHeaders } from "../_shared/cors.ts"
+import { Resend } from "https://esm.sh/resend@1.1.0"
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -13,6 +14,7 @@ serve(async (req) => {
     const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? ''
     // Use the service role key instead of the anon key to bypass RLS
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    const resendApiKey = Deno.env.get('RESEND_API_KEY') ?? ''
     
     if (!supabaseUrl || !supabaseServiceKey) {
       console.error('Missing environment variables: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY')
@@ -23,6 +25,12 @@ serve(async (req) => {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
         }
       )
+    }
+    
+    if (!resendApiKey) {
+      console.error('Missing environment variable: RESEND_API_KEY')
+      // We can still proceed with the waitlist signup even if email sending fails
+      console.warn('Will continue with waitlist signup but email notification will not be sent')
     }
     
     // Create client with service role key
@@ -127,11 +135,60 @@ serve(async (req) => {
       )
     }
 
+    // Send confirmation email if we have the API key and it's not a duplicate subscription
+    let emailResult = null
+    if (resendApiKey) {
+      try {
+        console.log(`Sending confirmation email to ${email}`)
+        const resend = new Resend(resendApiKey)
+        
+        emailResult = await resend.emails.send({
+          from: 'Real Estate Marketplace <onboarding@resend.dev>',
+          to: email,
+          subject: 'Welcome to our Waitlist!',
+          html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h1 style="color: #111827; font-size: 24px; margin-bottom: 20px;">Thanks for joining our waitlist!</h1>
+              
+              <p style="color: #4B5563; font-size: 16px; line-height: 1.5; margin-bottom: 16px;">
+                We're excited to have you on board. You're now on the waitlist for our cutting-edge real estate marketing platform.
+              </p>
+              
+              <p style="color: #4B5563; font-size: 16px; line-height: 1.5; margin-bottom: 16px;">
+                We're connecting property managers with expert creators for high-quality real estate marketing - from photography to 3D tours and more.
+              </p>
+              
+              <p style="color: #4B5563; font-size: 16px; line-height: 1.5; margin-bottom: 24px;">
+                We'll keep you updated on our progress and let you know when we're ready to launch.
+              </p>
+              
+              <div style="background-color: #F3F4F6; padding: 16px; border-radius: 6px; margin-bottom: 24px;">
+                <p style="color: #4B5563; font-size: 14px; margin: 0;">
+                  If you have any questions, feel free to reply to this email. We'd love to hear from you!
+                </p>
+              </div>
+              
+              <p style="color: #6B7280; font-size: 14px; margin-bottom: 8px;">
+                Best regards,<br>
+                The Real Estate Marketplace Team
+              </p>
+            </div>
+          `,
+        })
+        
+        console.log('Email sent successfully:', emailResult)
+      } catch (emailError) {
+        console.error('Failed to send confirmation email:', emailError)
+        // Continue with the success response even if email sending fails
+      }
+    }
+
     // Return success response
     return new Response(
       JSON.stringify({ 
         status: 'success',
         message: 'Successfully added to waitlist',
+        emailSent: !!emailResult,
         data 
       }),
       { 
