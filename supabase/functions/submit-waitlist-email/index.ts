@@ -20,15 +20,28 @@ serve(async (req) => {
       // Check if the request has a body before trying to parse it
       const contentType = req.headers.get('content-type') || ''
       if (contentType.includes('application/json')) {
-        const text = await req.text()
-        if (text) {
-          requestData = JSON.parse(text)
+        // Clone the request before consuming it to avoid issues
+        const clonedReq = req.clone()
+        const text = await clonedReq.text()
+        
+        // Only attempt to parse if we have non-empty text
+        if (text && text.trim()) {
+          try {
+            requestData = JSON.parse(text)
+          } catch (jsonError) {
+            console.error('JSON parse error:', jsonError, 'Text:', text)
+            throw new Error('Invalid JSON format')
+          }
+        } else {
+          console.warn('Empty request body received')
         }
+      } else {
+        console.warn(`Unsupported content type: ${contentType}`)
       }
     } catch (parseError) {
-      console.error('Error parsing request body:', parseError)
+      console.error('Error processing request body:', parseError)
       return new Response(
-        JSON.stringify({ error: 'Invalid JSON in request body' }),
+        JSON.stringify({ error: 'Invalid request format', details: parseError.message }),
         { 
           status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
