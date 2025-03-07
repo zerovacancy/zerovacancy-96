@@ -7,7 +7,8 @@ import { useRef } from "react";
 import { Squares } from "@/components/ui/squares";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { Loader2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const MovingBorder = ({
   children,
@@ -61,7 +62,6 @@ export function GlowDialog({
 }: GlowDialogProps) {
   const [email, setEmail] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,26 +76,49 @@ export function GlowDialog({
     }
 
     setIsLoading(true);
-    const webhookUrl = "https://hooks.zapier.com/hooks/catch/21787151/2wjtn4b/";
     
     try {
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "no-cors",
-        body: JSON.stringify({
-          email,
-          timestamp: new Date().toISOString(),
-          triggered_from: window.location.origin,
-        }),
+      // Collect metadata
+      const metadata = {
+        referrer: document.referrer,
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        dialog: "glow_popup",
+        timestamp: new Date().toISOString(),
+      };
+      
+      // Call our Supabase Edge Function
+      const { data, error } = await supabase.functions.invoke('submit-waitlist-email', {
+        body: { 
+          email, 
+          source: "glow_dialog", 
+          marketingConsent: true,
+          metadata
+        }
       });
-
-      toast({
-        title: "Success!",
-        description: "You've been added to the waitlist. We'll be in touch soon!",
-      });
+      
+      if (error) {
+        console.error("Error submitting email:", error);
+        toast({
+          title: "Error",
+          description: "Failed to join the waitlist. Please try again later.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Handle already subscribed message
+      if (data?.status === 'already_subscribed') {
+        toast({
+          title: "Already Subscribed",
+          description: data.message || "You're already on our waitlist!",
+        });
+      } else {
+        toast({
+          title: "Success!",
+          description: "You've been added to the waitlist. We'll be in touch soon!",
+        });
+      }
       
       setEmail("");
       onOpenChange(false);

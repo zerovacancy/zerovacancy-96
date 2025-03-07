@@ -186,6 +186,39 @@ export type Database = {
         }
         Relationships: []
       }
+      waitlist_subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          marketing_consent: boolean
+          metadata: Json | null
+          source: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          marketing_consent?: boolean
+          metadata?: Json | null
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          marketing_consent?: boolean
+          metadata?: Json | null
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

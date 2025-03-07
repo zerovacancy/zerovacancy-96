@@ -8,11 +8,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { EmailInput } from "./email-input";
 import { WaitlistButton } from "./waitlist-button";
 import { SocialProof } from "./social-proof";
+import { supabase } from "@/integrations/supabase/client";
 
 export function WaitlistCTA({
-  className
+  className,
+  source = "landing_page"
 }: {
   className?: string;
+  source?: string;
 }) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -26,13 +29,45 @@ export function WaitlistCTA({
       inputRef.current?.focus();
       return;
     }
+    
     setIsLoading(true);
+    
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Collect additional metadata about the signup
+      const metadata = {
+        referrer: document.referrer,
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString(),
+      };
+      
+      // Call our Supabase Edge Function
+      const { data, error } = await supabase.functions.invoke('submit-waitlist-email', {
+        body: { 
+          email, 
+          source, 
+          marketingConsent: true, 
+          metadata 
+        }
+      });
+      
+      if (error) {
+        console.error("Error submitting email:", error);
+        toast.error("Failed to join waitlist. Please try again.");
+        return;
+      }
+      
+      // Handle already subscribed message
+      if (data?.status === 'already_subscribed') {
+        toast.info(data.message || "You're already on our waitlist!");
+      } else {
+        toast.success("Thanks for joining our waitlist!");
+      }
+      
+      // Clear the email field on success
       setEmail("");
-      toast.success("Thanks for joining our waitlist!");
     } catch (error) {
+      console.error("Error submitting email:", error);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
