@@ -1,11 +1,12 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Sparkles, Check, Info } from "lucide-react";
 import { motion } from "framer-motion";
 import NumberFlow from '@number-flow/react';
 import { PricingFeatures } from "./PricingFeatures";
 import { PricingPlanProps } from "./types";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface PricingTierProps {
   plan: PricingPlanProps;
@@ -38,6 +39,26 @@ export const PricingTier: React.FC<PricingTierProps> = ({
     1: "Most popular for real estate agents",
     2: "Perfect for luxury properties"
   };
+  
+  // Track hover state for interactive effects
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Determine the plan's theme color
+  const getPlanColor = (idx: number) => {
+    if (idx === 0) return "blue";
+    if (idx === 1) return "purple";
+    return "emerald";
+  };
+
+  // Generate color classes based on the plan index
+  const planColor = getPlanColor(index);
+  
+  // Button animation variants
+  const buttonVariants = {
+    initial: { scale: 1 },
+    tap: { scale: 0.95 },
+    hover: { scale: 1.02, y: -2 }
+  };
 
   return (
     <motion.div 
@@ -45,6 +66,7 @@ export const PricingTier: React.FC<PricingTierProps> = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       className="w-full"
+      viewport={{ once: true }}
     >
       <motion.div
         className={cn(
@@ -52,8 +74,11 @@ export const PricingTier: React.FC<PricingTierProps> = ({
           "relative overflow-visible",
           "border-2 bg-white shadow-md transition-all duration-300",
           isActive ? "border-brand-purple shadow-lg" : "border-slate-200",
-          isActive && "scale-[1.02]"
+          isActive && "scale-[1.02]",
+          isHovering && "pricing-card-active"
         )}
+        onHoverStart={() => setIsHovering(true)}
+        onHoverEnd={() => setIsHovering(false)}
         whileTap={{ scale: 0.98 }}
         layout
       >
@@ -77,7 +102,12 @@ export const PricingTier: React.FC<PricingTierProps> = ({
           </div>
         )}
         
-        <div className="flex justify-between items-start mt-3">
+        <motion.div 
+          className="flex justify-between items-start mt-3"
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 + (index * 0.05) }}
+        >
           <div>
             <div className="flex items-center gap-2 mb-1">
               <p className="font-semibold text-xl flex items-center gap-2 text-gray-950 font-jakarta">
@@ -85,20 +115,24 @@ export const PricingTier: React.FC<PricingTierProps> = ({
               </p>
             </div>
             
-            {/* Value proposition text */}
-            <p className="text-xs text-slate-600 mb-2 font-inter">
+            {/* Value proposition text with subtle animation */}
+            <motion.p 
+              className="text-xs text-slate-600 mb-2 font-inter"
+              animate={isHovering ? { x: [0, 2, 0] } : {}}
+              transition={{ duration: 1, repeat: isHovering ? Infinity : 0 }}
+            >
               {VALUE_PROPOSITIONS[index]}
-            </p>
+            </motion.p>
             
             <div className="text-slate-500 text-md font-inter">
               <div className="flex items-baseline gap-1">
                 <span className={cn(
-                  "text-brand-purple-dark font-bold text-3xl flex items-center font-jakarta", // Increased size
+                  `text-${planColor}-700 font-bold text-3xl flex items-center font-jakarta`, 
                   animatePriceChange && "animate-pulse-subtle"
                 )}>
                   ${" "}
                   <NumberFlow
-                    className="text-brand-purple-dark font-bold text-3xl font-jakarta" // Increased size
+                    className={`text-${planColor}-700 font-bold text-4xl font-jakarta`} 
                     value={price}
                   />
                 </span>
@@ -107,22 +141,23 @@ export const PricingTier: React.FC<PricingTierProps> = ({
                 </span>
               </div>
               
-              {/* Annual savings badge */}
+              {/* Annual savings badge with enhanced animation */}
               {period === 1 && index > 0 && (
                 <motion.div 
                   className="mt-1 inline-block bg-green-50 text-green-600 px-2 py-0.5 rounded-md text-xs font-medium"
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
+                  whileHover={{ scale: 1.05, y: -1 }}
                 >
                   Save ${calculateSavings?.(index)} per year
                 </motion.div>
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
         
-        {/* Features section with grouped categories */}
+        {/* Features section with grouped categories and tooltips */}
         <PricingFeatures 
           features={plan.features} 
           expandedFeatures={expandedFeatures} 
@@ -130,12 +165,15 @@ export const PricingTier: React.FC<PricingTierProps> = ({
           planIndex={index}
         />
         
-        {/* Enhanced Get Started CTA button */}
+        {/* Enhanced Get Started CTA button with improved tap target and animations */}
         <motion.button 
           onClick={() => handleGetStarted(plan.title)}
-          whileTap={{ scale: 0.95 }}
+          variants={buttonVariants}
+          initial="initial"
+          whileHover="hover"
+          whileTap="tap"
           className={cn(
-            "w-full mt-4 rounded-xl font-medium text-sm py-3", // Increased height for better tap target
+            "w-full mt-4 rounded-xl font-medium text-sm py-3.5", // Increased height for better tap target
             "touch-manipulation transition-all duration-300",
             index === 0 
               ? "bg-blue-50 text-blue-600 hover:bg-blue-100 active:bg-blue-200"

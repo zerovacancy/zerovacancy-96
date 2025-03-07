@@ -61,6 +61,46 @@
     background-color: rgba(139, 92, 246, 0.1);
     transform: translateX(4px);
   }
+  
+  /* Feature category styles */
+  .feature-category {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+  
+  /* Feature tooltip indicator */
+  .feature-tooltip-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: rgba(139, 92, 246, 0.1);
+    color: #8957ff;
+    font-size: 10px;
+    margin-left: 5px;
+    cursor: help;
+    transition: background-color 0.2s;
+  }
+  
+  .feature-tooltip-indicator:hover {
+    background-color: rgba(139, 92, 246, 0.2);
+  }
+  
+  /* Snap scrolling for pricing tiers on mobile */
+  .snap-scroll-container {
+    scroll-snap-type: x mandatory;
+  }
+  
+  .snap-scroll-item {
+    scroll-snap-align: center;
+  }
 
   @keyframes subtle-bounce {
     0%, 100% { transform: translateY(0); }
@@ -101,5 +141,22 @@
   @keyframes glow-pulse {
     0%, 100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
     50% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.6); }
+  }
+  
+  @keyframes pop-in {
+    0% { transform: scale(0.9); opacity: 0; }
+    70% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  @keyframes check-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  
+  @keyframes feature-highlight {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(139, 92, 246, 0.1); }
+    100% { background-color: transparent; }
   }
 }
