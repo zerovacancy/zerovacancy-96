@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -67,11 +66,7 @@ export function GlowDialog({
     e.preventDefault();
     
     if (!email) {
-      toast({
-        title: "Error",
-        description: "Please enter your email address",
-        variant: "destructive",
-      });
+      toast.error("Please enter your email address");
       return;
     }
 
@@ -99,36 +94,22 @@ export function GlowDialog({
       
       if (error) {
         console.error("Error submitting email:", error);
-        toast({
-          title: "Error",
-          description: "Failed to join the waitlist. Please try again later.",
-          variant: "destructive",
-        });
+        toast.error("Failed to join the waitlist. Please try again later.");
         return;
       }
       
       // Handle already subscribed message
       if (data?.status === 'already_subscribed') {
-        toast({
-          title: "Already Subscribed",
-          description: data.message || "You're already on our waitlist!",
-        });
+        toast.info(data.message || "You're already on our waitlist!");
       } else {
-        toast({
-          title: "Success!",
-          description: "You've been added to the waitlist. We'll be in touch soon!",
-        });
+        toast.success("You've been added to the waitlist. We'll be in touch soon!");
       }
       
       setEmail("");
       onOpenChange(false);
     } catch (error) {
       console.error("Error submitting email:", error);
-      toast({
-        title: "Error",
-        description: "Failed to join the waitlist. Please try again later.",
-        variant: "destructive",
-      });
+      toast.error("Failed to join the waitlist. Please try again later.");
     } finally {
       setIsLoading(false);
     }

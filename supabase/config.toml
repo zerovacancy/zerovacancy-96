@@ -36,7 +36,6 @@ vector_port = 54328
 
 [functions]
 # Port to use for Functions API serving.
-enabled = true
 
 [functions.verify-payment]
 verify_jwt = true
