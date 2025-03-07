@@ -102,6 +102,29 @@
     scroll-snap-align: center;
   }
 
+  /* Available Now indicator animation */
+  .availability-indicator {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .availability-indicator::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    background: linear-gradient(to bottom right, rgba(255,255,255,0) 40%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 60%);
+    transform: rotate(45deg) translate(-100%, 0);
+    animation: availability-shimmer 3s infinite;
+  }
+
+  @keyframes availability-shimmer {
+    0% { transform: rotate(45deg) translate(-100%, -100%); }
+    100% { transform: rotate(45deg) translate(100%, 100%); }
+  }
+
   @keyframes subtle-bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-2px); }
