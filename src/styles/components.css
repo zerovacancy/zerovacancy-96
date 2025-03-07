@@ -46,6 +46,22 @@
     overflow: hidden;
   }
 
+  /* New micro-interactions for pricing */
+  .pricing-card-active {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.2);
+  }
+
+  .cta-button-hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.15);
+  }
+
+  .feature-hover {
+    background-color: rgba(139, 92, 246, 0.1);
+    transform: translateX(4px);
+  }
+
   @keyframes subtle-bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-2px); }
@@ -69,5 +85,21 @@
   @keyframes sparkle {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.6; transform: scale(1.1); }
+  }
+  
+  /* New animations for pricing micro-interactions */
+  @keyframes scale-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  @keyframes slide-in-right {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
+    50% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.6); }
   }
 }

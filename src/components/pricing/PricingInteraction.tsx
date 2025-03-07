@@ -26,6 +26,7 @@ export function PricingInteraction({
   const [expandedFeatures, setExpandedFeatures] = useState<{[key: number]: boolean}>({});
   const [showSwipeHint, setShowSwipeHint] = useState(true);
   const [animatePriceChange, setAnimatePriceChange] = useState(false);
+  const [activeCardIndex, setActiveCardIndex] = useState(1); // Default to middle card (Professional)
   const isMobile = useIsMobile();
   
   // Initialize price states based on the initial period
@@ -65,6 +66,11 @@ export function PricingInteraction({
     return () => clearTimeout(timer);
   }, []);
 
+  // Handle card scrolling with snap effect
+  const handleCardScroll = (index: number) => {
+    setActiveCardIndex(index);
+  };
+
   const planPrices = [0, starter, pro];
   
   // Calculate savings
@@ -89,7 +95,7 @@ export function PricingInteraction({
       "relative overflow-hidden",
       isMobile ? "max-w-[95%] mx-auto" : "max-w-sm"
     )}>
-      {/* Background gradient effect */}
+      {/* Enhanced background with subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-slate-50 pointer-events-none" />
       
       {/* Period toggle with enhanced styling */}
@@ -99,36 +105,73 @@ export function PricingInteraction({
         animatePriceChange={animatePriceChange}
       />
       
-      {/* Improved swipe instruction */}
+      {/* Improved swipe instruction with more eye-catching design */}
       <AnimatePresence>
         {showSwipeHint && (
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="text-xs text-gray-500 flex items-center gap-1 mb-1 bg-slate-50 px-3 py-1.5 rounded-full shadow-sm animate-pulse-subtle font-inter"
+            className="text-xs text-gray-500 flex items-center gap-1.5 mb-1.5 bg-slate-50/80 backdrop-blur-sm px-3.5 py-2 rounded-full shadow-sm animate-pulse-subtle font-inter"
           >
-            <span>Compare pricing plans below</span>
+            <span>Swipe to compare pricing plans</span>
+            <motion.span 
+              animate={{ x: [0, 3, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+              className="inline-block"
+            >
+              →
+            </motion.span>
           </motion.div>
         )}
       </AnimatePresence>
       
-      {/* Display all pricing tiers stacked vertically */}
-      <div className="w-full flex flex-col gap-6 mt-4">
-        {plans.map((plan, index) => (
-          <PricingTier
-            key={index}
-            plan={plan}
-            index={index}
-            price={planPrices[index]}
-            period={period}
-            animatePriceChange={animatePriceChange}
-            expandedFeatures={!!expandedFeatures[index]}
-            toggleFeatures={() => toggleFeatures(index)}
-            handleGetStarted={handleGetStarted}
-            calculateSavings={calculateSavings}
+      {/* Card pagination indicators */}
+      <div className="flex justify-center gap-1.5 my-1">
+        {plans.map((_, index) => (
+          <motion.button
+            key={`indicator-${index}`}
+            onClick={() => handleCardScroll(index)}
+            className={cn(
+              "transition-all duration-300 rounded-full",
+              index === activeCardIndex 
+                ? "w-6 h-2 bg-brand-purple" 
+                : "w-2 h-2 bg-slate-300"
+            )}
+            whileTap={{ scale: 0.9 }}
+            aria-label={`View ${plans[index].title} plan`}
           />
         ))}
+      </div>
+      
+      {/* Display all pricing tiers in scrollable container with snap effect */}
+      <div 
+        className="w-full mt-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+        style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
+      >
+        <div className="flex w-full">
+          {plans.map((plan, index) => (
+            <div 
+              key={index}
+              className="min-w-full px-0.5 snap-center"
+              style={{ scrollSnapAlign: 'center' }}
+            >
+              <PricingTier
+                key={index}
+                plan={plan}
+                index={index}
+                price={planPrices[index]}
+                period={period}
+                animatePriceChange={animatePriceChange}
+                expandedFeatures={!!expandedFeatures[index]}
+                toggleFeatures={() => toggleFeatures(index)}
+                handleGetStarted={handleGetStarted}
+                calculateSavings={calculateSavings}
+                isActive={index === activeCardIndex}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
