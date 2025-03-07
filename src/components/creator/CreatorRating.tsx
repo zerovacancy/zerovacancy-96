@@ -16,27 +16,18 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({
   name 
 }) => {
   const isMobile = useIsMobile();
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating - fullStars >= 0.5;
   
   return (
     <div className="flex justify-between items-center w-full">
       <div className="flex items-center">
-        {/* Star rating */}
+        {/* Single star rating */}
         <div className="flex mr-1.5">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className={cn(
-                "w-3.5 h-3.5 sm:w-4 sm:h-4",
-                i < fullStars
-                  ? "text-yellow-400 fill-yellow-400"
-                  : i === fullStars && hasHalfStar
-                  ? "text-yellow-400 fill-yellow-400/50"
-                  : "text-gray-300 fill-gray-100"
-              )}
-            />
-          ))}
+          <Star
+            className={cn(
+              "w-4 h-4",
+              "text-yellow-400 fill-yellow-400"
+            )}
+          />
         </div>
         
         {/* Rating text */}
