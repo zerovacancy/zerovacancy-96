@@ -1,8 +1,10 @@
-
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.7.1'
 import { corsHeaders } from "../_shared/cors.ts"
 import { Resend } from "https://esm.sh/resend@1.1.0"
+import React from 'npm:react@18.2.0'
+import { renderAsync } from 'npm:@react-email/render@0.0.7'
+import { WaitlistWelcomeEmail } from "./_templates/WaitlistWelcome.tsx"
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -142,38 +144,16 @@ serve(async (req) => {
         console.log(`Sending confirmation email to ${email}`)
         const resend = new Resend(resendApiKey)
         
+        // Render the React Email template to HTML
+        const emailHtml = await renderAsync(
+          React.createElement(WaitlistWelcomeEmail, { userEmail: email })
+        )
+        
         emailResult = await resend.emails.send({
-          from: 'Real Estate Marketplace <onboarding@resend.dev>',
+          from: 'ZeroVacancy <onboarding@resend.dev>',
           to: email,
-          subject: 'Welcome to our Waitlist!',
-          html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <h1 style="color: #111827; font-size: 24px; margin-bottom: 20px;">Thanks for joining our waitlist!</h1>
-              
-              <p style="color: #4B5563; font-size: 16px; line-height: 1.5; margin-bottom: 16px;">
-                We're excited to have you on board. You're now on the waitlist for our cutting-edge real estate marketing platform.
-              </p>
-              
-              <p style="color: #4B5563; font-size: 16px; line-height: 1.5; margin-bottom: 16px;">
-                We're connecting property managers with expert creators for high-quality real estate marketing - from photography to 3D tours and more.
-              </p>
-              
-              <p style="color: #4B5563; font-size: 16px; line-height: 1.5; margin-bottom: 24px;">
-                We'll keep you updated on our progress and let you know when we're ready to launch.
-              </p>
-              
-              <div style="background-color: #F3F4F6; padding: 16px; border-radius: 6px; margin-bottom: 24px;">
-                <p style="color: #4B5563; font-size: 14px; margin: 0;">
-                  If you have any questions, feel free to reply to this email. We'd love to hear from you!
-                </p>
-              </div>
-              
-              <p style="color: #6B7280; font-size: 14px; margin-bottom: 8px;">
-                Best regards,<br>
-                The Real Estate Marketplace Team
-              </p>
-            </div>
-          `,
+          subject: 'Welcome to the ZeroVacancy Waitlist!',
+          html: emailHtml,
         })
         
         console.log('Email sent successfully:', emailResult)
