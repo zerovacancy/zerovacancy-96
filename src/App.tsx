@@ -1,11 +1,11 @@
 
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './components/ErrorFallback';
 import { Toaster } from '@/components/ui/toaster';
 
-// Lazy load pages for improved performance
+// Lazy load all pages for improved performance
 const Index = lazy(() => import('./pages/index'));
 const PaymentConfirmation = lazy(() => import('./pages/PaymentConfirmation'));
 const Terms = lazy(() => import('./pages/Terms'));
@@ -25,6 +25,27 @@ const PageLoader = () => (
 );
 
 function App() {
+  // Preload critical resources
+  useEffect(() => {
+    // Preload the Index component after initial render
+    const timer = setTimeout(() => {
+      import('./pages/index');
+    }, 200);
+    
+    // Add passive event listeners to improve scrolling performance
+    const passiveOption = { passive: true };
+    document.addEventListener('touchstart', () => {}, passiveOption);
+    document.addEventListener('touchmove', () => {}, passiveOption);
+    document.addEventListener('wheel', () => {}, passiveOption);
+    
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('touchstart', () => {});
+      document.removeEventListener('touchmove', () => {});
+      document.removeEventListener('wheel', () => {});
+    };
+  }, []);
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Router>

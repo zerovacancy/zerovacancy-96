@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
@@ -51,7 +52,7 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
       (entries) => {
         if (entries[0].isIntersecting) {
           setIsVisible(true);
-          // Disconnect after detecting visibility
+          // Disconnect after detecting visibility to save resources
           observer.disconnect();
         }
       },
@@ -107,7 +108,7 @@ export const CreatorMedia: React.FC<CreatorMediaProps> = ({
             containIntrinsicSize: 'auto 300px',
           }}
         />
-      ) : isVisible ? (
+      ) : isVisible && media.type === 'video' ? (
         <>
           {/* Video element with fallback in case it fails to load */}
           <video

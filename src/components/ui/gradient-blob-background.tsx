@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { OptimizedSpotlight } from './optimized-spotlight';
 
@@ -40,6 +40,18 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
   baseColor = 'bg-white/80',
   animationSpeed = 'medium'
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+  const isReducedMotion = useRef(false);
+  
+  // Check for reduced motion preference
+  useEffect(() => {
+    setIsMounted(true);
+    isReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }, []);
+
+  // Don't render animations for users with reduced motion preference
+  const shouldAnimate = isMounted && !isReducedMotion.current;
+  
   // Determine blob sizes based on the blobSize prop
   const getBlobSizeClass = (position: 'first' | 'second' | 'third') => {
     const sizes = {
@@ -63,20 +75,41 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
     return sizes[blobSize][position];
   };
 
-  // Animation duration based on speed
+  // Animation duration based on speed or disabled for reduced motion
   const getAnimationDuration = (base: number) => {
+    if (!shouldAnimate) return '0s';
+    
     const multipliers = {
       fast: 0.7,
       medium: 1,
-      slow: 2.2 // Even slower animation for more subtlety
+      slow: 2.2
     };
     
     return `${base * multipliers[animationSpeed]}s`;
   };
 
+  // Only render the number of blobs needed based on screen size to reduce DOM elements
+  const [windowWidth, setWindowWidth] = useState(0);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Determine how many blobs to render based on screen width
+  const blobCount = windowWidth < 768 ? 3 : 5;
+
   return (
     <div className={cn(`relative w-full overflow-hidden ${baseColor}`, className)}>
-      {/* Pattern background */}
+      {/* Pattern background - only if pattern is not 'none' */}
       {pattern === 'dots' && (
         <div className={`absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-${dotOpacity * 100}`}></div>
       )}
@@ -94,41 +127,45 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
         </div>
       )}
       
-      {/* Gradient blobs with modified positioning to avoid unwanted visual patterns */}
+      {/* Render main blobs (always visible) */}
       <div 
         className={cn(
           `absolute -top-10 -left-20 ${getBlobSizeClass('first')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
         )}
-        style={{ animation: `blob ${getAnimationDuration(45)} infinite` }}
+        style={shouldAnimate ? { animation: `blob ${getAnimationDuration(45)} infinite` } : {}}
       ></div>
       <div 
         className={cn(
           `absolute top-[40%] -right-20 ${getBlobSizeClass('second')} ${blobColors.second} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
         )}
-        style={{ animation: `blob ${getAnimationDuration(50)} infinite`, animationDelay: `${getAnimationDuration(8)}` }}
+        style={shouldAnimate ? { animation: `blob ${getAnimationDuration(50)} infinite`, animationDelay: `${getAnimationDuration(8)}` } : {}}
       ></div>
       <div 
         className={cn(
           `absolute -bottom-40 left-[20%] ${getBlobSizeClass('third')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
         )}
-        style={{ animation: `blob ${getAnimationDuration(40)} infinite`, animationDelay: `${getAnimationDuration(15)}` }}
+        style={shouldAnimate ? { animation: `blob ${getAnimationDuration(40)} infinite`, animationDelay: `${getAnimationDuration(15)}` } : {}}
       ></div>
       
-      {/* Additional blobs for better coverage throughout the site - repositioned */}
-      <div 
-        className={cn(
-          `absolute top-[15%] right-[25%] ${getBlobSizeClass('second')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
-        )}
-        style={{ animation: `blob ${getAnimationDuration(55)} infinite`, animationDelay: `${getAnimationDuration(12)}` }}
-      ></div>
-      <div 
-        className={cn(
-          `absolute top-[70%] -left-40 ${getBlobSizeClass('first')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
-        )}
-        style={{ animation: `blob ${getAnimationDuration(48)} infinite`, animationDelay: `${getAnimationDuration(20)}` }}
-      ></div>
+      {/* Render additional blobs only for larger screens */}
+      {blobCount > 3 && (
+        <>
+          <div 
+            className={cn(
+              `absolute top-[15%] right-[25%] ${getBlobSizeClass('second')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
+            )}
+            style={shouldAnimate ? { animation: `blob ${getAnimationDuration(55)} infinite`, animationDelay: `${getAnimationDuration(12)}` } : {}}
+          ></div>
+          <div 
+            className={cn(
+              `absolute top-[70%] -left-40 ${getBlobSizeClass('first')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
+            )}
+            style={shouldAnimate ? { animation: `blob ${getAnimationDuration(48)} infinite`, animationDelay: `${getAnimationDuration(20)}` } : {}}
+          ></div>
+        </>
+      )}
       
-      {/* Spotlight effect */}
+      {/* Spotlight effect - only if withSpotlight is true */}
       {withSpotlight && (
         <OptimizedSpotlight className={spotlightClassName} size={spotlightSize} />
       )}
@@ -140,4 +177,3 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
     </div>
   );
 };
-

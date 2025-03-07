@@ -1,6 +1,5 @@
 
-import React, { useRef } from "react";
-import { useInView } from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist-cta";
@@ -11,7 +10,33 @@ const TITLES = ["Converts", "Captivates", "Drives Leads"];
 export function Hero() {
   const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
+  const [isInView, setIsInView] = useState(false);
+  
+  // Improved intersection observer implementation
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          // Disconnect after setting to true to avoid unnecessary recalculations
+          observer.disconnect();
+        }
+      },
+      { 
+        threshold: 0.15,
+        rootMargin: '100px' 
+      }
+    );
+    
+    observer.observe(sectionRef.current);
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
   
   return (
     <section 
@@ -19,33 +44,27 @@ export function Hero() {
       className={cn(
         "flex items-center justify-center flex-col", 
         "px-4 sm:px-6", 
-        // Further reduced padding on desktop, kept mobile padding
-        isMobile ? "py-[24px]" : "py-[16px]", // Reduced from py-[32px]
-        // Adjusted margins for desktop
-        isMobile ? "my-[16px]" : "my-[12px]", // Reduced from my-[24px]
-        // Reduced min-height for desktop by ~20%
-        "min-h-fit sm:min-h-[36vh]", // Reduced from 45vh
+        isMobile ? "py-[24px]" : "py-[16px]",
+        isMobile ? "my-[16px]" : "my-[12px]",
+        "min-h-fit sm:min-h-[36vh]",
         "relative z-10", 
-        // Reduced gap for tighter spacing
-        isMobile ? "gap-3" : "gap-2", // Reduced from gap-4
-        "touch-manipulation",
+        isMobile ? "gap-3" : "gap-2",
+        "touch-manipulation will-change-transform",
         "bg-gradient-to-b from-purple-50 via-indigo-50/60 to-blue-50/30",
         isInView ? "animate-fade-in" : "opacity-0"
       )} 
     >
       <div 
         className={cn(
-          // Tightened gap for desktop content
           "flex flex-col max-w-6xl mx-auto w-full px-[3px]",
-          isMobile ? "gap-3" : "gap-2", // Reduced from gap-4
+          isMobile ? "gap-3" : "gap-2", 
           isInView ? "animate-fade-in delay-100" : "opacity-0"
         )}
       >
         <div className="relative">
           <h1 className={cn(
             "tracking-tight leading-[1.1] text-center font-bold font-jakarta",
-            // Reduced bottom margin for desktop
-            isMobile ? "mb-3" : "mb-2" // Reduced from mb-4
+            isMobile ? "mb-3" : "mb-2"
           )}>
             {isMobile ? (
               <span className="flex flex-col items-center">
@@ -78,7 +97,7 @@ export function Hero() {
                     "text-3xl sm:text-5xl lg:text-6xl",
                     "tracking-[-0.02em]", 
                     "text-brand-purple-dark", 
-                    "block sm:inline-block mb-1 sm:mb-0 font-jakarta" // Reduced from mb-2
+                    "block sm:inline-block mb-1 sm:mb-0 font-jakarta"
                   )}
                 >
                   Property Content that
@@ -87,7 +106,7 @@ export function Hero() {
                 <div 
                   role="text" 
                   aria-label="Property Content animation"
-                  className="relative flex w-full justify-center h-[4.5em] sm:h-[3em] md:h-[2.5em] lg:h-[2.5em] overflow-visible mt-1 sm:mt-1" // Reduced heights and margins
+                  className="relative flex w-full justify-center h-[4.5em] sm:h-[3em] md:h-[2.5em] lg:h-[2.5em] overflow-visible mt-1 sm:mt-1"
                 >
                   <TextRotate
                     texts={TITLES}
@@ -134,8 +153,7 @@ export function Hero() {
             "px-2 sm:px-4", 
             "[word-spacing:0.12em] sm:[word-spacing:0.16em]", 
             "relative z-10", 
-            // Reduced top margin significantly for desktop
-            isMobile ? "mt-2" : "mt-3", // Reduced from mt-8
+            isMobile ? "mt-2" : "mt-3",
             "mb-0", 
             "font-inter"
           )}
@@ -147,13 +165,12 @@ export function Hero() {
       <div 
         className={cn(
           "w-full", 
-          // Reduced top margin for desktop
-          isMobile ? "mt-2" : "mt-3", // Reduced from mt-6
+          isMobile ? "mt-2" : "mt-3",
           "px-3 sm:px-4",
           isInView ? "animate-fade-in delay-200" : "opacity-0" 
         )}
       >
-        <WaitlistCTA className="mb-2 sm:mb-3" /> {/* Reduced bottom margin */}
+        <WaitlistCTA className="mb-2 sm:mb-3" />
       </div>
       
       <div className="absolute bottom-0 left-0 right-0 h-[150px] sm:h-[140px] pointer-events-none opacity-50 overflow-hidden">

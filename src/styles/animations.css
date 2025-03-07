@@ -1,35 +1,44 @@
+
 @tailwind utilities;
 
 @layer utilities {
-  
+  /* Fast animations with will-change and hardware acceleration */
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.4s ease-out forwards;
+    will-change: opacity, transform;
   }
   
   .animate-fade-out {
-    animation: fadeOut 0.5s ease-in forwards;
+    animation: fadeOut 0.4s ease-in forwards;
+    will-change: opacity, transform;
   }
   
   .animate-slide-in-bottom {
-    animation: slideInFromBottom 0.6s ease-out forwards;
+    animation: slideInFromBottom 0.5s ease-out forwards;
+    will-change: transform, opacity;
   }
   
   .animate-slide-in-left {
-    animation: slideInFromLeft 0.6s ease-out forwards;
+    animation: slideInFromLeft 0.5s ease-out forwards;
+    will-change: transform, opacity;
   }
   
   .animate-slide-in-right {
-    animation: slideInFromRight 0.6s ease-out forwards;
+    animation: slideInFromRight 0.5s ease-out forwards;
+    will-change: transform, opacity;
   }
   
   .animate-zoom-in {
-    animation: zoomIn 0.5s ease-out forwards;
+    animation: zoomIn 0.4s ease-out forwards;
+    will-change: transform, opacity;
   }
   
   .animate-rotate-in {
-    animation: rotateIn 0.5s ease-out forwards;
+    animation: rotateIn 0.4s ease-out forwards;
+    will-change: transform, opacity;
   }
   
+  /* Less intensive animations without will-change */
   .animate-shift-bg {
     animation: shiftBackgroundPosition 3s ease infinite;
   }
@@ -52,6 +61,7 @@
   
   .animate-expand-width {
     animation: expandWidth 0.5s ease-out forwards;
+    will-change: width, opacity;
   }
   
   .animate-shimmer {
@@ -84,57 +94,22 @@
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
   }
 
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  @keyframes float-subtle {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
-  }
-
-  @keyframes pulse-subtle {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.9;
-      transform: scale(0.98);
-    }
-  }
-  
-  @keyframes sparkle {
-    0%, 100% {
-      opacity: 0.8;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-  }
-
+  /* Optimized appear/disappear animations */
   .content-hidden {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: opacity, transform;
   }
   
   .content-visible {
     opacity: 1;
     transform: translateY(0);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: opacity, transform;
   }
   
+  /* Performance efficient hover animations */
   .hover-lift {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
@@ -146,17 +121,10 @@
   
   .animate-grow-x {
     animation: growWidth 1s ease-out forwards;
+    will-change: width, opacity;
   }
   
-  .animate-pulse-subtle {
-    animation: pulse-subtle 2s ease-in-out infinite;
-  }
-  
-  @keyframes growWidth {
-    from { width: 0; opacity: 0; }
-    to { width: 100%; opacity: 1; }
-  }
-  
+  /* Animation delay utilities */
   .animation-delay-200 {
     animation-delay: 200ms;
   }
@@ -175,5 +143,12 @@
   
   .animation-delay-800 {
     animation-delay: 800ms;
+  }
+
+  /* Hardware acceleration for critical animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 }

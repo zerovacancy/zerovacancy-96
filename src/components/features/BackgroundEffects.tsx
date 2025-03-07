@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 import { cn } from '@/lib/utils';
 
@@ -17,6 +17,7 @@ interface BackgroundEffectsProps {
   pattern?: 'dots' | 'grid' | 'none';
   baseColor?: string;
   animationSpeed?: 'slow' | 'medium' | 'fast';
+  id?: string; // Added id prop for easier targeting
 }
 
 export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({ 
@@ -27,27 +28,69 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
     second: "bg-indigo-100",
     third: "bg-violet-100"
   },
-  blobOpacity = 0.12, // Even more subtle opacity
+  blobOpacity = 0.12,
   withSpotlight = true,
-  spotlightClassName = "from-purple-500/5 via-violet-500/5 to-blue-500/5", // Very subtle spotlight
+  spotlightClassName = "from-purple-500/5 via-violet-500/5 to-blue-500/5",
   pattern = "none",
-  baseColor = "bg-white/80", // Slightly transparent white to allow blobs to show through
-  animationSpeed = 'slow'
+  baseColor = "bg-white/80",
+  animationSpeed = 'slow',
+  id
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Only render heavy effects when the component is in view
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else {
+          // Only hide when scrolled far away (optimization)
+          if (Math.abs(entry.boundingClientRect.top) > window.innerHeight * 2) {
+            setIsVisible(false);
+          }
+        }
+      },
+      { 
+        threshold: 0.1,
+        rootMargin: '200px' 
+      }
+    );
+    
+    observer.observe(containerRef.current);
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <GradientBlobBackground 
-      className={cn("overflow-visible", className)}
-      blobColors={blobColors}
-      blobOpacity={blobOpacity}
-      withSpotlight={withSpotlight}
-      spotlightClassName={spotlightClassName}
-      pattern={pattern}
-      baseColor={baseColor}
-      blobSize="large" // Larger blobs create more subtle transitions
-      animationSpeed={animationSpeed}
-    >
-      {children}
-    </GradientBlobBackground>
+    <div ref={containerRef} id={id} className={cn("relative w-full overflow-hidden", className)}>
+      {isVisible && (
+        <GradientBlobBackground 
+          className="overflow-visible"
+          blobColors={blobColors}
+          blobOpacity={blobOpacity}
+          withSpotlight={withSpotlight}
+          spotlightClassName={spotlightClassName}
+          pattern={pattern}
+          baseColor={baseColor}
+          blobSize="large"
+          animationSpeed={animationSpeed}
+        >
+          {children}
+        </GradientBlobBackground>
+      )}
+      {!isVisible && (
+        <div className={cn("relative w-full", baseColor)}>
+          {children}
+        </div>
+      )}
+    </div>
   );
 };
 
