@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
-import { ArrowRight, Calendar } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Dialog } from "../ui/dialog";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -95,24 +95,12 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               {/* Rating section with more compact layout for mobile */}
               <div className="bg-gray-50/80 rounded-lg px-3 py-2 shadow-sm relative">
                 <div className="flex justify-between items-center">
-                  <CreatorRating rating={creator.rating} reviews={creator.reviews} name={creator.name} />
-                  
-                  {/* "Available Now" indicator - MOBILE ONLY */}
-                  {isMobile && (
-                    <div className={cn(
-                      "flex items-center justify-center",
-                      "bg-[rgba(245,247,250,0.85)] backdrop-blur-[4px]",
-                      "px-2.5 py-1",
-                      "rounded-full",
-                      "text-xs font-medium",
-                      "text-gray-600",
-                      "shadow-[0_1px_3px_rgba(0,0,0,0.08)]",
-                      "border border-green-100/50"
-                    )}>
-                      <Calendar className="w-3 h-3 mr-1 text-emerald-500" />
-                      <span>Available Now</span>
-                    </div>
-                  )}
+                  <CreatorRating 
+                    rating={creator.rating} 
+                    reviews={creator.reviews} 
+                    name={creator.name} 
+                    availabilityStatus={creator.availabilityStatus}
+                  />
                 </div>
               </div>
               

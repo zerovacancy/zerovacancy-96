@@ -1,21 +1,42 @@
 
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, Calendar, Clock, Crown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import type { AvailabilityStatus } from './types';
 
 interface CreatorRatingProps {
   rating: number;
   reviews?: number;
   name: string;
+  availabilityStatus?: AvailabilityStatus;
 }
 
 export const CreatorRating: React.FC<CreatorRatingProps> = ({ 
   rating, 
   reviews = 0,
-  name 
+  name,
+  availabilityStatus
 }) => {
   const isMobile = useIsMobile();
+  
+  const availabilityConfig = {
+    'available-now': {
+      text: 'Available Now',
+      icon: <Calendar className="w-3 h-3 mr-1 text-emerald-500" />,
+      className: 'border-green-100/50'
+    },
+    'available-tomorrow': {
+      text: 'Available Tomorrow',
+      icon: <Clock className="w-3 h-3 mr-1 text-amber-500" />,
+      className: 'border-amber-100/50'
+    },
+    'premium-only': {
+      text: 'Premium Only',
+      icon: <Crown className="w-3 h-3 mr-1 text-purple-500" />,
+      className: 'border-purple-100/50'
+    }
+  };
   
   return (
     <div className="flex justify-between items-center w-full">
@@ -48,6 +69,24 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({
           </span>
         )}
       </div>
+      
+      {/* Availability Indicator */}
+      {availabilityStatus && availabilityConfig[availabilityStatus] && (
+        <div className={cn(
+          "flex items-center justify-center",
+          "bg-[rgba(245,247,250,0.85)] backdrop-blur-[4px]",
+          "px-2.5 py-1",
+          "rounded-full",
+          "text-xs font-medium",
+          "text-gray-600",
+          "shadow-[0_1px_3px_rgba(0,0,0,0.08)]",
+          isMobile ? "" : "text-xs",
+          availabilityConfig[availabilityStatus].className
+        )}>
+          {availabilityConfig[availabilityStatus].icon}
+          <span>{availabilityConfig[availabilityStatus].text}</span>
+        </div>
+      )}
     </div>
   );
 };

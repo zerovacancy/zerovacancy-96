@@ -9,6 +9,7 @@ export interface Creator {
   image: string;
   workExamples: string[];
   tags?: string[];
+  availabilityStatus?: AvailabilityStatus;
 }
 
 export interface CreatorCardProps {
@@ -17,3 +18,5 @@ export interface CreatorCardProps {
   loadedImages: Set<string>;
   imageRef: (node: HTMLImageElement | null) => void;
 }
+
+export type AvailabilityStatus = 'available-now' | 'available-tomorrow' | 'premium-only';

@@ -119,10 +119,30 @@
     transform: rotate(45deg) translate(-100%, 0);
     animation: availability-shimmer 3s infinite;
   }
+  
+  /* Premium Only status animation */
+  .premium-status {
+    animation: premium-pulse 2s infinite alternate;
+  }
+  
+  /* Tomorrow status animation */
+  .tomorrow-status {
+    animation: tomorrow-fade 3s infinite alternate;
+  }
 
   @keyframes availability-shimmer {
     0% { transform: rotate(45deg) translate(-100%, -100%); }
     100% { transform: rotate(45deg) translate(100%, 100%); }
+  }
+  
+  @keyframes premium-pulse {
+    0% { box-shadow: 0 0 0 rgba(139, 92, 246, 0.1); }
+    100% { box-shadow: 0 0 8px rgba(139, 92, 246, 0.5); }
+  }
+  
+  @keyframes tomorrow-fade {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
   }
 
   @keyframes subtle-bounce {
