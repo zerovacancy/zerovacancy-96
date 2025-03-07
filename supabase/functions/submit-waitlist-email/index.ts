@@ -1,11 +1,7 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.7.1'
-
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+import { corsHeaders } from "../_shared/cors.ts"
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -18,8 +14,29 @@ serve(async (req) => {
     const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') ?? ''
     const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-    // Get request body
-    const { email, source = 'waitlist', marketingConsent = true, metadata = {} } = await req.json()
+    // Safely parse request body with error handling
+    let requestData = {}
+    try {
+      // Check if the request has a body before trying to parse it
+      const contentType = req.headers.get('content-type') || ''
+      if (contentType.includes('application/json')) {
+        const text = await req.text()
+        if (text) {
+          requestData = JSON.parse(text)
+        }
+      }
+    } catch (parseError) {
+      console.error('Error parsing request body:', parseError)
+      return new Response(
+        JSON.stringify({ error: 'Invalid JSON in request body' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      )
+    }
+
+    const { email, source = 'waitlist', marketingConsent = true, metadata = {} } = requestData as any
 
     if (!email) {
       return new Response(
@@ -98,7 +115,7 @@ serve(async (req) => {
   } catch (err) {
     console.error('Unexpected error:', err)
     return new Response(
-      JSON.stringify({ error: 'Internal Server Error' }),
+      JSON.stringify({ error: 'Internal Server Error', details: err.message }),
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
