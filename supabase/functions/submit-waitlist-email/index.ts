@@ -11,8 +11,22 @@ serve(async (req) => {
 
   try {
     const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? ''
-    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') ?? ''
-    const supabase = createClient(supabaseUrl, supabaseAnonKey)
+    // Use the service role key instead of the anon key to bypass RLS
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('Missing environment variables: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY')
+      return new Response(
+        JSON.stringify({ error: 'Server configuration error' }),
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      )
+    }
+    
+    // Create client with service role key
+    const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
     // Safely parse request body with error handling
     let requestData = {}
@@ -75,7 +89,7 @@ serve(async (req) => {
 
     console.log(`Submitting waitlist email: ${email} from source: ${source}`)
 
-    // Add email to waitlist_subscribers table
+    // Add email to waitlist_subscribers table using service role client
     const { data, error } = await supabase
       .from('waitlist_subscribers')
       .insert([
@@ -105,7 +119,7 @@ serve(async (req) => {
       
       console.error('Error inserting subscriber:', error)
       return new Response(
-        JSON.stringify({ error: 'Failed to add to waitlist' }),
+        JSON.stringify({ error: 'Failed to add to waitlist', details: error }),
         { 
           status: 500, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
