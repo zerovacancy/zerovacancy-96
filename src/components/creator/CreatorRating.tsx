@@ -24,17 +24,17 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({
     'available-now': {
       text: 'Available Now',
       icon: <Calendar className="w-3 h-3 mr-1 text-emerald-500" />,
-      className: 'border-green-100/50'
+      className: 'border-green-100/50 availability-indicator'
     },
     'available-tomorrow': {
       text: 'Available Tomorrow',
       icon: <Clock className="w-3 h-3 mr-1 text-amber-500" />,
-      className: 'border-amber-100/50'
+      className: 'border-amber-100/50 tomorrow-status'
     },
     'premium-only': {
       text: 'Premium Only',
       icon: <Crown className="w-3 h-3 mr-1 text-purple-500" />,
-      className: 'border-purple-100/50'
+      className: 'border-purple-100/50 premium-status'
     }
   };
   
@@ -80,7 +80,6 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({
           "text-xs font-medium",
           "text-gray-600",
           "shadow-[0_1px_3px_rgba(0,0,0,0.08)]",
-          isMobile ? "" : "text-xs",
           availabilityConfig[availabilityStatus].className
         )}>
           {availabilityConfig[availabilityStatus].icon}
