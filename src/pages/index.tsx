@@ -35,7 +35,14 @@ const Index = () => {
   const [showGlowDialog, setShowGlowDialog] = useState(false);
   const isMobile = useIsMobile();
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
-  const [visibleSections, setVisibleSections] = useState<{[key: number]: boolean}>({});
+  const [visibleSections, setVisibleSections] = useState<{[key: number]: boolean}>({
+    0: true, // Hero section is visible by default
+    1: true, 
+    2: true,
+    3: true,
+    4: true,
+    5: true
+  });
   
   // Initialize local storage and dialog state
   useEffect(() => {
@@ -53,13 +60,13 @@ const Index = () => {
       if (index >= 0) {
         setVisibleSections(prev => ({
           ...prev,
-          [index]: entry.isIntersecting
+          [index]: entry.isIntersecting || prev[index] // Keep sections visible once they've been seen
         }));
       }
     });
   }, []);
   
-  // Use Intersection Observer to optimize rendering of sections
+  // Use Intersection Observer to optimize rendering of sections with safety timeout
   useEffect(() => {
     const observer = new IntersectionObserver(
       observerCallback,
@@ -72,9 +79,22 @@ const Index = () => {
       section.setAttribute('data-section-index', index.toString());
       observer.observe(section);
     });
+
+    // Safety timeout to make all sections visible if they aren't already
+    const safetyTimeout = setTimeout(() => {
+      setVisibleSections({
+        0: true,
+        1: true,
+        2: true,
+        3: true,
+        4: true,
+        5: true
+      });
+    }, 1000);
     
     return () => {
       observer.disconnect();
+      clearTimeout(safetyTimeout);
     };
   }, [observerCallback]);
   
@@ -148,8 +168,8 @@ const Index = () => {
           animationSpeed="slow"
         >
           <div className="space-y-0 w-full">
-            {/* Hero Section */}
-            <section ref={addSectionRef(0)} className={cn("w-full", visibleSections[0] ? "content-visible" : "content-hidden")}>
+            {/* Hero Section - Always visible */}
+            <section ref={addSectionRef(0)} className="w-full">
               <Hero />
             </section>
             
@@ -157,11 +177,11 @@ const Index = () => {
             <section 
               ref={addSectionRef(1)} 
               id="how-it-works" 
-              className={cn("relative w-full", visibleSections[1] ? "content-visible" : "content-hidden")}
+              className="relative w-full"
             >
               <div className="relative z-10">
                 <Suspense fallback={<SectionLoader />}>
-                  {visibleSections[1] && <OptimizedHowItWorks />}
+                  <OptimizedHowItWorks />
                 </Suspense>
               </div>
             </section>
@@ -170,11 +190,11 @@ const Index = () => {
             <section 
               ref={addSectionRef(2)} 
               id="find-creators" 
-              className={cn("relative w-full", visibleSections[2] ? "content-visible" : "content-hidden")}
+              className="relative w-full"
             >
               <div className="max-w-7xl mx-auto relative z-10 py-10 sm:py-16 lg:py-20">
                 <Suspense fallback={<SectionLoader />}>
-                  {visibleSections[2] && <PreviewSearch />}
+                  <PreviewSearch />
                 </Suspense>
               </div>
             </section>
@@ -182,27 +202,27 @@ const Index = () => {
             {/* Professional Content Creation Services */}
             <section 
               ref={addSectionRef(3)} 
-              className={cn("w-full", visibleSections[3] ? "content-visible" : "content-hidden")}
+              className="w-full"
             >
               <Suspense fallback={<SectionLoader />}>
-                {visibleSections[3] && <FeaturesSectionWithHoverEffects />}
+                <FeaturesSectionWithHoverEffects />
               </Suspense>
             </section>
 
             {/* Pricing Section */}
             <section 
               ref={addSectionRef(4)} 
-              className={cn("w-full", visibleSections[4] ? "content-visible" : "content-hidden")}
+              className="w-full"
             >
               <Suspense fallback={<SectionLoader />}>
-                {visibleSections[4] && <Pricing />}
+                <Pricing />
               </Suspense>
             </section>
 
             {/* Final CTA Section */}
             <div 
               ref={addSectionRef(5)} 
-              className={cn("relative w-full", visibleSections[5] ? "content-visible" : "content-hidden")}
+              className="relative w-full"
             >
               <div className="relative z-10 max-w-7xl mx-auto py-14 sm:py-20 lg:py-24">
                 <CallToActionSection />
