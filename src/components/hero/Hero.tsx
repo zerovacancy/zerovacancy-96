@@ -1,45 +1,18 @@
 
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist-cta";
 
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isInView, setIsInView] = useState(false);
-  
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    
-    observer.observe(sectionRef.current);
-    
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-  
   return (
     <section 
-      ref={sectionRef}
       className={cn(
         "flex flex-col items-center justify-center",
         "px-4 sm:px-6",
         "py-8 sm:py-12 md:py-16",
         "min-h-[30vh]",
         "relative z-10",
-        "bg-gradient-to-b from-purple-50 via-indigo-50/60 to-blue-50/30",
-        isInView ? "opacity-100" : "opacity-0",
-        "transition-opacity duration-500"
+        "bg-gradient-to-b from-purple-50 via-indigo-50/60 to-blue-50/30"
       )}
     >
       <div className="max-w-5xl w-full mx-auto flex flex-col gap-6 sm:gap-8">
