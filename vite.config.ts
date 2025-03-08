@@ -47,6 +47,9 @@ export default defineConfig(({ mode }) => ({
     commonjsOptions: {
       transformMixedEsModules: true,
       include: [/node_modules/],
+      // Add these options to help with React version conflicts
+      strictRequires: false,
+      esmExternals: true,
     },
     rollupOptions: {
       // External packages that should not be bundled
@@ -62,14 +65,6 @@ export default defineConfig(({ mode }) => ({
           }
         },
       },
-    },
-    // Add this configuration to ignore peer dependency version issues
-    commonjsOptions: {
-      transformMixedEsModules: true,
-      include: [/node_modules/],
-      // Add these options to help with React version conflicts
-      strictRequires: false,
-      esmExternals: true,
     },
   }
 }));
