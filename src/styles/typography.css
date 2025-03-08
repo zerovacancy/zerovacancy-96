@@ -1,29 +1,29 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @layer base {
   h1 {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight font-jakarta text-brand-purple-dark;
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight font-inter text-brand-purple-dark;
   }
 
   h2 {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight font-jakarta text-brand-purple-dark;
+    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight font-inter text-brand-purple-dark;
   }
 
   h3 {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight font-jakarta text-brand-purple-medium;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight font-inter text-brand-purple-medium;
   }
 
   h4 {
-    @apply text-xl sm:text-2xl font-medium font-jakarta text-brand-purple-medium;
+    @apply text-xl sm:text-2xl font-medium font-inter text-brand-purple-medium;
   }
 
   h5 {
-    @apply text-lg sm:text-xl font-medium font-jakarta text-brand-purple-medium;
+    @apply text-lg sm:text-xl font-medium font-inter text-brand-purple-medium;
   }
 
   h6 {
-    @apply text-base sm:text-lg font-medium font-jakarta text-brand-purple-medium;
+    @apply text-base sm:text-lg font-medium font-inter text-brand-purple-medium;
   }
 
   p {
@@ -45,7 +45,7 @@
 
 @layer components {
   .section-title {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-center tracking-tight font-jakarta text-brand-purple-dark;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-center tracking-tight font-inter text-brand-purple-dark;
   }
 
   .section-subtitle {
@@ -53,15 +53,15 @@
   }
 
   .text-display {
-    @apply text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight font-jakarta text-brand-purple-dark;
+    @apply text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight font-inter text-brand-purple-dark;
   }
 
   .text-heading {
-    @apply text-2xl sm:text-3xl font-semibold tracking-tight font-jakarta text-brand-purple-medium;
+    @apply text-2xl sm:text-3xl font-semibold tracking-tight font-inter text-brand-purple-medium;
   }
 
   .text-title {
-    @apply text-xl font-medium font-jakarta text-brand-purple-medium;
+    @apply text-xl font-medium font-inter text-brand-purple-medium;
   }
 
   .text-body {

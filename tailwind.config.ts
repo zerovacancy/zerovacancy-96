@@ -20,7 +20,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
-        'jakarta': ['Plus Jakarta Sans', 'sans-serif'],
+        'jakarta': ['Inter', 'sans-serif'], // Keeping the jakarta class for backward compatibility
         'space': ['Space Grotesk', 'sans-serif'],
       },
       backgroundSize: {

@@ -33,7 +33,7 @@ export const FeatureHeader = ({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         viewport={{ once: true, margin: "-100px" }}
-        className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-5 font-jakarta tracking-tight"
+        className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-5 font-inter tracking-tight"
       >
         {title}
       </motion.h2>
