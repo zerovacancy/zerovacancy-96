@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { FeaturesGrid } from "./FeaturesGrid";
 import { MobileViewButton } from "./MobileViewButton";
+import { WarpBackground } from "@/components/ui/warp-background";
 
 export function FeaturesSectionWithHoverEffects() {
   const isMobile = useIsMobile();
@@ -24,6 +25,18 @@ export function FeaturesSectionWithHoverEffects() {
   
   return (
     <section className="relative py-14 sm:py-18 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Warp Background for a sense of depth */}
+      <div className="absolute inset-0 z-0 overflow-hidden opacity-[0.15]">
+        <WarpBackground
+          colors={["#8b5cf6", "#a78bfa", "#c4b5fd"]}
+          speed={isMobile ? "slow" : "medium"}
+          yOffset={0.2}
+          xOffset={0.5}
+          noiseIntensity={isMobile ? 0.4 : 0.5}
+          className="w-full h-full"
+        />
+      </div>
+
       <div className="max-w-6xl mx-auto relative z-10">
         <FeatureHeader 
           title="THE CREATIVE ARSENAL"
