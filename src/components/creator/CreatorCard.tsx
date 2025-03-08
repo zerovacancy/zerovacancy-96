@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { ArrowRight } from 'lucide-react';
@@ -108,13 +107,13 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               )}>
                 <ShimmerButton 
                   onClick={() => setShowEmailDialog(true)}
-                  aria-label={`Join waitlist to work with ${creator.name}`}
+                  aria-label={`Join The Collective to work with ${creator.name}`}
                   className={cn(
                     "w-full text-sm px-4 hover:scale-[1.03] active:scale-[0.98] transition-transform duration-200 group-hover:animate-pulse-subtle",
                     isMobile ? "h-10" : "h-10 sm:h-11", // Adjusted height for mobile
                   )}
                 >
-                  <span>Join Waitlist</span>
+                  <span>Join The Collective</span>
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
                 </ShimmerButton>
               </div>
