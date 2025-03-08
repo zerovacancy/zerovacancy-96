@@ -12,13 +12,17 @@ interface PreviewContentProps {
   loadedImages: Set<string>;
   handleImageLoad: (imagePath: string) => void;
   creatorData: Creator[];
+  locationValue?: string;
+  onLocationSelect: (location: string) => void;
 }
 
 export const PreviewContent: React.FC<PreviewContentProps> = ({
   isVisible,
   loadedImages,
   handleImageLoad,
-  creatorData
+  creatorData,
+  locationValue = '',
+  onLocationSelect
 }) => {
   const isMobile = useIsMobile();
   
@@ -34,7 +38,10 @@ export const PreviewContent: React.FC<PreviewContentProps> = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <SearchBar onLocationSelect={() => {}} />
+          <SearchBar 
+            value={locationValue} 
+            onLocationSelect={onLocationSelect} 
+          />
         </motion.div>
       </div>
       

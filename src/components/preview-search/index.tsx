@@ -10,6 +10,7 @@ const PreviewSearch = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [selectedLocation, setSelectedLocation] = useState<string>('');
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -41,6 +42,11 @@ const PreviewSearch = () => {
 
   const handleImageLoad = (imagePath: string) => {
     setLoadedImages(prev => new Set([...prev, imagePath]));
+  };
+
+  const handleLocationSelect = (location: string) => {
+    console.log('Location selected in PreviewSearch:', location);
+    setSelectedLocation(location);
   };
 
   const creatorData = [
@@ -102,6 +108,8 @@ const PreviewSearch = () => {
             loadedImages={loadedImages}
             handleImageLoad={handleImageLoad}
             creatorData={creatorData}
+            locationValue={selectedLocation}
+            onLocationSelect={handleLocationSelect}
           />
         </PreviewCard>
       </div>
