@@ -94,14 +94,12 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
               
               {/* Rating section with more compact layout for mobile */}
               <div className="bg-gray-50/80 rounded-lg px-3 py-2 shadow-sm relative">
-                <div className="flex justify-between items-center">
-                  <CreatorRating 
-                    rating={creator.rating} 
-                    reviews={creator.reviews} 
-                    name={creator.name} 
-                    availabilityStatus={creator.availabilityStatus}
-                  />
-                </div>
+                <CreatorRating 
+                  rating={creator.rating} 
+                  reviews={creator.reviews} 
+                  name={creator.name} 
+                  availabilityStatus={creator.availabilityStatus}
+                />
               </div>
               
               {/* CTA button section with adjusted spacing for mobile */}

@@ -70,7 +70,12 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
         delay: isMobile ? 0.1 * index : 0.1 + index * 0.1,
         ease: [0.22, 1, 0.36, 1]
       }}>
-            <CreatorCard creator={creator} onImageLoad={onImageLoad} loadedImages={loadedImages} imageRef={imageRef} />
+            <CreatorCard 
+              creator={creator} 
+              onImageLoad={onImageLoad} 
+              loadedImages={loadedImages} 
+              imageRef={imageRef} 
+            />
           </motion.div>)}
         
         {creators.length === 0 && <div className="col-span-full text-center py-10">

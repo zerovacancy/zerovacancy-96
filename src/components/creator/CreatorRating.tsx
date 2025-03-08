@@ -80,11 +80,13 @@ export const CreatorRating: React.FC<CreatorRatingProps> = ({
           "text-xs font-medium",
           "text-gray-600",
           "shadow-[0_1px_3px_rgba(0,0,0,0.08)]",
-          isMobile ? "" : "text-xs",
+          "flex-shrink-0", // Add this to prevent the badge from shrinking
+          "min-w-fit", // Ensure minimum width based on content
+          "z-10", // Ensure the badge stays on top
           availabilityConfig[availabilityStatus]?.className || ""
         )}>
           {availabilityConfig[availabilityStatus]?.icon}
-          <span>{availabilityConfig[availabilityStatus]?.text}</span>
+          <span className="whitespace-nowrap">{availabilityConfig[availabilityStatus]?.text}</span>
         </div>
       )}
     </div>
