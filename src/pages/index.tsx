@@ -158,15 +158,15 @@ const Index = () => {
       <main className="flex-1 pb-16 sm:pb-0 w-full">
         <BackgroundEffects 
           blobColors={{
-            first: "bg-purple-100",
-            second: "bg-indigo-100",
-            third: "bg-violet-100"
+            first: "bg-purple-200",
+            second: "bg-indigo-200",
+            third: "bg-violet-200"
           }}
-          blobOpacity={0.15}
+          blobOpacity={0.35}
           withSpotlight={true}
-          spotlightClassName="from-purple-500/5 via-violet-500/5 to-blue-500/5"
-          baseColor="bg-white/80" 
-          pattern="none"
+          spotlightClassName="from-purple-500/10 via-violet-500/10 to-blue-500/10"
+          baseColor="bg-white/60" 
+          pattern="dots"
           className="py-0"
           animationSpeed="slow"
         >
