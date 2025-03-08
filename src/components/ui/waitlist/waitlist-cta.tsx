@@ -35,7 +35,7 @@ export function WaitlistCTA({
     try {
       // Collect additional metadata about the signup
       const metadata = {
-        referrer: document.referrer,
+        referrer: document.referrer || "",
         url: window.location.href,
         userAgent: navigator.userAgent,
         timestamp: new Date().toISOString(),
