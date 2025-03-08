@@ -1,11 +1,10 @@
-
 import React, { useRef, useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist-cta";
 import { TextRotate } from "../ui/text-rotate";
 
-const TITLES = ["Converts", "Captivates", "Drives Leads"];
+const TITLES = ["Visionaries", "Storytellers", "Artists"];
 
 export function Hero() {
   const isMobile = useIsMobile();
