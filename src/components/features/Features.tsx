@@ -31,8 +31,8 @@ export function FeaturesSectionWithHoverEffects() {
           color="#8b5cf6"
           // Removed props that don't exist in WarpBackgroundProps interface:
           // - speed (removed in previous edit)
-          // - yOffset and xOffset (removing now)
-          noiseIntensity={isMobile ? 0.4 : 0.5}
+          // - yOffset and xOffset (removed in previous edit)
+          // - noiseIntensity (removing now)
           className="w-full h-full"
         >
           {/* Empty div as required child for WarpBackground */}
