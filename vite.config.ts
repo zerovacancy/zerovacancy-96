@@ -14,16 +14,6 @@ export default defineConfig(({ mode }) => ({
     react({
       // Force specific React version for all components
       jsxImportSource: 'react',
-      // Ensure SWC treats React properly
-      swcOptions: {
-        jsc: {
-          transform: {
-            react: {
-              runtime: 'automatic',
-            },
-          },
-        },
-      },
     }),
     mode === 'development' &&
     componentTagger(),
