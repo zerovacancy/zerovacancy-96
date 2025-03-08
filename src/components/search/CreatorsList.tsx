@@ -123,8 +123,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
               }
             </span>
             
-            {/* Subtle shimmer effect */}
-            <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-indigo-100/20 to-transparent" />
+            {/* Subtle shimmer effect with enhanced border/glow */}
+            <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-indigo-100/20 to-transparent border border-indigo-200/30 shadow-[0_0_8px_rgba(129,140,248,0.15)]" />
           </motion.button>
         </div>
       )}
@@ -147,8 +147,8 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
               <ChevronDown className="ml-1.5 w-4 h-4" />
             </span>
             
-            {/* Adding the shimmer effect to match other CTAs */}
-            <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            {/* Adding the shimmer effect with enhanced border/glow to match other CTAs */}
+            <span className="absolute inset-0 z-0 animate-shimmer-slide bg-gradient-to-r from-transparent via-white/20 to-transparent border border-white/10 shadow-[0_0_10px_rgba(255,255,255,0.15)]" />
           </button>
         </div>
       )}
