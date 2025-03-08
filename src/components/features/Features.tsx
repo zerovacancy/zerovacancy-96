@@ -28,7 +28,7 @@ export function FeaturesSectionWithHoverEffects() {
       {/* Warp Background for a sense of depth */}
       <div className="absolute inset-0 z-0 overflow-hidden opacity-[0.15]">
         <WarpBackground
-          colors={["#8b5cf6", "#a78bfa", "#c4b5fd"]}
+          color={["#8b5cf6", "#a78bfa", "#c4b5fd"]}
           speed={isMobile ? "slow" : "medium"}
           yOffset={0.2}
           xOffset={0.5}

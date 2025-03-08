@@ -121,7 +121,10 @@ export const FeatureItem = ({
           pathClassName="stroke-[0.5px] md:stroke-[1px]"
           colors={borderColors}
           className="absolute inset-0 opacity-[0.3] group-hover:opacity-70 transition-opacity duration-500"
-        />
+        >
+          {/* Empty child needed for MovingBorder */}
+          <div className="sr-only">Moving border animation</div>
+        </MovingBorder>
       </div>
       
       <button
