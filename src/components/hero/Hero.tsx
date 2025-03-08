@@ -5,7 +5,7 @@ export function Hero() {
   return <section className="flex flex-col items-center justify-center px-4 sm:px-6 py-12 sm:py-16 md:py-20 min-h-[40vh] relative z-10 bg-white">
       <div className="max-w-5xl w-full mx-auto flex flex-col gap-8 sm:gap-10">
         <h1 className="text-center">
-          <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-jakarta tracking-tight leading-tight block text-[#4A2DD9] px-0 mx-0">SPACES DESERVE VISIONARIES, NOT VENDORS.</span>
+          <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-jakarta tracking-tight leading-tight block text-[#4A2DD9] px-0 mx-0">FOR SPACES THAT REQUIRE VISIONARIES, NOT VENDORS.</span>
         </h1>
 
         <p className="text-sm sm:text-base md:text-lg text-center text-brand-text-primary max-w-2xl mx-auto px-2">
