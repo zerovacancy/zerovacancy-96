@@ -23,7 +23,7 @@ serve(async (req) => {
 
     // Parse request
     const requestData = await req.json();
-    const { messages, system, model = 'claude-3-sonnet-20240229' } = requestData;
+    const { messages, system, model = 'claude-3-sonnet-20240229', max_tokens = 1024, temperature = 0.7 } = requestData;
 
     if (!messages || !Array.isArray(messages)) {
       return new Response(
@@ -46,7 +46,8 @@ serve(async (req) => {
         model,
         messages,
         system: system || 'You are Claude, a helpful AI assistant developed by Anthropic to be helpful, harmless, and honest.',
-        max_tokens: 1024
+        max_tokens,
+        temperature
       })
     });
 
