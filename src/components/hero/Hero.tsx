@@ -14,8 +14,7 @@ export function Hero() {
             PROPERTY CONTENT THAT{" "}
             <TextRotate 
               texts={rotatingWords}
-              className="inline-block"
-              highlightClassName="text-[#4A2DD9]"
+              mainClassName="inline-block"
               rotationInterval={2000}
             />
           </span>
