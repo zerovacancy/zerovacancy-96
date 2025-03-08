@@ -29,9 +29,9 @@ export function FeaturesSectionWithHoverEffects() {
       <div className="absolute inset-0 z-0 overflow-hidden opacity-[0.15]">
         <WarpBackground
           color="#8b5cf6"
-          // Removed 'speed' prop as it doesn't exist in WarpBackgroundProps
-          yOffset={0.2}
-          xOffset={0.5}
+          // Removed props that don't exist in WarpBackgroundProps interface:
+          // - speed (removed in previous edit)
+          // - yOffset and xOffset (removing now)
           noiseIntensity={isMobile ? 0.4 : 0.5}
           className="w-full h-full"
         >
