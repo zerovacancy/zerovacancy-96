@@ -30,8 +30,10 @@ export const MobileViewButton = ({
           className="group border-indigo-300 hover:border-indigo-500 hover:bg-indigo-50/70 text-indigo-600 font-medium px-6"
           onClick={toggleShowAllCards}
         >
-          Show less
-          <ChevronDown className="ml-2 h-4 w-4 rotate-180 transition-transform" />
+          <span className="flex items-center whitespace-nowrap">
+            Show less
+            <ChevronDown className="ml-2 h-4 w-4 rotate-180 transition-transform" />
+          </span>
         </Button>
       ) : (
         <Button 
@@ -40,8 +42,10 @@ export const MobileViewButton = ({
           className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium px-6 shadow-md"
           onClick={isMobile ? toggleShowAllCards : undefined}
         >
-          View all services
-          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          <span className="flex items-center whitespace-nowrap">
+            View all services
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </span>
         </Button>
       )}
     </motion.div>
