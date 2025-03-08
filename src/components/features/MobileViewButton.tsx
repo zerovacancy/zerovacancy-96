@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
@@ -27,8 +28,10 @@ export const MobileViewButton = ({
         <Button 
           variant="outline" 
           size="lg"
-          className="group border-indigo-300 hover:border-indigo-500 hover:bg-indigo-50/70 text-indigo-600 font-medium px-6"
+          className="group border-indigo-300 hover:border-indigo-500 hover:bg-indigo-50/70 text-indigo-600 font-medium px-6 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
           onClick={toggleShowAllCards}
+          aria-expanded={showAllCards}
+          aria-label="Show less services"
         >
           <span className="flex items-center whitespace-nowrap">
             Show less
@@ -48,7 +51,8 @@ export const MobileViewButton = ({
               "shadow-sm",
               "hover:shadow-md hover:bg-indigo-50/50 transition-all duration-200",
               "text-sm w-[85%] mx-auto",
-              "relative overflow-hidden group"
+              "relative overflow-hidden group",
+              "focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             )}
             onClick={toggleShowAllCards}
             initial={{
@@ -65,6 +69,10 @@ export const MobileViewButton = ({
             whileTap={{
               scale: 0.98
             }}
+            aria-expanded={showAllCards}
+            aria-label="View all services"
+            tabIndex={0}
+            role="button"
           >
             <span className="relative z-10 flex items-center whitespace-nowrap">
               View all services
@@ -79,8 +87,9 @@ export const MobileViewButton = ({
           <Button 
             variant="default"
             size="lg" 
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium px-6 shadow-md"
+            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium px-6 shadow-md focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
             onClick={isMobile ? toggleShowAllCards : undefined}
+            aria-label="View all services"
           >
             <span className="flex items-center whitespace-nowrap">
               View all services
