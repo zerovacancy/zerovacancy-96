@@ -63,13 +63,14 @@ export const FeatureItem = ({
   // Card background color based on icon - to match the example image
   const getCardBgColor = () => {
     switch(icon) {
-      case 'camera': return 'bg-blue-50';
-      case 'image': return 'bg-sky-50';
-      case 'video': return 'bg-purple-50';
-      case 'user': return 'bg-green-50';
-      case 'clock': return 'bg-amber-50';
-      case 'credit-card': return 'bg-cyan-50';
-      case 'award': return 'bg-pink-50';
+      case 'Camera': return 'bg-blue-50';
+      case 'Image': return 'bg-sky-50';
+      case 'Video': return 'bg-purple-50';
+      case 'UserCheck': return 'bg-green-50';
+      case 'Clock': return 'bg-amber-50';
+      case 'CreditCard': return 'bg-cyan-50';
+      case 'Award': return 'bg-pink-50';
+      case 'Instagram': return 'bg-rose-50';
       default: return 'bg-blue-50';
     }
   };
@@ -121,16 +122,17 @@ export const FeatureItem = ({
           className="w-full h-full flex flex-col z-10 relative text-left"
         >
           <div className="flex flex-col items-start gap-5 h-full">
-            {/* Icon container with consistent sizing - matching the example */}
+            {/* Standardized icon container - consistent sizing for all icons */}
             <div 
               className={cn(
                 "flex items-center justify-center",
-                "w-14 h-14",
+                "w-12 h-12 sm:w-14 sm:h-14", // Same size on mobile and desktop
                 "rounded-lg",
                 colorScheme.gradient ? `bg-gradient-to-br ${colorScheme.gradient}` : colorScheme.bg
               )}
             >
-              <Icon className="w-7 h-7 text-white" />
+              {/* Standardized icon size */}
+              <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" aria-hidden="true" />
             </div>
             
             <div className="text-left w-full flex-grow flex flex-col">
