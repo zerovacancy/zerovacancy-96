@@ -3,7 +3,6 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist/waitlist-cta";
 import { TextRotate } from "../ui/text-rotate";
-import { BorderBeam } from "../ui/border-beam";
 import { GlowingEffect } from "../ui/glowing-effect";
 import { motion } from "framer-motion";
 
@@ -44,16 +43,6 @@ export function Hero() {
       </div>
       
       <div className="w-full max-w-xl mx-auto mt-10 sm:mt-12 relative overflow-visible">
-        <BorderBeam 
-          size={400}
-          duration={6}
-          anchor={90}
-          borderWidth={3}
-          colorFrom="#6A3DE8" 
-          colorTo="#4361EE"
-          delay={0}
-          className="!opacity-70 scale-110 sm:scale-125"
-        />
         <WaitlistCTA />
       </div>
     </section>;
