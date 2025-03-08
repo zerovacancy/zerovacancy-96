@@ -43,15 +43,16 @@ export function Hero() {
         </p>
       </div>
       
-      <div className="w-full max-w-xl mx-auto mt-10 sm:mt-12 relative">
+      <div className="w-full max-w-xl mx-auto mt-10 sm:mt-12 relative overflow-visible">
         <BorderBeam 
-          size={300}
-          duration={8}
+          size={400}
+          duration={6}
           anchor={90}
-          borderWidth={2}
+          borderWidth={3}
           colorFrom="#6A3DE8" 
           colorTo="#4361EE"
           delay={0}
+          className="!opacity-70 scale-110 sm:scale-125"
         />
         <WaitlistCTA />
       </div>

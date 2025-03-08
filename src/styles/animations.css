@@ -94,6 +94,12 @@
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
   }
 
+  /* Enhanced border animations visibility */
+  .animate-border-beam {
+    animation: border-beam calc(var(--duration, 15) * 1s) linear infinite !important;
+    opacity: 0.8 !important;
+  }
+
   /* Optimized appear/disappear animations */
   .content-hidden {
     opacity: 0;
