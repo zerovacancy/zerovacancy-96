@@ -7,13 +7,14 @@ import { PricingCardHeader } from "./PricingCardHeader";
 import { PricingCardActionButton } from "./PricingCardActionButton";
 import { PricingCardFeatureList } from "./PricingCardFeatureList";
 import { PricingCardFooter } from "./PricingCardFooter";
+import { PricingFeature } from "../types";
 
 interface PricingCardProps {
   title: string;
   price: number;
   interval: string;
   description: string; // Kept for backward compatibility 
-  features: string[];
+  features: PricingFeature[];
   cta: string;
   color?: ColorVariant;
   highlighted?: boolean;

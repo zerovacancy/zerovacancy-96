@@ -28,7 +28,7 @@ export const PricingContent: React.FC<PricingContentProps> = ({
         { text: "Up to 3 properties" },
         { text: "Basic listing details" },
         { text: "Standard support" },
-      ],
+      ] as PricingFeature[],
       showPopular: false,
     },
     {
@@ -41,7 +41,7 @@ export const PricingContent: React.FC<PricingContentProps> = ({
         { text: "**Marketing Tools**", category: "header" },
         { text: "Social media sharing" },
         { text: "Basic analytics dashboard" },
-      ],
+      ] as PricingFeature[],
       showPopular: true,
     },
     {
@@ -56,7 +56,7 @@ export const PricingContent: React.FC<PricingContentProps> = ({
         { text: "SEO-Optimized descriptions", tooltip: "Content optimized to rank higher in search results for property listings" },
         { text: "**Content Creation**", category: "header" },
         { text: "plus: 3 monthly content pieces", primary: true },
-      ],
+      ] as PricingFeature[],
       showPopular: false,
     },
   ];
