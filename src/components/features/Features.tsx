@@ -28,8 +28,8 @@ export function FeaturesSectionWithHoverEffects() {
       {/* Warp Background for a sense of depth */}
       <div className="absolute inset-0 z-0 overflow-hidden opacity-[0.15]">
         <WarpBackground
-          color="#8b5cf6" // Changed from array to single string
-          speed={isMobile ? "slow" : "medium"}
+          color="#8b5cf6"
+          // Removed 'speed' prop as it doesn't exist in WarpBackgroundProps
           yOffset={0.2}
           xOffset={0.5}
           noiseIntensity={isMobile ? 0.4 : 0.5}
