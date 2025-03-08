@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { PreviewCard } from './PreviewCard';
 import { PreviewHeader } from './PreviewHeader';
 import { PreviewContent } from './PreviewContent';
+import type { AvailabilityStatus } from '../creator/types';
 
 const PreviewSearch = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,7 +52,8 @@ const PreviewSearch = () => {
       reviews: 127,
       location: "New York, NY",
       image: "/newemilyprofile.jpg",
-      workExamples: ["/1-d2e3f802.jpg"]
+      workExamples: ["/1-d2e3f802.jpg"],
+      availabilityStatus: 'available-now' as AvailabilityStatus
     }, 
     {
       name: "Jane Cooper",
@@ -61,7 +63,8 @@ const PreviewSearch = () => {
       reviews: 98,
       location: "Los Angeles, CA",
       image: "/janeprofile.png",
-      workExamples: ["/janesub.jpg", "/janesub2.png", "/janesub3.webp"]
+      workExamples: ["/janesub.jpg", "/janesub2.png", "/janesub3.webp"],
+      availabilityStatus: 'available-tomorrow' as AvailabilityStatus
     }, 
     {
       name: "Michael Brown",
@@ -71,7 +74,8 @@ const PreviewSearch = () => {
       reviews: 82,
       location: "Chicago, IL",
       image: "/emily profile.jpeg",
-      workExamples: ["/1-d2e3f802.jpg"]
+      workExamples: ["/1-d2e3f802.jpg"],
+      availabilityStatus: 'premium-only' as AvailabilityStatus
     }
   ];
 
