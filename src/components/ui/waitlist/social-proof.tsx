@@ -16,7 +16,7 @@ export function SocialProof() {
         </div>
         
         <div className={cn("flex items-center whitespace-nowrap", isMobile && "text-xs")}>
-          <Users className="h-4 w-6 text-indigo-600 mr-1.5" />
+          <Users className="h-4 w-4 text-indigo-800 mr-1.5" />
           <span className="font-bold text-indigo-700">2,165+</span>
           <span className="text-gray-800"> people joined</span>
           <span className="text-gray-400 mx-1.5">•</span>
