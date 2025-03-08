@@ -13,7 +13,6 @@ const Account = lazy(() => import('./pages/Account'));
 const ConnectSuccess = lazy(() => import('./pages/ConnectSuccess'));
 const ConnectRefresh = lazy(() => import('./pages/ConnectRefresh'));
 const ConnectOnboarding = lazy(() => import('./pages/ConnectOnboarding'));
-const DevTools = lazy(() => import('./pages/DevTools'));
 
 // Simple loading component to show during lazy loading
 const PageLoader = () => (
@@ -60,7 +59,6 @@ function App() {
               <Route path="/connect/success" element={<ConnectSuccess />} />
               <Route path="/connect/refresh" element={<ConnectRefresh />} />
               <Route path="/connect/onboarding" element={<ConnectOnboarding />} />
-              <Route path="/dev-tools" element={<DevTools />} />
             </Routes>
           </Suspense>
         </main>
