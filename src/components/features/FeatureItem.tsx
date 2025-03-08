@@ -13,6 +13,7 @@ interface FeatureItemProps {
   index: number;
   isPopular?: boolean;
   isPartiallyVisible?: boolean;
+  actionText?: string;
 }
 
 export const FeatureItem = ({ 
@@ -21,7 +22,8 @@ export const FeatureItem = ({
   icon, 
   index, 
   isPopular = false,
-  isPartiallyVisible = false
+  isPartiallyVisible = false,
+  actionText
 }: FeatureItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
@@ -181,13 +183,13 @@ export const FeatureItem = ({
             }
           </p>
           
-          {/* Learn more link - consistently visible for all cards */}
+          {/* Action text link - customized from feature data */}
           <div className={cn(
             "mt-2 sm:mt-3 text-xs font-medium flex items-center gap-1.5", 
             colorScheme.text,
             "transition-opacity duration-300"
           )}>
-            {isExpanded ? "Show less" : "Learn more"} <ChevronRight className={cn(
+            {actionText || (isExpanded ? "Show less" : "Learn more")} <ChevronRight className={cn(
               "w-3 h-3 transition-transform duration-300",
               isExpanded ? "rotate-90" : ""
             )} />

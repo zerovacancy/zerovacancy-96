@@ -26,8 +26,8 @@ export function FeaturesSectionWithHoverEffects() {
     <section className="relative py-14 sm:py-18 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         <FeatureHeader 
-          title="Professional Content Creation Services"
-          description="Everything you need to showcase your properties with stunning visuals and engaging content that attracts the right buyers."
+          title="THE CREATIVE ARSENAL"
+          description="Visual weaponry to transform perception and drive desire"
         />
         
         <FeaturesGrid

@@ -8,12 +8,14 @@ interface FeaturesGridProps {
     description: string;
     icon: string;
     isPopular?: boolean;
+    actionText?: string;
   }>;
   visibleFeatures: Array<{
     title: string;
     description: string;
     icon: string;
     isPopular?: boolean;
+    actionText?: string;
   }>;
   isMobile: boolean;
   showAllCards: boolean;
@@ -38,7 +40,8 @@ export const FeaturesGrid = ({
           icon={feature.icon}
           index={index}
           isPopular={feature.isPopular}
-          isPartiallyVisible={false} // Changed to show full video production card
+          isPartiallyVisible={false}
+          actionText={feature.actionText}
         />
       ))}
       
