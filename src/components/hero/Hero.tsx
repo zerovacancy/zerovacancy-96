@@ -1,7 +1,10 @@
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import { WaitlistCTA } from "../ui/waitlist/waitlist-cta";
 import { TextRotate } from "../ui/text-rotate";
+import { motion } from "framer-motion"; // Fixed import from framer-motion
+
 export function Hero() {
   const rotatingWords = ["Converts", "Engages", "Captivates", "Drives Leads"];
   return <section className="flex flex-col items-center justify-center px-4 sm:px-6 py-12 sm:py-16 md:py-20 min-h-[40vh] relative z-10 bg-white">
