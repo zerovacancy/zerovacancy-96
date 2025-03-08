@@ -28,25 +28,35 @@ export default defineConfig(({ mode }) => ({
     dedupe: ['react', 'react-dom'],
   },
   optimizeDeps: {
-    include: ['react', 'react-dom'],
+    include: ['react', 'react-dom', '@react-email/components', '@react-email/render'],
     // Force React Email components to use the main project's React version
     force: true,
     esbuildOptions: {
       // Fix for nested dependencies that use different React versions
       preserveSymlinks: false,
+      define: {
+        // Ensure consistent React environment
+        'process.env.NODE_ENV': JSON.stringify(mode)
+      }
     }
   },
   build: {
     commonjsOptions: {
       transformMixedEsModules: true,
+      include: [/node_modules/],
     },
     rollupOptions: {
       // External packages that should not be bundled
       external: [],
       output: {
         // Ensure proper chunks for better caching
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
+        manualChunks: (id) => {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'react-vendor';
+          }
+          if (id.includes('node_modules/@react-email')) {
+            return 'react-email-vendor';
+          }
         },
       },
     },
