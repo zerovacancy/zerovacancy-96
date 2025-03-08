@@ -19,7 +19,7 @@ export function SocialProof() {
           <Users className="h-4 w-4 text-indigo-800 mr-1.5" />
           <span className="font-bold text-indigo-700">2,165+</span>
           
-          <span className="text-gray-400 mx-1.5">•</span>
+          <span className="mx-1.5 text-purple-700">•</span>
           <span className="text-gray-800">Queue: </span>
           <span className="text-indigo-700 font-bold">{isMobile ? "1-2 days" : "2-3 weeks"}</span>
         </div>
