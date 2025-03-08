@@ -65,7 +65,8 @@ export function Hero() {
           )}>
             <span 
               className={cn(
-                "text-3xl sm:text-5xl lg:text-6xl",
+                // Optimized text sizes for better responsiveness
+                "text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
                 "font-bold font-jakarta tracking-[-0.02em]",
                 "bg-clip-text text-transparent", 
                 "bg-gradient-to-r from-[#4A2DD9] via-[#8A2BE2] to-[#4169E1]"
@@ -82,7 +83,8 @@ export function Hero() {
 
         <div 
           className={cn(
-            isMobile ? "text-xs" : "text-base lg:text-lg", 
+            // Optimized description text for better readability
+            "text-xs sm:text-sm md:text-base lg:text-lg", 
             isMobile ? "leading-[1.4]" : "leading-[1.5]", 
             "tracking-normal",
             "text-brand-text-primary", 
