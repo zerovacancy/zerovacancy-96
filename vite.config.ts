@@ -19,10 +19,17 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    // Add dedicated React resolution to prevent version conflicts
+    dedupe: ['react', 'react-dom']
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
-    exclude: ['@react-email/components', '@react-email/render']
+    // Force React Email components to use the main project's React version
+    force: true,
+    esbuildOptions: {
+      // Fix for nested dependencies that use different React versions
+      preserveSymlinks: false,
+    }
   },
   build: {
     commonjsOptions: {
