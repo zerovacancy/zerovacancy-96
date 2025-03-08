@@ -99,6 +99,16 @@
     animation: border-beam calc(var(--duration, 15) * 1s) linear infinite !important;
     opacity: 0.8 !important;
   }
+  
+  /* Creator card glow effect */
+  .creator-card-glow {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+  
+  .group:hover .creator-card-glow {
+    opacity: 1;
+  }
 
   /* Optimized appear/disappear animations */
   .content-hidden {
