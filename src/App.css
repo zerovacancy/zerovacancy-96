@@ -12,6 +12,11 @@
   }
 }
 
+/* Playfair Display adjustments */
+.font-playfair {
+  letter-spacing: -0.01em; /* Slightly tighter letter spacing for headings */
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

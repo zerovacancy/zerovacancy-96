@@ -79,7 +79,9 @@ export const FeatureItem = ({
         // For partially visible card
         isPartiallyVisible && "opacity-80 shadow-none",
         // Add subtle border
-        `border border-${borderColorBase}-100 border-opacity-30`
+        `border border-${borderColorBase}-100 border-opacity-30`,
+        // Add some top margin for popular tag
+        isPopular && "mt-3 sm:mt-5" 
       )}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ 
@@ -103,7 +105,7 @@ export const FeatureItem = ({
       >
         {/* Popular Tag - Improved positioning to prevent cutoff */}
         {isPopular && (
-          <div className="absolute -top-3 inset-x-0 flex justify-center z-20 px-2">
+          <div className="absolute -top-4 sm:-top-5 inset-x-0 flex justify-center z-20 px-2">
             <div className="py-1 px-2.5 flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-xs font-medium shadow-md">
               <Sparkles className="h-3 w-3" />
               <span className="font-medium">Popular</span>
