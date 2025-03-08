@@ -13,10 +13,10 @@ export function Hero() {
           <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-inter tracking-tight leading-tight block text-[#4A2DD9] px-0 mx-0">
             PROPERTY CONTENT THAT{" "}
             <TextRotate 
-              words={rotatingWords}
+              texts={rotatingWords}
               className="inline-block"
               highlightClassName="text-[#4A2DD9]"
-              interval={2000}
+              rotationInterval={2000}
             />
           </span>
         </h1>
