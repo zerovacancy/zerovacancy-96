@@ -20,6 +20,8 @@ const supabaseAdmin = createClient(
 );
 
 Deno.serve(async (req) => {
+  console.log("Hello from Functions!");
+  
   // Handle CORS preflight requests
   const corsResponse = corsOptionsHandler(req);
   if (corsResponse) return corsResponse;

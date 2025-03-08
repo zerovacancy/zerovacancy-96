@@ -25,10 +25,6 @@ export function Hero() {
       <div className="w-full max-w-xl mx-auto mt-8">
         <WaitlistCTA />
       </div>
-      
-      <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none">
-        <div className="absolute bottom-0 left-0 right-0 h-full bg-white" />
-      </div>
     </section>
   );
 }
