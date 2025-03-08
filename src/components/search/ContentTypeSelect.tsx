@@ -32,7 +32,7 @@ export const ContentTypeSelect = () => {
           "placeholder:text-gray-500" // Increased contrast for placeholder
         )}
       >
-        <option value="">Select content type</option>
+        <option value="">[Creative medium]</option>
         <option value="professional-photography">Professional Photography</option>
         <option value="virtual-tours">Virtual Tours (360° POV)</option>
         <option value="drone-video">Drone Video Tours</option>

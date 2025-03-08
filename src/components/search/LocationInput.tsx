@@ -1,4 +1,3 @@
-
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import { MapPin, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -134,7 +133,7 @@ export const LocationInput: React.FC<LocationInputProps> = ({ value, onLocationS
       <input
         ref={inputRef}
         type="text"
-        placeholder="Enter city or zip code"
+        placeholder="[Property location]"
         value={inputValue}
         onChange={handleLocationChange}
         onKeyDown={handleKeyDown}
