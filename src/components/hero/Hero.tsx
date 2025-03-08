@@ -76,7 +76,7 @@ export function Hero() {
                     "text-brand-purple-dark mb-1"
                   )}
                 >
-                  Property Content that
+                  Property spaces deserve
                 </span>
                 <span 
                   className={cn(
@@ -86,7 +86,7 @@ export function Hero() {
                     "bg-gradient-to-r from-[#4A2DD9] via-[#8A2BE2] to-[#4169E1]"
                   )}
                 >
-                  Drives Leads
+                  visionaries, not vendors.
                 </span>
               </span>
             ) : (
@@ -100,12 +100,12 @@ export function Hero() {
                     "block sm:inline-block mb-1 sm:mb-0 font-jakarta"
                   )}
                 >
-                  Property Content that
+                  Property spaces deserve
                 </span>
                 
                 <div 
                   role="text" 
-                  aria-label="Property Content animation"
+                  aria-label="Property Content"
                   className="relative flex w-full justify-center h-[4.5em] sm:h-[3em] md:h-[2.5em] lg:h-[2.5em] overflow-visible mt-1 sm:mt-1"
                 >
                   <TextRotate
@@ -158,7 +158,7 @@ export function Hero() {
             "font-inter"
           )}
         >
-          Connect with expert creators who deliver content that converts. Tailored to your needs and budget.
+          Connect with creators who see beyond square footage to capture the soul of your spaces. Our curated network transforms properties into visual narratives that intrigue, inspire, and ultimately convert.
         </div>
       </div>
       
