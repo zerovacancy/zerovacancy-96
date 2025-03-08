@@ -1,6 +1,7 @@
 
-import { createClient } from '@supabase/supabase-js';
-import { corsHeaders } from '../_shared/cors';
+// Import from a URL instead of a package name for Deno compatibility
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4';
+import { corsHeaders } from '../_shared/cors.ts';
 
 // Handle CORS preflight requests
 export const corsOptionsHandler = (req: Request) => {
