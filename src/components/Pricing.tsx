@@ -18,8 +18,8 @@ const Pricing = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Enhanced header with animation */}
         <PricingHeader 
-          title="Simple, Transparent Pricing" 
-          subtitle="Choose the perfect plan for your real estate photography needs. No hidden fees."
+          title="INVESTMENT TIERS" 
+          subtitle="Visual storytelling that transforms vacancies into waiting lists"
         />
         
         {/* Pricing toggle and content */}
@@ -28,11 +28,8 @@ const Pricing = () => {
           isLoading={isLoading}
         />
         
-        {/* Enhanced notes section */}
-        <div className="mt-10 lg:mt-16">
-          <CommonFeatures />
-        </div>
-
+        {/* Removed CommonFeatures section as it's not in the new design */}
+        
         {/* FAQ section (condensed for pricing page) */}
         <div className="mt-12 lg:mt-16">
           <PricingFAQ />

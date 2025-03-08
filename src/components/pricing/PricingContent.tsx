@@ -6,7 +6,7 @@ import { PricingInteraction } from "./PricingInteraction";
 import { PricingCardList } from "./PricingCardList";
 import { PricingToggle } from "./PricingToggle";
 import { ColorVariant } from "./PricingCardColors";
-import { PRICING, SAVINGS, FEATURES, VALUE_PROPOSITIONS, PLAN_DESCRIPTIONS, PLAN_CTAS } from "./pricingData";
+import { PRICING, FEATURES, VALUE_PROPOSITIONS, PLAN_DESCRIPTIONS, PLAN_CTAS } from "./pricingData";
 
 interface PricingContentProps {
   subscription: any;
@@ -14,106 +14,92 @@ interface PricingContentProps {
 }
 
 export const PricingContent = ({ subscription, isLoading }: PricingContentProps) => {
-  const [isYearly, setIsYearly] = useState(true);
+  const [isYearly, setIsYearly] = useState(false);
   const isMobile = useIsMobile();
 
   // Plans data for the interaction component
   const pricingPlans = [
     {
-      title: "Basic",
-      price: 0,
-      features: FEATURES.free
+      title: "THE FOUNDATION",
+      price: PRICING.starterMonthly,
+      features: FEATURES.foundation
     },
     {
-      title: "Professional",
-      price: isYearly ? PRICING.starterAnnual : PRICING.starterMonthly,
+      title: "THE NARRATIVE",
+      price: PRICING.proMonthly,
       showPopular: true,
-      features: FEATURES.starter
+      features: FEATURES.narrative
     },
     {
-      title: "Premium",
-      price: isYearly ? PRICING.proAnnual : PRICING.proMonthly,
-      features: FEATURES.pro
+      title: "THE MASTERPIECE",
+      price: PRICING.premiumMonthly,
+      features: FEATURES.masterpiece
     }
   ];
 
   // Pricing cards data with enhanced details for better conversion and categorized features
   const pricingCards = [
     {
-      title: "Basic",
-      price: 0,
-      interval: isYearly ? "mo" : "mo",
-      description: PLAN_DESCRIPTIONS.basic,
+      title: "THE FOUNDATION",
+      price: PRICING.starterMonthly,
+      interval: "",
+      description: PLAN_DESCRIPTIONS.foundation,
       features: [
-        "**Access & Discovery**", 
-        "Browse & Discover Content Creators - Explore available photographers, videographers, and media professionals.",
-        "Limited Access to Creator Profiles - View portfolios to assess style and quality.",
-        "Preview Marketplace Features - Get familiar with the platform before upgrading."
+        "Essential visual narrative", 
+        "Curated property moments",
+        "Core spatial storytelling",
+        "Foundational amenity presence",
+        "48-hour creative delivery"
       ],
-      cta: "Start for Free",
+      cta: PLAN_CTAS.foundation,
       color: "blue" as ColorVariant,
-      valueProposition: VALUE_PROPOSITIONS.basic,
-      footerText: PLAN_CTAS.basic
+      valueProposition: VALUE_PROPOSITIONS.foundation,
+      footerText: ""
     },
     {
-      title: "Professional",
-      price: isYearly ? PRICING.starterAnnual : PRICING.starterMonthly,
-      interval: isYearly ? "mo" : "mo",
-      description: PLAN_DESCRIPTIONS.professional,
+      title: "THE NARRATIVE",
+      price: PRICING.proMonthly,
+      interval: "",
+      description: PLAN_DESCRIPTIONS.narrative,
       features: [
-        "**Submit Requests for Proposals (RFPs)**", 
-        "Connect directly with top-tier creators to get competitive offers.",
-        "Browse & Hire Premium Creators - Access vetted professionals for high-quality photography and video.",
-        "1 Revision Included Per Project - Ensure content meets your expectations.",
-        "**Content Optimization**",
-        "Social Media Optimized Content - Get media tailored for Instagram, Facebook, LinkedIn, and more.",
-        "SEO-Optimized Content - Improve your property's visibility in search results.",
-        "Geo-Targeted Content - Target potential renters/buyers in specific locations for better engagement."
+        "Expanded visual storytelling", 
+        "Cinematic property sequence",
+        "Elevated aerial perspective",
+        "Environmental context",
+        "Lifestyle integration",
+        "24-hour creative delivery"
       ],
-      cta: "Choose Professional",
+      cta: PLAN_CTAS.narrative,
       highlighted: true,
       color: "purple" as ColorVariant,
       showPopularTag: true,
-      valueProposition: VALUE_PROPOSITIONS.professional,
-      footerText: PLAN_CTAS.professional
+      valueProposition: VALUE_PROPOSITIONS.narrative,
+      footerText: ""
     },
     {
-      title: "Premium",
-      price: isYearly ? PRICING.proAnnual : PRICING.proMonthly,
-      interval: isYearly ? "mo" : "mo",
-      description: PLAN_DESCRIPTIONS.premium,
+      title: "THE MASTERPIECE",
+      price: PRICING.premiumMonthly,
+      interval: "",
+      description: PLAN_DESCRIPTIONS.masterpiece,
       features: [
-        "**Premium Requests & Access**",
-        "Submit Requests for Proposals (RFPs) Instantly - Connect with elite creators faster.",
-        "Browse & Hire Premium Creators - Work with top-rated professionals for stunning visuals.",
-        "3 Revisions Included Per Project - Get the perfect content without extra costs.",
-        "**Advanced Content Optimization**",
-        "Social Media Optimized Content - High-performing visuals and videos for social platforms.",
-        "SEO-Optimized Content - Rank higher in searches and attract more organic traffic.",
-        "Geo-Targeted Content - Precision targeting ensures your content reaches the right audience.",
-        "Marketing Channel Optimization - Content fine-tuned for maximum performance on email, listings, ads & more.",
-        "**Premium Benefits**",
-        "7-Day Money-Back Guarantee - Try risk-free, ensuring total satisfaction.",
-        "Performance Insights Dashboard - Track engagement and effectiveness of your marketing assets."
+        "Comprehensive visual identity",
+        "Feature-length property film",
+        "Signature aerial sequences",
+        "Neighborhood integration",
+        "Staged lifestyle vignettes",
+        "Same-day priority creation",
+        "Full commercial sovereignty"
       ],
-      cta: "Upgrade to Premium",
+      cta: PLAN_CTAS.masterpiece,
       color: "emerald" as ColorVariant,
-      valueProposition: VALUE_PROPOSITIONS.premium,
-      footerText: PLAN_CTAS.premium
+      valueProposition: VALUE_PROPOSITIONS.masterpiece,
+      footerText: ""
     }
   ];
 
   return (
     <>
-      {/* Pricing Toggle - Desktop Only */}
-      {!isMobile && (
-        <div className="flex justify-center mt-10 mb-12">
-          <PricingToggle 
-            isYearly={isYearly} 
-            setIsYearly={setIsYearly}
-          />
-        </div>
-      )}
+      {/* Removed pricing toggle since we don't need yearly/monthly toggle */}
       
       {/* Pricing Cards with increased vertical spacing */}
       <div className="mt-8 sm:mt-10">
@@ -129,14 +115,20 @@ export const PricingContent = ({ subscription, isLoading }: PricingContentProps)
           </div>
         ) : (
           <PricingCardList 
-            cards={pricingCards.map(card => ({
-              ...card,
-              interval: isYearly ? "mo, billed annually" : "mo"
-            }))} 
+            cards={pricingCards} 
             subscription={subscription}
             isLoading={isLoading}
           />
         )}
+      </div>
+
+      {/* Add Creative Satisfaction section */}
+      <div className="mt-16 text-center">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">CREATIVE SATISFACTION</h2>
+        <p className="max-w-3xl mx-auto text-slate-600">
+          We believe in the power of collaborative vision. If you're not captivated by the final creation, 
+          we'll refine until you are. If we cannot align our visions, your investment returns to you in full.
+        </p>
       </div>
     </>
   );

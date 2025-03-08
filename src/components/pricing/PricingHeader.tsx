@@ -32,7 +32,7 @@ const PricingHeader = ({
               "bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100/50",
               "text-indigo-800 text-sm font-medium shadow-sm"
             )}>
-              Simple & Transparent
+              Premium Quality
             </div>
           </div>
         </div>
