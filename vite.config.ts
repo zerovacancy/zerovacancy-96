@@ -18,9 +18,14 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // Force specific module resolution for react-email components
+      "@react-email/components": path.resolve(__dirname, "node_modules/@react-email/components"),
+      "@react-email/render": path.resolve(__dirname, "node_modules/@react-email/render"),
+      "react": path.resolve(__dirname, "node_modules/react"),
+      "react-dom": path.resolve(__dirname, "node_modules/react-dom")
     },
-    // Add dedicated React resolution to prevent version conflicts
-    dedupe: ['react', 'react-dom']
+    // Dedupe React to prevent version conflicts
+    dedupe: ['react', 'react-dom'],
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
@@ -34,6 +39,16 @@ export default defineConfig(({ mode }) => ({
   build: {
     commonjsOptions: {
       transformMixedEsModules: true,
-    }
+    },
+    rollupOptions: {
+      // External packages that should not be bundled
+      external: [],
+      output: {
+        // Ensure proper chunks for better caching
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+        },
+      },
+    },
   }
 }));
