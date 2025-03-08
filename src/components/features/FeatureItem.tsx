@@ -79,9 +79,7 @@ export const FeatureItem = ({
         // For partially visible card
         isPartiallyVisible && "opacity-80 shadow-none",
         // Add subtle border
-        `border border-${borderColorBase}-100 border-opacity-30`,
-        // Add top padding to prevent tag cutoff
-        isPopular && "mt-5 pt-1"
+        `border border-${borderColorBase}-100 border-opacity-30`
       )}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ 
@@ -103,10 +101,10 @@ export const FeatureItem = ({
         aria-expanded={isExpanded}
         className="w-full h-full flex flex-col p-4 sm:p-5 lg:p-6 z-10 relative text-left"
       >
-        {/* Popular Tag - Fixed positioning to ensure visibility */}
+        {/* Popular Tag - Improved positioning to prevent cutoff */}
         {isPopular && (
-          <div className="absolute -top-5 inset-x-0 flex justify-center z-20 px-4">
-            <div className="py-1 px-3 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-xs font-medium shadow-md">
+          <div className="absolute -top-3 inset-x-0 flex justify-center z-20 px-2">
+            <div className="py-1 px-2.5 flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-purple-medium to-brand-purple text-white text-xs font-medium shadow-md">
               <Sparkles className="h-3 w-3" />
               <span className="font-medium">Popular</span>
             </div>
