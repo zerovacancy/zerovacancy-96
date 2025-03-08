@@ -1,7 +1,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { WaitlistCTA } from "../ui/waitlist-cta";
+import { WaitlistCTA } from "../ui/waitlist/waitlist-cta";
 
 export function Hero() {
   return (

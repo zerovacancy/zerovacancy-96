@@ -5,7 +5,6 @@ import { useState, useRef, forwardRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { CheckCircle, Mail } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface EmailInputProps {
   email: string;
@@ -18,7 +17,6 @@ export const EmailInput = forwardRef<HTMLInputElement, EmailInputProps>(
   ({ email, setEmail, isLoading, inputRef }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
     const [isValid, setIsValid] = useState(false);
-    const isMobile = useIsMobile();
 
     // Validate email as user types
     useEffect(() => {
@@ -29,7 +27,7 @@ export const EmailInput = forwardRef<HTMLInputElement, EmailInputProps>(
     return (
       <div className={cn(
         "relative transition-all duration-300", 
-        isMobile ? "w-full" : "w-[380px]",
+        "w-full sm:w-[380px]",
         isFocused && "scale-[1.02] transform"
       )}>
         {/* Input field with mail icon */}
@@ -57,28 +55,20 @@ export const EmailInput = forwardRef<HTMLInputElement, EmailInputProps>(
           className={cn(
             "border transition-all duration-300",
             "focus:scale-100", // Prevent default scale to use our custom one
-            isMobile 
-              ? [
-                  "h-[50px]",
-                  "bg-white", 
-                  isFocused ? "border-indigo-400 ring-2 ring-indigo-200" : "border-gray-100",
-                  "pl-10 pr-3 py-2",
-                  "text-sm",
-                  "placeholder:text-gray-400", 
-                  "rounded-xl",
-                  "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]"
-                ] 
-              : [
-                  "h-[52px]",
-                  "border-gray-200 bg-white", 
-                  "focus:ring-2 focus:ring-primary/50 focus:border-transparent", 
-                  "pl-10 pr-4 py-2", 
-                  "text-base placeholder:text-gray-400", 
-                  "rounded-xl",
-                  isFocused ? "border-indigo-400 ring-2 ring-indigo-200 shadow-[0_0_10px_rgba(99,102,241,0.2)]" : "",
-                  "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]",
-                  "hover:border-indigo-300 hover:shadow-[0_0_8px_rgba(99,102,241,0.15)]"
-                ]
+            "h-[50px] sm:h-[52px]",
+            "bg-white", 
+            isFocused ? "border-indigo-400 ring-2 ring-indigo-200" : "border-gray-100",
+            "pl-10 pr-3 py-2 sm:pl-10 sm:pr-4 sm:py-2",
+            "text-sm sm:text-base",
+            "placeholder:text-gray-400", 
+            "rounded-xl",
+            "shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]",
+            "sm:border-gray-200 sm:bg-white", 
+            "sm:focus:ring-2 sm:focus:ring-primary/50 sm:focus:border-transparent", 
+            "sm:rounded-xl",
+            isFocused ? "sm:border-indigo-400 sm:ring-2 sm:ring-indigo-200 sm:shadow-[0_0_10px_rgba(99,102,241,0.2)]" : "",
+            "sm:shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]",
+            "sm:hover:border-indigo-300 sm:hover:shadow-[0_0_8px_rgba(99,102,241,0.15)]"
           )} 
           value={email} 
           onChange={e => setEmail(e.target.value)} 
