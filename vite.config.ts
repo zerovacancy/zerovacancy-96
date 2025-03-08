@@ -22,6 +22,11 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
-    exclude: ['@react-email/components']
+    exclude: ['@react-email/components', '@react-email/render']
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    }
   }
 }));
