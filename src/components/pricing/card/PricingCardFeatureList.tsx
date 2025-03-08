@@ -4,9 +4,10 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PricingCardFeature } from "./PricingCardFeature";
 import { ColorVariant } from "../PricingCardColors";
+import { PricingFeature } from "../types";
 
 interface PricingCardFeatureListProps {
-  features: string[];
+  features: PricingFeature[];
   color?: ColorVariant;
 }
 
@@ -37,14 +38,16 @@ export const PricingCardFeatureList = ({
       <div className="space-y-4">
         {(isExpanded ? features : features.slice(0, 4)).map((feature, index) => {
           // Check if this feature has a category heading (starts with **)
-          const isHeading = feature.startsWith("**") && feature.endsWith("**");
+          const isHeading = feature.text.startsWith("**") && feature.text.endsWith("**");
           
           return (
             <PricingCardFeature 
               key={index}
-              feature={feature}
+              feature={feature.text}
               isHeading={isHeading}
               color={color}
+              tooltip={feature.tooltip}
+              isPrimary={feature.primary}
             />
           );
         })}

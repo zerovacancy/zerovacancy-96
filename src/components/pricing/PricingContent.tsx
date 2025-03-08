@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -5,6 +6,7 @@ import { motion } from "framer-motion";
 import { PricingToggle } from "./PricingToggle";
 import { PricingCard } from "./card/PricingCard";
 import { PricingInteraction } from "./PricingInteraction";
+import { PricingFeature } from "./types";
 
 export interface PricingContentProps {
   subscription: any;
@@ -17,43 +19,43 @@ export const PricingContent: React.FC<PricingContentProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
-  // Mock pricing plans data
+  // Mock pricing plans data with correctly typed features
   const plans = [
     {
       title: "Free",
       features: [
-        "**Core Features**",
-        "Up to 3 properties",
-        "Basic listing details",
-        "Standard support",
+        { text: "**Core Features**", category: "header" },
+        { text: "Up to 3 properties" },
+        { text: "Basic listing details" },
+        { text: "Standard support" },
       ],
       showPopular: false,
     },
     {
       title: "Basic",
       features: [
-        "**Core Features**",
-        "Up to 10 properties",
-        "Enhanced listing details",
-        "Priority support",
-        "**Marketing Tools**",
-        "Social media sharing",
-        "Basic analytics dashboard",
+        { text: "**Core Features**", category: "header" },
+        { text: "Up to 10 properties" },
+        { text: "Enhanced listing details" },
+        { text: "Priority support" },
+        { text: "**Marketing Tools**", category: "header" },
+        { text: "Social media sharing" },
+        { text: "Basic analytics dashboard" },
       ],
       showPopular: true,
     },
     {
       title: "Professional",
       features: [
-        "**Core Features**",
-        "Unlimited properties",
-        "Premium listing details",
-        "24/7 support",
-        "**Marketing Tools**",
-        "Advanced analytics dashboard",
-        "SEO-Optimized descriptions",
-        "**Content Creation**",
-        "plus: 3 monthly content pieces",
+        { text: "**Core Features**", category: "header" },
+        { text: "Unlimited properties" },
+        { text: "Premium listing details" },
+        { text: "24/7 support" },
+        { text: "**Marketing Tools**", category: "header" },
+        { text: "Advanced analytics dashboard" },
+        { text: "SEO-Optimized descriptions", tooltip: "Content optimized to rank higher in search results for property listings" },
+        { text: "**Content Creation**", category: "header" },
+        { text: "plus: 3 monthly content pieces", primary: true },
       ],
       showPopular: false,
     },
