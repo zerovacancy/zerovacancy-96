@@ -11,7 +11,20 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
+    react({
+      // Force specific React version for all components
+      jsxImportSource: 'react',
+      // Ensure SWC treats React properly
+      swcOptions: {
+        jsc: {
+          transform: {
+            react: {
+              runtime: 'automatic',
+            },
+          },
+        },
+      },
+    }),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
