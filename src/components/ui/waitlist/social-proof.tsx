@@ -17,10 +17,10 @@ export function SocialProof() {
         
         <div className={cn("flex items-center whitespace-nowrap", isMobile && "text-xs")}>
           <Users className="h-4 w-4 text-indigo-800 mr-1.5" />
-          <span className="font-bold text-indigo-700 px-0">2,165+</span>
-          
+          <span className="font-bold text-indigo-700">2,165+</span>
+          <span className="text-gray-800 font-medium"> people joined</span>
           <span className="text-gray-400 mx-1.5">•</span>
-          <span className="px-[2px] text-[brand-purple-medium] text-stone-800 font-normal">Queue: </span>
+          <span className="text-gray-800">Queue: </span>
           <span className="text-indigo-700 font-bold">{isMobile ? "1-2 days" : "2-3 weeks"}</span>
         </div>
       </div>
