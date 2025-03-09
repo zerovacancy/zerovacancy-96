@@ -1,20 +1,7 @@
 
 import { motion } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export const BackgroundEffects = () => {
-  const isMobile = useIsMobile();
-  
-  // Don't render decorative animations on mobile
-  if (isMobile) {
-    return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Simplified background for mobile - just a single static gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white to-slate-50/50 opacity-50" />
-      </div>
-    );
-  }
-  
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {/* Top-right purple blob */}

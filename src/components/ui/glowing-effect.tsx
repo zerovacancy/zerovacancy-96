@@ -4,7 +4,6 @@
 import { memo, useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { animate } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface GlowingEffectProps {
   blur?: number;
@@ -35,14 +34,10 @@ const GlowingEffect = memo(
     const containerRef = useRef<HTMLDivElement>(null);
     const lastPosition = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef<number>(0);
-    const isMobile = useIsMobile();
-    
-    // Skip expensive calculations on mobile
-    const isDisabled = disabled || isMobile;
 
     const handleMove = useCallback(
       (e?: MouseEvent | { x: number; y: number }) => {
-        if (!containerRef.current || isDisabled) return;
+        if (!containerRef.current) return;
 
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
@@ -101,11 +96,11 @@ const GlowingEffect = memo(
           });
         });
       },
-      [inactiveZone, proximity, movementDuration, isDisabled]
+      [inactiveZone, proximity, movementDuration]
     );
 
     useEffect(() => {
-      if (isDisabled) return;
+      if (disabled) return;
 
       const handleScroll = () => handleMove();
       const handlePointerMove = (e: PointerEvent) => handleMove(e);
@@ -122,19 +117,7 @@ const GlowingEffect = memo(
         window.removeEventListener("scroll", handleScroll);
         document.body.removeEventListener("pointermove", handlePointerMove);
       };
-    }, [handleMove, isDisabled]);
-
-    // Use simpler content for mobile
-    if (isMobile) {
-      return (
-        <div 
-          className={cn(
-            "pointer-events-none absolute -inset-px hidden rounded-[inherit] border-[0.5px] border-gray-200/40 opacity-20",
-            className
-          )}
-        />
-      );
-    }
+    }, [handleMove, disabled]);
 
     return (
       <>
@@ -143,7 +126,7 @@ const GlowingEffect = memo(
             "pointer-events-none absolute -inset-px hidden rounded-[inherit] border opacity-0 transition-opacity",
             glow && "opacity-100",
             variant === "white" && "border-white",
-            isDisabled && "!block"
+            disabled && "!block"
           )}
         />
         <div
@@ -182,7 +165,7 @@ const GlowingEffect = memo(
             glow && "opacity-100",
             blur > 0 && "blur-[var(--blur)] ",
             className,
-            isDisabled && "!hidden"
+            disabled && "!hidden"
           )}
         >
           <div

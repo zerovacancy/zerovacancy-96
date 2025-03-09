@@ -2,7 +2,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { OptimizedSpotlight } from './optimized-spotlight';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 interface GradientBlobBackgroundProps {
   className?: string;
@@ -43,7 +42,6 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const isReducedMotion = useRef(false);
-  const isMobile = useIsMobile();
   
   // Check for reduced motion preference
   useEffect(() => {
@@ -51,8 +49,8 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
     isReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, []);
 
-  // Don't render animations for users with reduced motion preference or on mobile
-  const shouldAnimate = isMounted && !isReducedMotion.current && !isMobile;
+  // Don't render animations for users with reduced motion preference
+  const shouldAnimate = isMounted && !isReducedMotion.current;
   
   // Determine blob sizes based on the blobSize prop
   const getBlobSizeClass = (position: 'first' | 'second' | 'third') => {
@@ -107,22 +105,16 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
   }, []);
 
   // Determine how many blobs to render based on screen width
-  const blobCount = windowWidth < 768 ? 2 : 5;
-  
-  // Reduce blob opacity on mobile
-  const effectiveBlobOpacity = isMobile ? blobOpacity * 0.3 : blobOpacity;
-  
-  // Simplify pattern on mobile
-  const effectivePattern = isMobile ? 'none' : pattern;
+  const blobCount = windowWidth < 768 ? 3 : 5;
 
   return (
     <div className={cn(`relative w-full overflow-hidden ${baseColor}`, className)}>
-      {/* Pattern background - only if pattern is not 'none' and not on mobile */}
-      {effectivePattern === 'dots' && (
+      {/* Pattern background - only if pattern is not 'none' */}
+      {pattern === 'dots' && (
         <div className={`absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-${dotOpacity * 100}`}></div>
       )}
       
-      {effectivePattern === 'grid' && (
+      {pattern === 'grid' && (
         <div className={`absolute inset-0 opacity-${dotOpacity * 10}`}>
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -135,46 +127,46 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
         </div>
       )}
       
-      {/* Render minimum blobs on mobile with reduced opacity */}
+      {/* Render main blobs (always visible) */}
       <div 
         className={cn(
-          `absolute -top-10 -left-20 ${getBlobSizeClass('first')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${effectiveBlobOpacity * 100}`
+          `absolute -top-10 -left-20 ${getBlobSizeClass('first')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
         )}
         style={shouldAnimate ? { animation: `blob ${getAnimationDuration(45)} infinite` } : {}}
       ></div>
       <div 
         className={cn(
-          `absolute top-[40%] -right-20 ${getBlobSizeClass('second')} ${blobColors.second} rounded-full mix-blend-multiply filter blur-3xl opacity-${effectiveBlobOpacity * 100}`
+          `absolute top-[40%] -right-20 ${getBlobSizeClass('second')} ${blobColors.second} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
         )}
         style={shouldAnimate ? { animation: `blob ${getAnimationDuration(50)} infinite`, animationDelay: `${getAnimationDuration(8)}` } : {}}
       ></div>
+      <div 
+        className={cn(
+          `absolute -bottom-40 left-[20%] ${getBlobSizeClass('third')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
+        )}
+        style={shouldAnimate ? { animation: `blob ${getAnimationDuration(40)} infinite`, animationDelay: `${getAnimationDuration(15)}` } : {}}
+      ></div>
       
-      {/* Only render these blobs if not on mobile */}
-      {blobCount > 2 && (
+      {/* Render additional blobs only for larger screens */}
+      {blobCount > 3 && (
         <>
           <div 
             className={cn(
-              `absolute -bottom-40 left-[20%] ${getBlobSizeClass('third')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${effectiveBlobOpacity * 100}`
-            )}
-            style={shouldAnimate ? { animation: `blob ${getAnimationDuration(40)} infinite`, animationDelay: `${getAnimationDuration(15)}` } : {}}
-          ></div>
-          <div 
-            className={cn(
-              `absolute top-[15%] right-[25%] ${getBlobSizeClass('second')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${effectiveBlobOpacity * 100}`
+              `absolute top-[15%] right-[25%] ${getBlobSizeClass('second')} ${blobColors.first} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
             )}
             style={shouldAnimate ? { animation: `blob ${getAnimationDuration(55)} infinite`, animationDelay: `${getAnimationDuration(12)}` } : {}}
           ></div>
           <div 
             className={cn(
-              `absolute top-[70%] -left-40 ${getBlobSizeClass('first')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${effectiveBlobOpacity * 100}`
+              `absolute top-[70%] -left-40 ${getBlobSizeClass('first')} ${blobColors.third} rounded-full mix-blend-multiply filter blur-3xl opacity-${blobOpacity * 100}`
             )}
             style={shouldAnimate ? { animation: `blob ${getAnimationDuration(48)} infinite`, animationDelay: `${getAnimationDuration(20)}` } : {}}
           ></div>
         </>
       )}
       
-      {/* Spotlight effect - only if withSpotlight is true and not on mobile */}
-      {withSpotlight && !isMobile && (
+      {/* Spotlight effect - only if withSpotlight is true */}
+      {withSpotlight && (
         <OptimizedSpotlight className={spotlightClassName} size={spotlightSize} />
       )}
       

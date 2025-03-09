@@ -12,20 +12,6 @@ export function Hero() {
   const rotatingWords = ["CONVERTS", "ENGAGES", "CAPTIVATES", "DRIVES LEADS"];
   const isMobile = useIsMobile();
   
-  // Simplified animation for mobile
-  const mobileMotionProps = {
-    initial: { opacity: 0.9 },
-    animate: { opacity: 1 },
-    transition: { duration: 0.5 }
-  };
-  
-  // Full animation for desktop
-  const desktopMotionProps = {
-    initial: { opacity: 0.8 },
-    animate: { opacity: 1 },
-    transition: { duration: 1, repeat: Infinity, repeatType: "reverse" }
-  };
-  
   return (
     <GradientBlobBackground 
       blobColors={{
@@ -33,11 +19,11 @@ export function Hero() {
         second: "bg-indigo-200",
         third: "bg-violet-200"
       }}
-      blobOpacity={isMobile ? 0.15 : 0.35}
-      withSpotlight={!isMobile}
+      blobOpacity={0.35}
+      withSpotlight={true}
       spotlightClassName="from-purple-500/10 via-violet-500/10 to-blue-500/10"
       baseColor="bg-white/60"
-      pattern={isMobile ? "none" : "dots"}
+      pattern="dots"
       className="w-full overflow-hidden"
       animationSpeed="slow"
     >
@@ -51,26 +37,26 @@ export function Hero() {
             <motion.span 
               className="text-display px-0 mx-0 relative"
               style={{ color: "#4A2DD9" }} // Use style for the specific color to avoid class conflicts
-              {...(isMobile ? mobileMotionProps : desktopMotionProps)}
+              initial={{ opacity: 0.8 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
             >
               PROPERTY CONTENT THAT
-              {!isMobile && (
-                <GlowingEffect
-                  blur={10}
-                  spread={15}
-                  glow={true}
-                  variant="default"
-                  disabled={false}
-                  movementDuration={2}
-                  borderWidth={1}
-                />
-              )}
+              <GlowingEffect
+                blur={10}
+                spread={15}
+                glow={true}
+                variant="default"
+                disabled={false}
+                movementDuration={2}
+                borderWidth={1}
+              />
             </motion.span>
             <TextRotate 
               texts={rotatingWords}
               mainClassName="text-display inline-block"
               style={{ color: "#4A2DD9" }}
-              rotationInterval={isMobile ? 3000 : 2000}
+              rotationInterval={2000}
               exit={{ y: "-120%", opacity: 0 }}
             />
           </h1>

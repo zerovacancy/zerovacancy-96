@@ -41,13 +41,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         "flex-1 pb-0 w-full",
         isMobile ? "pt-0 max-w-[100vw] overflow-hidden" : ""
       )}>
-        {/* Strip down background effects on mobile for better performance */}
-        <div className={cn(
-          "w-full",
-          isMobile ? "bg-white/90" : ""
-        )}>
-          {children}
-        </div>
+        {children}
         <Footer />
       </main>
       
