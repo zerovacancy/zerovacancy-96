@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, forwardRef } from 'react';
 import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -21,7 +21,7 @@ interface BackgroundEffectsProps {
   mobileFullWidth?: boolean;
 }
 
-export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({ 
+export const BackgroundEffects = forwardRef<HTMLDivElement, BackgroundEffectsProps>(({ 
   className, 
   children,
   blobColors = {
@@ -37,7 +37,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
   animationSpeed = 'slow',
   id,
   mobileFullWidth = false
-}) => {
+}, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
   const isMobile = useIsMobile();
@@ -80,10 +80,18 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
 
   return (
     <div 
-      ref={containerRef} 
+      ref={(node) => {
+        // Handle both the forwarded ref and the local ref
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+        containerRef.current = node;
+      }}
       id={id} 
       className={cn(
-        "relative w-full overflow-hidden",
+        "relative w-full overflow-visible",
         isMobile && "max-w-full",
         className
       )}
@@ -91,7 +99,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       {isVisible ? (
         <GradientBlobBackground 
           className={cn(
-            isMobile ? "overflow-hidden" : "overflow-visible"
+            isMobile ? "overflow-visible" : "overflow-visible"
           )}
           blobColors={blobColors}
           blobOpacity={blobOpacity}
@@ -119,6 +127,8 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       )}
     </div>
   );
-};
+});
+
+BackgroundEffects.displayName = 'BackgroundEffects';
 
 export default BackgroundEffects;

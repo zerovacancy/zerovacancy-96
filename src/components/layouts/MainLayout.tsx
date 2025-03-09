@@ -34,10 +34,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   const isMobile = useIsMobile();
   
   return (
-    <div className="flex flex-col min-h-screen w-full">
+    <div className="flex flex-col min-h-screen w-full overflow-visible">
       <Header />
       
-      {/* Removed the main tag, content is now directly in the parent div */}
+      {/* Content container with no scroll barriers */}
       <div className={cn(
         "flex-1 w-full overflow-visible",
         isMobile ? "pt-0 max-w-[100vw]" : ""

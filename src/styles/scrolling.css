@@ -21,7 +21,7 @@ body {
   height: 100%;
   /* Single scrolling container */
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: auto !important;
   /* Prevent scroll chaining/bouncing effect on some browsers */
   overscroll-behavior-y: none;
 }
@@ -29,10 +29,13 @@ body {
 /* Remove scroll containers that break the single page scroll experience */
 .section-container,
 .content-container,
-section {
+section,
+[data-radix-scroll-area-viewport] {
   overflow: visible !important;
   overflow-x: visible !important;
   overflow-y: visible !important;
+  height: auto !important;
+  max-height: none !important;
 }
 
 /* Target features section specifically for smooth scrolling */
@@ -70,13 +73,13 @@ section {
 
   /* Target all Radix UI scroll viewports on mobile */
   [data-radix-scroll-area-viewport] {
-    max-height: none;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
   }
 
   /* Prevent nested scrolling containers on mobile */
-  .section-container,
-  .content-container,
-  section {
+  section, div {
     overflow: visible !important;
   }
 
@@ -85,5 +88,16 @@ section {
     overflow-x: auto !important;
     overflow-y: hidden !important;
     height: 100% !important;
+  }
+  
+  /* Force single scrolling container */
+  #root, main, .section-container, .content-container {
+    overflow: visible !important;
+    height: auto !important;
+  }
+  
+  /* Fix for background effects containers */
+  .bg-white\/60, .bg-white\/80 {
+    overflow: visible !important;
   }
 }

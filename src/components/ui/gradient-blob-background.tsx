@@ -108,7 +108,7 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
   const blobCount = windowWidth < 768 ? 3 : 5;
 
   return (
-    <div className={cn(`relative w-full overflow-hidden ${baseColor}`, className)}>
+    <div className={cn(`relative w-full overflow-visible ${baseColor}`, className)}>
       {/* Pattern background - only if pattern is not 'none' */}
       {pattern === 'dots' && (
         <div className={`absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-${dotOpacity * 100}`}></div>
@@ -171,7 +171,7 @@ export const GradientBlobBackground: React.FC<GradientBlobBackgroundProps> = ({
       )}
       
       {/* Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 overflow-visible">
         {children}
       </div>
     </div>
