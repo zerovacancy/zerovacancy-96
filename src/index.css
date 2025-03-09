@@ -86,10 +86,19 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
   main {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     padding-bottom: 2rem !important; /* Added space at the bottom */
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .mobile-px-adjust {

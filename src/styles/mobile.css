@@ -1,8 +1,82 @@
 
 /* Mobile touch optimizations */
 @media (max-width: 768px) {
+  /* Base container fixes */
   #root {
     padding: 0.5rem;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  /* Fix container sizing and prevent overflow */
+  .mobile-content-container,
+  .section-container,
+  .social-proof-container,
+  section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Consolidated spacing for mobile containers */
+  .mobile-content-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Prevent double padding in nested containers */
+  .section-container .mobile-content-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  /* Section spacing consolidation */
+  section {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .section-container {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Fix margins for mobile stacking */
+  .mobile-margin-fix {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Reset excessive margins on nested containers */
+  .section-container .mobile-margin-fix {
+    margin-bottom: 0;
+  }
+
+  /* Social proof component specific fixes */
+  .social-proof-container {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  
+  /* Improve landing page section spacing */
+  #how-it-works,
+  #find-creators,
+  #features,
+  #pricing {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+    max-width: 100%;
   }
 
   /* Mobile optimization: Disable hover effects on mobile for better performance */
@@ -31,61 +105,15 @@
     transition-duration: 0.3s !important;
   }
   
-  /* Improve padding for mobile content */
-  .mobile-content-container {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-  
   /* Improve touch targets for mobile */
   button, a, input, select, textarea {
     min-height: 36px;
-  }
-  
-  /* Fixed spacing for sections */
-  body {
-    padding-bottom: 0;
-  }
-
-  /* Fix section spacing on mobile */
-  section {
-    margin-bottom: 1rem !important;
-    padding-bottom: 0.5rem !important;
   }
   
   /* Fix stacking context issues */
   .mobile-z-fix {
     z-index: 1;
     position: relative;
-  }
-  
-  /* Fix section spacing in index page */
-  #how-it-works,
-  #find-creators,
-  #features,
-  #pricing {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
-  
-  /* Ensure sections don't bleed into each other */
-  .section-container {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  /* Fix excessive margins on mobile */
-  .mobile-margin-fix {
-    margin-bottom: 0.5rem !important;
-  }
-
-  /* Fix for the spacing in social proof component */
-  .social-proof-container {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
   }
 }
 

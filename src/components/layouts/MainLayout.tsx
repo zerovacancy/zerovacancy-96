@@ -47,7 +47,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     pattern: "dots" as const,
     className: "pt-0",
     animationSpeed: "slow" as const,
-    mobileFullWidth: isMobile
+    mobileFullWidth: false // Changed to false to prevent overflow issues
   };
   
   const mergedBackgroundProps = {
@@ -60,30 +60,34 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       <Header />
       
       <main className={cn(
-        "flex-1 pb-0 w-full", // Removed bottom padding that was causing issues
-        isMobile ? "pt-0" : ""
+        "flex-1 pb-0 w-full",
+        isMobile ? "pt-0 overflow-x-hidden" : ""
       )}>
         {withBackground ? (
           <>
-            <BackgroundEffects 
-              blobColors={mergedBackgroundProps.blobColors}
-              blobOpacity={mergedBackgroundProps.blobOpacity}
-              withSpotlight={mergedBackgroundProps.withSpotlight}
-              spotlightClassName={mergedBackgroundProps.spotlightClassName}
-              baseColor={mergedBackgroundProps.baseColor}
-              pattern={mergedBackgroundProps.pattern}
-              className={mergedBackgroundProps.className}
-              animationSpeed={mergedBackgroundProps.animationSpeed}
-              mobileFullWidth={mergedBackgroundProps.mobileFullWidth}
-            >
-              <div className={cn(
-                "w-full",
-                isMobile ? "pb-6" : "" // Add spacing only for mobile
-              )}>
-                {children}
-              </div>
-            </BackgroundEffects>
-            {/* Footer moved outside of BackgroundEffects to fix mobile layout */}
+            <div className={cn(
+              "w-full",
+              isMobile ? "overflow-x-hidden" : ""
+            )}>
+              <BackgroundEffects 
+                blobColors={mergedBackgroundProps.blobColors}
+                blobOpacity={mergedBackgroundProps.blobOpacity}
+                withSpotlight={mergedBackgroundProps.withSpotlight}
+                spotlightClassName={mergedBackgroundProps.spotlightClassName}
+                baseColor={mergedBackgroundProps.baseColor}
+                pattern={mergedBackgroundProps.pattern}
+                className={mergedBackgroundProps.className}
+                animationSpeed={mergedBackgroundProps.animationSpeed}
+                mobileFullWidth={mergedBackgroundProps.mobileFullWidth}
+              >
+                <div className={cn(
+                  "w-full",
+                  isMobile ? "pb-4" : "" 
+                )}>
+                  {children}
+                </div>
+              </BackgroundEffects>
+            </div>
             <Footer />
           </>
         ) : (

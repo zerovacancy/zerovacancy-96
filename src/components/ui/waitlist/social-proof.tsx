@@ -10,8 +10,9 @@ export function SocialProof() {
   
   return (
     <div className={cn(
-      "flex items-center justify-center mt-2 sm:mt-3",
-      "social-proof-container" // Added for mobile spacing fixes
+      "flex items-center justify-center mt-2 sm:mt-3 w-full",
+      "social-proof-container",
+      isMobile ? "max-w-[100%] overflow-x-hidden px-0" : "" // Fixed container width for mobile
     )}>
       {/* Social proof pill */}
       <div className={cn(
