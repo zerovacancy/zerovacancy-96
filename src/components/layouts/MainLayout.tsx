@@ -34,12 +34,15 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   const isMobile = useIsMobile();
   
   return (
-    <div className="flex flex-col min-h-screen w-full">
+    <div className={cn(
+      "flex flex-col min-h-screen w-full",
+      isMobile ? "overflow-visible" : ""
+    )}>
       <Header />
       
       <main className={cn(
         "flex-1 pb-0 w-full",
-        isMobile ? "pt-0 max-w-[100vw] overflow-hidden" : ""
+        isMobile ? "pt-0 max-w-[100vw] overflow-visible" : ""
       )}>
         {children}
         <Footer />

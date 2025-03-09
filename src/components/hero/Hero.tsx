@@ -24,12 +24,12 @@ export function Hero() {
       spotlightClassName="from-purple-500/10 via-violet-500/10 to-blue-500/10"
       baseColor="bg-white/60"
       pattern="dots"
-      className="w-full overflow-hidden"
+      className="w-full"
       animationSpeed="slow"
     >
       <section className={cn(
-        "flex flex-col items-center justify-center px-3 sm:px-6 py-8 sm:py-16 md:py-20 min-h-[40vh] relative z-10 w-full",
-        isMobile ? "pt-4 pb-6 px-2 max-w-[100vw]" : "" // Adjusted padding for mobile
+        "flex flex-col items-center justify-center px-3 sm:px-6 py-8 sm:py-16 md:py-20 w-full",
+        isMobile ? "pt-4 pb-6 px-2" : "" // Adjusted padding for mobile
       )}>
         <div className="max-w-5xl w-full mx-auto flex flex-col gap-6 sm:gap-10">
           <h1 className="text-center flex flex-col items-center gap-2 sm:gap-4">
@@ -70,7 +70,7 @@ export function Hero() {
         </div>
         
         <div className={cn(
-          "w-full max-w-xl mx-auto relative overflow-visible",
+          "w-full max-w-xl mx-auto relative",
           isMobile ? "mt-6 px-1" : "mt-10 sm:mt-12" // Adjusted margin for mobile
         )}>
           <WaitlistCTA />

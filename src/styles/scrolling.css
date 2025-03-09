@@ -31,6 +31,14 @@
   }
 }
 
+/* Explicitly disable scroll snap on mobile */
+@media (max-width: 768px) {
+  html, body, main, section, div {
+    scroll-snap-type: none !important;
+    scroll-snap-align: none !important;
+  }
+}
+
 /* Gradual fade for scroll edges */
 .scroll-fade-edges {
   mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);

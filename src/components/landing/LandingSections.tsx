@@ -23,73 +23,18 @@ const SectionLoader = () => (
 
 export const LandingSections: React.FC = () => {
   const isMobile = useIsMobile();
-  const sectionsRef = useRef<(HTMLElement | null)[]>([]);
-  const [visibleSections, setVisibleSections] = useState<{[key: number]: boolean}>({
-    0: true, // Hero section is visible by default
-    1: true, 
-    2: true,
-    3: true,
-    4: true,
-    5: true
-  });
   
-  // Optimized Intersection Observer with useCallback to avoid recreating functions
-  const observerCallback = useCallback((entries: IntersectionObserverEntry[]) => {
-    entries.forEach(entry => {
-      const index = parseInt(entry.target.getAttribute('data-section-index') || '-1', 10);
-      if (index >= 0) {
-        setVisibleSections(prev => ({
-          ...prev,
-          [index]: entry.isIntersecting || prev[index] // Keep sections visible once they've been seen
-        }));
-      }
-    });
-  }, []);
-  
-  // Use Intersection Observer to optimize rendering of sections with safety timeout
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      observerCallback,
-      { threshold: 0.1, rootMargin: '200px' }
-    );
-    
-    sectionsRef.current.forEach((section, index) => {
-      if (!section) return;
-      
-      section.setAttribute('data-section-index', index.toString());
-      observer.observe(section);
-    });
-
-    // Safety timeout to make all sections visible if they aren't already
-    const safetyTimeout = setTimeout(() => {
-      setVisibleSections({
-        0: true,
-        1: true,
-        2: true,
-        3: true,
-        4: true,
-        5: true
-      });
-    }, 1000);
-    
-    return () => {
-      observer.disconnect();
-      clearTimeout(safetyTimeout);
-    };
-  }, [observerCallback]);
-  
-  // Helper function to add section refs
-  const addSectionRef = (index: number) => (el: HTMLElement | null) => {
-    sectionsRef.current[index] = el;
-  };
+  // Create a single array to store refs instead of using individual states
+  // This avoids too many re-renders and state updates
+  const [sectionsVisible, setSectionsVisible] = useState(true);
   
   return (
     <div className={cn(
       "w-full",
-      isMobile ? "space-y-4 max-w-[100vw] overflow-hidden" : "" // Better spacing between sections on mobile
+      isMobile ? "max-w-[100vw]" : "" 
     )}>
-      {/* Hero Section - Always visible */}
-      <section ref={addSectionRef(0)} className={cn(
+      {/* Hero Section */}
+      <section className={cn(
         "w-full", 
         isMobile ? "section-spacing pt-0" : ""
       )}>
@@ -97,12 +42,11 @@ export const LandingSections: React.FC = () => {
       </section>
       
       {/* How It Works Section */}
-      <BeamsBackground id="how-it-works" className="w-full overflow-hidden">
+      <BeamsBackground id="how-it-works" className="w-full">
         <section 
-          ref={addSectionRef(1)} 
           className={cn(
             "relative w-full",
-            isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+            isMobile ? "mb-4 mt-2" : "" 
           )}
         >
           <div className="relative z-10">
@@ -115,11 +59,10 @@ export const LandingSections: React.FC = () => {
       
       {/* Search Section */}
       <section 
-        ref={addSectionRef(2)} 
         id="find-creators" 
         className={cn(
           "relative w-full",
-          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+          isMobile ? "mb-4 mt-2" : ""
         )}
       >
         <div className={cn(
@@ -138,14 +81,13 @@ export const LandingSections: React.FC = () => {
         blobOpacity={0.15}
         baseColor="bg-white/60"
         mobileFullWidth={true}
-        className="w-full overflow-hidden"
+        className="w-full"
       >
         <section 
-          ref={addSectionRef(3)}
           id="features"
           className={cn(
             "w-full",
-            isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+            isMobile ? "mb-4 mt-2" : "" 
           )}
         >
           <Suspense fallback={<SectionLoader />}>
@@ -156,11 +98,10 @@ export const LandingSections: React.FC = () => {
 
       {/* Pricing Section */}
       <section 
-        ref={addSectionRef(4)}
         id="pricing"
         className={cn(
           "w-full",
-          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+          isMobile ? "mb-4 mt-2" : "" 
         )}
       >
         <Suspense fallback={<SectionLoader />}>
@@ -170,10 +111,9 @@ export const LandingSections: React.FC = () => {
 
       {/* Final CTA Section */}
       <div 
-        ref={addSectionRef(5)} 
         className={cn(
           "relative w-full",
-          isMobile ? "pt-2 pb-8 max-w-[100vw] overflow-hidden" : "" // Adjust bottom spacing for mobile to avoid footer overlap
+          isMobile ? "pt-2 pb-8" : "" 
         )}
       >
         <div className={cn(

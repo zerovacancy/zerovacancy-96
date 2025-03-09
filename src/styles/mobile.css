@@ -135,6 +135,29 @@
     position: static !important;
   }
 
+  /* ==== Override BackgroundEffects Component ==== */
+  /* These target the specific component causing issues */
+  .relative.w-full.overflow-hidden,
+  .GradientBlobBackground,
+  .BeamsBackground {
+    height: auto !important;
+    min-height: auto !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  /* ==== Fix Section Containers and Background Components ==== */
+  /* Aggressive targeting of elements likely causing scroll hijacking */
+  .GradientBlobBackground > div,
+  .BeamsBackground > div,
+  .BackgroundEffects > div,
+  [class*="background"] > div {
+    position: relative !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
   /* ==== Retain Necessary Mobile Optimizations ==== */
   /* Improve touch targets for mobile */
   button, a, input, select, textarea {
