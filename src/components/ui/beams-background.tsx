@@ -11,93 +11,63 @@ interface AnimatedGradientBackgroundProps {
   id?: string;
 }
 
+interface Beam {
+  x: number;
+  y: number;
+  width: number;
+  length: number;
+  angle: number;
+  speed: number;
+  opacity: number;
+  hue: number;
+  pulse: number;
+  pulseSpeed: number;
+}
+
+function createBeam(width: number, height: number): Beam {
+  const angle = -35 + Math.random() * 10;
+  return {
+    x: Math.random() * width * 1.5 - width * 0.25,
+    y: Math.random() * height * 1.5 - height * 0.25,
+    width: 30 + Math.random() * 60,
+    length: height * 2.5,
+    angle: angle,
+    speed: 0.6 + Math.random() * 1.2,
+    opacity: 0.12 + Math.random() * 0.16,
+    hue: 190 + Math.random() * 70,
+    pulse: Math.random() * Math.PI * 2,
+    pulseSpeed: 0.02 + Math.random() * 0.03
+  };
+}
+
 export function BeamsBackground({
   className,
   children,
   intensity = "medium",
   id
 }: AnimatedGradientBackgroundProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const beamsRef = useRef<Beam[]>([]);
+  const animationFrameRef = useRef<number>(0);
   const isMobile = useIsMobile();
   
-  // Simplified mobile version with no canvas animations
-  if (isMobile) {
-    return (
-      <div 
-        id={id}
-        className={cn("relative bg-white", className)}
-      >
-        <div className="absolute inset-0 bg-[#e6e3ff]/15"></div>
-        <div className="relative z-10 w-full">
-          {children}
-        </div>
-      </div>
-    );
-  }
-
-  // Full desktop version with animations
-  return (
-    <div 
-      id={id}
-      className={cn("relative bg-white", className)}
-    >
-      <DesktopBeamsBackground intensity={intensity} />
-      <div className="relative z-10 w-full">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-// Separated component to avoid rendering complex logic on mobile
-function DesktopBeamsBackground({ intensity }: { intensity: string }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>(0);
-  const beamsRef = useRef<any[]>([]);
-  
-  const opacityMap: Record<string, number> = {
+  const MINIMUM_BEAMS = 20;
+  const opacityMap = {
     subtle: 0.7,
     medium: 0.85,
     strong: 1
   };
   
+  // Skip complex animations on mobile
   useEffect(() => {
-    // Desktop animation setup logic
+    // Return early if on mobile
+    if (isMobile) return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
     
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    
-    interface Beam {
-      x: number;
-      y: number;
-      width: number;
-      length: number;
-      angle: number;
-      speed: number;
-      opacity: number;
-      hue: number;
-      pulse: number;
-      pulseSpeed: number;
-    }
-
-    function createBeam(width: number, height: number): Beam {
-      const angle = -35 + Math.random() * 10;
-      return {
-        x: Math.random() * width * 1.5 - width * 0.25,
-        y: Math.random() * height * 1.5 - height * 0.25,
-        width: 30 + Math.random() * 60,
-        length: height * 2.5,
-        angle: angle,
-        speed: 0.6 + Math.random() * 1.2,
-        opacity: 0.12 + Math.random() * 0.16,
-        hue: 190 + Math.random() * 70,
-        pulse: Math.random() * Math.PI * 2,
-        pulseSpeed: 0.02 + Math.random() * 0.03
-      };
-    }
-    
-    const MINIMUM_BEAMS = 20;
     
     const updateCanvasSize = () => {
       const dpr = window.devicePixelRatio || 1;
@@ -175,10 +145,32 @@ function DesktopBeamsBackground({ intensity }: { intensity: string }) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [intensity, opacityMap]);
+  }, [intensity, isMobile]);
+  
+  // Simplified mobile version
+  if (isMobile) {
+    return (
+      <div 
+        id={id}
+        className={cn("relative bg-white", className)}
+        style={{
+          overflow: 'visible',
+          height: 'auto'
+        }}
+      >
+        <div className="absolute inset-0 bg-[#e6e3ff]/15"></div>
+        <div className="relative z-10 w-full">
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <>
+    <div 
+      id={id}
+      className={cn("relative overflow-hidden bg-white", className)}
+    >
       <canvas ref={canvasRef} className="absolute inset-0" style={{
         filter: "blur(15px)"
       }} />
@@ -197,7 +189,11 @@ function DesktopBeamsBackground({ intensity }: { intensity: string }) {
         }} 
         className="absolute inset-0 bg-[#e6e3ff]/15" 
       />
-    </>
+
+      <div className="relative z-10 w-full">
+        {children}
+      </div>
+    </div>
   );
 }
 

@@ -5,6 +5,7 @@ import { PromotionalBanner } from '@/components/landing/PromotionalBanner';
 import { LandingSections } from '@/components/landing/LandingSections';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { BackgroundEffects } from '@/components/features/BackgroundEffects';
 
 /**
  * Main landing page component with performance optimizations
@@ -17,13 +18,11 @@ const Index = () => {
   // Initialize local storage and dialog state
   useEffect(() => {
     const hasVisited = localStorage.getItem('hasVisited');
-    const shouldShowDialog = !hasVisited && !isMobile; // Only show dialog on desktop
-    setShowGlowDialog(shouldShowDialog);
-    
+    setShowGlowDialog(!hasVisited);
     if (!hasVisited) {
       localStorage.setItem('hasVisited', 'true');
     }
-  }, [isMobile]);
+  }, []);
   
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
@@ -31,7 +30,7 @@ const Index = () => {
   
   return (
     <>
-      <MainLayout withBackground={!isMobile}>
+      <MainLayout>
         {!isMobile && (
           <PromotionalBanner 
             showBanner={showBanner}
@@ -41,7 +40,7 @@ const Index = () => {
         )}
         <LandingSections />
       </MainLayout>
-      {!isMobile && <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />}
+      <GlowDialog open={showGlowDialog} onOpenChange={setShowGlowDialog} />
     </>
   );
 };

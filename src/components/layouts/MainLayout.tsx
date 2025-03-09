@@ -5,7 +5,6 @@ import Footer from '../Footer';
 import { BottomNav } from '../navigation/BottomNav';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { BackgroundEffects } from '@/components/features/BackgroundEffects';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -35,20 +34,17 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   const isMobile = useIsMobile();
   
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className={cn(
+      "flex flex-col min-h-screen w-full",
+      isMobile ? "overflow-x-hidden" : ""
+    )}>
       <Header />
       
       <main className={cn(
-        "flex-1 relative w-full",
-        isMobile ? "pt-0" : ""
+        "flex-1 pb-0 w-full",
+        isMobile ? "pt-0 max-w-[100vw]" : ""
       )}>
-        {withBackground && !isMobile ? (
-          <BackgroundEffects {...(backgroundProps || {})}>
-            {children}
-          </BackgroundEffects>
-        ) : (
-          <>{children}</>
-        )}
+        {children}
         <Footer />
       </main>
       
