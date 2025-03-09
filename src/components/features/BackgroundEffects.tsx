@@ -18,7 +18,7 @@ interface BackgroundEffectsProps {
   baseColor?: string;
   animationSpeed?: 'slow' | 'medium' | 'fast';
   id?: string;
-  mobileFullWidth?: boolean; // Added to control mobile full width behavior
+  mobileFullWidth?: boolean;
 }
 
 export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({ 
@@ -84,6 +84,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       id={id} 
       className={cn(
         "relative w-full overflow-hidden", 
+        // Fix for mobile: only apply px-0 when mobileFullWidth is true
         isMobile && mobileFullWidth ? "px-0" : "", 
         className
       )}
@@ -101,7 +102,8 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
           animationSpeed={animationSpeed}
         >
           <div className={cn(
-            isMobile ? "px-2 py-2 mobile-z-fix" : "", // Add mobile padding and fix z-index
+            // Improved mobile padding - consistent across all child content
+            isMobile ? "px-3 py-2 mobile-z-fix" : "", 
             "relative"
           )}>
             {children}
@@ -110,7 +112,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       ) : (
         // Fallback to ensure content is visible even if effects are disabled
         <div className={cn("relative w-full", baseColor)}>
-          <div className={cn(isMobile ? "px-2 py-2" : "")}>
+          <div className={cn(isMobile ? "px-3 py-2" : "")}>
             {children}
           </div>
         </div>

@@ -83,8 +83,8 @@ export const LandingSections: React.FC = () => {
   
   return (
     <div className={cn(
-      "space-y-0 w-full",
-      isMobile ? "space-y-6" : "" // Add spacing between sections on mobile
+      "w-full",
+      isMobile ? "space-y-4" : "" // Better spacing between sections on mobile
     )}>
       {/* Hero Section - Always visible */}
       <section ref={addSectionRef(0)} className={cn(
@@ -99,8 +99,8 @@ export const LandingSections: React.FC = () => {
         ref={addSectionRef(1)} 
         id="how-it-works" 
         className={cn(
-          "relative w-full section-container",
-          isMobile ? "mt-6 mb-6" : ""
+          "relative w-full",
+          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
         )}
       >
         <div className="relative z-10">
@@ -115,8 +115,8 @@ export const LandingSections: React.FC = () => {
         ref={addSectionRef(2)} 
         id="find-creators" 
         className={cn(
-          "relative w-full section-container",
-          isMobile ? "mt-6 mb-6" : ""
+          "relative w-full",
+          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
         )}
       >
         <div className={cn(
@@ -134,8 +134,8 @@ export const LandingSections: React.FC = () => {
         ref={addSectionRef(3)}
         id="features"
         className={cn(
-          "w-full section-container",
-          isMobile ? "mt-6 mb-6" : ""
+          "w-full",
+          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
         )}
       >
         <Suspense fallback={<SectionLoader />}>
@@ -148,8 +148,8 @@ export const LandingSections: React.FC = () => {
         ref={addSectionRef(4)}
         id="pricing"
         className={cn(
-          "w-full section-container",
-          isMobile ? "mt-6 mb-6" : ""
+          "w-full",
+          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
         )}
       >
         <Suspense fallback={<SectionLoader />}>
@@ -161,13 +161,13 @@ export const LandingSections: React.FC = () => {
       <div 
         ref={addSectionRef(5)} 
         className={cn(
-          "relative w-full section-container",
-          isMobile ? "pt-2 pb-12" : ""
+          "relative w-full",
+          isMobile ? "pt-2 pb-8" : "" // Adjust bottom spacing for mobile to avoid footer overlap
         )}
       >
         <div className={cn(
           "relative z-10 max-w-7xl mx-auto",
-          isMobile ? "py-6" : "py-14 sm:py-20 lg:py-24"
+          isMobile ? "py-4" : "py-14 sm:py-20 lg:py-24"
         )}>
           <CallToActionSection />
         </div>

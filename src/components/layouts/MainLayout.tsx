@@ -60,24 +60,32 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       <Header />
       
       <main className={cn(
-        "flex-1 pb-16 sm:pb-0 w-full",
+        "flex-1 pb-0 w-full", // Removed bottom padding that was causing issues
         isMobile ? "pt-0" : ""
       )}>
         {withBackground ? (
-          <BackgroundEffects 
-            blobColors={mergedBackgroundProps.blobColors}
-            blobOpacity={mergedBackgroundProps.blobOpacity}
-            withSpotlight={mergedBackgroundProps.withSpotlight}
-            spotlightClassName={mergedBackgroundProps.spotlightClassName}
-            baseColor={mergedBackgroundProps.baseColor}
-            pattern={mergedBackgroundProps.pattern}
-            className={mergedBackgroundProps.className}
-            animationSpeed={mergedBackgroundProps.animationSpeed}
-            mobileFullWidth={mergedBackgroundProps.mobileFullWidth}
-          >
-            {children}
+          <>
+            <BackgroundEffects 
+              blobColors={mergedBackgroundProps.blobColors}
+              blobOpacity={mergedBackgroundProps.blobOpacity}
+              withSpotlight={mergedBackgroundProps.withSpotlight}
+              spotlightClassName={mergedBackgroundProps.spotlightClassName}
+              baseColor={mergedBackgroundProps.baseColor}
+              pattern={mergedBackgroundProps.pattern}
+              className={mergedBackgroundProps.className}
+              animationSpeed={mergedBackgroundProps.animationSpeed}
+              mobileFullWidth={mergedBackgroundProps.mobileFullWidth}
+            >
+              <div className={cn(
+                "w-full",
+                isMobile ? "pb-6" : "" // Add spacing only for mobile
+              )}>
+                {children}
+              </div>
+            </BackgroundEffects>
+            {/* Footer moved outside of BackgroundEffects to fix mobile layout */}
             <Footer />
-          </BackgroundEffects>
+          </>
         ) : (
           <>
             {children}
