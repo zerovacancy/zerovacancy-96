@@ -5,6 +5,7 @@ import { PromotionalBanner } from '@/components/landing/PromotionalBanner';
 import { LandingSections } from '@/components/landing/LandingSections';
 import { GlowDialog } from '@/components/ui/glow-dialog';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { BackgroundEffects } from '@/components/features/BackgroundEffects';
 
 /**
  * Main landing page component with performance optimizations

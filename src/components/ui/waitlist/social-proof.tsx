@@ -12,7 +12,7 @@ export function SocialProof() {
     <div className={cn(
       "flex items-center justify-center mt-2 sm:mt-3 w-full",
       "social-proof-container",
-      isMobile ? "max-w-full overflow-hidden px-0" : "" // Fixed container width for mobile
+      isMobile ? "max-w-full px-0" : "" // Fixed container width for mobile
     )}>
       {/* Social proof pill */}
       <div className={cn(

@@ -5,6 +5,8 @@ import CallToActionSection from '../CallToActionSection';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { lazy } from 'react';
+import { BackgroundEffects } from '@/components/features/BackgroundEffects';
+import { BeamsBackground } from '@/components/ui/beams-background';
 
 // Lazy-loaded components
 const OptimizedHowItWorks = lazy(() => import('../how-it-works/OptimizedHowItWorks'));
@@ -95,20 +97,21 @@ export const LandingSections: React.FC = () => {
       </section>
       
       {/* How It Works Section */}
-      <section 
-        ref={addSectionRef(1)} 
-        id="how-it-works" 
-        className={cn(
-          "relative w-full",
-          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
-        )}
-      >
-        <div className="relative z-10">
-          <Suspense fallback={<SectionLoader />}>
-            <OptimizedHowItWorks />
-          </Suspense>
-        </div>
-      </section>
+      <BeamsBackground id="how-it-works" className="w-full overflow-hidden">
+        <section 
+          ref={addSectionRef(1)} 
+          className={cn(
+            "relative w-full",
+            isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+          )}
+        >
+          <div className="relative z-10">
+            <Suspense fallback={<SectionLoader />}>
+              <OptimizedHowItWorks />
+            </Suspense>
+          </div>
+        </section>
+      </BeamsBackground>
       
       {/* Search Section */}
       <section 
@@ -130,18 +133,26 @@ export const LandingSections: React.FC = () => {
       </section>
       
       {/* Professional Content Creation Services */}
-      <section 
-        ref={addSectionRef(3)}
-        id="features"
-        className={cn(
-          "w-full",
-          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
-        )}
+      <BackgroundEffects
+        pattern="dots"
+        blobOpacity={0.15}
+        baseColor="bg-white/60"
+        mobileFullWidth={true}
+        className="w-full overflow-hidden"
       >
-        <Suspense fallback={<SectionLoader />}>
-          <FeaturesSectionWithHoverEffects />
-        </Suspense>
-      </section>
+        <section 
+          ref={addSectionRef(3)}
+          id="features"
+          className={cn(
+            "w-full",
+            isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+          )}
+        >
+          <Suspense fallback={<SectionLoader />}>
+            <FeaturesSectionWithHoverEffects />
+          </Suspense>
+        </section>
+      </BackgroundEffects>
 
       {/* Pricing Section */}
       <section 

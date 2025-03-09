@@ -80,7 +80,10 @@ export function WaitlistCTA({
       isMobile ? "px-0" : "px-5 sm:px-0",
       className
     )}>
-      <form onSubmit={handleSubmit} className="flex w-full flex-col space-y-3 sm:flex-row sm:space-y-0 sm:items-center sm:justify-center sm:gap-4">
+      <form onSubmit={handleSubmit} className={cn(
+        "flex w-full flex-col space-y-3 sm:flex-row sm:space-y-0 sm:items-center sm:justify-center sm:gap-4",
+        isMobile && "max-w-[100vw] px-2"
+      )}>
         <EmailInput 
           email={email}
           setEmail={setEmail}

@@ -83,15 +83,15 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       ref={containerRef} 
       id={id} 
       className={cn(
-        "relative w-full",
-        isMobile ? "max-w-[100vw] overflow-hidden" : "overflow-hidden",
+        "relative w-full overflow-hidden",
+        isMobile && "max-w-full",
         className
       )}
     >
       {isVisible ? (
         <GradientBlobBackground 
           className={cn(
-            isMobile ? "max-w-[100vw] overflow-hidden" : "overflow-visible"
+            isMobile ? "overflow-hidden" : "overflow-visible"
           )}
           blobColors={blobColors}
           blobOpacity={blobOpacity}
@@ -103,7 +103,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
           animationSpeed={animationSpeed}
         >
           <div className={cn(
-            isMobile ? "px-3 py-2 mobile-z-fix" : "", 
+            isMobile ? "mobile-z-fix" : "", 
             "relative"
           )}>
             {children}
