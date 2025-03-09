@@ -85,13 +85,8 @@ export const LandingSections: React.FC = () => {
   
   return (
     <>
-      {/* Hero Section - Always visible */}
-      <section ref={addSectionRef(0)} className={cn(
-        "w-full", 
-        isMobile ? "section-spacing pt-0" : ""
-      )}>
-        <Hero />
-      </section>
+      {/* Hero Component - Now directly rendered without the section wrapper */}
+      <Hero />
       
       {/* How It Works Section */}
       <BeamsBackground id="how-it-works" className="w-full">
