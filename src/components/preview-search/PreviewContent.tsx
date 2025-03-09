@@ -27,7 +27,7 @@ export const PreviewContent: React.FC<PreviewContentProps> = ({
   const isMobile = useIsMobile();
   
   return (
-    <div className="flex flex-col w-full relative z-10 scroll-container-optimized">
+    <div className="flex flex-col w-full relative z-10">
       {/* SearchBar container */}
       <div className={cn(
         "w-full px-3 sm:px-6 md:px-8 lg:px-10",

@@ -66,6 +66,8 @@
     scroll-behavior: smooth;
     scroll-snap-type: none;
     padding-bottom: 0;
+    overflow: visible;
+    height: auto;
   }
   
   /* Prevent nested containers from having double padding */
