@@ -1,106 +1,136 @@
-/* Essential mobile layout fixes */
+/* Experience section with 4 boxes */
 @media (max-width: 768px) {
-  /* Fix overall container width */
-  html, body, #root, #__next {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  /* Main container fixes */
-  main, .main-container {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow-x: hidden !important;
-  }
-  
-  /* Prevent horizontal overflow of elements */
-  div, section, article, aside, header, footer, nav {
-    max-width: 100vw !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Adjust padding for mobile content */
-  section > div, .container, .content-wrapper, [class*="content-container"] {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    box-sizing: border-box !important;
-    width: 100% !important;
-  }
-  
-  /* Fix grid layouts */
-  .grid, [class*="grid-cols"] {
+  /* Target both how-it-works-section and how-it-works */
+  #how-it-works, #how-it-works-section {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 16px !important;
-  }
-  
-  /* Fix card layouts */
-  .card, [class*="card"], .feature-item, [class*="feature-item"] {
     width: 100% !important;
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    box-sizing: border-box !important;
+    padding: 0 12px !important;
   }
   
-  /* Buttons and interactive elements */
-  button, .button, a[class*="button"], [type="submit"] {
+  /* Fix individual boxes */
+  #how-it-works .grid > div {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
+    margin-bottom: 12px !important;
   }
   
-  /* Fix max-width containers */
-  [class*="max-w"] {
-    max-width: 100% !important;
+  /* Fix the heading */
+  #how-it-works h2, #how-it-works h3 {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Fix description text */
+  #how-it-works p, #how-it-works-section p {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+  }
+}
+
+/* Find creative collaborator search section */
+@media (max-width: 768px) {
+  /* Fix the search container */
+  #find-creators > div {
     width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Style fixes for THE EXPERIENCE section */
-  .mobile-experience-section .grid {
-    gap: 12px !important;
-  }
-  
-  /* Style fixes for Search section */
-  .mobile-search-section .bg-white {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    border-radius: 16px !important;
-  }
-  
-  /* Style fixes for Services section */
-  .mobile-services-section .grid > div {
-    margin-bottom: 16px !important;
-  }
-  
-  /* Explicitly set width 100% for all top level containers */
-  .BackgroundEffects, .background-container {
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-  }
-  
-  /* Fix input fields and selects on mobile */
-  input, select, textarea {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Reset button styles for button-like links */
-  a.view-all-button, .view-all-services {
-    display: block !important;
-    width: 80% !important;
-    max-width: 80% !important;
+    max-width: calc(100% - 24px) !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    text-align: center !important;
+    padding: 16px !important;
+  }
+  
+  /* Fix form elements */
+  #find-creators input, 
+  #find-creators select, 
+  #find-creators button {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 12px !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Fix the heading */
+  #find-creators h2 {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* Creative Arsenal services section */
+@media (max-width: 768px) {
+  /* Fix the grid of service cards */
+  #features .grid, #features [class*="grid"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+    padding: 0 12px !important;
+  }
+  
+  /* Fix individual service cards */
+  #features .grid > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 16px !important;
+    height: auto !important;
+    min-height: 180px !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Fix height issue */
+  #features button {
+    height: auto !important;
+  }
+  
+  /* Fix heading */
+  #features h2, #features .FeatureHeader h2 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* Fix card titles */
+  #features h3 {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Fix the "View all services" button */
+  #features a[href="#"], #features button[aria-label*="View all"] {
+    width: 80% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+}
+
+/* General section spacing fixes */
+@media (max-width: 768px) {
+  section {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+    margin-bottom: 16px !important;
+    position: relative !important;
+  }
+  
+  /* Add subtle separators between sections */
+  section:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: rgba(0,0,0,0.05);
+  }
+  
+  /* Reduce the space between sections */
+  .space-y-0 > section + section {
+    margin-top: -16px !important;
   }
 }
