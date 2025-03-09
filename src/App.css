@@ -1,3 +1,4 @@
+import '../styles/mobile-fixes.css';
 
 /* Import refactored style files */
 @import './styles/feature-cards.css';
