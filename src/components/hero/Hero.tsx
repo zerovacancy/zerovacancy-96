@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section className={cn(
       "flex flex-col items-center justify-center px-3 sm:px-6 py-8 sm:py-16 md:py-20 min-h-[40vh] relative z-10 w-full",
-      isMobile ? "pt-4 pb-6 px-2 overflow-x-hidden max-w-[100vw]" : "" // Adjusted padding for mobile
+      isMobile ? "pt-4 pb-6 px-2 max-w-[100vw] overflow-hidden" : "" // Adjusted padding for mobile
     )}>
       <div className="max-w-5xl w-full mx-auto flex flex-col gap-6 sm:gap-10">
         <h1 className="text-center flex flex-col items-center gap-2 sm:gap-4">

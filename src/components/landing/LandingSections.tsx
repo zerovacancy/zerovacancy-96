@@ -84,7 +84,7 @@ export const LandingSections: React.FC = () => {
   return (
     <div className={cn(
       "w-full",
-      isMobile ? "space-y-4" : "" // Better spacing between sections on mobile
+      isMobile ? "space-y-4 max-w-[100vw] overflow-hidden" : "" // Better spacing between sections on mobile
     )}>
       {/* Hero Section - Always visible */}
       <section ref={addSectionRef(0)} className={cn(
@@ -100,7 +100,7 @@ export const LandingSections: React.FC = () => {
         id="how-it-works" 
         className={cn(
           "relative w-full",
-          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
+          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
         )}
       >
         <div className="relative z-10">
@@ -116,7 +116,7 @@ export const LandingSections: React.FC = () => {
         id="find-creators" 
         className={cn(
           "relative w-full",
-          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
+          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
         )}
       >
         <div className={cn(
@@ -135,7 +135,7 @@ export const LandingSections: React.FC = () => {
         id="features"
         className={cn(
           "w-full",
-          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
+          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
         )}
       >
         <Suspense fallback={<SectionLoader />}>
@@ -149,7 +149,7 @@ export const LandingSections: React.FC = () => {
         id="pricing"
         className={cn(
           "w-full",
-          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
+          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
         )}
       >
         <Suspense fallback={<SectionLoader />}>
@@ -162,7 +162,7 @@ export const LandingSections: React.FC = () => {
         ref={addSectionRef(5)} 
         className={cn(
           "relative w-full",
-          isMobile ? "pt-2 pb-8" : "" // Adjust bottom spacing for mobile to avoid footer overlap
+          isMobile ? "pt-2 pb-8 max-w-[100vw] overflow-hidden" : "" // Adjust bottom spacing for mobile to avoid footer overlap
         )}
       >
         <div className={cn(

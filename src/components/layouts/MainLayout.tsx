@@ -61,13 +61,13 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       
       <main className={cn(
         "flex-1 pb-0 w-full",
-        isMobile ? "pt-0 overflow-x-hidden" : ""
+        isMobile ? "pt-0 max-w-[100vw] overflow-hidden" : ""
       )}>
         {withBackground ? (
           <>
             <div className={cn(
               "w-full",
-              isMobile ? "overflow-x-hidden" : ""
+              isMobile ? "overflow-hidden max-w-[100vw]" : ""
             )}>
               <BackgroundEffects 
                 blobColors={mergedBackgroundProps.blobColors}

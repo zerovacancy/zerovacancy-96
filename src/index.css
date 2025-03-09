@@ -90,6 +90,7 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
+    max-width: 100vw;
   }
 
   main {
@@ -97,7 +98,7 @@
     padding-right: 0 !important;
     padding-bottom: 2rem !important; /* Added space at the bottom */
     width: 100%;
-    max-width: 100%;
+    max-width: 100vw;
     overflow-x: hidden;
   }
   
@@ -117,5 +118,13 @@
   
   .mobile-text-center {
     text-align: center;
+  }
+  
+  /* Fix mobile container overflow */
+  .section-container,
+  .social-proof-container {
+    max-width: 100vw !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 }

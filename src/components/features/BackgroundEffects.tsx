@@ -84,14 +84,14 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       id={id} 
       className={cn(
         "relative w-full",
-        isMobile ? "overflow-x-hidden max-w-[100vw]" : "overflow-hidden",
+        isMobile ? "max-w-[100vw] overflow-hidden" : "overflow-hidden",
         className
       )}
     >
       {isVisible ? (
         <GradientBlobBackground 
           className={cn(
-            isMobile ? "max-w-[100vw] overflow-x-hidden" : "overflow-visible"
+            isMobile ? "max-w-[100vw] overflow-hidden" : "overflow-visible"
           )}
           blobColors={blobColors}
           blobOpacity={blobOpacity}
@@ -103,7 +103,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
           animationSpeed={animationSpeed}
         >
           <div className={cn(
-            isMobile ? "px-3 py-2 mobile-z-fix max-w-[100vw]" : "", 
+            isMobile ? "px-3 py-2 mobile-z-fix" : "", 
             "relative"
           )}>
             {children}
@@ -112,7 +112,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       ) : (
         // Fallback to ensure content is visible even if effects are disabled
         <div className={cn("relative w-full", baseColor)}>
-          <div className={cn(isMobile ? "px-3 py-2 max-w-[100vw]" : "")}>
+          <div className={cn(isMobile ? "px-3 py-2" : "")}>
             {children}
           </div>
         </div>
