@@ -10,23 +10,25 @@
   scrollbar-width: none;  /* Firefox */
 }
 
-/* Improved scroll behavior */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 1rem;
-  height: 100%;
-}
+/* Improved scroll behavior - desktop only */
+@media (min-width: 769px) {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 1rem;
+    height: 100%;
+  }
 
-body {
-  height: 100%;
-  /* Prevent scroll chaining/bouncing effect on some browsers */
-  overscroll-behavior-y: none;
-}
+  body {
+    height: 100%;
+    /* Prevent scroll chaining/bouncing effect on some browsers */
+    overscroll-behavior-y: none;
+  }
 
-/* Target features section specifically for smooth scrolling */
-#features {
-  scroll-margin-top: 80px;
-  scroll-snap-align: start;
+  /* Target features section specifically for smooth scrolling */
+  #features {
+    scroll-margin-top: 80px;
+    scroll-snap-align: start;
+  }
 }
 
 /* Gradual fade for scroll edges */
@@ -43,7 +45,9 @@ body {
   scroll-snap-align: start;
 }
 
-/* Smooth scrolling for better user experience */
-.smooth-scroll {
-  scroll-behavior: smooth;
+/* Smooth scrolling for better user experience - desktop only */
+@media (min-width: 769px) {
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
 }
