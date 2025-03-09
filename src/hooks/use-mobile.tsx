@@ -5,7 +5,11 @@ const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 1024
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
+  const [isMobile, setIsMobile] = React.useState(() => {
+    // Initialize with SSR-safe default
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < MOBILE_BREAKPOINT;
+  });
 
   React.useEffect(() => {
     // Initial check
@@ -28,12 +32,17 @@ export function useIsMobile() {
     return () => mql.removeEventListener("change", onChange)
   }, [])
 
-  // Return boolean value (use !! to ensure boolean)
-  return !!isMobile
+  // Return boolean value
+  return isMobile
 }
 
 export function useIsTablet() {
-  const [isTablet, setIsTablet] = React.useState<boolean | undefined>(undefined)
+  const [isTablet, setIsTablet] = React.useState(() => {
+    // Initialize with SSR-safe default
+    if (typeof window === 'undefined') return false;
+    const width = window.innerWidth;
+    return width >= MOBILE_BREAKPOINT && width < TABLET_BREAKPOINT;
+  });
 
   React.useEffect(() => {
     const checkTablet = () => {
@@ -43,16 +52,18 @@ export function useIsTablet() {
     
     checkTablet()
     
-    const handleResize = () => {
-      checkTablet()
-    }
+    // Use matchMedia for better performance
+    const mql = window.matchMedia(
+      `(min-width: ${MOBILE_BREAKPOINT}px) and (max-width: ${TABLET_BREAKPOINT - 1}px)`
+    );
     
-    window.addEventListener('resize', handleResize)
+    const onChange = () => checkTablet()
+    mql.addEventListener("change", onChange)
     
-    return () => window.removeEventListener('resize', handleResize)
+    return () => mql.removeEventListener("change", onChange)
   }, [])
 
-  return !!isTablet
+  return isTablet
 }
 
 export function useIsMobileOrTablet() {

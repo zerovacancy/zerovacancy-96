@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { lazy } from 'react';
 import { BackgroundEffects } from '@/components/features/BackgroundEffects';
-import { BeamsBackground } from '@/components/ui/beams-background';
 
 // Lazy-loaded components
 const OptimizedHowItWorks = lazy(() => import('../how-it-works/OptimizedHowItWorks'));
@@ -38,7 +37,7 @@ export const LandingSections: React.FC = () => {
         </Suspense>
       </section>
       
-      {/* Search Section */}
+      {/* Search Section - Simplified for mobile */}
       <section id="find-creators" className="w-full py-10">
         <div className="max-w-7xl mx-auto px-4">
           <Suspense fallback={<SectionLoader />}>
@@ -49,16 +48,24 @@ export const LandingSections: React.FC = () => {
       
       {/* Professional Content Creation Services */}
       <section id="features" className="w-full py-10">
-        <BackgroundEffects
-          pattern="dots"
-          blobOpacity={0.15}
-          baseColor="bg-white/60"
-          mobileFullWidth={true}
-        >
-          <Suspense fallback={<SectionLoader />}>
-            <FeaturesSectionWithHoverEffects />
-          </Suspense>
-        </BackgroundEffects>
+        {isMobile ? (
+          <div className="bg-white/60">
+            <Suspense fallback={<SectionLoader />}>
+              <FeaturesSectionWithHoverEffects />
+            </Suspense>
+          </div>
+        ) : (
+          <BackgroundEffects
+            pattern="dots"
+            blobOpacity={0.15}
+            baseColor="bg-white/60"
+            mobileFullWidth={true}
+          >
+            <Suspense fallback={<SectionLoader />}>
+              <FeaturesSectionWithHoverEffects />
+            </Suspense>
+          </BackgroundEffects>
+        )}
       </section>
 
       {/* Pricing Section */}

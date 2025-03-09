@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -41,7 +41,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
 }) => {
   const isMobile = useIsMobile();
 
-  // Mobile-optimized version - no complex effects, just a simple background
+  // Always render a simple container for mobile
   if (isMobile) {
     return (
       <div 

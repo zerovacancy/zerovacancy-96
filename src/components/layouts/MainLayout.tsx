@@ -5,6 +5,7 @@ import Footer from '../Footer';
 import { BottomNav } from '../navigation/BottomNav';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { BackgroundEffects } from '@/components/features/BackgroundEffects';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -41,7 +42,13 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         "flex-1 relative w-full",
         isMobile ? "pt-0" : ""
       )}>
-        {children}
+        {withBackground && !isMobile ? (
+          <BackgroundEffects {...(backgroundProps || {})}>
+            {children}
+          </BackgroundEffects>
+        ) : (
+          <>{children}</>
+        )}
         <Footer />
       </main>
       

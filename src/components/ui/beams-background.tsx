@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -33,7 +34,7 @@ export function BeamsBackground({
     );
   }
 
-  // Full desktop version with animations - only rendered on desktop
+  // Full desktop version with animations
   return (
     <div 
       id={id}
@@ -51,8 +52,9 @@ export function BeamsBackground({
 function DesktopBeamsBackground({ intensity }: { intensity: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>(0);
+  const beamsRef = useRef<any[]>([]);
   
-  const opacityMap = {
+  const opacityMap: Record<string, number> = {
     subtle: 0.7,
     medium: 0.85,
     strong: 1
@@ -96,8 +98,6 @@ function DesktopBeamsBackground({ intensity }: { intensity: string }) {
     }
     
     const MINIMUM_BEAMS = 20;
-
-    const beamsRef = useRef<Beam[]>([]);
     
     const updateCanvasSize = () => {
       const dpr = window.devicePixelRatio || 1;
@@ -175,7 +175,7 @@ function DesktopBeamsBackground({ intensity }: { intensity: string }) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [intensity]);
+  }, [intensity, opacityMap]);
 
   return (
     <>
