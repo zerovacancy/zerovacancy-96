@@ -39,111 +39,41 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
   id,
   mobileFullWidth = false
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(true);
   const isMobile = useIsMobile();
 
-  // Only render heavy effects when the component is in view
-  useEffect(() => {
-    if (!containerRef.current || isMobile) return;
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        } else {
-          // Keep content visible but disable expensive effects when far away
-          if (Math.abs(entry.boundingClientRect.top) > window.innerHeight * 2) {
-            // We now always keep content visible
-            // setIsVisible(false);
-          }
-        }
-      },
-      { 
-        threshold: 0.1,
-        rootMargin: '200px' 
-      }
-    );
-    
-    observer.observe(containerRef.current);
-    
-    // Safety timeout to ensure visibility
-    const safetyTimeout = setTimeout(() => {
-      setIsVisible(true);
-    }, 500);
-    
-    return () => {
-      observer.disconnect();
-      clearTimeout(safetyTimeout);
-    };
-  }, [isMobile]);
-
+  // Mobile-optimized version - no complex effects, just a simple background
   if (isMobile) {
-    // Simplified mobile rendering without nested containers or background effects
     return (
       <div 
-        ref={containerRef} 
         id={id} 
-        className={cn(
-          "relative w-full",
-          className
-        )}
-        style={{
-          // Ensure we're not creating scroll containers
-          overflow: 'visible',
-          height: 'auto'
-        }}
+        className={cn("relative w-full", className)}
       >
-        <div className={cn(
-          "relative mobile-z-fix",
-          baseColor
-        )}>
+        <div className={cn("relative", baseColor)}>
           {children}
         </div>
       </div>
     );
   }
 
+  // Desktop version with full effects
   return (
     <div 
-      ref={containerRef} 
       id={id} 
-      className={cn(
-        "relative w-full overflow-hidden",
-        isMobile && "max-w-full",
-        className
-      )}
+      className={cn("relative w-full", className)}
     >
-      {isVisible ? (
-        <GradientBlobBackground 
-          className={cn(
-            isMobile ? "overflow-hidden" : "overflow-visible"
-          )}
-          blobColors={blobColors}
-          blobOpacity={blobOpacity}
-          withSpotlight={withSpotlight}
-          spotlightClassName={spotlightClassName}
-          pattern={pattern}
-          baseColor={baseColor}
-          blobSize="large"
-          animationSpeed={animationSpeed}
-        >
-          <div className={cn(
-            isMobile ? "mobile-z-fix" : "", 
-            "relative"
-          )}>
-            {children}
-          </div>
-        </GradientBlobBackground>
-      ) : (
-        // Fallback to ensure content is visible even if effects are disabled
-        <div className={cn("relative w-full", baseColor)}>
-          <div className={cn(isMobile ? "px-3 py-2" : "")}>
-            {children}
-          </div>
+      <GradientBlobBackground 
+        blobColors={blobColors}
+        blobOpacity={blobOpacity}
+        withSpotlight={withSpotlight}
+        spotlightClassName={spotlightClassName}
+        pattern={pattern}
+        baseColor={baseColor}
+        animationSpeed={animationSpeed}
+      >
+        <div className="relative">
+          {children}
         </div>
-      )}
+      </GradientBlobBackground>
     </div>
   );
 };

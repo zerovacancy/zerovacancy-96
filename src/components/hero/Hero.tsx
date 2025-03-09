@@ -14,32 +14,17 @@ export function Hero() {
   
   return (
     <div className="w-full">
+      {/* Mobile version - simplified with no gradient blob background */}
       {isMobile ? (
-        // Mobile version - no gradient blob background
-        <section className={cn(
-          "flex flex-col items-center justify-center px-3 sm:px-6 py-8 sm:py-16 md:py-20 w-full",
-          "pt-4 pb-6 px-2" // Adjusted padding for mobile
-        )}>
-          <div className="max-w-5xl w-full mx-auto flex flex-col gap-6 sm:gap-10">
-            <h1 className="text-center flex flex-col items-center gap-2 sm:gap-4">
-              <motion.span 
-                className="text-display px-0 mx-0 relative"
+        <section className="py-12 px-4 w-full">
+          <div className="max-w-5xl mx-auto">
+            <h1 className="text-center mb-6">
+              <span 
+                className="text-display block mb-2"
                 style={{ color: "#4A2DD9" }}
-                initial={{ opacity: 0.8 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
               >
                 PROPERTY CONTENT THAT
-                <GlowingEffect
-                  blur={10}
-                  spread={15}
-                  glow={true}
-                  variant="default"
-                  disabled={false}
-                  movementDuration={2}
-                  borderWidth={1}
-                />
-              </motion.span>
+              </span>
               <TextRotate 
                 texts={rotatingWords}
                 mainClassName="text-display inline-block"
@@ -49,17 +34,17 @@ export function Hero() {
               />
             </h1>
 
-            <p className="text-sm px-1 paragraph-base text-center max-w-2xl mx-auto">
+            <p className="text-center mb-8 max-w-2xl mx-auto">
               Connect with creators who see beyond square footage to capture the soul of your spaces. Our curated network transforms properties into visual narratives that intrigue, inspire, and ultimately convert.
             </p>
-          </div>
-          
-          <div className="w-full max-w-xl mx-auto relative mt-6 px-1">
-            <WaitlistCTA />
+            
+            <div className="w-full max-w-xl mx-auto">
+              <WaitlistCTA />
+            </div>
           </div>
         </section>
       ) : (
-        // Desktop version - with gradient blob background
+        // Desktop version with full gradient blob background
         <GradientBlobBackground 
           blobColors={{
             first: "bg-purple-200",
