@@ -21,6 +21,48 @@
 
 @layer base {
   h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight font-space text-brand-purple-dark uppercase;
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight font-space text-brand-purple-dark uppercase;
+  }
+
+  h3 {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight font-space text-brand-purple-medium uppercase;
+  }
+
+  h4 {
+    @apply text-xl sm:text-2xl font-medium font-space text-brand-purple-medium uppercase;
+  }
+
+  h5 {
+    @apply text-lg sm:text-xl font-medium font-space text-brand-purple-medium uppercase;
+  }
+
+  h6 {
+    @apply text-base sm:text-lg font-medium font-space text-brand-purple-medium uppercase;
+  }
+
+  p {
+    @apply text-base leading-relaxed font-normal font-anek text-brand-text-primary;
+  }
+
+  a {
+    @apply text-brand-purple hover:text-opacity-80 transition-colors duration-200 font-inter;
+  }
+
+  strong, b {
+    @apply font-semibold text-brand-purple-medium font-anek;
+  }
+
+  small {
+    @apply text-sm text-brand-text-light font-anek;
+  }
+}
+
+@layer base {
+  h1 {
     @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight font-playfair text-brand-purple-dark uppercase;
   }
 
