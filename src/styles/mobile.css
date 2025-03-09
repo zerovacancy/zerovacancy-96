@@ -1,4 +1,3 @@
-
 /* Mobile touch optimizations */
 @media (max-width: 768px) {
   /* ==== Core Layout Fixes ==== */
@@ -7,6 +6,8 @@
     height: auto !important;
     overflow: visible !important;
     scroll-behavior: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
   }
   
   body {
@@ -32,6 +33,7 @@
     padding-bottom: 0 !important;
     height: auto !important;
     min-height: initial !important;
+    max-height: none !important;
   }
   
   /* Fix root container */
@@ -40,12 +42,31 @@
     padding: 0;
     margin: 0 auto;
     height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* ==== Aggressive Override for All Elements ==== */
+  /* Target everything to prevent height-based scroll containers */
+  div, section, main, header, footer, article, aside, 
+  .hero-section, .experience-section, .collaborator-section, 
+  .investment-section, .creative-arsenal-section,
+  [class*="-section"], [id*="-section"], [class*="Section"], [id*="Section"],
+  .hero, .experience, .collaborator, .investment-tiers, .creative-arsenal,
+  #hero, #experience, #collaborator, #investment-tiers, #creative-arsenal {
+    max-height: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    position: static !important;
     overflow: visible !important;
   }
 
   /* ==== Aggressively Override All Scroll Snapping ==== */
   /* Force disable all scroll snapping everywhere */
-  html, body, main, div, section, article, aside, nav, header, footer {
+  html, body, main, div, section, article, aside, nav, header, footer,
+  *[style*="height:"], *[style*="min-height:"], *[style*="max-height:"],
+  *[style*="overflow:"], *[style*="overflow-y:"], *[style*="overflow-x:"] {
     scroll-snap-type: none !important;
     scroll-snap-align: none !important;
     scroll-snap-stop: normal !important;
@@ -67,6 +88,7 @@
     position: static !important;
     height: auto !important;
     min-height: initial !important;
+    max-height: none !important;
   }
 
   /* ==== Section & Container Spacing System ==== */
@@ -79,6 +101,8 @@
     overflow: visible !important;
     position: static !important;
     height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
   }
   
   /* Container sizing fixes */
@@ -92,6 +116,8 @@
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
   }
   
   /* Fix footer visibility */
@@ -100,6 +126,8 @@
     box-sizing: border-box;
     overflow: visible !important;
     height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
   }
   
   /* Remove scroll-snapping that causes individual section scrolling */
@@ -110,6 +138,8 @@
     scroll-snap-type: none !important;
     padding-bottom: 0;
     height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
   }
   
   /* Prevent nested containers from having double padding */
@@ -122,7 +152,11 @@
   #how-it-works,
   #find-creators,
   #features,
-  #pricing {
+  #pricing,
+  #experience,
+  #investment-tiers,
+  #creative-arsenal,
+  #collaborator {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 1.5rem;
@@ -132,6 +166,56 @@
     overflow: visible !important;
     height: auto !important;
     min-height: initial !important;
+    max-height: none !important;
+    position: static !important;
+  }
+
+  /* ==== Target Section-Specific Elements ==== */
+  /* Experience section fixes */
+  .experience-container, 
+  .experience-cards, 
+  .experience-card,
+  .step-cards,
+  .step-card,
+  [class*="experience"],
+  [id*="experience"] {
+    height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  /* Investment tiers fixes */
+  .pricing-container,
+  .pricing-cards,
+  .pricing-card,
+  .tier-container,
+  .tier-card,
+  [class*="pricing"],
+  [id*="pricing"],
+  [class*="tier"],
+  [id*="tier"] {
+    height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  /* Creative arsenal fixes */
+  .services-container,
+  .service-cards,
+  .service-card,
+  .arsenal-container,
+  [class*="service"],
+  [id*="service"],
+  [class*="arsenal"],
+  [id*="arsenal"] {
+    height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
+    overflow: visible !important;
     position: static !important;
   }
 
@@ -188,6 +272,30 @@
   
   .snap-x > .snap-start {
     scroll-snap-align: start !important;
+  }
+
+  /* ==== Override Inline Styles ==== */
+  /* Last resort for elements with inline styles */
+  [style*="height:100vh"], 
+  [style*="height: 100vh"],
+  [style*="height:100%"], 
+  [style*="height: 100%"],
+  [style*="min-height:100vh"], 
+  [style*="min-height: 100vh"],
+  [style*="min-height:100%"], 
+  [style*="min-height: 100%"] {
+    height: auto !important;
+    min-height: initial !important;
+    max-height: none !important;
+  }
+
+  /* ==== Forced Override for Problem Elements ==== */
+  /* If individual scroll containers persist, add this */
+  *:not(body):not(.snap-x) {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
   }
 }
 
