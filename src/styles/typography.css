@@ -1,4 +1,22 @@
 
+:root {
+  /* Font Families */
+  --font-space: 'Space Grotesk', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-anek: 'Anek Devanagari', sans-serif;
+  
+  /* Brand Colors (Based on your existing variables) */
+  --color-brand-purple-dark: #3A1D8C;
+  --color-brand-purple-medium: #5E3DB3;
+  --color-brand-purple: #7C3AED;
+  --color-brand-text-primary: #333333;
+  --color-brand-text-secondary: #6B7280;
+  --color-brand-text-light: #9CA3AF;
+}
+
+/* Then immediately after that, your existing import statement */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Anek+Devanagari:wght@300;400;500;600;700&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Anek+Devanagari:wght@300;400;500;600;700&display=swap');
 
 @layer base {
