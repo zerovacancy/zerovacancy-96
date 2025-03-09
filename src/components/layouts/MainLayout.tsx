@@ -37,13 +37,14 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     <div className="flex flex-col min-h-screen w-full">
       <Header />
       
-      <main className={cn(
+      {/* Removed the main tag, content is now directly in the parent div */}
+      <div className={cn(
         "flex-1 w-full overflow-visible",
         isMobile ? "pt-0 max-w-[100vw]" : ""
       )}>
         {children}
         <Footer />
-      </main>
+      </div>
       
       <BottomNav />
     </div>
