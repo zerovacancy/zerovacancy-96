@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { FeaturesGrid } from "./FeaturesGrid";
 import { MobileViewButton } from "./MobileViewButton";
+import { cn } from "@/lib/utils";
 
 export function FeaturesSectionWithHoverEffects() {
   const isMobile = useIsMobile();
@@ -62,12 +63,19 @@ export function FeaturesSectionWithHoverEffects() {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-14 sm:py-18 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-visible"
+      className={cn(
+        "relative overflow-visible",
+        "py-14 sm:py-18 lg:py-24 px-4 sm:px-6 lg:px-8",
+        isMobile && "py-8 px-3 mobile-features-section"
+      )}
       id="features"
     >
       <div className="absolute inset-0 z-0 overflow-hidden opacity-[0.15] bg-gradient-to-b from-violet-50 to-white"></div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className={cn(
+        "max-w-6xl mx-auto relative z-10",
+        isMobile && "mobile-features-container"
+      )}>
         <FeatureHeader 
           title="THE CREATIVE ARSENAL"
           description="Visual weaponry to transform perception and drive desire"
