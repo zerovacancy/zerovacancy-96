@@ -8,19 +8,14 @@
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
-    overflow-y: visible;
+    overflow-y: auto;
     position: relative;
     padding-bottom: 0;
   }
 
-  /* Ensure main content area fills viewport and manages scrolling */
-  main {
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-bottom: 0 !important;
+  /* Ensure content fills viewport and uses single scrolling container */
+  main, section, div {
+    overflow: visible;
   }
   
   /* Fix root container */
@@ -37,7 +32,6 @@
     margin: 0;
     width: 100%;
     box-sizing: border-box;
-    overflow: visible;
   }
   
   /* Container sizing fixes */
@@ -47,7 +41,6 @@
     width: 100%;
     max-width: 100vw;
     box-sizing: border-box;
-    overflow: visible;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
   }
@@ -56,7 +49,6 @@
   footer {
     width: 100%;
     box-sizing: border-box;
-    overflow: visible;
   }
   
   /* Remove scroll-snapping that causes individual section scrolling */
@@ -87,7 +79,6 @@
     padding-bottom: 1.5rem;
     box-sizing: border-box;
     max-width: 100%;
-    overflow: visible;
   }
 
   /* ==== Retain Necessary Mobile Optimizations ==== */
@@ -126,7 +117,7 @@
     text-align: center;
   }
   
-  /* Optimize scrolling performance */
+  /* Optimize scrolling performance while keeping a single scroll container */
   .optimize-scrolling {
     will-change: transform;
     backface-visibility: hidden;

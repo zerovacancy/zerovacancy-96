@@ -19,9 +19,20 @@ html {
 
 body {
   height: 100%;
+  /* Single scrolling container */
+  overflow-x: hidden;
+  overflow-y: auto;
   /* Prevent scroll chaining/bouncing effect on some browsers */
   overscroll-behavior-y: none;
-  overflow-x: hidden;
+}
+
+/* Remove scroll containers that break the single page scroll experience */
+.section-container,
+.content-container,
+section {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
 }
 
 /* Target features section specifically for smooth scrolling */

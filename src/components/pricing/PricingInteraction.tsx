@@ -92,7 +92,7 @@ export function PricingInteraction({
   return (
     <div className={cn(
       "border-2 rounded-[22px] p-4 shadow-lg w-full flex flex-col items-center gap-3 bg-white",
-      "relative overflow-hidden",
+      "relative",
       isMobile ? "max-w-[95%] mx-auto" : "max-w-sm"
     )}>
       {/* Enhanced background with subtle gradient */}
@@ -146,7 +146,7 @@ export function PricingInteraction({
       
       {/* Display all pricing tiers in scrollable container with snap effect */}
       <div 
-        className="w-full mt-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+        className="w-full mt-3 snap-x snap-mandatory scrollbar-hide"
         style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
       >
         <div className="flex w-full">

@@ -41,12 +41,19 @@
   }
 }
 
-/* Prevent nested scrollbars */
-.no-scrollbar {
+/* Ensure there are no rogue scrollbars */
+.no-scrollbar,
+section,
+.section-container,
+.content-container {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overflow: visible;
 }
 
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,
+section::-webkit-scrollbar,
+.section-container::-webkit-scrollbar,
+.content-container::-webkit-scrollbar {
   display: none;
 }

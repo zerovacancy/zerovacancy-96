@@ -84,7 +84,6 @@ export const LandingSections: React.FC = () => {
   };
   
   return (
-    // Removed the unnecessary wrapper div - this was causing mobile layout issues
     <>
       {/* Hero Section - Always visible */}
       <section ref={addSectionRef(0)} className={cn(
@@ -95,12 +94,12 @@ export const LandingSections: React.FC = () => {
       </section>
       
       {/* How It Works Section */}
-      <BeamsBackground id="how-it-works" className="w-full overflow-hidden">
+      <BeamsBackground id="how-it-works" className="w-full">
         <section 
           ref={addSectionRef(1)} 
           className={cn(
             "relative w-full",
-            isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+            isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
           )}
         >
           <div className="relative z-10">
@@ -117,7 +116,7 @@ export const LandingSections: React.FC = () => {
         id="find-creators" 
         className={cn(
           "relative w-full",
-          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
         )}
       >
         <div className={cn(
@@ -136,14 +135,14 @@ export const LandingSections: React.FC = () => {
         blobOpacity={0.15}
         baseColor="bg-white/60"
         mobileFullWidth={true}
-        className="w-full overflow-hidden"
+        className="w-full"
       >
         <section 
           ref={addSectionRef(3)}
           id="features"
           className={cn(
             "w-full",
-            isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+            isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
           )}
         >
           <Suspense fallback={<SectionLoader />}>
@@ -158,7 +157,7 @@ export const LandingSections: React.FC = () => {
         id="pricing"
         className={cn(
           "w-full",
-          isMobile ? "mb-4 mt-2 max-w-[100vw] overflow-hidden" : "" // Better mobile spacing
+          isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
         )}
       >
         <Suspense fallback={<SectionLoader />}>
@@ -171,7 +170,7 @@ export const LandingSections: React.FC = () => {
         ref={addSectionRef(5)} 
         className={cn(
           "relative w-full",
-          isMobile ? "pt-2 pb-8 max-w-[100vw] overflow-hidden" : "" // Adjust bottom spacing for mobile to avoid footer overlap
+          isMobile ? "pt-2 pb-8" : "" // Adjust bottom spacing for mobile to avoid footer overlap
         )}
       >
         <div className={cn(
