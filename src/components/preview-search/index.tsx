@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils';
 import { PreviewCard } from './PreviewCard';
 import { PreviewHeader } from './PreviewHeader';
 import { PreviewContent } from './PreviewContent';
-import { useIsMobile } from '@/hooks/use-mobile';
 import type { AvailabilityStatus } from '../creator/types';
 
 const PreviewSearch = () => {
@@ -12,7 +11,6 @@ const PreviewSearch = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [selectedLocation, setSelectedLocation] = useState<string>('');
-  const isMobile = useIsMobile();
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -100,37 +98,20 @@ const PreviewSearch = () => {
           "group-hover:opacity-90 group-hover:blur-md"
         )}></div>
 
-        {isMobile ? (
-          <div className="relative p-4 bg-white rounded-xl z-10">
-            <PreviewHeader 
-              title="FIND YOUR CREATIVE COLLABORATOR"
-              subtitle="Because extraordinary spaces deserve extraordinary storytellers"
-            />
-            <PreviewContent 
-              isVisible={isVisible}
-              loadedImages={loadedImages}
-              handleImageLoad={handleImageLoad}
-              creatorData={creatorData}
-              locationValue={selectedLocation}
-              onLocationSelect={handleLocationSelect}
-            />
-          </div>
-        ) : (
-          <PreviewCard isVisible={isVisible}>
-            <PreviewHeader 
-              title="FIND YOUR CREATIVE COLLABORATOR"
-              subtitle="Because extraordinary spaces deserve extraordinary storytellers"
-            />
-            <PreviewContent 
-              isVisible={isVisible}
-              loadedImages={loadedImages}
-              handleImageLoad={handleImageLoad}
-              creatorData={creatorData}
-              locationValue={selectedLocation}
-              onLocationSelect={handleLocationSelect}
-            />
-          </PreviewCard>
-        )}
+        <PreviewCard isVisible={isVisible}>
+          <PreviewHeader 
+            title="FIND YOUR CREATIVE COLLABORATOR"
+            subtitle="Because extraordinary spaces deserve extraordinary storytellers"
+          />
+          <PreviewContent 
+            isVisible={isVisible}
+            loadedImages={loadedImages}
+            handleImageLoad={handleImageLoad}
+            creatorData={creatorData}
+            locationValue={selectedLocation}
+            onLocationSelect={handleLocationSelect}
+          />
+        </PreviewCard>
       </div>
     </div>
   );

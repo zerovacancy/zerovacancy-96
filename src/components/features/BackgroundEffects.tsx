@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 import { cn } from '@/lib/utils';
@@ -45,7 +44,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
 
   // Only render heavy effects when the component is in view
   useEffect(() => {
-    if (!containerRef.current || isMobile) return;
+    if (!containerRef.current) return;
     
     const observer = new IntersectionObserver(
       (entries) => {
@@ -77,33 +76,7 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
       observer.disconnect();
       clearTimeout(safetyTimeout);
     };
-  }, [isMobile]);
-
-  if (isMobile) {
-    // Simplified mobile rendering without nested containers or background effects
-    return (
-      <div 
-        ref={containerRef} 
-        id={id} 
-        className={cn(
-          "relative w-full",
-          className
-        )}
-        style={{
-          // Ensure we're not creating scroll containers
-          overflow: 'visible',
-          height: 'auto'
-        }}
-      >
-        <div className={cn(
-          "relative mobile-z-fix",
-          baseColor
-        )}>
-          {children}
-        </div>
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div 
