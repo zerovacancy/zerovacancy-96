@@ -1,10 +1,42 @@
 
-/* Static utility classes - No animations */
+/* Animations optimization utilities */
 .will-change-transform {
   will-change: transform;
 }
 
+/* Layer promotion for frequently animated elements */
 .promote-layer {
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+/* Animation for scroll indicators */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s infinite;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
 }

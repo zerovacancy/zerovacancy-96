@@ -2,6 +2,7 @@
 import React, { Suspense } from 'react';
 import { Hero } from '../hero/Hero';
 import CallToActionSection from '../CallToActionSection';
+import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { lazy } from 'react';
 import { BackgroundEffects } from '@/components/features/BackgroundEffects';
@@ -15,7 +16,7 @@ const PreviewSearch = lazy(() => import('@/components/preview-search'));
 // Simple loading fallback
 const SectionLoader = () => (
   <div className="w-full py-8 flex items-center justify-center">
-    <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full"></div>
+    <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
@@ -47,11 +48,24 @@ export const LandingSections: React.FC = () => {
       
       {/* Professional Content Creation Services */}
       <section id="features" className="w-full py-10">
-        <div className="bg-white/60">
-          <Suspense fallback={<SectionLoader />}>
-            <FeaturesSectionWithHoverEffects />
-          </Suspense>
-        </div>
+        {isMobile ? (
+          <div className="bg-white/60">
+            <Suspense fallback={<SectionLoader />}>
+              <FeaturesSectionWithHoverEffects />
+            </Suspense>
+          </div>
+        ) : (
+          <BackgroundEffects
+            pattern="dots"
+            blobOpacity={0.15}
+            baseColor="bg-white/60"
+            mobileFullWidth={true}
+          >
+            <Suspense fallback={<SectionLoader />}>
+              <FeaturesSectionWithHoverEffects />
+            </Suspense>
+          </BackgroundEffects>
+        )}
       </section>
 
       {/* Pricing Section */}

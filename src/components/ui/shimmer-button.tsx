@@ -2,11 +2,30 @@
 "use client";
 
 import * as React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+
+const shimmer = {
+  initial: {
+    x: "-100%"
+  },
+  animate: {
+    x: "100%"
+  },
+  transition: {
+    repeat: Infinity,
+    repeatType: "loop",
+    duration: 2,
+    ease: "linear"
+  }
+};
 
 interface ShimmerButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
+  shimmerColor?: string;
+  shimmerSize?: string;
+  shimmerDuration?: string;
   disabled?: boolean;
   variant?: 'primary' | 'secondary' | 'tertiary';
 }
@@ -14,10 +33,15 @@ interface ShimmerButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(({
   children,
   className,
+  shimmerColor = "rgba(255, 255, 255, 0.2)",
+  shimmerSize = "60%",
+  shimmerDuration = "2s",
   disabled,
   variant = 'primary',
   ...props
 }, ref) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+  
   const getVariantStyles = () => {
     switch (variant) {
       case 'primary':
@@ -28,7 +52,8 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
             "shadow-[0_4px_12px_rgba(79,70,229,0.2)]",
             "hover:shadow-[0_6px_20px_rgba(79,70,229,0.3)]",
             "hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700",
-          ]
+          ],
+          shimmerColor: "rgba(255, 255, 255, 0.2)"
         };
       case 'secondary':
         return {
@@ -38,7 +63,8 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
             "border-2 border-gray-200",
             "hover:bg-gray-50 hover:border-gray-300",
             "shadow-sm hover:shadow"
-          ]
+          ],
+          shimmerColor: "rgba(0, 0, 0, 0.05)"
         };
       case 'tertiary':
         return {
@@ -47,11 +73,13 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
             "text-gray-700",
             "border border-gray-200",
             "hover:bg-gray-100/70 hover:text-gray-900"
-          ]
+          ],
+          shimmerColor: "rgba(0, 0, 0, 0.03)"
         };
       default:
         return {
-          base: []
+          base: [],
+          shimmerColor: "rgba(255, 255, 255, 0.2)"
         };
     }
   };
@@ -80,12 +108,35 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
         
         className
       )} 
+      onMouseEnter={() => setIsHovered(true)} 
+      onMouseLeave={() => setIsHovered(false)} 
       disabled={disabled} 
       {...props}
     >
       <span className="relative z-10 flex items-center gap-2">
         {children}
       </span>
+      
+      <AnimatePresence>
+        {!disabled && (
+          <motion.span 
+            className="absolute inset-0 z-0" 
+            style={{
+              background: `linear-gradient(90deg, transparent 0%, ${variantStyles.shimmerColor} ${shimmerSize}, transparent 100%)`
+            }} 
+            initial="initial" 
+            animate="animate" 
+            variants={shimmer} 
+            transition={{
+              duration: parseInt(shimmerDuration),
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "linear"
+            }} 
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
     </button>
   );
 });
