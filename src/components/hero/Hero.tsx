@@ -15,9 +15,11 @@ export function Hero() {
       "flex flex-col items-center justify-center",
       "px-4 sm:px-6",
       "py-12 sm:py-16 md:py-20",
-      "min-h-[40vh]",
+      // Remove min-height on mobile to prevent scroll trapping
+      isMobile ? "py-8" : "min-h-[40vh]",
       "relative z-10",
-      isMobile && "py-8 min-h-0"
+      // Fix overflow issues
+      "overflow-visible"
     )}>
       <div className={cn(
         "max-w-5xl w-full mx-auto flex flex-col gap-8 sm:gap-10",
