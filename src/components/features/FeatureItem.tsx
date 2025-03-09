@@ -133,19 +133,11 @@ export const FeatureItem = ({
               {/* Standardized icon size */}
               <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" aria-hidden="true" />
             </div>
-          </div>
-        </button>
-      </motion.div>
-    </div>
-  );
-};
-
-export default FeatureItem;
             
             <div className="text-left w-full flex-grow flex flex-col">
               <div>
                 {/* Title style to match example */}
-                <h3 className="card-title text-gray-900">
+                <h3 className="text-base font-bold leading-tight uppercase mb-2 text-gray-900">
                   {title}
                 </h3>
                 
@@ -159,7 +151,7 @@ export default FeatureItem;
                 />
                 
                 {/* Description with proper truncation */}
-                <p className="card-description">
+                <p className="text-sm text-gray-600 leading-relaxed">
                   {isExpanded || !isLongDesc ? 
                     description : 
                     (<>
@@ -180,3 +172,11 @@ export default FeatureItem;
                 <ChevronRight className="w-4 h-4 ml-1" />
               </div>
             </div>
+          </div>
+        </button>
+      </motion.div>
+    </div>
+  );
+};
+
+export default FeatureItem;
