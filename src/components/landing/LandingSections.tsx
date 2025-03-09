@@ -84,10 +84,8 @@ export const LandingSections: React.FC = () => {
   };
   
   return (
-    <div className={cn(
-      "w-full",
-      isMobile ? "space-y-4 max-w-[100vw] overflow-hidden" : "" // Better spacing between sections on mobile
-    )}>
+    // Removed the unnecessary wrapper div - this was causing mobile layout issues
+    <>
       {/* Hero Section - Always visible */}
       <section ref={addSectionRef(0)} className={cn(
         "w-full", 
@@ -183,7 +181,7 @@ export const LandingSections: React.FC = () => {
           <CallToActionSection />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
