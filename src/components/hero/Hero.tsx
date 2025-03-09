@@ -27,16 +27,15 @@ export function Hero() {
       className="w-full overflow-hidden"
       animationSpeed="slow"
     >
-      <section className={cn(
+      <div className={cn(
         "flex flex-col items-center justify-center px-3 sm:px-6 py-8 sm:py-16 md:py-20 min-h-[40vh] relative z-10 w-full",
         isMobile ? "pt-4 pb-6 px-2 max-w-[100vw]" : "" // Adjusted padding for mobile
       )}>
         <div className="max-w-5xl w-full mx-auto flex flex-col gap-6 sm:gap-10">
           <h1 className="text-center flex flex-col items-center gap-2 sm:gap-4">
-            {/* Make sure text-display class is applied but allow color to be overridden */}
             <motion.span 
               className="text-display px-0 mx-0 relative"
-              style={{ color: "#4A2DD9" }} // Use style for the specific color to avoid class conflicts
+              style={{ color: "#4A2DD9" }}
               initial={{ opacity: 0.8 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
@@ -75,7 +74,7 @@ export function Hero() {
         )}>
           <WaitlistCTA />
         </div>
-      </section>
+      </div>
     </GradientBlobBackground>
   );
 }
