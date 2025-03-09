@@ -2,7 +2,6 @@
 import React, { Suspense } from 'react';
 import { Hero } from '../hero/Hero';
 import CallToActionSection from '../CallToActionSection';
-import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { lazy } from 'react';
 import { BackgroundEffects } from '@/components/features/BackgroundEffects';

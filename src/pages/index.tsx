@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MainLayout } from '@/components/layouts/MainLayout';
 import { PromotionalBanner } from '@/components/landing/PromotionalBanner';
 import { LandingSections } from '@/components/landing/LandingSections';
@@ -13,17 +13,6 @@ const Index = () => {
   const [showBanner, setShowBanner] = useState(true);
   const [showGlowDialog, setShowGlowDialog] = useState(false);
   const isMobile = useIsMobile();
-  
-  // Initialize local storage and dialog state
-  useEffect(() => {
-    const hasVisited = localStorage.getItem('hasVisited');
-    const shouldShowDialog = !hasVisited && !isMobile; // Only show dialog on desktop
-    setShowGlowDialog(shouldShowDialog);
-    
-    if (!hasVisited) {
-      localStorage.setItem('hasVisited', 'true');
-    }
-  }, [isMobile]);
   
   const handleTryNowClick = () => {
     setShowGlowDialog(true);
