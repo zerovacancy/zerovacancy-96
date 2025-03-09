@@ -221,3 +221,6 @@
     text-align: center !important;
   }
 }
+
+@import './mobile-fixes.css';
+
