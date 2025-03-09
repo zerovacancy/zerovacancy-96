@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -40,20 +39,20 @@ const PricingHeader = ({
         
         {/* Main title */}
         <h2 className={cn(
-          "font-bold text-slate-900 mb-4 tracking-tight uppercase font-playfair",
-          isMobile ? "text-3xl" : "text-4xl",
+          "heading-2",
+          "mb-4",
           "bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700"
         )}>
-          {title.toUpperCase()}
+          {title}
         </h2>
         
         {/* Decorative element under the heading */}
-        <div className="w-20 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mx-auto mb-6" />
+        <div className="section-title-decoration" />
         
         {/* Subtitle */}
         <p className={cn(
-          "mx-auto text-slate-600 leading-relaxed font-space",
-          isMobile ? "text-sm px-4" : "text-lg"
+          "paragraph-base",
+          isMobile ? "px-4" : ""
         )}>
           {subtitle}
         </p>
