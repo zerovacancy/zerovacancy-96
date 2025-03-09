@@ -37,6 +37,39 @@
     scroll-snap-type: none !important;
     scroll-snap-align: none !important;
   }
+  
+  /* Ensure sections don't become scroll containers on mobile */
+  html, body {
+    overflow-x: hidden;
+    position: relative;
+    height: auto !important;
+    min-height: 100% !important;
+  }
+  
+  /* Reset overflow for all sections on mobile */
+  section, div {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    position: static !important;
+  }
+  
+  /* Prevent individual scrollable areas on mobile */
+  .is-mobile section, .is-mobile div {
+    -webkit-overflow-scrolling: auto !important;
+    overflow-y: visible !important;
+  }
+  
+  /* Ensure all sections are in the normal document flow */
+  .is-mobile .container, .is-mobile section {
+    position: relative !important;
+    transform: none !important;
+  }
+  
+  /* Disable fixed positioning on mobile */
+  .is-mobile .fixed {
+    position: relative !important;
+  }
 }
 
 /* Gradual fade for scroll edges */

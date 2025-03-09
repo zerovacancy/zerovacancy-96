@@ -31,7 +31,7 @@ export const LandingSections: React.FC = () => {
   return (
     <div className={cn(
       "w-full",
-      isMobile ? "max-w-[100vw]" : "" 
+      isMobile ? "max-w-[100vw] overflow-visible" : "" 
     )}>
       {/* Hero Section */}
       <section className={cn(
