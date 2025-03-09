@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ChevronDown, Check, Sparkles, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -96,7 +95,7 @@ export const PricingCard = ({
       {/* Header section with improved typography */}
       <div className="mb-6">
         <h3 className={cn(
-          "text-xl font-bold font-jakarta",
+          "card-title",
           colorStyles.accent
         )}>
           {title}
@@ -104,11 +103,11 @@ export const PricingCard = ({
         <div className="mt-3 flex items-baseline">
           {price > 0 ? (
             <>
-              <span className="text-5xl font-bold tracking-tight font-jakarta text-brand-purple-dark">${price}</span>
+              <span className="text-5xl font-bold tracking-tight font-space text-brand-purple-dark">${price}</span>
               <span className="ml-1 text-sm text-slate-500 font-inter">/{interval}</span>
             </>
           ) : (
-            <span className="text-5xl font-bold tracking-tight font-jakarta text-brand-purple-dark">Free</span>
+            <span className="text-5xl font-bold tracking-tight font-space text-brand-purple-dark">Free</span>
           )}
         </div>
         
