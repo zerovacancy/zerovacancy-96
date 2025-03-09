@@ -40,3 +40,13 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+
+/* Prevent nested scrollbars */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

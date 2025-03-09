@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from 'react';
 import { CreatorCard } from '../creator/CreatorCard';
 import { ChevronDown, Filter, ChevronUp, ChevronRight, ChevronLeft } from 'lucide-react';
@@ -134,10 +135,10 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
             </>
           )}
           
-          {/* Horizontal scroll container for mobile */}
+          {/* Horizontal scroll container for mobile - removing nested scroll functionality */}
           <div 
             ref={scrollContainerRef}
-            className="flex overflow-x-auto gap-4 pb-4 pt-1 snap-x snap-mandatory touch-pan-x scroll-container-optimized [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+            className="flex overflow-x-auto gap-4 pb-4 pt-1 snap-x snap-mandatory touch-pan-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
             onScroll={handleScroll}
             role="list"
             aria-label="Creators list"

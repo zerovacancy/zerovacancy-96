@@ -21,12 +21,12 @@ body {
   height: 100%;
   /* Prevent scroll chaining/bouncing effect on some browsers */
   overscroll-behavior-y: none;
+  overflow-x: hidden;
 }
 
 /* Target features section specifically for smooth scrolling */
 #features {
   scroll-margin-top: 80px;
-  scroll-snap-align: start;
 }
 
 /* Gradual fade for scroll edges */

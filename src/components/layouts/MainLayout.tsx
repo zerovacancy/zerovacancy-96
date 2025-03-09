@@ -38,8 +38,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       <Header />
       
       <main className={cn(
-        "flex-1 pb-0 w-full",
-        isMobile ? "pt-0 max-w-[100vw] overflow-hidden" : ""
+        "flex-1 w-full overflow-visible",
+        isMobile ? "pt-0 max-w-[100vw]" : ""
       )}>
         {children}
         <Footer />

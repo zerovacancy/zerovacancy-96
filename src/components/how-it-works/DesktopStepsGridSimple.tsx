@@ -35,8 +35,6 @@ const DesktopStepsGridSimple: React.FC<DesktopStepsGridSimpleProps> = ({
           </div>
         ))}
       </div>
-      
-      {/* Removed the connecting lines section */}
     </div>
   );
 };
