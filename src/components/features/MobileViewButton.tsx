@@ -16,11 +16,7 @@ export const MobileViewButton = ({
 }: MobileViewButtonProps) => {
   return (
     <motion.div 
-      className={cn(
-        isMobile ? "mt-8 z-30 relative" : "mt-12",
-        "flex justify-center",
-        isMobile && !showAllCards ? "md:hidden" : ""
-      )}
+      className={`${isMobile ? 'mt-8' : 'mt-12'} flex justify-center ${isMobile && !showAllCards ? 'md:hidden' : ''}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -45,13 +41,7 @@ export const MobileViewButton = ({
         <Button 
           variant="default"
           size="lg" 
-          className={cn(
-            "bg-gradient-to-r from-indigo-600 to-purple-600",
-            "hover:from-indigo-700 hover:to-purple-700",
-            "text-white font-medium px-6 btn-text-primary",
-            "shadow-md hover:shadow-lg",
-            isMobile && "w-[80%] mx-auto"
-          )}
+          className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium px-6 btn-text-primary"
           onClick={isMobile ? toggleShowAllCards : undefined}
           aria-label="View all services"
         >
