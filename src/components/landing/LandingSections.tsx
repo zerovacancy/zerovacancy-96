@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, Suspense, useCallback } from 'react';
 import { Hero } from '../hero/Hero';
 import CallToActionSection from '../CallToActionSection';
@@ -88,22 +87,10 @@ export const LandingSections: React.FC = () => {
       {/* Hero Component - Now directly rendered without the section wrapper */}
       <Hero />
       
-      {/* How It Works Section */}
-      <BeamsBackground id="how-it-works" className="w-full">
-        <section 
-          ref={addSectionRef(1)} 
-          className={cn(
-            "relative w-full",
-            isMobile ? "mb-4 mt-2" : "" // Better mobile spacing
-          )}
-        >
-          <div className="relative z-10">
-            <Suspense fallback={<SectionLoader />}>
-              <OptimizedHowItWorks />
-            </Suspense>
-          </div>
-        </section>
-      </BeamsBackground>
+      {/* How It Works Section - No longer wrapped in an additional section */}
+      <Suspense fallback={<SectionLoader />}>
+        <OptimizedHowItWorks ref={addSectionRef(1)} />
+      </Suspense>
       
       {/* Search Section */}
       <section 
