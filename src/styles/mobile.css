@@ -1,5 +1,15 @@
 /* Mobile touch optimizations */
 @media (max-width: 768px) {
+  /* Critical scroll fixes - Ensure the root element allows scrolling */
+  html, body, #root, #__next {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100% !important;
+    position: relative !important;
+    overscroll-behavior-y: none;
+  }
+
   /* Remove padding from root to eliminate white space */
   #root {
     padding: 0;
@@ -18,6 +28,9 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
     overflow-x: hidden;
+    overflow-y: visible !important;
+    max-height: none !important;
+    overscroll-behavior-y: none;
   }
   
   /* Fix section spacing */
@@ -27,6 +40,18 @@
     padding-bottom: 1.5rem;
     position: relative;
     border-bottom: 1px solid rgba(128, 128, 128, 0.08);
+    height: auto !important;
+    min-height: auto !important;
+  }
+  
+  /* Fix for the Hero section that's trapping scroll */
+  .Hero, [id="hero"], 
+  section:first-of-type,
+  section:nth-of-type(1) {
+    min-height: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
   
   /* Add clear visual separation between sections */
@@ -106,9 +131,21 @@
     min-height: 230px !important;
   }
   
+  /* Fix for elements with fixed positions that may interfere with scrolling */
+  .fixed {
+    position: absolute !important;
+  }
+  
   /* Body padding adjustment for bottom nav */
   body {
     padding-bottom: 4rem;
+  }
+  
+  /* Ensure main content container expands to allow scrolling */
+  main {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
   }
 }
 
@@ -122,6 +159,9 @@
   .BackgroundEffects {
     background-color: #fcfcff !important;
     position: relative;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
   }
   
   /* Reduce blob opacity on mobile */
