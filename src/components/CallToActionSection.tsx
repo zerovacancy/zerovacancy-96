@@ -2,35 +2,30 @@ import React from 'react';
 import { ShimmerButton } from './ui/shimmer-button';
 import { ArrowRight, TrendingUp } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-
 const CallToActionSection = () => {
   const isMobile = useIsMobile();
-  
-  return (
-    <div className="w-full mx-auto max-w-4xl text-center relative z-10 px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 will-change-transform">
+  return <div className="w-full mx-auto max-w-4xl text-center relative z-10 px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 will-change-transform">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-purple-50/40 to-white -z-10 opacity-80"></div>
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5MzNFRkYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2NGgtMXYtNHptMi0yaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS03LTJoMXYxaC0xdi0xem0tMi0yaDF2MWgtMXYtMXptMi0yaDF2MWgtMXYtMXptMiAxMGgxdjFoLTF2LTF6Ii8+PC9nPjwvZz48L3N2Zz4=')] -z-10 opacity-40 py-px"></div>
+      <div className="absolute inset-0 -z-10 opacity-40 py-px bg-[brand-purple-medium] bg-sky-50"></div>
       
       <div className="flex items-center justify-center mb-4 sm:mb-6">
         <TrendingUp className="w-6 h-6 text-brand-purple mr-2 animate-float-subtle" />
         
-        {isMobile ? (
-          // Mobile version: single coherent headline with all text in one line
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 font-jakarta tracking-tight">
+        {isMobile ?
+      // Mobile version: single coherent headline with all text in one line
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 font-jakarta tracking-tight">
             ELEVATE YOUR REAL ESTATE MARKETING <span className="bg-gradient-to-r from-brand-purple-dark to-brand-purple bg-clip-text text-transparent font-extrabold">TODAY</span>
-          </h2>
-        ) : (
-          // Desktop version: Fixed layout with flex container to ensure proper alignment
-          <div className="flex flex-col items-center">
+          </h2> :
+      // Desktop version: Fixed layout with flex container to ensure proper alignment
+      <div className="flex flex-col items-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 font-jakarta tracking-tight">
               ELEVATE YOUR REAL ESTATE MARKETING
             </h2>
             <span className="bg-gradient-to-r from-brand-purple-dark to-brand-purple bg-clip-text text-transparent font-extrabold text-2xl sm:text-3xl md:text-4xl mt-2">
               TODAY
             </span>
-          </div>
-        )}
+          </div>}
       </div>
       
       {/* Decorative element under the heading */}
@@ -53,8 +48,6 @@ const CallToActionSection = () => {
       
       {/* Added extra bottom padding on mobile */}
       <div className={`${isMobile ? 'h-8' : 'h-0'}`}></div>
-    </div>
-  );
+    </div>;
 };
-
 export default CallToActionSection;
