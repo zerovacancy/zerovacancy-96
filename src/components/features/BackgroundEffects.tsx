@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 import { cn } from '@/lib/utils';
@@ -78,6 +79,15 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
     };
   }, []);
 
+  // On mobile, use much simpler backgrounds with minimal effects
+  const mobileProps = {
+    blobOpacity: 0.05,
+    pattern: 'none' as const,
+    withSpotlight: false,
+    animationSpeed: 'slow' as const,
+    blobSize: 'small' as const
+  };
+
   return (
     <div 
       ref={containerRef} 
@@ -94,13 +104,13 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
             isMobile ? "overflow-hidden" : "overflow-visible"
           )}
           blobColors={blobColors}
-          blobOpacity={blobOpacity}
-          withSpotlight={withSpotlight}
+          blobOpacity={isMobile ? mobileProps.blobOpacity : blobOpacity}
+          withSpotlight={isMobile ? mobileProps.withSpotlight : withSpotlight}
           spotlightClassName={spotlightClassName}
-          pattern={pattern}
+          pattern={isMobile ? mobileProps.pattern : pattern}
           baseColor={baseColor}
-          blobSize="large"
-          animationSpeed={animationSpeed}
+          blobSize={isMobile ? mobileProps.blobSize : "large"}
+          animationSpeed={isMobile ? mobileProps.animationSpeed : animationSpeed}
         >
           <div className={cn(
             isMobile ? "mobile-z-fix" : "", 

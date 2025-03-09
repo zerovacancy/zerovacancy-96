@@ -130,6 +130,131 @@
     backface-visibility: hidden;
     transform: translateZ(0);
   }
+  
+  /* ==== DISABLE ANIMATIONS FOR MOBILE ==== */
+  /* Disable all animations for better performance */
+  * {
+    animation-play-state: paused !important;
+    transition: none !important;
+  }
+  
+  /* Disable blob animations from GradientBlobBackground */
+  [style*="animation: blob"] {
+    animation: none !important;
+    opacity: 0.1 !important; /* Lower opacity to reduce visual weight */
+  }
+  
+  /* Disable transition effects */
+  [style*="transition"],
+  .transition,
+  .transition-all,
+  .transition-colors,
+  .transition-opacity,
+  .transition-shadow,
+  .transition-transform {
+    transition: none !important;
+  }
+  
+  /* Reduce or remove complex shadows */
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl,
+  [class*="shadow-"] {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Disable blur effects for better performance */
+  .blur,
+  .blur-sm,
+  .blur-md,
+  .blur-lg,
+  .blur-xl,
+  .blur-2xl,
+  .blur-3xl,
+  [class*="blur-"],
+  [style*="blur"] {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+  
+  /* Simplify gradient backgrounds */
+  .bg-gradient-to-r,
+  .bg-gradient-to-l,
+  .bg-gradient-to-t,
+  .bg-gradient-to-b,
+  .bg-gradient-to-tr,
+  .bg-gradient-to-tl,
+  .bg-gradient-to-br,
+  .bg-gradient-to-bl,
+  [class*="bg-gradient"] {
+    background: #f8f9fa !important; /* Use a simple light background instead */
+  }
+  
+  /* Simplify backdrop blur */
+  .backdrop-blur,
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl,
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+  }
+  
+  /* Disable glowing effects */
+  .glow,
+  [class*="glow-"],
+  .bg-glow,
+  [class*="shadow-glow"] {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+  }
+  
+  /* Hide purely decorative elements */
+  .decorative-only,
+  .decorative-element,
+  .desktop-only-decoration {
+    display: none !important;
+  }
+  
+  /* Optimize grid patterns and backgrounds */
+  [class*="bg-grid"],
+  [class*="bg-dots"],
+  .pattern-bg {
+    background-image: none !important;
+  }
+  
+  /* Simplify mix-blend modes for better rendering */
+  [style*="mix-blend"],
+  .mix-blend-multiply,
+  .mix-blend-screen,
+  .mix-blend-overlay,
+  .mix-blend-darken,
+  .mix-blend-lighten,
+  .mix-blend-color-dodge,
+  .mix-blend-color-burn,
+  .mix-blend-hard-light,
+  .mix-blend-soft-light,
+  .mix-blend-difference,
+  .mix-blend-exclusion,
+  .mix-blend-hue,
+  .mix-blend-saturation,
+  .mix-blend-color,
+  .mix-blend-luminosity {
+    mix-blend-mode: normal !important;
+  }
+  
+  /* Hide specific animation components */
+  .optimized-spotlight,
+  .spotlight,
+  .animated-grid,
+  .border-beam,
+  .wavy-background,
+  .border-trail {
+    display: none !important;
+  }
 }
 
 /* Section spacing control classes */
