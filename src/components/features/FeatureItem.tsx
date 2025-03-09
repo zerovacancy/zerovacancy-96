@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -75,12 +76,22 @@ export const FeatureItem = ({
   };
   
   return (
-    <div className="relative pt-4">
+    <div className={cn(
+      "relative pt-4",
+      isMobile ? "mb-2" : "" // Add margin bottom on mobile
+    )}>
       {/* Popular Tag - Positioned at the top left */}
       {isPopular && (
         <div className="absolute top-0 left-4 z-20">
-          <div className="py-1.5 px-3.5 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-xs font-medium shadow-sm">
-            <Sparkles className="h-3.5 w-3.5" />
+          <div className={cn(
+            "flex items-center gap-1.5 rounded-full",
+            "bg-gradient-to-r from-purple-500 to-indigo-500",
+            "text-white text-xs font-medium shadow-sm",
+            isMobile ? "py-1 px-3" : "py-1.5 px-3.5"
+          )}>
+            <Sparkles className={cn(
+              isMobile ? "h-3 w-3" : "h-3.5 w-3.5"
+            )} />
             <span className="font-medium">Popular</span>
           </div>
         </div>
@@ -91,12 +102,12 @@ export const FeatureItem = ({
           "relative w-full text-left group",
           getCardBgColor(), // Apply background color based on icon type
           "rounded-xl",
-          // Fixed heights based on screen size
-          "h-[250px] sm:h-[280px]",
+          // Fixed heights based on screen size - adjusted for mobile
+          isMobile ? "h-[230px]" : "h-[250px] sm:h-[280px]",
           // Shadow and transition
           "shadow-sm",
-          // Consistent padding
-          "p-5",
+          // Consistent padding - adjusted for mobile
+          isMobile ? "p-4" : "p-5",
           // For partially visible card
           isPartiallyVisible && "opacity-80 shadow-none"
         )}
@@ -118,40 +129,52 @@ export const FeatureItem = ({
         <button
           onClick={handleClick}
           aria-expanded={isExpanded}
-          className="w-full h-full flex flex-col z-10 relative text-left"
+          className={cn(
+            "w-full h-full flex flex-col z-10 relative text-left",
+            "touch-manipulation" // Added for better mobile experience
+          )}
         >
           <div className="flex flex-col items-start gap-5 h-full">
             {/* Standardized icon container - consistent sizing for all icons */}
             <div 
               className={cn(
                 "flex items-center justify-center",
-                "w-12 h-12 sm:w-14 sm:h-14", // Same size on mobile and desktop
+                isMobile ? "w-11 h-11" : "w-12 h-12 sm:w-14 sm:h-14", // Adjusted for mobile
                 "rounded-lg",
                 colorScheme.gradient ? `bg-gradient-to-br ${colorScheme.gradient}` : colorScheme.bg
               )}
             >
               {/* Standardized icon size */}
-              <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" aria-hidden="true" />
+              <Icon className={cn(
+                "text-white",
+                isMobile ? "w-5 h-5" : "w-6 h-6 sm:w-7 sm:h-7"
+              )} aria-hidden="true" />
             </div>
             
             <div className="text-left w-full flex-grow flex flex-col">
               <div>
                 {/* Title style to match example */}
-                <h3 className="text-base font-bold leading-tight uppercase mb-2 text-gray-900">
+                <h3 className={cn(
+                  "font-bold leading-tight uppercase mb-2 text-gray-900",
+                  isMobile ? "text-sm" : "text-base"
+                )}>
                   {title}
                 </h3>
                 
                 {/* Colored bar below title to match example */}
                 <div 
                   className={cn(
-                    "w-12 h-0.5 mb-3",
-                    "rounded-full",
+                    "h-0.5 mb-3 rounded-full",
+                    isMobile ? "w-10" : "w-12",
                     colorScheme.gradient ? `bg-gradient-to-r ${colorScheme.gradient}` : colorScheme.bg
                   )} 
                 />
                 
                 {/* Description with proper truncation */}
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className={cn(
+                  "text-gray-600 leading-relaxed",
+                  isMobile ? "text-xs" : "text-sm"
+                )}>
                   {isExpanded || !isLongDesc ? 
                     description : 
                     <>
@@ -166,10 +189,14 @@ export const FeatureItem = ({
               <div className={cn(
                 "mt-auto pt-3 flex items-center", 
                 colorScheme.text,
-                "text-sm font-medium"
+                isMobile ? "text-xs" : "text-sm",
+                "font-medium"
               )}>
                 {actionText || (isExpanded ? "Show less" : "Learn more")} 
-                <ChevronRight className="w-4 h-4 ml-1" />
+                <ChevronRight className={cn(
+                  "ml-1",
+                  isMobile ? "w-3.5 h-3.5" : "w-4 h-4"
+                )} />
               </div>
             </div>
           </div>

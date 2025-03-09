@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, lazy, Suspense, useCallback } from 'react';
 import Header from '../components/Header';
 import { Hero } from '../components/hero/Hero';
@@ -21,7 +22,7 @@ const PreviewSearch = lazy(() => import('@/components/preview-search'));
 
 // Simple loading fallback
 const SectionLoader = () => (
-  <div className="w-full py-16 flex items-center justify-center">
+  <div className="w-full py-8 sm:py-16 flex items-center justify-center">
     <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
@@ -155,7 +156,10 @@ const Index = () => {
         </div>
       )}
 
-      <main className="flex-1 pb-16 sm:pb-0 w-full">
+      <main className={cn(
+        "flex-1 pb-16 sm:pb-0 w-full",
+        isMobile ? "pt-0" : ""
+      )}>
         <BackgroundEffects 
           blobColors={{
             first: "bg-purple-200",
@@ -167,12 +171,19 @@ const Index = () => {
           spotlightClassName="from-purple-500/10 via-violet-500/10 to-blue-500/10"
           baseColor="bg-white/60" 
           pattern="dots"
-          className="py-0"
+          className="pt-0"
           animationSpeed="slow"
+          mobileFullWidth={isMobile}
         >
-          <div className="space-y-0 w-full">
+          <div className={cn(
+            "space-y-0 w-full",
+            isMobile ? "space-y-6" : "" // Add spacing between sections on mobile
+          )}>
             {/* Hero Section - Always visible */}
-            <section ref={addSectionRef(0)} className="w-full">
+            <section ref={addSectionRef(0)} className={cn(
+              "w-full", 
+              isMobile ? "section-spacing pt-0" : ""
+            )}>
               <Hero />
             </section>
             
@@ -180,7 +191,10 @@ const Index = () => {
             <section 
               ref={addSectionRef(1)} 
               id="how-it-works" 
-              className="relative w-full"
+              className={cn(
+                "relative w-full section-container",
+                isMobile ? "mt-6 mb-6" : ""
+              )}
             >
               <div className="relative z-10">
                 <Suspense fallback={<SectionLoader />}>
@@ -193,9 +207,15 @@ const Index = () => {
             <section 
               ref={addSectionRef(2)} 
               id="find-creators" 
-              className="relative w-full"
+              className={cn(
+                "relative w-full section-container",
+                isMobile ? "mt-6 mb-6" : ""
+              )}
             >
-              <div className="max-w-7xl mx-auto relative z-10 py-10 sm:py-16 lg:py-20">
+              <div className={cn(
+                "max-w-7xl mx-auto relative z-10",
+                isMobile ? "py-4" : "py-10 sm:py-16 lg:py-20"
+              )}>
                 <Suspense fallback={<SectionLoader />}>
                   <PreviewSearch />
                 </Suspense>
@@ -204,8 +224,12 @@ const Index = () => {
             
             {/* Professional Content Creation Services */}
             <section 
-              ref={addSectionRef(3)} 
-              className="w-full"
+              ref={addSectionRef(3)}
+              id="features"
+              className={cn(
+                "w-full section-container",
+                isMobile ? "mt-6 mb-6" : ""
+              )}
             >
               <Suspense fallback={<SectionLoader />}>
                 <FeaturesSectionWithHoverEffects />
@@ -214,8 +238,12 @@ const Index = () => {
 
             {/* Pricing Section */}
             <section 
-              ref={addSectionRef(4)} 
-              className="w-full"
+              ref={addSectionRef(4)}
+              id="pricing"
+              className={cn(
+                "w-full section-container",
+                isMobile ? "mt-6 mb-6" : ""
+              )}
             >
               <Suspense fallback={<SectionLoader />}>
                 <Pricing />
@@ -225,9 +253,15 @@ const Index = () => {
             {/* Final CTA Section */}
             <div 
               ref={addSectionRef(5)} 
-              className="relative w-full"
+              className={cn(
+                "relative w-full section-container",
+                isMobile ? "pt-2 pb-12" : ""
+              )}
             >
-              <div className="relative z-10 max-w-7xl mx-auto py-14 sm:py-20 lg:py-24">
+              <div className={cn(
+                "relative z-10 max-w-7xl mx-auto",
+                isMobile ? "py-6" : "py-14 sm:py-20 lg:py-24"
+              )}>
                 <CallToActionSection />
               </div>
             </div>

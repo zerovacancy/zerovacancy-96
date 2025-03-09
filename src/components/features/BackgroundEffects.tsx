@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { GradientBlobBackground } from '@/components/ui/gradient-blob-background';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface BackgroundEffectsProps {
   className?: string;
@@ -16,7 +17,8 @@ interface BackgroundEffectsProps {
   pattern?: 'dots' | 'grid' | 'none';
   baseColor?: string;
   animationSpeed?: 'slow' | 'medium' | 'fast';
-  id?: string; // Added id prop for easier targeting
+  id?: string;
+  mobileFullWidth?: boolean; // Added to control mobile full width behavior
 }
 
 export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({ 
@@ -33,10 +35,12 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
   pattern = "none",
   baseColor = "bg-white/80",
   animationSpeed = 'slow',
-  id
+  id,
+  mobileFullWidth = false
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(true); // Default to visible to ensure content is shown
+  const [isVisible, setIsVisible] = useState(true);
+  const isMobile = useIsMobile();
 
   // Only render heavy effects when the component is in view
   useEffect(() => {
@@ -48,10 +52,10 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
         if (entry.isIntersecting) {
           setIsVisible(true);
         } else {
-          // Only hide when scrolled far away (optimization)
+          // Keep content visible but disable expensive effects when far away
           if (Math.abs(entry.boundingClientRect.top) > window.innerHeight * 2) {
-            // Keep content visible but disable expensive effects
-            // setIsVisible(false); - Removed to ensure content is always visible
+            // We now always keep content visible
+            // setIsVisible(false);
           }
         }
       },
@@ -75,7 +79,15 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
   }, []);
 
   return (
-    <div ref={containerRef} id={id} className={cn("relative w-full overflow-hidden", className)}>
+    <div 
+      ref={containerRef} 
+      id={id} 
+      className={cn(
+        "relative w-full overflow-hidden", 
+        isMobile && mobileFullWidth ? "px-0" : "", 
+        className
+      )}
+    >
       {isVisible ? (
         <GradientBlobBackground 
           className="overflow-visible"
@@ -88,12 +100,19 @@ export const BackgroundEffects: React.FC<BackgroundEffectsProps> = ({
           blobSize="large"
           animationSpeed={animationSpeed}
         >
-          {children}
+          <div className={cn(
+            isMobile ? "px-2 py-2 mobile-z-fix" : "", // Add mobile padding and fix z-index
+            "relative"
+          )}>
+            {children}
+          </div>
         </GradientBlobBackground>
       ) : (
         // Fallback to ensure content is visible even if effects are disabled
         <div className={cn("relative w-full", baseColor)}>
-          {children}
+          <div className={cn(isMobile ? "px-2 py-2" : "")}>
+            {children}
+          </div>
         </div>
       )}
     </div>
