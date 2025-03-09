@@ -11,18 +11,8 @@ interface MainLayoutProps {
   children: ReactNode;
   withBackground?: boolean;
   backgroundProps?: {
-    blobColors?: {
-      first?: string;
-      second?: string;
-      third?: string;
-    };
-    blobOpacity?: number;
-    withSpotlight?: boolean;
-    spotlightClassName?: string;
     baseColor?: string;
-    pattern?: 'dots' | 'grid' | 'none';
     className?: string;
-    animationSpeed?: 'slow' | 'medium' | 'fast';
     mobileFullWidth?: boolean;
   };
 }
@@ -42,7 +32,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         "flex-1 relative w-full",
         isMobile ? "pt-0" : ""
       )}>
-        {withBackground && !isMobile ? (
+        {withBackground ? (
           <BackgroundEffects {...(backgroundProps || {})}>
             {children}
           </BackgroundEffects>

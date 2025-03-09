@@ -16,7 +16,7 @@ const PreviewSearch = lazy(() => import('@/components/preview-search'));
 // Simple loading fallback
 const SectionLoader = () => (
   <div className="w-full py-8 flex items-center justify-center">
-    <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full"></div>
   </div>
 );
 
@@ -48,24 +48,11 @@ export const LandingSections: React.FC = () => {
       
       {/* Professional Content Creation Services */}
       <section id="features" className="w-full py-10">
-        {isMobile ? (
-          <div className="bg-white/60">
-            <Suspense fallback={<SectionLoader />}>
-              <FeaturesSectionWithHoverEffects />
-            </Suspense>
-          </div>
-        ) : (
-          <BackgroundEffects
-            pattern="dots"
-            blobOpacity={0.15}
-            baseColor="bg-white/60"
-            mobileFullWidth={true}
-          >
-            <Suspense fallback={<SectionLoader />}>
-              <FeaturesSectionWithHoverEffects />
-            </Suspense>
-          </BackgroundEffects>
-        )}
+        <div className="bg-white/60">
+          <Suspense fallback={<SectionLoader />}>
+            <FeaturesSectionWithHoverEffects />
+          </Suspense>
+        </div>
       </section>
 
       {/* Pricing Section */}

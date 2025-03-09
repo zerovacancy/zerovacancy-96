@@ -31,7 +31,7 @@ const Index = () => {
   
   return (
     <>
-      <MainLayout withBackground={!isMobile}>
+      <MainLayout withBackground={true}>
         {!isMobile && (
           <PromotionalBanner 
             showBanner={showBanner}
