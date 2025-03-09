@@ -57,3 +57,19 @@ section::-webkit-scrollbar,
 .content-container::-webkit-scrollbar {
   display: none;
 }
+
+/* Mobile animation optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  .mobile-anim-optimize {
+    animation-duration: 0.5s;
+    transition-duration: 0.3s;
+  }
+  
+  /* Ensure animations don't create scrollbars */
+  .animate-pulse-subtle,
+  .will-change-transform,
+  .promote-layer {
+    overflow: visible;
+  }
+}

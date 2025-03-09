@@ -58,3 +58,32 @@ section {
 .smooth-scroll {
   scroll-behavior: smooth;
 }
+
+/* Mobile-specific scrolling fixes */
+@media (max-width: 768px) {
+  /* Target the class we added to the ScrollArea on mobile */
+  .mobile-scroll-disabled {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  /* Target all Radix UI scroll viewports on mobile */
+  [data-radix-scroll-area-viewport] {
+    max-height: none;
+  }
+
+  /* Prevent nested scrolling containers on mobile */
+  .section-container,
+  .content-container,
+  section {
+    overflow: visible !important;
+  }
+
+  /* Special case for horizontal scrolling areas (keep these scrollable) */
+  .horizontal-scroll [data-radix-scroll-area-viewport] {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    height: 100% !important;
+  }
+}

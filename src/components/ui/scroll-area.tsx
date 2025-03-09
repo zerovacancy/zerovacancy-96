@@ -1,27 +1,41 @@
 
 import * as React from "react"
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
+import { useMediaQuery } from "@/hooks/use-media-query"
 
 import { cn } from "@/lib/utils"
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
->(({ className, children, ...props }, ref) => (
-  <ScrollAreaPrimitive.Root
-    ref={ref}
-    className={cn("relative", className)}
-    {...props}
-  >
-    <ScrollAreaPrimitive.Viewport 
-      className="h-full w-full rounded-[inherit]"
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> & {
+    mobileScrollDisabled?: boolean; // New prop to control mobile scrolling
+  }
+>(({ className, children, mobileScrollDisabled = true, ...props }, ref) => {
+  // Check if on mobile
+  const isMobile = useMediaQuery("(max-width: 768px)")
+  
+  // Determine if we should disable scrolling based on mobile status
+  const shouldDisableScrolling = isMobile && mobileScrollDisabled
+  
+  return (
+    <ScrollAreaPrimitive.Root
+      ref={ref}
+      className={cn("relative", className)}
+      {...props}
     >
-      {children}
-    </ScrollAreaPrimitive.Viewport>
-    <ScrollBar />
-    <ScrollAreaPrimitive.Corner />
-  </ScrollAreaPrimitive.Root>
-))
+      <ScrollAreaPrimitive.Viewport 
+        className={cn(
+          "h-full w-full rounded-[inherit]",
+          shouldDisableScrolling && "mobile-scroll-disabled" // Apply class for mobile
+        )}
+      >
+        {children}
+      </ScrollAreaPrimitive.Viewport>
+      {(!shouldDisableScrolling) && <ScrollBar />}
+      {(!shouldDisableScrolling) && <ScrollAreaPrimitive.Corner />}
+    </ScrollAreaPrimitive.Root>
+  )
+})
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName
 
 const ScrollBar = React.forwardRef<
