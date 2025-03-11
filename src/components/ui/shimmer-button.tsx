@@ -47,11 +47,10 @@ export const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonPr
       case 'primary':
         return {
           base: [
-            "bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600",
+            "gradient-button",
             "text-white",
-            "shadow-[0_4px_12px_rgba(79,70,229,0.2)]",
-            "hover:shadow-[0_6px_20px_rgba(79,70,229,0.3)]",
-            "hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700",
+            "shadow-[0_4px_12px_rgba(0,0,0,0.2)]",
+            "hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)]",
           ],
           shimmerColor: "rgba(255, 255, 255, 0.2)"
         };

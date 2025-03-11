@@ -28,7 +28,7 @@ const ConnectActionButtons = ({
       {accountStatus?.isOnboarded ? (
         <Button 
           variant="default" 
-          className="w-full sm:w-auto focus:ring-2 focus:ring-indigo-500/30 focus:outline-none" 
+          className="w-full sm:w-auto focus:ring-2 focus:ring-indigo-500/30 focus:outline-none gradient-button" 
           onClick={() => navigate('/account')}
           aria-label="Go to your dashboard"
         >
@@ -38,7 +38,7 @@ const ConnectActionButtons = ({
       ) : (
         <Button 
           variant="default" 
-          className="w-full sm:w-auto focus:ring-2 focus:ring-indigo-500/30 focus:outline-none" 
+          className="w-full sm:w-auto focus:ring-2 focus:ring-indigo-500/30 focus:outline-none gradient-button" 
           onClick={onStartOnboarding}
           disabled={loading}
           aria-label={accountStatus?.exists ? "Continue your onboarding process" : "Start the onboarding process"}

@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -155,7 +156,7 @@ export function GlowDialog({
               />
               <HoverBorderGradient 
                 type="submit"
-                className="!bg-white !text-black hover:!bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="gradient-button !text-white hover:!bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                 duration={1.5}
                 disabled={isLoading}
               >

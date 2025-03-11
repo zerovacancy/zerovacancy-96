@@ -1,3 +1,4 @@
+
 // src/components/ui/button.tsx
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
@@ -11,16 +12,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          "bg-primary text-primary-foreground hover:bg-primary/90",
+          "gradient-button text-white",
           "before:absolute before:inset-0 before:z-0 before:h-[100%] before:w-[20%]",
           "before:animate-shimmer-slide before:bg-gradient-to-r",
           "before:from-transparent before:via-white/10 before:to-transparent",
         ],
         primary: [
-          "bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 text-white",
-          "hover:from-purple-700 hover:via-blue-700 hover:to-cyan-700",
-          "shadow-[0_4px_12px_rgba(79,70,229,0.2)]",
-          "hover:shadow-[0_6px_20px_rgba(79,70,229,0.3)]",
+          "gradient-button text-white",
+          "shadow-[0_4px_12px_rgba(0,0,0,0.1)]",
+          "hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)]",
           "before:absolute before:inset-0 before:z-0 before:h-[100%] before:w-[20%]",
           "before:animate-shimmer-slide before:bg-gradient-to-r",
           "before:from-transparent before:via-white/20 before:to-transparent",
@@ -42,7 +42,7 @@ const buttonVariants = cva(
           "before:from-transparent before:via-gray-200/30 before:to-transparent",
         ],
         destructive: [
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "gradient-button text-white",
           "before:absolute before:inset-0 before:z-0 before:h-[100%] before:w-[20%]",
           "before:animate-shimmer-slide before:bg-gradient-to-r",
           "before:from-transparent before:via-white/10 before:to-transparent",

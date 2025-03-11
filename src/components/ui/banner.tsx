@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Star, Sparkle } from "lucide-react";
@@ -14,7 +15,7 @@ const bannerVariants = cva(
         success: "bg-green-500 text-white",
         warning: "bg-yellow-500 text-white",
         error: "bg-red-500 text-white",
-        purple: "bg-gradient-to-r from-violet-600 via-purple-500 to-indigo-600 text-white"
+        purple: "gradient-bg text-white"
       },
       size: {
         sm: "text-sm",

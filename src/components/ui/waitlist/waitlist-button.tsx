@@ -14,6 +14,7 @@ export function WaitlistButton({ isLoading }: WaitlistButtonProps) {
     <Button 
       type="submit" 
       className={cn(
+        "gradient-button",
         "flex items-center justify-center",
         "whitespace-nowrap",
         "shadow-lg hover:shadow-xl",
@@ -23,14 +24,11 @@ export function WaitlistButton({ isLoading }: WaitlistButtonProps) {
         "w-full sm:w-[210px]",
         "rounded-xl",
         "h-[50px] sm:h-[52px]",
-        "bg-gradient-to-r from-[#6A3DE8] to-[#4361EE]",
-        "hover:from-[#5A2DD8] hover:to-[#3351DE]", 
-        "hover:scale-[1.02] sm:hover:scale-[1.05]",
         "text-white",
         "font-medium",
         "px-4 sm:px-5",
         "focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2",
-        "after:absolute after:inset-0 after:bg-gradient-to-r after:from-purple-500/20 after:to-blue-500/20 after:opacity-0 after:animate-pulse after:pointer-events-none group-hover:after:opacity-100"
+        "after:absolute after:inset-0 after:bg-gradient-to-r after:from-white/10 after:to-white/10 after:opacity-0 after:animate-pulse after:pointer-events-none group-hover:after:opacity-100"
       )} 
       style={{
         gap: '6px'

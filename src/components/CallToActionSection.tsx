@@ -55,6 +55,7 @@ const CallToActionSection = () => {
         <ShimmerButton 
           variant="primary" 
           className={cn(
+            "gradient-button",
             "w-full sm:w-auto touch-manipulation transition-all duration-300 hover:scale-105 font-semibold",
             isMobile ? "text-sm h-[48px] min-w-[180px]" : "min-w-[200px] h-[52px] text-base"
           )}

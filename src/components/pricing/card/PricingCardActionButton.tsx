@@ -24,7 +24,7 @@ export const PricingCardActionButton = ({
       className={cn(
         "mt-2 w-full px-4 py-4 rounded-xl text-white font-medium font-inter",
         "transition-all duration-300",
-        isCurrentPlan ? "bg-green-500 cursor-default" : `bg-gradient-to-r ${colorStyles.highlight}`,
+        isCurrentPlan ? "bg-green-500 cursor-default" : "gradient-button",
         !isCurrentPlan && "hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] active:translate-y-0 group"
       )}
       whileHover={{ scale: !isCurrentPlan ? 1.02 : 1 }}

@@ -28,17 +28,18 @@ export const PromotionalBanner: React.FC<PromotionalBannerProps> = ({
           <Button 
             onClick={onTryNowClick}
             className={cn(
+              "gradient-button",
               "flex text-xs sm:text-sm items-center whitespace-nowrap", 
               "px-3 py-2 sm:px-5 sm:py-2.5 min-w-[8rem] sm:min-w-[9rem] min-h-[2.25rem] sm:min-h-[2.5rem]", 
-              "bg-white/90 hover:bg-white/95 text-violet-600 font-bold", 
-              "border border-violet-100", 
+              "font-bold", 
+              "border border-white/10", 
               "transition-all duration-200", 
               "touch-manipulation", 
               "shadow-[0_2px_10px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)]",
-              "focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:ring-offset-2",
+              "focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2",
               "before:absolute before:inset-0 before:z-0 before:h-[100%] before:w-[20%]",
               "before:animate-shimmer-slide before:bg-gradient-to-r",
-              "before:from-transparent before:via-violet-100/30 before:to-transparent",
+              "before:from-transparent before:via-white/20 before:to-transparent",
               "relative overflow-hidden"
             )}
             aria-label="Get early access to our platform"
