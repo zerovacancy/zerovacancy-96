@@ -1,7 +1,7 @@
-
 import React, { useState, forwardRef } from 'react';
-import { Search, Users, Calendar, FileCheck } from 'lucide-react';
+import { Search, Users, Calendar, FileCheck, Zap, Brain, LayoutDashboard, BarChartIcon as ChartBar } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SmallFeatureCard } from "@/components/SmallFeatureCard";
 
 const HowItWorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -197,133 +197,27 @@ const HowItWorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 
         {/* Desktop Steps Grid */}
         <div className="hidden md:block w-full mx-auto relative pt-8">
-          {/* Connecting Lines (Using absolute positioning) */}
-          <div className="absolute top-16 left-0 w-full z-0 hidden lg:block pointer-events-none">
-            {/* First connector line - violet to blue */}
-            <div className="absolute top-8 left-[23%] w-[18%] h-0.5 bg-gradient-to-r from-violet-500 to-blue-500">
-              <div className="absolute -right-3 -top-[7px] text-blue-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-            
-            {/* Second connector line - blue to amber */}
-            <div className="absolute top-8 left-[48%] w-[18%] h-0.5 bg-gradient-to-r from-blue-500 to-amber-500">
-              <div className="absolute -right-3 -top-[7px] text-amber-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-            
-            {/* Third connector line - amber to emerald */}
-            <div className="absolute top-8 left-[73%] w-[18%] h-0.5 bg-gradient-to-r from-amber-500 to-emerald-500">
-              <div className="absolute -right-3 -top-[7px] text-emerald-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Grid container */}
-          <div className="grid w-full grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-8 relative">
-            {steps.map((step, index) => (
-              <div 
-                key={index} 
-                className={`relative z-10 transition-all duration-500 ${
-                  index === activeStep ? 'scale-[1.02]' : 'scale-100'
-                }`}
-              >
-                <div 
-                  onClick={() => handleStepInteraction(index)}
-                  className={cn(
-                    "relative h-full min-h-[190px] px-6 py-7 rounded-xl",
-                    "transition-all duration-300 group cursor-pointer",
-                    "border hover:border-opacity-100 active:scale-[0.98]",
-                    "touch-manipulation",
-                    "shadow-sm hover:shadow-md",
-                    "flex flex-col items-center justify-start",
-                    activeStep === index && "ring-1 ring-offset-2"
-                  )}
-                  style={{
-                    borderColor: activeStep === index ? getAccentColor(step) : getAccentColor(step) + '33',
-                    borderWidth: activeStep === index ? '2px' : '1px',
-                    borderLeftWidth: activeStep === index ? '3px' : '1px',
-                    borderRadius: '12px',
-                    backgroundColor: getAccentColor(step) + (activeStep === index ? '12' : '08'),
-                    boxShadow: activeStep === index ? '0 4px 12px rgba(0,0,0,0.08)' : '0 2px 8px rgba(0,0,0,0.05)',
-                    transform: activeStep === index ? 'translateY(-5px)' : 'translateY(0)',
-                  }}
-                >
-                  {/* Step Number badge with gradient */}
-                  <div className="absolute -top-3 left-5 z-10">
-                    <span 
-                      className="inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold ring-2 ring-white shadow-sm text-white"
-                      style={{
-                        background: `linear-gradient(${step.gradientDirection}, ${step.gradientFrom}, ${step.gradientTo})`
-                      }}
-                    >
-                      {step.number}
-                      
-                      {/* Completed checkmark */}
-                      {completedSteps.includes(index) && (
-                        <div className="absolute -right-1 -top-1 bg-white rounded-full p-0.5 shadow-sm">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="w-2.5 h-2.5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
-                        </div>
-                      )}
-                    </span>
-                  </div>
-                  
-                  {/* Icon with gradient background */}
-                  <div 
-                    className="mb-5 rounded-lg p-4 transition-all duration-300 group-hover:scale-105 shadow-sm text-white"
-                    style={{
-                      background: `linear-gradient(${step.gradientDirection}, ${step.gradientFrom}, ${step.gradientTo})`
-                    }}
-                  >
-                    {React.cloneElement(step.icon, {
-                      className: "w-7 h-7"
-                    })}
-                  </div>
-                  
-                  {/* Title */}
-                  <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-3 text-center">
-                    {step.title}
-                  </h4>
-                  
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed text-center">
-                    {step.description}
-                  </p>
-                  
-                  {/* Learn More indicator */}
-                  <div className="mt-auto pt-3 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-blue-600 flex items-center gap-1">
-                    <span>Learn more</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </div>
-                  
-                  {/* Active indicator */}
-                  {activeStep === index && (
-                    <div 
-                      className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-10 h-1 rounded-full animate-pulse"
-                      style={{
-                        background: `linear-gradient(${step.gradientDirection}, ${step.gradientFrom}, ${step.gradientTo})`
-                      }}
-                    ></div>
-                  )}
-                </div>
-              </div>
-            ))}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            <SmallFeatureCard
+              icon={Search}
+              title="DISCOVER"
+              description="Explore our curated network of visionaries whose lenses and perspectives reshape how people experience spaces."
+            />
+            <SmallFeatureCard
+              icon={Users}
+              title="CONNECT"
+              description="Immerse yourself in creative portfolios that reveal each creator's unique perspective on architectural storytelling."
+            />
+            <SmallFeatureCard
+              icon={Calendar}
+              title="COLLABORATE"
+              description="Lock in your vision with transparent investment structures. Your creative capital remains in escrow until your vision materializes."
+            />
+            <SmallFeatureCard
+              icon={FileCheck}
+              title="TRANSFORM"
+              description="Receive visual assets that transcend traditional property marketing and create emotional connections with your ideal audience."
+            />
           </div>
         </div>
       </div>
