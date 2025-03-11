@@ -15,7 +15,8 @@ const bannerVariants = cva(
         success: "bg-green-500 text-white",
         warning: "bg-yellow-500 text-white",
         error: "bg-red-500 text-white",
-        purple: "gradient-bg text-white"
+        purple: "gradient-bg text-white",
+        dark: "bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white" // Added dark variant
       },
       size: {
         sm: "text-sm",

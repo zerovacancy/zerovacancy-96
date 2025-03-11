@@ -22,7 +22,7 @@ export const PromotionalBanner: React.FC<PromotionalBannerProps> = ({
   return (
     <div className="relative">
       <Banner 
-        variant="purple" 
+        variant="dark" 
         size="lg" 
         action={
           <Button 
