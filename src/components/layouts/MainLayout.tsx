@@ -37,7 +37,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     <div className="flex flex-col min-h-screen w-full overflow-visible">
       <Header />
       
-      {/* Content container with no scroll barriers */}
+      {/* Maintain the single scrolling container pattern */}
       <div className={cn(
         "flex-1 w-full overflow-visible",
         isMobile ? "pt-0 max-w-[100vw]" : ""

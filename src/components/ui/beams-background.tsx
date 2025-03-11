@@ -46,13 +46,13 @@ export const BeamsBackground = forwardRef<HTMLDivElement, BeamsBackgroundProps>(
         className
       )}
     >
-      {/* Pattern background */}
+      {/* Pattern background - ensuring they don't create scroll containers */}
       {pattern === 'dots' && (
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30 overflow-visible"></div>
       )}
       
       {pattern === 'grid' && (
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-20 overflow-visible">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -64,16 +64,16 @@ export const BeamsBackground = forwardRef<HTMLDivElement, BeamsBackgroundProps>(
         </div>
       )}
       
-      {/* Background beams */}
+      {/* Background beams - ensuring they don't create scroll containers */}
       <div 
-        className={`absolute inset-0 bg-gradient-to-br ${gradientColor} opacity-${opacity * 100}`}
+        className={`absolute inset-0 bg-gradient-to-br ${gradientColor} opacity-${opacity * 100} overflow-visible`}
         style={{ 
           clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
           transform: 'translate3d(0, 0, 0)',
         }}
       ></div>
       
-      {/* Content */}
+      {/* Content - ensuring it doesn't create scroll containers */}
       <div className="relative z-10 overflow-visible">
         {children}
       </div>

@@ -62,6 +62,16 @@ section,
   scroll-behavior: smooth;
 }
 
+/* Exceptions for content that truly needs to scroll horizontally */
+.horizontal-scroll {
+  overflow-x: auto !important;
+}
+
+.horizontal-scroll [data-radix-scroll-area-viewport] {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
 /* Mobile-specific scrolling fixes */
 @media (max-width: 768px) {
   /* Target the class we added to the ScrollArea on mobile */
@@ -99,5 +109,31 @@ section,
   /* Fix for background effects containers */
   .bg-white\/60, .bg-white\/80 {
     overflow: visible !important;
+  }
+
+  /* Fixed height issues on mobile */
+  .min-h-screen {
+    min-height: 100vh !important;
+  }
+}
+
+/* Small device screen sizes */
+@media (max-width: 360px) {
+  .xs-hidden {
+    display: none !important;
+  }
+  
+  .xs-full-width {
+    width: 100% !important;
+  }
+}
+
+/* Animation adjustment for mobile (reduce motion) */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -205,9 +205,9 @@ export const CreatorsList: React.FC<CreatorsListProps> = ({
           )}
         </div>
       ) : (
-        // DESKTOP: Grid layout (unchanged)
+        // DESKTOP: Improved grid layout with optimized spacing & responsiveness
         <div 
-          className="grid gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-3 xs:gap-4 sm:gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 px-0 sm:px-0"
           role="list"
           aria-label="Creators list"
         >

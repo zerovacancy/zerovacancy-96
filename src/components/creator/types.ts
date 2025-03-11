@@ -10,6 +10,16 @@ export interface Creator {
   workExamples: string[];
   tags?: string[];
   availabilityStatus?: AvailabilityStatus;
+  // New fields for enhanced card
+  tagline?: string;
+  yearsExperience?: number;
+  projectsCompleted?: number;
+  serviceSkills?: ServiceSkill[];
+}
+
+export interface ServiceSkill {
+  name: string;
+  level: number; // 0-100 scale
 }
 
 export interface CreatorCardProps {
